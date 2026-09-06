@@ -1,0 +1,58 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+{% macro slides_label(level) %}{% if level == 0 %}{{ _('hedy_introduction_slides') }}{% else %}{{ _('level') }} {{ level }}{% endif %}{% endmacro %}
+<div class="flex-col md:px-16">
+  {{ breadcrumb([
+      {'label': _('teaching_materials'), 'url': '/for-teachers/teaching-materials'},
+      {'label': _('slides')}
+    ], 'mt-2 mb-4') }}
+
+  <h1 class="my-5">{{ _('slides') }}</h1>
+
+  <div class="text-black text-base mb-6">{{ _('slides_info') }}</div>
+
+  <div class="flex flex-col md:flex-row gap-6 items-start mb-10">
+    <!-- level picker -->
+    <nav class="teacher-table-shell bg-white w-full shrink-0 slides-level-list"
+         id="slides_level_list"
+         aria-label="{{ _('slides') }}">
+      <ul class="list-none m-0 p-0 divide-y divide-gray-200">
+        {% for level in levels %}
+        <li>
+          <a href="/for-teachers/slides/{{ level }}"
+             data-cy="slides_level_{{ level }}"
+             class="slides-level-item{% if level == selected_level %} slides-level-item-active{% endif %}"
+             {% if level == selected_level %}aria-current="page" _="on load call me.scrollIntoView({block: 'nearest'})"{% endif %}>
+            {{ slides_label(level) }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- preview of the selected deck -->
+    <div class="flex flex-col gap-3 w-full min-w-0">
+      <div class="slides-preview teacher-table-shell bg-white overflow-hidden">
+        <iframe id="slides_preview"
+                data-cy="slides_preview"
+                src="/slides/{{ selected_level }}?embed=1"
+                title="{{ slides_label(selected_level) }}"
+                loading="lazy"></iframe>
+      </div>
+      <div class="flex flex-row gap-2">
+        <a class="blue-btn-new inline-flex items-center gap-2"
+           id="present_slides"
+           data-cy="present_slides"
+           href="/slides/{{ selected_level }}"
+           target="_blank"
+           rel="noopener">
+          <i class="fa-solid fa-expand"></i>
+          <span>{{ _('present') }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

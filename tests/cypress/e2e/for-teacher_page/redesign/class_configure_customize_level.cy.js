@@ -51,26 +51,26 @@ describe('Redesigned class configure and customize-level pages', () => {
   it('renders configure controls and navigates to customize-level', () => {
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'configure');
-      assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/redesign/class/${classId}`]);
+      assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/class/${classId}`]);
       cy.get('[id^="enable_level_"]').should('have.length.at.least', 16);
       cy.get('#customize_level').select('2');
 
-      cy.get(`button[onclick*="/for-teachers/redesign/class/${classId}/customize-level/"]`).click();
-      cy.url().should('include', `/for-teachers/redesign/class/${classId}/customize-level/2`);
+      cy.get(`button[onclick*="/for-teachers/class/${classId}/customize-level/"]`).click();
+      cy.url().should('include', `/for-teachers/class/${classId}/customize-level/2`);
     });
   });
 
   it('toggles level availability and updates through HTMX', () => {
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'configure');
-      cy.visit(`/for-teachers/redesign/class/${classId}/customize-level/1`);
+      cy.visit(`/for-teachers/class/${classId}/customize-level/1`);
       assertBreadcrumbLinks([
         '/for-teachers/class/all',
-        `/for-teachers/redesign/class/${classId}`,
-        `/for-teachers/redesign/class/${classId}/configure`,
+        `/for-teachers/class/${classId}`,
+        `/for-teachers/class/${classId}/configure`,
       ]);
 
-      cy.intercept('POST', `/for-teachers/redesign/class/${classId}/customize-level/1/availability`).as('availability');
+      cy.intercept('POST', `/for-teachers/class/${classId}/customize-level/1/availability`).as('availability');
       cy.get('#level_availability_panel input[type="checkbox"]').as('availabilityToggle');
       cy.get('#level_availability_panel .switch .slider').as('availabilitySlider');
 
@@ -100,17 +100,17 @@ describe('Redesigned class configure and customize-level pages', () => {
   it('opens level dropdown and navigates to another level from customize-level page', () => {
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'configure');
-      cy.visit(`/for-teachers/redesign/class/${classId}/customize-level/1`);
+      cy.visit(`/for-teachers/class/${classId}/customize-level/1`);
 
       cy.get('#level_button').should('be.visible');
       cy.get('#dropdown_level_button').click();
       cy.get('#level_dropdown').should('be.visible');
 
       cy.get('#level_dropdown a[id^="level_button_"]').should('have.length', 16);
-      cy.get('#level_button_3').should('have.attr', 'href', `/for-teachers/redesign/class/${classId}/customize-level/3`);
+      cy.get('#level_button_3').should('have.attr', 'href', `/for-teachers/class/${classId}/customize-level/3`);
       cy.get('#level_button_3').click();
 
-      cy.url().should('include', `/for-teachers/redesign/class/${classId}/customize-level/3`);
+      cy.url().should('include', `/for-teachers/class/${classId}/customize-level/3`);
       cy.get('#level_button_3').should('have.attr', 'disabled');
     });
   });
@@ -118,7 +118,7 @@ describe('Redesigned class configure and customize-level pages', () => {
   it('opens and closes add-adventures modal, then restores default adventures', () => {
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'configure');
-      cy.visit(`/for-teachers/redesign/class/${classId}/customize-level/1`);
+      cy.visit(`/for-teachers/class/${classId}/customize-level/1`);
 
       cy.get('#level_adventures_panel > div button.blue-btn-new').filter(':visible').first().click();
       cy.get('#add_adventures_modal_level_1').should('be.visible');
@@ -132,7 +132,7 @@ describe('Redesigned class configure and customize-level pages', () => {
         cy.wrap(originalAdventureIds[0]).as('removedAdventureId');
       });
 
-      cy.intercept('POST', `/for-teachers/redesign/class/${classId}/customize-level/1/remove-adventure*`).as('removeAdventure');
+      cy.intercept('POST', `/for-teachers/class/${classId}/customize-level/1/remove-adventure*`).as('removeAdventure');
       cy.get('@removedAdventureId').then((removedAdventureId) => {
         cy.get(`#level_1 li button[aria-label][hx-post*="adventure_id=${removedAdventureId}"]`).first().click();
       });
@@ -153,7 +153,7 @@ describe('Redesigned class configure and customize-level pages', () => {
         });
       });
 
-      cy.intercept('POST', `/for-teachers/redesign/class/${classId}/customize-level/1/restore-default-adventures`).as('restoreDefault');
+      cy.intercept('POST', `/for-teachers/class/${classId}/customize-level/1/restore-default-adventures`).as('restoreDefault');
       cy.get('button[hx-post*="/restore-default-adventures"]').click();
       cy.getDataCy('redesign_confirm_modal').should('be.visible');
       cy.getDataCy('redesign_confirm_yes_button').click();
@@ -171,12 +171,12 @@ describe('Redesigned class configure and customize-level pages', () => {
   it('loads remove-all-adventures modal endpoint and handles invalid level URL', () => {
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'configure');
-      cy.visit(`/for-teachers/redesign/class/${classId}/customize-level/1`);
+      cy.visit(`/for-teachers/class/${classId}/customize-level/1`);
 
       cy.get('#level_1 input[name="adventure"]').its('length').should('be.greaterThan', 0);
 
-      cy.intercept('GET', `/for-teachers/redesign/class/${classId}/customize-level/1/remove-all-adventures-modal`).as('removeAllModal');
-      cy.intercept('POST', `/for-teachers/redesign/class/${classId}/customize-level/1/sort-adventures`).as('removeAllAdventures');
+      cy.intercept('GET', `/for-teachers/class/${classId}/customize-level/1/remove-all-adventures-modal`).as('removeAllModal');
+      cy.intercept('POST', `/for-teachers/class/${classId}/customize-level/1/sort-adventures`).as('removeAllAdventures');
       cy.get('button[hx-get*="/remove-all-adventures-modal"]').click();
       cy.wait('@removeAllModal').its('response.statusCode').should('eq', 200);
       cy.getDataCy('htmx_modal_yes_button').should('be.visible');
@@ -187,7 +187,7 @@ describe('Redesigned class configure and customize-level pages', () => {
       cy.get('#level_1 input[name="adventure"]').should('not.exist');
 
       cy.request({
-        url: `/for-teachers/redesign/class/${classId}/customize-level/0`,
+        url: `/for-teachers/class/${classId}/customize-level/0`,
         failOnStatusCode: false,
       }).its('status').should('eq', 404);
     });
@@ -204,7 +204,7 @@ describe('Redesigned class configure and customize-level pages', () => {
       openClassSubpage(classId, 'configure');
 
       cy.intercept('GET', '/search*').as('searchTeacher');
-      cy.intercept('POST', `/for-teachers/redesign/class/${classId}/configure/invite`).as('inviteTeacher');
+      cy.intercept('POST', `/for-teachers/class/${classId}/configure/invite`).as('inviteTeacher');
 
       cy.get(`button.green-btn-new[data-class-id="${classId}"]`).scrollIntoView().click();
       cy.getDataCy('redesign_search_modal').should('be.visible');

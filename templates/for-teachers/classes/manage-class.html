@@ -4,7 +4,7 @@
 <div class="flex flex-col px-4 md:px-16">
   {{ breadcrumb([
       {'label': _('classes'), 'url': '/for-teachers/class/all'},
-      {'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ class_info.id},
+      {'label': class_info.name, 'url': '/for-teachers/class/' ~ class_info.id},
       {'label': _('manage_students')}
   ]) }}
   <h1 class="break-words">{{ class_info.name }}</h1>
@@ -12,7 +12,7 @@
   <div class="h-full overflow-visible" id="classes_table">
     <div class="w-full h-full mb-48">
       <div class="teacher-table-shell w-full h-full">
-        <form hx-get="/for-teachers/redesign/class/{{ class_info.id }}/manage/filter_sort"
+        <form hx-get="/for-teachers/class/{{ class_info.id }}/manage/filter_sort"
             hx-target="#manage-students-table-body"
             hx-swap="innerHTML"
             hx-trigger="submit"
@@ -38,7 +38,7 @@
           <button class="blue-btn-new" data-cy="invite_student" onclick='hedyApp.invite_to_class_redesign("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}}, "student")'>
             {{_('invite_by_username')}}
           </button>
-          <button class="blue-btn-new" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}?modal=redesign&return_to=/for-teachers/redesign/class/{{ class_info.id }}/manage', '_self')">{{_('create_accounts')}}</button>
+          <button class="blue-btn-new" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}?modal=redesign&return_to=/for-teachers/class/{{ class_info.id }}/manage', '_self')">{{_('create_accounts')}}</button>
       </div>
   </div>
   </div>

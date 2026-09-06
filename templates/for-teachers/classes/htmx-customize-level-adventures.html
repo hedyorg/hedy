@@ -27,7 +27,7 @@
 
                 <form
                     class="p-4 overflow-y-auto flex flex-col gap-4"
-                    hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/add-adventure"
+                    hx-post="/for-teachers/class/{{ class_id }}/customize-level/{{ level }}/add-adventure"
                     hx-target="#level_adventures_panel"
                     hx-swap="outerHTML"
                     hx-indicator="#level_adventures_indicator"
@@ -93,7 +93,19 @@
                         </div>
 
                         <div class="flex flex-wrap gap-2 mt-3">
-                            <a href="/for-teachers/customize-adventure" class="inline-flex blue-btn-new no-underline">{{ _('create_adventure') }}</a>
+                            <a
+                                href="/for-teachers/customize-adventure"
+                                class="inline-flex blue-btn-new no-underline"
+                                data-prompt="{{ _('set_adventure_name') }}"
+                                data-title="{{ _('create_adventure') }}"
+                                data-empty-name-error="{{ _('adventure_empty') }}"
+                                data-modal-variant="redesign"
+                                data-class-id="{{ class_id }}"
+                                data-level="{{ level }}"
+                                _="on click halt the event
+                                   then trigger closeAddAdventuresModal on #add_adventures_modal_level_{{ level }} 
+                                   then call hedyApp.create_adventure_with_name(event, me)"
+                            >{{ _('create_adventure') }}</a>
                             <a href="/public-adventures" target="_blank" class="inline-flex blue-btn-new no-underline">{{ _('public_adventures') }}</a>
                         </div>
                     </div>
@@ -119,7 +131,7 @@
         id="level_{{ level }}"
         class="flex flex-col gap-1 sortable mt-0"
         hx-trigger="end"
-        hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/sort-adventures"
+        hx-post="/for-teachers/class/{{ class_id }}/customize-level/{{ level }}/sort-adventures"
         hx-target="#level_adventures_panel"
         hx-swap="outerHTML"
         hx-include="[name='adventure']"
@@ -143,7 +155,7 @@
                     type="button"
                     class="text-red-600 hover:text-red-700 transition-colors mx-1 md:mx-1 inline-flex items-center justify-center w-11 md:w-fit md:h-fit h-11 rounded-full"
                     aria-label="{{ _('remove') }}"
-                    hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/remove-adventure?adventure_id={{ adventure.short_name }}"
+                    hx-post="/for-teachers/class/{{ class_id }}/customize-level/{{ level }}/remove-adventure?adventure_id={{ adventure.short_name }}"
                     hx-target="#level_adventures_panel"
                     hx-swap="outerHTML"
                     hx-indicator="#level_adventures_indicator"

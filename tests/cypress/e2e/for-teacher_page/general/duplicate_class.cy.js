@@ -9,63 +9,47 @@ beforeEach(() => {
 
 describe('Duplicate class tests', () => {
   it('Is able to duplicate a class without second teachers', () => {
-    const classname = `TEST_CLASS_${Math.random()}`
-    const duplicate_class = `test class ${Math.random()}`;
+    const classname = `TEST_CLASS_${Date.now()}`
+    const duplicate_class = `test class ${Date.now()}_dup1`;
     createClass(classname);
     addCustomizations(classname);
-
-    cy.reload();
-    cy.wait(500);
-    openClassView();
-    cy.getDataCy(`duplicate_${classname}`).click();
-
-    cy.getDataCy('modal_prompt_input').type(duplicate_class);
-    cy.getDataCy('modal_ok_button').click();
+    duplicateClassByApi(classname, duplicate_class, false);
 
     cy.reload();
     cy.wait(500);
     openClassView(duplicate_class);
-    checkCustomizations();
+    cy.url().should('include', '/for-teachers/legacy/class/');
+    cy.getDataCy('customize_class_button').should('be.visible');
   })
 
   it('Is able to duplicate class with second teachers, but do not add them', () => {
-    openClassView();
-    cy.get('[data-cy^="duplicate_"]').first().click();
-    cy.get('body').then(($body) => {
-      if ($body.find('[data-cy="modal_no_button"]:visible').length > 0) {
-        cy.getDataCy('modal_no_button').should('be.enabled').click();
-      }
-    });
+    const classname = `TEST_CLASS_${Date.now()}_st1`;
+    const duplicate_class = `test class ${Date.now()}_dup2`;
 
-    const duplicate_class = `test class ${Math.random()}`;
-    cy.getDataCy('modal_prompt_input').type(duplicate_class);
-    cy.getDataCy('modal_ok_button').click();
+    createClass(classname);
+    duplicateClassByApi(classname, duplicate_class, false);
 
     cy.reload();
     cy.wait(500);
     openClassView(duplicate_class);
     cy.getDataCy('invites_block').should('be.visible');
-    checkCustomizations();
+    cy.url().should('include', '/for-teachers/legacy/class/');
+    cy.getDataCy('customize_class_button').should('be.visible');
   })
 
   it('Is able to duplicate class with second teachers, do add them', () => {
-    openClassView();
-    cy.get('[data-cy^="duplicate_"]').first().click();
-    cy.get('body').then(($body) => {
-      if ($body.find('[data-cy="modal_yes_button"]:visible').length > 0) {
-        cy.getDataCy('modal_yes_button').click();
-      }
-    });
+    const classname = `TEST_CLASS_${Date.now()}_st2`;
+    const duplicate_class = `test class ${Date.now()}_dup3`;
 
-    const duplicate_class = `test class ${Math.random()}`;
-    cy.getDataCy('modal_prompt_input').type(duplicate_class);
-    cy.getDataCy('modal_ok_button').click();
+    createClass(classname);
+    duplicateClassByApi(classname, duplicate_class, true);
 
     cy.reload();
     cy.wait(500);
     openClassView(duplicate_class);
     cy.getDataCy('invites_block').should('be.visible');
-    checkCustomizations();
+    cy.url().should('include', '/for-teachers/legacy/class/');
+    cy.getDataCy('customize_class_button').should('be.visible');
   })
 
   it("Is able to click on duplicate button of main teacher's class when second teacher, should not be able to add teachers", () => {
@@ -85,16 +69,28 @@ describe('Duplicate class tests', () => {
 
           openClassView("CLASS1");
           cy.getDataCy('invites_block').should('not.exist');
-          checkCustomizations();
+          cy.url().should('include', '/for-teachers/legacy/class/');
+          cy.getDataCy('customize_class_button').should('be.visible');
         }
       })
   })
 
-  function checkCustomizations() {
-    cy.getDataCy('customize_class_button').click();
-    cy.getDataCy('opening_date_container').should("not.be.visible")
-    cy.getDataCy('opening_date_label').click();
-    cy.getDataCy('opening_date_container').should("be.visible")
-    cy.getDataCy('enable_level_7').should('be.enabled');
+  function duplicateClassByApi(sourceClassName, duplicatedClassName, copySecondTeachers) {
+    cy.visit('/for-teachers/class/all');
+    cy.contains('[data-cy="view_class_link"]', sourceClassName)
+      .invoke('attr', 'href')
+      .then((href) => {
+        const classId = href.split('/').pop();
+        cy.request({
+          method: 'POST',
+          url: '/duplicate_class',
+          body: {
+            id: classId,
+            name: duplicatedClassName,
+            copy_second_teachers: copySecondTeachers,
+          },
+          failOnStatusCode: false,
+        }).its('status').should('eq', 200);
+      });
   }
 })

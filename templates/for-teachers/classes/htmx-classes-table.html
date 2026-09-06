@@ -17,7 +17,7 @@
           {% set class_is_updated = 'content_version' in (class_customizations|default({})).get(class.id, {}) and class_customizations[class.id].content_version >= last_content_version %}
           <tr>
             <td class="text-center px-3 {% if loop.last %} rounded-b-lg {% endif %}">
-              <a href="/for-teachers/redesign/class/{{class.id}}" class="view_class" data-cy="view_class_link">
+              <a href="/for-teachers/class/{{class.id}}" class="view_class" data-cy="view_class_link">
                 {{class.name|e}}
               </a>
             </td>
@@ -46,13 +46,13 @@
                 <div id="{{ menu_id }}" class="hidden z-30 menu origin-top-right absolute w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-opacity transition-transform duration-150">
                   <ul class="list-none divide-y divide-gray-200 p-2">
                     {% if not is_archived %}
-                    <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline text-blue-900">
+                    <a href="/for-teachers/class/{{class.id}}/grade" class="no-underline text-blue-900">
                       <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg text-blue-900 ease-in transition duration-100">
                         <i class="fa-solid fa-circle-check text-sm"></i>
                         <span class="m-3">{{_('grading')}}</span>
                       </li>
                     </a>
-                    <a href="/for-teachers/redesign/class/{{class.id}}/configure" class="no-underline text-blue-900">
+                    <a href="/for-teachers/class/{{class.id}}/configure" class="no-underline text-blue-900">
                       <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 gap-4">
                         <i class="fa-solid fa-gears text-sm"></i>
                         <span class="m-3">{{_('configure')}}</span>
@@ -74,7 +74,7 @@
                         data-success-message="{{ _('class_updated_successfully') }}"
                         data-failure-message="{{ _('feedback_message_error') }}"
                         hx-trigger="click"
-                        hx-post="/for-teachers/redesign/update-content/{{ class.id }}"
+                        hx-post="/for-teachers/update-content/{{ class.id }}"
                         hx-target="#classes_table_container"
                         hx-swap="innerHTML"
                       >

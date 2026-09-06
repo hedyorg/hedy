@@ -15,7 +15,7 @@
                 type="checkbox"
                 {% if level|int in customizations['levels'] %}checked{% endif %}
                 aria-label="{{ _('available') }}"
-                hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/availability"
+                hx-post="/for-teachers/class/{{ class_id }}/customize-level/{{ level }}/availability"
                 hx-trigger="change"
                 hx-target="#level_availability_status"
                 hx-swap="outerHTML"

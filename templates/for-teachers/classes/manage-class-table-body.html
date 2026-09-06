@@ -46,7 +46,7 @@
         </li>
         {% endif %}
         <li data-cy="remove_student_{{ student.username }}" class="teacher-context-menu-item teacher-context-menu-item-danger gap-4"
-            hx-get="/for-teachers/redesign/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" 
+            hx-get="/for-teachers/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" 
             hx-target="#modal_target"
             hx-swap="innerHTML"
         >

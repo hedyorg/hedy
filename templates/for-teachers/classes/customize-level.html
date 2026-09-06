@@ -6,8 +6,8 @@
     {% from 'incl/breadcrumb.html' import breadcrumb %}
     {{ breadcrumb([
         {'label': _('classes'), 'url': '/for-teachers/class/all'},
-        {'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ class_info.id},
-        {'label': _('configure'), 'url': '/for-teachers/redesign/class/' ~ class_info.id ~ '/configure'},
+        {'label': class_info.name, 'url': '/for-teachers/class/' ~ class_info.id},
+        {'label': _('configure'), 'url': '/for-teachers/class/' ~ class_info.id ~ '/configure'},
         {'label': _('level_title') ~ ' ' ~ level_display}
     ]) }}
     <h1 style="overflow-wrap: anywhere;">{{ class_info.name }}</h1>
@@ -32,7 +32,7 @@
                 <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                 {% if loop.index == level_display|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
                 hover:bg-blue-200" {% if dropdown_level==level_display|int %}disabled{% endif %}
-                    href="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ dropdown_level }}">
+                    href="/for-teachers/class/{{ class_info.id }}/customize-level/{{ dropdown_level }}">
                     <div class="flex-grow h-min" tabindex=0>
                         {{ _('level_title') }} {{ dropdown_level }}
                     </div>
@@ -86,7 +86,7 @@
                         type="button"
                         class="blue-btn-new"
                         data-confirm-modal="redesign"
-                        hx-post="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/restore-default-adventures"
+                        hx-post="/for-teachers/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/restore-default-adventures"
                         hx-target="#level_adventures_panel"
                         hx-swap="outerHTML"
                         hx-indicator="#level_adventures_indicator"
@@ -97,7 +97,7 @@
                     <button
                         type="button"
                         class="red-btn-new"
-                        hx-get="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/remove-all-adventures-modal"
+                        hx-get="/for-teachers/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/remove-all-adventures-modal"
                         hx-target="#modal_target"
                     >
                         Remove all adventures

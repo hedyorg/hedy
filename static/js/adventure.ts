@@ -321,12 +321,111 @@ function addEditorExplanationButton(editor: ClassicEditor, explanationId: string
     toolbarItems.appendChild(button);
 }
 
-export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
-    const isLegacyAdventureEditPage =
-        window.location.pathname.startsWith('/for-teachers/customize-adventure/') &&
-        !window.location.pathname.startsWith('/for-teachers/redesign/');
+/**
+ * Stamp each real toolbar button with the name of the tool it runs.
+ *
+ * The toolbar config is a flat list of component names ('bold', 'code', '|', ...)
+ * and the toolbar builds one view per name, separators included, so the two line
+ * up by index. Matching on the tooltip text instead would break in every
+ * non-English locale, since CKEditor translates those.
+ *
+ * CKEditor drops entries it cannot build (an unregistered component, or a '-'
+ * line break while grouping is on), which would shift every index after it. We
+ * cannot see the cleaned list, so compare the lengths and skip tagging when they
+ * disagree: the panel then highlights nothing, rather than the wrong button.
+ */
+function tagToolbarItems(editor: ClassicEditor) {
+    const configured = editor.config.get('toolbar') as any;
+    const names: unknown[] = Array.isArray(configured) ? configured : configured?.items ?? [];
+    const items = Array.from(editor.ui.view.toolbar.items as any as Iterable<{ element?: HTMLElement }>);
 
-    if (isLegacyAdventureEditPage) {
+    if (!names.length || names.length !== items.length) {
+        return;
+    }
+
+    names.forEach((name, index) => {
+        if (typeof name !== 'string' || name === '|') {
+            return;
+        }
+        items[index]?.element?.setAttribute('data-hedy-tool', name);
+    });
+}
+
+/**
+ * Let the explanation panel point at the toolbar button it describes.
+ *
+ * The glyphs in the panel are illustrations, not controls, so they never touch
+ * the content. Hovering or clicking one highlights the matching toolbar button
+ * so teachers can see where the real control lives.
+ */
+function connectExplanationGlyphsToToolbar(editor: ClassicEditor, explanationId: string) {
+    const explanation = document.getElementById(explanationId);
+    const toolbar = editor.ui.view.toolbar.element;
+    if (!explanation || !toolbar) {
+        return;
+    }
+
+    let clearSpotlight: number | undefined;
+
+    const spotlight = (target: HTMLElement) => {
+        // Re-adding the class restarts the pulse animation.
+        target.classList.remove('hedy-tool-spotlight');
+        void target.offsetWidth;
+        target.classList.add('hedy-tool-spotlight');
+    };
+
+    const removeSpotlights = () => {
+        toolbar.querySelectorAll('.hedy-tool-spotlight')
+            .forEach(element => element.classList.remove('hedy-tool-spotlight'));
+    };
+
+    for (const glyph of Array.from(explanation.querySelectorAll<HTMLElement>('[data-points-to]'))) {
+        const tool = glyph.getAttribute('data-points-to');
+        const button = toolbar.querySelector<HTMLElement>(`[data-hedy-tool="${tool}"]`);
+        if (!button) {
+            continue;
+        }
+
+        // When the window is narrow the toolbar collapses overflowing buttons into
+        // a "show more items" dropdown. Highlighting a hidden button would look
+        // like nothing happened, so point at the dropdown that contains it.
+        const visibleTarget = () => button.offsetParent === null
+            ? toolbar.querySelector<HTMLElement>('.ck-toolbar__grouped-dropdown') ?? button
+            : button;
+
+        glyph.addEventListener('mouseenter', () => {
+            window.clearTimeout(clearSpotlight);
+            removeSpotlights();
+            spotlight(visibleTarget());
+        });
+
+        glyph.addEventListener('mouseleave', () => {
+            // Leaving the glyph always ends the hint, even if a click started
+            // the hold timer: the pointer moving away is the clearest signal
+            // that the teacher is done looking.
+            window.clearTimeout(clearSpotlight);
+            clearSpotlight = undefined;
+            removeSpotlights();
+        });
+
+        // Touch devices have no hover, so a tap gets the same hint.
+        glyph.addEventListener('click', () => {
+            window.clearTimeout(clearSpotlight);
+            removeSpotlights();
+            spotlight(visibleTarget());
+            clearSpotlight = window.setTimeout(() => {
+                removeSpotlights();
+                clearSpotlight = undefined;
+            }, 1500);
+        });
+    }
+}
+
+export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
+    const isAdventureEditPage =
+        window.location.pathname.startsWith('/for-teachers/customize-adventure/');
+
+    if (isAdventureEditPage) {
         autoSave('customize_adventure');
         window.addEventListener('pageshow', () => autoSave('customize_adventure'));
     }
@@ -685,14 +784,16 @@ function initializeEditor(language: string, editorContainer: HTMLElement, soluti
             })
             .then(editor => {
                 enableArrowDownToExitCodeBlock(editor);
+                tagToolbarItems(editor);
+                const explanationId = solutionExample ? 'explanation_solution' : 'explanation';
                 if (solutionExample) {
                     window.ckSolutionEditor = editor;
-                    addEditorExplanationButton(editor, 'explanation_solution');
                 } else {
                     window.ckEditor = editor;
                     $editor = editor;
-                    addEditorExplanationButton(editor, 'explanation');
                 }
+                addEditorExplanationButton(editor, explanationId);
+                connectExplanationGlyphsToToolbar(editor, explanationId);
                 resolve();
             })
             .catch(error => {

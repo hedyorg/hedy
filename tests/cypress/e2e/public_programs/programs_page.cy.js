@@ -63,6 +63,7 @@ describe("General tests for my programs page (with both custom teacher and built
 
     it("should not be added to my programs when running a program with copied code", () => {
         cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
+                cy.intercept('POST', '/programs').as('saveProgram');
         // Paste example code
         cy.get(`.adventure_content_${adventure}`).within(() => {
           cy.getDataCy(`paste_example_code_${adventure}`).click();
@@ -70,7 +71,7 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.getDataCy('runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
-        cy.getDataCy('programs').should("not.contain.text", 'Story 1');
+                cy.get('@saveProgram.all').should('have.length', 0);
     });
 
     it("should be added to my programs when running a program with modified code", () => {

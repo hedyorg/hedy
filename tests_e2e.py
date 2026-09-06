@@ -1121,7 +1121,7 @@ class TestClasses(AuthHelper):
 
         # WHEN retrieving the class
         # THEN receive an OK response code from the server
-        Class = self.get_data('for-teachers/class/' + Class['id'])
+        Class = self.get_data('for-teachers/legacy/class/' + Class['id'])
 
         # THEN validate the fields of the class
         self.assertIsInstance(Class, dict)
@@ -1235,7 +1235,7 @@ class TestClasses(AuthHelper):
 
         # WHEN retrieving the class
         # THEN receive an OK response code from the server
-        Class = self.get_data('for-teachers/class/' + Class['id'])
+        Class = self.get_data('for-teachers/legacy/class/' + Class['id'])
 
         # THEN the name of the class should be updated
         self.assertEqual(Class['name'], 'class2')
@@ -1296,7 +1296,7 @@ class TestClasses(AuthHelper):
         self.switch_user(teacher)
 
         # WHEN retrieving the class with a student in it
-        Class_data = self.get_data('for-teachers/class/' + Class['id'])
+        Class_data = self.get_data('for-teachers/legacy/class/' + Class['id'])
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
         class_student = Class_data['students'][0]
@@ -1345,7 +1345,7 @@ class TestClasses(AuthHelper):
         self.switch_user(teacher)
 
         # WHEN retrieving the class with a student in it
-        Class_data = self.get_data('for-teachers/class/' + Class['id'])
+        Class_data = self.get_data('for-teachers/legacy/class/' + Class['id'])
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
 
