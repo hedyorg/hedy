@@ -29,23 +29,40 @@
 
   <h1 class="my-5">{{ _('teaching_materials') }}</h1>
 
-  <h2 class="mt-8 mb-3">{{ _('prepare_per_level') }}</h2>
-  <div class="flex flex-row flex-wrap items-center gap-3">
-    <label for="prepare_level_select" class="text-base">{{ _('pick_level_to_prepare') }}</label>
-    <select id="prepare_level_select"
-            data-cy="prepare_level_select"
-            class="border border-gray-400 rounded px-3 py-2">
-      {% for level in levels %}
-      <option value="{{ level }}">{{ _('level') }} {{ level }}</option>
-      {% endfor %}
-    </select>
-    <button type="button"
-            class="blue-btn-new inline-flex items-center"
-            id="prepare_level_button"
-            data-cy="prepare_level_button"
-            onclick="window.location.href='/for-teachers/teaching-materials/' + document.getElementById('prepare_level_select').value">
-      {{ _('prepare') }}
-    </button>
+  {# Its own card, like the materials below it. #}
+  <div class="flex flex-row gap-4 mt-6">
+    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
+      <h2 class="m-0">{{ _('prepare_a_level') }}</h2>
+      <div class="text-black text-base">{{ _('prepare_a_level_info') }}</div>
+      {#
+        Hedy's own dropdown rather than a native select, matching the level picker on the
+        page it leads to. It reuses the ids hedyApp.open_index_dropdown() toggles, so it
+        needs no extra JavaScript; each level is a link, so there is nothing to submit.
+      #}
+      <div class="dropdown relative w-fit">
+        <button type="button" id="dropdown_open_button"
+                data-cy="prepare_level_button"
+                class="blue-btn-new inline-flex items-center gap-3"
+                onclick="hedyApp.open_index_dropdown()">
+          <span>{{ _('pick_a_level') }}</span>
+          <i class="fa-solid fa-chevron-down transition-all ease-in duration-300"
+             id="dropdown_index_arrow"></i>
+        </button>
+        <div id="dropdown-level" data-cy="prepare_level_options"
+             class="absolute block rounded-md ltr:left-0 rtl:right-0 w-max overflow-y-auto p-2 shadow-lg
+                    dropdown-blue z-30 min-w-full max-h-96"
+             style="display: none;">
+          {% for level in levels %}
+          <a href="/for-teachers/teaching-materials/{{ level }}"
+             data-cy="prepare_level_{{ level }}"
+             class="flex flex-row items-center rounded-lg px-3 py-1 text-lg font-extralight
+                    text-blue-900 no-underline ease-in transition duration-100 hover:bg-blue-200">
+            {{ _('level_title') }} {{ level }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
   </div>
 
   <div data-cy="teaching_materials_cards">

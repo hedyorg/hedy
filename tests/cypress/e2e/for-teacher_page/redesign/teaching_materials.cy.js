@@ -8,8 +8,8 @@ describe('Teaching materials', () => {
   it('offers a level picker and a card per material', () => {
     cy.visit('/for-teachers/teaching-materials');
 
-    cy.getDataCy('prepare_level_select').find('option').its('length').should('be.greaterThan', 1);
     cy.getDataCy('prepare_level_button').should('be.visible');
+    cy.getDataCy('prepare_level_options').should('not.be.visible');
     cy.getDataCy('teaching_materials_cards').find('> div').should('have.length', 3);
     cy.getDataCy('background_information_link').should('have.attr', 'href', '/for-teachers/manual');
     cy.getDataCy('slides_link').should('have.attr', 'href', '/for-teachers/slides');
@@ -18,8 +18,9 @@ describe('Teaching materials', () => {
   it('prepares the level picked in the dropdown', () => {
     cy.visit('/for-teachers/teaching-materials');
 
-    cy.getDataCy('prepare_level_select').select('5');
     cy.getDataCy('prepare_level_button').click();
+    cy.getDataCy('prepare_level_options').should('be.visible');
+    cy.getDataCy('prepare_level_5').click();
 
     cy.url().should('include', '/for-teachers/teaching-materials/5');
     cy.getDataCy('teaching_materials_level_dropdown').should('contain', 'Level 5');
