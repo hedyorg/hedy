@@ -546,6 +546,62 @@ kbd {
 }
 
 /*
+  A code block is plain text for the instant before CodeMirror converts it, and the
+  global `pre` rule paints that text white -- invisible here. Give it the same ground
+  and ink the light editor will take, so nothing flashes.
+*/
+.prepare-level pre.common-mistakes {
+  background: #edf2f7;
+  color: #2d3748;
+  border-radius: 4px;
+}
+
+/*
+  Tailwind's reset zeroes list padding, and Hedy restores the indent only inside
+  `.text-display-copy`, `.text-business-copy` and `.text-adventure-copy`. The teacher
+  manual is one of those, this page is not, so bullets hung outside the text column.
+  Match what the manual gives the very same markdown -- `ml-10` and `mt-2` between
+  items -- as logical properties, so it also reads correctly right to left.
+*/
+.prepare-level .level-guide-copy ul,
+.prepare-level .level-guide-copy ol {
+  margin-inline-start: 2.5rem;
+}
+.prepare-level .level-guide-copy li + li {
+  margin-top: 0.5rem;
+}
+
+/*
+  Common mistakes as two labelled beats: what goes wrong, then the fix. The entries ran
+  together and nothing said which code was broken, so each half takes a coloured edge
+  and a label, and a rule separates one mistake from the next. Logical properties, so
+  the edges sit on the correct side right to left.
+*/
+.prepare-level .mistake + .mistake {
+  margin-top: 2.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid #e2e8f0;
+}
+.prepare-level .mistake-beat {
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid transparent;
+}
+.prepare-level .mistake-beat + .mistake-beat { margin-top: 1.5rem; }
+.prepare-level .beat-problem { border-inline-start-color: #fc8181; }
+.prepare-level .beat-fix { border-inline-start-color: #68d391; }
+.prepare-level .beat-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.prepare-level .beat-problem .beat-label { color: #c53030; }
+.prepare-level .beat-fix .beat-label { color: #276749; }
+/* The label is the beat's first line; the prose under it should not push away from it. */
+.prepare-level .mistake-beat .beat-label + p { margin-top: 0.35rem; }
+
+/*
   Material names, one step down from the section headings around them.
 */
 .prepare-level .material-name {

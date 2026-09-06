@@ -7,41 +7,63 @@
 {# What changes in this level, and which concepts it adds, as one block of markdown. #}
 {% macro concepts_and_changes(text) %}
 {% if text %}
-<div class="text-black text-base" data-cy="level_concepts_and_changes">{{ text|commonmark }}</div>
+<div class="text-black text-base level-guide-copy" data-cy="level_concepts_and_changes">{{ text|commonmark }}</div>
 {% endif %}
 {% endmacro %}
 
-{# The mistakes teachers can expect in this level, with an example of each. #}
-{% macro common_mistakes(sections, level) %}
-{% for mistake_section in sections %}
 {#
-  Every field here is optional: the content is written level by level, so an entry can
-  carry only its code examples while the prose around it is still being written.
+  The mistakes teachers can expect in this level, with an example of each.
+
+  Every field is optional: the content is written level by level, so an entry can carry
+  only its code examples while the prose around it is still being written.
+
+  `beats` splits the entry into its two halves -- what goes wrong, and the fix -- and
+  labels them. It is opt-in because this macro also renders the teacher manual, which
+  should keep the plain run of prose and code it has today; the open and close tags are
+  wrapped in their own conditionals so that when it is off, the markup is unchanged
+  rather than merely restyled.
 #}
-<div data-cy="common_mistake">
+{% macro common_mistakes(sections, level, light=False, beats=False) %}
+{% for mistake_section in sections %}
+<div class="mistake" data-cy="common_mistake">
   {% if mistake_section.title %}<h4 class="mistake-title">{{ mistake_section.title|commonmark }}</h4>{% endif %}
   {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
+    {% if beats and (mistake_section.example.error_text or mistake_section.example.error_code) %}
+    <div class="mistake-beat beat-problem">
+      <span class="beat-label">What students get wrong</span>
+    {% endif %}
     {% if mistake_section.example.error_text %}
       <p>{{ mistake_section.example.error_text|commonmark }}</p>
     {% endif %}
     {% if mistake_section.example.error_code %}
       <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+        <pre class="common-mistakes{% if light %} light{% endif %}" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
       </div>
+    {% endif %}
+    {% if beats and (mistake_section.example.error_text or mistake_section.example.error_code) %}
+    </div>
+    {% endif %}
+
+    {% if beats and (mistake_section.example.solution_text or mistake_section.example.solution_code) %}
+    <div class="mistake-beat beat-fix">
+      <span class="beat-label">How to fix it</span>
     {% endif %}
     {% if mistake_section.example.solution_text %}
       <p>{{ mistake_section.example.solution_text|commonmark }}</p>
     {% endif %}
     {% if mistake_section.example.solution_code %}
       <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+        <pre class="common-mistakes{% if light %} light{% endif %}" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
       </div>
+    {% endif %}
+    {% if beats and (mistake_section.example.solution_text or mistake_section.example.solution_code) %}
+    </div>
     {% endif %}
   {% else %}
     {% if mistake_section.text %}<p>{{ mistake_section.text|commonmark }}</p>{% endif %}
     {% if mistake_section.code %}
       <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
+        <pre class="common-mistakes{% if light %} light{% endif %}" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
       </div>
     {% endif %}
   {% endif %}
