@@ -1,0 +1,26 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+<div class="flex-col md:px-16">
+  {{ breadcrumb([
+      {'label': _('teaching_materials')}
+    ], 'mt-2 mb-4') }}
+
+  <h1 class="my-5">{{ _('teaching_materials') }}</h1>
+
+  <div class="flex flex-row gap-4">
+    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
+      <h2 class="m-0"><a href="/for-teachers/manual" data-cy="background_information_link">{{ _('background_information') }}</a></h2>
+      <div class="text-black text-base">{{ _('background_information_info') }}</div>
+    </div>
+  </div>
+
+  <div class="flex flex-row gap-4 mt-10">
+    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
+      <h2 class="m-0"><a href="/for-teachers/slides" data-cy="slides_link">{{ _('slides') }}</a></h2>
+      <div class="text-black text-base">{{ _('slides_card_info') }}</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

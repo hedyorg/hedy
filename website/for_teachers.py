@@ -92,12 +92,6 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
 
-        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
-        slides = []
-        for level in range(hedy.HEDY_MAX_LEVEL + 1):
-            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
-                slides.append(level)
-
         return render_template(
             "for-teachers/for-teachers.html",
             current_page="for-teachers",
@@ -105,11 +99,50 @@ class ForTeachersModule(WebsiteModule):
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
-            slides=slides,
             javascript_page_options=dict(
                 page='for-teachers',
                 welcome_teacher=welcome_teacher,
             ))
+
+    @route("/teaching-materials", methods=["GET"])
+    def get_teaching_materials(self):
+        return render_template(
+            "for-teachers/teaching-materials.html",
+            current_page="for-teachers",
+            page_title=gettext("teaching_materials"))
+
+    @route("/slides", methods=["GET"])
+    def get_slides_overview(self):
+        return self._render_slides_page(None)
+
+    @route("/slides/<level>", methods=["GET"])
+    def get_slides_for_level(self, level):
+        return self._render_slides_page(level)
+
+    def _render_slides_page(self, level):
+        """Render the slides overview: a list of every level that has slides, plus a preview of one of them."""
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+        levels = [lvl for lvl in range(hedy.HEDY_MAX_LEVEL + 1)
+                  if SLIDES[g.lang].get_slides_for_level(lvl, keyword_language)]
+        if not levels:
+            return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+        if level is None:
+            selected_level = levels[0]
+        else:
+            try:
+                selected_level = int(level)
+            except ValueError:
+                return utils.error_page(error=404, ui_message="Slides do not exist!")
+            if selected_level not in levels:
+                return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+        return render_template(
+            "for-teachers/slides.html",
+            current_page="for-teachers",
+            page_title=gettext("slides"),
+            levels=levels,
+            selected_level=selected_level)
 
     @route("/redesign", methods=["GET"])
     @requires_teacher
@@ -252,66 +285,33 @@ class ForTeachersModule(WebsiteModule):
         if not workbook_for_level:
             return utils.error_page(error=404, ui_message="Workbook does not exist")
 
-        line = '_' * 30
-        for exercise in workbook_for_level['exercises']:
-            if isinstance(exercise, str):
-                # Some items in the list are just the string "new-page"
-                continue
-
-            if exercise['type'] == 'output':
-                exercise['title'] = gettext('workbook_output_question_title')
-                exercise['icon'] = '💻'
-                exercise['text'] = gettext('workbook_output_question_text')
-
-                if 'answer' in exercise.keys():
-                    a = len(exercise['answer'].split('\n'))
-                    exercise['lines'] = [line for x in range(a)]
-                else:
-                    pass
-
-            if exercise['type'] == 'circle':
-                exercise['title'] = gettext('workbook_circle_question_title')
-                exercise['icon'] = '◯'
-                goal = exercise['goal']
-                exercise['text'] = safe_format(gettext('workbook_circle_question_text'), goal=goal)
-
-            elif exercise['type'] == 'input':
-                exercise['title'] = gettext('workbook_input_question_title')
-                exercise['icon'] = '🧑‍💻'
-                exercise['text'] = gettext('workbook_input_question_text')
-
-                if 'answer' in exercise.keys():
-                    exercise['lines'] = [line for x in exercise['answer'].split('\n')]
-                else:
-                    pass
-
-                if 'output' in exercise.keys():
-                    exercise['output'] = [x for x in exercise['output'].split('\n')]
-                else:
-                    pass
-
-            elif exercise['type'] == 'MC-code':
-                exercise['title'] = gettext('workbook_multiple_choice_question_title')
-                exercise['icon'] = '🤔'
-                exercise['text'] = gettext('workbook_multiple_choice_question_text')
-
-            elif exercise['type'] == 'define':
-                exercise['title'] = gettext('workbook_define_question_title')  # ''
-                exercise['icon'] = '📖'
-                word = exercise['word']
-                exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
-                exercise['lines'] = [line for x in range(int(exercise['lines']))]
-
-            elif exercise['type'] == 'question':
-                exercise['title'] = gettext('workbook_open_question_title')  # ''
-                exercise['icon'] = '✍️'
-                exercise['lines'] = [line for x in range(int(exercise['lines']))]
+        prepare_workbook_for_template(workbook_for_level)
 
         return render_template("workbooks.html",
                                current_page="teacher-manual",
                                level=level,
                                page_title=f'Workbook {level}',
-                               workbook=workbook_for_level)
+                               workbooks=[(level, workbook_for_level)])
+
+    @route("/workbooks/all", methods=["GET"])
+    def all_workbooks(self):
+        workbooks = []
+        level = 1
+        while True:
+            workbook = WORKBOOKS[g.lang].get_workbook_for_level(level, g.lang)
+            if not workbook:
+                break
+
+            prepare_workbook_for_template(workbook)
+
+            workbooks.append((level, workbook))
+            level += 1
+
+        return render_template("workbooks.html",
+                               current_page="teacher-manual",
+                               level=level,
+                               page_title='All workbooks',
+                               workbooks=workbooks)
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
@@ -866,55 +866,9 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        if hedy_content.Adventures(g.lang).has_adventures():
-            default_adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
-        else:
-            default_adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-
-        teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
-        second_teacher_adventures = self.db.get_second_teacher_adventures(
-            [self.db.get_class(class_id)], user["username"])
-        teacher_adventures += second_teacher_adventures
-
-        customizations = self.db.get_class_customizations(class_id)
-        # START HERE
-        # Check how to deal with usages of this endpoint through other endpoints
-        migrate_customizations = False
-        if migrate_customizations:
-            if customizations:
-                # in case this class has thew new way to select adventures
-                if 'sorted_adventures' in customizations:
-                    # remove from customizations adventures that we have removed
-                    self.purge_customizations(customizations['sorted_adventures'],
-                                              default_adventures, teacher_adventures)
-                # it uses the old way so convert it to the new one
-                elif 'adventures' in customizations:
-                    customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-                    for adventure, levels in customizations['adventures'].items():
-                        for level in levels:
-                            customizations['sorted_adventures'][str(level)].append(
-                                {"name": adventure, "from_teacher": False})
-                customizations["updated_by"] = user["username"]
-                self.db.update_class_customizations(customizations)
-            else:
-                # Since it doesn't have customizations loaded, we create a default customization object.
-                # This makes further updating with HTMX easier
-                adventures_to_db = {}
-                for level, default_adventures in hedy_content.adventures_order_per_level().items():
-                    adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
-                                                    for adventure in default_adventures]
-
-                customizations = {
-                    "id": class_id,
-                    "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
-                    "opening_dates": {},
-                    "other_settings": [],
-                    "level_thresholds": {},
-                    "sorted_adventures": adventures_to_db,
-                    "updated_by": user["username"],
-                    "quiz_parsons_tabs_migrated": True,
-                }
-                self.db.update_class_customizations(customizations)
+        # Classes that were never customized have no record yet. Create one, otherwise this page
+        # would draw every level as closed and the first toggle would have nothing to update.
+        customizations = get_customizations(self.db, class_id)
 
         second_teacher_invites = [
             invite
@@ -945,24 +899,33 @@ class ForTeachersModule(WebsiteModule):
         # Validations
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("levels"), list):
+
+        customizations = get_customizations(self.db, class_id)
+
+        if "level" in body:
+            # One level was toggled. Only touching that level means two teachers working on
+            # the same class at the same time can no longer overwrite each other's levels.
+            try:
+                level = int(body["level"])
+            except (TypeError, ValueError):
+                return make_response(gettext("request_invalid"), 400)
+            if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+                return make_response(gettext("request_invalid"), 400)
+            _set_level_availability(customizations, level, bool(body.get("enabled")))
+        elif isinstance(body.get("levels"), list):
+            # The whole set of levels at once, as sent by older (cached) front-ends.
+            try:
+                levels = {int(i) for i in body["levels"]}
+            except (TypeError, ValueError):
+                return make_response(gettext("request_invalid"), 400)
+            newly_opened = levels - set(customizations.get("levels", []))
+            customizations["levels"] = sorted(levels)
+            for level in newly_opened:
+                _clear_opening_date(customizations, level)
+        else:
             return make_response(gettext("request_invalid"), 400)
 
-        # Values are always strings from the front-end -> convert to numbers
-        levels = [int(i) for i in body["levels"]]
-
-        customizations = self.db.get_class_customizations(class_id)
-        customizations = {
-            "id": class_id,
-            "levels": levels,
-            "opening_dates": {},
-            "other_settings": [],
-            "level_thresholds": {},
-            "sorted_adventures": customizations["sorted_adventures"],
-            "dashboard_customization": {},
-            "updated_by": user["username"],
-        }
-
+        customizations["updated_by"] = user["username"]
         self.db.update_class_customizations(customizations)
         add_class_customized_to_subscription(user["email"])
         response = {"success": gettext("class_customize_success")}
@@ -1043,14 +1006,7 @@ class ForTeachersModule(WebsiteModule):
         enabled = enabled_raw in {"1", "true", "on", "yes"}
 
         customizations = get_customizations(self.db, class_id)
-        levels = set(customizations.get("levels", []))
-        if enabled:
-            levels.add(level)
-        else:
-            levels.discard(level)
-
-        customizations["levels"] = sorted(levels)
-        print(customizations['levels'])
+        _set_level_availability(customizations, level, enabled)
         customizations["updated_by"] = user["username"]
         self.db.update_class_customizations(customizations)
         add_class_customized_to_subscription(user["email"])
@@ -3308,6 +3264,30 @@ class ForTeachersModule(WebsiteModule):
         return adventure["id"], 200
 
 
+def _clear_opening_date(customizations, level):
+    """Drop the scheduled opening date of a level, if it has one.
+
+    Opening dates can only be set on the legacy customize-class page. The redesigned pages
+    have no way to show or change them, so a level with a date in the future would read as
+    open there while students silently keep getting sent back to the first open level.
+    Toggling a level is an explicit statement about that level, so its schedule goes.
+    """
+    customizations.get("opening_dates", {}).pop(str(level), None)
+
+
+def _set_level_availability(customizations, level, enabled):
+    """Open or close a single level, leaving every other level untouched."""
+    levels = set(customizations.get("levels", []))
+    if enabled:
+        levels.add(level)
+    else:
+        levels.discard(level)
+
+    customizations["levels"] = sorted(levels)
+    _clear_opening_date(customizations, level)
+    return customizations
+
+
 def get_customizations(db, class_id):
     """
     Retrieves the customizations for a specific class from the database.
@@ -3380,3 +3360,61 @@ def render_why_class(adventure):
         gettext('see_adventure_shared_class'),
         class_name=adventure.get("why_class"),
         creator=adventure.get('creator'))
+
+
+def prepare_workbook_for_template(workbook):
+    """Change the workbook contents (in-place) in the way that is expected by the template."""
+    line = '_' * 30
+    for exercise in workbook['exercises']:
+        if isinstance(exercise, str):
+            # Some items in the list are just the string "new-page"
+            continue
+
+        if exercise['type'] == 'output':
+            exercise['title'] = gettext('workbook_output_question_title')
+            exercise['icon'] = '💻'
+            exercise['text'] = gettext('workbook_output_question_text')
+
+            if 'answer' in exercise.keys():
+                a = len(exercise['answer'].split('\n'))
+                exercise['lines'] = [line for x in range(a)]
+            else:
+                pass
+
+        if exercise['type'] == 'circle':
+            exercise['title'] = gettext('workbook_circle_question_title')
+            exercise['icon'] = '◯'
+            goal = exercise['goal']
+            exercise['text'] = safe_format(gettext('workbook_circle_question_text'), goal=goal)
+
+        elif exercise['type'] == 'input':
+            exercise['title'] = gettext('workbook_input_question_title')
+            exercise['icon'] = '🧑‍💻'
+            exercise['text'] = gettext('workbook_input_question_text')
+
+            if 'answer' in exercise.keys():
+                exercise['lines'] = [line for x in exercise['answer'].split('\n')]
+            else:
+                pass
+
+            if 'output' in exercise.keys():
+                exercise['output'] = [x for x in exercise['output'].split('\n')]
+            else:
+                pass
+
+        elif exercise['type'] == 'MC-code':
+            exercise['title'] = gettext('workbook_multiple_choice_question_title')
+            exercise['icon'] = '🤔'
+            exercise['text'] = gettext('workbook_multiple_choice_question_text')
+
+        elif exercise['type'] == 'define':
+            exercise['title'] = gettext('workbook_define_question_title')  # ''
+            exercise['icon'] = '📖'
+            word = exercise['word']
+            exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
+            exercise['lines'] = [line for x in range(int(exercise['lines']))]
+
+        elif exercise['type'] == 'question':
+            exercise['title'] = gettext('workbook_open_question_title')  # ''
+            exercise['icon'] = '✍️'
+            exercise['lines'] = [line for x in range(int(exercise['lines']))]
