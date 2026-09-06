@@ -1,109 +1,131 @@
 {% extends "layout.html" %}
 {% block full_width_content %}
-{% if not raw %}
-{% if session.preview_class %}
-<div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_class_banner" role="alert">
-    <div class="text-center center-text">{{_('previewing_class').format(class_name=session.preview_class["name"])}} <a data-cy="exit_preview_class_banner" class="text-white" href="/for-teachers/clear-preview-class">{{_('exit_preview_mode')}}</a></div>
-</div>
-{% endif %}
-{% if customizations and customizations["teachers_adventure"] %}
-  <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_adventure_banner" role="alert">
-      <div class="text-center center-text">{{_('previewing_adventure')}}
-        {% if initial_adventure.author == username %}
-          <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a>
-        {% else %}
-          <a class="text-white" href="/public-adventures">{{_('public_adventures')}}</a>
+    {% if not raw %}
+        {% if session.preview_class %}
+            <div class="bg-red-500 text-white text-sm font-bold px-4 py-3"
+                 data-cy="preview_class_banner"
+                 role="alert">
+                <div class="text-center center-text">{{ _("previewing_class").format(class_name=session.preview_class["name"]) }} <a data-cy="exit_preview_class_banner"
+    class="text-white"
+    href="/for-teachers/clear-preview-class">{{ _("exit_preview_mode") }}</a></div>
+            </div>
         {% endif %}
-      </div>
-  </div>
-{% endif %}
-<div class="mt-4 mb-1 mx-auto py-2 px-4 lg:px-16 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
-  <div class="flex flex-row gap-4">
-    <div class="flex flex-col md:flex-row md:gap-2" id="level_adventure_title">
-      <div class="dropdown relative">
-        <div class="flex flex-row">
-          <button type="text" id="dropdown_open_button" data-cy="dropdown_open_button"  data-loading disabled
-                  class="blue-btn-new text-4xl font-light text-blue-800" onclick="hedyApp.open_index_dropdown()">
-            <span>
-              {{ _('level_title') }} {{ level_nr }}
-            </span>
-            <span class="hidden" id="level_separator">
-              —
-            </span>
-            <span id="adventure_name" >
-              
-            </span>
-            <i class="fa-solid fa-chevron-down transition-all ease-in duration-300 text-3xl" id="dropdown_index_arrow"></i>
-          </button>
-        </div>
-        <div id="dropdown-level" class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 min-w-full" style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; width: 400px !important; max-height: 35rem;">
-          {% set index_levels = range(1, max_level + 1) %}
-          {% for i in index_levels %}
-            <div class="flex flex-col">
-              <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-                {% if loop.index == level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %}
-                {% if i not in available_levels%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
-
-                {% if i not in available_levels%}disabled{% endif %}
-              xd="  on click
+        {% if customizations and customizations["teachers_adventure"] %}
+            <div class="bg-red-500 text-white text-sm font-bold px-4 py-3"
+                 data-cy="preview_adventure_banner"
+                 role="alert">
+                <div class="text-center center-text">
+                    {{ _("previewing_adventure") }}
+                    {% if initial_adventure.author == username %}
+                        <a class="text-white"
+                           href="/for-teachers/customize-adventure/{{ initial_adventure.id }}">{{ _("edit_adventure") }}</a>
+                    {% else %}
+                        <a class="text-white" href="/public-adventures">{{ _("public_adventures") }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="mt-4 mb-1 mx-auto py-2 px-4 lg:px-16 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
+            <div class="flex flex-row gap-4">
+                <div class="flex flex-col md:flex-row md:gap-2" id="level_adventure_title">
+                    <div class="dropdown relative">
+                        <div class="flex flex-row">
+                            <button type="text"
+                                    id="dropdown_open_button"
+                                    data-cy="dropdown_open_button"
+                                    data-loading
+                                    disabled
+                                    class="blue-btn-new text-4xl font-light text-blue-800"
+                                    onclick="hedyApp.open_index_dropdown()">
+                                <span>{{ _("level_title") }} {{ level_nr }}</span>
+                                <span class="hidden" id="level_separator">—</span>
+                                <span id="adventure_name"></span>
+                                <i class="fa-solid fa-chevron-down transition-all ease-in duration-300 text-3xl"
+                                   id="dropdown_index_arrow"></i>
+                            </button>
+                        </div>
+                        <div id="dropdown-level"
+                             class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 min-w-full"
+                             style="display: none;
+                                    margin: 0.25rem 0px 0px;
+                                    padding-top: 0px;
+                                    padding-right: 0px !important;
+                                    padding-bottom: 0px;
+                                    padding-left: 0px !important;
+                                    width: 400px !important;
+                                    max-height: 35rem">
+                            {% set index_levels = range(1, max_level + 1) %}
+                            {% for i in index_levels %}
+                                <div class="flex flex-col">
+                                    <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100 {% if loop.index == level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} {% if i not in available_levels %} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
+                                            {% if i not in available_levels %}disabled{% endif %}
+                                            xd="  on click
                    toggle .sliding-content-closed .sliding-content-open on #level_{{ i }}_pane
                    then toggle .rotate-180 on #level_{{ i }}_arrow
                   then toggle .rounded-lg .rounded-t-lg .bg-blue-200 on #level_{{ i }}_header"
-                  onclick="hedyApp.open_index_pane(event)"
-                  id="level_{{ i }}_header"
-                  data-cy="level_{{ i }}_header">
-                {{_('level_title')}} {{ i }}
-                {% if i not in available_levels%}
-                  <i class="fa-solid fa-lock"></i>
-                {% else %}
-                  <i class="fa-solid fa-chevron-down text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-180{% endif %}" id="level_{{ i }}_arrow"></i>
-                {% endif %}
-              </button>
-              <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 grid
-                          {% if loop.index == level|int %}sliding-content-open{% else %}sliding-content-closed{% endif %}" id="level_{{ i }}_pane">
-                  <ul class="list-none overflow-hidden">
-                    <div class="p-4" id="level_{{ i }}_adventures">
-                      {% for adventure in adventures_for_index[i] %}
-                          {% if adventure.is_teacher_adventure%}
-                            {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'teacher', adventure.state, loop.index) }}
-                          {% elif adventure.is_command_adventure %}
-                            {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'command', adventure.state, loop.index) }}
-                          {% else %}
-                            {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, '', adventure.state, loop.index) }}
-                          {% endif %}
-                      {% endfor %}
-                      <li class="px-3 py-1 hover:bg-gray-200 cursor-pointer text-blue-900 ease-in transition duration-100"
-                          onclick="window.open('/cheatsheet/{{ i }}', '_blank', 'noopener,noreferrer')">
-                        <div class="flex flex-row gap-x-2 text-center">
-                          <i class="fa-solid fa-file-lines w-4" style="line-height: inherit;"></i>
-                          <span>{{ _('cheatsheet_title') }}</span>
+                                            onclick="hedyApp.open_index_pane(event)"
+                                            id="level_{{ i }}_header"
+                                            data-cy="level_{{ i }}_header">
+                                        {{ _("level_title") }} {{ i }}
+                                        {% if i not in available_levels %}
+                                            <i class="fa-solid fa-lock"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-chevron-down text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-180{% endif %}"
+                                               id="level_{{ i }}_arrow"></i>
+                                        {% endif %}
+                                    </button>
+                                    <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 grid {% if loop.index == level|int %}sliding-content-open{% else %}sliding-content-closed{% endif %}"
+                                         id="level_{{ i }}_pane">
+                                        <ul class="list-none overflow-hidden">
+                                            <div class="p-4" id="level_{{ i }}_adventures">
+                                                {% for adventure in adventures_for_index[i] %}
+                                                    {% if adventure.is_teacher_adventure %}
+                                                        {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'teacher', adventure.state, loop.index) }}
+                                                    {% elif adventure.is_command_adventure %}
+                                                        {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'command', adventure.state, loop.index) }}
+                                                    {% else %}
+                                                        {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, '', adventure.state, loop.index) }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <li class="px-3 py-1 hover:bg-gray-200 cursor-pointer text-blue-900 ease-in transition duration-100"
+                                                    onclick="window.open('/cheatsheet/{{ i }}', '_blank', 'noopener,noreferrer')">
+                                                    <div class="flex flex-row gap-x-2 text-center">
+                                                        <i class="fa-solid fa-file-lines w-4"
+                                                           style="line-height: inherit"></i>
+                                                        <span>{{ _("cheatsheet_title") }}</span>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
-                      </li>
                     </div>
-                  </ul>
-              </div>
+                </div>
             </div>
-          {% endfor %}
+            <div class="flex-1"></div>
+            <div class="flex flex-col md:flex-row gap-4 md:items-center">
+                {% if get_syntax_language(g.lang) != "en" and (not customizations or "hide_keyword_switcher" not in customizations["other_settings"]) %}
+                    {{ render_partial('hedy-page/htmx-language-switch-button.html', lang_switch_table=lang_switch_table) }}
+                {% endif %}
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="flex-1"></div>
-  <div class="flex flex-col md:flex-row gap-4 md:items-center">
-    {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
-      {{ render_partial('hedy-page/htmx-language-switch-button.html', lang_switch_table=lang_switch_table) }}
     {% endif %}
-  </div>
-</div>
-{% endif %}
-<div class="w-full max-w-screen-2xl mx-auto py-4 px-4 lg:px-16" id="code_content_container"
-  data-kwlang="{{ current_language().lang }}" data-level="{{ level }}">
-{% block levelbody %}{% endblock %}
-</div>
-
-{% include 'incl/share-modal-new.html' %}
-{% include 'incl/hand-in-modal.html' %}
-{% if HOC_tracking_pixel %}
-  <img src="https://code.org/api/hour/begin_hedy_text.png" id="tracking_pixel" data-cy="tracking_pixel" alt="Tracking Pixel - Hour of code" height="1" width="1">
-{% endif %}
+    <div class="w-full max-w-screen-2xl mx-auto py-4 px-4 lg:px-16"
+         id="code_content_container"
+         data-kwlang="{{ current_language().lang }}"
+         data-level="{{ level }}">
+        {% block levelbody %}{% endblock %}
+    </div>
+    {% include "incl/share-modal-new.html" %}
+    {% include "incl/hand-in-modal.html" %}
+    {% if HOC_tracking_pixel %}
+        <img src="https://code.org/api/hour/begin_hedy_text.png"
+             id="tracking_pixel"
+             data-cy="tracking_pixel"
+             alt="Tracking Pixel - Hour of code"
+             height="1"
+             width="1">
+    {% endif %}
 {% endblock %}

@@ -1,22 +1,22 @@
 {% extends "auth.html" %}
-
 {% block full_width_content %}
-<div class="text-xl flex flex-col">
-    <div id="learn_more_content" class="copy-container text-display-copy text-xl py-16">
-        {% for section in content['learn-more-sections'] %}
-            <h2>{{ section['title'] }}</h2>
-            <p>{{ section['text'] | commonmark }}</p>
-        {% endfor %}
-        {% if papers %}
-            <div id="research_container" class="text-xl">
-                <h2>Hedy Research</h2>
-                <ul>
-                {% for name, filename in papers.items() %}
-                    <li><a href="/research/{{ filename }}" target="_blank">{{ name }}</a></li>
-                {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+    <div class="text-xl flex flex-col">
+        <div id="learn_more_content"
+             class="copy-container text-display-copy text-xl py-16">
+            {% for section in content['learn-more-sections'] %}
+                <h2>{{ section['title'] }}</h2>
+                <p>{{ section['text'] | commonmark }}</p>
+            {% endfor %}
+            {% if papers %}
+                <div id="research_container" class="text-xl">
+                    <h2>Hedy Research</h2>
+                    <ul>
+                        {% for name, filename in papers.items() %}
+                            <li><a href="/research/{{ filename }}" target="_blank">{{ name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
     </div>
-</div>
 {% endblock %}

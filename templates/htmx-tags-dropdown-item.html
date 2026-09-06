@@ -1,8 +1,11 @@
 <!-- Requires #search_tags_input to exist -->
 <div class="relative cursor-pointer border-2 rounded-lg border-green-300 p-2 px-5 m-1 shadow"
-    id="tag_{{tag['name']}}" hx-post="/tags/create/{{adventure_id}}/{{tag.name}}" hx-target="#tags_list"
-    hx-swap="outerHTML" _="on click event.stopPropagation()
-        on htmx:afterRequest 
+     id="tag_{{ tag['name'] }}"
+     hx-post="/tags/create/{{ adventure_id }}/{{ tag.name }}"
+     hx-target="#tags_list"
+     hx-swap="outerHTML"
+     _="on click event.stopPropagation()
+        on htmx:afterRequest
             if detail.xhr.status == 200
                 remove me
                 set #tags_dropdown's *display to 'none'
@@ -12,6 +15,6 @@
             set v to its value
             if not my innerHTML.includes(v.trim())
                 set my *display to 'none'
-            else 
+            else
                 set my *display to 'block'
-            ">{{tag["name"]}}</div>
+            ">{{ tag["name"] }}</div>

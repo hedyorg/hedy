@@ -1,10 +1,11 @@
-
 {% macro sortable_th(field, label, sort_orders) %}
     {% set sort_val = sort_orders.get(field) if sort_orders else None %}
-  <th class="teacher-table-th min-w-28 sm:min-w-36 {% if field == 'student' %}rounded-tl-lg{% endif %}">
+    <th class="teacher-table-th min-w-28 sm:min-w-36 {% if field == 'student' %}rounded-tl-lg{% endif %}">
         {{ _(label) }}
-        <button class="ml-2" type="submit" data-cy="sort_{{ field }}"
-            _="on click
+        <button class="ml-2"
+                type="submit"
+                data-cy="sort_{{ field }}"
+                _="on click
                 if #{{ field }}-sort matches .fa-sort then
                     remove .fa-sort from #{{ field }}-sort
                     add .fa-sort-up to #{{ field }}-sort
@@ -19,33 +20,29 @@
                     set value of #{{ field }}-sort-input to 'none'
                 end">
             <i id="{{ field }}-sort"
-               class="fa-solid
-               {% if sort_val is none %}fa-sort
-               {% elif sort_val is true %}fa-sort-up
-               {% elif sort_val is false %}fa-sort-down
-               {% endif %}"></i>
+               class="fa-solid {% if sort_val is none %}fa-sort {% elif sort_val is true %}fa-sort-up {% elif sort_val is false %}fa-sort-down {% endif %}"></i>
         </button>
-        <input id="{{ field }}-sort-input" type="hidden" name="{{ field }}" value="{% if sort_val is none %}none{% elif sort_val is true %}ascendent{% elif sort_val is false %}descendent{% endif %}">
+        <input id="{{ field }}-sort-input"
+               type="hidden"
+               name="{{ field }}"
+               value="{% if sort_val is none %}none{% elif sort_val is true %}ascendent{% elif sort_val is false %}descendent{% endif %}">
     </th>
 {% endmacro %}
-
 <table class="teacher-table min-w-[36rem]" id="students-table">
-  <thead class="teacher-table-head">
-    <tr>
-      {{ sortable_th('student', 'students', sort_orders) }}
-      {{ sortable_th('timestamp', 'class_logs', sort_orders) }}
-      <th class="teacher-table-th rounded-tr-lg min-w-24">{{_('actions')}}</th>
-
-    </tr>
-  </thead>
-  <tbody class="teacher-table-body" id="manage-students-table-body">
-    {{
-      render_partial(
-        "for-teachers/classes/manage-class-table-body.html", 
-        students=students, 
-        class_info=class_info, 
-        teacher_classes=teacher_classes
-      )
-    }}
-  </tbody>
+    <thead class="teacher-table-head">
+        <tr>
+            {{ sortable_th('student', 'students', sort_orders) }}
+            {{ sortable_th('timestamp', 'class_logs', sort_orders) }}
+            <th class="teacher-table-th rounded-tr-lg min-w-24">{{ _("actions") }}</th>
+        </tr>
+    </thead>
+    <tbody class="teacher-table-body" id="manage-students-table-body">
+        {{ render_partial(
+                "for-teachers/classes/manage-class-table-body.html",
+                students=students,
+                class_info=class_info,
+                teacher_classes=teacher_classes
+        )
+        }}
+    </tbody>
 </table>

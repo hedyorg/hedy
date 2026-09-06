@@ -1,12 +1,11 @@
 {% extends "auth.html" %}
-
 {% block regular_content %}
-<div class="flex flex-col gap-4">
-    <div id="learn_more_content" class="text-xl">
-        {% for section in content['join-sections'] %}
-            <h2>{{ section['title'] }}</h2>
-            <p>{{ section['text'] | commonmark }}</p>
-        {% endfor %}
+    <div class="flex flex-col gap-4">
+        <div id="learn_more_content" class="text-xl">
+            {% for section in content['join-sections'] %}
+                <h2>{{ section['title'] }}</h2>
+                <p>{{ section['text'] | commonmark }}</p>
+            {% endfor %}
+        </div>
     </div>
-</div>
 {% endblock %}

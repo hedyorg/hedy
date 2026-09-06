@@ -12,9 +12,9 @@
  #}
 {% extends "layout.html" %}
 {% block full_width_content %}
-
-<div id="auth_main_container" class="common-page-container" hx-target="this">
-{% block regular_content %}{% endblock %}
-</div>
-
+    <div id="auth_main_container"
+         class="common-page-container"
+         hx-target="this">
+        {% block regular_content %}{% endblock %}
+    </div>
 {% endblock %}
