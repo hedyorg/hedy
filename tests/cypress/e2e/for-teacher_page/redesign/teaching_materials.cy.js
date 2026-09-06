@@ -55,32 +55,14 @@ describe('Teaching materials', () => {
       .should('have.length.greaterThan', 0);
   });
 
-  it('opens a menu per material with the actions it supports', () => {
-    cy.visit('/for-teachers/teaching-materials/3');
-
-    cy.getDataCy('teaching_materials_slides_menu').should('not.be.visible');
-    cy.getDataCy('teaching_materials_slides_actions').click();
-    cy.getDataCy('teaching_materials_slides_menu').should('be.visible');
-    cy.getDataCy('teaching_materials_slides_view').should('have.attr', 'href', '/for-teachers/slides/3');
-
-    // Opening another menu closes the previous one.
-    cy.getDataCy('teaching_materials_workbook_actions').click();
-    cy.getDataCy('teaching_materials_slides_menu').should('not.be.visible');
-    cy.getDataCy('teaching_materials_workbook_view').should('have.attr', 'href', '/for-teachers/workbooks/3');
-    // Downloading a workbook is not built yet, so the action is listed but disabled.
-    cy.getDataCy('teaching_materials_workbook_download')
-      .should('be.visible')
-      .and('have.attr', 'aria-disabled', 'true');
-  });
-
-  it('disables the materials that do not exist for a level', () => {
+  it('says so when a level has no such material', () => {
     // Workbooks only go up to level 8, slides go further.
     cy.visit('/for-teachers/teaching-materials/12');
 
     cy.getDataCy('teaching_materials_slides_link').should('have.attr', 'href', '/for-teachers/slides/12');
     cy.getDataCy('teaching_materials_workbook_link').should('not.have.attr', 'href');
-
-    cy.getDataCy('teaching_materials_workbook_actions').click();
-    cy.getDataCy('teaching_materials_workbook_view').should('have.attr', 'aria-disabled', 'true');
+    cy.getDataCy('teaching_materials_workbook_unavailable').should('be.visible');
+    // Solutions have no page at any level.
+    cy.getDataCy('teaching_materials_workbook_solutions_unavailable').should('be.visible');
   });
 });

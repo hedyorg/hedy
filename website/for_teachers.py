@@ -190,8 +190,7 @@ class ForTeachersModule(WebsiteModule):
             has_workbook=has_workbook,
             # Named apart from the macros of the same name that the template imports.
             level_concepts_and_changes=level_guide["concepts_and_changes"],
-            common_mistakes_sections=level_guide["sections"],
-            javascript_page_options=dict(page='teaching-materials'))
+            common_mistakes_sections=level_guide["sections"])
 
     @route("/slides", methods=["GET"])
     def get_slides_overview(self):

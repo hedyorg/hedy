@@ -516,3 +516,54 @@ kbd {
   height: 100%;
   border: 0;
 }
+
+/*
+  The "prepare a level" page under Teaching materials reads as a light document
+  rather than as an extension of the editor.  Everything here is scoped to that
+  page, so the same content rendered in the teacher manual keeps its own look.
+*/
+
+/*
+  Inline code, light instead of the dark editor theme.  The global `code` rule
+  sets its background with `!important`, so this has to as well; it wins on
+  specificity rather than on order.
+*/
+.prepare-level code {
+  background: #edf2f7 !important;
+  color: #e53e3e;
+  border: 1px solid #e2e8f0;
+}
+
+/*
+  The panel holding the page contents.  Follows the configure class and configure
+  level pages, but roomier: those hold a narrow column, this one runs the full width,
+  where `p-5` leaves the text sitting on the border.  Tailwind's built CSS has no
+  `md:p-12`, hence the rule here.
+*/
+.prepare-level .content-panel { padding: 1.5rem; }
+@media (min-width: 768px) {
+  .prepare-level .content-panel { padding: 3rem; }
+}
+
+/*
+  Material names, one step down from the section headings around them.
+*/
+.prepare-level .material-name {
+  font-family: 'Balsamiq Sans', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+/*
+  Mistake titles, given the blue slab heading the rest of the app uses -- the same
+  values as an `h3`.  The markdown filter wraps the title in a `p`, which is why
+  the font has to be set on both.
+*/
+.prepare-level .mistake-title,
+.prepare-level .mistake-title p {
+  font-family: 'Balsamiq Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: rgb(43 108 176);
+}

@@ -19,7 +19,7 @@
   carry only its code examples while the prose around it is still being written.
 #}
 <div data-cy="common_mistake">
-  {% if mistake_section.title %}<h4>{{ mistake_section.title|commonmark }}</h4>{% endif %}
+  {% if mistake_section.title %}<h4 class="mistake-title">{{ mistake_section.title|commonmark }}</h4>{% endif %}
   {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
     {% if mistake_section.example.error_text %}
       <p>{{ mistake_section.example.error_text|commonmark }}</p>

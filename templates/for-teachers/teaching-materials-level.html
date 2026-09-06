@@ -5,75 +5,39 @@
 {% from 'incl/level-guide.html' import concepts_and_changes, common_mistakes %}
 
 {#
-  One material a teacher can use to prepare this level, with the context menu
-  that holds its actions.  Actions we cannot offer yet (no page behind them, or
-  no material for this level) are still listed, but disabled.
+  One material a teacher can use to prepare this level: what it is, and a way in.
+
+  The overflow menu this row used to carry is gone -- downloading was never built and
+  "view" only repeated the link -- so a material with no page behind it says so instead
+  of offering an action that does nothing.
+
+  TODO: the descriptions and "Coming soon" are hardcoded English pending real copy;
+  they need to become translatable strings before this ships.
 #}
-{% macro material(index, label, cy, view_url=None, downloadable=False) %}
-<li class="flex flex-row items-center gap-4">
-  {# As big as the section headings below it, so the materials read as a section of their own. #}
-  <h2 class="m-0 w-72 flex-none">
-    {%- if view_url -%}
-      <a href="{{ view_url }}" data-cy="{{ cy }}_link">{{ label }}</a>
-    {%- else -%}
-      <span class="text-gray-600" data-cy="{{ cy }}_link">{{ label }}</span>
-    {%- endif -%}
-  </h2>
-  <div class="relative inline-block text-left" name="menu">
-    <button type="button" class="blue-btn-new teacher-menu-button" data-cy="{{ cy }}_actions"
-            aria-label="{{ label }}"
-            _="on click
-            remove .menu-content-open from <div.menu:not(#menu-{{ index }})/>
-            add .hidden .menu-content-closed to <div.menu:not(#menu-{{ index }})/>
-            if #menu-{{ index }} matches .hidden
-                remove .hidden from #menu-{{ index }}
-                call hedyApp.positionContextMenu(me)
-                wait 10ms
-                toggle .menu-content-open .menu-content-closed on #menu-{{ index }}
-            else
-                call hedyApp.teardownContextMenu(me)
-                toggle .menu-content-open .menu-content-closed on #menu-{{ index }}
-                wait 180ms
-                add .hidden to #menu-{{ index }}
-                ">
-      <i class="fa-solid fa-ellipsis"></i>
-    </button>
-    <div id="menu-{{ index }}" data-cy="{{ cy }}_menu"
-         class="teacher-context-menu hidden menu origin-top-right absolute grid menu-content-closed grow-0
-                ease-in transition-opacity transition-transform duration-150">
-      <ul class="list-none divide-y divide-gray-200 p-2">
-        {% if downloadable %}
-        <li>
-          {# Downloading a workbook is not built yet, so the action is shown but cannot be used. #}
-          <span class="teacher-context-menu-item flex items-center gap-4 opacity-50 cursor-not-allowed"
-                aria-disabled="true" data-cy="{{ cy }}_download">
-            <i class="fa-solid fa-download text-sm"></i>
-            <span>{{ _('download') }}</span>
-          </span>
-        </li>
-        {% endif %}
-        <li>
-          {% if view_url %}
-          <a href="{{ view_url }}" class="teacher-context-menu-item flex items-center gap-4 no-underline"
-             data-cy="{{ cy }}_view">
-            <i class="fa-solid fa-eye text-sm"></i>
-            <span>{{ _('view') }}</span>
-          </a>
-          {% else %}
-          <span class="teacher-context-menu-item flex items-center gap-4 opacity-50 cursor-not-allowed"
-                aria-disabled="true" data-cy="{{ cy }}_view">
-            <i class="fa-solid fa-eye text-sm"></i>
-            <span>{{ _('view') }}</span>
-          </span>
-          {% endif %}
-        </li>
-      </ul>
-    </div>
-  </div>
+{% macro material(label, description, icon, cy, view_url=None) %}
+<li class="flex flex-row items-center justify-between gap-4 py-4 border-b border-gray-300">
+  <span class="flex flex-row items-center gap-4 min-w-0">
+    <i class="fa-solid {{ icon }} text-xl w-6 text-center {{ 'text-blue-700' if view_url else 'text-gray-400' }}"
+       aria-hidden="true"></i>
+    <span class="flex flex-col gap-1 min-w-0">
+      {%- if view_url -%}
+        <a href="{{ view_url }}" data-cy="{{ cy }}_link" class="material-name">{{ label }}</a>
+      {%- else -%}
+        <span class="text-gray-600 material-name" data-cy="{{ cy }}_link">{{ label }}</span>
+      {%- endif -%}
+      <span class="text-sm text-gray-600">{{ description }}</span>
+    </span>
+  </span>
+  {% if view_url %}
+    <i class="fa-solid fa-chevron-right text-gray-400" aria-hidden="true"></i>
+  {% else %}
+    <span class="text-xs font-semibold text-gray-600 bg-gray-200 border border-gray-300 rounded-full px-2"
+          data-cy="{{ cy }}_unavailable">Coming soon</span>
+  {% endif %}
 </li>
 {% endmacro %}
 
-<div class="flex-col md:px-16">
+<div class="flex flex-col px-4 md:px-16 prepare-level">
   {{ breadcrumb([
       {'label': _('teaching_materials'), 'url': '/for-teachers/teaching-materials'},
       {'label': _('prepare_level') + ' ' + selected_level|string}
@@ -113,23 +77,32 @@
     </div>
   </div>
 
-  {{ concepts_and_changes(level_concepts_and_changes) }}
+  <div class="flex flex-col gap-10 mt-5 bg-white border border-gray-300 rounded-lg content-panel">
+    <section>
+      {{ concepts_and_changes(level_concepts_and_changes) }}
+    </section>
 
-  <ul class="list-none m-0 p-0 flex flex-col gap-6 mt-8" data-cy="teaching_materials_list">
-    {{ material(1, _('slides'), 'teaching_materials_slides',
-                '/for-teachers/slides/' ~ selected_level if has_slides else None) }}
-    {{ material(2, _('workbook'), 'teaching_materials_workbook',
-                '/for-teachers/workbooks/' ~ selected_level if has_workbook else None,
-                downloadable=True) }}
-    {{ material(3, _('workbook_solutions'), 'teaching_materials_workbook_solutions',
-                downloadable=True) }}
-  </ul>
+    <section>
+      <ul class="list-none m-0 p-0 flex flex-col border-t border-gray-300" data-cy="teaching_materials_list">
+        {{ material(_('slides'), 'Present the level, one concept at a time',
+                    'fa-chalkboard', 'teaching_materials_slides',
+                    '/for-teachers/slides/' ~ selected_level if has_slides else None) }}
+        {{ material(_('workbook'), 'Exercises to print, away from the screen',
+                    'fa-book', 'teaching_materials_workbook',
+                    '/for-teachers/workbooks/' ~ selected_level if has_workbook else None) }}
+        {{ material(_('workbook_solutions'), 'Worked answers for every exercise',
+                    'fa-key', 'teaching_materials_workbook_solutions') }}
+      </ul>
+    </section>
 
-  {% if common_mistakes_sections %}
-  <h2 class="mt-10 mb-3" data-cy="teaching_materials_common_mistakes">{{ _('common_mistakes') }}</h2>
-  <div data-cy="common_mistakes_list">
-    {{ common_mistakes(common_mistakes_sections, selected_level) }}
+    {% if common_mistakes_sections %}
+    <section class="flex flex-col gap-6">
+      <h2 class="m-0" data-cy="teaching_materials_common_mistakes">{{ _('common_mistakes') }}</h2>
+      <div data-cy="common_mistakes_list">
+        {{ common_mistakes(common_mistakes_sections, selected_level) }}
+      </div>
+    </section>
+    {% endif %}
   </div>
-  {% endif %}
 </div>
 {% endblock %}
