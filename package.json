@@ -10,25 +10,26 @@
   "scripts": {
     "build": "doit run deploy",
     "cypress-gui": "cd tests && cypress open",
-    "cypress": "cd tests && cypress run --spec \"cypress/e2e/**/*\""
+    "cypress": "cd tests && cypress run --spec \"cypress/e2e/**/*\"",
+    "print-workbook": "tsx tools/print-workbook.ts"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.14.7",
+    "@cypress/code-coverage": "^4.0.3",
     "@types/ace": "^0.0.47",
     "@types/jquery": "^3.5.6",
     "@types/sortablejs": "^1.15.1",
-    "cypress": "^13.17.0",
+    "cypress": "^15.20.0",
     "esbuild": "^0.28.1",
     "jqueryui": "^1.11.1",
     "minify": "^7.0.1",
-    "nyc": "^15.1.0",
+    "nyc": "^18.0.0",
     "tailwindcss": "^3.3.14",
     "typescript": "^5.0.0",
     "ts-node": "^10.9.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "istanbul-lib-coverage": "^3.2.0",
     "@lezer/generator": "^1.7.1",
-    "cypress-real-events": "^1.12.0",
+    "cypress-real-events": "^1.15.0",
     "source-map-support": "^0.5.21",
     "yaml": "2.8.3"
   },
@@ -49,13 +50,15 @@
     "chai-colors": "^1.0.1",
     "chart.js": "^4.4.2",
     "codemirror": "^6.0.1",
-    "dompurify": "^3.4.0",
+    "dompurify": "^3.4.12",
     "istanbul-lib-coverage": "^3.2.0",
     "jquery-ui-dist": "^1.13.1",
     "jszip": "^3.10.1",
     "postcss": "^8.5.26",
+    "puppeteer": "^24.20.0",
     "sortablejs": "^1.15.0",
     "tone": "^14.7.77",
+    "tsx": "^4.20.5",
     "tw-elements": "^1.0.0"
   },
   "nyc": {
