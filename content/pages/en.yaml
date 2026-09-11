@@ -434,7 +434,7 @@ teacher-guide:
                     {remove} dice {from} adventures
                     {print} I love adventures {at} {random}
     -   level: '4'
-        concepts_and_changes: |-
+        concepts_and_changes: ''|-
             In level 4, students are introduced to the importance of syntax in programming for the first time. Quotation marks are introduced in this level around text in `{print}` and `{ask}`. It may not be the most exciting level, but it is a very important skill to master before moving on to the next levels. Students may find this level challenging, especially when variables appear in the text. We recommend providing explicit instruction and practicing together with the students.
 
             New in this level:
@@ -473,7 +473,7 @@ teacher-guide:
                 solution_code: |-
                     {print} "You're not getting an error now!"
     -   level: '5'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             The `{if}` and `{else}` are introduced in this level.
 
             New in this level:
@@ -559,7 +559,7 @@ teacher-guide:
                     {if} secret_password {is} password {print} 'Access granted!'
                     {else} {print} 'Access denied!'
     -   level: '6'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             This level builds on the new `{if}` and `{else}` commands from the previous level. With `{if}` and `{else}`, you add two choices to your code. In this level, students learn to add more options with `{elif}`. It is important that students learn to place `{if}`, `{elif}`, and `{else}` on separate lines. In addition, students learn to use `{in}` to check whether an answer is in a list.
 
             New in this level:
@@ -615,7 +615,7 @@ teacher-guide:
                     {if} chosen_color {in} pretty_colors
                     {print} 'Great choice!'
     -   level: '7'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In this level the students learn how to incoprorate maths into their programs. They'll be able to calculate with variables and decimals from now on.
 
             New in this level:
@@ -664,7 +664,7 @@ teacher-guide:
                 solution_code: |-
                     {print} 2.5 + 2.5
     -   level: '8'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In this last level of Hedy Basic your students will learn how to use repitition in their programs! they can only repeat one line multiple times. Repeating multiple lines will be taught in the upcoming levels.
 
             New in this level:
@@ -703,7 +703,7 @@ teacher-guide:
                 solution_text: Make sure the code doesn't take too long to execute
                 solution_code: "{repeat} 20 {times} {print} 'This is enough'"
     -   level: '9'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In this first level of Hedy Advanced students learn to use indentation. This allows them to use multiple lines in an if-statement or repeat multiple lines. The students often enjoy this level very much, because it allows them to make more intricate programs.
             On the other hand, some students will struggle understanding when to use indentation and how to do it.
 
@@ -763,7 +763,7 @@ teacher-guide:
                     {repeat} 20 {times}
                         {print} 'This is enough'
     -   level: '10'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In this level we are expanding on the {if} and {repeat} again. In the previous level the students have learned how to use multiple lines after {repeat, {if}, {elif} or {else}.
             Now the students will also learn about *nesting*, putting an {if} or {repeat} inside an {if} or {repeat}. They will also learn two new commands: {and} and {or}.
             This will bring the students a lot more possibilities to make more versitile programs.
@@ -829,7 +829,7 @@ teacher-guide:
                     {if} color {is} blue {or} color {is} green
                         {print} 'Beautiful!'
     -   level: '11'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In this level the students will be introduced to loops with {for}.
 
             New in this level:
@@ -860,7 +860,7 @@ teacher-guide:
                     {for} animal {in} animals
                       {print} 'I love ' animal
     -   level: '12'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In this last level of Hedy Advanced students will learn how to use basic functions.
 
             New in this level:
@@ -990,7 +990,7 @@ teacher-guide:
                 solution_code: |-
                     #When you're ready for it, take a look in the upcoming levels. Or keep practising the basics first in this level.
     -   level: '14'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             This level focusses on working with lists. The students will also learn how to use repitition the Python way.
 
             New in this level:
@@ -1031,7 +1031,7 @@ teacher-guide:
                     {print}('I love ' icecream[{random}] ' icecream')
         -   title: Students still use the old at random command
             example:
-                error_text: '{random} has changed this level'.
+                error_text: '{random} has changed this level'
                 error_code: |-
                     icecream = [strawberry, chocolate]
                     {print} 'I love ' icecream at random ' icecream'
@@ -1040,7 +1040,7 @@ teacher-guide:
                     icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
     -   level: '15'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             This level focusses on functions. In Hedy advanced the students have learned how to use a basic function. In this level they'll not only learn the Python syntax of using a fucntion, but they will also learn how to use arguments in functions and {return} {value}.
 
             New in this level:
@@ -1048,8 +1048,8 @@ teacher-guide:
             * Using arguments in a function
             * Using {return} {value}
         sections:
-        -   title: 'Students have trouble with the correct syntax and indentation of a function'
-            example:
+        -   title:
+            example: Students have trouble with the correct syntax and indentation of a function
                 error_text: Students have trouble with the correct syntax and indentation of a function
                 error_code: |-
                     {def} greet_the_costumer(name
@@ -1084,13 +1084,12 @@ teacher-guide:
                     room_number = get_a_room(favorite_number)
                     print('Your room number is ', room_number)
     -   level: '16'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
                 In this last level of Hedy the students will learn how to use a {while} loop and practise more with the new syntax.
                 After this level, students are ready to continue programming in 'real' Python compilers.
 
                 New in this level:
                 * The {while} loop
-        sections:
         -   title: Students forget indentation in the while loop
             example:
                 error_text: Indentation is often hard for students.
