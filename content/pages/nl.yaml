@@ -442,7 +442,6 @@ teacher-guide:
                     {print} Ik hou van avonturen {at} {random}
     -   level: "4"
         concepts_and_changes: |-
- |-
             In level 4 maken de leerlingen voor het eerst kennis met het belang van syntax in het programmeren. Aanhalingstekens worden dit level geïntroduceerd rond tekst een `{print}` en `{ask}`.
             Niet het meest spannende level, maar wel een heel belangrijke vaardigheid om goed in de vingers te krijgen voordat ze doorgaan naar de volgende levels.
             Leerlingen kunnen dit level als lastig ervaren, vooral als er variabelen in de tekst voorkomen. We raden aan expliciete instructie te geven en samen met de leerlingen te oefenen.
@@ -486,7 +485,6 @@ teacher-guide:
                     {print} 'Er lopen twee oma`s door het park'
     -   level: "5"
         concepts_and_changes: |-
-|-
             In dit level leren de leerlingen `{if}` en `{else}` te gebruiken in hun programma's.
 
             Nieuw in dit level:
@@ -574,7 +572,6 @@ teacher-guide:
                     {else} {print} 'Verboden toegang!'
     -   level: "6"
         concepts_and_changes: |-
-|-
             Dit level bouwt verder op de nieuwe commando's `{if}` en `{else}` van het vorige level. Met `{if}` en `{else}` voeg je twee keuzeopties toe aan je code.
             In dit level leren de leerlingen meer opties toe te voegen met `{elif}`. Het is hierbij belangrijk dat de leerlingen de {if}, {elif} en {else} op verschillende regels leren plaatsen.
             Daarnaast leren de leerlingen `{in}` gebruiken om te checken of een antwoord in een lijst staat.
@@ -632,7 +629,6 @@ teacher-guide:
                     {print} 'Goede keuze!'
     -   level: "7"
         concepts_and_changes: |-
-|-
             In dit level leren de leerlingen rekenen in hun programma's. Ze leren rekenen met variablen en kunnen vanaf nu ook kommagetallen gebruiken.
 
             Nieuw in dit level:
@@ -640,3 +636,480 @@ teacher-guide:
             * Kommagetallen gebruiken
             * Rekenen met variabelen
             * Het = symbool gebruiken in plaats van `{is}`
+        sections:
+        -   title: Leerlingen hebben moeite met de aanhalingstekens
+            example:
+                error_text: Leerlingen kunnen het lastig blijven vinden om de aanhalingstekens correct te gebruiken. Voeg je in dit geval aanhalingstekens toe aan de som, dan print de computer letterlijk '5+5'.
+                error_code: "{print} '5 + 5'"
+                solution_text: In deze code print het programma '10'.
+                solution_code: '{print} 5 + 5'
+        -   title: Leerlingen hebben moeite met rekenen met variabelen
+            example:
+                error_text: 'Sommige leerlingen vinden het lastig om te rekenen met een variabele. Laat ze simpele voorbeelden zien, zoals deze, om aan het concept te wennen:'
+                error_code: |-
+                    leeftijd = {ask} 'Hoe oud ben je?'
+                    {print} 'Volgend jaar ben je dan ' age + 1
+                solution_text: 'Of ga een stapje verder, zoals:'
+                solution_code: |-
+                    ```
+                    prijs = 0
+                    {print} 'Welkom bij ons hamburgerrestaurant'
+                    hamburger = {ask} 'Wilt u een hamburger?'
+                    {if} hamburger = ja
+                    prijs = prijs + 10
+                    drankje = {ask} 'Wilt u een drankje?'
+                    {if} drankje = ja
+                    prijs = prijs + 4
+                    {print} 'Dat is dan ' prijs ' euro alstublieft'
+                    ```
+        -   title: Leerlinge vergeten het = symbool
+            example:
+                error_text: Het kan dat leerlingen {is} blijven gebruiken in plaats van =. Ga bij jezelf na wat je met je leerlingen wil bereiken. Wil je de de leerlingen laagdrempelig kennismaken met programmeren? Laat ze dan lekker verder werken met {is}. Wil je dat ze later overstappen op Python of een andere programmeertaal, moedig ze dan aan om het =-teken te gebruiken.
+                error_code:
+                    naam {is} Hedy
+                solution_text: Het = teken
+                solution_code:
+                    naam = Hedy
+        -   title: Leerlingen gebruiken een komma in plaats van een punt bij kommagetallen
+            example:
+                error_text: In het Nederlands gebruiken we een komma in decimale getallen, helaas gebruiken programmeertalen een punt en zal dat in Hedy dus ook moeten.
+                error_code: |-
+                    {print} 2,5 + 2,5
+                solution_text: Gebruik een punt
+                solution_code: |-
+                    {print} 2.5 + 2.5
+    -   level: '8'
+        concepts_and_changes: ''|-
+            In dit laatste level van Hedy Basis leren je leerlingen hoe ze herhaling in hun programma's kunnen gebruiken! Ze kunnen slechts één regel meerdere keren herhalen. Het herhalen van meerdere regels wordt in de volgende levels behandeld.
+
+            Nieuw in dit level:
+
+            * Een regel herhalen met `{repeat} 3 {times}`
+            * Een regel een 'variabele' keer herhalen
+        sections:
+        -   title: Leerlingen vergeten delen van het {repeat} commando, of de {print} die erop volgt
+            example:
+                error_text: Zorg dat leerlingen alle stukjes van het commando gebruiken.
+                error_code: |-
+                    {repeat} 3 {times}  "For he's a jolly good fellow"
+                    {repeat} 3 {print} 'Which nobody can deny!'
+                solution_text: 'Zo klopt het:'
+                solution_code: |-
+                    {repeat} 3 {times} {print} "For he's a jolly good fellow"
+                    {repeat} 3 {times} {print} 'Which nobody can deny!'
+        -   title: Leerlingen proberen meerdere regels te herhalen
+            example:
+                error_text: In dit level kun je slechts een regel code herhalen. In dit voorbeeldprogramma wilde de leerlingen 3 verschillende drankjes printen, maar dan kan nog niet. Dit programma stelt 3x de vraag en print vervolgens maar één antwoord.
+                error_code: |-
+                    {repeat} 3 {times} drinken = {ask} 'Wat wil je drinken?'
+                    {print} drinken
+                solution_text: In het volgende level leer je meerdere regels herhalen. Voor nu moet het og even zo.
+                solution_code: |-
+                    {repeat} 3 {times} drinken = {ask} 'Wat wil je drinken?'
+                    {print} drinken
+                    {repeat} 3 {times} drinken = {ask} 'Wat wil je drinken?'
+                    {print} drinken
+                    {repeat} 3 {times} drinken = {ask} 'Wat wil je drinken?'
+                    {print} drinken
+        -   title: Leerlingen maken programma's die te lang duren om uit te voeren
+            example:
+                error_text: Om te voorkomen dat het device van de leerling vastloopt, of onze server ermee ophoudt, hebben wij een rem op te lange programma's gezet. De leerling krijgt een waarschuwing als het programma te lang duurt om uit te voeren.
+                error_code: "{repeat} 100 {times} {print} 'Hoe vaak mag ik herhalen?'"
+                solution_text: Zorg dat de code niet te lang duurt om uit te voeren
+                solution_code: "{repeat} 20 {times} {print} 'Dit is voldoende'"
+    -   level: '9'
+        concepts_and_changes: ''|-
+            In dit eerste level van Hedy Advanced leren leerlingen inspringen. Hierdoor kunnen ze meerdere regels gebruiken in een if-statement of meerdere regels herhalen. Leerlingen vinden dit level vaak erg leuk, omdat ze hiermee ingewikkeldere programma's kunnen maken.
+            Aan de andere kant zullen sommige leerlingen moeite hebben met begrijpen wanneer ze moeten inspringen en hoe ze dit moeten doen.
+
+            Nieuw in dit level:
+            * Meerdere regels na een `{if}`, `{elif}` of `{else}` door inspringing te gebruiken
+            * Meerdere regels na een `{repeat}` door inspringing te gebruiken
+        sections:
+        -   title: Leerlingen springen verkeerd in
+            example:
+                error_text: Inspringen is een nieuw concept in dit level en voor sommige leerlingen kan het lastig zijn om dit te leren. Zorg ervoor dat ze eerst enkele eenvoudige voorbeelden oefenen voordat ze er een heel programma mee maken.
+                error_code: |-
+                    {repeat} 3 {times}
+                    {print} 'hallo'
+                solution_text: 'Dit klopt:'
+                solution_code: |-
+                    {repeat} 3 {times}
+                        {print} 'hallo'
+        -   title: Leerlingen herhalen per ongeluk maar één regel, in plaats van meerdere.
+            example:
+                error_text: Bijvoorbeeld, in de onderstaande code wilde de leerling de bestelling van 3 mensen opnemen. In plaats daarvan vroeg het programma het 3 keer, maar werd er maar één bestelling opgeslagen.
+                error_code: |-
+                    {repeat} 3 {times}
+                        drinken = {ask} 'Wat wil je drinken?'
+                    {print} drinken
+                solution_text: |-
+                    In de juiste code begint de derde regel ook met inspringen. Op deze manier hoort deze bij het repeat-blok en wordt de regel daarom 3 keer herhaald.
+                    Door je leerlingen deze verschillen te laten zien, kun je ze helpen begrijpen waarom we inspringing nodig hebben om onze programma's goed te laten werken.
+                solution_code: |-
+                    {repeat} 3 {times}
+                        drinken = {ask} 'Wat wil je drinken?'
+                        {print} drinken
+        -   title: Leerlingen willen {if}-statements al nesten
+            example:
+                error_text: |-
+                    In dit level mogen leerlingen nog geen `{if}`-statements in andere `{if}`-statements of in repeat-lussen plaatsen.
+                    In het volgende level is dit wel toegestaan.
+                error_code: |-
+                    verjaardag = {ask} 'Is het je verjaardag?'
+                    {if} verjaardag {is} ja
+                        {repeat} 3 {times}
+                            {print} 'Hiep Hiep Hoera!'
+                solution_text: 'Dit klopt:'
+                solution_code: |-
+                    verjaardag = {ask} 'Is het je verjaardag?'
+                    {if} verjaardag {is} ja
+                        {print} 'Hiep Hiep Hoera!'
+                        {print} 'Hiep Hiep Hoera!'
+                        {print} 'Hiep Hiep Hoera!'
+        -   title: Leerlingen maken programma's die te lang duren om uit te voeren
+            example:
+                error_text: Om te voorkomen dat het device van de leerling vastloopt, of onze server ermee ophoudt, hebben wij een rem op te lange programma's gezet. De leerling krijgt een waarschuwing als het programma te lang duurt om uit te voeren.
+                error_code: "{repeat} 100 {times} {print} 'Hoe vaak mag ik herhalen?'"
+                solution_text: Zorg dat de code niet te lang duurt om uit te voeren
+                solution_code: "{repeat} 20 {times} {print} 'Dit is voldoende'"
+    -   level: '10'
+        concepts_and_changes: ''|-
+            In dit level bouwen we opnieuw verder op `{if}` en `{repeat}`. In het vorige level hebben de leerlingen geleerd hoe ze meerdere regels kunnen gebruiken na `{repeat}`, `{if}`, `{elif}` of `{else}`.
+            Nu leren de leerlingen ook over *nesting*: het plaatsen van een `{if}` of `{repeat}` binnen een `{if}` of `{repeat}`. Ze leren ook twee nieuwe commando's: `{and}` en `{or}`.
+            Hierdoor krijgen de leerlingen veel meer mogelijkheden om veelzijdigere programma's te maken.
+
+            Nieuw in dit level:
+            * `{if}` en `{repeat}` nesten
+            * `{and}` en `{or}` gebruiken na een `{if}`
+
+        sections:
+        -   title: Students make mistakes with indentation
+            example:
+                error_text: Het lastigste aan dit level is om de inspringing goed te krijgen. Leerlingen vinden het leuk om `{if}`-statements te nesten, soms zelfs binnen andere geneste `{if}`-statements. Het bijhouden van de juiste inspringing kan daardoor behoorlijk lastig worden.
+                error_code: |-
+                    {print} 'Robin loopt door het centrum'
+                    locatie = {ask} 'Gaat Robin een winkel binnen, of gaat ze naar huis?'
+                    {if} locatie {is} winkel
+                        {print} 'Ze gaat de winkel binnen.'
+                        {print} 'Robin ziet een interessant uitziend boek'
+                        boek = {ask} 'Koopt Robin het boek?'
+                            {if} boek {is} ja
+                    {print} 'Robin koopt het boek en gaat naar huis'
+                    {else}
+                        {print} 'Robin verlaat de winkel en gaat naar huis'
+                    {else}
+                        {print} 'Robin gaat naar huis'
+                solution_text: This is the correct code. Try to keep track of all the different constructions when putting `{if}` statements inside other `{if}` statements.
+                solution_code: |-
+                    {print} 'Robin loopt door het centrum'
+                    locatie = {ask} 'Gaat Robin een winkel binnen, of gaat ze naar huis?'
+                    {if} locatie {is} winkel
+                        {print} 'Ze gaat de winkel binnen.'
+                        {print} 'Robin ziet een interessant uitziend boek'
+                        boek = {ask} 'Koopt Robin het boek?'
+                        {if} boek {is} ja
+                            {print} 'Robin koopt het boek en gaat naar huis'
+                        {else}
+                            {print} 'Robin verlaat de winkel en gaat naar huis'
+                    {else}
+                        {print} 'Robin gaat naar huis'
+        -   title: Leerlingen verwarren `{and}` met `{or}`
+            example:
+                error_text: Hoewel de commando's misschien op elkaar lijken, werken ze heel verschillend.
+                error_code: |-
+                    spel = {ask} 'Wil je een spel spelen?'
+                    tijd = {ask} 'Heb je tijd om te spelen?'
+                    {if} spel {is} 'ja' {or} tijd {is} 'ja'
+                        {print} 'Laten we spelen!'
+                solution_text: In dit geval wil je dat de persoon twee keer 'ja' antwoordt dus moet je een `{and}` gebruiken.
+                solution_code: |-
+                    spel = {ask} 'Wil je een spel spelen?'
+                    tijd = {ask} 'Heb je tijd om te spelen?'
+                    {if} spel {is} 'ja' {and} tijd {is} 'ja'
+                        {print} 'Laten we spelen!'
+        -   title: Leerlingen maken hun regels met `{or}` niet af
+            example:
+                error_text: Na {or} zou een complete conditie moeten volgen.
+                error_code: |-
+                    kleur = {ask} 'Welke kleur vind je leuk?'
+                    {if} kleur {is} blauw {or} groen
+                        {print} 'Mooi!'
+                solution_text: 'Maak de regel zo af:'
+                solution_code: |-
+                    kleur = {ask} 'Welke kleur vind je leuk?'
+                    {if} kleur {is} blauw {or} kleur {is} groen
+                        {print} 'Mooi!'
+    -   level: '11'
+        concepts_and_changes: ''|-
+            In this level the students will be introduced to loops with {for}.
+
+            New in this level:
+            * Loops with {for}
+        sections:
+        -   title: Students do not use the `{for}` command correctly
+            example:
+                error_text: We often see that students try to print the list (in the example animals) instead of the items of the list.
+                error_code: |-
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                      {print} 'I love ' animals
+                solution_text: The word animals in the last line should be changed into animal.
+                solution_code: |-
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                      {print} 'I love ' animal
+        -   title: Students forget the indentation
+            example:
+                error_text: Students tend to forget to use indentation after a for command.
+                error_code: |-
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                    {print} 'I love ' animals
+                solution_text: You should use indentation after a for command.
+                solution_code: |-
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                      {print} 'I love ' animal
+    -   level: '12'
+        concepts_and_changes: ''|-
+            In this last level of Hedy Advanced students will learn how to use basic functions.
+
+            New in this level:
+            * Using basic functions with {define} and {call}
+        sections:
+        -   title: Students make a function but forget to call it.
+            example:
+                error_text: A function only works when you call it.
+                error_code: |-
+                    {define} greet_costumer
+                        {print} 'Hello'
+                        {print} 'How are you doing?'
+                solution_text: Call the function
+                solution_code: |-
+                    {define} greet_costumer
+                        {print} 'Hello'
+                        {print} 'How are you doing?'
+
+                    {call} greet_costumer
+        -   title: Students have trouble with indentation.
+            example:
+                error_text: Indentation will stay tricky for many students
+                error_code: |-
+                    {define} function
+                    {print} 'Use indentation in a function.'
+                    {if} use_if_statement {is} 'yes'
+                    {print} 'And don't forget to use indentation for the loops as well'
+                solution_text: Use correct indentation when using a function
+                solution_code: |-
+                    {define} function
+                        {print} 'Use indentation in a function.'
+                        {if} use_if_statement_too {is} 'yes'
+                            {print} 'And don't forget to use indentation for the loops as well'
+        -   title: Students forget quotation marks
+            example:
+                error_text: Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the `{if}` command.
+                error_code: |-
+                    superheroes = Spiderman, Batman, Iron Man
+                    superhero = superheroes {at} {random}
+                    {if} superhero = Batman
+                        {print} 'IM BATMAN!'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
+                    superhero = superheroes {at} {random}
+                    {if} superhero {is} 'Batman'
+                        {print} 'IM BATMAN!'
+
+    -   level: '13'
+        concepts_and_changes: |-
+            In this first level of Hedy Expert the students will get more and more into the concepts and syntax of real programming languages.
+            We recommend to only work on the Hedy Expert levels with your students of your goal is get them to work with other 'real' programming languages (like Python) later on.
+            If this learning goal does not fit your students, we recoomend to only work on Hedy Basic and Hedy advanced, where the students will learn the basic principles of programming, but are not bothered by specific syntax rules.
+
+            **Please note** that from this level on the Hedy syntax is (nearly) Python syntax. This means that previously learned Hedy syntax might not work here. We will explain all the new Pythonian syntax in the upcoming levels, but as to not overwhelm the students we have spread this out over multiple levels.
+            This results in the fact that some functionalities, functions and lists for example, will not work in the Hedy way, but will not have been explained yet in the new Pythonian way. Therefore a little patience is required from the students; We are taking a step back from the previous levels to get the syntax right, and then we'll go on to learn all the functionalities the Python way.
+
+            In this level students will also learn to work with operators, giving them more opportunities to use maths in their programs.
+
+
+            New in this level:
+            * Printing with Python syntax: `{print}('Hello world!')
+            * Printing variables string text and variables together like this: `{print}('Hello, ', name, '!')
+            * Asking questions with `{input}`
+            * Using colons after {if} statements
+            * Using these operators: < > == != <= >=
+        sections:
+        -   title: Students forget to use the new syntax
+            example:
+                error_text: This level contains a lot of new syntax rules.
+                error_code: |-
+                    mood {is} {ask} 'How are you doing ' name '?'
+                    {if} mood {is} good
+                        {print} 'Great!'
+                solution_text: Use the proper syntax.
+                solution_code: |-
+                    mood = input('How are you doing?', name, '?')
+                    {if} mood == 'good':
+                        {print}('Great!')
+        -   title: Students confuse the < and > signs
+            example:
+                error_text: Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
+                error_code: |-
+                    age = {ask} 'How old are you?'
+                    {if} age < 12
+                        {print} 'You are older than I am!'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    age = {ask} 'How old are you?'
+                    {if} age > 12
+                        {print} 'You are older than I am!'
+        -   title: Students use the wrong signs for `!=` `<=` and `>=`
+            example:
+                error_text: These signs are probably new for most students. Make sure to explain these signs to your students.
+                error_code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name =  'Hedy'
+                        {print} 'You are not Hedy'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name != 'Hedy'
+                        {print} 'You are not Hedy'
+        -   title: Students forget to use the == sign
+            example:
+                error_text: In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
+                error_code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name = 'Hedy'
+                        {print} 'You are cool!'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    name = {ask} 'What is your name?'
+                    {if} name == 'Hedy'
+                        {print} 'You are cool!'
+        -   title: Students will try functionalities that they've learned in the previous levels, that are not in the Python syntax.
+            example:
+                error_text: Students will try to use repitition, functions or lists for example.
+                error_code: |-
+                    {define} pick_an_animal
+                        animals = dog, cat, hamster
+                        {repeat} 3 {times}
+                        {print} animals {at} {random}
+
+                    {call} pick_an_animal
+                solution_text: They will learn how to do those things in the upcoming levels.
+                solution_code: |-
+                    #When you're ready for it, take a look in the upcoming levels. Or keep practising the basics first in this level.
+    -   level: '14'
+        concepts_and_changes: ''|-
+            This level focusses on working with lists. The students will also learn how to use repitition the Python way.
+
+            New in this level:
+            * Working with lists
+            * Combining lists with {for} {if} and {random}
+            * Repitition with {for} i {range}(1,10)
+
+        sections:
+        -   title: Students forget the brackets
+            example:
+                error_text: From this level on lists should be in brackets.
+                error_code: |-
+                    icecream = 'strawberry', 'chocolate'
+                    {print} 'I love ' icecream[{random}] ' icecream'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    icecream = ['strawberry', 'chocolate']
+                    {print} 'I love ' icecream[{random}] ' icecream'
+        -   title: Students use the wrong brackets
+            example:
+                error_text: From this level on lists should be in brackets.
+                error_code: |-
+                    icecream = ('strawberry', 'chocolate')
+                    {print} 'I love ' icecream[{random}] ' icecream'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    icecream = ['strawberry', 'chocolate']
+                    {print} 'I love ' icecream[{random}] ' icecream'
+        -   title: Students forget the quotation marks while focussing on the brackets
+            example:
+                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |-
+                    icecream = [strawberry, chocolate]
+                    {print} 'I love ' icecream[{random}] ' icecream'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    icecream = ['strawberry', 'chocolate']
+                    {print} 'I love ' icecream[{random}] ' icecream'
+        -   title: Students still use the old at random command
+            example:
+                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |-
+                    icecream = [strawberry, chocolate]
+                    {print} 'I love ' icecream at random ' icecream'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    icecream = ['strawberry', 'chocolate']
+                    {print} 'I love ' icecream[{random}] ' icecream'
+    -   level: '15'
+        concepts_and_changes: ''|-
+            This level focusses on functions. In Hedy advanced the students have learned how to use a basic function. In this level they'll not only learn the Python syntax of using a fucntion, but they will also learn how to use arguments in functions and return value.
+
+            New in this level:
+            * Using a function the Python way
+            * Using arguments in a function
+            * Using return value
+        sections:
+        -   title:
+            example: Students have trouble with the correct syntax and indentation of a function
+                error_text: Students have trouble with the correct syntax and indentation of a function
+                error_code: |-
+                    def greet_the_costumer(name
+                    print('Hello ', name, '!')
+
+                    customer = 'Hedy
+                    greet_the_costumer()customer
+                solution_text: Take a carefull look at the syntax and indentation.
+                solution_code: |-
+                    def greet_the_costumer(name):
+                        print('Hello ', name, '!')
+
+                    customer = 'Hedy'
+                    greet_the_costumer(customer)
+        -   title: Students forget to use {return} in the function
+            example:
+                error_text:
+                error_code: |-
+                    def get_a_room(number):
+                        room_number = 1000 + number
+
+                    favorite_number = 7
+                    room_number = return get_a_room(favorite_number)
+                    print('Your room number is ', room_number)
+                solution_text:
+                solution_code: |-
+                    def get_a_room(number):
+                        room_number = 1000 + number
+                        return room_number
+
+                    favorite_number = 7
+                    room_number = get_a_room(favorite_number)
+                    print('Your room number is ', room_number)
+    -   level: '16'
+        concepts_and_changes: ''|-
+                In this last level of Hedy the students will learn how to use a {while} loop and practise more with the new syntax.
+                After this level, students are ready to continue programming in 'real' Python compilers.
+        -   title: Students forget indentation in the while loop
+            example:
+                error_text: Indentation is often hard for students.
+                error_code: |-
+                    answer = 0
+                    {while} answer != 25
+                    answer = {ask} 'What is 5 times 5?'
+                    {print} 'A correct answer has been given'
+                solution_text: 'This is the correct code:'
+                solution_code: |-
+                    answer = 0
+                    {while} answer != 25
+                        answer = {ask} 'What is 5 times 5?'
+                    {print} 'A correct answer has been given'
