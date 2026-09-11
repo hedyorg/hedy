@@ -1572,7 +1572,7 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
 }
 
 export interface InitializeContextMenuPageOptions {
-  readonly page: 'classes' | 'manage-students' | 'my-adventures';
+  readonly page: 'classes' | 'manage-students' | 'my-adventures' | 'teaching-materials';
 }
 
 let contextMenuClickListenerInitialized = false;

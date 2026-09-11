@@ -157,7 +157,40 @@ class ForTeachersModule(WebsiteModule):
         return render_template(
             "for-teachers/teaching-materials.html",
             current_page="for-teachers",
-            page_title=gettext("teaching_materials"))
+            page_title=gettext("teaching_materials"),
+            levels=list(range(1, hedy.HEDY_MAX_LEVEL + 1)))
+
+    @route("/teaching-materials/<level>", methods=["GET"])
+    def get_teaching_materials_for_level(self, level):
+        """Render the page that gathers everything a teacher needs to prepare one level."""
+        try:
+            selected_level = int(level)
+        except ValueError:
+            return utils.error_page(error=404, ui_message="Level does not exist")
+
+        if not 1 <= selected_level <= hedy.HEDY_MAX_LEVEL:
+            return utils.error_page(error=404, ui_message="Level does not exist")
+
+        # Not every level has every material in every language, and we do not want to
+        # send teachers to a page that will 404 on them.
+        keyword_language = request.args.get("keyword_language", default=g.keyword_lang, type=str)
+        has_slides = bool(SLIDES[g.lang].get_slides_for_level(selected_level, keyword_language))
+        has_workbook = bool(WORKBOOKS[g.lang].get_workbook_for_level(selected_level, keyword_language))
+
+        level_guide = teacher_guide_levels(g.lang)[selected_level - 1]
+        level_guide = hedy_content.deep_translate_keywords(level_guide, keyword_language)
+
+        return render_template(
+            "for-teachers/teaching-materials-level.html",
+            current_page="for-teachers",
+            page_title=gettext("teaching_materials"),
+            levels=list(range(1, hedy.HEDY_MAX_LEVEL + 1)),
+            selected_level=selected_level,
+            has_slides=has_slides,
+            has_workbook=has_workbook,
+            # Named apart from the macros of the same name that the template imports.
+            level_concepts_and_changes=level_guide["concepts_and_changes"],
+            common_mistakes_sections=level_guide["sections"])
 
     @route("/slides", methods=["GET"])
     def get_slides_overview(self):

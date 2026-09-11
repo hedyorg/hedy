@@ -1,0 +1,118 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+{% from 'incl/level-guide.html' import concepts_and_changes, common_mistakes %}
+
+{#
+  One material a teacher can use to prepare this level: what it is, and a way in.
+
+  The overflow menu this row used to carry is gone -- downloading was never built and
+  "view" only repeated the link -- so a material with no page behind it says so instead
+  of offering an action that does nothing.
+
+  TODO: the descriptions and "Coming soon" are hardcoded English pending real copy;
+  they need to become translatable strings before this ships.
+#}
+{% macro material(label, description, icon, cy, view_url=None, unavailable_label='Work in progress', status=None) %}
+<li class="flex flex-row items-center justify-between gap-4 py-4 border-b border-gray-300">
+  <span class="flex flex-row items-center gap-4 min-w-0">
+    <i class="fa-solid {{ icon }} text-xl w-6 text-center {{ 'text-blue-700' if view_url else 'text-gray-400' }}"
+       aria-hidden="true"></i>
+    <span class="flex flex-col gap-1 min-w-0">
+      {%- if view_url -%}
+        <a href="{{ view_url }}" data-cy="{{ cy }}_link" class="material-name">{{ label }}</a>
+      {%- else -%}
+        <span class="text-gray-600 material-name" data-cy="{{ cy }}_link">{{ label }}</span>
+      {%- endif -%}
+      <span class="text-sm text-gray-600">{{ description }}</span>
+    </span>
+  </span>
+  {#
+    `status` is shown whether or not the material has a page: it says something about
+    the material itself. `unavailable_label` only appears when this level has no page.
+  #}
+  {% if status or not view_url %}
+    <span class="text-xs font-semibold text-gray-600 bg-gray-200 border border-gray-300 rounded-full px-2"
+          data-cy="{{ cy }}_unavailable">{{ status or unavailable_label }}</span>
+  {% endif %}
+</li>
+{% endmacro %}
+
+<div class="flex flex-col px-4 md:px-16 prepare-level">
+  {{ breadcrumb([
+      {'label': _('teaching_materials'), 'url': '/for-teachers/teaching-materials'},
+      {'label': _('prepare_level') + ' ' + selected_level|string}
+    ], 'mt-2 mb-4') }}
+
+  <div class="flex flex-row flex-wrap items-center gap-4 my-5">
+    <h1 class="m-0">{{ _('teaching_materials') }}</h1>
+    {#
+      The level picker doubles as the title of the page, the same way it does on the
+      level page.  It reuses the ids that hedyApp.open_index_dropdown() toggles, so no
+      extra JavaScript is needed here.
+    #}
+    <div class="dropdown relative">
+      <button type="button" id="dropdown_open_button"
+              data-cy="teaching_materials_level_dropdown"
+              aria-label="{{ _('level') }}"
+              class="blue-btn-new text-4xl font-light text-blue-800"
+              onclick="hedyApp.open_index_dropdown()">
+        <span>{{ _('level_title') }} {{ selected_level }}</span>
+        <i class="fa-solid fa-chevron-down transition-all ease-in duration-300 text-3xl"
+           id="dropdown_index_arrow"></i>
+      </button>
+      <div id="dropdown-level" data-cy="teaching_materials_level_options"
+           class="absolute block rounded-md ltr:left-0 rtl:right-0 w-max overflow-y-auto p-2 shadow-lg
+                  dropdown-blue z-30 min-w-full max-h-96"
+           style="display: none;">
+        {% for level in levels %}
+        <a href="/for-teachers/teaching-materials/{{ level }}"
+           data-cy="teaching_materials_level_{{ level }}"
+           class="flex flex-row items-center justify-between rounded-lg px-3 py-1 text-lg font-extralight
+                  text-blue-900 no-underline ease-in transition duration-100 hover:bg-blue-200
+                  {% if level == selected_level %}bg-blue-200{% endif %}">
+          {{ _('level_title') }} {{ level }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-10 mt-5 bg-white border border-gray-300 rounded-lg content-panel">
+    {% if level_concepts_and_changes %}
+    {# TODO: hardcoded English, pending real copy and a translatable string. #}
+    <section class="flex flex-col gap-4">
+      <h2 class="m-0 text-3xl">What is new in this level?</h2>
+      {{ concepts_and_changes(level_concepts_and_changes) }}
+    </section>
+    {% endif %}
+
+    <section>
+      <ul class="list-none m-0 p-0 flex flex-col border-t border-gray-300" data-cy="teaching_materials_list">
+        {{ material(_('slides'), 'Present the level, one concept at a time',
+                    'fa-chalkboard', 'teaching_materials_slides',
+                    '/for-teachers/slides/' ~ selected_level if has_slides else None) }}
+        {# The workbooks are still being written, at every level. #}
+        {{ material(_('workbook'), 'Exercises to print, away from the screen',
+                    'fa-book', 'teaching_materials_workbook',
+                    '/for-teachers/workbooks/' ~ selected_level if has_workbook else None,
+                    status='Work in progress') }}
+        {# No page for these at any level yet, unlike the two above. #}
+        {{ material(_('workbook_solutions'), 'Worked answers for every exercise',
+                    'fa-key', 'teaching_materials_workbook_solutions',
+                    unavailable_label='Coming soon') }}
+      </ul>
+    </section>
+
+    {% if common_mistakes_sections %}
+    <section class="flex flex-col gap-6">
+      <h2 class="m-0 text-3xl" data-cy="teaching_materials_common_mistakes">{{ _('common_mistakes') }}</h2>
+      <div data-cy="common_mistakes_list">
+        {{ common_mistakes(common_mistakes_sections, selected_level, light=True, beats=True) }}
+      </div>
+    </section>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -516,3 +516,110 @@ kbd {
   height: 100%;
   border: 0;
 }
+
+/*
+  The "prepare a level" page under Teaching materials reads as a light document
+  rather than as an extension of the editor.  Everything here is scoped to that
+  page, so the same content rendered in the teacher manual keeps its own look.
+*/
+
+/*
+  Inline code, light instead of the dark editor theme.  The global `code` rule
+  sets its background with `!important`, so this has to as well; it wins on
+  specificity rather than on order.
+*/
+.prepare-level code {
+  background: #edf2f7 !important;
+  color: #e53e3e;
+  border: 1px solid #e2e8f0;
+}
+
+/*
+  The panel holding the page contents.  Follows the configure class and configure
+  level pages, but roomier: those hold a narrow column, this one runs the full width,
+  where `p-5` leaves the text sitting on the border.  Tailwind's built CSS has no
+  `md:p-12`, hence the rule here.
+*/
+.prepare-level .content-panel { padding: 1.5rem; }
+@media (min-width: 768px) {
+  .prepare-level .content-panel { padding: 3rem; }
+}
+
+/*
+  A code block is plain text for the instant before CodeMirror converts it, and the
+  global `pre` rule paints that text white -- invisible here. Give it the same ground
+  and ink the light editor will take, so nothing flashes.
+*/
+.prepare-level pre.common-mistakes {
+  background: #edf2f7;
+  color: #2d3748;
+  border-radius: 4px;
+}
+
+/*
+  Tailwind's reset zeroes list padding, and Hedy restores the indent only inside
+  `.text-display-copy`, `.text-business-copy` and `.text-adventure-copy`. The teacher
+  manual is one of those, this page is not, so bullets hung outside the text column.
+  Match what the manual gives the very same markdown -- `ml-10` and `mt-2` between
+  items -- as logical properties, so it also reads correctly right to left.
+*/
+.prepare-level .level-guide-copy ul,
+.prepare-level .level-guide-copy ol {
+  margin-inline-start: 2.5rem;
+}
+.prepare-level .level-guide-copy li + li {
+  margin-top: 0.5rem;
+}
+
+/*
+  Common mistakes as two labelled beats: what goes wrong, then the fix. The entries ran
+  together and nothing said which code was broken, so each half takes a coloured edge
+  and a label, and a rule separates one mistake from the next. Logical properties, so
+  the edges sit on the correct side right to left.
+*/
+.prepare-level .mistake + .mistake {
+  margin-top: 2.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid #e2e8f0;
+}
+.prepare-level .mistake-beat {
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid transparent;
+}
+.prepare-level .mistake-beat + .mistake-beat { margin-top: 1.5rem; }
+.prepare-level .beat-problem { border-inline-start-color: #fc8181; }
+.prepare-level .beat-fix { border-inline-start-color: #68d391; }
+.prepare-level .beat-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.prepare-level .beat-problem .beat-label { color: #c53030; }
+.prepare-level .beat-fix .beat-label { color: #276749; }
+/* The label is the beat's first line; the prose under it should not push away from it. */
+.prepare-level .mistake-beat .beat-label + p { margin-top: 0.35rem; }
+
+/*
+  Material names, one step down from the section headings around them.
+*/
+.prepare-level .material-name {
+  font-family: 'Balsamiq Sans', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+/*
+  Mistake titles, given the blue slab heading the rest of the app uses -- the same
+  values as an `h3`.  The markdown filter wraps the title in a `p`, which is why
+  the font has to be set on both.
+*/
+.prepare-level .mistake-title,
+.prepare-level .mistake-title p {
+  font-family: 'Balsamiq Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: rgb(43 108 176);
+}
