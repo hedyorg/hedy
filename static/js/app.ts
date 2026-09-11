@@ -441,13 +441,20 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
     const adventure = container.closest('[data-tabtarget]')?.getAttribute('data-tabtarget');
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
 
-    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).html('<i class="fa-solid fa-arrow-down"></i>').appendTo(buttonContainer).click(function () {
-      if (!theGlobalEditor?.isReadOnly) {
-        theGlobalEditor.contents = exampleEditor.contents + '\n';
-      }
-      update_view("main_editor_keyword_selector", <string>$(preview).attr('data-lang'));
-      stopit();
-      clearOutput();
+    $('<button>')
+      .css({ fontFamily: 'sans-serif' })
+      .addClass('yellow-btn')
+      .attr('data-cy', `paste_example_code_${adventure}`)
+      .attr('aria-label', `${ClientMessages['copy_to_editor']}`)
+      .html('<i class="fa-solid fa-arrow-down"></i>')
+      .appendTo(buttonContainer)
+      .click(function () {
+        if (!theGlobalEditor?.isReadOnly) {
+          theGlobalEditor.contents = exampleEditor.contents + '\n';
+        }
+        update_view("main_editor_keyword_selector", <string>$(preview).attr('data-lang'));
+        stopit();
+        clearOutput();
     });
   }
 

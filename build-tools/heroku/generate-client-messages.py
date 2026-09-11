@@ -37,6 +37,7 @@ ADDITIONAL_GETTEXT_KEYS = [
     'invitations_sent',
     'invite',
     'program_size_too_long',
+    'copy_to_editor',
 ]
 
 
