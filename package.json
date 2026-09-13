@@ -31,7 +31,9 @@
     "@lezer/generator": "^1.7.1",
     "cypress-real-events": "^1.15.0",
     "source-map-support": "^0.5.21",
-    "yaml": "2.8.3"
+    "yaml": "2.8.3",
+    "puppeteer": "^24.20.0",
+    "tsx": "^4.20.5"
   },
   "license": "ISC",
   "dependencies": {
@@ -55,10 +57,8 @@
     "jquery-ui-dist": "^1.13.1",
     "jszip": "^3.10.1",
     "postcss": "^8.5.26",
-    "puppeteer": "^24.20.0",
     "sortablejs": "^1.15.0",
     "tone": "^14.7.77",
-    "tsx": "^4.20.5",
     "tw-elements": "^1.0.0"
   },
   "nyc": {
@@ -75,5 +75,11 @@
     "reporter": [
       "html"
     ]
+  },
+  "allowScripts": {
+    "cypress": true,
+    "esbuild": true,
+    "puppeteer": true,
+    "fsevents": false
   }
 }
