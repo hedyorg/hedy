@@ -1,6 +1,7 @@
 {% extends "auth.html" %}
 
 {% block full_width_content %}
+{% from 'incl/level-guide.html' import concepts_and_changes, common_mistakes %}
     <div class="bg-blue-200 mb-4">
         <div class="py-4 flex items-center w-full copy-container mx-auto">
             <div class="tracking-wide text-xl font-extralight">{{ page_title }}</div>
@@ -65,28 +66,11 @@
                 {# Per-level content, has different structure #}
                 {% for level in levels %}
                     <h3 id="{{level.title|slugify}}">{{ level.title }}</h3>
-                    {% for mistake_section in level.sections %}
-                        <div>
-                            <h4>{{ mistake_section.title|commonmark }}</h4>
-                            {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
-                                <p>{{ mistake_section.example.error_text|commonmark }}</p>
-                                <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
-                                </div>
-                                <p>{{ mistake_section.example.solution_text|commonmark }}</p>
-                                <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
-                                </div>
-                            {% else %}
-                                <p>{{ mistake_section.text|commonmark }}</p>
-                                {% if mistake_section.code %}
-                                        <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                            <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
-                                        </div>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    {% endfor %}
+                    {{ concepts_and_changes(level.concepts_and_changes) }}
+                    {% if level.sections %}
+                        <h4 class="mt-6">{{ _('common_mistakes') }}</h4>
+                        {{ common_mistakes(level.sections, level.level) }}
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
