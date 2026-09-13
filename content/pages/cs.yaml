@@ -320,6 +320,18 @@ teacher-guide:
                 error_code: "narozeniny = {ask} 'Jsou to tvoje narozeniny?'\n{if} narozeniny = ano\n    {repeat} 3 {times}\n        {print} 'Hip Hip Hurá!'"
                 solution_text: 'Toto je správný kód pro tuto úroveň:'
                 solution_code: "narozeniny = {ask} 'Jsou to tvoje narozeniny?'\n{if} narozeniny = ano\n    {print} 'Hip Hip Hurá!'\n    {print} 'Hip Hip Hurá!'\n    {print} 'Hip Hip Hurá!'"
+        -   title: Studenti vytvářejí programy, jejichž spuštění trvá příliš dlouho
+            example:
+                error_text: Na této úrovni je velmi snadné vytvářet programy, jejichž dokončení zabere spoustu času. Pokud program trvá příliš dlouho, bude zastaven, a to se záměrem zabránit namáhání žákova stroje.
+                error_code: "{repeat} 100 {times}\n    {print} 'Kolikrát to mohu opakovat?'"
+                solution_text: Ujistěte se, že spuštění kódu netrvá příliš dlouho
+                solution_code: "{repeat} 20 {times}\n    {print} 'Tohle stačí'"
+        -   title: Studenti používají příkaz `{if}` ke kontrole, zda je hodnota proměnné stejná jako název proměnné
+            example:
+                error_text: "U našich studentů jsme si všimli časté chyby: snaží se vytvořit program, který kontroluje heslo, ale zadají heslo „password“.\nVe 2. řádku je počítač požádán, aby zkontroloval, zda je proměnná heslo stejná jako proměnná heslo, tedy sama. Což znamená, že odpověď je vždy ano.\nS tímto kódem tedy bude odpověď vždy „Můžete vstoupit“ bez ohledu na to, co hráč vyplní."
+                error_code: "Heslo {is} {ask} 'Jaké je heslo?'\n{if} heslo {is} heslo\n{print} ‘Můžete vstoupit‘\n{else}\n{print} ‘Nejste oprávněn‘"
+                solution_text: Tuto chybu můžete napravit přidáním uvozovek. Tímto způsobem počítač pozná, že druhé heslo v `{{if} password {is} 'password'`` je řetězcová hodnota (tedy normální text), a ne název proměnné.
+                solution_code: "Heslo {is} {ask} 'Jaké je heslo?'\n{if} heslo {is} ‘heslo‘\n{print} ‘Můžete vstoupit‘\n{else}\n{print} ‘Nejste oprávněn‘"
     -   level: '9'
         sections:
         -   title: Studenti dělají chyby v odsazování
@@ -426,3 +438,55 @@ teacher-guide:
                 error_code: "zmrzlina = ('jahodová', ' čokoládová')\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
                 solution_text: 'Toto je správný kód:'
                 solution_code: "zmrzlina = ['jahodová', ' čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+        -   title: Studenti zapomínají na uvozovky, zatímco se soustředí na závorky
+            example:
+                error_text: Studenti se někdy velmi soustředí na nový aspekt syntaxe, takže zapomínají na uvozovky.
+                error_code: "zmrzlina = [jahodová, čokoládová]\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "zmrzlina = ['jahodová', 'čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+        -   title: Studenti stále používají starý příkaz at random
+            example:
+                error_text: Studenti se někdy velmi soustředí na nový aspekt syntaxe, takže zapomínají na uvozovky.
+                error_code: "zmrzlina = [jahodová, čokoládová]\n{print} 'Miluji ' zmrzlinu at random ' zmrzlinu'"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "icecream = ['jahodová', ' čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+        -   title: Studenti zapomínají na uvozovky, zatímco se soustředí na závorky
+            example:
+                error_text: Studenti se někdy velmi soustředí na nový aspekt syntaxe, takže zapomínají na uvozovky.
+                error_code: "icecream = [jahodová, čokoládová]\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "zmrzlina = ['jahodová', 'čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+    -   level: '17'
+        sections:
+        -   title: Studenti používají `{elif}` stejně jako `{else}`, tedy bez podmínky
+            example:
+                error_text: Příkaz `{elif}` potřebuje za sebou podmínku. Nelze jej použít jako `{else}`, bez podmínky.
+                error_code: "barva = ask 'Jaká je vaše oblíbená barva?'\n{if} barva == 'zelená':\n{print} 'zelená je pěkná'\n{elif}:\n{print} ‘mám rád zelenou‘"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "barva = {ask} 'Jaká je vaše oblíbená barva?'\n{if} barva == 'zelená':\n{print} 'zelená je pěkná'\n{elif} barva == žlutá:\n{print} 'žlutá je v pořádku'\n{else}:\n{print} 'mám rád zelenou'"
+        -   title: Studenti zapomínají na dvojtečku
+            example:
+                error_text: Za každým příkazem, který vyžaduje odsazení, by měla být dvojtečka.
+                error_code: "odpovědět = ask ‘Jak se máš?‘\n{if} odpověď {is} ‘skvěle'\n{print} ‘Já také!‘\n{elif} odpověď {is} ‘špatně‘\n{print} ‘Dovol mi, abych tě rozveselil!‘\n{else}\n{print} 'Jsem skvělý!‘"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "odpovědět = ask ‘Jak se máš?‘\n{if} odpověď {is} ‘skvěle'\n{print} ‘Já také!‘\n{elif} odpověď {is} ‘špatně‘\n{print} ‘Dovol mi, abych tě rozveselil!‘\n{else}\n{print} 'Jsem skvělý!‘"
+    -   level: '18'
+        sections:
+        -   title: Studenti zapomínají používat závorky
+            example:
+                error_text: Studenti zapomenou dát kolem textu závorky.
+                error_code: "{print} 'moje jméno je Hedy!'"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "{print}('moje jméno je Hedy!')"
+        -   title: Studenti budou stále používat příkaz ask
+            example:
+                error_text: Příkaz ask se používá od úrovně 1. Pro studenty tedy může být obtížné přejít na příkaz input místo ask.
+                error_code: "{print}('Moje jméno je Hedy!')\njméno = ask('Jaké je tvé jméno?')\n{print}('Takže tvoje jméno je ', jméno)"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "{print}('Moje jméno je Hedy!')\njméno = ask('Jaké je tvé jméno?')\n{print}('Takže tvoje jméno je ', jméno)"
+        -   title: Studenti mohou použít závorky jako uvozovky
+            example:
+                error_text: Naučili se udržovat proměnné mimo uvozovky, takže by to mohli udělat i se závorkami. Což není správný způsob jejich použití.
+                error_code: "teplota = 25\n{print}('Venku je ') teplota ('stupňů venku')"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "teplota = 25\n{print}('Venku je ', teplota, 'stupňů venku')"

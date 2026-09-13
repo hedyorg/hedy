@@ -547,6 +547,35 @@ teacher-guide:
                         {print} 'Hip Hip Hooray!'
                         {print} 'Hip Hip Hooray!'
                         {print} 'Hip Hip Hooray!'
+        -   title: Schülerinnen und Schüler erstellen Programme, die zu lang zum Ausführen brauchen
+            example:
+                error_text: In diesem Level ist es sehr leicht lang laufende Programme zu erstellen. Den Schülerinnen und Schülern ist es nicht erlaubt lang laufende Programme zu erstellen (um unsere Server zu retten).
+                error_code: |-
+                    {repeat} 100 {times}
+                        {print} 'Wie oft kann ich dies wiederholen?'
+                solution_text: Stelle sicher, dass die Programme nicht zu lange laufen
+                solution_code: |-
+                    {repeat} 20 {times}
+                        {print} 'Dies ist genug'
+        -   title: Die Schülerinnen und Schüler nutzen den `{if}`-Befehl, um zu prüfen, ob der Variablenwert das Gleiche ist wie der Variablenname
+            example:
+                error_text: |-
+                    Wir haben diesen Fehler bei einigen unserer Schülerinnen und Schüler gesehen. Sie erstellen ein Passwort für ihren Computer, verwenden als Passwort jedoch 'Passwort'.
+                    In Zeile 2 wird der Computer beauftragt zu prüfen, ob die Variable passwort das Gleiche ist wie die Variable passwort, also sich selbst. Was bedeutet, dass die Antwort immer ja ist.
+                    Also wird mit diesem Code die Antwort immer 'Du kannst reinkommen' sein, was auch immer der Spieler einträgt.
+                error_code: |-
+                    passwort {is} {ask} 'Was ist das Passwort?'
+                    {if} passwort {is} passwort
+                        {print} 'Du kannst reinkommen'
+                    {else}
+                        {print} 'Du hast keine Erlaubnis'
+                solution_text: Du kannst diesen Fehler beheben, indem du Anführungszeichen hinzufügst. Auf diese Weise weiß der Computer, dass das zweite Passwort eine Zeichenkette (also normaler Text) ist und kein Variablenname.
+                solution_code: |-
+                    passwort {is} {ask} 'Was ist das Passwort?'
+                    {if} passwort {is} 'passwort'
+                        {print} 'Du kannst reinkommen'
+                    {else}
+                        {print} 'Du hast keine Erlaubnis'
     -   level: "9"
         sections:
         -   title: Schülerinnen und Schüler machen Fehler bei der Einrückung
@@ -761,3 +790,103 @@ teacher-guide:
                 solution_code: |-
                     eis = ['Erdbeer', 'Schokoladen']
                     {print} 'Ich liebe ' eis[{random}] 'eis'
+        -   title: Schülerinnen und Schüler vergessen die Anführungszeichen während sie sich auf die Klammern konzentrieren
+            example:
+                error_text: Schülerinnen und Schüler konzentrieren sich manchmal sehr auf den neuen Aspekt der Syntax, sodass sie die Anführungszeichen vergessen.
+                error_code: |-
+                    eis = [Erdbeer, Schokoladen]
+                    {print} 'Ich liebe ' icecream[{random}] 'eis'
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: |-
+                    eis = ['Erdbeer', 'Schokoladen']
+                    {print} 'Ich liebe ' icecream[{random}] 'eis'
+        -   title: Schülerinnen und Schüler verwenden immer noch den alten at random Befehl
+            example:
+                error_text: Schülerinnen und Schüler konzentrieren sich manchmal sehr auf den neuen Aspekt der Syntax, sodass sie die Anführungszeichen vergessen.
+                error_code: |-
+                    eis = [Erdbeer, Schokoladen]
+                    {print} 'Ich liebe ' eis at random 'eis'
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: |-
+                    eis = ['Erdbeer', 'Schokoladen']
+                    {print} 'Ich liebe ' eis[{random}] 'eis'
+        -   title: Schülerinnen und Schüler vergessen die Anführungszeichen während sie sich auf die Klammern konzentrieren
+            example:
+                error_text: Schülerinnen und Schüler sind manchmal sehr auf die neuen Aspekte der Syntax konzentriert, sodass sie die Anführungszeichen vergessen.
+                error_code: |-
+                    eis = [Erdbeer, Schokoladen]
+                    {print} 'Ich liebe ' eis[{random}] 'eis'
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: |-
+                    eis = ['Erdbeer', 'Schokoladen']
+                    {print} 'Ich liebe ' eis[{random}] 'eis'
+    -   level: "17"
+        sections:
+        -   title: Schülerinnen und Schüler benutzen `{elif}` wie `{else}`, also ohne Bedingung
+            example:
+                error_text: Der `{elif}` Befehl benötigt eine Bedingung dahinter. Er kann nicht wie `{else}` benutzt werden, ohne Bedingung.
+                error_code: |-
+                    farbe = {ask} 'Was ist deine Lieblingsfarbe?'
+                    {falls} farbe == 'grün':
+                        {print} 'Grün ist nett'
+                    {elif}:
+                        {print} 'Ich mag grün'
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: |-
+                    farbe = {ask} 'Was ist deine Lieblingsfarbe?'
+                    {if} farbe == 'grün':
+                        {print} 'grün ist nett'
+                    {elif} farbe == gelb:
+                        {print} 'gelb ist OK'
+                    {else}:
+                        {print} 'Ich mag grün'
+        -   title: Schülerinnen und Schüler vergessen den Doppelpunkt
+            example:
+                error_text: Nach jedem Befehl der Einrückung verlangt, sollte ein Doppelpunkt verwendet werden.
+                error_code: |-
+                    antwort = {ask} 'Wie geht es dir?'
+                    {if} antwort {is} 'großartig'
+                        {print} 'Ich auch!'
+                    {elif} antwort {is} 'schlecht'
+                        {print} 'Lass mich dich aufheitern!'
+                    {else}
+                        {print} 'Großartig!'
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: |-
+                    antwort = {ask} 'Wie geht es dir?'
+                    {if} antwort {is} 'großartig':
+                        {print} 'Ich auch!'
+                    {elif} antwort {is} 'schlecht':
+                        {print} 'Lass mich dich aufheitern!'
+                    {else}:
+                        {print} 'Großartig!'
+    -   level: "18"
+        sections:
+        -   title: Schülerinnen und Schüler vergessen die Klammern
+            example:
+                error_text: Schülerinnen und Schüler vergessen Klammern um ihren Text zu setzen.
+                error_code: "{print} 'mein Name ist Hedy!'"
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: "{print}('mein Name ist Hedy!')"
+        -   title: Schülerinnen und Schüler verwenden weiterhin den frage-Befehl
+            example:
+                error_text: Der frage-Befehl wurde seit Level 1 benutzt. Also könnte es schwierig für die Schülerinnen und Schüler sein zu input anstelle von frage zu wechseln.
+                error_code: |-
+                    {print}('Mein Name ist Hedy!')
+                    name = frage('Was ist dein Name?')
+                    {print}('Also ist dein Name ', name)
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: |-
+                    {print}('Mein Name ist Hedy!')
+                    name = {input}('Was ist dein Name?')
+                    {print}('Also ist dein Name ', name)
+        -   title: Schülerinnen und Schüler könnten die Klammern als Anführungszeichen verwenden
+            example:
+                error_text: Sie haben gelernt die Variablen außerhalb der Anführungszeichen zu halten, also könnten sie das Gleiche mit den Klammern tun. Was nicht der richtige Weg ist sie zu benutzen.
+                error_code: |-
+                    temperatur = 25
+                    {print}('Es ist ') temperatur ('Grad draußen')
+                solution_text: "Dies ist der korrekte Code:"
+                solution_code: |-
+                    temperatur = 25
+                    {print}('Es ist ', temperatur, 'Grad draußen')
