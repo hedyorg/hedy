@@ -8,6 +8,13 @@ on:
     branches: [ main ]
     types: [opened, synchronize, reopened]
 
+# A burst of pushes to the same branch only needs the newest run. Cancelling the
+# older ones also keeps them from committing a snapshot of a commit that has
+# since been superseded.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.event.pull_request.head.ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # This workflow is split into 2 jobs:
   #
@@ -34,10 +41,12 @@ jobs:
           echo "Pull Request"
           echo "branch=$PULL_REQUEST_HEAD_REF" >> $GITHUB_OUTPUT
           echo "repo=${{ github.event.pull_request.head.repo.full_name }}" >> $GITHUB_OUTPUT
+          echo "sha=${{ github.event.pull_request.head.sha }}" >> $GITHUB_OUTPUT
         elif [[  "${{ github.event_name }}" == "push" ]]; then
           echo "Push Event"
           echo "branch=${{ github.ref }}" >> $GITHUB_OUTPUT
           echo "repo=${{ github.event.repository.full_name }}" >> $GITHUB_OUTPUT
+          echo "sha=${{ github.sha }}" >> $GITHUB_OUTPUT
         else
           echo "Unsupported event type!" >&2
           exit 1
@@ -57,11 +66,14 @@ jobs:
     # safe *for this job specifically*: it declares 'permissions: contents: read'
     # and receives no secrets, which is exactly the mitigation GitHub recommends
     # for running untrusted code. The privileged half lives in 'postupdate'.
+    #
+    # We check out the exact commit that triggered this run, not the branch
+    # name. See 'postupdate' for why.
     - uses: actions/checkout@v6
       name: Checkout branch
       with:
         fetch-depth: 1
-        ref: ${{ steps.branch.outputs.branch }}
+        ref: ${{ steps.branch.outputs.sha }}
         repository: ${{ steps.branch.outputs.repo }}
         allow-unsafe-pr-checkout: true
 
@@ -115,6 +127,7 @@ jobs:
     outputs:
       branch: ${{ steps.branch.outputs.branch }}
       repo: ${{ steps.branch.outputs.repo }}
+      sha: ${{ steps.branch.outputs.sha }}
 
   postupdate:
     needs: [updatefiles]
@@ -135,33 +148,27 @@ jobs:
     # is executed in this job: we only check out the branch so that the commit
     # lands on it, overlay the artifact, and commit. Keep it that way -- do not
     # add build or test steps to this job.
+    #
+    # We check out the same commit 'updatefiles' built, not the tip of the
+    # branch. The artifact is a snapshot of the whole tree, so overlaying it on a
+    # newer tip would silently revert every commit pushed in the meantime.
+    #
+    # Either use HEDY_BOT_TOKEN or GITHUB_TOKEN to push.
+    # GITHUB_TOKEN can do fewer things (push to main, trigger new GHAs, etc).
     - uses: actions/checkout@v6
       name: Checkout branch
       with:
         fetch-depth: 1
-        ref: ${{ needs.updatefiles.outputs.branch }}
+        ref: ${{ needs.updatefiles.outputs.sha }}
         repository: ${{ needs.updatefiles.outputs.repo }}
         allow-unsafe-pr-checkout: true
+        token: ${{ secrets.HEDY_BOT_TOKEN || secrets.GITHUB_TOKEN }}
 
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
         name: updated-files
         path: .
-
-    #----------------------------------------------------------------------
-    # Either use HEDY_BOT_TOKEN or GITHUB_TOKEN
-    # GITHUB_TOKEN can do fewer things (push to main, trigger new GHAs, etc).
-    - name: Check for presence of GitHub Token
-      id: secret
-      run: |
-        if [ ! -z "${{ secrets.HEDY_BOT_TOKEN }}" ]; then
-          echo "We have a token!"
-          echo "secret=${{ secrets.HEDY_BOT_TOKEN }}" >> $GITHUB_OUTPUT
-        else
-          echo "We do not have a token"
-          echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
-        fi
 
     - name: Post comment
       if: ${{ hashFiles('comment.md.tmp') != '' && github.event_name == 'pull_request_target' }}
@@ -172,12 +179,34 @@ jobs:
     #----------------------------------------------------------------------
     #  Commit back
     #
-    # We need to pass the token here. This is necessary to bypass branch
-    # protection (which will disallow non-reviewed pushes otherwise)
-    - name: Commit changed files (with token)
-      uses: stefanzweifel/git-auto-commit-action@v2.3.0
-      with:
-        commit_message: 🤖 Automatically update generated files
-        branch: ${{ needs.updatefiles.outputs.branch }}
+    # The token comes from the checkout step. It is necessary to bypass branch
+    # protection (which will disallow non-reviewed pushes otherwise).
+    #
+    # The commit sits on top of the commit we built, so if the branch has moved
+    # on the push is not a fast-forward and git rejects it. That is the point:
+    # the newer push has its own run, which will regenerate the files from the
+    # up-to-date tree.
+    - name: Commit changed files
       env:
-        GITHUB_TOKEN: ${{ steps.secret.outputs.secret }}
+        BRANCH: ${{ needs.updatefiles.outputs.branch }}
+        SHA: ${{ needs.updatefiles.outputs.sha }}
+      run: |
+        git add .
+        if git diff --cached --quiet; then
+          echo "Working tree clean. Nothing to commit."
+          exit 0
+        fi
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git commit -m "🤖 Automatically update generated files" --author="$GITHUB_ACTOR <$GITHUB_ACTOR@users.noreply.github.com>"
+
+        BRANCH="${BRANCH#refs/heads/}"
+        if git push origin "HEAD:refs/heads/$BRANCH"; then
+          exit 0
+        fi
+        git fetch --depth=1 origin "refs/heads/$BRANCH"
+        if [ "$(git rev-parse FETCH_HEAD)" != "$SHA" ]; then
+          echo "::notice::$BRANCH moved on while this run was building; leaving the commit to the newer run."
+          exit 0
+        fi
+        exit 1
