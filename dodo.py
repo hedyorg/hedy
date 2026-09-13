@@ -184,7 +184,6 @@ def task_client_messages():
         # Depends on a specific YAML file and the .mo files
         file_dep=[
             *glob('content/client-messages/*.yaml'),
-            'content/client-messages.txt',
             *mofiles,
             script,
         ],
