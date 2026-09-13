@@ -1,13 +1,13 @@
 import { loginForAdmin } from "../login/login";
 import { openAdventureView } from '../../tools/adventures/adventure.js';
 
-export function goToPage(page)
+export function goToPage(page, options = {})
 {
     if (typeof page === 'string' || page instanceof String)
     {
         if(page != "")
         {
-            cy.visit(page);
+            cy.visit(page, options);
         }
 
     }
@@ -38,9 +38,9 @@ export function goToTeachersPage()
     goToPage(Cypress.env('teachers_page'));
 }
 
-export function goToHedyPage()
+export function goToHedyPage(options = {})
 {
-    goToPage(Cypress.env('hedy_page'));
+    goToPage(Cypress.env('hedy_page'), options);
 }
 
 export function goToHedyPageWithEnKeywords()

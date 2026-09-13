@@ -216,10 +216,10 @@
       </div>
       <div class="block flex-1"></div>
       <div id="speak_container" class="hidden flex flex-row items-center w-max overflow-visible">
-        <button id="speak_mute_button" class="blue-btn-new ltr:mr-1 rtl:ml-1" data-muted="false" onclick="hedyApp.toggleSpeakMute()">
-          <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
+        <button id="speak_mute_button" class="blue-btn-new ltr:mr-1 rtl:ml-1" aria-label="{{ _('mute') }}" aria-pressed="true" onclick="hedyApp.toggleSpeakMute()">
+          <span class="fa fa-volume-xmark ltr:mr-1 rtl:ml-1"></span>
         </button>
-        <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
+        <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded" aria-label="{{ _('choose_a_voice') }}" onchange="hedyApp.updateSpeakVoice()">
           <option value="">{{ _('choose_a_voice') }}</option>
         </select>
       </div>
