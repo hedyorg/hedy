@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hedy - Slides - {{ level }} </title>
-    <link rel="stylesheet" href="{{static('css/reveal-js-custom.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/sky.css')}}">
-
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
-</head>
-<body>
-    <div class="reveal">
-      <div class="slides">
-          {% for index, slide in slides.items() %}
-            {# Embedded previews get shorter slides: with the editor laid out side by
+    <head>
+        <meta charset="UTF-8">
+        <title>Hedy - Slides - {{ level }}</title>
+        <link rel="stylesheet" href="{{ static('css/reveal-js-custom.css') }}">
+        <link rel="stylesheet" href="{{ static('vendor/reveal/dist/reset.css') }}">
+        <link rel="stylesheet" href="{{ static('vendor/reveal/dist/reveal.css') }}">
+        <link rel="stylesheet"
+              href="{{ static('vendor/reveal/dist/theme/sky.css') }}">
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet"
+              href="{{ static('vendor/reveal/plugin/highlight/monokai.css') }}">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                {% for index, slide in slides.items() %}
+                    {# Embedded previews get shorter slides: with the editor laid out side by
                side there is no need for the full 1018px, and a shorter slide means
                Reveal scales it down far less, so the preview stays readable. #}
-            <section data-markdown style="text-align: left; height: {{ '640px' if embed else '1018px' }}; font-size:0.8em">
-                {{ slide['header'] }}
-                <textarea data-template>
+                    <section data-markdown
+                             style="text-align: left;
+                                    height: {{ '640px' if embed else '1018px' }};
+                                    font-size:0.8em">
+                        {{ slide['header'] }}
+                        <textarea data-template>
                     ### {{ slide['header'] }}
 
                     {{ slide['text'] }}
@@ -32,15 +36,15 @@
                     {% endif %}
                     <aside class="notes">{{ slide['notes'] }}</aside>
                 </textarea>
-            </section>
-          {% endfor %}
-      </div>
-    </div>
-    <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
-    <script src="{{static('vendor/reveal/plugin/notes/notes.js')}}"></script>
-    <script src="{{static('vendor/reveal/plugin/markdown/markdown.js')}}"></script>
-    <script src="{{static('vendor/reveal/plugin/highlight/highlight.js')}}"></script>
-    <script>
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+        <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
+        <script src="{{static('vendor/reveal/plugin/notes/notes.js')}}"></script>
+        <script src="{{static('vendor/reveal/plugin/markdown/markdown.js')}}"></script>
+        <script src="{{static('vendor/reveal/plugin/highlight/highlight.js')}}"></script>
+        <script>
         // More info about initialization & config:
         // - https://revealjs.com/initialization/
         // - https://revealjs.com/config/
@@ -58,6 +62,6 @@
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
         });
-    </script>
+</script>
 </body>
 </html>

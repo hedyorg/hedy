@@ -5,3 +5,8 @@ dep_file = ".doit.db.json"
 [tool.doit.plugins.command]
 watch = "doit_watch:Watch"
 
+# https://djlint.com/docs/configuration/
+[tool.djlint]
+profile = "jinja"
+ignore="H021,H030,H031"
+format_attribute_js_json=true

@@ -1,299 +1,341 @@
-
 {% macro adventure_index(adv_name, tab_level, title, selected, id, adv_class, state, index) %}
-  <li class="{% if selected %}adv-selected{% else %}not-selected-adv{% endif %}
-        px-3 py-1 hover:bg-gray-200 cursor-pointer  text-blue-900
-        ease-in transition duration-100"
+    <li class="{% if selected %}adv-selected{% else %}not-selected-adv{% endif %} px-3 py-1 hover:bg-gray-200 cursor-pointer text-blue-900 ease-in transition duration-100"
         data-tab="{{ adv_name }}"
         data-cy="{{ title if adv_class == 'teacher' else adv_name }}"
         data-level="{{ tab_level }}"
         tabindex="{{ index }}"
         data-type="{{ adv_class }}"
-        id = "{{ id }}"
-  >
-    <div class="flex flex-row gap-x-2 text-center">
-      {% if adv_class == 'command' %}
-        <i class="fa-regular fa-lightbulb w-4" style="line-height: inherit;"></i>
-      {% elif adv_class == 'teacher' %}
-        <i class="w-4 text-center align-middle w-4"></i>
-      {% else %}
-        <i class="w-4 text-center align-middle w-4"></i>
-      {% endif %}
-      <span>
-        {{ title }}
-      </span>
-      <div class="flex-1" ></div>
-      <i class="fa-regular
-                {% if state == 'ticked' %}
-                  fa-circle-check
-                {% elif state == 'submitted' %}
-                  fa-paper-plane
-                {% endif %}"
-                data-status-icon
-                style="line-height: inherit;">
-      </i>
-    
-      {% if state == 'ticked' %}
-      {% elif state == 'submitted' %}
-      {% else %}
-      {% endif %}
-    </div>
-  </li>
+        id="{{ id }}">
+        <div class="flex flex-row gap-x-2 text-center">
+            {% if adv_class == "command" %}
+                <i class="fa-regular fa-lightbulb w-4" style="line-height: inherit;"></i>
+            {% elif adv_class == "teacher" %}
+                <i class="w-4 text-center align-middle w-4"></i>
+            {% else %}
+                <i class="w-4 text-center align-middle w-4"></i>
+            {% endif %}
+            <span>{{ title }}</span>
+            <div class="flex-1"></div>
+            <i class="fa-regular {% if state == 'ticked' %} fa-circle-check {% elif state == 'submitted' %} fa-paper-plane {% endif %}"
+               data-status-icon
+               style="line-height: inherit">
+            </i>
+            {% if state == "ticked" %}
+            {% elif state == "submitted" %}
+            {% else %}
+            {% endif %}
+        </div>
+    </li>
 {% endmacro %}
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ g.lang }}" class="notranslate" translate="no">
-  <head>
-    <title>{% if page_title %}{{page_title}}{% else %}Hedy{% endif %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{static(generated_css_file)}}">
-    <link rel="stylesheet" href="{{static('/css/additional.css')}}">
-    <link rel="icon" type="image/png" href="{{static('/images/Hedy-logo-96x96-laptop.png')}}"/>
-    <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
-    <link rel="stylesheet" href="{{static('/fonts/balsamiqsans/balsamiqsans.css')}}"/>
-  </head>
-  <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element,morph" data-logged-in="{{ 1 if username else 0 }}">
-    <div id="modal_target"></div>
-    <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
-    <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal_content" data-cy="modal_content" class="hidden w-1/2 fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
-       <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
-          <div id="modal_confirm_text" data-cy="modal_confirm_text" class="text-white mb-8 text-xl"></div>
-          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal_yes_button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
-            <button id="modal_no_button" data-cy="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
-          </div>
-       </div>
-       <div id="modal_prompt" class="hidden">
-        <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
-        <div class="xm-auto">
-          <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
-          <div class="mt-4 flex flex-row justify-center">
-              <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-              <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
-          </div>
-        </div>
-       </div>
-       <div id="modal_search" class="hidden">
-          <div id="modal_search_text" class="text-white mb-8 text-xl"></div>
-          <div class="xm-auto">
-            {# for this search to actually work, user code is meant to set up the attributes before using #}
-            <input id="modal_search_input"
-                   data-cy="modal_search_input"
-                   type="search"
-                   name="search"
-                   class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1"
-                   hx-trigger="input changed delay:500ms, search"
-                   hx-target="#search_results">
-
-              <ul id="users_to_invite" class="grid grid-cols-3 items-center mb-4 list-none">
-  
-              </ul>
-            <ul class="list-none flex flex-col items-center align" id="search_results" hx-on::after-settle="document.getElementById('modal_search_input').focus()">
-
-            </ul>              
-          </div>
-            <div class="mt-4 flex flex-row justify-center">
-              {# This modal is meant to be used with HTMX, so user code is required to set up the htmx attributes before calling #}
-                <button id="modal_ok_search_button" data-cy="modal_ok_search_button" class="green-btn block m-4 w-40 pb-4 pt-4">
-                  {{_('ok')}}
-                </button>
-                <button id="modal_cancel_search_button" data-cy="modal_cancel_search_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+    <head>
+        <title>{% if page_title %}{{ page_title }}{% else %}Hedy{% endif %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ static(generated_css_file) }}">
+        <link rel="stylesheet" href="{{ static('/css/additional.css') }}">
+        <link rel="icon"
+              type="image/png"
+              href="{{ static('/images/Hedy-logo-96x96-laptop.png') }}" />
+        <link rel="stylesheet" href="{{ static('/fontawesome/css/all.min.css') }}" />
+        <link rel="stylesheet"
+              href="{{ static('/fonts/balsamiqsans/balsamiqsans.css') }}" />
+    </head>
+    <body id="main_container"
+          dir="{{ g.dir }}"
+          class="{% if not raw %}bg-gray-100{% endif %}"
+          hx-ext="disable-element,morph"
+          data-logged-in="{{ 1 if username else 0 }}">
+        <div id="modal_target"></div>
+        <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
+        <div id="modal_mask"
+             class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
+        <div id="modal_content"
+             data-cy="modal_content"
+             class="hidden w-1/2 fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+             style="max-height: 80vh;
+                    overflow-y: auto">
+            <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
+                <div id="modal_confirm_text"
+                     data-cy="modal_confirm_text"
+                     class="text-white mb-8 text-xl"></div>
+                <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
+                    <button id="modal_yes_button"
+                            data-cy="modal_yes_button"
+                            class="green-btn block m-4 w-40 pb-4 pt-4">{{ _("yes") }}</button>
+                    <button id="modal_no_button"
+                            data-cy="modal_no_button"
+                            class="red-btn block m-4 w-40 pb-4 pt-4">{{ _("no") }}</button>
+                </div>
             </div>
-       </div>
-       <div id="modal_copy" class="hidden">
-           <div class="absolute top-2 right-2">
-              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal_copy_close_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <title>Close</title>
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-          </svg></div>
-          <div id="modal_copy_title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal_copy_text" class="text-white mb-8 text-xl"></div>
-          <div id="modal_copy_buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal_copy_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('copy_link_to_share')}}</button>
-          </div>
-       </div>
-       <div id="modal_repair" class="hidden">
-          <div class="absolute top-2 right-2">
-              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal_repair_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <title>Close</title>
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-          </svg></div>
-          <div id="modal_repair_title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal_repair_text" class="text-white mb-8 text-xl"></div>
-       </div>
-        <div id="modal_preview" class="hidden">
-          <div class="absolute top-2 right-2">
-              <svg class="fill-current h-8 w-8 text-white cursor-pointer" id="modal_preview_button" data-cy="modal_preview_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <title>Close</title>
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-          </svg></div>
-          <div id="modal_preview_title" class="text-black mb-4 text-2xl"></div>
-          <div id="modal_preview_content"></div>
-       </div>
-    </div>
-    <div id="redesign_confirm_modal"
-         data-cy="redesign_confirm_modal"
-         class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
-      <div id="redesign_confirm_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
-      <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
-        <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
-          <h3 class="m-0 flex min-w-0 items-center gap-2 text-2xl font-semibold">
-            <span id="redesign_confirm_title">{{ _('confirm') }}</span>
-            <span id="redesign_confirm_title_name" class="hidden inline-block max-w-[14rem] truncate align-bottom" title=""></span>
-          </h3>
-          <button id="redesign_confirm_close_button"
-                  data-cy="redesign_confirm_close_button"
-                  type="button"
-                  class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
-                  aria-label="{{ _('cancel') }}">
-            <i class="fa-solid fa-xmark text-lg"></i>
-          </button>
+            <div id="modal_prompt" class="hidden">
+                <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
+                <div class="xm-auto">
+                    <input id="modal_prompt_input"
+                           data-cy="modal_prompt_input"
+                           type="text"
+                           class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
+                    <div class="mt-4 flex flex-row justify-center">
+                        <button id="modal_ok_button"
+                                data-cy="modal_ok_button"
+                                class="green-btn block m-4 w-40 pb-4 pt-4">{{ _("ok") }}</button>
+                        <button id="modal_cancel_button"
+                                data-cy="modal_cancel_button"
+                                class="red-btn block m-4 w-40 pb-4 pt-4">{{ _("cancel") }}</button>
+                    </div>
+                </div>
+            </div>
+            <div id="modal_search" class="hidden">
+                <div id="modal_search_text" class="text-white mb-8 text-xl"></div>
+                <div class="xm-auto">
+                    {# for this search to actually work, user code is meant to set up the attributes before using #}
+                    <input id="modal_search_input"
+                           data-cy="modal_search_input"
+                           type="search"
+                           name="search"
+                           class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1"
+                           hx-trigger="input changed delay:500ms, search"
+                           hx-target="#search_results">
+                    <ul id="users_to_invite"
+                        class="grid grid-cols-3 items-center mb-4 list-none">
+                    </ul>
+                    <ul class="list-none flex flex-col items-center align"
+                        id="search_results"
+                        hx-on::after-settle="document.getElementById('modal_search_input').focus()">
+                    </ul>
+                </div>
+                <div class="mt-4 flex flex-row justify-center">
+                    {# This modal is meant to be used with HTMX, so user code is required to set up the htmx attributes before calling #}
+                    <button id="modal_ok_search_button"
+                            data-cy="modal_ok_search_button"
+                            class="green-btn block m-4 w-40 pb-4 pt-4">{{ _("ok") }}</button>
+                    <button id="modal_cancel_search_button"
+                            data-cy="modal_cancel_search_button"
+                            class="red-btn block m-4 w-40 pb-4 pt-4">{{ _("cancel") }}</button>
+                </div>
+            </div>
+            <div id="modal_copy" class="hidden">
+                <div class="absolute top-2 right-2">
+                    <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer"
+                         id="modal_copy_close_button"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <title>Close</title>
+                        <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                    </svg>
+                </div>
+                <div id="modal_copy_title" class="text-white mb-8 text-xl hidden"></div>
+                <div id="modal_copy_text" class="text-white mb-8 text-xl"></div>
+                <div id="modal_copy_buttons"
+                     class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
+                    <button id="modal_copy_button"
+                            class="green-btn block m-4 w-40 pb-4 pt-4">{{ _("copy_link_to_share") }}</button>
+                </div>
+            </div>
+            <div id="modal_repair" class="hidden">
+                <div class="absolute top-2 right-2">
+                    <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer"
+                         id="modal_repair_button"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <title>Close</title>
+                        <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                    </svg>
+                </div>
+                <div id="modal_repair_title" class="text-white mb-8 text-xl hidden"></div>
+                <div id="modal_repair_text" class="text-white mb-8 text-xl"></div>
+            </div>
+            <div id="modal_preview" class="hidden">
+                <div class="absolute top-2 right-2">
+                    <svg class="fill-current h-8 w-8 text-white cursor-pointer"
+                         id="modal_preview_button"
+                         data-cy="modal_preview_button"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <title>Close</title>
+                        <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                    </svg>
+                </div>
+                <div id="modal_preview_title" class="text-black mb-4 text-2xl"></div>
+                <div id="modal_preview_content"></div>
+            </div>
         </div>
-        <div class="px-5 py-5 sm:px-6">
-          <p id="redesign_confirm_text" data-cy="redesign_confirm_text" class="m-0 leading-7 text-lg text-gray-700"></p>
+        <div id="redesign_confirm_modal"
+             data-cy="redesign_confirm_modal"
+             class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
+            <div id="redesign_confirm_backdrop"
+                 class="absolute inset-0 bg-black opacity-60"></div>
+            <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+                <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+                    <h3 class="m-0 flex min-w-0 items-center gap-2 text-2xl font-semibold">
+                        <span id="redesign_confirm_title">{{ _("confirm") }}</span>
+                        <span id="redesign_confirm_title_name"
+                              class="hidden inline-block max-w-[14rem] truncate align-bottom"
+                              title=""></span>
+                    </h3>
+                    <button id="redesign_confirm_close_button"
+                            data-cy="redesign_confirm_close_button"
+                            type="button"
+                            class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+                            aria-label="{{ _('cancel') }}">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <div class="px-5 py-5 sm:px-6">
+                    <p id="redesign_confirm_text"
+                       data-cy="redesign_confirm_text"
+                       class="m-0 leading-7 text-lg text-gray-700"></p>
+                </div>
+                <div id="redesign_confirm_actions"
+                     class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+                    <button id="redesign_confirm_no_button"
+                            data-cy="redesign_confirm_no_button"
+                            type="button"
+                            class="blue-btn-new">{{ _("cancel") }}</button>
+                    <button id="redesign_confirm_yes_button"
+                            data-cy="redesign_confirm_yes_button"
+                            type="button"
+                            class="green-btn-new">{{ _("yes") }}</button>
+                </div>
+            </div>
         </div>
-        <div id="redesign_confirm_actions" class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
-          <button id="redesign_confirm_no_button"
-                  data-cy="redesign_confirm_no_button"
-                  type="button"
-                  class="blue-btn-new">
-            {{ _('cancel') }}
-          </button>
-          <button id="redesign_confirm_yes_button"
-                  data-cy="redesign_confirm_yes_button"
-                  type="button"
-                  class="green-btn-new">
-            {{ _('yes') }}
-          </button>
+        <div id="redesign_prompt_modal"
+             data-cy="redesign_prompt_modal"
+             class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
+            <div id="redesign_prompt_backdrop"
+                 class="absolute inset-0 bg-black opacity-60"></div>
+            <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+                <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+                    <h3 id="redesign_prompt_title" class="m-0 text-2xl font-semibold"></h3>
+                    <button id="redesign_prompt_close_button"
+                            data-cy="redesign_prompt_close_button"
+                            type="button"
+                            class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+                            aria-label="{{ _('cancel') }}">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <div class="space-y-4 px-5 py-5 sm:px-6">
+                    <p id="redesign_prompt_text"
+                       data-cy="redesign_prompt_text"
+                       class="m-0 leading-7 text-lg text-gray-700"></p>
+                    <input id="redesign_prompt_input"
+                           data-cy="redesign_prompt_input"
+                           type="text"
+                           class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base text-gray-900 outline-none ring-blue-200 transition duration-100 focus:border-blue-500 focus:ring-2">
+                </div>
+                <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+                    <button id="redesign_prompt_cancel_button"
+                            data-cy="redesign_prompt_cancel_button"
+                            type="button"
+                            class="blue-btn-new">{{ _("cancel") }}</button>
+                    <button id="redesign_prompt_ok_button"
+                            data-cy="redesign_prompt_ok_button"
+                            type="button"
+                            class="green-btn-new">{{ _("ok") }}</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="redesign_prompt_modal"
-         data-cy="redesign_prompt_modal"
-         class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
-      <div id="redesign_prompt_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
-      <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
-        <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
-          <h3 id="redesign_prompt_title" class="m-0 text-2xl font-semibold"></h3>
-          <button id="redesign_prompt_close_button"
-                  data-cy="redesign_prompt_close_button"
-                  type="button"
-                  class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
-                  aria-label="{{ _('cancel') }}">
-            <i class="fa-solid fa-xmark text-lg"></i>
-          </button>
+        <div id="redesign_search_modal"
+             data-cy="redesign_search_modal"
+             class="hidden fixed inset-0 z-50 items-start sm:items-center justify-center overflow-y-auto px-4 py-4 sm:px-6 sm:py-6">
+            <div id="redesign_search_backdrop"
+                 class="absolute inset-0 bg-black opacity-60"></div>
+            <div class="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-2xl">
+                <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+                    <h3 class="m-0 text-2xl font-semibold">{{ _("invite") }}</h3>
+                    <button id="redesign_search_close_button"
+                            data-cy="redesign_search_close_button"
+                            type="button"
+                            class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+                            aria-label="{{ _('cancel') }}">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <div class="space-y-4 px-5 py-5 sm:px-6">
+                    <p id="redesign_search_text" class="m-0 leading-7 text-lg text-gray-700"></p>
+                    <input id="redesign_search_input"
+                           data-cy="redesign_search_input"
+                           type="search"
+                           name="search"
+                           class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base text-gray-900 outline-none ring-blue-200 transition duration-100 focus:border-blue-500 focus:ring-2"
+                           hx-trigger="input changed delay:500ms, search"
+                           hx-target="#redesign_search_results">
+                    <div id="redesign_users_to_invite_container"
+                         class="hidden rounded-lg border border-gray-300 bg-gray-50 p-3 inline-block w-full">
+                        <p class="m-0 mb-2 text-sm font-semibold text-gray-700">{{ _("invite") }}</p>
+                        <ul id="redesign_users_to_invite"
+                            class="grid grid-cols-1 gap-2 mb-0 list-none max-h-56 overflow-y-auto pr-1">
+                        </ul>
+                    </div>
+                    <div class="rounded-lg border border-gray-300 bg-gray-50 p-3">
+                        <p class="m-0 mb-2 text-base font-semibold text-sm text-gray-700">{{ _("search_results") }}</p>
+                        <ul id="redesign_search_results"
+                            class="list-none flex flex-col gap-2 mb-0 max-h-64 overflow-y-auto pr-1"
+                            hx-on::after-settle="document.getElementById('redesign_search_input').focus()">
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+                    <button id="redesign_search_cancel_button"
+                            data-cy="redesign_search_cancel_button"
+                            type="button"
+                            class="blue-btn-new">{{ _("cancel") }}</button>
+                    <button id="redesign_search_ok_button"
+                            data-cy="redesign_search_ok_button"
+                            type="button"
+                            class="green-btn-new">{{ _("ok") }}</button>
+                </div>
+            </div>
         </div>
-        <div class="space-y-4 px-5 py-5 sm:px-6">
-          <p id="redesign_prompt_text" data-cy="redesign_prompt_text" class="m-0 leading-7 text-lg text-gray-700"></p>
-          <input id="redesign_prompt_input"
-                 data-cy="redesign_prompt_input"
-                 type="text"
-                 class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base text-gray-900 outline-none ring-blue-200 transition duration-100 focus:border-blue-500 focus:ring-2">
+        <div id="modal_alert"
+             class="z-50 fixed hidden"
+             role="alert"
+             style="top: 10%;
+                    left: 50%;
+                    transform: translate(-50%, -50%)">
+            <div id="modal_alert_container"
+                 data-cy="modal_alert_container"
+                 class="mx-auto relative flex items-center justify-center gap-3 bg-green-100 border-green-400 text-green-700 border rounded px-6 py-2">
+                <svg class="absolute top-2 right-2 h-5 w-5 fill-current text-green-500 block sm:inline cursor-pointer"
+                     id="modal_alert_button"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 20 20">
+                    <title>Close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                </svg>
+                <span id="modal_alert_text"
+                      data-cy="modal_alert_text"
+                      class="block sm:inline px-1"></span>
+            </div>
         </div>
-        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
-          <button id="redesign_prompt_cancel_button"
-                  data-cy="redesign_prompt_cancel_button"
-                  type="button"
-                  class="blue-btn-new">
-            {{ _('cancel') }}
-          </button>
-          <button id="redesign_prompt_ok_button"
-                  data-cy="redesign_prompt_ok_button"
-                  type="button"
-                  class="green-btn-new">
-            {{ _('ok') }}
-          </button>
+        <div id="loading_mask" class="invisible">
+            <div id="loading_spinner"></div>
         </div>
-      </div>
-    </div>
-    <div id="redesign_search_modal"
-         data-cy="redesign_search_modal"
-        class="hidden fixed inset-0 z-50 items-start sm:items-center justify-center overflow-y-auto px-4 py-4 sm:px-6 sm:py-6">
-      <div id="redesign_search_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
-      <div class="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-2xl">
-        <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
-          <h3 class="m-0 text-2xl font-semibold">{{ _('invite') }}</h3>
-          <button id="redesign_search_close_button"
-                  data-cy="redesign_search_close_button"
-                  type="button"
-                  class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
-                  aria-label="{{ _('cancel') }}">
-            <i class="fa-solid fa-xmark text-lg"></i>
-          </button>
+        <div class="min-h-screen" id="layout">
+            {% if menu != False %}
+                {% include "incl/menubar.html" %}
+            {% endif %}
+            {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+            {% block full_width_content %}{% endblock %}
+            <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
         </div>
-        <div class="space-y-4 px-5 py-5 sm:px-6">
-          <p id="redesign_search_text" class="m-0 leading-7 text-lg text-gray-700"></p>
-          <input id="redesign_search_input"
-                 data-cy="redesign_search_input"
-                 type="search"
-                 name="search"
-                 class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base text-gray-900 outline-none ring-blue-200 transition duration-100 focus:border-blue-500 focus:ring-2"
-                 hx-trigger="input changed delay:500ms, search"
-                 hx-target="#redesign_search_results">
-          <div id="redesign_users_to_invite_container" class="hidden rounded-lg border border-gray-300 bg-gray-50 p-3 inline-block w-full">
-            <p class="m-0 mb-2 text-sm font-semibold text-gray-700">{{ _('invite') }}</p>
-            <ul id="redesign_users_to_invite" class="grid grid-cols-1 gap-2 mb-0 list-none max-h-56 overflow-y-auto pr-1">
-            </ul>
-          </div>
-          <div class="rounded-lg border border-gray-300 bg-gray-50 p-3">
-            <p class="m-0 mb-2 text-base font-semibold text-sm text-gray-700">{{ _('search_results') }}</p>
-            <ul id="redesign_search_results" class="list-none flex flex-col gap-2 mb-0 max-h-64 overflow-y-auto pr-1" hx-on::after-settle="document.getElementById('redesign_search_input').focus()">
-            </ul>
-          </div>
-        </div>
-        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
-          <button id="redesign_search_cancel_button"
-                  data-cy="redesign_search_cancel_button"
-                  type="button"
-                  class="blue-btn-new">
-            {{ _('cancel') }}
-          </button>
-          <button id="redesign_search_ok_button"
-                  data-cy="redesign_search_ok_button"
-                  type="button"
-                  class="green-btn-new">
-            {{ _('ok') }}
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="modal_alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
-         <div id="modal_alert_container" data-cy="modal_alert_container"
-           class="mx-auto relative flex items-center justify-center gap-3 bg-green-100 border-green-400 text-green-700 border rounded px-6 py-2">
-          <svg class="absolute top-2 right-2 h-5 w-5 fill-current text-green-500 block sm:inline cursor-pointer"
-           id="modal_alert_button"
-           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-          <span id="modal_alert_text" data-cy="modal_alert_text" class="block sm:inline px-1"></span>
-      </div>
-    </div>
-
-    <div id="loading_mask" class="invisible">
-      <div id="loading_spinner"></div>
-    </div>
-
-    <div class="min-h-screen" id="layout">
-      {% if menu != False %}
-        {% include "incl/menubar.html" %}
-      {% endif %}
-      {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-      {% block full_width_content %}{% endblock %}
-
-      <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
-      </div>
-
-    {% block scripts %}
-    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/htmx-2.0.3.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/idiomorph-0.3.0/idiomorph-ext.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/hyperscript-0.9.8.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/js/skulpt_debugger.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    {% block additional_scripts %}{% endblock %}
-    {# We must mark the JSON safe -- in script tags HTML entities are not allowed #}
-    <script>hedyApp.initialize({
+        {% block scripts %}
+            <script src="{{static('/vendor/jquery.min.js')}}" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/htmx-2.0.3.min.js')}}" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/idiomorph-0.3.0/idiomorph-ext.min.js')}}"
+                    crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/hyperscript-0.9.8.min.js')}}"
+                    crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/js-confetti.browser.js')}}"
+                    crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/skulpt.min.js')}}" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/skulpt-stdlib.js')}}" crossorigin="anonymous"></script>
+            <script src="{{static('/js/skulpt_debugger.js')}}" crossorigin="anonymous"></script>
+            <script src="{{static('/js/appbundle.js')}}" crossorigin="anonymous"></script>
+            {% block additional_scripts %}{% endblock %}
+            {# We must mark the JSON safe -- in script tags HTML entities are not allowed #}
+            <script>hedyApp.initialize({
       lang: {{ g.lang|tojson|safe }},
       level: {{ level|tojson|safe }},
       keyword_language: {{ g.keyword_lang|tojson|safe }},
@@ -302,7 +344,8 @@
       featureFlags: {{ feature_flags|tojson|safe }},
       {% if initialize_logs %}logs: true,{% endif %}
       javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
-      });</script>
-    {% endblock %}
-  </body>
+      });
+            </script>
+        {% endblock %}
+    </body>
 </html>

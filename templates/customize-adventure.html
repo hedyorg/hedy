@@ -1,282 +1,285 @@
 {% extends "auth.html" %}
-
 {% block regular_content %}
-{% from 'incl/editor-tool-hint.html' import editor_tool_hint %}
-<button id='go_back_button' data-cy='go_back_button' class="back-btn"
-onclick="window.open('/for-teachers', '_self');">
-    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
-    <span>{{_('go_back')}}</span>
-</button>
-<br><br>
-<div class="flex flex-col" data-level="{{level}}" data-kwlang="{{ current_language().lang }}" >
-    <h2>{{_('customize_adventure')}}: <strong>{{adventure.name}}</strong></h2>
-    <div class="h-full w-full list-none flex flex-row items-center gap-x-2 xl:gap-x-6 mb-4 mt-4" id="adventures-buttons">
-        <div
-            class="cust-adv-tab cust-adv-tab-text active flex-initial truncate flex items-center justify-center"
-            data-cy="settings"
-            _="on click remove .active from .cust-adv-tab
+    {% from 'incl/editor-tool-hint.html' import editor_tool_hint %}
+    <button id="go_back_button"
+            data-cy='go_back_button'
+            class="back-btn"
+            onclick="window.open('/for-teachers', '_self');">
+        <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
+        <span>{{ _("go_back") }}</span>
+    </button>
+    <br>
+    <br>
+    <div class="flex flex-col"
+         data-level="{{ level }}"
+         data-kwlang="{{ current_language().lang }}">
+        <h2>{{ _("customize_adventure") }}: <strong>{{ adventure.name }}</strong></h2>
+        <div class="h-full w-full list-none flex flex-row items-center gap-x-2 xl:gap-x-6 mb-4 mt-4"
+             id="adventures-buttons">
+            <div class="cust-adv-tab cust-adv-tab-text active flex-initial truncate flex items-center justify-center"
+                 data-cy="settings"
+                 _="on click remove .active from .cust-adv-tab
                 add .active to me
                 add .hidden to .tab_content
-                remove .hidden from .settings"
-            >
-            <div class="cust-adv-text">{{_('general_settings')}}</div>
-        </div>
-        <div
-            class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
-            data-cy="adventure"
-            _="on click remove .active from .cust-adv-tab
+                remove .hidden from .settings">
+                <div class="cust-adv-text">{{ _("general_settings") }}</div>
+            </div>
+            <div class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
+                 data-cy="adventure"
+                 _="on click remove .active from .cust-adv-tab
                 add .active to me
                 add .hidden to .tab_content
-                remove .hidden from .editor"
-            >
-            {{_('adventure')}}
-            <button type="button" class="px-2" _="on click toggle .hidden on #explanation">
-                <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path
-                    d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                </svg>
-            </button>
-        </div>
-        <div
-            id="preview-tab"
-            class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
-            data-cy="preview"
-            _="on click remove .active from .cust-adv-tab
+                remove .hidden from .editor">
+                {{ _("adventure") }}
+                <button type="button"
+                        class="px-2"
+                        _="on click toggle .hidden on #explanation">
+                    <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                    </svg>
+                </button>
+            </div>
+            <div id="preview-tab"
+                 class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
+                 data-cy="preview"
+                 _="on click remove .active from .cust-adv-tab
                 add .active to me
                 add .hidden to .tab_content
                 remove .hidden from .preview
-                hedyApp.initializeCodePage({{javascript_page_options|tojson}})"
-            >
-            {{_('preview')}}
-        </div>
-        <div
-            class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
-            data-cy="solution_example"
-            _="on click remove .active from .cust-adv-tab
+                hedyApp.initializeCodePage({{ javascript_page_options|tojson }})">{{ _("preview") }}</div>
+            <div class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
+                 data-cy="solution_example"
+                 _="on click remove .active from .cust-adv-tab
                 add .active to me
                 add .hidden to .tab_content
-                remove .hidden from .solution_example"
-            >
-            {{_('solution_example')}}
-                <button type="button" class="px-2" _="on click toggle .hidden on #explanation_solution">
-                    <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                        d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                remove .hidden from .solution_example">
+                {{ _("solution_example") }}
+                <button type="button"
+                        class="px-2"
+                        _="on click toggle .hidden on #explanation_solution">
+                    <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
                     </svg>
                 </button>
-        </div>
-        <div
-            class="flex hidden items-center justify-center"
-            data-cy="tips"
-            _="on click remove .tab-selected from .tab
+            </div>
+            <div class="flex hidden items-center justify-center"
+                 data-cy="tips"
+                 _="on click remove .tab-selected from .tab
                 add .tab-selected to me
                 add .hidden to .tab_content
-                remove .hidden from .tips"
-            >
-            tips
+                remove .hidden from .tips">tips</div>
         </div>
-    </div>
-    <div class="p-6 w-full overflow-auto bg-white mb-5 shadow-md">
-
-        <div class="tab_content px-10 settings">
-            <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', true, '{{_('update_adventure_prompt')}}')"
-                id="customize_adventure"
-                data-te-validation-init>
-                <div class="flex gap-4 w-2/3">
-                    <div class="flex flex-col w-full">
-                        <div class="flex flex-row items-center mb-4">
-                            <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
-                            <div class="flex-1">
-                                <input id="custom_adventure_name" data-cy="custom_adventure_name" autofocus required value="{{ adventure.name }}" class="w-full border-2 bg-gray-100 text-gray-700 py-2 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
+        <div class="p-6 w-full overflow-auto bg-white mb-5 shadow-md">
+            <div class="tab_content px-10 settings">
+                <form onsubmit="event.preventDefault();
+                                hedyApp.update_adventure('{{ adventure.id }}', true, '{{ _('
+                                    update_adventure_prompt ') }}')"
+                      id="customize_adventure"
+                      data-te-validation-init>
+                    <div class="flex gap-4 w-2/3">
+                        <div class="flex flex-col w-full">
+                            <div class="flex flex-row items-center mb-4">
+                                <label for="name" class="inline-block w-40 text-xl">{{ _("name") }}</label>
+                                <div class="flex-1">
+                                    <input id="custom_adventure_name"
+                                           data-cy="custom_adventure_name"
+                                           autofocus
+                                           required
+                                           value="{{ adventure.name }}"
+                                           class="w-full border-2 bg-gray-100 text-gray-700 py-2 px-4 ltr:pr-8 rtl:pl-8 rounded"
+                                           {% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-row items-center mb-4">
-                            <label for="custom_adventure_classes" class="inline-block w-40 text-xl">{{_('used_in')}}</label>
-                            <div class="flex-1">
-                                <custom-select data-type="multiple" id="classes_dropdown" data-cy="classes_select"
-                                               data-label="{{_('select_classes')}}">
+                            <div class="flex flex-row items-center mb-4">
+                                <label for="custom_adventure_classes"
+                                       class="inline-block w-40 text-xl">{{ _("used_in") }}</label>
+                                <div class="flex-1">
+                                    <custom-select data-type="multiple" id="classes_dropdown" data-cy="classes_select" data-label="{{ _('select_classes') }}">
                                     {% for class in all_classes %}
-                                        <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}" data-cy="{{class.name}}">{{ class.name }}</option>
+                                        <option {% if class.id in adventure.classes %}selected{% endif %}
+                                                value="{{ class.id }}"
+                                                data-cy="{{ class.name }}">{{ class.name }}</option>
                                     {% endfor %}
-                                </custom-select>
+                                    </custom-select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-row items-center mb-4">
-                            <label for="custom_adventure_levels" class="inline-block w-40 text-xl">{{_('available_in')}}</label>
-                            <div class="flex-1">
-                                <custom-select data-type="multiple" id="levels_dropdown" data-cy="level_select" data-label="{{_('select_levels')}}">
+                            <div class="flex flex-row items-center mb-4">
+                                <label for="custom_adventure_levels"
+                                       class="inline-block w-40 text-xl">{{ _("available_in") }}</label>
+                                <div class="flex-1">
+                                    <custom-select data-type="multiple" id="levels_dropdown" data-cy="level_select" data-label="{{ _('select_levels') }}">
                                     {% for i in range(1, (max_level + 1)) %}
-                                        <option {% if i|string in adventure.levels %}selected{% endif %} data-value="{{i}}" data-cy="{{i}}">{{ i }}</option>
+                                        <option {% if i|string in adventure.levels %}selected{% endif %}
+                                                data-value="{{ i }}"
+                                                data-cy="{{ i }}">{{ i }}</option>
                                     {% endfor %}
-                                </custom-select>
+                                    </custom-select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-row items-center mb-4">
-                            <label class="inline-block w-40 text-xl" for="language">{{_('language')}}</label>
-                            <div class="flex-1">
-                                <custom-select data-type="single" id="languages_dropdown" data-cy="language_select" data-label="{{_('select_lang')}}">
-                                    <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
+                            <div class="flex flex-row items-center mb-4">
+                                <label class="inline-block w-40 text-xl" for="language">{{ _("language") }}</label>
+                                <div class="flex-1">
+                                    <custom-select data-type="single" id="languages_dropdown" data-cy="language_select" data-label="{{ _('select_lang') }}">
+                                    <option value="{{ adventure['language'] or current_language().lang }}"
+                                            selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
                                     {% for language in other_languages(adventure["language"]) %}
-                                        <option value="{{ language.lang }}" data-cy="{{ language.lang }}">{{ language.sym }}</option>
+                                        <option value="{{ language.lang }}"
+                                                data-cy="{{ language.lang }}">{{ language.sym }}</option>
                                     {% endfor %}
-                                </custom-select>
+                                    </custom-select>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="flex flex-row items-start mb-4">
-                                <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
+                            <div class="flex flex-row items-start mb-4">
+                                <label for="search_tags_input" class="inline-block w-40 text-xl">{{ _("tags") }}</label>
                                 <div class="flex flex-1">
                                     <div class="flex flex-1 flex-row w-full relative" id="add_tags">
-                                            <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"  data-cy="search_tags_input"
-                                                class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
-                                                hx-trigger="keyup[keyCode == 13]"
-                                                data-autosaved="true"
+                                        <input type="text"
+                                               name="tag"
+                                               autocomplete="off"
+                                               placeholder="{{ _('tag_input_placeholder') }}"
+                                               id="search_tags_input"
+                                               data-cy="search_tags_input"
+                                               class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
+                                               hx-trigger="keyup[keyCode == 13]"
+                                               data-autosaved="true"
+                                               hx-post="/tags/create/{{ adventure.id }}"
+                                               hx-target="#tags_list"
+                                               hx-swap="outerHTML"
+                                               _="on click event.stopPropagation()
+                                                    on keypress if event.keyCode == 13 event.stopPropagation() end
+                                                    on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
+                                                    on htmx:afterRequest set my value to '' then focus()">
+                                        <button class="green-btn"
+                                                data-cy="add_adventure_tags"
+                                                hx-trigger="click"
                                                 hx-post="/tags/create/{{ adventure.id }}"
                                                 hx-target="#tags_list"
                                                 hx-swap="outerHTML"
-                                                _="on click event.stopPropagation()
-                                                    on keypress if event.keyCode == 13 event.stopPropagation() end
-                                                    on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
-                                                    on htmx:afterRequest set my value to '' then focus()"
-                                                >
-                                            <button class="green-btn" data-cy="add_adventure_tags"
-                                                hx-trigger="click"
-                                                hx-post="/tags/create/{{adventure.id}}"
-                                                hx-target="#tags_list"
-                                                hx-swap="outerHTML"
                                                 hx-include="[name='tag']"
-                                                _="on htmx:afterRequest set value of #search_tags_input to ''"
-                                                >{{_('add')}}</button>
-
-                                            <div
-                                                id="tags_dropdown"
-                                                hx-trigger="load"
-                                                hx-get="/tags?adventure_id={{adventure.id}}"
-                                                hx-target="#tags_dropdown"
-                                                hx-swap="outerHTML"
-                                            ></div>
+                                                _="on htmx:afterRequest set value of #search_tags_input to ''">{{ _("add") }}</button>
+                                        <div id="tags_dropdown"
+                                             hx-trigger="load"
+                                             hx-get="/tags?adventure_id={{ adventure.id }}"
+                                             hx-target="#tags_dropdown"
+                                             hx-swap="outerHTML"></div>
                                     </div>
                                 </div>
                                 <div class="flex-1">
                                     {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
                                 </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg w-2/3">
-                    <input type="checkbox" name="agree_public" id="agree_public" data-cy="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
-                    <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
-                </div>
-                <div class="flex gap-2 mt-4 items-center">
-                    <button id="submit_adventure" type="submit" class="green-btn">{{_('submit_program')}}</button>
-                    <button type="reset" class="red-btn" data-cy="remove_adventure_button"
-                    hx-confirm="{{_('delete_adventure_prompt')}}"
-                    hx-trigger="click"
-                    hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
-                    hx-swap="none"
-                    _="on htmx:afterRequest if detail.xhr.status == 200 then window.open('/for-teachers', '_self')"
-                    >{{_('remove')}}</button>
-                </div>
-            </form>
-
-
-            <hr
-            class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
-            <div class="flex">
-                {% set usedInClasses = adventure_classes|length %}
-                {% if usedInClasses > 0 %}
-                    <div class="flex flex-col">
-                        <h3>{{_('adventure_exp_classes')}}</h3>
-
-                        <div class="flex gap-2 flex-wrap">
-                            {% for cls in adventure_classes %}
-                                {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
-                            {% endfor %}
-                        </div>
-
+                    <div class="flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg w-2/3">
+                        <input type="checkbox"
+                               name="agree_public"
+                               id="agree_public"
+                               data-cy="agree_public"
+                               class="mr-4"
+                               {% if adventure.public %}checked{% endif %}>
+                        <label for="agree_public" class="text-sm italic w-full">{{ _("adventure_terms") }}</label>
                     </div>
-                {% endif %}
-            </div>
-        </div>
-
-    <div class="tab_content editor hidden">
-        <div class="flex gap-2">
-            <div class="w-full">
+                    <div class="flex gap-2 mt-4 items-center">
+                        <button id="submit_adventure" type="submit" class="green-btn">{{ _("submit_program") }}</button>
+                        <button type="reset"
+                                class="red-btn"
+                                data-cy="remove_adventure_button"
+                                hx-confirm="{{ _('delete_adventure_prompt') }}"
+                                hx-trigger="click"
+                                hx-delete="/for-teachers/customize-adventure/{{ adventure.id }}"
+                                hx-swap="none"
+                                _="on htmx:afterRequest if detail.xhr.status == 200 then window.open('/for-teachers', '_self')">{{ _("remove") }}</button>
+                    </div>
+                </form>
+                <hr class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
                 <div class="flex">
-                    {% set content = prepare_content_for_ckeditor(adventure.content) if adventure.content|length > 0 else prepare_content_for_ckeditor(_('template_code')) %}
-                    <textarea id="adventure-editor" class="hidden">{{content}}</textarea>
+                    {% set usedInClasses = adventure_classes|length %}
+                    {% if usedInClasses > 0 %}
+                        <div class="flex flex-col">
+                            <h3>{{ _("adventure_exp_classes") }}</h3>
+                            <div class="flex gap-2 flex-wrap">
+                                {% for cls in adventure_classes %}
+                                    {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
-
             </div>
-
-            <div id="explanation" class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/4">
-                {{ editor_tool_hint('code', _('adventure_code_button')) }}
-                {{ editor_tool_hint('codeBlock', _('adventure_codeblock_button')) }}
-            </div>
-        </div>
-        <button class="green-btn mt-2"
-            _="on click remove .tab-selected from .tab
+            <div class="tab_content editor hidden">
+                <div class="flex gap-2">
+                    <div class="w-full">
+                        <div class="flex">
+                            {% set content = prepare_content_for_ckeditor(adventure.content) if adventure.content|length > 0 else prepare_content_for_ckeditor(_('template_code')) %}
+                            <textarea id="adventure-editor" class="hidden">{{content}}</textarea>
+                        </div>
+                    </div>
+                    <div id="explanation"
+                         class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/4">
+                        {{ editor_tool_hint('code', _('adventure_code_button')) }}
+                        {{ editor_tool_hint('codeBlock', _('adventure_codeblock_button')) }}
+                    </div>
+                </div>
+                <button class="green-btn mt-2"
+                        _="on click remove .tab-selected from .tab
                 add .tab-selected to #preview-tab
                 add .hidden to .tab_content
                 remove .hidden from .preview
-                hedyApp.initializeCodePage({{javascript_page_options|tojson}})"
-        >{{_('preview')}}</button>
-    </div>
-
-    <div class="tab_content solution_example hidden">
-        <div class="w-full p-2 ltr:mr-2 rtl:ml-2">
-            {{_('solution_example_explanation')}}
-        </div>
-        <div class="flex gap-2">
-            {% set solution_code = prepare_content_for_ckeditor(adventure.solution_example) if adventure.solution_example|length > 0 else prepare_content_for_ckeditor(_('template_code_solution')) %}
-            <textarea id="adventure-solution-editor" class="hidden">{{solution_code}}</textarea>
-            <div id="explanation_solution" class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/4">
-                {{ editor_tool_hint('code', _('adventure_code_button')) }}
-                {{ editor_tool_hint('codeBlock', _('adventure_codeblock_button')) }}
+                hedyApp.initializeCodePage({{ javascript_page_options|tojson }})">{{ _("preview") }}</button>
             </div>
-        </div>
-    </div>
-
-    <div class="tab_content preview hidden">
-              <div class="lg:flex lg:flex-row turn-pre-into-ace show-copy-button teacher-adv">
+            <div class="tab_content solution_example hidden">
+                <div class="w-full p-2 ltr:mr-2 rtl:ml-2">{{ _("solution_example_explanation") }}</div>
+                <div class="flex gap-2">
+                    {% set solution_code = prepare_content_for_ckeditor(adventure.solution_example) if adventure.solution_example|length > 0 else prepare_content_for_ckeditor(_('template_code_solution')) %}
+                    <textarea id="adventure-solution-editor" class="hidden">{{solution_code}}</textarea>
+                    <div id="explanation_solution"
+                         class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/4">
+                        {{ editor_tool_hint('code', _('adventure_code_button')) }}
+                        {{ editor_tool_hint('codeBlock', _('adventure_codeblock_button')) }}
+                    </div>
+                </div>
+            </div>
+            <div class="tab_content preview hidden">
+                <div class="lg:flex lg:flex-row turn-pre-into-ace show-copy-button teacher-adv">
                     <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {{ content|safe }}
                     </div>
-                  {% if adventure.example_code %}
-                      <div class="border"></div>
-                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                        {{ adventure.example_code|safe }}
-                      </div>
-                  {% endif %}
-              </div>
-        {% include "hedy-page/editor-and-output.html" %}
-    </div>
-
-    <div class="tab_content tips hidden">
-        tips here
-    </div>
-
-    <div class="flex flex-col items center mb-4 overflow-x-auto" id="warnings_container">
-        <div id="warningbox"
-            class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
-            role="alert" style="display: none;">
-            <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
-            <div class="flex">
-                <div class="py-1">
-                    <div id="warningbox_icon">
-                        <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path
-                                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                        </svg>
-                    </div>
+                    {% if adventure.example_code %}
+                        <div class="border"></div>
+                        <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">{{ adventure.example_code|safe }}</div>
+                    {% endif %}
                 </div>
-                <div>
-                    <p class="details text-sm">{{ _('multiple_levels_warning') }}</p>
+                {% include "hedy-page/editor-and-output.html" %}
+            </div>
+            <div class="tab_content tips hidden">tips here</div>
+            <div class="flex flex-col items center mb-4 overflow-x-auto"
+                 id="warnings_container">
+                <div id="warningbox"
+                     class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+                     role="alert"
+                     style="display: none">
+                    <p class="close-dialog" onclick="hedyApp.error.hide ()">
+                        <i class="fa-solid fa-xmark"></i>
+                    </p>
+                    <div class="flex">
+                        <div class="py-1">
+                            <div id="warningbox_icon">
+                                <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20">
+                                    <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="details text-sm">{{ _("multiple_levels_warning") }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-</div>
 {% endblock %}
