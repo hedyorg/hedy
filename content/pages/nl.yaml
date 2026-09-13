@@ -678,7 +678,7 @@ teacher-guide:
                 solution_code: |-
                     {print} 2.5 + 2.5
     -   level: '8'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In dit laatste level van Hedy Basis leren je leerlingen hoe ze herhaling in hun programma's kunnen gebruiken! Ze kunnen slechts één regel meerdere keren herhalen. Het herhalen van meerdere regels wordt in de volgende levels behandeld.
 
             Nieuw in dit level:
@@ -717,7 +717,7 @@ teacher-guide:
                 solution_text: Zorg dat de code niet te lang duurt om uit te voeren
                 solution_code: "{repeat} 20 {times} {print} 'Dit is voldoende'"
     -   level: '9'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In dit eerste level van Hedy Advanced leren leerlingen inspringen. Hierdoor kunnen ze meerdere regels gebruiken in een if-statement of meerdere regels herhalen. Leerlingen vinden dit level vaak erg leuk, omdat ze hiermee ingewikkeldere programma's kunnen maken.
             Aan de andere kant zullen sommige leerlingen moeite hebben met begrijpen wanneer ze moeten inspringen en hoe ze dit moeten doen.
 
@@ -773,7 +773,7 @@ teacher-guide:
                 solution_text: Zorg dat de code niet te lang duurt om uit te voeren
                 solution_code: "{repeat} 20 {times} {print} 'Dit is voldoende'"
     -   level: '10'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In dit level bouwen we opnieuw verder op `{if}` en `{repeat}`. In het vorige level hebben de leerlingen geleerd hoe ze meerdere regels kunnen gebruiken na `{repeat}`, `{if}`, `{elif}` of `{else}`.
             Nu leren de leerlingen ook over *nesting*: het plaatsen van een `{if}` of `{repeat}` binnen een `{if}` of `{repeat}`. Ze leren ook twee nieuwe commando's: `{and}` en `{or}`.
             Hierdoor krijgen de leerlingen veel meer mogelijkheden om veelzijdigere programma's te maken.
@@ -840,7 +840,7 @@ teacher-guide:
                     {if} kleur {is} blauw {or} kleur {is} groen
                         {print} 'Mooi!'
     -   level: '11'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In dit level maken de leerlingen kennis met {for} loops.
 
             Nieuw in dit level:
@@ -871,7 +871,7 @@ teacher-guide:
                     {for} dier {in} dieren
                         {print} 'I love ' dier
     -   level: '12'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In dit laatste level van Hedy Gevorderd maken de leerlingen kennis met simpele functies.
 
             Nieuw in dit level:
@@ -1001,7 +1001,7 @@ teacher-guide:
                     #Als je er klaar voor bent, ga dan naar het volgende level om weer nieuwe syntax bij te leren.
                     # Of oefen nog even lekker door in dit level.
     -   level: '14'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             In dit level ligt de focus op werken met lijstjes. De leerlingen leren ook om herhaling te gebruiken op de Python manier.
 
             Nieuw in dit level:
@@ -1041,7 +1041,7 @@ teacher-guide:
                     {print} ('Ik vind ' smaken[{random}] 'ijsjes heerlijk')
         -   title: Leerlingen gebruiken de oude Hedy syntax bij {random}
             example:
-                error_text: '{random} is veranderd in dit level'.
+                error_text: '{random} is veranderd in dit level.'
                 error_code: |-
                     icecream = [strawberry, chocolate]
                     {print} 'I love ' icecream {at} {random} ' icecream'
@@ -1050,7 +1050,7 @@ teacher-guide:
                     icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
     -   level: '15'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
             Dit level gaat over functies. In Hedy Gevorderd hebben de leerlingen geleerd om simpele functies te gebruiken. In dit level leren ze niet alleen de Python syntax van een functie, maar ook leren ze argumenten en {return} {value} te gebruiken.
 
             Nieuw in dit level:
@@ -1058,8 +1058,8 @@ teacher-guide:
             * Argumenten gebruiken in een functie
             * {return} {value} gebruiken in een functie
         sections:
-        -   title:
-            example: Leerlingen gebruiken verkeerde syntax en vergeten in te springen
+        -   title: Leerlingen gebruiken verkeerde syntax en vergeten in te springen
+            example:
                 error_text: Inspringen en juiste syntax blijven struikelblokken
                 error_code: |-
                     {def} begroet_de_klant(naam
@@ -1094,12 +1094,13 @@ teacher-guide:
                     kamernummer = krijg_een_kamer(favoriet_getal)
                     print('Je kamernummer is ', kamernummer)
     -   level: '16'
-        concepts_and_changes: ''|-
+        concepts_and_changes: |-
                 In dit laatste level van Hedy leren de leerlingen de {while} loop gebruiken en oefenen met nieuwe syntax.
                 Na dit level kunnen leerlingen verder programmeren in 'echte' Python compilers.
 
                 Nieuw in dit level:
                 * De {while} loop
+        sections:
         -   title: Leerlingen vergeten in te springen bij de {while} loop
             example:
                 error_text: Inspringen kan lastig zijn
