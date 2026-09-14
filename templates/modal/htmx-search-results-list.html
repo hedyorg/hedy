@@ -3,14 +3,20 @@
 {% set button_classes = 'green-btn-new text-sm px-4 py-1' if is_redesign else 'green-btn' %}
 
 {% if usernames|length == 0 %}
-<li class="{{ row_classes }}">
-    <span>{{_('no_usernames_found')}}</span>    
-</li>
+    <li class="{{ row_classes }}">
+        <span>{{ _("no_usernames_found") }}</span>
+    </li>
 {% endif %}
 
 {% for username in usernames %}
     <li class="{{ row_classes }}">
         <span>{{ username }}</span>
-        <button class="{{ button_classes }}" data-cy="invite-{{ loop.index }}" onclick="hedyApp.add_user_to_invite_list('{{ username }}', this, '{{ 'redesign' if is_redesign else 'legacy' }}');">{{_('add')}}</button>
+        <button
+            class="{{ button_classes }}"
+            data-cy="invite-{{ loop.index }}"
+            onclick="hedyApp.add_user_to_invite_list('{{ username }}', this, '{{ '
+                         redesign ' if is_redesign else '
+                         legacy ' }}');"
+        >{{ _("add") }}</button>
     </li>
 {% endfor %}
