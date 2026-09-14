@@ -12,11 +12,22 @@
         >
             {{ tag }}
             {% if not public and username == creator %}
-                <span
-                    class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"
-                    {% if adventure_id %} hx-target="#tags_dropdown" hx-delete="/tags/delete/{{ tag }}/{{ adventure_id }}" hx-swap="beforeend" _="on htmx:afterRequest
-                        if detail.xhr.status == 200 then remove #tag_{{ loop.index }} end" {% else %} _='on click remove #tag_{{ loop.index }}' {% endif %}
-                ></span>
+                {% if adventure_id %}
+
+                    <span
+                        class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"
+                        hx-target="#tags_dropdown"
+                        hx-delete="/tags/delete/{{ tag }}/{{ adventure_id }}"
+                        hx-swap="beforeend"
+                        _="on htmx:afterRequest
+                            if detail.xhr.status == 200 then remove #tag_{{ loop.index }} end"
+                    />
+                {% else %}
+                    <span
+                        class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"
+                        _='on click remove #tag_{{ loop.index }}'
+                    />
+                {% endif %}
             {% endif %}
         </li>
     {% endfor %}

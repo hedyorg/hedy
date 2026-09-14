@@ -74,12 +74,7 @@
         <button
             class="green-btn"
             data-cy="invite_student"
-            onclick='hedyApp.invite_to_class("{{ class_info.id }}", {
-                         {
-                             _('invite_prompt') |
-                                 default (None) | tojson
-                         }
-                     }, "student")'
+            onclick="hedyApp.invite_to_class(`{{ class_info.id }}`, `{{ _('invite_prompt') | default (None) | tojson }}`, 'student')"
         >{{ _("invite_by_username") }}</button>
         <button
             class="green-btn"
@@ -142,36 +137,13 @@
                             >{{ students_info[student].adventures_ticked }}</td>
                             <td class="text-center text-blue-900">
                                 <div class="flex justify-center gap-6">
-                                    <button
-                                        title="{{ _('change_password') }}"
-                                        class="flex flex-col items-center"
-                                        onclick='hedyApp.change_password_student("{{ student }}", {
-                                                     {
-                                                         _('enter_password') |
-                                                             default (None) | tojson
-                                                     }
-                                                 }, {
-                                                     {
-                                                         _('password_change_prompt') |
-                                                             default (None) | tojson
-                                                     }
-                                                 }, {
-                                                     {
-                                                         _('reset_password') |
-                                                             default (None) | tojson
-                                                     }
-                                                 })'
-                                    >
+                                    <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{ student }}", { { _('enter_password') | default (None) | tojson } }, { { _('password_change_prompt') | default (None) | tojson } }, { { _('reset_password') | default (None) | tojson } })'>
                                         <span class="fas fa-pen block mb-4 mt-4"></span>
                                     </button>
                                     <button
                                         title="{{ _('programs') }}"
                                         class="flex flex-col items-center"
-                                        onclick="window.open("
-                                        '
-                                        /programs?user="{{ student }}"
-                                        '
-                                        )
+                                        onclick="window.open('/programs?user={{ student }}')"
                                     >
                                         <span class="fas fa-code block mb-4 mt-4"></span>
                                     </button>

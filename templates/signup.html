@@ -415,11 +415,14 @@
                             </div>
                         {% endif %}
                         <div class="flex justify-between items-center">
-                            <label for="agree_terms">{{ _("agree_with") }} <a
-     data-cy="privacy"
-     onclick="event.preventDefault();
-              window.location.href = '/privacy'"
- >{{ _("privacy_terms") }}</a></label>
+                            <label for="agree_terms">
+                                {{ _("agree_with") }}
+                                <a
+                                    data-cy="privacy"
+                                    onclick="event.preventDefault();
+                                             window.location.href = '/privacy'"
+                                >{{ _("privacy_terms") }}</a>
+                            </label>
                             <input type="checkbox" data-cy="agree_terms" name="agree_terms" required>
                         </div>
                     </div>

@@ -22,19 +22,19 @@
                         class="blue-btn-new teacher-menu-button"
                         data-cy="manage_student_actions_{{ student.username }}"
                         _="on click
-            remove .menu-content-open from <div.menu:not(#menu-{{ loop.index }})/>
-            add .hidden .menu-content-closed to <div.menu:not(#menu-{{ loop.index }})/>
-            if #menu-{{ loop.index }} matches .hidden
-                remove .hidden from #menu-{{ loop.index }}
-                call hedyApp.positionContextMenu(me)
-                wait 10ms
-                toggle .menu-content-open .menu-content-closed on #menu-{{ loop.index }}
-            else
-                call hedyApp.teardownContextMenu(me)
-                toggle .menu-content-open .menu-content-closed on #menu-{{ loop.index }}
-                wait 180ms
-                add .hidden to #menu-{{ loop.index }}
-                "
+                            remove .menu-content-open from <div.menu:not(#menu-{{ loop.index }})/>
+                            add .hidden .menu-content-closed to <div.menu:not(#menu-{{ loop.index }})/>
+                            if #menu-{{ loop.index }} matches .hidden
+                                remove .hidden from #menu-{{ loop.index }}
+                                call hedyApp.positionContextMenu(me)
+                                wait 10ms
+                                toggle .menu-content-open .menu-content-closed on #menu-{{ loop.index }}
+                            else
+                                call hedyApp.teardownContextMenu(me)
+                                toggle .menu-content-open .menu-content-closed on #menu-{{ loop.index }}
+                                wait 180ms
+                                add .hidden to #menu-{{ loop.index }}
+                                "
                     >
                         <i class="fa-solid fa-ellipsis"></i>
                     </button>

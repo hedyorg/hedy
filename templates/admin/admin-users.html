@@ -348,15 +348,19 @@
             <tbody>
                 {% for user in users %}
                     <tr>
-                        <td class="username_cell cursor-pointer"><a
-    class="no-underline"
-    onclick="window.open('/programs?user={{ user.username }}', '_blank');"
->{% if user.username|length > 18 %}{{ user.username[:15] + "..." }}{% else %}{{ user.username }}{% endif %}</a></td>
+                        <td class="username_cell cursor-pointer">
+                            <a
+                                class="no-underline"
+                                onclick="window.open('/programs?user={{ user.username }}', '_blank');"
+                            >{% if user.username|length > 18 %}{{ user.username[:15] + "..." }}{% else %}{{ user.username }}{% endif %}</a>
+                        </td>
                         <td class="count_cell hidden">{{ user.program_count or 0 }}</td>
-                        <td class="email_cell cursor-pointer"><a
-    class="no-underline"
-    onclick="hedyApp.changeUserEmail('{{ user.username }}', '{{ user.email }}')"
->{% if user.email and user.email|length > 30 %}{{ user.email[:27] + "..." }}{% else %}{{ user.email }}{% endif %}</a></td>
+                        <td class="email_cell cursor-pointer">
+                            <a
+                                class="no-underline"
+                                onclick="hedyApp.changeUserEmail('{{ user.username }}', '{{ user.email }}')"
+                            >{% if user.email and user.email|length > 30 %}{{ user.email[:27] + "..." }}{% else %}{{ user.email }}{% endif %}</a>
+                        </td>
                         <td class="created_cell hidden">{{ user.created }}</td>
                         <td class="last_login_cell">{{ user.last_login }}</td>
                         <td class="birth_year_cell">{{ user.birth_year }}</td>
@@ -365,11 +369,9 @@
                         <td class="country_cell">{{ user.country }}</td>
                         <td class="gender_cell hidden">{{ user.gender }}</td>
                         <td class="experience_cell hidden">{{ user.prog_experience }}</td>
-                        <td
-                            class="tags_cell text-center cursor-pointer"
-                        ><span
-    onclick="hedyApp.edit_user_tags('{{ user.username }}');"
->✏️</span></td>
+                        <td class="tags_cell text-center cursor-pointer">
+                            <span onclick="hedyApp.edit_user_tags('{{ user.username }}');">✏️</span>
+                        </td>
                         <td id="is_teacher_{{ user.username }}" class="teacher_cell text-center">
                             <input
                                 id="check_teacher_{{ user.username }}"

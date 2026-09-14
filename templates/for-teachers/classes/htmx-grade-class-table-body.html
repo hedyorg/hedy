@@ -12,8 +12,8 @@
                     <div
                         class="flex flex-row  items-center cursor-pointer hover:bg-blue-200 p-3 rounded-lg transition-all ease-in duration-100"
                         _="on click
-                toggle .sliding-content-closed .sliding-content-open on #program_{{ program.program_id }}
-                then toggle .rotate-180  on #program_{{ program.program_id }}_arrow"
+                            toggle .sliding-content-closed .sliding-content-open on #program_{{ program.program_id }}
+                            then toggle .rotate-180  on #program_{{ program.program_id }}_arrow"
                     >
                         {{ program.name }}
                         <div class="flex flex-1"></div>
@@ -52,12 +52,12 @@
                 <td class="text-center">{{ program.date }}</td>
                 <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
                     {{ render_partial(
-                            'for-teachers/classes/htmx-grade-class-checkbox.html',
-                            class_id=class_info.id,
-                            level=program.level,
-                            student=program.student,
-                            adventure_name=program.adventure_name,
-                            is_ticked=program.ticked,
+                        'for-teachers/classes/htmx-grade-class-checkbox.html',
+                        class_id=class_info.id,
+                        level=program.level,
+                        student=program.student,
+                        adventure_name=program.adventure_name,
+                        is_ticked=program.ticked,
                     )
                     }}
                 </td>

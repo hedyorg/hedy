@@ -18,16 +18,16 @@
                         hx-swap="innerHTML"
                         hx-trigger="submit"
                         hx-include="
-                #student-sort-input,
-                #timestamp-sort-input
-            "
+                            #student-sort-input,
+                            #timestamp-sort-input
+                        "
                     >
                         <div class="w-full overflow-x-auto overflow-y-visible">
                             {{ render_partial(
-                                    "for-teachers/classes/manage-class-table.html",
-                                    students=students,
-                                    class_info=class_info,
-                                    teacher_classes=teacher_classes
+                                "for-teachers/classes/manage-class-table.html",
+                                students=students,
+                                class_info=class_info,
+                                teacher_classes=teacher_classes
                             )
                             }}
                         </div>
@@ -35,16 +35,7 @@
                 </div>
                 <h2>{{ _("add_students") }}</h2>
                 <div class="flex flex-col sm:flex-row gap-6">
-                    <button
-                        class="blue-btn-new"
-                        data-cy="invite_student"
-                        onclick='hedyApp.invite_to_class_redesign("{{ class_info.id }}", {
-                                     {
-                                         _('invite_prompt') |
-                                             default (None) | tojson
-                                     }
-                                 }, "student")'
-                    >{{ _("invite_by_username") }}</button>
+                    <button class="blue-btn-new" data-cy="invite_student" onclick='hedyApp.invite_to_class_redesign("{{ class_info.id }}", { { _('invite_prompt') | default (None) | tojson } }, "student")'>{{ _("invite_by_username") }}</button>
                     <button
                         class="blue-btn-new"
                         data-cy="create_accounts"

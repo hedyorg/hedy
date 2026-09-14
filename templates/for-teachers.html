@@ -17,7 +17,9 @@
                     <i class="fa-solid fa-xmark"></i>
                 </button>
                 <h2 class="m-0 basis-1/12 text-yellow-900">{{ _("hedy_teacher_update_title") }}</h2>
-                <div class="text-black basis-10/12 text-yellow-900 whitespace-pre-line">{{ _("hedy_teacher_update_content") }}</div>
+                <div
+                    class="text-black basis-10/12 text-yellow-900 whitespace-pre-line"
+                >{{ _("hedy_teacher_update_content") }}</div>
             </div>
         </div>
 
@@ -34,12 +36,7 @@
                         class="green-btn inline-flex items-center"
                         id="create_class_button"
                         data-cy="create_class_button"
-                        onclick='hedyApp.create_class({
-                                     {
-                                         _('class_name_prompt') |
-                                             default (None) | tojson
-                                     }
-                                 })'
+                        onclick="hedyApp.create_class(`{{ _('class_name_prompt') | default (None) | tojson }}`)"
                         {% if second_teacher and role == 'viewer' %}disabled{% endif %}
                     >{{ _("create_class") }}</button>
                     {% if teacher_classes %}
@@ -64,10 +61,10 @@
                 <!-- classes table -->
                 {% if teacher_classes %}
                     {{ render_partial(
-                            'htmx-classes-table.html',
-                            teacher_classes=teacher_classes,
-                            class_customizations=class_customizations,
-                            last_content_version=last_content_version
+                        'htmx-classes-table.html',
+                        teacher_classes=teacher_classes,
+                        class_customizations=class_customizations,
+                        last_content_version=last_content_version
                     )
                     }}
                 {% endif %}
@@ -86,7 +83,7 @@
                         data-cy="create_adventure_button"
                         class="green-btn inline-flex"
                         _="on click
-            window.open('/for-teachers/customize-adventure?ui=legacy', '_self')"
+                            window.open('/for-teachers/customize-adventure?ui=legacy', '_self')"
                         data-cy="edit_link"
                         {% if second_teacher and role == 'viewer' %}disabled{% endif %}
                     >{{ _("create_adventure") }}</button>
@@ -175,11 +172,7 @@
                                 <button
                                     class="white-btn"
                                     id="download_slides_{{ level }}"
-                                    onclick="hedyApp.downloadSlides({
-                                                 {
-                                                     level
-                                                 }
-                                             })"
+                                    onclick="hedyApp.downloadSlides(`{{ level }}`)"
                                 >
                                     <span>
                                         <span class="hidden sm:inline-block">{{ _("download") }}</span>

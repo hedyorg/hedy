@@ -175,16 +175,7 @@
                         <button
                             id="runit"
                             class="green-btn"
-                            onclick='hedyApp.runit({
-                                         {
-                                             level
-                                         }
-                                     }, "{{ language }}", false, {
-                                         {
-                                             _('already_program_running') |
-                                                 default (None) | tojson
-                                         }
-                                     }, "run")'
+                            onclick="hedyApp.runit(`{{ level }}`, `{{ language }}`, false, `{{ _('already_program_running') | default (None) | tojson }}`, 'run')"
                         >{{ _("run_code_button") }}</button>
                         <button
                             id="stopit"
@@ -197,26 +188,32 @@
             </div>
         {% endif %}
         {% block scripts %}
-            <script src="{{static('/vendor/jquery.min.js')}}" crossorigin="anonymous"></script>
-            <script src="{{static('/vendor/htmx-2.0.3.min.js')}}" crossorigin="anonymous"></script>
+            <script src="{{ static('/vendor/jquery.min.js') }}" crossorigin="anonymous"></script>
             <script
-                src="{{static('/vendor/hyperscript-0.9.8.min.js')}}"
+                src="{{ static('/vendor/htmx-2.0.3.min.js') }}"
                 crossorigin="anonymous"
             ></script>
-            <script src="{{static('/vendor/skulpt.min.js')}}" crossorigin="anonymous"></script>
-            <script src="{{static('/vendor/skulpt-stdlib.js')}}" crossorigin="anonymous"></script>
-            <script src="{{static('/js/appbundle.js')}}" crossorigin="anonymous"></script>
+            <script
+                src="{{ static('/vendor/hyperscript-0.9.8.min.js') }}"
+                crossorigin="anonymous"
+            ></script>
+            <script src="{{ static('/vendor/skulpt.min.js') }}" crossorigin="anonymous"></script>
+            <script
+                src="{{ static('/vendor/skulpt-stdlib.js') }}"
+                crossorigin="anonymous"
+            ></script>
+            <script src="{{ static('/js/appbundle.js') }}" crossorigin="anonymous"></script>
             {% block additional_scripts %}{% endblock %}
             <script>
             hedyApp.initialize({
               lang: '{{ language }}',
-              level:  '{{  level }}',
+              level:  '{{ level }}',
               keyword_language: '{{ keyword_language }}',
-              staticRoot: {{ static('')|tojson|safe }},
-              environment: {{ frontend_environment|tojson|safe }},
-              featureFlags: {{ feature_flags|tojson|safe }},
-              javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
-            })
+              staticRoot: {{ static('') | tojson | safe }},
+              environment: {{ frontend_environment | tojson | safe }},
+              featureFlags: {{ feature_flags | tojson | safe }},
+              javascriptPageOptions: {{ javascript_page_options | tojson | safe }},
+            });
 
             // Remove all console logs as these messages might clutter the log of the parent site
             console.log = function () {};

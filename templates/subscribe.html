@@ -25,12 +25,10 @@
                         >
                     </div>
                     <div class="signup-container">
-                        <label
-                            for="mce-EMAIL"
-                            class="signup-label"
-                        >{{ _("email") }}<span
-    class="asterisk"
->*</span></label>
+                        <label for="mce-EMAIL" class="signup-label">
+                            {{ _("email") }}
+                            <span class="asterisk">*</span>
+                        </label>
                         <input
                             type="email"
                             value=""
@@ -88,12 +86,14 @@
                         <p class="text-base mt-0">({{ _("required_field") }})</p>
                     </div>
                     <div class="text-center">
-                        (<a
-    href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090"
-    class="text-black"
-    target="_blank"
-    title="View previous campaigns"
->{{ _("previous_campaigns") }}</a>)
+                        (
+                        <a
+                            href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090"
+                            class="text-black"
+                            target="_blank"
+                            title="View previous campaigns"
+                        >{{ _("previous_campaigns") }}</a>
+                        )
                     </div>
                 </form>
             </div>

@@ -39,11 +39,7 @@
                                         type="checkbox"
                                         id="enable_level_{{ level }}"
                                         {% if customizations and level in customizations['levels'] %}checked{% endif %}
-                                        onchange="hedyApp.save_customizations_levels('{{ class_info.id }}', {
-                                                      {
-                                                          level
-                                                      }
-                                                  })"
+                                        onchange="hedyApp.save_customizations_levels('{{ class_info.id }}', `{{ level }}`)"
                                         data-level="{{ level }}"
                                         level="{{ level }}"
                                     >
@@ -63,7 +59,9 @@
                         id="customize_level"
                         class="border border-gray-400 rounded px-3 py-2 w-full sm:w-56"
                     >
-                        {% for level in range(1, 17) %}<option value="{{ level }}">{{ _("level_title") }} {{ level }}</option>{% endfor %}
+                        {% for level in range(1, 17) %}
+                            <option value="{{ level }}">{{ _("level_title") }} {{ level }}</option>
+                        {% endfor %}
                     </select>
                     <button
                         type="button"
@@ -95,9 +93,9 @@
                             id="configure-teachers-table-body"
                         >
                             {{ render_partial(
-                                    "for-teachers/classes/configure-class-teachers-table-body.html",
-                                    class_info=class_info,
-                                    second_teacher_invites=second_teacher_invites
+                                "for-teachers/classes/configure-class-teachers-table-body.html",
+                                class_info=class_info,
+                                second_teacher_invites=second_teacher_invites
                             )
                             }}
                         </tbody>

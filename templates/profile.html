@@ -19,9 +19,8 @@
                     <h2 class="profile-section-body-header">{{ _("my_messages") }}</h2>
                     {% for invite_data in invitations %}
                         <div class="[&:not(:last-child)]:mb-4" id="invitation_{{ loop.index }}">
-                            {{ _("invite_message") }} "<span
-    class="font-bold italic"
->{{ invite_data['class_name'] }}</span>".
+                            {{ _("invite_message") }} "
+                            <span class="font-bold italic">{{ invite_data['class_name'] }}</span>".
                             <br>
                             {{ _("sent_by") }} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{ _("prompt_join_class") }}
                             <div class="flex flex-row mt-4">
@@ -33,20 +32,17 @@
                                     hx-post="/class/join/{{ invite_data['class_id'] }}"
                                     hx-swap="none"
                                     _="on htmx:afterRequest
-                                    if detail.xhr.status == '302'
-                                        set window.location.pathname to {% if is_teacher %}'/for-teachers'{% else %}'/programs'{% endif %}
-                                    else if detail.xhr.status == '200'
-                                         hide #messages
-                                         remove #invitation_{{ loop.index }}
-                                    end"
+                                        if detail.xhr.status == '302'
+                                            set window.location.pathname to {% if is_teacher %}'/for-teachers'{% else %}'/programs'{% endif %}
+                                        else if detail.xhr.status == '200'
+                                            hide #messages
+                                            remove #invitation_{{ loop.index }}
+                                        end"
                                 >{{ _("join_class") }}</button>
                                 <button
                                     type="submit"
                                     class="red-btn mx-4 px-4"
-                                    onclick="hedyApp.remove_student_invite('{{ user_data['
-                                                 username '] }}', '{{ invite_data['
-                                                 class_id '] }}', '{{ _('
-                                                 delete_invite_prompt ') }}')"
+                                    onclick="hedyApp.remove_student_invite(`{{ user_data['username'] }}`, `{{ invite_data['class_id'] }}`, `{{ _('delete_invite_prompt') }}`)"
                                 >{{ _("delete_invite") }}</button>
                             </div>
                         </div>
@@ -118,11 +114,7 @@
                                 <div
                                     class="w-32 h-32 rounded-lg relative profile_image {% if (public_settings.image and public_settings.image == i|string()) or (not public_settings.image and i == 1) %}border-2 border-blue-600{% endif %}"
                                     id="profile_image_{{ i }}"
-                                    onclick="hedyApp.select_profile_image({
-                                                 {
-                                                     i
-                                                 }
-                                             });"
+                                    onclick="hedyApp.select_profile_image(`{{ i }}`);"
                                 >
                                     <div class="relative h-full">
                                         <img
@@ -189,8 +181,7 @@
                                 type="reset"
                                 class="ml-auto red-btn"
                                 onclick="event.preventDefault();
-                                         hedyApp.destroy_public('{{ _('
-                                             are_you_sure ') }}');"
+                                         hedyApp.destroy_public(`{{ _('are_you_sure') }}`);"
                             >{{ _("delete_public") }}</button>
                         {% endif %}
                     </div>
@@ -210,10 +201,7 @@
                                 <p class="text-xl italic text-blue-600">{{ user_class['name'] }}</p>
                                 <button
                                     class="red-btn ltr:ml-auto rtl:mr-auto"
-                                    onclick="hedyApp.remove_student('{{ user_class['
-                                                 id '] }}', '{{ user_data['
-                                                 username '] }}', '{{ _('
-                                                 self_removal_prompt ') }}')"
+                                    onclick="hedyApp.remove_student(`{{ user_class['id'] }}`, `{{ user_data['username'] }}`, `{{ _('self_removal_prompt') }}`)"
                                 >{{ _("leave_class") }}</button>
                             </div>
                         {% endfor %}
@@ -232,14 +220,15 @@
                         <label for="username" class="inline-block w-72">{{ _("username") }}</label><strong id="username" class="inline-block w-1/2 px-2">{{ user_data['username'] }}</strong>
                     </div>
                     <div class="flex flex-row items-center mb-2">
-                        <label for="email" class="inline-block w-72">{{ _("email") }}</label><input
-    id="email"
-    name="email"
-    type="email"
-    class="personal-input"
-    value="{{ user_data['email'] }}"
-    {% if user_data['email'] %}required{% endif %}
->
+                        <label for="email" class="inline-block w-72">{{ _("email") }}</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            class="personal-input"
+                            value="{{ user_data['email'] }}"
+                            {% if user_data['email'] %}required{% endif %}
+                        />
                     </div>
                     <div class="flex flex-row items-center mb-2">
                         <label for="birth_year" class="inline-block w-72">{{ _("birth_year") }}</label>
@@ -249,7 +238,7 @@
                             class="personal-input"
                             type="number"
                             value="{{ user_data['birth_year'] }}"
-                        >
+                        />
                     </div>
                     <div class="flex flex-row items-center mb-2">
                         <label for="language" class="inline-block w-72">{{ _("preferred_language") }}</label>
@@ -283,8 +272,7 @@
                     <div class="flex flex-row items-center mb-2">
                         <label for="gender" class="inline-block w-72">{{ _("gender") }}</label>
                         <select id="gender" name="gender" class="personal-input">
-                            <option value=""}>{{ _("select") }}
-                            </option>
+                            <option value="">{{ _("select") }}</option>
                             <option
                                 value="f"
                                 {% if user_data['gender'] == "f" %}selected{% endif %}
@@ -388,8 +376,7 @@
                 <p class="mt-0 mb-6">{{ _("destroy_account_message") }}</p>
                 <button
                     class="red-btn"
-                    onclick="hedyApp.destroy('{{ _('
-                                 are_you_sure ') }}')"
+                    onclick="hedyApp.destroy(`{{ _('are_you_sure') }}`)"
                     data-cy="delete_profile_button"
                 >{{ _("destroy_account") }}</button>
             </div>

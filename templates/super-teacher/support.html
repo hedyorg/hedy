@@ -19,14 +19,22 @@
                     <tr
                         class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}"
                     >
-                        <td class="username_cell cursor-pointer text-center p-2"><a
-    class="no-underline"
-    onclick="window.open('/programs?user={{ user.username }}', '_blank');"
->{% if user.username|length > 18 %}{{ user.username[:15] + "..." }}{% else %}{{ user.username }}{% endif %}</a></td>
-                        <td class="email_cell cursor-pointer text-center p-2"><a
-    class="no-underline"
-    onclick="hedyApp.changeUserEmail('{{ user.username }}', '{{ user.email }}')"
->{% if user.email and user.email|length > 30 %}{{ user.email[:27] + "..." }}{% else %}{{ user.email }}{% endif %}</a></td>
+                        <td class="username_cell cursor-pointer text-center p-2">
+                            <a
+                                class="no-underline"
+                                onclick="window.open('/programs?user={{ user.username }}', '_blank');"
+                            >
+                                {% if user.username|length > 18 %}{{ user.username[:15] + "..." }}{% else %}{{ user.username }}{% endif %}
+                            </a>
+                        </td>
+                        <td class="email_cell cursor-pointer text-center p-2">
+                            <a
+                                class="no-underline"
+                                onclick="hedyApp.changeUserEmail('{{ user.username }}', '{{ user.email }}')"
+                            >
+                                {% if user.email and user.email|length > 30 %}{{ user.email[:27] + "..." }}{% else %}{{ user.email }}{% endif %}
+                            </a>
+                        </td>
                         <td class="last_login_cell text-center p-2">{{ user.last_login }}</td>
                         <td class="language_cell text-center p-2">{{ user.language }}</td>
                         <td class="country_cell text-center p-2">{{ user.country }}</td>

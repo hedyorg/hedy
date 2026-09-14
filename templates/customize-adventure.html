@@ -39,9 +39,9 @@
                 class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
                 data-cy="adventure"
                 _="on click remove .active from .cust-adv-tab
-                add .active to me
-                add .hidden to .tab_content
-                remove .hidden from .editor"
+                    add .active to me
+                    add .hidden to .tab_content
+                    remove .hidden from .editor"
             >
                 {{ _("adventure") }}
                 <button
@@ -63,10 +63,10 @@
                 class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
                 data-cy="preview"
                 _="on click remove .active from .cust-adv-tab
-                add .active to me
-                add .hidden to .tab_content
-                remove .hidden from .preview
-                hedyApp.initializeCodePage({{ javascript_page_options|tojson }})"
+                    add .active to me
+                    add .hidden to .tab_content
+                    remove .hidden from .preview
+                    hedyApp.initializeCodePage({{ javascript_page_options|tojson }})"
             >{{ _("preview") }}</div>
             <div
                 class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
@@ -105,8 +105,7 @@
             <div class="tab_content px-10 settings">
                 <form
                     onsubmit="event.preventDefault();
-                              hedyApp.update_adventure('{{ adventure.id }}', true, '{{ _('
-                                  update_adventure_prompt ') }}')"
+                              hedyApp.update_adventure('{{ adventure.id }}', true, `{{ _('update_adventure_prompt') }}`)"
                     id="customize_adventure"
                     data-te-validation-init
                 >
@@ -294,10 +293,10 @@
                 <button
                     class="green-btn mt-2"
                     _="on click remove .tab-selected from .tab
-                add .tab-selected to #preview-tab
-                add .hidden to .tab_content
-                remove .hidden from .preview
-                hedyApp.initializeCodePage({{ javascript_page_options|tojson }})"
+                        add .tab-selected to #preview-tab
+                        add .hidden to .tab_content
+                        remove .hidden from .preview
+                        hedyApp.initializeCodePage({{ javascript_page_options|tojson }})"
                 >{{ _("preview") }}</button>
             </div>
 

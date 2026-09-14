@@ -46,9 +46,7 @@
             >
                 <i
                     class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600"
-                    onclick="hedyApp.set_favourite_program('{{ program.id }}', '{{ _('
-                                 favourite_confirm ') }}', '{{ _('
-                                 unfavourite_confirm ') }}');"
+                    onclick="hedyApp.set_favourite_program(`{{ program.id }}`, `{{ _('favourite_confirm') }}`, `{{ _('unfavourite_confirm') }}`);"
                     aria-hidden="true"
                 ></i>
             </div>
@@ -73,14 +71,12 @@
                 >
                     <button
                         class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500"
-                        onclick="hedyApp.copy_to_clipboard(`{{ program.code }}`, '{{ _('
-                                     copy_clipboard ') }}')"
+                        onclick="hedyApp.copy_to_clipboard(`{{ program.code }}`, `{{ _('copy_clipboard') }}`)"
                     >{{ _("copy_code") }}</button>
                     {% if program.public %}
                         <button
                             class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500"
-                            onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{ program.id }}'), '{{ _('
-                                         copy_clipboard ') }}')"
+                            onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink(`{{ program.id }}`), `{{ _('copy_clipboard') }}`)"
                         >{{ _("copy_link_to_share") }}</button>
                     {% endif %}
                     {% if not second_teachers_programs %}
@@ -88,15 +84,13 @@
                             <button
                                 class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2"
                                 data-cy="delete_non_submitted_program_{{ program.id }}"
-                                onclick="hedyApp.delete_program('{{ program.id }}', '{{ _('
-                                             delete_confirm ') }}')"
+                                onclick="hedyApp.delete_program(`{{ program.id }}`, `{{ _('delete_confirm') }}`)"
                             >{{ _("delete") }}</button>
                         {% else %}
                             <button
                                 class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2"
                                 data-cy="delete_submitted_program_{{ program.id }}"
-                                onclick="hedyApp.delete_program('{{ program.id }}', '{{ _('
-                                             delete_confirm ') }}')"
+                                onclick="hedyApp.delete_program(`{{ program.id }}`, `{{ _(' delete_confirm ') }}`)"
                             >{{ _("delete") }}</button>
                         {% endif %}
                     {% endif %}
@@ -114,7 +108,7 @@
     >
         <button
             class="blue-btn"
-            onclick="window.open(hedyApp.viewProgramLink('{{ program.id }}'))"
+            onclick="window.open(hedyApp.viewProgramLink(`{{ program.id }}`))"
         >{{ _("open") }}</button>
     </div>
     <div
@@ -133,11 +127,9 @@
                 class="green-btn"
                 data-cy="submit_btn_{{ program.id }}"
                 {% if not program.public or second_teachers_programs %} style="display: none;" {% endif %}
-                onclick="hedyApp.modal.confirm('{{ _('
-                             submit_warning ') }}',
-                             function() {
-                                 hedyApp.submit_program('{{ program.id }}')
-                             })"
+                onclick="hedyApp.modal.confirm(`{{ _(' submit_warning ') }}`, function() {
+                             hedyApp.submit_program(`{{ program.id }}`)
+                         })"
             >{{ _("submit_program") }}</button>
             {% if not second_teachers_programs %}
                 <div class="dropdown relative">
@@ -149,12 +141,12 @@
                                margin: 0px;
                                margin-top: 0.25rem"
                         _="on mutation of @style
-                    set arrow to #share_arrow_{{ program.id }}
-                    if *display == 'none'
-                        remove .rotate-180 from arrow
-                    else if not arrow.classList.contains('rotate-180')
-                        add .rotate-180 to arrow
-                    end"
+                            set arrow to #share_arrow_{{ program.id }}
+                            if *display == 'none'
+                                remove .rotate-180 from arrow
+                            else if not arrow.classList.contains('rotate-180')
+                                add .rotate-180 to arrow
+                            end"
                     >
                         <button
                             data-cy="share_button_{{ program.id }}"
@@ -165,7 +157,10 @@
                             hx-target="#program_{{ program.id }}"
                         >
                             <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
-                            <div class="mr-auto" tabindex="0">{% if program.public %}{{ _("private") }}{% else %}{{ _("public") }}{% endif %}</div>
+                            <div
+                                class="mr-auto"
+                                tabindex="0"
+                            >{% if program.public %}{{ _("private") }}{% else %}{{ _("public") }}{% endif %}</div>
                         </button>
                     </div>
                 </div>

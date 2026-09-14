@@ -55,14 +55,14 @@
                 class="cust-adv-tab cust-adv-tab-text active bg-white text-blue-700 shadow-sm font-semibold flex-initial truncate flex items-center justify-center rounded-lg border border-gray-200 px-5 py-2 transition-colors"
                 data-cy="settings"
                 _="on click remove .active from .cust-adv-tab
-                add .active to me
-                remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
-                add .text-gray-700 to .cust-adv-tab
-                remove .text-gray-700 from me
-                add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
-                add .hidden to .tab_content
-                remove .hidden from .settings
-                remove .hidden from .editor"
+                    add .active to me
+                    remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
+                    add .text-gray-700 to .cust-adv-tab
+                    remove .text-gray-700 from me
+                    add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
+                    add .hidden to .tab_content
+                    remove .hidden from .settings
+                    remove .hidden from .editor"
             >
                 <div class="cust-adv-text">{{ _("content") }}</div>
             </div>
@@ -71,26 +71,26 @@
                 data-cy="adventure"
                 id="preview-tab"
                 _="on click remove .active from .cust-adv-tab
-                add .active to me
-                remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
-                add .text-gray-700 to .cust-adv-tab
-                remove .text-gray-700 from me
-                add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
-                add .hidden to .tab_content
-                remove .hidden from .preview
-                hedyApp.initializeCodePage({{ javascript_page_options|tojson }})"
+                    add .active to me
+                    remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
+                    add .text-gray-700 to .cust-adv-tab
+                    remove .text-gray-700 from me
+                    add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
+                    add .hidden to .tab_content
+                    remove .hidden from .preview
+                    hedyApp.initializeCodePage({{ javascript_page_options|tojson }})"
             >{{ _("preview") }}</div>
             <div
                 class="cust-adv-tab cust-adv-tab-text text-gray-700 flex-initial truncate flex items-center justify-center rounded-lg border border-transparent px-5 py-2 transition-colors"
                 data-cy="preview"
                 _="on click remove .active from .cust-adv-tab
-                add .active to me
-                remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
-                add .text-gray-700 to .cust-adv-tab
-                remove .text-gray-700 from me
-                add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
-                add .hidden to .tab_content
-                remove .hidden from .solution_example"
+                    add .active to me
+                    remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
+                    add .text-gray-700 to .cust-adv-tab
+                    remove .text-gray-700 from me
+                    add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
+                    add .hidden to .tab_content
+                    remove .hidden from .solution_example"
             >
                 <div class="flex items-center gap-2">
                     <span>{{ _("solution") }}</span>
@@ -100,13 +100,13 @@
                 class="cust-adv-tab cust-adv-tab-text text-gray-700 flex-initial truncate flex items-center justify-center rounded-lg border border-transparent px-5 py-2 transition-colors"
                 data-cy="solution_example"
                 _="on click remove .active from .cust-adv-tab
-                add .active to me
-                remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
-                add .text-gray-700 to .cust-adv-tab
-                remove .text-gray-700 from me
-                add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
-                add .hidden to .tab_content
-                remove .hidden from .usage"
+                    add .active to me
+                    remove .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 from .cust-adv-tab
+                    add .text-gray-700 to .cust-adv-tab
+                    remove .text-gray-700 from me
+                    add .bg-white .text-blue-700 .font-semibold .shadow-sm .border-gray-200 to me
+                    add .hidden to .tab_content
+                    remove .hidden from .usage"
             >{{ _("settings_header") }}</div>
         </div>
         <div
@@ -283,11 +283,11 @@
                                 name="adventure_public"
                                 value="1"
                                 _="on change
-                                if my.checked
-                                    remove .hidden from #public_adventure_options
-                                else
-                                    add .hidden to #public_adventure_options
-                                end"
+                                    if my.checked
+                                        remove .hidden from #public_adventure_options
+                                    else
+                                        add .hidden to #public_adventure_options
+                                    end"
                                 {% if adventure.public %}checked{% endif %}
                             >
                             <span class="slider round"></span>
@@ -345,9 +345,9 @@
                                             hx-target="#tags_list"
                                             hx-swap="outerHTML"
                                             _="on click event.stopPropagation()
-                                        on keypress if event.keyCode == 13 event.stopPropagation() end
-                                        on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
-                                        on htmx:afterRequest set my value to '' then focus()"
+                                                on keypress if event.keyCode == 13 event.stopPropagation() end
+                                                on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
+                                                on htmx:afterRequest set my value to '' then focus()"
                                         >
                                         <button
                                             class="green-btn"

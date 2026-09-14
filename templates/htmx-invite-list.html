@@ -9,9 +9,9 @@
                         <th class="px-2 py-2 text-center">{{ _("role") }}</th>
                         <th class="px-2 py-2 text-center">{{ _("invite_date") }}</th>
                         <th class="px-2 py-2 text-center">{{ _("expiration_date") }}</th>
-                        {% if not is_second_teacher %}<th
-    class="px-2 p-2 bg-blue-900 text-white"
->{{ _("remove") }}</th>{% endif %}
+                        {% if not is_second_teacher %}
+                            <th class="px-2 p-2 bg-blue-900 text-white">{{ _("remove") }}</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -31,14 +31,9 @@
                                     <a
                                         href="#"
                                         data-cy="remove_user_invitation"
-                                        onclick='hedyApp.remove_student_invite("{{ invite.username }}", "{{ class_id }}", {
-                                                     {
-                                                         _('delete_invite_prompt') |
-                                                             default (None) | tojson
-                                                     }
-                                                 })'
-                                    ><i class="fa-solid fa-trash text-red-500"></a>
-                                    </td>
+                                        onclick="hedyApp.remove_student_invite(`{{ invite.username }}`, `{{ class_id }}`, `{{ _('delete_invite_prompt') | default (None) | tojson }}`)"
+                                    ><i class="fa-solid fa-trash text-red-500" /></a>
+                                </td>
                             {% endif %}
                         </tr>
                     {% endfor %}

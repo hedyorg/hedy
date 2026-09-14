@@ -23,12 +23,12 @@
             style="display: none;
                    width: 100%"
             _="on mutation of @style
-                                set arrow to the previous <svg/>
-                                if *display == 'none'
-                                    remove .rotate-180 from arrow
-                                else if not arrow.classList.contains('rotate-180')
-                                    add .rotate-180 to arrow
-                                end"
+                set arrow to the previous <svg/>
+                if *display == 'none'
+                    remove .rotate-180 from arrow
+                else if not arrow.classList.contains('rotate-180')
+                    add .rotate-180 to arrow
+                end"
         ></div>
     </div>
 </template>

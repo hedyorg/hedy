@@ -19,10 +19,8 @@
                     id="dropdown_level_button"
                     onclick="$('#level_dropdown').slideToggle('medium');"
                 >
-                    <span>{{ _("level_title") }} {{ level_display }}</span> <i
-     id="level-arrow"
-     class="fa-solid fa-angle-down"
- ></i>
+                    <span>{{ _("level_title") }} {{ level_display }}</span>
+                    <i id="level-arrow" class="fa-solid fa-angle-down"></i>
                 </button>
                 <div
                     class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
@@ -39,12 +37,12 @@
                            margin: 0px;
                            margin-top: 0.25rem"
                     _="on mutation of @style
-                set arrow to #level-arrow
-                if *display == 'none'
-                remove .rotate-180 from arrow
-                else if not arrow.classList.contains('rotate-180')
-                add .rotate-180 to arrow
-                end"
+                        set arrow to #level-arrow
+                        if *display == 'none'
+                        remove .rotate-180 from arrow
+                        else if not arrow.classList.contains('rotate-180')
+                        add .rotate-180 to arrow
+                        end"
                 >
                     {% for dropdown_level in range(1, 17) %}
                         <a
@@ -67,10 +65,10 @@
         >
             <section class="flex flex-col gap-6 w-full">
                 {{ render_partial(
-                        'for-teachers/classes/htmx-customize-level-availability.html',
-                        class_id=class_id,
-                        level=level_display|int,
-                        customizations=customizations
+                    'for-teachers/classes/htmx-customize-level-availability.html',
+                    class_id=class_id,
+                    level=level_display|int,
+                    customizations=customizations
                 )
                 }}
 
@@ -88,11 +86,11 @@
                     </div>
 
                     {{ render_partial(
-                            'for-teachers/classes/htmx-customize-level-adventures.html',
-                            class_id=class_id,
-                            level=level_display|int,
-                            adventures=adventures[level_display|int],
-                            available_adventures=available_adventures[level_display|int]
+                        'for-teachers/classes/htmx-customize-level-adventures.html',
+                        class_id=class_id,
+                        level=level_display|int,
+                        adventures=adventures[level_display|int],
+                        available_adventures=available_adventures[level_display|int]
                     )
                     }}
                 </div>

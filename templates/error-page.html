@@ -12,14 +12,7 @@
         <div class="mb-6 -mt-8 text-lg font-bold">{{ page_error }}</div>
         <button
             class="green-btn"
-            onclick="{
-                         %
-                         if iframe %
-                     }
-                     parent. {
-                         % endif %
-                     }
-                     window.location.href = '/'"
+            {% if iframe %} onclick="parent.window.location.href = '/'" {% else %} onclick="window.location.href = '/'" {% endif %}
         >{{ _("go_back_to_main") }}</button>
     </div>
     <script>

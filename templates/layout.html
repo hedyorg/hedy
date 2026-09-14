@@ -451,43 +451,52 @@
             {% if menu != False %}
                 {% include "incl/menubar.html" %}
             {% endif %}
-            {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-            {% block full_width_content %}{% endblock %}
+            <!-- djlint:off -->
+      {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
+      {% block full_width_content %}{% endblock %}
+            <!-- djlint:on -->
 
             <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
         </div>
 
         {% block scripts %}
-            <script src="{{static('/vendor/jquery.min.js')}}" crossorigin="anonymous"></script>
-            <script src="{{static('/vendor/htmx-2.0.3.min.js')}}" crossorigin="anonymous"></script>
+            <script src="{{ static('/vendor/jquery.min.js') }}" crossorigin="anonymous"></script>
             <script
-                src="{{static('/vendor/idiomorph-0.3.0/idiomorph-ext.min.js')}}"
+                src="{{ static('/vendor/htmx-2.0.3.min.js') }}"
                 crossorigin="anonymous"
             ></script>
             <script
-                src="{{static('/vendor/hyperscript-0.9.8.min.js')}}"
+                src="{{ static('/vendor/idiomorph-0.3.0/idiomorph-ext.min.js') }}"
                 crossorigin="anonymous"
             ></script>
             <script
-                src="{{static('/vendor/js-confetti.browser.js')}}"
+                src="{{ static('/vendor/hyperscript-0.9.8.min.js') }}"
                 crossorigin="anonymous"
             ></script>
-            <script src="{{static('/vendor/skulpt.min.js')}}" crossorigin="anonymous"></script>
-            <script src="{{static('/vendor/skulpt-stdlib.js')}}" crossorigin="anonymous"></script>
-            <script src="{{static('/js/skulpt_debugger.js')}}" crossorigin="anonymous"></script>
-            <script src="{{static('/js/appbundle.js')}}" crossorigin="anonymous"></script>
+            <script
+                src="{{ static('/vendor/js-confetti.browser.js') }}"
+                crossorigin="anonymous"
+            ></script>
+            <script src="{{ static('/vendor/skulpt.min.js') }}" crossorigin="anonymous"></script>
+            <script
+                src="{{ static('/vendor/skulpt-stdlib.js') }}"
+                crossorigin="anonymous"
+            ></script>
+            <script src="{{ static('/js/skulpt_debugger.js') }}" crossorigin="anonymous"></script>
+            <script src="{{ static('/js/appbundle.js') }}" crossorigin="anonymous"></script>
             {% block additional_scripts %}{% endblock %}
             {# We must mark the JSON safe -- in script tags HTML entities are not allowed #}
-            <script>hedyApp.initialize({
-      lang: {{ g.lang|tojson|safe }},
-      level: {{ level|tojson|safe }},
-      keyword_language: {{ g.keyword_lang|tojson|safe }},
-      staticRoot: {{ static('')|tojson|safe }},
-      environment: {{ frontend_environment|tojson|safe }},
-      featureFlags: {{ feature_flags|tojson|safe }},
-      {% if initialize_logs %}logs: true,{% endif %}
-      javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
-      });
+            <script>
+            hedyApp.initialize({
+                lang: {{ g.lang|tojson|safe }},
+                level: {{ level|tojson|safe }},
+                keyword_language: {{ g.keyword_lang|tojson|safe }},
+                staticRoot: {{ static('')|tojson|safe }},
+                environment: {{ frontend_environment|tojson|safe }},
+                featureFlags: {{ feature_flags|tojson|safe }},
+                {% if initialize_logs %}logs: true,{% endif %}
+                javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
+            });
             </script>
         {% endblock %}
     </body>

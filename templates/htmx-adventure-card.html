@@ -24,16 +24,20 @@
 
         {% set creator = _('owner') if adventure["author"] != adventure["creator"] else _('creator') %}
         {% if adventure["creator_public_profile"] or adventure["public_user"] %}
-            <p class="text-gray-600 mt-1"><strong>{{ creator }}:</strong> <a href="/user/{{ adventure.creator or adventure.username }}">{{ adventure.creator or adventure.username }}</a></p>
+            <p class="text-gray-600 mt-1">
+                <strong>{{ creator }}:</strong> <a
+     href="/user/{{ adventure.creator or adventure.username }}"
+ >{{ adventure.creator or adventure.username }}</a>
+            </p>
         {% else %}
-            <p
-                class="text-gray-600 mt-1"
-            ><strong>{{ creator }}:</strong> {{ adventure.creator or adventure.username }}</p>
+            <p class="text-gray-600 mt-1">
+                <strong>{{ creator }}:</strong> {{ adventure.creator or adventure.username }}
+            </p>
         {% endif %}
         {% if adventure["author"] != adventure["creator"] %}
-            <p
-                class="text-gray-600 mt-1"
-            ><strong>{{ _("creator") }}:</strong> {{ adventure.author or adventure.username }}</p>
+            <p class="text-gray-600 mt-1">
+                <strong>{{ _("creator") }}:</strong> {{ adventure.author or adventure.username }}
+            </p>
         {% endif %}
         <p class="text-gray-600 mt-1">
             <!-- adventure.level will gradually be removed until we have all adventures using only levels. -->
@@ -86,9 +90,9 @@
                 hx-target="#adventure_{{ adventure.id }}"
                 hx-swap="outerHTML"
                 _="on htmx:afterRequest
-                            if detail.xhr.status == 200 then
-                                hedyApp.modal.notifySuccess('{{ _('adventure_cloned') }}')
-                            end"
+                    if detail.xhr.status == 200 then
+                        hedyApp.modal.notifySuccess('{{ _('adventure_cloned') }}')
+                    end"
                 data-cy="clone_{{ adventure.name }}"
                 data-id="{{ adventure.id }}"
             >{{ _("clone") }}</button>

@@ -36,12 +36,12 @@
                                 class="flex flex-col p-3 sm:p-4 gap-1 rounded-lg hover:bg-gray-300 active:bg-gray-400 ease-in transition duration-100 bg-white border border-gray-400 shadow-sm rounded-lg show-program-button"
                                 role="button"
                                 _="on click
-                                            add .hidden to .program-{{ username }}
-                                            remove .hidden from #program_{{ program.id }}
-                                            then add .bg-white to .show-program-button
-                                            then remove .bg-white from me
-                                            then add .bg-gray-400 to me
-                                            put '{{ program.name }}' into #program_name_{{ username }}"
+                                    add .hidden to .program-{{ username }}
+                                    remove .hidden from #program_{{ program.id }}
+                                    then add .bg-white to .show-program-button
+                                    then remove .bg-white from me
+                                    then add .bg-gray-400 to me
+                                    put '{{ program.name }}' into #program_name_{{ username }}"
                             >
                                 <span class="text-base sm:text-lg text-blue-700 break-words">{{ program.name }}</span>
                                 <div class="flex flex-row gap-2">

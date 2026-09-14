@@ -2,9 +2,9 @@
 {% set class_id = class_id|default('') %}
 <div id="level_availability_panel" class="flex flex-col gap-2">
     {{ render_partial(
-            'for-teachers/classes/htmx-customize-level-availability-status.html',
-            level=level,
-            customizations=customizations
+        'for-teachers/classes/htmx-customize-level-availability-status.html',
+        level=level,
+        customizations=customizations
     )
     }}
 

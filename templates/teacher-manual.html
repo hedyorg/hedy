@@ -37,11 +37,9 @@
                         </div>
                         {# Subsection nav #}
                         {% for title in subsection_titles %}
-                            <div
-                                class="ltr:ml-8 rtl:mr-8 text-sm"
-                            ><a
-    href="#{{ title|slugify }}"
->· {{ title }}</a></div>
+                            <div class="ltr:ml-8 rtl:mr-8 text-sm">
+                                <a href="#{{ title|slugify }}">· {{ title }}</a>
+                            </div>
                         {% endfor %}
                     {% else %}
                         <div class="my-2">

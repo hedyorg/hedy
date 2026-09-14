@@ -38,19 +38,18 @@
                                     <button
                                         class="blue-btn-new p-1.5 flex justify-center rounded-full"
                                         _="on click
-                        remove .menu-content-open from <div.menu:not(#{{ menu_id }})/>
-                        add .hidden .menu-content-closed to <div.menu:not(#{{ menu_id }})/>
-                        if #{{ menu_id }} matches .hidden
-                          remove .hidden from #{{ menu_id }}
-                          call hedyApp.positionContextMenu(me, true)
-                          wait 10ms
-                          toggle .menu-content-open .menu-content-closed on #{{ menu_id }}
-                        else
-                          call hedyApp.teardownContextMenu(me)
-                          toggle .menu-content-open .menu-content-closed on #{{ menu_id }}
-                          wait 180ms
-                          add .hidden to #{{ menu_id }}
-                         "
+                                            remove .menu-content-open from <div.menu:not(#{{ menu_id }})/>
+                                            add .hidden .menu-content-closed to <div.menu:not(#{{ menu_id }})/>
+                                            if #{{ menu_id }} matches .hidden
+                                            remove .hidden from #{{ menu_id }}
+                                            call hedyApp.positionContextMenu(me, true)
+                                            wait 10ms
+                                            toggle .menu-content-open .menu-content-closed on #{{ menu_id }}
+                                            else
+                                            call hedyApp.teardownContextMenu(me)
+                                            toggle .menu-content-open .menu-content-closed on #{{ menu_id }}
+                                            wait 180ms
+                                            add .hidden to #{{ menu_id }}"
                                     >
                                         <i class="fa-solid fa-ellipsis"></i>
                                     </button>

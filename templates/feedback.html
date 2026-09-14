@@ -78,10 +78,12 @@
                                 <td class="text-center p-2">{{ feedback.page }}</td>
                                 <td class="text-center p-2">{{ feedback.category }}</td>
                                 <td class="text-center p-2">{{ feedback.date|format_date }}</td>
-                                <td class="text-center p-2"><a
-    target="_blank"
-    href="https://github.com/hedyorg/hedy/issues/new?labels=feedback&title={{ feedback.category }}&body=%23%20Description%0A{{ feedback.message }}%0A%0A%23%20Page%0A{{ feedback.page }}%0A%0A%23%20Date%0A{{ feedback.date|format_date }}"
->Create issue</a></td>
+                                <td class="text-center p-2">
+                                    <a
+                                        target="_blank"
+                                        href="https://github.com/hedyorg/hedy/issues/new?labels=feedback&title={{ feedback.category }}&body=%23%20Description%0A{{ feedback.message }}%0A%0A%23%20Page%0A{{ feedback.page }}%0A%0A%23%20Date%0A{{ feedback.date|format_date }}"
+                                    >{{ _("create_issue") }}</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

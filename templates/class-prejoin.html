@@ -16,8 +16,7 @@
                 <h2 class="mt-0 mb-8">"{{ class_info.name }}"</h2>
                 <button
                     class="green-btn"
-                    onclick="hedyApp.join_class('{{ class_info.id }}', '{{ class_info.name }}', '{{ _('
-                                 join_prompt ') }}')"
+                    onclick="hedyApp.join_class('{{ class_info.id }}', '{{ class_info.name }}', `{{ _('join_prompt') }}`)"
                 >{{ _("join_class") }}</button>
             </div>
         {% endif %}

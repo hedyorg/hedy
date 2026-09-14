@@ -13,17 +13,7 @@
             {{ _("customize_class") }}: {{ class_info.name }}
             <i
                 class="fa-solid fa-pencil cursor-pointer text-lg mx-2"
-                onclick='hedyApp.rename_class("{{ class_info.id }}", {
-                             {
-                                 _("rename_class_prompt") |
-                                     default (None) | tojson
-                             }
-                         }, {
-                             {
-                                 _("rename_class") |
-                                     default (None) | tojson
-                             }
-                         })'
+                onclick='hedyApp.rename_class("{{ class_info.id }}", `{{ _("rename_class_prompt") | default (None) | tojson }}`, `{{ _("rename_class") | default (None) | tojson }}`)'
                 title="{{ _('rename_class') }}"
             >
             </i>
@@ -60,7 +50,9 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-left border-t border-r border-gray-400">{{ _("hide_keyword_switcher") }}</td>
+                                        <td
+                                            class="text-left border-t border-r border-gray-400"
+                                        >{{ _("hide_keyword_switcher") }}</td>
                                         <td class="border-t border-gray-400">
                                             <input
                                                 class="other_settings_checkbox"
@@ -161,12 +153,7 @@
                                 id="remove_customizations_button"
                                 type="button"
                                 data-cy="remove_customizations_button"
-                                onclick='hedyApp.restore_customization_to_default({
-                                             {
-                                                 _('remove_customizations_prompt') |
-                                                     default (None) | tojson
-                                             }
-                                         })'
+                                onclick="hedyApp.restore_customization_to_default(`{{ _('remove_customizations_prompt') | default (None) | tojson }})`"
                             >{{ _("remove_customization") }}</button>
                         </div>
                     {% endif %}
