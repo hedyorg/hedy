@@ -546,17 +546,6 @@ kbd {
 }
 
 /*
-  A code block is plain text for the instant before CodeMirror converts it, and the
-  global `pre` rule paints that text white -- invisible here. Give it the same ground
-  and ink the light editor will take, so nothing flashes.
-*/
-.prepare-level pre.common-mistakes {
-  background: #edf2f7;
-  color: #2d3748;
-  border-radius: 4px;
-}
-
-/*
   Tailwind's reset zeroes list padding, and Hedy restores the indent only inside
   `.text-display-copy`, `.text-business-copy` and `.text-adventure-copy`. The teacher
   manual is one of those, this page is not, so bullets hung outside the text column.
@@ -622,4 +611,20 @@ kbd {
   font-size: 1.25rem;
   line-height: 1.25;
   color: rgb(43 108 176);
+}
+
+/*
+  Common mistakes examples only become editors once they scroll into view. Until then
+  the <pre> holds the raw code, which the global `pre` rule colours white on no
+  background -- an empty white box. Give it the editor's background meanwhile.
+*/
+pre.common-mistakes:not(:has(.cm-editor)) {
+  background: #272822;
+  padding: 0.25rem 0.5rem;
+}
+
+/* The light editor's ground and ink, for blocks that will become light editors. */
+pre.common-mistakes.light:not(:has(.cm-editor)) {
+  background: #edf2f7;
+  color: #2d3748;
 }

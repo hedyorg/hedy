@@ -139,7 +139,6 @@ export function initialize(options: InitializeOptions) {
     case 'classes':
     case 'manage-students':
     case 'my-adventures':
-    case 'teaching-materials':
       initializeContextMenuEventHandler(options.javascriptPageOptions);
       break;
     

@@ -7,9 +7,6 @@
 {#
   One material a teacher can use to prepare this level: what it is, and a way in.
   Only materials with a page behind them are listed.
-
-  TODO: the descriptions are hardcoded English pending real copy; they need to become
-  translatable strings before this ships.
 #}
 {% macro material(label, description, icon, cy, view_url) %}
 <li class="flex flex-row items-center justify-between gap-4 py-4 border-b border-gray-300">
@@ -65,9 +62,8 @@
 
   <div class="flex flex-col gap-10 mt-5 bg-white border border-gray-300 rounded-lg content-panel">
     {% if level_concepts_and_changes %}
-    {# TODO: hardcoded English, pending real copy and a translatable string. #}
     <section class="flex flex-col gap-4">
-      <h2 class="m-0 text-3xl">What is new in this level?</h2>
+      <h2 class="m-0 text-3xl">{{ _('what_is_new_in_level') }}</h2>
       {{ concepts_and_changes(level_concepts_and_changes) }}
     </section>
     {% endif %}
@@ -76,12 +72,12 @@
     <section>
       <ul class="list-none m-0 p-0 flex flex-col border-t border-gray-300" data-cy="teaching_materials_list">
         {% if has_slides %}
-        {{ material(_('slides'), 'Present the level, one concept at a time',
+        {{ material(_('slides'), _('slides_level_info'),
                     'fa-chalkboard', 'teaching_materials_slides',
                     '/for-teachers/slides/' ~ selected_level) }}
         {% endif %}
         {% if has_workbook %}
-        {{ material(_('workbook'), 'Exercises to print, away from the screen',
+        {{ material(_('workbook'), _('workbook_level_info'),
                     'fa-book', 'teaching_materials_workbook',
                     '/for-teachers/workbooks/' ~ selected_level) }}
         {% endif %}

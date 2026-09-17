@@ -13,6 +13,7 @@ describe('Teaching materials', () => {
     cy.getDataCy('teaching_materials_cards').find('> div').should('have.length', 3);
     cy.getDataCy('background_information_link').should('have.attr', 'href', '/for-teachers/manual');
     cy.getDataCy('slides_link').should('have.attr', 'href', '/for-teachers/slides');
+    cy.getDataCy('workbooks_link').should('have.attr', 'href', '/for-teachers/workbooks/all');
   });
 
   it('prepares the level picked in the dropdown', () => {
