@@ -362,7 +362,8 @@ class ForTeachersModule(WebsiteModule):
         except ValueError:
             return utils.error_page(error=404, ui_message="Workbook does not exist")
 
-        workbook_for_level = WORKBOOKS[g.lang].get_workbook_for_level(level, g.lang)
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+        workbook_for_level = WORKBOOKS[g.lang].get_workbook_for_level(level, keyword_language)
         if not workbook_for_level:
             return utils.error_page(error=404, ui_message="Workbook does not exist")
 
@@ -376,10 +377,11 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/workbooks/all", methods=["GET"])
     def all_workbooks(self):
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
         workbooks = []
         level = 1
         while True:
-            workbook = WORKBOOKS[g.lang].get_workbook_for_level(level, g.lang)
+            workbook = WORKBOOKS[g.lang].get_workbook_for_level(level, keyword_language)
             if not workbook:
                 break
 

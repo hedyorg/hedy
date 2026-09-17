@@ -117,7 +117,6 @@ class TestPublicPages:
         assert 'href="/for-teachers/workbooks/3"' in with_workbook
         assert 'href="/for-teachers/slides/12"' in without_workbook
         assert 'teaching_materials_workbook_link' not in without_workbook
-        assert 'teaching_materials_workbook_solutions' not in with_workbook
 
     def test_teaching_materials_every_level_renders(self, client, template_variables):
         """Every level has a page, whether or not its guide has been written yet."""

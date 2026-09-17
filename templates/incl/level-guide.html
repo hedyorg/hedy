@@ -30,7 +30,7 @@
   {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
     {% if beats and (mistake_section.example.error_text or mistake_section.example.error_code) %}
     <div class="mistake-beat beat-problem">
-      <span class="beat-label">What students get wrong</span>
+      <span class="beat-label">{{ _('mistake_what_goes_wrong') }}</span>
     {% endif %}
     {% if mistake_section.example.error_text %}
       <p>{{ mistake_section.example.error_text|commonmark }}</p>
@@ -46,7 +46,7 @@
 
     {% if beats and (mistake_section.example.solution_text or mistake_section.example.solution_code) %}
     <div class="mistake-beat beat-fix">
-      <span class="beat-label">How to fix it</span>
+      <span class="beat-label">{{ _('mistake_how_to_fix') }}</span>
     {% endif %}
     {% if mistake_section.example.solution_text %}
       <p>{{ mistake_section.example.solution_text|commonmark }}</p>

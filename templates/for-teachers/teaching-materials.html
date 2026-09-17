@@ -3,20 +3,11 @@
 {% block regular_content %}
 {% from 'incl/breadcrumb.html' import breadcrumb %}
 
-{#
-  A single entry in the list of teaching materials.  Pass a `url` once the page
-  behind the card exists; without one the card renders as a plain heading.
-#}
-{% macro material_card(title, info, url=None, cy=None) %}
+{# A single entry in the list of teaching materials. #}
+{% macro material_card(title, info, url, cy) %}
 <div class="flex flex-row gap-4 mt-6">
   <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
-    <h2 class="m-0">
-      {%- if url -%}
-        <a href="{{ url }}" data-cy="{{ cy }}">{{ title }}</a>
-      {%- else -%}
-        {{ title }}
-      {%- endif -%}
-    </h2>
+    <h2 class="m-0"><a href="{{ url }}" data-cy="{{ cy }}">{{ title }}</a></h2>
     <div class="text-black text-base">{{ info }}</div>
   </div>
 </div>
@@ -69,7 +60,7 @@
     {{ material_card(_('background_information'), _('background_information_info'),
                      '/for-teachers/manual', 'background_information_link') }}
     {{ material_card(_('slides'), _('slides_card_info'), '/for-teachers/slides', 'slides_link') }}
-    {{ material_card(_('workbooks'), _('workbooks_info')) }}
+    {{ material_card(_('workbooks'), _('workbooks_info'), '/for-teachers/workbooks/all', 'workbooks_link') }}
   </div>
 </div>
 {% endblock %}
