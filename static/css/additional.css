@@ -546,6 +546,17 @@ kbd {
 }
 
 /*
+  A code block is plain text for the instant before CodeMirror converts it, and the
+  global `pre` rule paints that text white -- invisible here. Give it the same ground
+  and ink the light editor will take, so nothing flashes.
+*/
+.prepare-level pre.common-mistakes {
+  background: #edf2f7;
+  color: #2d3748;
+  border-radius: 4px;
+}
+
+/*
   Tailwind's reset zeroes list padding, and Hedy restores the indent only inside
   `.text-display-copy`, `.text-business-copy` and `.text-adventure-copy`. The teacher
   manual is one of those, this page is not, so bullets hung outside the text column.
