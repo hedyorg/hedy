@@ -6,36 +6,20 @@
 
 {#
   One material a teacher can use to prepare this level: what it is, and a way in.
+  Only materials with a page behind them are listed.
 
-  The overflow menu this row used to carry is gone -- downloading was never built and
-  "view" only repeated the link -- so a material with no page behind it says so instead
-  of offering an action that does nothing.
-
-  TODO: the descriptions and "Coming soon" are hardcoded English pending real copy;
-  they need to become translatable strings before this ships.
+  TODO: the descriptions are hardcoded English pending real copy; they need to become
+  translatable strings before this ships.
 #}
-{% macro material(label, description, icon, cy, view_url=None, unavailable_label='Work in progress', status=None) %}
+{% macro material(label, description, icon, cy, view_url) %}
 <li class="flex flex-row items-center justify-between gap-4 py-4 border-b border-gray-300">
   <span class="flex flex-row items-center gap-4 min-w-0">
-    <i class="fa-solid {{ icon }} text-xl w-6 text-center {{ 'text-blue-700' if view_url else 'text-gray-400' }}"
-       aria-hidden="true"></i>
+    <i class="fa-solid {{ icon }} text-xl w-6 text-center text-blue-700" aria-hidden="true"></i>
     <span class="flex flex-col gap-1 min-w-0">
-      {%- if view_url -%}
-        <a href="{{ view_url }}" data-cy="{{ cy }}_link" class="material-name">{{ label }}</a>
-      {%- else -%}
-        <span class="text-gray-600 material-name" data-cy="{{ cy }}_link">{{ label }}</span>
-      {%- endif -%}
+      <a href="{{ view_url }}" data-cy="{{ cy }}_link" class="material-name">{{ label }}</a>
       <span class="text-sm text-gray-600">{{ description }}</span>
     </span>
   </span>
-  {#
-    `status` is shown whether or not the material has a page: it says something about
-    the material itself. `unavailable_label` only appears when this level has no page.
-  #}
-  {% if status or not view_url %}
-    <span class="text-xs font-semibold text-gray-600 bg-gray-200 border border-gray-300 rounded-full px-2"
-          data-cy="{{ cy }}_unavailable">{{ status or unavailable_label }}</span>
-  {% endif %}
 </li>
 {% endmacro %}
 
@@ -88,22 +72,22 @@
     </section>
     {% endif %}
 
+    {% if has_slides or has_workbook %}
     <section>
       <ul class="list-none m-0 p-0 flex flex-col border-t border-gray-300" data-cy="teaching_materials_list">
+        {% if has_slides %}
         {{ material(_('slides'), 'Present the level, one concept at a time',
                     'fa-chalkboard', 'teaching_materials_slides',
-                    '/for-teachers/slides/' ~ selected_level if has_slides else None) }}
-        {# The workbooks are still being written, at every level. #}
+                    '/for-teachers/slides/' ~ selected_level) }}
+        {% endif %}
+        {% if has_workbook %}
         {{ material(_('workbook'), 'Exercises to print, away from the screen',
                     'fa-book', 'teaching_materials_workbook',
-                    '/for-teachers/workbooks/' ~ selected_level if has_workbook else None,
-                    status='Work in progress') }}
-        {# No page for these at any level yet, unlike the two above. #}
-        {{ material(_('workbook_solutions'), 'Worked answers for every exercise',
-                    'fa-key', 'teaching_materials_workbook_solutions',
-                    unavailable_label='Coming soon') }}
+                    '/for-teachers/workbooks/' ~ selected_level) }}
+        {% endif %}
       </ul>
     </section>
+    {% endif %}
 
     {% if common_mistakes_sections %}
     <section class="flex flex-col gap-6">

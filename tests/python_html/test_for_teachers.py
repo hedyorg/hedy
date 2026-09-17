@@ -108,6 +108,17 @@ class TestPublicPages:
         # Keywords are localized before rendering, so no placeholder survives.
         assert '{print}' not in context['level_concepts_and_changes']
 
+    def test_teaching_materials_level_lists_only_existing_materials(self, client):
+        """A material with no page at this level is left out rather than labelled."""
+        # Workbooks stop after level 8; slides go further.
+        with_workbook = client.get('/for-teachers/teaching-materials/3').get_data(as_text=True)
+        without_workbook = client.get('/for-teachers/teaching-materials/12').get_data(as_text=True)
+
+        assert 'href="/for-teachers/workbooks/3"' in with_workbook
+        assert 'href="/for-teachers/slides/12"' in without_workbook
+        assert 'teaching_materials_workbook_link' not in without_workbook
+        assert 'teaching_materials_workbook_solutions' not in with_workbook
+
     def test_teaching_materials_every_level_renders(self, client, template_variables):
         """Every level has a page, whether or not its guide has been written yet."""
         import hedy

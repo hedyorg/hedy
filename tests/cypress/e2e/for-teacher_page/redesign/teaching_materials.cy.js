@@ -26,11 +26,12 @@ describe('Teaching materials', () => {
     cy.getDataCy('teaching_materials_level_dropdown').should('contain', 'Level 5');
   });
 
-  it('has a page per level listing the materials it will hold', () => {
+  it('has a page per level listing its materials', () => {
     cy.visit('/for-teachers/teaching-materials/3');
 
     cy.getDataCy('teaching_materials_level_dropdown').should('contain', 'Level 3');
-    cy.getDataCy('teaching_materials_list').find('> li').should('have.length', 3);
+    cy.getDataCy('teaching_materials_slides_link').should('have.attr', 'href', '/for-teachers/slides/3');
+    cy.getDataCy('teaching_materials_workbook_link').should('have.attr', 'href', '/for-teachers/workbooks/3');
     cy.getDataCy('teaching_materials_common_mistakes').should('be.visible');
   });
 
@@ -56,14 +57,11 @@ describe('Teaching materials', () => {
       .should('have.length.greaterThan', 0);
   });
 
-  it('says so when a level has no such material', () => {
+  it('leaves out materials a level does not have', () => {
     // Workbooks only go up to level 8, slides go further.
     cy.visit('/for-teachers/teaching-materials/12');
 
     cy.getDataCy('teaching_materials_slides_link').should('have.attr', 'href', '/for-teachers/slides/12');
-    cy.getDataCy('teaching_materials_workbook_link').should('not.have.attr', 'href');
-    cy.getDataCy('teaching_materials_workbook_unavailable').should('be.visible');
-    // Solutions have no page at any level.
-    cy.getDataCy('teaching_materials_workbook_solutions_unavailable').should('be.visible');
+    cy.getDataCy('teaching_materials_workbook_link').should('not.exist');
   });
 });
