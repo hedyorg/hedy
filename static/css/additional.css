@@ -612,3 +612,13 @@ kbd {
   line-height: 1.25;
   color: rgb(43 108 176);
 }
+
+/*
+  Common mistakes examples only become editors once they scroll into view. Until then
+  the <pre> holds the raw code, which the global `pre` rule colours white on no
+  background -- an empty white box. Give it the editor's background meanwhile.
+*/
+pre.common-mistakes:not(:has(.cm-editor)) {
+  background: #272822;
+  padding: 0.25rem 0.5rem;
+}
