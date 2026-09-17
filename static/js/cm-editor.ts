@@ -26,7 +26,6 @@ import { LRLanguage } from "@codemirror/language"
 import { PARSER_FACTORIES } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
-import { light } from "./cm-light-theme";
 import { error } from "./modal";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
 import { ClientMessages } from "./client-messages";
@@ -71,9 +70,7 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
             editorType = EditorType.EXAMPLE;
         }
 
-        // Pages that read as a document rather than as an editor ask for the light theme
-        // by putting `light` on the <pre>.
-        return new HedyCodeMirrorEditor(preview, true, editorType, dir, $(preview).hasClass('light'));
+        return new HedyCodeMirrorEditor(preview, true, editorType, dir);
     }
 }
 
@@ -89,7 +86,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private currentDebugLine?: number;
     private incorrectLineMapping: Record<string, number> = {};
 
-    constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, __: string = "ltr", isLight: boolean = false) {
+    constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, __: string = "ltr") {
         const levelStr = $(element).closest('[data-level]').attr('data-level');
         const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
         const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
@@ -180,13 +177,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 ]
             });
         } else { // the editor is a read only editor
-            const surface = isLight
-                ? { background: '#edf2f7', color: '#2d3748' }
-                : { background: '#272822', color: 'white' };
             let theme: Record<string, any> = {
                 ".cm-cursor, .cm-dropCursor": { border: "none"},
                 ".cm-name": {
-                    color: isLight ? '#2c7a7b' : '#009975'
+                    color: '#009975'
                 },
             }
             // base set of extensions for every type of read-only editor
@@ -195,7 +189,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 highlightSpecialChars(),
                 drawSelection(),
                 syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-                isLight ? [] : monokai,
+                monokai,
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 placeholders,
                 theLevel ? level.of(theLevel) : [],
@@ -203,11 +197,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 Prec.high(decorationsTheme),
                 Prec.highest(variableHighlighter)
             ];
-            // `decorationsTheme` above colours variables and functions for a dark ground.
-            // The light theme restates them, so it has to outrank it.
-            if (isLight) {
-                extensions.push(Prec.highest(light));
-            }
 
             switch (editorType) {
                 case EditorType.CHEATSHEET:
@@ -217,9 +206,9 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     break;
                 case EditorType.WORKBOOK:
                     theme["&"] = {
-                        background: surface.background,
+                        background: '#272822',
                         fontSize: '15.2px',
-                        color: surface.color,
+                        color: 'white',
                         borderRadius: '4px',
                         marginRight: '5px'
                     }
@@ -227,24 +216,24 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     break;
                 case EditorType.COMMON_MISTAKES:
                     theme["&"] = {
-                        background: surface.background,
+                        background: '#272822',
                         fontSize: '15.2px',
-                        color: surface.color,
+                        color: 'white',
                         borderRadius: '4px',
                         marginRight: '5px'
                     }
-                    // Nothing here can be edited, so an active line would only mark wherever
-                    // the reader happened to click.
                     extensions.push([
                         EditorView.theme(theme),
-                        lineNumbers()
+                        lineNumbers(),
+                        highlightActiveLine(),
+                        highlightActiveLineGutter()
                     ]);
                     break;
                 case EditorType.VIEW_PROGRAM:
                     theme["&"] = {
-                        background: surface.background,
+                        background: '#272822',
                         fontSize: '15.2px',
-                        color: surface.color,
+                        color: 'white',
                         borderRadius: '4px',
                         marginRight: '5px',
                         height: '100%',
