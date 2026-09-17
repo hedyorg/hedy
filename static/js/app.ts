@@ -46,6 +46,7 @@ let theAdventures: Record<string, Adventure> = {};
 export let theLevel: number = 0;
 export let theLanguage: string = '';
 export let theKeywordLanguage: string = 'en';
+let theVoice: string;
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
@@ -441,13 +442,20 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
     const adventure = container.closest('[data-tabtarget]')?.getAttribute('data-tabtarget');
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
 
-    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).html('<i class="fa-solid fa-arrow-down"></i>').appendTo(buttonContainer).click(function () {
-      if (!theGlobalEditor?.isReadOnly) {
-        theGlobalEditor.contents = exampleEditor.contents + '\n';
-      }
-      update_view("main_editor_keyword_selector", <string>$(preview).attr('data-lang'));
-      stopit();
-      clearOutput();
+    $('<button>')
+      .css({ fontFamily: 'sans-serif' })
+      .addClass('yellow-btn')
+      .attr('data-cy', `paste_example_code_${adventure}`)
+      .attr('aria-label', `${ClientMessages['copy_to_editor']}`)
+      .html('<i class="fa-solid fa-arrow-down"></i>')
+      .appendTo(buttonContainer)
+      .click(function () {
+        if (!theGlobalEditor?.isReadOnly) {
+          theGlobalEditor.contents = exampleEditor.contents + '\n';
+        }
+        update_view("main_editor_keyword_selector", <string>$(preview).attr('data-lang'));
+        stopit();
+        clearOutput();
     });
   }
 
@@ -1238,14 +1246,14 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 }
 
 function speakIsMuted() {
-  return $('#speak_mute_button').attr('data-muted') === 'true';
+  return $('#speak_mute_button').attr('aria-pressed') === 'true';
 }
 
 export function toggleSpeakMute() {
   const speakMuteButton = $('#speak_mute_button');
   const speakMuteIcon = speakMuteButton.find('.fa');
 
-  const MUTED_ATTR = 'data-muted';
+  const MUTED_ATTR = 'aria-pressed';
   const MUTED_ICON = 'fa-volume-xmark';
   const UNMUTED_ICON = 'fa-volume-high';
 
@@ -1259,13 +1267,33 @@ export function toggleSpeakMute() {
   }
 }
 
+/**
+ * Ensure the state of the mute button matches the state of the dropdown. If no voice is selected, the button should be disabled and muted.
+ */
+export function updateSpeakVoice() {
+  const selectedURI = $('#speak_dropdown').val();
+  const speakMuteButton = $('#speak_mute_button');
+  if (!selectedURI) {
+    if (!speakIsMuted()) {
+      toggleSpeakMute();
+    }
+    speakMuteButton.attr('disabled', 'true');
+  } else {
+    if (speakIsMuted() && theVoice === '') {
+      // Unmute if the user selected a voice after there wasn't one selected. If the user manually muted, we don't want to unmute for them.
+      toggleSpeakMute();
+    }
+    speakMuteButton.removeAttr('disabled');
+  }
+  theVoice = selectedURI as string;
+}
+
 function speak(text: string) {
   if (speakIsMuted()) {
     return;
   }
-  var selectedURI = $('#speak_dropdown').val();
-  if (!selectedURI) { return; }
-  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
+  if (!theVoice) { return; }
+  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === theVoice)[0];
 
   if (voice) {
     let utterance = new SpeechSynthesisUtterance(text);
@@ -1303,6 +1331,7 @@ function initializeSpeech() {
       for (const voice of voices) {
         $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
+      updateSpeakVoice();
       $('#speak_container').show();
 
       clearInterval(timer);

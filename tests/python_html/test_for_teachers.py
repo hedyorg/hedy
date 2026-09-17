@@ -77,7 +77,7 @@ class TestPublicPages:
                 assert context['current_page'] == 'teacher-manual'
                 if url.startswith('/for-teachers/workbooks/'):
                     assert context['page_title']
-                    assert context['workbook']
+                    assert context['workbooks']
                 else:
                     assert context['section_title']
                     assert context['section_key'] in ('intro', 'this_does_not_exist')

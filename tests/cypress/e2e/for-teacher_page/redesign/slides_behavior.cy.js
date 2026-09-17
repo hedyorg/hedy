@@ -63,8 +63,13 @@ describe('Teacher slides behavior', () => {
 
   it('shows a whole slide at once, editor and output side by side', () => {
     cy.visit('/for-teachers/slides/6');
-    cy.getDataCy('slides_preview').should(($f) => {
-      expect($f[0].contentWindow.Reveal, 'deck is initialised').to.exist;
+    // The preview frame loads lazily, so it can still be booting when the page is
+    // ready: the Reveal global exists as soon as its own script runs, but the API
+    // we drive the deck with is only there once the deck has initialised.
+    cy.getDataCy('slides_preview', { timeout: 10000 }).should(($f) => {
+      const deck = $f[0].contentWindow.Reveal;
+      expect(deck, 'deck is initialised').to.exist;
+      expect(deck.isReady(), 'deck is ready').to.be.true;
     });
     cy.getDataCy('slides_preview').then(($f) => {
       const win = $f[0].contentWindow;

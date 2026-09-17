@@ -230,7 +230,6 @@ def localized_date_format(date, short_format=False, only_date=False):
 
 
 def datetotimeordate(date):
-    print(date)
     return date.replace("T", " ")
 
 
