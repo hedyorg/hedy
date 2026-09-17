@@ -4,10 +4,9 @@ name: Update Weblate
 
 on:
   workflow_dispatch: {}
-#  Temporarily disabling automatic Weblate updates until hedy levels are redesigned #6342
-#  schedule:
-#    # 6 in the morning
-#    - cron:  '0 6 * * *'
+  schedule:
+    # 6 in the morning
+    - cron:  '0 6 * * *'
 
 jobs:
   update-weblate:
@@ -17,12 +16,16 @@ jobs:
     # If an open Weblate/translations PR still exists, we shouldn't tell Weblate to push again.
     # Because we ended our previous push with a 'reset', Weblate would otherwise force-push
     # new changes over the unmerged old changes, causing them to lost.
+    #
+    # This covers both the PRs Weblate opens itself and the ones 'resolve-weblate-conflict.yml'
+    # opens as hedybot (labeled 'translations'), the same PRs 'unlock-weblate.yml' reacts to.
     - name: Check for existence of old Weblate PR
       run: |
-        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        prs=$(gh pr -R hedyorg/hedy list --json number,title,author,labels \
+          -q '.[] | select(.author.login == "weblate" or any(.labels[]; .name == "translations")) | "#\(.number) \(.title)"')
         if [[ "$prs" != "" ]]; then
           echo "Open Pull Request for Weblate!"
-          gh pr -R hedyorg/hedy list --search 'Translations update'
+          echo "$prs"
           exit 1
         fi
       env:
@@ -61,7 +64,7 @@ jobs:
 
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
         # (NOTE: this list is also below!)
-        for component in glossary adventures keywords client-messages web-texts webpages; do
+        for component in glossary adventures keywords client-messages web-texts webpages slides; do
           wlc lock hedy/$component
         done
 
@@ -78,13 +81,13 @@ jobs:
 
     - name: Confirm that Weblate created a new PR
       run: |
-        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        prs=$(gh pr -R hedyorg/hedy list --author weblate --json title -q '.[].title')
         if [[ "$prs" == "" ]]; then
           echo "Weblate didn't create a PR! Not resetting because that would lose changes!"
 
           # Unlock each component again so we don't stay locked
           # (NOTE: this list is also above!)
-          for component in glossary adventures keywords client-messages web-texts webpages; do
+          for component in glossary adventures keywords client-messages web-texts webpages slides; do
             wlc unlock hedy/$component
           done
 

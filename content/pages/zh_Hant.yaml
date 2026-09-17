@@ -1,81 +1,804 @@
 home-sections:
--   {}
--   {}
--   {}
--   {}
--   {}
--   {}
--   title: 我需要安裝其他軟件嗎？
-    text: 不。Hedy在瀏覽器中使用，您是用哪一個瀏覽器瀏覽這個網頁。您可以在Chrome瀏覽器、Edge瀏覽器和Firefox瀏覽器中使用。Hedy也可以在手機和平板使用。
--   title: 我需要編程經驗來和Hedy一起教導嗎？
+-   title: 讓文字程式設計變簡單！
+    text: |-
+        世界各地有許多學校和教師想教學生寫程式。一開始通常會使用有趣的工具，例如 Bee-Bot 機器人、Scratch Junior 或 Scratch。使用這些工具一段時間後，孩子常會想學習功能更強大的文字程式語言，例如 Python。
+
+        不過，Python 並不容易，因為它只能使用英文，而且學習者必須同時理解複雜的程式設計概念和語法。Hedy 讓你更容易開始學習文字程式語言！Hedy 可以免費使用、採用開放原始碼，而且具有三項不同於其他文字程式語言的特色。
+
+        1. Hedy 支援多種語言，你可以用自己的語言寫 Hedy 程式
+        2. Hedy 採漸進式學習，讓你一次學習一個概念及其語法
+        3. Hedy 專為課堂設計，讓教師可以完整調整學生的學習體驗
+-   title: 多語言程式設計
+    text: 幾乎所有文字程式語言都使用英文關鍵字，例如 `for` 或 `repeat`，但 Hedy 可以使用任何語言！目前支援 47 種語言，包括荷蘭文、西班牙文、阿拉伯文、土耳其文、中文和印地文。如果尚未提供你的語言，隨時都能開始新的翻譯。
+-   title: 循序漸進地學習
+    text: 學習程式語言可能讓人感到不知所措，因為學習者必須同時理解概念（例如 if-else 或迴圈）和語法（例如引號或小括號）。Hedy 會先用很少的語法介紹概念，再逐步加入更完整的規則。這是經科學研究證實有效的學習方式！
+-   title: 專為課堂打造
+    text: |-
+        Hedy 適合 10 歲以上的孩子，並專為課堂使用而設計。
+        教師可以使用我們免費提供的內建教案，也能自行編寫課程，並將內容載入 Hedy 使用者介面。
+-   title: 情境中的程式設計
+    text: Hedy 以非常多元的方式呈現程式設計，能用來完成各種有趣的作品。你可以用 Hedy 創作數位互動故事、在畫面上顯示彩色圖畫，也能用繪圖機把圖畫在紙上，或將圖案繡在衣服上。你還可以製作含有按鈕和鍵盤操作的遊戲或應用程式。
+-   title: Hedy 免費嗎？
+    text: |-
+        是的！Hedy 是「開放原始碼」軟體，代表每個人都能幫助我們讓 Hedy 變得更好。
+        你可以在 <a href="https://github.com/hedyorg/hedy" target="_blank">GitHub</a> 上找到我們的程式碼。
+        如果你喜歡 Hedy 並想提供協助，我們非常歡迎也十分感謝你的<a href="https://github.com/sponsors/hedyorg" target="_blank">捐款</a>！
+-   title: 我需要安裝任何東西嗎？
+    text: 不需要。Hedy 會在瀏覽器中執行，也就是你現在用來查看這個頁面的程式，例如 Chrome、Edge 或 Firefox。Hedy 也能在手機和平板電腦上使用。
+-   title: 使用 Hedy 教學需要程式設計經驗嗎？
+    text: |-
+        不需要。簡報和學習者介面會說明所有概念。
+        建立免費的教師帳號後，你也能使用教師手冊，查看教學方法和常見錯誤等資訊。
 teacher-guide:
--   {}
+-   title: 簡介
+    key: intro
+    subsections:
+    -   title: Hedy 是什麼？
+        text: |-
+            Hedy 是一種文字程式語言，專為 10 到 15 歲的兒童與青少年設計。
+            Scratch 等兒童程式語言使用程式積木，Hedy 則使用文字程式碼。
+            你可以透過遊戲般的練習一步步學習，像真正的程式設計師一樣輸入程式碼。
+            Hedy 因此能成為通往 Python 等正式程式語言的踏腳石，讓學習過程容易上手，而且充滿樂趣！
+            如果想進一步了解，可以觀看這部介紹 Hedy 程式語言開發過程的<a href="https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2s" target="_blank">影片</a>。
+    -   title: 適用對象
+        text: |-
+            Hedy 以 10 至 15 歲的國中階段學生為主要設計對象。
+            學生必須具備良好的閱讀能力。我們建議至少達到小學三年級的閱讀程度後，再開始使用 Hedy。
+            學生（以及教師！）在開始使用 Hedy 前，都不需要任何程式設計經驗。
+    -   title: Hedy 如何運作？
+        text: |-
+            Hedy 分成多個等級，每個等級都會教授新的指令，並提供各種冒險，讓學生練習新學到的指令。
+            教師可以決定要向學生開放哪些冒險。這個等級要讓他們製作餐廳、計算機，還是鬼屋呢？每個等級的冒險會按照由易到難的順序排列，讓學生持續接受挑戰。學生可以自行完成冒險，教師也能用它進行全班教學。
+
+            冒險中還包含程式碼範例，讓較不熟悉數位工具的教師也能使用 Hedy！當然，喜歡發揮創意的教師也可以製作自己的教案和冒險。
+
+            完成某個等級的所有冒險後，學生可以透過小測驗檢查自己的學習成果。
+            你可以在班級頁面查看學生的作品和學習進度。
+    -   title: 裝置
+        text: |-
+            Hedy 是網頁式工具，只要裝置上有瀏覽器（例如 Google Chrome、Firefox 或 Edge）就能使用，所以筆記型電腦、Chromebook、平板電腦，甚至智慧型手機都適合使用 Hedy。
+            使用 Hedy 前不需要下載任何東西，只要前往網站就能開始！
+    -   title: Hedy 社群
+        text: |-
+            歡迎所有 Hedy 老師、程式設計師和支持者加入我們的 <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord 伺服器</a>。這裡很適合交流 Hedy：你可以在不同頻道分享很酷的專案和課程、回報程式問題，或與其他老師及 Hedy 團隊聊天。
+            你可以在<a href="https://www.youtube.com/watch?v=Lyz_Lnd-_aI" target="_blank">這裡</a>觀看如何加入 Discord 社群的影片。
+    -   title: Hedy 與 GDPR
+        text: |-
+            歐盟境內的組織在處理個人資料時，必須遵守 GDPR（《一般資料保護規則》）。
+            這對許多學校來說是個複雜的議題，因此 Hedy 允許你在不分享個人資料的情況下使用所有程式設計功能。
+            最簡單的方法，是教師和學生都不建立帳號，直接使用 Hedy。沒有帳號時，除了自訂等級、儲存學生程式和查看學習進度之外，其他功能都能使用。雖然會受到一些限制，但確實有學校以這種方式使用 Hedy。
+
+            第二種方法，是教師使用不含個人資料的電子郵件地址建立帳號，例如「docent25@email.com」。建立教師帳號時，除了用來重設密碼的電子郵件地址之外，不需要提供其他資訊。
+            有了教師帳號，你可以為學生建立匿名帳號，例如 rainbow-student1、rainbow-student2 等（詳細說明請參閱「教學準備」）。這樣就能使用 Hedy 的所有功能，包括儲存學習進度，又不必分享教師或學生的個人資料。
+
+            如果上述方式仍不符合你的需求，我們也可以簽署個人資料處理協議。
 -   levels:
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 例如，學生直接輸入一句話，卻沒有使用「輸出」指令。
+                error_code: Hedy 無法輸出這段文字
+                solution_text: 教導學生每一行程式碼都要以指令開頭。
+                solution_code: '{print} Hedy 可以輸出這段文字！'
+            title: 學生忘了輸入指令
+        -   example:
+                error_text: 英文指令使用大寫字母時無法運作。
+                error_code: |-
+                    Ask 為什麼我的程式碼無法執行？
+                    Print 因為我使用了大寫字母。
+                solution_text: 移除大寫字母。
+                solution_code: |-
+                    {ask} 為什麼我的程式碼現在可以執行？
+                    {print} 因為我把大寫字母改掉了！
+            title: 學生輸入指令時使用大寫字母
+        -   example:
+                error_text: '`answer` 用來在 `ask` 指令之後重複顯示回答。若沒有先使用 `ask`，`answer` 就不會有任何作用。'
+                error_code: '{print} 你的名字是 {answer}'
+                solution_text: 加入 ask 指令，程式就能正常運作。
+                solution_code: |-
+                    {ask} 你叫什麼名字？
+                    {print} 你的名字是 {answer}
+            title: 學生沒有使用 ask，卻使用 answer
+        -   example:
+                error_text: 學生使用海龜時，常常喜歡試很大的數字，結果箭頭會跑出畫面。
+                error_code: |-
+                    {forward} 300
+                    {turn} 90
+                solution_text: 在這個範例中，學生常以為 `turn` 指令沒有作用，其實它已正確執行，只是海龜走出了畫面範圍。使用較小的數字就能避免這個情況。
+                solution_code: |-
+                    {forward} 100
+                    {turn} 90
+            title: 海龜：學生讓海龜走出畫面
+        -   example:
+                error_text: '`backward` 不是 Hedy 指令。'
+                error_code: 後退 100
+                solution_text: 若要讓海龜向後走，請使用 `forward` 指令和負數。例如：
+                solution_code: '{forward} -100'
+            title: 海龜：學生使用 `backward` 指令，但沒有這個指令。
+        level: '1'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: Hedy 無法辨識拼錯的指令。
+                error_code: 輸處 不要拼錯字
+                solution_text: 教導學生閱讀錯誤訊息，這樣他們就能自己找出問題。
+                solution_code: '{print} 請不要拼錯字'
+            title: 學生拼錯指令
+        -   example:
+                error_text: 學生會在這個等級學習變數。`ask` 指令也需要搭配變數，但學生常會忘記。
+                error_code: 問 你想吃什麼
+                solution_text: 在這個等級中，你必須告訴 Hedy 要把回答儲存在哪裡，之後才能再次使用。這個儲存位置稱為變數。
+                solution_code: 餐點 {is} {ask} 你想吃什麼？
+            title: 學生忘了 `ask` 指令已經改變
+        -   example:
+                error_text: 有些學生發現 `{echo}` 指令不能再使用時，可能會感到挫折。因此，向學生說明使用變數的好處非常重要。例如，一段程式碼中可以使用多個變數，而且能把變數放在句子中想放的任何位置！
+                error_code: |-
+                    answer {is} {ask} 為什麼 {echo} 不能用了？！
+                    {echo}
+                solution_text: 請改用變數。
+                solution_code: |-
+                    answer {is} {ask} 為什麼 {echo} 不能用了？！
+                    {print} answer
+            title: 學生嘗試使用 `{echo}` 指令
+        -   example:
+                error_text: 在以下範例中，name 既是變數，也被當成一般文字。這段程式碼會輸出「Hi my Hedy is Hedy」。
+                error_code: |-
+                    name {is} Hedy
+                    {print} 嗨，我的名字是 name
+                solution_text: 因此，不要把想在文字中使用的詞當成變數名稱。到了第 4 級，使用引號就能解決這個問題。
+                solution_code: |-
+                    名字 {is} Hedy
+                    {print} 嗨，我是 名字
+            title: 學生把變數名稱當成一般文字使用
+        -   example:
+                error_text: 變數名稱應該只用一個單字。你可以用底線連接兩個單字，這樣仍算一個名稱。
+                error_code: chosen door is ask 你要選哪一扇門？
+                solution_text: 請加上底線。
+                solution_code: chosen_door {is} {ask} 你選哪一扇門
+            title: 學生使用包含兩個單字的長變數名稱
+        -   example:
+                error_text: 在這個範例中，學生用 horse 和 name 代表同一個變數。
+                error_code: |-
+                    馬名 {is} {ask} 你的馬叫什麼名字？
+                    {print} 你的馬叫 名字
+                solution_text: 請務必檢查整段程式碼中的變數名稱是否完全相同。細微的差異可能很難發現（例如單數與複數），但仍會讓程式無法正常運作。
+                solution_code: |-
+                    name {is} {ask} 你的馬叫什麼名字
+                    {print} 你的馬叫 name
+            title: 學生可能會用兩個不同名稱表示同一個變數
+        level: '2'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 清單不能整份輸出。你只能使用 {at} {random}，從清單中輸出一個項目。
+                error_code: |-
+                    雜貨 {is} 蘋果, 牛奶, 巧克力
+                    {print} 雜貨
+                solution_text: 若要輸出完整的雜貨清單，只要將所有項目放在 `{print}` 指令後面即可。你也可以使用 {at} {random}，從清單中輸出一個項目。
+                solution_code: |-
+                    {print} 蘋果, 牛奶, 巧克力
+
+                    # 或
+
+                    雜貨 {is} 蘋果, 牛奶, 巧克力
+                    {print} 雜貨 {at} {random}
+            title: 學生嘗試輸出整份清單
+        -   example:
+                error_text: 這個問題可能在第 2 級也發生過，現在清單也可能出現同樣的問題。
+                error_code: |-
+                    名字 {is} Hedy
+                    {print} 嗨，我的名字是 名字
+
+                    # 或
+
+                    動物 {is} 犀牛, 蜜蜂, 天鵝
+                    {print} 最棒的動物是…… 動物 {at} {random}
+                solution_text: 輸出一般文字時，請避免在句子中直接使用變數或清單的名稱。到了第 4 級，這個問題可以用引號解決。
+                solution_code: |-
+                    name {is} Hedy
+                    {print} 嗨，我是 name
+
+                    # 或者
+
+                    animals {is} 犀牛, 蜜蜂, 天鵝
+                    {print} 最棒的動物是…… animals {at} {random}
+            title: 學生把變數或清單的名稱當成一般文字
+        -   example:
+                error_text: 如下例所示
+                error_code: |-
+                    鳥類 {is} 麻雀, 海鷗, 知更鳥
+                    {print} 鳥類 random
+                solution_text: 加上 `at` 就能解決這個問題。
+                solution_code: |-
+                    鳥類 {is} 麻雀, 海鷗, 知更鳥
+                    {print} 鳥類 {at} {random}
+            title: 學生在 `{at}` `{random}` 中忘了使用 `{at}`
+        -   example:
+                error_text: 有時學生會把 `{at}` `{random}` 放在一行的開頭。
+                error_code: |-
+                    水果 {is} 蘋果, 櫻桃, 香蕉
+                    水果 {at} {random}
+                solution_text: 提醒學生：要輸出文字時，一定要使用「輸出」指令。
+                solution_code: |-
+                    水果 {is} 蘋果, 櫻桃, 香蕉
+                    {print} 水果 {at} {random}
+            title: 學生使用 `{at}` `{random}` 時忘了加上 `{print}` 指令
+        -   example:
+                error_text: 清單中的項目要用逗號分隔。
+                error_code: |-
+                    披薩 {is} 蘑菇 鮪魚 四季
+                    {print} 披薩 {at} {random}
+                solution_text: 清單中的每個項目後面都要加上逗號
+                solution_code: |-
+                    披薩 {is} 蘑菇, 鮪魚, 四季
+                    {print} 披薩 {at} {random}
+            title: 學生忘了在清單中使用逗號
+        -   example:
+                error_text: 例如
+                error_code: |-
+                    clubs {is} 曼徹斯特聯隊
+                    {print} clubs {at} {random}
+                solution_text: Hedy 無法隨機輸出任何內容，因為沒有可供選擇的清單。
+                solution_code: |-
+                    clubs {is} 曼徹斯特聯隊, 拜仁慕尼黑足球俱樂部, 巴塞隆納足球俱樂部
+                    {print} clubs {at} {random}
+            title: 學生在沒有清單時嘗試使用 `{at}` `{random}`
+        -   example:
+                error_text: 在下方範例中，`names` 不是清單，而是變數，因此不能把任何項目加入其中。
+                error_code: |-
+                    names {is} Jake
+                    your_name {is} {ask} 你是誰？
+                    {add} your_name {to} names
+                    {print} names {at} {random}
+                solution_text: 程式中必須先有清單，所以要加入第二個名字（例如 Amy），把 `names` 變成清單。如果不想讓 Amy 留在清單中，之後可以使用 `remove` 將她移除。
+                solution_code: |-
+                    names {is} Jake, Amy
+                    your_name {is} {ask} 你是誰？
+                    {add} your_name {to} names
+                    {print} names {at} {random}
+            title: 學生在沒有清單時嘗試使用 add/remove
+        -   example:
+                error_text: '`add`／`remove` 指令少了 `to`／`from` 就無法運作。'
+                error_code: |-
+                    adventures {is} 故事, 鸚鵡, 骰子
+                    choice {is} 你最喜歡哪一個冒險？
+                    {add} choice
+                    {remove} 骰子
+                    {print} 我喜歡 adventures {at} {random}
+                solution_text: Hedy 必須知道要將項目加入哪一份清單，或從哪一份清單移除。
+                solution_code: |-
+                    adventures {is} 故事, 鸚鵡, 骰子
+                    choice {is} 你最喜歡哪一個冒險？
+                    {add} choice {to_list} adventures
+                    {remove} 骰子 {from} adventures
+                    {print} 我喜歡 adventures {at} {random}
+            title: 學生在 `{add}`／`{remove}` 中忘了使用 `{to}`／`{from}`
+        level: '3'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 在這個等級中，「輸出」和 `ask` 使用的文字前後都需要引號。
+                error_code: |-
+                    {print} 你好
+                    心情 {is} {ask} '你今天好嗎？
+                solution_text: 請加上正確的引號。
+                solution_code: |-
+                    {print} '你好'
+                    心情 {is} {ask} '你今天好嗎？'
+            title: 學生忘了在文字前後都加上引號
+        -   example:
+                error_text: 開始上課時，請先確認學生知道如何正確輸入引號，這一點很重要。在 Hedy 中，學生可以使用單引號 ('') 和雙引號 ("")，但反引號（``）不是有效的引號。
+                error_code: |-
+                    {print} `歡迎光臨餐廳`
+                    食物 {is} {ask} "你想點什麼？"
+                solution_text: 以下才是正確的引號：
+                solution_code: |-
+                    {print} '歡迎光臨餐廳'
+                    食物 {is} {ask} '你想點什麼？'
+            title: 學生使用了錯誤的引號
+        -   example:
+                error_text: 從這個等級開始，不允許在文字中使用單引號。英文縮寫常會用到單引號，例如 `you're`、`don't` 或 `what's`。
+                error_code: "{print} '你不可以輸入 '這個內容''"
+                solution_text: 你可以暫時使用不完全正確的英文文法，省略單字中的單引號；也可以改用反引號 ` 代替單引號。
+                solution_code: |-
+                    {print} 'Youre allowed to type this'
+                    {print} 'And you`re able to do this'
+            title: 學生在文字中使用撇號
+        level: '4'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 學生使用 `{if}` 或 `{else}` 後，常會忘記再使用 `{print}` 或 `{ask}` 等第二個指令。
+                error_code: |-
+                    {if} 名字 {is} Hedy '太棒了！'
+                    {else}  Hedy {is} 更棒！
+                solution_text: 加入「輸出」指令就能修正問題。
+                solution_code: |-
+                    {if} 名字 {is} Hedy {print} '太棒了！'
+                    {else} {print} 'Hedy 更棒！'
+            title: 學生忘了在 `{if}` 指令中使用 `{print}`
+        -   example:
+                error_text: 在這個範例中，學生用「馬名」和「名字」表示同一個變數。
+                error_code: |-
+                    馬名 {is} {ask} '你的馬叫什麼名字？'
+                    {if} 名字 {is} Bonfire {print} '很酷'
+                    {else} {print} '沒那麼酷！'
+                solution_text: 請務必檢查整段程式碼中的變數名稱是否一致。細微的差異（例如單複數）可能很難看出來，卻會讓程式無法正常運作。
+                solution_code: |-
+                    馬名 {is} {ask} '你的馬叫什麼名字？'
+                    {if} 馬名 {is} Bonfire {print} '很酷！'
+                    {else} {print} '沒那麼酷！'
+            title: 學生可能用兩個不同的名稱代表同一個變數
+        -   example:
+                error_text: 使用 `if` 指令可能會讓程式碼變得很長，學生也常因此忘了加上引號。
+                error_code: |-
+                    {if} name {is} Hedy {print} 好玩
+                    {else} {print} '還好！
+                solution_text: 「輸出」指令中的文字前後都要加上引號，總共要有兩個引號。
+                solution_code: |-
+                    {if} 名字 {is} Hedy {print} '有趣'
+                    {else} {print} '還好！'
+            title: 學生還是會忘記在文字兩側加上引號
+        -   example:
+                error_text: 在這個等級中，變數名稱前後不需要引號。
+                error_code: |-
+                    {if}  name  {is} 'Hedy' {print} '好玩'
+                    {else} {print} '還好！'
+                solution_text: 移除引號，就能讓程式正常運作。
+                solution_code: |-
+                    {if} 名字 {is} Hedy {print} '有趣'
+                    {else} {print} '還好！'
+            title: 學生在變數名稱前後加上引號
+        -   example:
+                error_text: Hedy 的變數名稱不能包含空格。如果要把幾個單字組合起來，學生必須用底線（_）連接它們。
+                error_code: chosen_door is ask  你要選哪一扇門？
+                solution_text: 請加上底線。
+                solution_code: 選擇的門 {is} {ask} '你要選哪一扇門？'
+            title: 學生使用包含兩個以上單字的長變數名稱
+        -   example:
+                error_text: 例如，這位學生希望 Hedy 告訴所有朋友他們都很有趣，並告訴其他同學他們並不有趣。
+                error_code: "{if} name {is} Jesse, David, Souf {print} '你很好笑' {else} {print} '你不好笑'"
+                solution_text: |-
+                    你可以使用 `{in}` 指令。雖然較高的級別才會說明這個指令，但它在第 5 級已經可以使用。
+                    另一種做法是使用多個 `{if}` 指令，不使用 `{else}` 指令。缺點是程式不會告訴其他同學他們不好笑。
+                solution_code: |-
+                    friends {is} Jesse, David, Souf
+                    name {is} {ask} '你是誰？'
+                    {if} name {in} friends {print} '你很好笑'
+                    {else} {print} '你不好笑'
+
+                    # 或者
+
+                    name {is} {ask} '你是誰？'
+                    {if} name {is} Jesse {print} '你很好笑'
+                    {if} name {is} David {print} '你很好笑'
+                    {if} name {is} Souf {print} '你很好笑'
+            title: 學生希望多個答案都算正確
+        -   example:
+                error_text: 在下方範例中，密碼就是 `password`。這會讓程式每次都判定密碼正確。
+                error_code: |-
+                    密碼 {is} {ask} '密碼是什麼？'
+                    {if} 密碼 {is} password {print} '允許進入'
+                    {else} {print} '拒絕進入！'
+                solution_text: 請為變數選擇另一個名稱。
+                solution_code: |-
+                    秘密密碼 {is} {ask} '密碼是什麼？'
+                    {if} 秘密密碼 {is} password {print} '允許進入！'
+                    {else} {print} '拒絕進入！'
+            title: 學生在 `{if}` 陳述式中，讓變數名稱與它的值相同
+        level: '5'
     -   sections:
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 有些學生不確定是否該加上引號。如果加上引號，輸出畫面會直接顯示「5+5」，而不是計算結果。
+                error_code: "{print} '5 + 5'"
+                solution_text: 這段程式碼會在輸出畫面顯示「10」。
+                solution_code: '{print} 5 + 5'
+            title: 學生不熟悉引號的使用方式
+        -   example:
+                error_text: 有些學生會覺得使用變數進行數學運算很難。請試著用非常簡單的範例向他們說明，例如：
+                error_code: |-
+                    年齡 = {ask} '你幾歲？'
+                    {print} '明年你就會是' 年齡 + 1
+                solution_text: 也可以再進一步，像這樣寫。
+                solution_code: |-
+                    price = 0
+                    {print} '歡迎來到我們的漢堡店'
+                    burger = {ask} '你想要漢堡嗎？'
+                    {if} burger = 是 price = price + 10
+                    drink = {ask} '你想要飲料嗎？'
+                    {if} drink = 是 price = price + 4
+                    {print} '總共是' price '歐元'
+            title: 學生不熟悉使用變數進行數學運算的概念
+        level: '6'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 請確認學生知道要使用完整的 `repeat` 指令，也要使用「輸出」指令。
+                error_code: |-
+                    {repeat} 3 {times} 他真是個好夥伴
+                    {repeat} 3 輸出
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    {repeat} 3 {times} {print} '他真是個好夥伴'
+                    {repeat} 3 {times} {print} '沒有人能否認！'
+            title: 學生漏掉 `repeat` 指令中的某個單字，或忘了使用「輸出」指令
+        -   example:
+                error_text: 這個等級一次只能重複一行程式碼。在這段程式中，學生想輸出 3 杯不同的飲料，但程式會問 3 次問題，最後只輸出最後一個回答。
+                error_code: |-
+                    {repeat} 3 {times} 飲料 = {ask} '你想喝什麼？'
+                    {print} 飲料
+                solution_text: 要重複多行程式碼，必須前往下一個級別。因此，在這個級別中，你必須分別輸出每一項內容。
+                solution_code: |-
+                    飲料 = {ask} '你想喝什麼？'
+                    {print} 飲料
+                    飲料 = {ask} '你想喝什麼？'
+                    {print} 飲料
+                    飲料 = {ask} '你想喝什麼？'
+                    {print} 飲料
+            title: 學生嘗試重複執行多行程式碼
+        -   example:
+                error_text: 在這個等級中，很容易寫出需要很久才能執行完畢的程式。如果執行時間過長，系統會停止程式，以免學生的裝置負擔過重。
+                error_code: "{repeat} 100 {times} {print} '我可以重複幾次？'"
+                solution_text: 請確認程式碼不會花太久時間執行
+                solution_code: "{repeat} 20 {times} {print} '這樣就夠了'"
+            title: 學生寫出的程式需要很久才能執行完畢
+        level: '7'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 縮排是這個等級的新概念，有些學生可能不容易理解。請先讓他們練習幾個簡單範例，再使用縮排編寫完整程式。
+                error_code: |-
+                    {repeat} 3 {times}
+                    {print} '哈囉'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    {repeat} 3 {times}
+                        {print} '哈囉'
+            title: 學生使用了錯誤的縮排
+        -   example:
+                error_text: 例如在下方程式碼中，學生想記下 3 個人的飲料訂單，但程式只是問了 3 次，最後只記下一份訂單。
+                error_code: |-
+                    {repeat} 3 {times}
+                        飲料 = {ask} '你想喝什麼？'
+                    {print} 飲料
+                solution_text: |-
+                    在正確的程式碼中，第三行開頭也有縮排。這樣第三行才會屬於 repeat 區塊，並一起重複 3 次。
+                    向學生展示這些差異，能幫助他們理解為什麼程式需要縮排才能正常運作。
+                solution_code: |-
+                    {repeat} 3 {times}
+                        飲料 = {ask} '你想喝什麼？'
+                        {print} 飲料
+            title: 學生想重複多行，卻只重複了一行
+        -   example:
+                error_text: |-
+                    在這個等級中，學生還不能將 `{if}` 陳述式放進其他 `{if}` 陳述式或 repeat 迴圈中。
+                    下一個等級就能這樣使用。
+                error_code: |-
+                    生日 = {ask} '今天是你的生日嗎？'
+                    {if} 生日 = 是
+                        {repeat} 3 {times}
+                            {print} '太棒了！生日快樂！'
+                solution_text: 以下是這個級別的正確程式碼：
+                solution_code: |-
+                    birthday = {ask} '今天是你的生日嗎？'
+                    {if} birthday = 是
+                        {print} '生日快樂！'
+                        {print} '生日快樂！'
+                        {print} '生日快樂！'
+            title: 學生想要巢狀使用 `{if}` 陳述式，或將 `{if}` 陳述式放進迴圈中
+        level: '8'
     -   sections:
-        -   example: {}
+        -   example:
+                error_text: 這個級別最困難的部分，就是正確使用縮排。學生喜歡把 `{if}` 陳述式一層層巢狀放入，有時甚至會放在另一個巢狀 `{if}` 裡。要掌握每一層的縮排可能很不容易。
+                error_code: |-
+                    {print} 'Robin 正走在市中心'
+                    地點 = {ask} 'Robin 要走進商店，還是回家？'
+                    {if} 地點 {is} 商店
+                        {print} '她走進商店。'
+                        {print} 'Robin 看到一本有趣的書'
+                        書 = {ask} 'Robin 會買下這本書嗎？'
+                            {if} 書 {is} 會
+                    {print} 'Robin 買了書，然後回家'
+                    {else}
+                        {print} 'Robin 離開商店回家'
+                    {else}
+                        {print} 'Robin 回家了'
+                solution_text: 以下是正確的程式碼。將 `{if}` 陳述式放進其他 `{if}` 陳述式時，請留意每一層不同的程式結構。
+                solution_code: |-
+                    {print} 'Robin 正走在市中心'
+                    地點 = {ask} 'Robin 要走進商店，還是回家？'
+                    {if} 地點 {is} 商店
+                        {print} '她走進商店。'
+                        {print} 'Robin 看到一本有趣的書'
+                        書 = {ask} 'Robin 會買下這本書嗎？'
+                        {if} 書 {is} 會
+                            {print} 'Robin 買了書，然後回家'
+                        {else}
+                            {print} 'Robin 離開商店回家'
+                    {else}
+                        {print} 'Robin 回家了'
+            title: 學生弄錯了縮排
+        level: '9'
     -   sections:
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 我們常看到學生嘗試輸出整份清單（範例中是 animals），而不是逐一輸出清單中的項目。
+                error_code: |-
+                    動物清單 {is} 狗, 貓, 水滴魚
+                    {for} 動物 {in} 動物清單
+                      {print} '我喜歡' 動物清單
+                solution_text: 最後一行的「動物清單」應該改成「動物」。
+                solution_code: |-
+                    動物清單 {is} 狗, 貓, 水滴魚
+                    {for} 動物 {in} 動物清單
+                      {print} '我喜歡' 動物
+            title: 學生沒有正確使用 `{for}` 指令
+        -   example:
+                error_text: 學生常會忘記在 `for` 指令後使用縮排。
+                error_code: |-
+                    動物清單 {is} 狗, 貓, 水滴魚
+                    {for} 動物 {in} 動物清單
+                    {print} '我喜歡' 動物清單
+                solution_text: 使用 `{for}` 指令後應該縮排。
+                solution_code: |-
+                    動物清單 {is} 狗, 貓, 水滴魚
+                    {for} 動物 {in} 動物清單
+                      {print} '我喜歡' 動物
+            title: 學生忘了縮排
+        level: '10'
     -   sections:
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 請確認學生有使用縮排。
+                error_code: |-
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+            title: 學生忘了使用縮排
+        -   example:
+                error_text: |-
+                    有些學生不明白 `i` 是一個變數。之所以選用 `i`，是因為 Python 程式設計常這樣使用，但其實也能改用其他變數名稱。
+                    例如以下程式碼：
+                error_code: |-
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
+                solution_text: 也可以改用這段程式碼，執行結果相同。
+                solution_code: |-
+                    {for} 香蕉 {in} {range} 1 {to} 5
+                        {print} 香蕉
+            title: 學生不明白 `i` 是什麼
+        level: '11'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 這個等級比前面的等級需要更多引號。在這個範例中，清單和 `{if}` 指令都漏了引號。
+                error_code: |-
+                    超級英雄 = 蜘蛛人, 蝙蝠俠, 鋼鐵人
+                    超級英雄角色 = 超級英雄 {at} {random}
+                    {if} 超級英雄角色 = 蝙蝠俠
+                        {print} '我是蝙蝠俠！'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    超級英雄 = '蜘蛛人', '蝙蝠俠', '鋼鐵人'
+                    超級英雄角色 = 超級英雄 {at} {random}
+                    {if} 超級英雄角色 {is} '蝙蝠俠'
+                        {print} '我是蝙蝠俠！'
+            title: 學生忘記加上引號
+        -   example:
+                error_text: |-
+                    數字可以放在引號中，但這樣電腦會把它當成文字，也就不能拿來計算。
+                    在下方範例中，數字 25 放在引號裡，因此不能用來進行數學運算。
+                error_code: |-
+                    score = '25'
+                    answer {is} {ask} '你想加一分嗎？'
+                    {if} answer {is} '是'
+                        score = score + 1
+                        {print} score
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    分數 = 25
+                    回答 {is} {ask} '你想得到一分嗎？'
+                    {if} 回答 {is} '是'
+                        分數 = 分數 + 1
+                        {print} 分數
+            title: 學生替要用來計算的數字加上引號
+        -   example:
+                error_text: 從這個等級開始可以使用小數，但不能使用逗號。
+                error_code: '{print} 2,5 + 2,5'
+                solution_text: 以下是正確的程式碼：
+                solution_code: '{print} 2.5 + 2.5'
+            title: 學生在小數中使用逗號，而不是句點
+        level: '12'
     -   sections:
-        -   example: {}
+        -   example:
+                error_text: 這兩個指令看起來可能很相似，但功能大不相同。
+                error_code: |-
+                    遊戲 {is} {ask} '你想玩遊戲嗎？'
+                    時間 {is} {ask} '你有時間玩嗎？'
+                    {if} 遊戲 {is} '是' {or} 時間 {is} '是'
+                        {print} '一起玩吧！'
+                solution_text: 在這個例子中，對方必須在兩個問題都回答「是」，所以應該使用 `and`。
+                solution_code: |-
+                    遊戲 {is} {ask} '你想玩遊戲嗎？'
+                    時間 {is} {ask} '你有時間玩嗎？'
+                    {if} 遊戲 {is} '是' {and} 時間 {is} '是'
+                        {print} '一起玩吧！'
+            title: 學生混淆 `{and}` 和 `{or}`
+        level: '13'
     -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 學生通常已在數學課看過這些符號。不過，如果學生還不認識這些符號，學起來可能會有點困難。
+                error_code: |-
+                    年齡 = {ask} '你幾歲？'
+                    {if} 年齡 < 12
+                        {print} '你比我年長！'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    age = {ask} '你幾歲？'
+                    {if} age > 12
+                        {print} '你比我年長！'
+            title: 學生混淆 `<` 和 `>` 符號
+        -   example:
+                error_text: 大多數學生可能沒看過這些符號，請務必向他們說明每個符號的意思。
+                error_code: |-
+                    name = {ask} '你叫什麼名字？'
+                    {if} name =  'Hedy'
+                        {print} '你不是 Hedy'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    名字 = {ask} '你叫什麼名字？'
+                    {if} 名字 != 'Hedy'
+                        {print} '你不是 Hedy'
+            title: 學生使用錯誤的 `!=`、`<=` 和 `>=` 符號
+        -   example:
+                error_text: 在這個等級中，學生仍可使用 `=` 或 `is`，但在其他等級或 Python 中，這樣寫可能會造成問題。因此，最好讓學生練習使用正確的寫法。
+                error_code: |-
+                    名字 = {ask} '你叫什麼名字？'
+                    {if} 名字 = 'Hedy'
+                        {print} '你很酷！'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    名字 = {ask} '你叫什麼名字？'
+                    {if} 名字 == 'Hedy'
+                        {print} '你很酷！'
+            title: 學生忘了使用 `==` 符號
+        level: '14'
     -   sections:
-        -   example: {}
+        -   example:
+                error_text: 縮排對學生來說常常很難。
+                error_code: |-
+                    回答 = 0
+                    {while} 回答 != 25
+                    回答 = {ask} '5 乘以 5 是多少？'
+                    {print} '答對了'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    回答 = 0
+                    {while} 回答 != 25
+                        回答 = {ask} '5 乘以 5 是多少？'
+                    {print} '答對了'
+            title: 學生忘了在 `while` 迴圈中縮排
+        level: '15'
     -   sections:
-        -   example: {}
-        -   example: {}
+        -   example:
+                error_text: 從這個等級開始，清單必須放在方括號中。
+                error_code: |-
+                    冰淇淋 = '草莓', '巧克力'
+                    {print} '我喜歡' 冰淇淋[{random}] '冰淇淋'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    冰淇淋 = ['草莓', '巧克力']
+                    {print} '我喜歡' 冰淇淋[{random}] '冰淇淋'
+            title: 學生忘了使用方括號
+        -   example:
+                error_text: 從這個等級開始，清單必須放在方括號中。
+                error_code: |-
+                    icecream = ('草莓', '巧克力')
+                    {print} '我喜歡' icecream[{random}] '冰淇淋'
+                solution_text: 以下是正確的程式碼：
+                solution_code: |-
+                    冰淇淋 = ['草莓', '巧克力']
+                    {print} '我喜歡' 冰淇淋[{random}] '冰淇淋'
+            title: 學生使用了錯誤的括號
+        level: '16'
+    title: 常見錯誤
+    key: common_mistakes
+    intro: 犯錯也是學習的一部分，寫程式時尤其如此！犯錯無可避免，卻也是很好的學習機會。不過對教師來說，要找出正確的修正方式可能很有挑戰，尤其學生逐級學習後，程式會變得越來越長。因此，我們整理了每個等級常見的錯誤和解決方法。
+title: Hedy 說明文件
+join-sections:
+-   title: 支持 Hedy
+    text: '# 你可以透過三種方式支持 Hedy！'
+-   title: 改進 Hedy 語言
+    text: |-
+        Hedy 採用漸進式設計並支援多種語言，因此帶來許多有趣的技術挑戰。
+        你可以在 <a href="https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage" target="_blank">GitHub</a> 上查看這些問題。
+-   title: 翻譯 Hedy
+    text: |-
+        不會寫程式也沒關係！你還可以<a href="https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial" target="_blank">翻譯關鍵字、錯誤訊息、冒險及其他內容</a>，用這種方式支持 Hedy。
+        以下是目前的翻譯進度。請協助我們完成一種語言，或加入新的語言！
+        <a href="https://hosted.weblate.org/engage/hedy/">
+        <img src="https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg" alt="翻譯進度" /></a>
+-   title: 協助教師開始使用
+    text: |-
+        Hedy 的設計目標，是協助教師在課堂中教授程式設計。我們提供教師專用功能，例如建立及自訂班級，並查看學生的學習情況。
+        如果你喜歡 Hedy，可以聯絡熟悉的學校，協助教師開始使用！我們也能透過 <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord</a> 幫你尋找學校或教師。
+learn-more-sections:
+-   title: Hedy 基金會
+    text: |-
+        Hedy 由 Hedy 基金會（Stichting Hedy）維護，地址為 Sportmanstaat 8, 2341 JG Oegstgeest，荷蘭商會登記號碼為 94013985。
+
+        基金會董事會成員如下：
+
+          * Felienne Hermans，主席
+          * Eelko Huizing，財務
+          * Renée Merbis，秘書
+
+        Stichting Hedy 董事會成員執行職務時不會獲得任何報酬。 
+-   title: 深入了解！
+    text: |-
+        想進一步了解 Hedy 的理念和設計嗎？請觀看 Felienne 在 2022 年 StrangeLoop 大會上的演講：
+
+        <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/fmF7HpU_-9k?wmode=opaque" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+-   title: 新聞中的 Hedy
+    text: |-
+        自 2020 年初推出以來，已有許多網站和報紙介紹過 Hedy。我們將相關內容整理在這裡：
+        * [CoRecursive（英文），2024 年 6 月](https://corecursive.com/hedy-with-felienne-hermans/)
+        * [Java Magazine（荷蘭文），2023 年 4 月](images/Hedy_Javamagazine2023.pdf)
+        * [gotopia（英文），2023 年 2 月](https://gotopia.tech/articles/215/teaching-kids-how-to-code-with-Hedy)
+        * [Roteco（德文），2022 年 11 月](https://www.roteco.ch/de/stories/robot-und-ressourcen/hedy-eine-mitwachsende-programmiersprache/)
+        * [Tech Optimism - A Solution to the IT Shortage（荷蘭文），2022 年 8 月](https://podcasts.apple.com/nl/podcast/techoptimisme-2-een-oplossing-voor-het-it-tekort/id1114136654?i=1000581523458)
+        * [Codeweek Podcast（英文），2022 年 7 月](https://codeweek.eu/podcasts/26)
+        * [Heise.de（德文），2022 年 1 月](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)
+        * [Strumenta，2021 年 11 月](https://tomassetti.me/teaching-programming-with-hedy/)
+        * [Vives（荷蘭文），CodeWeek 特刊，2021 年 10 月](images/Vives-174-codeweek.pdf)
+        * [CodeWeek.eu - Haunted House Challenge，2021 年 9 月](https://codeweek.eu/2021/challenges/haunted-house)
+        * [CodeWeek.eu（英文），2021 年 5 月](https://codeweek.eu/blog/hedy-making-textual-programming-easier-and-more-fun/)
+        * [Opensource.com，2021 年 4 月](https://opensource.com/article/21/4/hedy-teach-code)
+        * [IO Magazine，2021 年 4 月](https://ict-research.nl/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
+        * [Ingeniería De Software（西班牙文），2021 年 2 月](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
+        * [Hello World Magazine，2021 年 2 月](images/Hello_World_15_Hedy.pdf)
+        * [DiScoro，2021 年 1 月](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
+        * [Felienne 以 Hedy 榮獲荷蘭 ICT 研究獎，2021 年 1 月](https://www.universiteitleiden.nl/en/news/2021/01/felienne-hermans-receives-dutch-prize-for-ict-research-2021)
+        * [SlashDot，2020 年 8 月](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
+        * [GenBeta（西班牙文），2020 年 8 月](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
+        * [Developpez（法文），2020 年 8 月](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
+        * [Vives（荷蘭文），2020 年 10 月](images/artikel_vives.pdf)「Met Hedy stap voor stap leren programmeren」
+        * [Leiden University，2020 年 4 月](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
+        * [Mare（荷蘭文），2020 年 4 月](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
+        * [AG Connect（荷蘭文），2020 年 4 月](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
+start-sections:
+-   title: 開始使用 Hedy
+    text: |-
+        歡迎使用 Hedy，我們很樂意協助你開始！
+
+        我們的[教師手冊](https://www.hedy.org/for-teachers/manual) 詳細介紹所有功能，而這個頁面提供簡短總覽，讓你在深入探索前先了解各項功能。
+
+        以下是幾個重要特色：
+        * Hedy 是協助管理兒童程式設計課堂的工具！你可以建立自己的班級和教案，也能查看孩子的學習情況。
+        * 開始時不需要具備很多程式設計知識；Hedy 也會帶著教師循序漸進地學習！
+        * Hedy 已翻譯成多種語言，因此你可以使用自己的母語。
+        * 每個孩子都能寫程式！Hedy 對視覺不便的孩子特別有幫助，因為它能朗讀教材，不必使用滑鼠。
+        * 我們隨時願意協助。你可以在 [Discord](https://discord.gg/8yY7dEme9r) 找到我們，也可以[寄電子郵件](hello@hedy.org)給我們。
+-   title: 教師談 Hedy
+    text: |-
+        世界各地有許多教師表達了對 Hedy 的喜愛。以下是部分教師與我們分享的心得：
+
+        *非常有啟發性！這是一個很棒的方法，能讓自己和學生都更容易接觸程式設計。玩起來很有趣，也很有潛力運用在學生身上。我認為這是很好的工具！我相信，這是孩子開始學習程式設計的好方法。Python 和寫程式一直都很吸引人，但入門門檻非常高。現在門檻降低了，也讓人知道寫程式其實可以很容易。我很高興看到 Hedy 努力讓所有使用者都能輕鬆接觸程式設計！*
+        荷蘭：受訓中的中學數學教師
+
+        *介面簡單，範例也很好。* 教師：小學三至六年級
+
+        *多語言程式設計，以及漸進式程式設計這個概念本身。* 美國：中學六至八年級
+
+        *以漸進方式介紹程式設計。* 澳洲：高中
+
+        *會自動接續。* 荷蘭：HAVO-VWO 二年級
+
+        *說明可以使用荷蘭文（程式碼則使用英文），而且功能會逐步增加。* 荷蘭：進階班級
+
+        *Hedy 和它的漸進等級……真是了不起的點子。我想親自感謝你們創造了它，真的非常感謝。我也從未看過學生展現出像使用 Hedy 時這麼高的投入和熱情。我們已教到第 5 級，準備在課堂和實驗課再用一週，接著才開始學 Python。* 巴基斯坦
+
+        *它很有「真正寫程式」的感覺，和實際的程式設計很相似。* 荷蘭：四至八年級進階班級
+
+        *循序漸進的活動，而且活動很有趣。* 荷蘭：各程度一年級、VWO/HAVO 二年級、VWO+ 二年級、HAVO 三年級、VWO 三年級
+
+        *我非常喜歡 Hedy，它的設計也很完善，很適合在小學使用。Hedy 的漸進式方法效果很好。每個等級開頭的簡短說明和小範例，能幫助孩子快速了解這個等級的新內容。孩子可以自行選擇不同作業，這點也很有效。你會看到孩子挑選自己感興趣的作業，然後逐級完成。對於擅長程式設計、想體驗真正程式語言的孩子來說，Hedy 非常有趣。等中學提供更多資訊科技教育時，這也會是很好的準備。* 荷蘭：Oegstgeest 蒙特梭利學校
+
+        *整體安排得非常好。* 荷蘭：HAVO-VWO 初中
+
+        *我可以掌握全班的學習進度。* 荷蘭：七、八年級
+
+        ![Felienne 教孩子寫程式](/images/teacherfeedback/Fkids1.JPG) *Felienne 教孩子寫程式*        ![孩子學習 Hedy](/images/teacherfeedback/Fkids2.JPG) *孩子學習 Hedy*

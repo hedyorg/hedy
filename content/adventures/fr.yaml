@@ -8,14 +8,14 @@ adventures:
                 story_text: |
                     Au niveau 1 tu peux faire une histoire avec un personnage principal dont tu auras choisi le nom toi-même.
 
-                    À la première ligne, utilise `{ask}` pour demander le nom du personnage de ton histoire.
+                    À la première ligne, utilise `{ask}` pour demander le nom du personnage de ton histoire. Ensuite, utilise {answer} pour utiliser le nom du personnage qui a été donné.
                 example_code: |
                     ```
                     {ask} Le nom du personnage principal de cette histoire est
                     {print} {answer} est en train de marcher dans la forêt
-                    {print} Il a un peu peur, {answer}
-                    {print} Il entend de drôles de bruits tout autour
-                    {print} {answer} craint que cette forêt soit hantée
+                    {print} Un peu effrayé, {answer} continue de marcher
+                    {print} {answer} entend de drôles de bruits tout autour
+                    {print} Il craint que cette forêt soit hantée
                     ```
                 story_text_2: |
                     ### Défi
@@ -23,7 +23,17 @@ adventures:
                     Cette histoire doit être différente de celle proposée dans le code d'exemple.
                     Utilise au moins une commande `{ask}` et `{answer}`.
                     Tu peux choisir n'importe quel sujet.
-                    Si tu n'as pas d'idée, tu peux parler de l'un des sujets suivants : un film, un match ou une journée au zoo.
+                    Si tu n'as pas d'idée, tu peux parler de l'un des sujets suivants : aller au cinéma, un match de sport ou une journée au zoo.
+                answer_code: |
+                    ```
+                    {print} Un jour, je suis allé(e) au zoo.
+                    {ask} Quel animal ai-je vu en premier ?
+                    {print} D'abord, j'ai vu un(e) {answer}
+                    {print} Ensuite j'ai vu un pingouin.
+                    {print} Il était en train de prendre son repas.
+                    {ask} Qu'est-ce que le pingouin était entrain de manger ?
+                    {print} Le pingouin mangeait {answer} en guise de repas.
+                    ```
             2:
                 story_text: |
                     Dans le niveau 2 tu peux créer une histoire plus drôle. Le nom de ton personnage principal peut être à n'importe quel endroit de la phrase
@@ -39,6 +49,27 @@ adventures:
                     {print} Soudain, il entend un bruit étrange…
                     {sleep}
                     {print} nom craint que cette forêt soit hantée
+                    ```
+                story_text_2: |
+                    ### Défi
+                    Il est maintenant temps d'ajouter des variables à l'histoire que tu as créée au niveau précédent.
+                    Retourne à l'histoire du niveau 1 et copie le code. Colle le code dans l'écran de saisie de ce niveau.
+
+                    Ce code ne fonctionnera pas dans ce niveau car il n'utilise pas encore de variables.
+                    Corrige le code en utilisant des variables et le mot clé `{is}` avec la commande `{ask}` comme tu l'as appris dans ce niveau.
+
+                    **Extra** Ajoute une commande `{sleep}` à ton code pour apporter du suspens à ton histoire.
+                answer_code: |
+                    ```
+                    {print} Un jour je suis allé(e) au zoo.
+                    premier_animal {is} {ask} Quel animal ai-je vu en premier ?
+                    {print} D'abord j'ai vu un(e) premier_animal
+                    {print} Puis j'ai vu un pingouin.
+                    {print} Il prenait son repas.
+                    nourriture {is} {ask} Que mangeait le pingouin ?
+                    {print} Le pingouin mangeait...
+                    {sleep} 3
+                    {print} nourriture
                     ```
             3:
                 story_text: |
@@ -73,6 +104,19 @@ adventures:
                     jeté {is} {ask} Quel objet devrions-nous jeter ?
                     {remove} jeté {from} sac_à_dos
                     ```
+                answer_code: |
+                    ```
+                    animaux {is} lion, zèbre, flamand rose
+                    {print} Bonjour les enfants ! Aujourd'hui, nous allons au zoo !
+                    animal_prefere {is} {ask} Quel animal souhaites-tu voir aujourd'hui ?
+                    {add} animal_prefere {to} animaux
+                    {sleep} 2
+                    {print} Dirigeons-nous vers le animaux{at} {random}
+                    {sleep}
+                    animal_le_moins_aime {is} {ask} Quel animal ne souhaites-tu pas voir ?
+                    {remove} animal_le_moins_aime {from} animaux
+                    {print} Allons voir un animaux {at} {random} maintenant !
+                    ```
             4:
                 story_text: |
                     ### Exercice
@@ -93,6 +137,16 @@ adventures:
                     animaux {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Il entend des bruits de _ animaux {at} {random}
                     {print} nom _ craint que la forêt ne soit hantée _
+                    ```
+                answer_code: |
+                    ```
+                    nom {is} {ask} 'Quel est ton nom ?'
+                    {print}  'Le personnage principal s'appelle' name
+                    {print} nom  ' s'en va marcher dans la forêt.'
+                    {print} nom ' a un peu peur.'
+                    animaux {is} 🦔, 🐿, 🦉, 🦇
+                    {print} 'Il entend le bruit d'un ' animaux {at} {random}
+                    {print} nom ' a peur que la forêt soit hantée.'
                     ```
             5:
                 story_text: |
@@ -119,22 +173,34 @@ adventures:
                     {if} fin {is} heureuse {print} nom " sort son épée et le monstre s'enfuie à toutes jambes"
                     {else} {print} "Le monstre mange " nom
                     ```
+                answer_code: |
+                    ```
+                    nom {is} {ask} 'Comment s'appelle le héro ?'
+                    {print} 'Oh non, l'avion va s'écraser. Qui va nous sauver ?'
+                    {print} "Regardez qui vole dans le ciel, c'est " nom
+                    fin {is} {ask} 'Vas-tu sauver l'avion ou le détruire ?'
+                    {if} fin {is} sauver {print} nom "a fait atterrir l'avion, il nous a sauvés !"
+                    {else} {print} "Oh non ! " nom " détruit l'avion, au secours !"
+                    ```
             6:
-                story_text: "Maintenant que vous pouvez utiliser `{elif}` vous pouvez créer une histoire encore plus interactive ! Vous pourriez créer plusieurs personnages, par exemple, qui auraient tous des attributs différents.\nOu vous pourriez faire choisir à votre joueur quel chemin emprunter, quelle porte ouvrir ou quelle potion magique boire...\n\n###Exercice\nCréez votre propre histoire avec 3 options ou plus en utilisant {elif}."
-                example_code: "```\npersonnage =  {ask}  'Qui va vous aider dans votre quête?'\n{if} personnage {is} 'Daisy'\n    {print} 'Vous avez chosi Daysi! C'est la plus futée de tous!'\n    {print} \"Daisy vous dit immédiatement que vous ne devriez pas manger cez baies là-bas.\"\n{elif} personnage {is} 'Jason'\n    {print} 'Vous avez chosi Jason! C'est le plus fort de tous!'\n    {print} 'Jason soulève un rocher, en découvrant une carte secrète en dessous.'\n{elif} character {is} 'Sam'\n    {print} ''Vous avez chosi Sam! C'est le plus rapide de tous!'\n    {print} 'Sam grimpe à un arbre et voit qu'il y a un village pas très loin...'\n\n```\n"
+                story_text: "Maintenant que vous pouvez utiliser `{elif}` vous pouvez créer une histoire encore plus interactive ! Vous pourriez créer plusieurs personnages, par exemple, qui auraient tous des attributs différents.\nOu vous pourriez faire choisir à votre joueur quel chemin emprunter, quelle porte ouvrir ou quelle potion magique boire...\n\n### Exercice\nCréez votre propre histoire avec 3 options ou plus en utilisant `{elif}`."
+                example_code: "```\npersonnage {is} {ask} 'Qui va vous aider dans votre quête ?'\n{if} personnage {is} 'Daisy'\n{print} 'Vous avez choisi Daisy ! C'est la plus futée de tous !'\n{elif} personnage {is} 'Jason'\n{print} 'Vous avez choisi Jason ! C'est le plus fort de tous !'\n{elif} personnage {is} 'Sam'\n{print} 'Vous avez choisi Sam ! C'est le plus rapide de tous !'\n```\n"
             8:
                 story_text: |
                     Dans une histoire, on se répète parfois. Par exemple, quand une personne appelle à l'aide ou chante une chanson.
                     À ce niveau, tu peux écrire ces répétitions dans ton histoire, avec `{repeat}`.
 
                     ### Exercice
-                    Ajoute une répétition à ta propre histoire. Retourne en arrière dans tes programmes sauvegardés, choisi une histoire que tu as programmée à un niveau précédent, trouve une ligne contenant `{print}` et répète là !
+                    Ajoute une répétition à ta propre histoire. Retourne en arrière dans tes programmes sauvegardés, choisi une histoire que tu as programmée à un niveau précédent, trouve une ligne contenant `{print}` et répète la !
                 example_code: |
                     ```
                     {print} "Le prince appelait à l'aide sans arrêt"
                     {repeat} 5 {times} {print} 'Au secours !'
                     {print} "Pourquoi personne ne vient m'aider ?"
                     ```
+                answer_code: |
+                    {print} 'Tous les enfants voulaient aller au zoo, et n'arrêtaient pas de crier : '
+                    {repeat} 3 {times} {print} "Allons au zoo !"
             9:
                 story_text: |
                     À ce niveau tu peux utiliser plusieurs lignes dans une commande `{if}`, ainsi tu peux améliorer la fin heureuse et la fin triste !
@@ -150,12 +216,27 @@ adventures:
                     ```
                     {print} "OH NON ! Le T-rex se rapproche !"
                     fin = {ask} "Voulez-vous une fin triste ou heureuse ?"
+                    # La fin heureuse
                     {if} fin {is} heureuse
                     …{print} "Juste à temps, Richard retourne d'un saut dans la machine à voyager dans le temps !"
                     …{print} _
+                    # La fin triste
                     {else}
                     …{print} "Oh non ! Richard est trop lent…"
                     …{print} _
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'OH NON ! Le T-rex se rapproche !'
+                    fin = {ask} 'Veux-tu une fin heureuse ou malheureuse ?'
+                    {if} fin {is} heureuse
+                        {print} 'À la dernière minute, Richard saute dans la machine à voyager dans le temps !'
+                        {print} 'Fiou, content qu'on ait réussi'
+                        {print} 'Juste à temps.'
+                    {else}
+                        {print} 'Oh non ! Richard est trop lent...'
+                        {print} 'Le T-rex rugit d'un énorme ROAR'
+                        {print} 'Il ouvre la gueule et dévore Richard en une seule bouchée.'
                     ```
             10:
                 story_text: |
@@ -185,13 +266,68 @@ adventures:
                     {else}
                         {print} "Robin rentre à la maison"
                     ```
+                story_text_2: |
+                    En utilisant les commandes `{and}` et `{or}` tu peux rendre tes histoires plus flexibles. Tu peux poser deux questions et répondre à une combinaison de réponses.
+
+                    ### Défi 1
+                    Regarde le code d'exemple et termine-le. Ensuite, ajoute au moins 2`{if}` avec un `{and}` ou un `{or}`.
+
+                    ### Défi 2
+                    Trouve une histoire parmi les niveaux précédents et ajoute un `{and}` ou un `{or}`.
+                example_code_2: |
+                    ```
+                    {print} 'Notre héroïne marche dans la forêt.'
+                    {print} 'Le chemin se sépare en deux.'
+                    chemin = {ask} 'Quel chemin devrait-elle choisir ?'
+                    arme = {ask} 'Quelle arme sort-elle ?'
+                    {if} chemin {is} gauche {and} arme {is} épée
+                        _
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Victoire marche en ville.'
+                    lieu = {ask} 'Va-t-elle dans un magasin ou rentre-t-elle à la maison ?'
+                    {if} lieu {is} magasin
+                        {print} 'Elle entre dans le magasin.'
+                        {print} 'Victoire voit un livre qui semble intéressant.'
+                        livre = {ask} 'Achète-t-elle le livre ?'
+                        {if} livre {is} oui
+                            {print} 'Victoire achète le livre puis rentre chez elle.'
+                        {else}
+                            {print} 'Victoire sort du magasin et rentre chez elle.'
+                    {else}
+                        {print} 'Victoire rentre chez elle.'
+                        glace = {ask} 'S'arrête-t-elle prendre une glace sur le chemin du retour ?'
+                        {if} glace {is} oui
+                            {print} 'Victoire s'arrête d'abord pour manger une glace.'
+                            {print} 'Elle choisit le sorbet au citron.'
+                            {print} 'Il est délicieux.'
+                        {else}
+                            {print} 'Elle rentre directement à la maison.'
+                    ```
+                answer_code_2: |
+                    ```
+                    {print} 'Notre héroïne marche à travers la forêt.'
+                    {print} 'Le chemin se sépare en deux.'
+                    chemin = {ask} 'Quel chemin devrait-elle choisir ?'
+                    arme = {ask} 'Quelle arme dégaine-t-elle ?'
+
+                    {if} chemin {is} gauche {and} arme {is} épée
+                        {print} 'Aucun montre n'ose approcher notre héroïne.'
+
+                    {if} chemin {is} gauche {and} arme {is} lance-pierre
+                        {print} 'L'héroïne est attaquée par un hibours.'
+
+                    {if} chemin {is} droite {or} arme {is} grimoire
+                        {print} 'L'héroïne rencontre un mystérieux magicien.'
+                    ```
             11:
                 story_text: |
-                    À ce niveau, tu peux utiliser la commande {for} dans ton histoire. Par exemple, tu peux facilement programmer le livre pour enfant « Ours brun, dis-moi ce que tu vois ? »
+                    À ce niveau, tu peux utiliser la commande `{for}` dans ton histoire. De cette manière, tu pourrais facilement programmer le livre pour enfant « Ours brun, dis-moi ce que tu vois ? »
 
                     ### Exercice
 
-                    Regarde <a href="https://fr.slideshare.net/smt786/our-brun-dismoi">l'histoire</a> si tu ne la connais pas et assure-toi ensuite de la programmer comme dans le livre.
+                    Regarde <a href="https://fliphtml5.com/jmlya/nquy"> l'histoire</a> si tu ne la connais pas et assure-toi ensuite de la programmer comme dans le livre.
                 example_code: "```\nanimaux = _ , _ , _ \n{print} \"Ours brun, Ours brun\"\n{print} \"Que vois-tu ?\"\n```\n"
             13:
                 example_code: |
@@ -203,18 +339,18 @@ adventures:
                 story_text: "Utiliser une boucle `{while}` peut rendre vos histoires plus intéressantes. Par exemple, utiliser `{while} game == 'on'` pourrait faire durer une partie jusqu'à ce que le jeu soit fermé.\nVous pourriez également utiliser `{while} sword == 'lost'` pour que le joueur ne puisse continuer tant que l'épée n'est pas retrouvée.\n\n### Exercice\nLe code en exemple vous montre comment utiliser la boucle `{while}` dans le contexte d'une histoire. Essayez à votre tour de **trouver votre propre scénario** dans lequel le joueur doit trouver quelque chose avant de pouvoir continuer.\n"
                 example_code: |
                     ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them ?'
-                    {print} 'You can choose : tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look ?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are !'
-                            keys = 'found'
+                    clés= 'perdues'
+                    {print}('Tu es dans ton jardin et tu as perdu tes clés.')
+                    {print}( 'Où veux-tu les chercher ?')
+                    {print}('Tu peux regarder sous : la branche, la jardinière, le caillou, la boîte aux lettres.')
+                    {while} clés== 'perdues'
+                        emplacement = {input}('Où veux-tu regarder ?')
+                        {if} emplacement == 'la jardinière'
+                            {print}( 'Elles sont là !')
+                            clés = 'trouvées'
                         {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house !'
+                            {print}('Non, elles ne sont pas sous ', emplacement)
+                    {print}('Maintenant tu peux entrer dans la maison !')
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
@@ -233,8 +369,8 @@ adventures:
                     {print} Je choisis animaux {at} {random}
                     ```
                 story_text_2: |
-                    ## Supprimer d'une liste
-                    Si tu peux ajouter des éléments à une liste, tu peux aussi en retirer bien sûr. Cela se fait avec la commande `{remove} {from}`
+                    ## {remove} {from}
+                    Si tu peux ajouter des éléments à une liste, tu peux aussi en retirer bien sûr. Cela se fait avec la commande `{remove} {from}`.
                 example_code_2: |
                     ```
                     animaux {is} chien, chat, kangourou
@@ -339,15 +475,15 @@ adventures:
                     Tu y arrives ? Génial ! Veux-tu ajouter davantage de fonctions à ta calculatrice ? **Cette aventure se poursuit dans l'onglet suivant !**
                 example_code: |
                     ```
-                    {define} calculer_note_moyenne
+                    {def} calculer_note_moyenne():
                         total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
+                        {for} i {in} {range} (1,4):
+                            note = {input} _
                             total = total + _
-                            return _ / 4
+                            {return} _ / 4
 
-                    note_moyenne = {call} _
-                    {print} 'Ta note moyenne est ' note_moyenne
+                    note_moyenne = _
+                    {print}('Ta note moyenne est ', note_moyenne)
                     ```
     calculator_2:
         levels: {}
@@ -373,7 +509,11 @@ adventures:
                     {print} "SURPRISE !"
                     ```
     congratulations:
-        levels: {}
+        levels:
+            8:
+                story_text: |
+                    Félicitations ! Tu as atteint la fin de Hedy Basic ! Tu peux continuer à apprendre avec Hedy Advanced (niveaux 9-12), où tu apprendras des concepts de programmation plus complexes.
+                    Sinon, n'hésite pas à continuer avec Hedy Basic et à créer tes propres programmes.
     debugging:
         name: débugage
         default_save_name: débugage
@@ -537,8 +677,10 @@ adventures:
                     Change les noms par les noms de tes amis ou de ta famille, et termine le code.
                 example_code: |
                     ```
+                    # Préparation du jeu:
                     joueurs = Anne, Jean, Jeanne
                     choix = 1, 2, 3, 4, 5, 6
+                    # Laisser chaque joueur lancer le dé :
                     _ _ _ _
                         {print} joueur " obtient un " choix {at} {random}
                         {sleep}
@@ -907,7 +1049,7 @@ adventures:
                     ### Exercice
                     Copie le code d'exemple dans la zone de programmation en cliquant sur le bouton jaune.
                     Maintenant finis l'histoire en ajoutant au moins 5 lignes de code.
-                    Rappelle-toi de commencer chaque ligne de code avec la commande `{print}`.
+                    Rappelle-toi de commencer chaque ligne de code avec la commande `{print}` ou `{ask}`.
             2:
                 story_text: |
                     Dans cette maison hantée tu peux choisir tes monstres avec des emojis. Bien sûr tu peux aussi utiliser des mots.
@@ -1038,10 +1180,10 @@ adventures:
         levels:
             15:
                 story_text: |
-                    Dans l'aventure précédente, vous avez appris à utiliser un argument dans une fonction et à le combiner avec un {ask}.
+                    Dans l'aventure précédente, vous avez appris à utiliser un argument dans une fonction et à le combiner avec un {input}.
                     Vous vous êtes peut-être demandé pourquoi vous utiliseriez des fonctions, car les fonctions de l'exemple ne représentaient qu'une seule ligne de code.
                     Nous allons maintenant vous montrer à quoi ressemble une fonction plus grande et nous utiliserons également plusieurs arguments. Vous verrez à quel point il est préférable d’utiliser une fonction une fois qu’elle devient plus grande.
-                    Voici un exemple de fonction avec des arguments combinés avec des commandes {ask}.
+                    Voici un exemple de fonction avec des arguments combinés avec des commandes `{input}`.
     if_command:
         description: Introduction à la commande `{if}`
         levels:
@@ -1106,7 +1248,7 @@ adventures:
                         {print} "Tu ne veux pas continuer"
                     ```
     in_command:
-        description: Introduction de la commande `{in}`
+        description: Introduction de la commande {in}
         levels:
             6:
                 story_text: |
@@ -1253,7 +1395,7 @@ adventures:
                     **Bonus** Peux-tu faire que le perroquet demande plus que ton nom, en ajoutant des lignes de code ?
             3:
                 story_text: |
-                    Apprend à ton perroquet un nouveau mot avec `{add} {to_list}`.
+                    Apprend à ton perroquet un nouveau mot avec `{add}`.
                     ### Exercice
                     Peux-tu ajouter la commande `{add} {to_list}` pour faire marcher le code ?
                 example_code: |
@@ -1327,7 +1469,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## La commande d'affichage
+                    ## La commande {print}
                     Tu peux afficher du texte à l'écran en utilisant la commande `{print}`.
                 example_code: |
                     ```
@@ -1347,13 +1489,14 @@ adventures:
                     ```
             13:
                 story_text: |-
-                    Nous sommes arrivés à du code Python réel ! Cela signifie qu'à partir de maintenant, nous devons utiliser les parenthèses avec `{print}` et `{range}`
-                    Cela signifie aussi que tu peux utiliser le code Hedy de ce niveau dans n'importe quel environnement Python du moment que tu utilises les commandes en anglais. Si tu ne l'as pas encore fait, tu peux basculer en anglais dans le menu des commandes.
+                    Nous sommes arrivés à du code qui ressemble à du vrai Python !
+                    A ce niveau, tu ne verras pas de nouvelles commandes. Nous allons uniquement voir une façon un peu différente de les écrire, qui est plus proche de ce qui est fait pour du code Python.
+                    Cela signifie qu'à partir de maintenant, nous devons utiliser les parenthèses avec `{print}`.
+                    Cela signifie aussi que tu peux utiliser le code Hedy de ce niveau dans n'importe quel environnement Python du moment que tu utilises les commandes en anglais.
+                    Si tu ne l'as pas encore fait, tu peux basculer en anglais dans le menu des commandes.
                 example_code: |
                     ```
                     {print}('Salut !')
-                    {for} i {in} {range}(1, 10):
-                        {print}('Ceci est la ligne ', i)
                     ```
                 story_text_2: Si tu veux afficher plus d'un élément, tu dois les séparer par une virgule.
                 example_code_2: |
@@ -1398,7 +1541,7 @@ adventures:
                     {print} 'qu'y a-t-il de plus amusant que ça ?'
                     ```
     random_command:
-        description: Introduction de la commande `{at} {random}`
+        description: Introduction de la commande {at} {random}
         levels:
             3:
                 story_text: |
@@ -1457,11 +1600,8 @@ adventures:
                     ```
                     {repeat} 5 {times}
                         {print} "Salut tout le monde"
-                        {print}"Tout ceci sera répété 5 fois"
+                        {print} "Tout ceci sera répété 5 fois"
                     ```
-
-                        {print} "Bonjour tout le monde"
-                        {print} "Ceci sera écrit 5 fois"
             10:
                 story_text: |
                     À ce niveau, tu peux non seulement utiliser un bloc de lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !
@@ -1476,14 +1616,8 @@ adventures:
                         {else}
                             {print} "La pizza c'est meilleur"
                     ```
-
-                        nourriture = {ask} "Que veux-tu ?"
-                        {if} nourriture {is} pizza
-                            {print} "parfait !"
-                        {else}
-                            {print} "La pizza c'est meilleur"
     repeat_command_2:
-        description: repeat command 2
+        description: '{repeat} commande 2'
         levels:
             8:
                 story_text: |
@@ -1498,7 +1632,7 @@ adventures:
                     ```
                 story_text_2: |
                     Une autre chose intéressante que tu peux faire avec la commande `{repeat}` est d'utiliser une variable pour indiquer le nombre de fois que quelque chose doit être répété. Dans l'exemple, tu peux voir que nous demandons en premier quel âge a la personne.
-                    Ensuite, en ligne 3, le message est répété `âge` fois. Ainsi nous avons utilisé la variable `âge` avec la commande `{repeat}`.
+                    Ensuite, en ligne 3, le message est répété 'âge' fois. Ainsi nous avons utilisé la variable 'âge' avec la commande `{repeat}`.
                 example_code_2: |
                     ```
                     {print} "Youpi ! C'est ton anniversaire"
@@ -1657,7 +1791,7 @@ adventures:
             8:
                 story_text: |
                     À ce niveau tu as appris comment utiliser la commande `{repeat}` pour répéter une ligne de code un certain nombre de fois.
-                    Tu peux l'utiliser dans ton restaurant pour demander à plusieurs personnes ce qu'elles veulent manger.
+                    Tu peux l'utiliser dans ton restaurant pour demander (`{ask}`) à plusieurs personnes ce qu'elles veulent manger.
 
                     ### Exercice
                     Peux-tu compléter le code ? Hedy doit demander le plat autant de fois qu'il y a de personnes. Donc s'il y a 5 personnes, la question doit être répétée 5 fois.
@@ -1781,7 +1915,7 @@ adventures:
                 example_code: |
                     ```
                     choix {is} pierre, papier, ciseaux
-                    {print} choix {at} {random}
+                    {print} choix _
                     ```
                 story_text_2: |
                     **Bonus** fait un jeu pour deux joueurs. Commence par demander aux deux joueurs leurs noms. Ensuite, laisse l'ordinateur tirer leur réponse au hasard.
@@ -1904,7 +2038,7 @@ adventures:
                         {print} 'Rendez vous à la gare à 10 h 00'
                      ```
     sleep_command:
-        description: Introduction à la commande pour endormir
+        description: Introduction à la commande {sleep}
         levels:
             2:
                 story_text: |
@@ -2131,9 +2265,11 @@ adventures:
             7:
                 story_text: |
                     À ce niveau tu peux utiliser les maths pour dessiner différentes formes.
-                    Tu as sans doute appris à l'école qu'il faut 360 degrés pour faire tour complet. Si ce n'est pas le cas… maintenant tu le sais !
+                    Tu as sans doute appris à l'école qu'il faut 360 degrés pour faire un tour complet. Si ce n'est pas le cas… maintenant tu le sais !
                     C'est pour ça que tu utilises 90 degrés pour le carré. 360 divisé par 4 fait 90.
-                    Maintenant que nous pouvons faire des maths avec Hedy, nous pouvons dessiner toutes les formes que nous voulons !
+                    Maintenant que nous pouvons faire des maths avec Hedy, nous pouvons dessiner toutes les formes que nous voulons !
+                    ### Exercice
+                    Crée tes propres formes !
                 example_code: |
                     ```
                     nombre_sommets = {ask} "Combien de sommets veux-tu ?"
