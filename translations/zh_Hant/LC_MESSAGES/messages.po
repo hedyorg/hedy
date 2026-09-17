@@ -8,2098 +8,2129 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-02-02 20:37+0000\n"
-"Last-Translator: Annelies Vlaar <Annelies_Vlaar@hotmail.com>\n"
+"PO-Revision-Date: 2026-08-30 19:24+0000\n"
+"Last-Translator: Lee Vincent <vincentlee986@gmail.com>\n"
 "Language-Team: zh_Hant <LL@li.org>\n"
 "Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "Generated-By: Babel 2.14.0 & Rico\n"
 
 msgid "Access Before Assign"
-msgstr "檢測到變數`{name}`在設定前已在第{access_line_number}行被使用。 您能在使用前設定該變數嗎？"
+msgstr "我們發現變數 `{name}` 在第 {access_line_number} 行使用時還沒設定。請先設定這個變數，再使用它。"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the `{is}` command."
+msgstr "我們發現變數 `{variable}` 還沒設定，就先用在 `{is}` 指令右側了。請先設定這個變數，再使用它。"
 
 msgid "Else Without If Error"
-msgstr ""
+msgstr "我們發現在第 {line_number} 行，`{else}` 寫在 `{if}` 前面。請試著先寫 `{if}`，再寫 `{else}`。"
 
 msgid "Function Undefined"
-msgstr ""
+msgstr "我們發現函式 {name} 還沒定義就被使用了。請先定義這個函式，再使用它。"
 
 msgid "Has Blanks"
-msgstr ""
+msgstr "我們發現程式碼好像還沒完成。你可以在空白處補上程式碼嗎？"
 
 msgid "Incomplete"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的 `{incomplete_command}` 好像少了一部分程式碼。請試著把缺少的內容補上。"
 
 msgid "Incomplete Repeat"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的 `{repeat}` 少了 `{command}` 指令。請試著加上這個指令。"
 
 msgid "Invalid"
-msgstr ""
+msgstr "我們發現 `{invalid_command}` 不是 Hedy 第 {level} 級的指令。請試著改用 `{guessed_command}`。"
 
 msgid "Invalid Argument"
-msgstr ""
+msgstr "`{command}` 不能搭配 `{invalid_argument}` 使用。請試著把 `{invalid_argument}` 改成 {allowed_types}。"
 
 msgid "Invalid Argument Type"
-msgstr ""
+msgstr "`{command}` 無法搭配 `{invalid_argument}` 使用，因為它是 {invalid_type}。請試著把 `{invalid_argument}` 改為 {allowed_types}。"
 
 msgid "Invalid At Command"
-msgstr ""
+msgstr "我們發現從第 16 級開始不能使用 `{command}`。請試著用方括號 `[]` 來表示清單。"
 
 msgid "Invalid Space"
-msgstr ""
+msgstr "我們發現第 {line_number} 行開頭有一個空格。請試著移除這個空格。"
 
 msgid "Invalid Type Combination"
-msgstr ""
+msgstr "我們發現 `{invalid_argument}` 和 `{invalid_argument_2}` 不能搭配 `{command}` 使用，因為一個是 {invalid_type}，另一個是 {invalid_type_2}。請試著將 `{invalid_argument}` 改成 {invalid_type_2}，或將 `{invalid_argument_2}` 改成 {invalid_type}。"
 
+#, fuzzy
 msgid "Lonely Echo"
-msgstr ""
+msgstr "我們發現 `{echo}` 用在 `{ask}`之前，或沒有搭配 `{ask}`使用。請試著先寫一個 `{ask}`，再使用 `{echo}`。"
 
 msgid "Lonely Text"
-msgstr ""
+msgstr "我們發現第 {line_number} 行使用的文字似乎少了一個指令。請試著在這段文字前加上需要的指令。"
 
 msgid "Missing Additional Command"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的 `{command}` 指令少了某個部分。請試著在程式碼中使用 `{missing_command}`。"
 
 msgid "Missing Colon Error"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的 `{command}` 結尾需要加上 `:`。從第 17 級開始，請試著在指令那一行的結尾加上 `:`。"
 
 msgid "Missing Command"
-msgstr ""
+msgstr "我們發現第 {line_number} 行似乎少了一個指令。請查看練習區，找找看應該使用哪個指令。"
 
 msgid "Missing Inner Command"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的 `{command}` 陳述式似乎少了一個指令。請查看練習區，找找看應該使用哪個指令。"
 
 msgid "Missing Square Brackets"
-msgstr ""
+msgstr "我們發現第 {line_number} 行建立的清單少了方括號 `[]`。請試著在清單前後加上方括號。"
 
 msgid "Missing Variable"
-msgstr ""
+msgstr "我們發現這一行開頭少了 `{command}` 指令所需的變數。請試著把變數寫在 `{command}` 前面。"
 
 msgid "Misspelled At Command"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的 `{invalid_argument}` 好像拼錯了。請改成 `{command}`。"
 
 msgid "No Indentation"
-msgstr ""
+msgstr "我們發現第 {line_number} 行使用的 {leading_spaces} 個空格似乎不夠。每進入一個新的程式區塊，請將縮排增加 {indent_size} 個空格。"
 
 msgid "Non Decimal Variable"
-msgstr ""
+msgstr "我們發現第 {line_number} 行使用了 Hedy 不支援的數字！請試著使用十進位數字，例如 2。"
 
 msgid "Parse"
-msgstr ""
+msgstr "我們發現第 {location[0]} 行使用了不允許的 `{character_found}`。請檢查程式碼中是否少了或多了某個字元。"
 
 msgid "Pressit Missing Else"
-msgstr ""
+msgstr "我們發現程式碼少了 `{else}`，無法處理其他按鍵。請試著在程式碼中加入 `{else}`。"
 
 msgid "Runtime Index Error"
-msgstr ""
+msgstr "我們發現清單 {name} 是空的，或少了索引。請確認清單不是空的，或試著在 `[]` 中為缺少的索引填入數字。"
 
 msgid "Runtime Value Error"
-msgstr ""
+msgstr "我們發現 `{command}` 收到了不允許使用的值 `{value}`。{tip}"
 
 msgid "Runtime Values Error"
-msgstr ""
+msgstr "我們發現 `{command}` 收到了不允許使用的值 `{value}` 和 `{value}`。{tip}"
 
 msgid "Save Microbit code "
-msgstr ""
+msgstr "儲存 micro:bit 程式碼"
 
 msgid "Too Big"
-msgstr ""
+msgstr "我們發現這個程式有 {lines_of_code} 行，但我們最多只能處理 {max_lines} 行。請試著縮短程式。"
 
 msgid "Too Few Indents"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的空格太少（目前有 {leading_spaces} 個）。請試著再加一個空格。"
 
 msgid "Too Many Indents"
-msgstr ""
+msgstr "我們發現第 {line_number} 行有太多空格 ({leading_spaces} 個)。請試著移除多餘的空格。"
 
 msgid "Unexpected Indentation"
-msgstr ""
+msgstr "我們發現第 {line_number} 行的空格太多（目前有 {leading_spaces} 個）。每進入一個新的程式區塊，請以 {indent_size} 個空格為單位調整縮排。"
 
 msgid "Unquoted Assignment"
-msgstr ""
+msgstr "我們發現 `{is}` 右側的文字沒有放在引號中。從這個等級開始，文字必須寫在引號中。請試著將文字 {text} 放入引號。"
 
 msgid "Unquoted Equality Check"
-msgstr ""
+msgstr "我們發現程式碼正在檢查變數是否等於一段包含多個單字的文字。請試著將要檢查的文字放在引號中。"
 
-#, fuzzy
 msgid "Unquoted Text"
-msgstr "Be careful. If you `{ask}` or `{print}` something, the text should start and finish with a quotation mark. You forgot that for the text {unquotedtext}."
+msgstr "我們發現 `{ask}` 或 `{print}` 使用的文字似乎少了引號。請試著在 {unquotedtext} 前後加上引號。"
 
 msgid "Unsupported Float"
-msgstr ""
+msgstr "我們發現程式碼使用了目前尚未支援的非整數。請試著將 `{value}` 改成整數。"
 
 msgid "Unsupported String Value"
-msgstr ""
+msgstr "我們發現文字中包含不能使用的值 `{invalid_value}`。請試著移除這個值，或變更它的類型。"
 
 msgid "Unused Variable"
-msgstr ""
+msgstr "我們發現第 {line_number} 行定義了變數 {variable_name}，但尚未使用。請試著使用這個變數，或將它移除。"
 
 msgid "Var Undefined"
-msgstr ""
+msgstr "我們發現變數 `{name}` 還沒設定就被使用了。請先設定變數再使用，或將 `{name}` 放在引號中。"
 
 msgid "Wrong Level"
-msgstr ""
+msgstr "我們發現這段程式碼是正確的 Hedy 程式碼，但 `{offending_keyword}` 是第 {working_level} 級使用的指令。{tip}"
 
 msgid "Wrong Number of Arguments"
-msgstr ""
+msgstr "我們發現函式 {name} 使用了錯誤的引數數量：{used_number} 個。請試著改成 {defined_number} 個。"
 
 msgid "about_this_adventure"
-msgstr ""
+msgstr "關於這個冒險"
 
 msgid "accept_program"
-msgstr ""
+msgstr "通過程式"
 
 msgid "account_overview"
-msgstr ""
+msgstr "帳號總覽"
 
 msgid "actions"
-msgstr ""
+msgstr "動作"
 
 msgid "active_classes"
-msgstr ""
+msgstr "使用中的班級"
 
 msgid "add"
-msgstr ""
+msgstr "新增"
 
 msgid "add_adventures"
-msgstr ""
+msgstr "加入冒險"
 
 msgid "add_students"
-msgstr ""
+msgstr "新增學生"
 
 msgid "add_your_language"
-msgstr ""
+msgstr "加入你的語言！"
 
 msgid "additional_teachers"
-msgstr ""
+msgstr "其他教師"
 
 msgid "admin"
-msgstr ""
+msgstr "管理員"
 
 msgid "adventure"
-msgstr ""
+msgstr "冒險"
 
 msgid "adventure_cloned"
-msgstr ""
+msgstr "已建立冒險副本"
 
 msgid "adventure_code_button"
-msgstr ""
+msgstr "在句子中顯示指令，例如 <code>print</code>。學生無法直接執行它。若要加入可供學生執行的程式碼，請使用下方按鈕。"
 
 msgid "adventure_codeblock_button"
-msgstr ""
+msgstr "加入一個範例程式碼區塊，學生可以把它傳到自己的編輯器中執行。<b>若要離開區塊：</b>將游標移到最後一行的末端，然後按向下方向鍵。"
 
 msgid "adventure_duplicate"
-msgstr ""
+msgstr "你已經有同名的冒險。"
 
 msgid "adventure_empty"
-msgstr ""
+msgstr "你尚未輸入冒險名稱！"
 
 msgid "adventure_exp_classes"
-msgstr ""
+msgstr "你的冒險用在以下班級中"
 
 msgid "adventure_flagged"
-msgstr ""
+msgstr "已成功檢舉這個冒險。"
 
 msgid "adventure_id_invalid"
-msgstr ""
+msgstr "這個冒險 ID 無效。"
 
 msgid "adventure_length"
-msgstr ""
+msgstr "你的冒險必須至少有 20 個字元。"
 
 msgid "adventure_name_invalid"
-msgstr ""
+msgstr "這個冒險名稱無效。"
 
 msgid "adventure_terms"
-msgstr ""
+msgstr "我同意我的冒險可能會公開在 Hedy 上。"
 
 msgid "adventure_updated"
-msgstr ""
+msgstr "冒險已更新！"
 
 msgid "adventures"
-msgstr ""
+msgstr "冒險"
 
 msgid "adventures_at_level"
-msgstr ""
+msgstr "此等級的冒險"
 
 msgid "adventures_completed"
-msgstr ""
+msgstr "已完成的冒險：{number_of_adventures}"
 
 msgid "adventures_info"
-msgstr ""
+msgstr "Hedy 的每個等級都有為學生準備的內建練習，我們稱它們為冒險。你可以建立自己的冒險，並將它們加入班級。自訂冒險能讓你為學生設計切合需求又有趣的內容。你可以<a href=\"/for-teachers/manual\">在這裡</a>進一步了解如何建立冒險。"
 
 msgid "adventures_restored"
-msgstr ""
+msgstr "已還原預設冒險。"
 
 msgid "adventures_ticked"
-msgstr ""
+msgstr "已勾選的冒險"
 
 msgid "adventures_tried"
-msgstr ""
+msgstr "嘗試過的冒險"
 
 msgid "ago"
-msgstr ""
+msgstr "{timestamp}前"
 
 msgid "agree_invalid"
-msgstr ""
+msgstr "你必須同意隱私權條款。"
 
 msgid "agree_with"
-msgstr ""
+msgstr "我同意"
 
 msgid "ajax_error"
-msgstr ""
+msgstr "發生錯誤，請再試一次。"
 
 msgid "all"
-msgstr ""
+msgstr "全部"
 
 msgid "all_rows_missing_separator"
-msgstr ""
+msgstr "所有資料列都沒有分號。你是否想讓我們自動產生密碼？如果是，請開啟密碼切換開關，再重新建立帳號。如果不是，請在以下資料列中用分號分隔使用者名稱和密碼：{rows}"
 
 msgid "allow_resubmit"
-msgstr ""
+msgstr "允許重新繳交"
 
 msgid "already_account"
-msgstr ""
+msgstr "已經有帳號了嗎？"
 
 msgid "already_program_running"
-msgstr ""
+msgstr "已有一個程式正在執行，請先讓它執行完畢。"
 
 msgid "archive"
-msgstr ""
+msgstr "封存"
 
 msgid "archive_class"
-msgstr ""
+msgstr "封存班級"
 
 msgid "archived"
-msgstr ""
+msgstr "已封存"
 
 msgid "archived_classes"
-msgstr ""
+msgstr "已封存的班級"
 
 msgid "are_you_sure"
-msgstr ""
+msgstr "確定嗎？這個動作無法復原。"
 
 msgid "are_you_sure_soft"
-msgstr ""
+msgstr "確定嗎？"
 
-#, fuzzy
 msgid "ask_needs_var"
-msgstr "Starting in level 2, `{ask}` needs to be used with a variable. Example: name `{is}` `{ask}` What are you called?"
+msgstr "從第 2 級開始，`{ask}` 必須搭配變數使用。例如：name `{is}` `{ask}` 你叫什麼名字？"
 
 msgid "available"
-msgstr ""
+msgstr "可用"
 
 msgid "available_for_students"
-msgstr ""
+msgstr "開放給學生使用"
 
 msgid "available_in"
-msgstr ""
+msgstr "可用於："
 
 msgid "available_levels"
-msgstr ""
+msgstr "可用等級"
 
 msgid "back_to_class"
-msgstr ""
+msgstr "返回班級"
 
 msgid "background_information"
-msgstr ""
+msgstr "背景資訊"
 
 msgid "background_information_info"
-msgstr ""
+msgstr "開始使用 Hedy 教學前需要知道的一切：這個語言背後的教學理念、各等級的提示、學生常犯的錯誤，以及處理方式。"
 
 msgid "become_a_sponsor"
-msgstr ""
+msgstr "成為贊助者"
 
 msgid "birth_year"
-msgstr ""
+msgstr "出生年份"
 
 msgid "built_in"
-msgstr ""
+msgstr "內建"
 
 msgid "built_in_adventures"
-msgstr ""
+msgstr "內建冒險"
 
 msgid "by"
-msgstr ""
+msgstr "由"
 
 msgid "cancel"
-msgstr ""
+msgstr "取消"
 
 msgid "cant_parse_exception"
-msgstr ""
+msgstr "無法解析程式"
 
 msgid "certified_teacher"
-msgstr ""
+msgstr "認證教師"
 
 msgid "change_password"
-msgstr ""
+msgstr "變更密碼"
 
 msgid "cheatsheet_title"
-msgstr ""
+msgstr "速查表"
 
 msgid "choose_a_voice"
-msgstr ""
+msgstr "選擇語音"
 
 msgid "class"
-msgstr "Class"
+msgstr "班級"
 
 msgid "class_already_joined"
-msgstr ""
+msgstr "你已經加入這個班級了"
 
 msgid "class_customize_success"
-msgstr ""
+msgstr "已成功自訂班級。"
 
 msgid "class_graph_explanation"
-msgstr ""
+msgstr "這張圖顯示學生嘗試過的冒險數量 (表示他們確實在該冒險中進行了練習)，以及錯誤次數和成功執行次數之間的關係。"
 
 msgid "class_logs"
-msgstr ""
+msgstr "上次登入"
 
 msgid "class_name"
-msgstr ""
+msgstr "班級名稱"
 
 msgid "class_name_duplicate"
-msgstr ""
+msgstr "你已經有一個同名的班級。"
 
 msgid "class_name_empty"
-msgstr ""
+msgstr "你還沒輸入班級名稱！"
 
 msgid "class_name_invalid"
-msgstr ""
+msgstr "這個班級名稱無效。"
 
 msgid "class_name_prompt"
-msgstr ""
+msgstr "請輸入新班級的名稱"
 
 msgid "class_survey_description"
-msgstr ""
+msgstr "我們想更了解 Hedy 的使用者。你的回答能幫助我們改進 Hedy，謝謝你！"
 
 msgid "class_survey_later"
-msgstr ""
+msgstr "明天再提醒我"
 
 msgid "class_survey_question1"
-msgstr ""
+msgstr "你班上的學生年齡範圍為何？"
 
 msgid "class_survey_question2"
-msgstr ""
+msgstr "你班上主要使用哪一種語言？"
 
 msgid "class_survey_question3"
-msgstr ""
+msgstr "你班上的性別比例如何？"
 
 msgid "class_survey_question4"
-msgstr ""
+msgstr "你的學生有哪些與其他學生不同的特點？"
 
 msgid "class_updated_successfully"
-msgstr ""
+msgstr "班級已成功更新。"
 
 msgid "class_without_adventures"
-msgstr ""
+msgstr "沒有冒險的班級"
 
 msgid "class_without_adventures_explanation"
-msgstr ""
+msgstr "建立不含任何冒險的班級。"
 
 msgid "classes"
-msgstr ""
+msgstr "班級"
 
 msgid "classes_info"
-msgstr ""
+msgstr "建立班級後，你可以在儀表板上查看每位學生的學習進度，也能調整學生會看到的冒險，甚至加入自己設計的冒險！你可以建立任意數量的班級。每個班級都能有多位教師，並為每位教師設定不同角色。你也可以加入任意數量的學生，但請注意，每位學生同一時間只能加入一個班級。你可以在<a href=\"/for-teachers/manual\">教師手冊</a>中查看班級的詳細資訊。"
 
 msgid "clone"
-msgstr ""
+msgstr "建立副本"
 
 msgid "cloned_times"
-msgstr ""
+msgstr "副本數"
 
 msgid "close"
-msgstr ""
+msgstr "關閉"
 
 msgid "comma"
-msgstr ""
+msgstr "一個逗號"
 
 msgid "command_not_available_yet_exception"
-msgstr ""
+msgstr "這個指令還不能使用"
 
 msgid "command_unavailable_exception"
-msgstr ""
+msgstr "這個指令已不再適用"
 
 msgid "commands"
-msgstr ""
+msgstr "指令"
 
 msgid "common_mistakes"
 msgstr ""
 
 msgid "configure"
-msgstr ""
+msgstr "設定"
 
 msgid "configure_class"
-msgstr ""
+msgstr "設定班級"
 
 msgid "configure_class_info"
-msgstr ""
+msgstr "你可以在這裡調整班級設定，包括加入、刪除或重新排列冒險，也可以設定特定等級在指定日期後開放。"
 
 msgid "confirm"
-msgstr ""
+msgstr "確認"
 
 msgid "connect_guest_teacher"
-msgstr ""
+msgstr "我想聯絡一位能來上幾堂課的客座教師"
 
 msgid "constant_variable_role"
-msgstr ""
+msgstr "常數"
 
 msgid "containing"
-msgstr ""
+msgstr "包含"
 
 msgid "content"
-msgstr ""
+msgstr "內容"
 
 msgid "content_invalid"
-msgstr ""
+msgstr "這個冒險無效。"
 
 msgid "continue"
-msgstr ""
+msgstr "繼續"
 
 msgid "contributor"
-msgstr ""
+msgstr "貢獻者"
 
 msgid "copy_accounts_to_clipboard"
-msgstr ""
+msgstr "複製到剪貼簿"
 
 msgid "copy_class"
-msgstr ""
+msgstr "複製既有班級"
 
 msgid "copy_class_explanation"
-msgstr ""
+msgstr "建立新班級，並套用既有班級的設定與冒險。原班級的學生不會一併加入。"
 
 msgid "copy_clipboard"
-msgstr ""
+msgstr "已成功複製到剪貼簿"
 
 msgid "copy_code"
-msgstr ""
+msgstr "複製程式碼"
 
 msgid "copy_link_to_share"
-msgstr ""
+msgstr "複製分享連結"
 
 msgid "copy_mail_link"
-msgstr ""
+msgstr "請複製這個連結，並貼到新的分頁中："
 
 msgid "copy_second_teachers"
-msgstr ""
+msgstr "要把另一個班級的協同教師也邀請到這個班級嗎？"
 
 msgid "copy_to_editor"
 msgstr ""
 
 msgid "country"
-msgstr ""
+msgstr "國家"
 
 msgid "country_invalid"
-msgstr ""
+msgstr "請選擇有效的國家。"
 
 msgid "create_account"
-msgstr ""
+msgstr "建立帳號"
 
 msgid "create_accounts"
-msgstr ""
+msgstr "建立帳號"
 
 msgid "create_accounts_placeholder"
-msgstr ""
+msgstr "輸入帳號，或從試算表貼上"
 
 msgid "create_accounts_prompt"
-msgstr ""
+msgstr "即將建立 {number_of_accounts} 個學生帳號。確定嗎？"
 
 msgid "create_adventure"
-msgstr ""
+msgstr "建立冒險"
 
 msgid "create_class"
-msgstr ""
+msgstr "建立新班級"
 
 msgid "create_student_account"
-msgstr ""
+msgstr "建立帳號"
 
 msgid "create_student_account_explanation"
-msgstr ""
+msgstr "有了帳號，你就能儲存自己的程式。"
 
 msgid "create_student_accounts"
-msgstr ""
+msgstr "為以下班級建立學生帳號："
 
 msgid "create_teacher_account"
-msgstr ""
+msgstr "建立教師帳號"
 
 msgid "create_teacher_account_explanation"
-msgstr ""
+msgstr "有了教師帳號，你可以儲存自己的程式，也能查看學生的成果。"
 
 msgid "create_usernames_and_passwords_desc"
-msgstr ""
+msgstr "每行輸入一組使用者名稱和密碼，並用分號隔開。如果資料已放在兩欄的試算表中，也可以複製內容並貼到這裡。"
 
 msgid "create_usernames_and_passwords_title"
-msgstr ""
+msgstr "使用者名稱和密碼"
 
 msgid "create_usernames_desc"
-msgstr ""
+msgstr "每行輸入一個使用者名稱，或從試算表貼上。"
 
 msgid "create_usernames_title"
-msgstr ""
+msgstr "使用者名稱"
 
 msgid "created"
-msgstr ""
+msgstr "建立時間"
 
 msgid "creator"
-msgstr ""
+msgstr "建立者"
 
 msgid "current_password"
-msgstr ""
+msgstr "目前密碼"
 
 msgid "custom_adventures"
-msgstr ""
+msgstr "自訂冒險"
 
 msgid "customization_deleted"
-msgstr ""
+msgstr "已成功刪除自訂設定。"
 
 msgid "customize"
-msgstr ""
+msgstr "自訂"
 
 msgid "customize_adventure"
-msgstr ""
+msgstr "自訂冒險"
 
 msgid "customize_class"
-msgstr ""
+msgstr "自訂班級"
 
 msgid "customize_levels"
-msgstr ""
+msgstr "自訂等級"
 
 msgid "danger_zone"
-msgstr ""
+msgstr "危險區域"
 
 msgid "dash"
-msgstr ""
+msgstr "一個連字號"
 
 msgid "debug"
-msgstr ""
+msgstr "除錯"
 
 msgid "default_401"
-msgstr ""
+msgstr "你似乎沒有權限…"
 
 msgid "default_403"
-msgstr ""
+msgstr "看來你不能執行這個動作……"
 
 msgid "default_404"
-msgstr ""
+msgstr "找不到這個頁面……"
 
 msgid "default_500"
-msgstr ""
+msgstr "發生問題。請寄信到 hello@hedy.org 向我們回報。"
 
 msgid "delete"
-msgstr ""
+msgstr "刪除"
 
 msgid "delete_adventure_prompt"
-msgstr ""
+msgstr "確定要移除這個冒險嗎？"
 
 msgid "delete_class"
-msgstr ""
+msgstr "刪除班級"
 
 msgid "delete_class_prompt"
-msgstr ""
+msgstr "確定要刪除這個班級嗎？這個動作無法復原。"
 
 msgid "delete_confirm"
-msgstr ""
+msgstr "確定要刪除這個程式嗎？"
 
 msgid "delete_invite"
-msgstr ""
+msgstr "刪除邀請"
 
 msgid "delete_invite_prompt"
-msgstr ""
+msgstr "確定要移除這個班級邀請嗎？"
 
 msgid "delete_public"
-msgstr ""
+msgstr "刪除公開個人檔案"
 
 msgid "delete_success"
-msgstr ""
+msgstr "已成功刪除程式。"
 
 msgid "delete_tag_prompt"
-msgstr ""
+msgstr "確定要刪除這個標籤嗎？"
 
 msgid "destroy_account"
-msgstr ""
+msgstr "刪除帳號"
 
 msgid "destroy_account_message"
-msgstr ""
+msgstr "刪除帳號後無法復原。你的帳號及所有相關資料都會被移除，包括公開個人檔案、程式、冒險和班級。這個動作無法復原，請確認你真的要繼續。"
 
 msgid "directly_available"
-msgstr ""
+msgstr "直接開啟"
 
 msgid "disable"
-msgstr ""
+msgstr "停用"
 
 msgid "disabled"
-msgstr ""
+msgstr "已停用"
 
 msgid "discord_server"
-msgstr ""
+msgstr "Discord 伺服器"
 
 msgid "distinguished_user"
-msgstr ""
+msgstr "傑出使用者"
 
 msgid "double quotes"
-msgstr ""
+msgstr "雙引號"
 
 msgid "download"
-msgstr ""
+msgstr "下載"
 
 msgid "duplicate"
-msgstr ""
+msgstr "複製"
 
 msgid "echo_and_ask_mismatch_exception"
-msgstr ""
+msgstr "echo 和 ask 不相符"
 
-#, fuzzy
 msgid "echo_out"
-msgstr "Starting in level 2 `{echo}` is no longer needed. You can repeat an answer with `{ask}` and `{print}` now. Example: name is `{ask}` What are you called? `{print}` hello name"
+msgstr "從第 2 級開始，不再需要 `{echo}`。現在可以用 `{ask}` 和 `{print}` 來重複顯示答案。例如：`name {is} {ask} 你叫什麼名字？ {print} 你好 name`"
 
 msgid "edit_adventure"
-msgstr ""
+msgstr "編輯冒險"
 
 msgid "edit_code_button"
-msgstr ""
+msgstr "編輯程式碼"
 
 msgid "email"
-msgstr ""
+msgstr "電子郵件"
 
 msgid "email_invalid"
-msgstr ""
+msgstr "請輸入有效的電子郵件地址。"
 
 msgid "english"
-msgstr ""
+msgstr "英文"
 
 msgid "enter"
-msgstr ""
+msgstr "送出"
 
 msgid "enter_password"
-msgstr ""
+msgstr "請為下列使用者輸入新密碼："
 
 msgid "enter_text"
-msgstr ""
+msgstr "在這裡輸入答案…"
 
 msgid "error_logo_alt"
-msgstr ""
+msgstr "錯誤圖示"
 
 msgid "errors"
-msgstr ""
+msgstr "錯誤"
 
 msgid "exclamation mark"
-msgstr ""
+msgstr "一個驚嘆號"
 
 msgid "exists_email"
-msgstr ""
+msgstr "這個電子郵件地址已有人使用。"
 
 msgid "exists_username"
-msgstr ""
+msgstr "這個使用者名稱已有人使用。"
 
 msgid "exit_preview_mode"
-msgstr ""
+msgstr "離開預覽模式"
 
 msgid "expand_output"
-msgstr ""
+msgstr "展開輸出"
 
 msgid "experience_invalid"
-msgstr ""
+msgstr "請選擇有效的經驗選項（是或否）。"
 
 msgid "expiration_date"
-msgstr ""
+msgstr "到期日"
 
 msgid "favorite_program"
-msgstr ""
+msgstr "最愛程式"
 
 msgid "favourite_confirm"
-msgstr ""
+msgstr "確定要將這個程式設為最愛嗎？"
 
 msgid "favourite_program"
-msgstr ""
+msgstr "最愛程式"
 
 msgid "favourite_program_invalid"
-msgstr ""
+msgstr "你選擇的最愛程式無效。"
 
 msgid "favourite_success"
-msgstr ""
+msgstr "已將你的程式加入最愛。"
 
 msgid "feedback_message_error"
-msgstr ""
+msgstr "發生問題，請稍後再試。"
 
 msgid "female"
-msgstr ""
+msgstr "女性"
 
 msgid "filter"
-msgstr ""
+msgstr "篩選"
 
 msgid "flag_adventure_prompt"
-msgstr ""
+msgstr "要檢舉這個冒險，讓我們檢查內容是否合適嗎？"
 
 msgid "float"
-msgstr ""
+msgstr "數字"
 
 msgid "for_teachers"
-msgstr ""
+msgstr "教師專區"
 
 msgid "forgot_password"
-msgstr ""
+msgstr "忘記密碼了嗎？"
 
 msgid "from_another_teacher"
-msgstr ""
+msgstr "來自其他教師"
 
 msgid "from_magazine_website"
-msgstr ""
+msgstr "來自雜誌或網站"
 
 msgid "from_video"
-msgstr ""
+msgstr "來自影片"
 
 msgid "gender"
-msgstr ""
+msgstr "性別"
 
 msgid "gender_invalid"
-msgstr ""
+msgstr "請選擇有效的性別（女性、男性或其他）。"
 
 msgid "general_settings"
-msgstr ""
+msgstr "一般設定"
 
 msgid "give_link_to_teacher"
-msgstr ""
+msgstr "將以下連結交給你的教師："
 
 msgid "go_back"
-msgstr ""
+msgstr "返回"
 
 msgid "go_back_to_main"
-msgstr ""
+msgstr "返回首頁"
 
 msgid "go_to_your_clone"
-msgstr ""
+msgstr "前往你的冒險副本"
 
 msgid "goto_profile"
-msgstr ""
+msgstr "前往我的個人檔案"
 
 msgid "grading"
-msgstr ""
+msgstr "批改"
 
 msgid "grading_class_info"
-msgstr ""
+msgstr "你可以在這裡查看學生繳交的程式。"
 
 msgid "grading_table_explanation"
-msgstr ""
+msgstr "這個表格會顯示學生繳交的程式。你可以篩選全部項目，也可以依等級、學生及／或冒險進行篩選；按一下「篩選」按鈕後，條件才會生效。按一下表格標題旁的按鈕，還可以排序表格。"
 
 msgid "graph_title"
-msgstr ""
+msgstr "第 {level} 級每個已完成冒險的錯誤數"
 
 msgid "hand_in"
-msgstr ""
+msgstr "繳交"
 
 msgid "hand_in_exercise"
-msgstr ""
+msgstr "繳交練習"
 
 msgid "heard_about_hedy"
-msgstr ""
+msgstr "你是從哪裡知道 Hedy 的？"
 
 msgid "heard_about_invalid"
-msgstr ""
+msgstr "請選擇你透過哪個有效的管道得知我們。"
 
 msgid "hedy_introduction_slides"
-msgstr ""
+msgstr "Hedy 入門簡報"
 
 msgid "hedy_logo_alt"
-msgstr ""
+msgstr "Hedy 標誌"
 
 msgid "hedy_on_github"
-msgstr ""
+msgstr "GitHub 上的 Hedy"
 
 msgid "hedy_teacher_update_content"
-msgstr ""
+msgstr "我們大幅更新了內容，讓 Hedy 變得更好！這表示部分冒險和等級可能已移動或移除，因而影響目前的班級自訂設定。<br /><br />為避免問題並取得最新內容，請按一下班級表格中的 [更新] 按鈕。這個按鈕會從班級中移除已淘汰的冒險，並加入更新、改良過的冒險。<br /><br />想進一步了解這些變更，請閱讀我們<a href='https://mailchi.mp/8fd6211e776a/8w1lcvtsd8-16537057'>電子報中的說明</a>。"
 
 msgid "hedy_teacher_update_title"
-msgstr ""
+msgstr "Hedy 的重要變更"
 
 msgid "hello_logo"
-msgstr "你好!"
+msgstr "你好！"
 
 msgid "hide_adventures"
-msgstr ""
+msgstr "隱藏冒險"
 
 msgid "hide_classes"
-msgstr ""
+msgstr "隱藏班級"
 
 msgid "hide_keyword_switcher"
-msgstr ""
+msgstr "隱藏關鍵字切換器"
 
 msgid "hide_slides"
-msgstr ""
+msgstr "隱藏簡報"
 
 msgid "highest_level_reached"
-msgstr ""
+msgstr "到達的最高等級"
 
 msgid "ill_work_some_more"
-msgstr ""
+msgstr "我會再多修改一下"
 
-#, fuzzy
 msgid "image_invalid"
-msgstr "The image you chose image is invalid."
+msgstr "你選擇的圖片無效。"
 
 msgid "incomplete_command_exception"
-msgstr ""
+msgstr "指令不完整"
 
 msgid "incorrect_handling_of_quotes_exception"
-msgstr ""
+msgstr "引號處理方式不正確"
 
 msgid "incorrect_use_of_types_exception"
-msgstr ""
+msgstr "類型使用錯誤"
 
 msgid "incorrect_use_of_variable_exception"
-msgstr ""
+msgstr "變數使用方式不正確"
 
 msgid "indentation_exception"
-msgstr ""
+msgstr "縮排錯誤"
 
 msgid "input"
-msgstr ""
+msgstr "來自 `{ask}` 的輸入"
 
 msgid "input_variable_role"
-msgstr ""
+msgstr "輸入"
 
 msgid "integer"
-msgstr ""
+msgstr "數字"
 
 msgid "invalid_class_link"
-msgstr ""
+msgstr "加入班級的連結無效。"
 
 msgid "invalid_command_exception"
-msgstr ""
+msgstr "無效的指令"
 
 msgid "invalid_keyword_language_comment"
-msgstr ""
+msgstr "# 提供的關鍵字語言無效，已將關鍵字語言設為英文"
 
 msgid "invalid_language_comment"
-msgstr ""
+msgstr "# 提供的語言無效，已將語言設為英文"
 
 msgid "invalid_level_comment"
-msgstr ""
+msgstr "# 提供的等級無效，已將等級設為第 1 級"
 
 msgid "invalid_program_comment"
-msgstr ""
+msgstr "# 提供的程式無效，請再試一次"
 
 msgid "invalid_teacher_invitation_code"
-msgstr ""
+msgstr "教師邀請碼無效。若要成為教師，請寄信到 hello@hedy.org 與我們聯絡。"
 
 msgid "invalid_username_password"
-msgstr ""
+msgstr "使用者名稱或密碼錯誤。"
 
 msgid "invitations_sent"
-msgstr ""
+msgstr "所有邀請都已成功寄出！"
 
 msgid "invite"
-msgstr ""
+msgstr "邀請"
 
 msgid "invite_by_username"
-msgstr ""
+msgstr "依使用者名稱邀請"
 
 msgid "invite_date"
-msgstr ""
+msgstr "邀請日期"
 
 msgid "invite_message"
-msgstr ""
+msgstr "你收到了一份加入班級的邀請"
 
 msgid "invite_prompt"
-msgstr ""
+msgstr "輸入使用者名稱"
 
 msgid "invite_teacher"
-msgstr ""
+msgstr "邀請教師"
 
 msgid "invited_on"
-msgstr ""
+msgstr "邀請日期"
 
 msgid "join_class"
-msgstr ""
+msgstr "加入班級"
 
 msgid "join_prompt"
-msgstr ""
+msgstr "你必須有帳號才能加入班級。要現在登入嗎？"
 
 msgid "keybinding_waiting_for_keypress"
-msgstr ""
+msgstr "正在等待按鍵……"
 
 msgid "keyword_language_invalid"
-msgstr ""
+msgstr "請選擇有效的指令語言 (英文或你使用的語言)。"
 
 msgid "landcode_phone_number"
-msgstr ""
+msgstr "請一併加上你所在國家的國際電話國碼"
 
 msgid "language"
-msgstr ""
+msgstr "語言"
 
 msgid "language_invalid"
-msgstr ""
+msgstr "請選擇有效的語言。"
 
 msgid "languages"
-msgstr ""
+msgstr "你以前用過哪些程式語言？"
 
 msgid "last_changed"
-msgstr ""
+msgstr "上次變更"
 
 msgid "last_edited"
-msgstr ""
+msgstr "上次編輯"
 
 msgid "last_update"
-msgstr ""
+msgstr "上次更新"
 
 msgid "lastname"
-msgstr ""
+msgstr "姓氏"
 
 msgid "leave_class"
-msgstr ""
+msgstr "離開班級"
 
 msgid "level"
-msgstr ""
+msgstr "等級"
 
 msgid "level_accessible"
-msgstr ""
+msgstr "等級已開放給學生"
 
 msgid "level_disabled"
-msgstr ""
+msgstr "等級已停用"
 
 msgid "level_future"
-msgstr ""
+msgstr "這個等級的自動開放時間： "
 
 msgid "level_invalid"
-msgstr ""
+msgstr "這個 Hedy 等級無效。"
 
 msgid "level_not_class"
-msgstr ""
+msgstr "這個等級尚未在你的班級中開放"
 
 msgid "level_title"
-msgstr ""
+msgstr "等級"
 
 msgid "levels"
-msgstr ""
+msgstr "等級"
 
 msgid "link"
-msgstr ""
+msgstr "連結"
 
 msgid "linkedin_page"
-msgstr ""
+msgstr "Hedy 的 LinkedIn 頁面"
 
 msgid "list"
-msgstr ""
+msgstr "一份清單"
 
 msgid "list_variable_role"
-msgstr ""
+msgstr "清單"
 
 msgid "logged_in_to_share"
-msgstr ""
+msgstr "你必須先登入，才能儲存及分享程式。"
 
 msgid "login"
-msgstr ""
+msgstr "登入"
 
 msgid "login_long"
-msgstr ""
+msgstr "登入你的帳號"
 
 msgid "login_to_save_your_work"
-msgstr ""
+msgstr "登入以儲存你的作品"
 
 msgid "logout"
-msgstr ""
+msgstr "登出"
 
 msgid "mail_change_password_body"
 msgstr ""
+"你的 Hedy 密碼已變更。如果這是你本人操作，就不需要擔心。\n"
+"如果你沒有變更密碼，請立即回覆這封電子郵件與我們聯絡。"
 
 msgid "mail_change_password_subject"
-msgstr ""
+msgstr "你的 Hedy 密碼已變更"
 
 msgid "mail_error_change_processed"
-msgstr ""
+msgstr "傳送驗證郵件時發生問題，但你的變更仍已正確完成。"
 
 msgid "mail_goodbye"
 msgstr ""
+"繼續寫程式吧！\n"
+"Hedy 團隊"
 
 msgid "mail_hello"
-msgstr ""
+msgstr "嗨，{username}！"
 
 msgid "mail_recover_password_body"
 msgstr ""
+"按一下以下連結，就能設定新的 Hedy 密碼。這個連結的有效期限為 <b>4</b> 小時。\n"
+"如果你沒有要求重設密碼，請忽略這封電子郵件：{link}"
 
 msgid "mail_recover_password_subject"
-msgstr "請求重置密碼。"
+msgstr "申請重設密碼。"
 
 msgid "mail_reset_password_body"
 msgstr ""
+"你的 Hedy 密碼已重設為新密碼。如果這是你本人操作，就不需要擔心。\n"
+"如果你沒有變更密碼，請立即回覆這封電子郵件與我們聯絡。"
 
 msgid "mail_reset_password_subject"
-msgstr ""
+msgstr "你的 Hedy 密碼已重設"
 
 msgid "mail_welcome_teacher_body"
 msgstr ""
+"<strong>歡迎！</strong>\n"
+"恭喜你擁有全新的 Hedy 教師帳號。歡迎加入全球 Hedy 教師社群！\n"
+"\n"
+"<strong>教師帳號可以做什麼</strong>\n"
+"現在，你可以使用更多功能。\n"
+"\n"
+"1. 你可以在 <a href=\"https://hedy.org/for-teachers/manual\">教師手冊</a>中找到更多說明。\n"
+"2. 使用教師帳號可以建立班級。學生可以加入你的班級，你也能查看他們的學習進度。請到<a href=\"https://hedycode.com/for-teachers\">教師頁面</a>建立和管理班級。\n"
+"3. 你可以完整自訂班級，例如開放或關閉等級、啟用或停用冒險，以及編寫自己的冒險！\n"
+"\n"
+"<strong>加入我們的線上社群！</strong>\n"
+"歡迎所有 Hedy 教師、程式設計師和其他喜愛 Hedy 的人加入我們的 <a href=\"https://discord.gg/8yY7dEme9r\">Discord 伺服器</a>。這裡很適合討論 Hedy：你可以在不同頻道分享有趣的專案和課程、回報錯誤，也可以和其他教師及 Hedy 團隊聊天。\n"
+"\n"
+"<strong>如何尋求協助 </strong>\n"
+"如果有任何不清楚的地方，可以在 Discord 告訴我們，或<a href=\"mailto: hello@hedy.org\">寄電子郵件給我們</a>。\n"
+"\n"
+"<strong>如何回報錯誤</strong>\n"
+"Discord 上有一個名為 #bugs 的錯誤回報頻道。如果你遇到問題，最適合在那裡告訴我們。如果你會使用 GitHub，也可以在那裡建立一個<a href=\"https://github.com/hedyorg/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">問題回報</a>。\n"
 
 msgid "mail_welcome_teacher_subject"
-msgstr ""
+msgstr "你的 Hedy 教師帳號已準備完成"
 
 msgid "mail_welcome_verify_body"
 msgstr ""
+"你的 Hedy 帳號已成功建立，歡迎加入！\n"
+"請按一下這個連結來驗證你的電子郵件地址：{link}"
 
 msgid "mail_welcome_verify_subject"
-msgstr ""
+msgstr "歡迎來到 Hedy"
 
 msgid "mailing_title"
-msgstr ""
+msgstr "訂閱 Hedy 電子報"
 
 msgid "main_subtitle"
-msgstr ""
+msgstr "適合課堂使用的文字式程式設計"
 
 msgid "main_title"
-msgstr ""
+msgstr "Hedy"
 
 msgid "make_public"
-msgstr ""
+msgstr "設為公開"
 
 msgid "make_sure_you_are_done"
-msgstr ""
+msgstr "請確認你已完成！按下「繳交」後，就無法再修改程式。"
 
 msgid "male"
-msgstr ""
+msgstr "男性"
 
 msgid "manage_students"
-msgstr ""
+msgstr "管理學生"
 
 msgid "manage_students_info"
-msgstr ""
+msgstr "你可以在這裡建立學生帳號、邀請學生，或將學生移出班級。"
 
 msgid "manual_out_of_date"
-msgstr ""
+msgstr "這個版本的手冊內容已與目前的操作介面不符。"
 
 msgid "more_adventures"
-msgstr ""
+msgstr "更多冒險"
 
 msgid "more_info"
-msgstr ""
+msgstr "更多資訊"
 
 msgid "more_options"
-msgstr ""
+msgstr "更多選項"
 
 msgid "multiple_keywords_warning"
-msgstr ""
+msgstr "你正嘗試使用關鍵字 {orig_keyword}，但這個關鍵字可能有好幾種意思。請從以下清單選擇你想使用的項目，並將它連同大括號一起複製貼到程式碼中：{keyword_list}"
 
 msgid "multiple_levels_warning"
-msgstr ""
+msgstr "我們發現你同時選取了多個等級，並在冒險中加入程式碼片段。這可能會影響語法醒目提示和指令關鍵字的自動翻譯。"
 
 msgid "mute"
 msgstr ""
 
 msgid "my_account"
-msgstr ""
+msgstr "我的帳號"
 
 msgid "my_adventures"
-msgstr ""
+msgstr "我的冒險"
 
 msgid "my_classes"
-msgstr ""
+msgstr "我的班級"
 
 msgid "my_messages"
-msgstr ""
+msgstr "我的訊息"
 
 msgid "my_public_profile"
-msgstr ""
+msgstr "我的公開個人檔案"
 
 msgid "name"
-msgstr ""
+msgstr "名稱"
 
 msgid "nav_hedy"
-msgstr ""
+msgstr "Hedy"
 
 msgid "nav_learn_more"
-msgstr ""
+msgstr "進一步了解"
 
 msgid "nav_start"
-msgstr ""
+msgstr "首頁"
 
 msgid "never"
-msgstr ""
+msgstr "永不"
 
 msgid "new_class_page"
-msgstr ""
+msgstr "新增班級"
 
 msgid "new_password"
-msgstr ""
+msgstr "新密碼"
 
 msgid "new_password_repeat"
-msgstr ""
+msgstr "再次輸入新密碼"
 
 msgid "newline"
-msgstr ""
+msgstr "一個換行"
 
 msgid "newsletter"
-msgstr ""
+msgstr "電子報"
 
 msgid "next_adventure"
-msgstr ""
+msgstr "下一個冒險"
 
 msgid "next_page"
-msgstr ""
+msgstr "下一頁"
 
 msgid "next_student"
-msgstr ""
+msgstr "下一位學生"
 
 msgid "no"
-msgstr ""
+msgstr "否"
 
 msgid "no_account"
-msgstr ""
+msgstr "還沒有帳號嗎？"
 
 msgid "no_accounts"
-msgstr ""
+msgstr "沒有可建立的帳號。"
 
 msgid "no_adventures_in_level"
-msgstr ""
+msgstr "這個等級沒有冒險"
 
 msgid "no_adventures_yet"
-msgstr ""
+msgstr "找不到符合這些條件的公開冒險。請試著搜尋其他內容。"
 
 msgid "no_built_in_adventures_available"
-msgstr ""
+msgstr "沒有可用的內建冒險"
 
 msgid "no_custom_adventures_available"
-msgstr ""
+msgstr "沒有可用的自訂冒險"
 
 msgid "no_existing_class"
-msgstr ""
+msgstr "沒有既有班級"
 
 msgid "no_more_flat_if"
-msgstr ""
+msgstr "從第 8 級開始，`{if}` 後面的程式碼必須放在下一行，並在開頭加上 4 個空格。"
 
 msgid "no_programs"
-msgstr ""
+msgstr "沒有任何程式。"
 
 msgid "no_shared_programs"
-msgstr ""
+msgstr "沒有分享任何程式…"
 
 msgid "no_students"
-msgstr ""
+msgstr "這個班級沒有學生"
 
 msgid "no_such_adventure"
-msgstr ""
+msgstr "這個冒險不存在！"
 
 msgid "no_such_class"
-msgstr ""
+msgstr "找不到這個 Hedy 班級。"
 
 msgid "no_such_level"
-msgstr ""
+msgstr "這個 Hedy 等級不存在！"
 
 msgid "no_such_program"
-msgstr ""
+msgstr "找不到這個 Hedy 程式！"
 
 msgid "no_tag"
-msgstr ""
+msgstr "未提供標籤！"
 
 msgid "no_usernames_found"
-msgstr ""
+msgstr "找不到使用者"
 
 msgid "not_adventure_yet"
-msgstr ""
+msgstr "你必須先填寫冒險名稱。"
 
 msgid "not_enrolled"
-msgstr ""
+msgstr "看來你不在這個班級中！"
 
 msgid "not_in_class_no_handin"
-msgstr ""
+msgstr "你不在任何班級中，所以不需要繳交任何內容。"
 
 msgid "not_logged_in_cantsave"
-msgstr ""
+msgstr "你的程式不會儲存。"
 
 msgid "not_logged_in_handin"
-msgstr ""
+msgstr "必須先登入，才能繳交作業。"
 
 msgid "not_teacher"
-msgstr ""
+msgstr "你似乎不是教師！"
 
 msgid "not_used_in_classes"
-msgstr ""
+msgstr "目前未用於任何班級 "
 
 msgid "number"
-msgstr ""
+msgstr "一個數字"
 
 msgid "number_lines"
-msgstr ""
+msgstr "行數"
 
 msgid "number_of_errors"
-msgstr ""
+msgstr "錯誤數量：{number_of_errors}"
 
 msgid "ok"
-msgstr ""
+msgstr "確定"
 
 msgid "one_level_error"
-msgstr ""
+msgstr "你必須至少選擇一個等級。"
 
 msgid "only_you_can_see"
-msgstr ""
+msgstr "只有你能看到這個程式。"
 
 msgid "open"
-msgstr ""
+msgstr "開啟"
 
 msgid "opening_date"
-msgstr ""
+msgstr "開放日期"
 
 msgid "opening_dates"
-msgstr ""
+msgstr "開放日期"
 
 msgid "option"
-msgstr ""
+msgstr "選項"
 
 msgid "or"
-msgstr ""
+msgstr "或"
 
 msgid "other"
-msgstr ""
+msgstr "其他"
 
 msgid "other_block"
-msgstr ""
+msgstr "另一種積木式程式語言"
 
 msgid "other_settings"
-msgstr ""
+msgstr "其他設定"
 
 msgid "other_source"
-msgstr ""
+msgstr "其他"
 
 msgid "other_text"
-msgstr ""
+msgstr "其他文字語言"
 
 msgid "outdated_class_warning"
-msgstr ""
+msgstr "這個班級的內容已過時。"
 
 msgid "overwrite_warning"
-msgstr ""
+msgstr "你已經有一個同名的程式。儲存這個程式會取代原本的程式，確定要繼續嗎？"
 
 msgid "owner"
-msgstr ""
+msgstr "擁有者"
 
 msgid "page_not_found"
-msgstr ""
+msgstr "找不到這個頁面！"
 
 msgid "pair_with_teacher"
-msgstr ""
+msgstr "我想和另一位教師配對並獲得協助"
 
 msgid "password"
-msgstr ""
+msgstr "密碼"
 
 msgid "password_change_not_allowed"
-msgstr ""
+msgstr "你沒有權限變更這位使用者的密碼。"
 
 msgid "password_change_prompt"
-msgstr ""
+msgstr "確定要變更這個密碼嗎？"
 
 msgid "password_change_success"
-msgstr ""
+msgstr "已成功變更學生的密碼。"
 
 msgid "password_invalid"
-msgstr ""
+msgstr "你的密碼無效。"
 
 msgid "password_repeat"
-msgstr ""
+msgstr "再次輸入密碼"
 
 msgid "password_resetted"
-msgstr ""
+msgstr "密碼已成功重設。正在將你重新導向登入頁面。"
 
 msgid "password_six"
-msgstr ""
+msgstr "你的密碼必須至少包含 6 個字元。"
 
 msgid "password_updated"
-msgstr ""
+msgstr "密碼已更新。"
 
 msgid "passwords_six"
-msgstr ""
+msgstr "所有密碼都必須至少有 6 個字元。"
 
 msgid "passwords_too_short"
-msgstr ""
+msgstr "密碼長度必須至少為 6 個字元。請修正以下密碼，讓每個密碼至少有 6 個字元：{passwords}"
 
 msgid "pending_invites"
-msgstr ""
+msgstr "等待回覆的邀請"
 
 msgid "people_with_a_link"
-msgstr ""
+msgstr "其他人只要有連結，就能看到這個程式。如果你有公開個人檔案，程式也會顯示在該頁面上。"
 
 msgid "performance_graph"
-msgstr ""
+msgstr "表現圖表"
 
 msgid "performance_graph_info"
-msgstr ""
+msgstr "這張圖表會顯示學生完成的冒險數量，以及他們在各等級的程式執行次數和錯誤次數。"
 
 msgid "period"
-msgstr ""
+msgstr "一個句號"
 
 msgid "personal_text"
-msgstr ""
+msgstr "個人介紹"
 
 msgid "personal_text_invalid"
-msgstr ""
+msgstr "你的個人介紹無效。"
 
 msgid "phone_number"
-msgstr ""
+msgstr "電話號碼"
 
 msgid "preferred_keyword_language"
-msgstr ""
+msgstr "偏好的關鍵字語言"
 
 msgid "preferred_language"
-msgstr ""
+msgstr "偏好語言"
 
 msgid "present"
-msgstr ""
+msgstr "開始簡報"
 
 msgid "preview"
-msgstr ""
+msgstr "預覽"
 
 msgid "preview_as_student"
-msgstr ""
+msgstr "以學生身分預覽班級"
 
 msgid "previewing_adventure"
-msgstr ""
+msgstr "正在預覽冒險"
 
 msgid "previewing_class"
-msgstr ""
+msgstr "你正以教師身分預覽 <em>{class_name}</em> 班級。"
 
 msgid "previous_campaigns"
-msgstr ""
+msgstr "查看過往活動"
 
 msgid "previous_page"
-msgstr ""
+msgstr "上一頁"
 
 msgid "print_accounts"
-msgstr ""
+msgstr "列印"
 
 msgid "print_accounts_title"
-msgstr ""
+msgstr "hedy.org 學生帳號"
 
 msgid "print_logo"
-msgstr "打印"
+msgstr "輸出"
 
 msgid "privacy_terms"
-msgstr ""
+msgstr "隱私權條款"
 
 msgid "private"
-msgstr ""
+msgstr "私密"
 
 msgid "profile_logo_alt"
-msgstr ""
+msgstr "個人檔案圖示。"
 
 msgid "profile_picture"
-msgstr ""
+msgstr "個人檔案圖片"
 
 msgid "profile_updated"
-msgstr ""
+msgstr "個人檔案已更新。"
 
 msgid "profile_updated_reload"
-msgstr ""
+msgstr "個人檔案已更新，頁面將重新載入。"
 
 msgid "program_contains_error"
-msgstr ""
+msgstr "這個程式包含錯誤，確定仍要分享嗎？"
 
 msgid "program_header"
-msgstr ""
+msgstr "我的程式"
 
 msgid "program_size_too_long"
-msgstr ""
+msgstr "你的程式不能超過 {amount_lines} 行！"
 
 msgid "program_status_accepted"
-msgstr ""
+msgstr "程式已通過"
 
 msgid "program_status_not_accepted"
-msgstr ""
+msgstr "程式未通過"
 
 msgid "program_too_large_exception"
-msgstr ""
+msgstr "程式太大"
 
 msgid "programming_experience"
-msgstr ""
+msgstr "你有寫程式的經驗嗎？"
 
 msgid "programming_invalid"
-msgstr ""
+msgstr "請選擇有效的程式語言。"
 
 msgid "programs"
-msgstr ""
+msgstr "程式"
 
 msgid "prompt_join_class"
-msgstr ""
+msgstr "你想加入這個班級嗎？"
 
 msgid "provided_username_duplicates"
-msgstr ""
+msgstr "你重複提供了以下使用者名稱：{usernames}"
 
 msgid "public"
-msgstr ""
+msgstr "公開"
 
 msgid "public_adventures"
-msgstr ""
+msgstr "瀏覽公開冒險"
 
 msgid "public_content"
-msgstr ""
+msgstr "公開內容"
 
 msgid "public_content_info"
-msgstr ""
+msgstr "你可以在這裡找到公開的冒險。這些冒險由世界各地的教師製作。歡迎瀏覽，也可以在自己的課程中使用。"
 
 msgid "public_invalid"
-msgstr ""
+msgstr "這個同意選項無效"
 
 msgid "public_profile"
-msgstr ""
+msgstr "公開個人檔案"
 
 msgid "public_profile_info"
-msgstr ""
+msgstr "勾選這個方塊，就會讓所有人看見我的個人檔案。請不要分享姓名或住家地址等個人資訊，因為任何人都能看到！"
 
 msgid "public_profile_updated"
-msgstr ""
+msgstr "公開個人檔案已更新，頁面將重新載入。"
 
 msgid "question mark"
-msgstr ""
+msgstr "一個問號"
 
 msgid "recent"
-msgstr ""
+msgstr "我最近的程式"
 
 msgid "recover_password"
-msgstr "請求重置密碼"
+msgstr "申請重設密碼"
 
 msgid "reject_program"
-msgstr ""
+msgstr "退回程式"
 
 msgid "remove"
-msgstr ""
+msgstr "移除"
 
 msgid "remove_customization"
-msgstr ""
+msgstr "移除自訂設定"
 
 msgid "remove_customizations_prompt"
-msgstr ""
+msgstr "確定要移除這個班級的自訂設定嗎？"
 
 msgid "remove_student_prompt"
-msgstr ""
+msgstr "確定要將這位學生移出班級嗎？"
 
 msgid "remove_user_prompt"
-msgstr ""
+msgstr "確定要將這位使用者移出班級嗎？"
 
 msgid "rename_class"
-msgstr ""
+msgstr "重新命名班級"
 
 msgid "rename_class_prompt"
-msgstr ""
+msgstr "你想為這個班級取什麼名稱？"
 
 msgid "repair_program_logo_alt"
-msgstr ""
+msgstr "修復程式圖示"
 
 msgid "repeat_dep"
-msgstr ""
+msgstr "從第 8 級開始，`{repeat}` 必須搭配縮排使用。你可以在第 8 級的 `{repeat}` 分頁查看範例。"
 
 msgid "repeat_match_password"
-msgstr ""
+msgstr "再次輸入的密碼不一致。"
 
 msgid "repeat_new_password"
-msgstr ""
+msgstr "再次輸入新密碼"
 
 msgid "report_failure"
-msgstr ""
+msgstr "這個程式不存在，或尚未公開"
 
 msgid "report_program"
-msgstr ""
+msgstr "確定要檢舉這個程式嗎？"
 
 msgid "report_success"
-msgstr ""
+msgstr "已回報這個程式"
 
 msgid "request_invalid"
-msgstr ""
+msgstr "要求無效"
 
 msgid "request_teacher"
-msgstr ""
+msgstr "你想成為教師嗎？"
 
 msgid "request_teacher_account"
-msgstr ""
+msgstr "成為教師"
 
 msgid "required_field"
-msgstr ""
+msgstr "標有 * 的欄位為必填"
 
 msgid "reset_adventure_prompt"
-msgstr ""
+msgstr "確定要重設所有已選取的冒險嗎？"
 
 msgid "reset_adventures"
-msgstr ""
+msgstr "重設已選取的冒險"
 
 msgid "reset_button"
-msgstr ""
+msgstr "重設"
 
 msgid "reset_password"
-msgstr ""
+msgstr "重設密碼"
 
 msgid "restart"
-msgstr ""
+msgstr "重新開始"
 
 msgid "retrieve_adventure_error"
-msgstr ""
+msgstr "你沒有權限查看這個冒險！"
 
 msgid "retrieve_class_error"
-msgstr ""
+msgstr "只有教師可以取得班級資料"
 
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "取得標籤時發生錯誤"
 
 msgid "role"
-msgstr ""
+msgstr "角色"
 
 msgid "run_code_button"
-msgstr ""
+msgstr "執行程式碼"
 
 msgid "save_parse_warning"
-msgstr ""
+msgstr "這個程式包含錯誤，確定仍要儲存嗎？"
 
 msgid "save_prompt"
-msgstr ""
+msgstr "你必須有帳號才能儲存程式。要現在登入嗎？"
 
 msgid "save_success_detail"
-msgstr ""
+msgstr "程式已成功儲存。"
 
 msgid "save_turtle_drawing"
-msgstr ""
+msgstr "儲存繪圖"
 
 msgid "saving_language_failed"
-msgstr ""
+msgstr "無法變更冒險的語言。"
 
 msgid "search"
-msgstr ""
+msgstr "搜尋…"
 
 msgid "search_button"
-msgstr ""
+msgstr "搜尋"
 
 msgid "search_results"
-msgstr ""
+msgstr "搜尋結果"
 
 msgid "second_teacher"
-msgstr ""
+msgstr "協同教師"
 
 msgid "second_teacher_copy_prompt"
-msgstr ""
+msgstr "確定要複製這位教師嗎？"
 
 msgid "second_teacher_prompt"
-msgstr ""
+msgstr "輸入要邀請的教師使用者名稱。"
 
 msgid "second_teacher_warning"
-msgstr ""
+msgstr "這個班級中的所有教師都可以自訂班級。"
 
 msgid "see_adventure_shared_class"
-msgstr ""
+msgstr "你能查看這個冒險，是因為你和 {creator} 都在 {class_name} 班級中。"
 
 msgid "see_certificate"
-msgstr ""
+msgstr "查看 {username} 的 Hedy 憑證！"
 
 msgid "select"
-msgstr ""
+msgstr "選取"
 
 msgid "select_adventures"
-msgstr ""
+msgstr "選取冒險並排序"
 
 msgid "select_all"
-msgstr ""
+msgstr "全選"
 
 msgid "select_classes"
-msgstr ""
+msgstr "選擇班級"
 
 msgid "select_lang"
-msgstr ""
+msgstr "選擇語言"
 
 msgid "select_levels"
-msgstr ""
+msgstr "選擇等級"
 
 msgid "selected"
-msgstr ""
+msgstr "已選取"
 
 msgid "self_removal_prompt"
-msgstr ""
+msgstr "確定要離開這個班級嗎？"
 
 msgid "send_password_recovery"
-msgstr ""
+msgstr "寄送密碼復原連結給我"
 
 msgid "sent_by"
-msgstr ""
+msgstr "此邀請由"
 
 msgid "sent_password_recovery"
-msgstr ""
+msgstr "你很快就會收到一封電子郵件，裡面有重設密碼的說明。"
 
 msgid "set_adventure_name"
-msgstr ""
+msgstr "你想為冒險取什麼名稱？"
 
 msgid "settings"
-msgstr ""
+msgstr "我的個人設定"
 
 msgid "settings_header"
-msgstr ""
+msgstr "設定"
 
 msgid "share_by_giving_link"
-msgstr ""
+msgstr "將下方連結分享給其他人，就能讓他們看到你的程式："
 
 msgid "share_with_teachers"
-msgstr ""
+msgstr "與教師分享"
 
 msgid "share_your_program"
-msgstr ""
+msgstr "分享你的程式"
 
 msgid "show_editor"
-msgstr ""
+msgstr "顯示編輯器"
 
 msgid "signup_student_or_teacher"
-msgstr ""
+msgstr "你是學生還是教師？"
 
 msgid "single quotes"
-msgstr ""
+msgstr "一個單引號"
 
 msgid "slash"
-msgstr ""
+msgstr "一個斜線"
 
 msgid "sleeping"
-msgstr ""
+msgstr "休眠中……"
 
 msgid "slides"
-msgstr ""
+msgstr "簡報"
 
 msgid "slides_card_info"
-msgstr ""
+msgstr "每個 Hedy 等級都有現成簡報，方便你上課時使用。你可以直接在瀏覽器中開始簡報，也可以下載檔案。"
 
 msgid "slides_for_level"
-msgstr ""
+msgstr "等級簡報"
 
 msgid "slides_info"
-msgstr ""
+msgstr "Hedy 每個等級都有一份能協助教學的簡報。簡報包含各等級的說明，以及可以直接在簡報中執行的 Hedy 範例。按一下連結就能開始！入門簡報會在第 1 級前先介紹 Hedy 的基本概念。你可以在<a href=\"https://hedy.org/for-teachers/manual/features\">教師手冊</a>中找到更多簡報資訊。"
 
 msgid "social_media"
-msgstr ""
+msgstr "社群媒體"
 
 msgid "solution"
-msgstr ""
+msgstr "解答"
 
 msgid "solution_example"
-msgstr ""
+msgstr "範例解答"
 
 msgid "solution_example_explanation"
-msgstr ""
+msgstr "這裡用來填寫冒險的解答。如果你想和其他教師分享這個冒險，可以在這裡提供建議解答，讓他們參考。"
 
 msgid "some_rows_missing_separator"
-msgstr ""
-
-msgid "something_went_wrong_keyword_parsing"
-msgstr ""
-
-msgid "space"
-msgstr ""
-
-msgid "standard_new_class"
-msgstr ""
-
-msgid "standard_new_class_explanation"
-msgstr ""
-
-msgid "star"
-msgstr ""
-
-msgid "start_learning"
-msgstr ""
-
-msgid "start_teaching"
-msgstr ""
-
-msgid "step_title"
-msgstr ""
-
-msgid "stepper_variable_role"
-msgstr ""
-
-msgid "stop"
-msgstr ""
-
-msgid "stop_code_button"
-msgstr ""
-
-msgid "string"
-msgstr ""
-
-msgid "student_accounts_created"
-msgstr ""
-
-msgid "student_adventures_table"
-msgstr ""
-
-msgid "student_adventures_table_explanation"
-msgstr ""
-
-msgid "student_already_invite"
-msgstr ""
-
-msgid "student_in_another_class"
-msgstr ""
-
-msgid "student_information"
-msgstr ""
-
-msgid "student_information_explanation"
-msgstr ""
-
-msgid "student_removed_successfully"
-msgstr ""
-
-msgid "student_signup_header"
-msgstr ""
-
-msgid "students"
-msgstr ""
-
-msgid "submission_time"
-msgstr ""
-
-msgid "submit_program"
-msgstr ""
-
-msgid "submit_warning"
-msgstr ""
-
-msgid "submitted"
-msgstr ""
-
-msgid "submitted_header"
-msgstr ""
-
-msgid "subscribe"
-msgstr ""
-
-msgid "subscribe_message"
-msgstr ""
-
-msgid "subscribe_newsletter"
-msgstr ""
-
-msgid "subscribed_header"
-msgstr ""
-
-msgid "subscribed_message"
-msgstr ""
-
-msgid "successful_runs"
-msgstr ""
-
-msgid "successfully_subscribed"
-msgstr ""
-
-msgid "surname"
-msgstr ""
-
-msgid "survey_skip"
-msgstr ""
-
-msgid "survey_submit"
-msgstr ""
-
-msgid "tag_in_adventure"
-msgstr ""
-
-msgid "tag_input_placeholder"
-msgstr ""
-
-msgid "tags"
-msgstr ""
-
-msgid "teacher"
-msgstr ""
-
-msgid "teacher_invalid"
-msgstr ""
-
-msgid "teacher_invitation_require_login"
-msgstr ""
-
-msgid "teacher_manual"
-msgstr ""
-
-msgid "teacher_signup_header"
-msgstr ""
-
-msgid "teacher_welcome"
-msgstr ""
-
-msgid "teachers"
-msgstr ""
-
-msgid "teaching_materials"
-msgstr ""
-
-msgid "teaching_materials_info"
-msgstr ""
+msgstr "以下各列缺少分號，因此使用者名稱或密碼其中一項缺失：{rows}"
 
 #, fuzzy
+msgid "something_went_wrong_keyword_parsing"
+msgstr "你的冒險中有個地方需要修改：所有指令關鍵字都有正確放在 { } 裡嗎？"
+
+msgid "space"
+msgstr "一個空格"
+
+msgid "standard_new_class"
+msgstr "標準新班級"
+
+msgid "standard_new_class_explanation"
+msgstr "建立包含 Hedy 團隊製作之冒險的班級。"
+
+msgid "star"
+msgstr "一個星號"
+
+msgid "start_learning"
+msgstr "開始吧！"
+
+msgid "start_teaching"
+msgstr "建立帳號"
+
+msgid "step_title"
+msgstr "作業"
+
+msgid "stepper_variable_role"
+msgstr "計數變數"
+
+msgid "stop"
+msgstr "停止"
+
+msgid "stop_code_button"
+msgstr "停止程式"
+
+msgid "string"
+msgstr "文字"
+
+msgid "student_accounts_created"
+msgstr "已成功建立學生帳號"
+
+msgid "student_adventures_table"
+msgstr "學生的冒險"
+
+msgid "student_adventures_table_explanation"
+msgstr "這個表格會顯示學生在各等級冒險中建立的程式。按一下眼睛圖示可以查看程式頁面；看完程式後，可以勾選核取記號來表示已完成。"
+
+msgid "student_already_invite"
+msgstr "這位學生已有一份等待回覆的邀請。"
+
+msgid "student_in_another_class"
+msgstr "這位學生已在另一個班級中。請學生先離開所有班級，再試一次。"
+
+msgid "student_information"
+msgstr "學生資料"
+
+msgid "student_information_explanation"
+msgstr "這個表格會顯示班上學生的基本資料，你也能在表格中執行多種動作：按一下鉛筆圖示可變更學生密碼，按一下程式碼圖示可查看學生的程式頁面，按一下紅色垃圾桶圖示可將學生移出班級。"
+
+msgid "student_removed_successfully"
+msgstr "已成功將學生移出班級"
+
+msgid "student_signup_header"
+msgstr "學生"
+
+msgid "students"
+msgstr "學生"
+
+msgid "submission_time"
+msgstr "繳交時間"
+
+msgid "submit_program"
+msgstr "繳交"
+
+msgid "submit_warning"
+msgstr "確定要繳交這個程式嗎？"
+
+msgid "submitted"
+msgstr "已繳交"
+
+msgid "submitted_header"
+msgstr "這個程式已成功繳交，無法再編輯。"
+
+msgid "subscribe"
+msgstr "訂閱"
+
+msgid "subscribe_message"
+msgstr "訂閱電子報，掌握我們的最新動態與活動。按一下下方按鈕即可訂閱。如果之後改變心意，可以使用任何一封電子郵件中的取消訂閱連結。"
+
+msgid "subscribe_newsletter"
+msgstr "訂閱電子報"
+
+msgid "subscribed_header"
+msgstr "你已訂閱"
+
+msgid "subscribed_message"
+msgstr "感謝你訂閱我們的電子報！希望你喜歡電子報的內容。若有任何意見，歡迎到我們的<a target=\"_blank\" href=\"https://discord.gg/8yY7dEme9r\">Discord 伺服器</a>告訴我們。如果之後改變心意，可以使用任何一封電子郵件中的取消訂閱連結。"
+
+msgid "successful_runs"
+msgstr "成功執行次數：{successful_runs}"
+
+msgid "successfully_subscribed"
+msgstr "已成功訂閱我們的電子報"
+
+msgid "surname"
+msgstr "名字"
+
+msgid "survey_skip"
+msgstr "不要再顯示"
+
+msgid "survey_submit"
+msgstr "送出"
+
+msgid "tag_in_adventure"
+msgstr "冒險中的標籤"
+
+msgid "tag_input_placeholder"
+msgstr "輸入新標籤"
+
+msgid "tags"
+msgstr "標籤"
+
+msgid "teacher"
+msgstr "教師"
+
+msgid "teacher_invalid"
+msgstr "教師資料無效。"
+
+msgid "teacher_invitation_require_login"
+msgstr "若要將個人檔案設為教師身分，你必須先登入。如果還沒有帳號，請先建立帳號。"
+
+msgid "teacher_manual"
+msgstr "教師手冊"
+
+msgid "teacher_signup_header"
+msgstr "教師"
+
+msgid "teacher_welcome"
+msgstr "歡迎來到 Hedy！你現在擁有教師帳號，可以建立班級並邀請學生。"
+
+msgid "teachers"
+msgstr "教師"
+
+msgid "teaching_materials"
+msgstr "教學教材"
+
+msgid "teaching_materials_info"
+msgstr "你可以在這裡找到教材。"
+
 msgid "template_code"
 msgstr ""
-"This is the explanation of my adventure!\n"
+"這是我的冒險說明！\n"
 "\n"
-"This way I can show a command: <code>{print}</code>\n"
+"我可以像這樣顯示一個指令：<code>print</code>\n"
 "\n"
-"But sometimes I might want to show a piece of code, like this:\n"
+"有時我也會想顯示一段程式碼，例如：\n"
 "<pre>\n"
-"ask What's your name?\n"
-"echo so your name is \n"
+"ask 你叫什麼名字？\n"
+"print 原來你的名字是 _\n"
 "</pre>"
 
 msgid "template_code_solution"
 msgstr ""
+"這是我的冒險解答！\n"
+"\n"
+"以下是正確的程式碼：\n"
+"<pre>\n"
+"ask 你叫什麼名字？\n"
+"print 原來你的名字是 answer\n"
+"</pre>"
 
 msgid "this_adventure_has_an_example_solution"
-msgstr ""
+msgstr "這個冒險有範例解答"
 
 msgid "this_turns_in_assignment"
-msgstr ""
+msgstr "這會把作業繳交給你的教師。"
 
 msgid "title"
-msgstr ""
+msgstr "標題"
 
 msgid "title_admin"
-msgstr ""
+msgstr "Hedy - 管理員頁面"
 
 msgid "title_class-overview"
-msgstr ""
+msgstr "Hedy - 班級總覽"
 
 msgid "title_customize-adventure"
-msgstr ""
+msgstr "Hedy - 自訂冒險"
 
 msgid "title_customize-class"
-msgstr ""
+msgstr "Hedy - 自訂班級"
 
 msgid "title_for-teacher"
-msgstr ""
+msgstr "Hedy - 教師專區"
 
 msgid "title_grade_class"
-msgstr ""
+msgstr "批改班級作業"
 
 msgid "title_learn-more"
-msgstr ""
+msgstr "Hedy - 進一步了解"
 
 msgid "title_login"
-msgstr ""
+msgstr "Hedy - 登入"
 
 msgid "title_my-profile"
-msgstr ""
+msgstr "Hedy - 我的帳號"
 
 msgid "title_performance_graph"
-msgstr ""
+msgstr "表現圖表"
 
 msgid "title_privacy"
-msgstr ""
+msgstr "Hedy - 隱私權條款"
 
 msgid "title_programs"
-msgstr ""
+msgstr "Hedy - 我的程式"
 
 msgid "title_public-adventures"
-msgstr ""
+msgstr "Hedy - 公開冒險"
 
 msgid "title_recover"
-msgstr ""
+msgstr "Hedy - 復原帳號"
 
 msgid "title_reset"
-msgstr ""
+msgstr "Hedy - 重設密碼"
 
 msgid "title_signup"
-msgstr ""
+msgstr "Hedy - 建立帳號"
 
 msgid "title_start"
-msgstr ""
+msgstr "Hedy - 讓文字程式設計變簡單"
 
 msgid "title_view-adventure"
-msgstr ""
+msgstr "Hedy - 查看冒險"
 
 msgid "token_invalid"
-msgstr ""
+msgstr "你的驗證碼無效。"
 
 msgid "too_many_accounts"
-msgstr ""
+msgstr "你不能建立超過 100 個學生帳號。"
 
 msgid "tooltip_level_locked"
-msgstr ""
+msgstr "你的教師已停用這個等級"
 
 msgid "translate_error"
-msgstr ""
+msgstr "翻譯程式碼時發生問題。請試著執行程式碼，看看是否有錯誤。含有錯誤的程式碼無法翻譯。"
 
 msgid "translating_hedy"
-msgstr ""
+msgstr "翻譯 Hedy"
 
 msgid "translator"
-msgstr ""
+msgstr "翻譯者"
 
 msgid "turned_into_teacher"
-msgstr ""
+msgstr "恭喜！你已成功成為教師。"
 
 msgid "unarchive"
-msgstr ""
+msgstr "取消封存"
 
 msgid "unarchive_class"
-msgstr ""
+msgstr "取消封存班級"
 
 msgid "unauthorized"
-msgstr ""
+msgstr "你沒有權限存取這個頁面"
 
 msgid "unfavourite_confirm"
-msgstr ""
+msgstr "確定要將這個程式從最愛中移除嗎？"
 
 msgid "unfavourite_success"
-msgstr ""
+msgstr "已從最愛中移除你的程式。"
 
 msgid "unknown_variable_role"
-msgstr ""
+msgstr "未知"
 
 msgid "unsaved_class_changes"
-msgstr ""
+msgstr "還有尚未儲存的變更，確定要離開這個頁面嗎？"
 
 msgid "unsubmit_program"
-msgstr ""
+msgstr "取消繳交程式"
 
 msgid "unsubmit_warning"
-msgstr ""
+msgstr "確定要取消繳交這個程式嗎？"
 
 msgid "unsubmitted"
-msgstr ""
+msgstr "未繳交"
 
 msgid "unsubscribed_header"
-msgstr ""
+msgstr "你已取消訂閱"
 
 msgid "unsubscribed_message"
-msgstr ""
+msgstr "很遺憾你要離開。如果是不小心取消訂閱，可以填寫<a href=\"http://eepurl.com/hk77Mv\">這份表單</a>重新訂閱。"
 
 msgid "update"
-msgstr ""
+msgstr "更新"
 
 msgid "update_adventure_prompt"
-msgstr ""
+msgstr "確定要更新這個冒險嗎？"
 
 msgid "update_class_prompt"
-msgstr ""
+msgstr "確定要更新班級嗎？"
 
 msgid "update_public"
-msgstr ""
+msgstr "更新公開個人檔案"
 
 msgid "updated"
-msgstr ""
+msgstr "已更新"
 
 msgid "updating_indicator"
-msgstr ""
+msgstr "正在更新"
 
 msgid "use_custom_passwords"
-msgstr ""
+msgstr "使用自己的密碼"
 
 msgid "use_generated_passwords"
-msgstr ""
+msgstr "自動產生密碼"
 
 msgid "use_of_blanks_exception"
-msgstr ""
+msgstr "程式中使用空白"
 
 msgid "use_of_nested_functions_exception"
-msgstr ""
+msgstr "使用巢狀函式"
 
 msgid "used_in"
-msgstr ""
+msgstr "使用於："
 
 msgid "user"
-msgstr ""
+msgstr "使用者"
 
 msgid "user_not_private"
-msgstr ""
+msgstr "這位使用者不存在，或沒有公開的個人檔案"
 
 msgid "username"
-msgstr ""
+msgstr "使用者名稱"
 
 msgid "username_contains_invalid_symbol"
-msgstr ""
+msgstr "使用者名稱不能包含「:」或「@」符號。請從以下使用者名稱中移除這些符號：{usernames}"
 
 msgid "username_contains_separator"
-msgstr ""
+msgstr "使用者名稱不能包含分號。你是否想使用自己的密碼？如果是，請開啟密碼切換開關，再重新建立帳號。如果不是，請從以下使用者名稱中移除分號：{usernames}"
 
 msgid "username_empty"
-msgstr ""
+msgstr "你尚未輸入使用者名稱！"
 
 msgid "username_invalid"
-msgstr ""
+msgstr "你的使用者名稱無效。"
 
 msgid "username_special"
-msgstr ""
+msgstr "使用者名稱不能包含 `:` 或 `@`。"
 
 msgid "username_three"
-msgstr ""
+msgstr "使用者名稱必須至少包含三個字元。"
 
 msgid "usernames_too_short"
-msgstr ""
+msgstr "使用者名稱長度必須至少為 3 個字元。請修正以下使用者名稱，讓每個名稱至少有 3 個字元：{usernames}"
 
 msgid "usernames_unavailable"
-msgstr ""
+msgstr "以下使用者名稱無法使用：{usernames}。你可以建立相似的帳號，例如在名稱後加上底線或班級名稱。"
 
 msgid "view_adventures"
-msgstr ""
+msgstr "查看冒險"
 
 msgid "view_classes"
-msgstr ""
+msgstr "查看班級"
 
 msgid "view_program"
-msgstr ""
+msgstr "查看程式"
 
 msgid "view_slides"
-msgstr ""
+msgstr "查看簡報"
 
 msgid "waiting_for_submit"
-msgstr ""
+msgstr "等待繳交"
 
 msgid "walker_variable_role"
-msgstr ""
+msgstr "走訪變數"
 
 msgid "website"
-msgstr ""
+msgstr "網站"
 
 msgid "what_is_your_role"
-msgstr ""
+msgstr "你的角色是什麼？"
 
 msgid "workbook_circle_question_text"
-msgstr ""
+msgstr "**問題**：請圈出這段程式碼中的 {goal}："
 
 msgid "workbook_circle_question_title"
-msgstr ""
+msgstr "圈選"
 
 msgid "workbook_define_question_text"
-msgstr ""
+msgstr "**問題**：{word} 是什麼意思？"
 
 msgid "workbook_define_question_title"
-msgstr ""
+msgstr "定義"
 
 msgid "workbook_input_question_text"
-msgstr ""
+msgstr "**問題**：哪一段程式碼產生了這個輸出？"
 
 msgid "workbook_input_question_title"
-msgstr ""
+msgstr "輸入"
 
 msgid "workbook_multiple_choice_question_text"
-msgstr ""
+msgstr "**問題**：這段程式碼正確，還是有錯誤？"
 
 msgid "workbook_multiple_choice_question_title"
-msgstr ""
+msgstr "選擇"
 
 msgid "workbook_open_question_title"
-msgstr ""
+msgstr "開放式問題"
 
 msgid "workbook_output_question_text"
-msgstr ""
+msgstr "**問題**：這段程式碼會輸出什麼？"
 
 msgid "workbook_output_question_title"
-msgstr ""
+msgstr "輸出"
 
 msgid "written_by"
-msgstr ""
+msgstr "作者："
 
 msgid "year_invalid"
-msgstr ""
+msgstr "請輸入 1900 到 {current_year} 之間的年份。"
 
 msgid "yes"
-msgstr ""
+msgstr "是"
 
 msgid "your_personal_text"
-msgstr ""
+msgstr "輸入你的個人介紹……"
 
 msgid "your_program"
-msgstr ""
+msgstr "你的程式"
 
 #~ msgid "select_own_adventures"
 #~ msgstr "Select own adventures"
