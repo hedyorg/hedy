@@ -23,7 +23,7 @@
   wrapped in their own conditionals so that when it is off, the markup is unchanged
   rather than merely restyled.
 #}
-{% macro common_mistakes(sections, level, beats=False) %}
+{% macro common_mistakes(sections, level, light=False, beats=False) %}
 {% for mistake_section in sections %}
 <div class="mistake" data-cy="common_mistake">
   {% if mistake_section.title %}<h4 class="mistake-title">{{ mistake_section.title|commonmark }}</h4>{% endif %}
@@ -37,7 +37,7 @@
     {% endif %}
     {% if mistake_section.example.error_code %}
       <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+        <pre class="common-mistakes{% if light %} light{% endif %}" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
       </div>
     {% endif %}
     {% if beats and (mistake_section.example.error_text or mistake_section.example.error_code) %}
@@ -53,7 +53,7 @@
     {% endif %}
     {% if mistake_section.example.solution_code %}
       <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+        <pre class="common-mistakes{% if light %} light{% endif %}" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
       </div>
     {% endif %}
     {% if beats and (mistake_section.example.solution_text or mistake_section.example.solution_code) %}
@@ -63,7 +63,7 @@
     {% if mistake_section.text %}<p>{{ mistake_section.text|commonmark }}</p>{% endif %}
     {% if mistake_section.code %}
       <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
+        <pre class="common-mistakes{% if light %} light{% endif %}" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
       </div>
     {% endif %}
   {% endif %}
