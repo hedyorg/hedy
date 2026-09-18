@@ -228,6 +228,7 @@ function initializePreviewCodeBlocks(previewContainer: HTMLElement) {
                 .css({ fontFamily: 'sans-serif' })
                 .addClass('yellow-btn')
                 .attr('data-cy', 'paste_example_code_preview')
+                .attr('aria-label', `${ClientMessages['copy_to_editor']}`)
                 .text(symbol)
                 .appendTo(buttonContainer)
                 .on('click', () => {

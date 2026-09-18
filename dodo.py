@@ -184,6 +184,7 @@ def task_client_messages():
         # Depends on a specific YAML file and the .mo files
         file_dep=[
             *glob('content/client-messages/*.yaml'),
+            'content/client-messages.txt',
             *mofiles,
             script,
         ],
@@ -501,20 +502,36 @@ def task_container():
 def task__offline():
     """Build the offline Hedy distribution."""
 
-    return dict(
-        title=lambda _: 'Build offline Hedy',
-        task_dep=['backend', 'frontend'],
-        actions=[
-            'pyinstaller -y app.spec',
-            # We copy this here instead of in the 'spec' file so that we can rename
-            # the file (spec file copies cannot do that).
-            'cp data-for-testing.json dist/offlinehedy/database.json',
-            'cp OFFLINE_README.txt dist/offlinehedy/README.txt',
-            # There are some research papers in the distribution that take up a lot
-            # of space.
-            'rm -rf dist/offlinehedy/_internal/content/research/*',
-        ],
-    )
+    if platform.system() == 'Windows':
+        return dict(
+            title=lambda _: 'Build offline Hedy',
+            task_dep=['backend', 'frontend'],
+            actions=[
+                'pyinstaller -y app.spec',
+                # We copy this here instead of in the 'spec' file so that we can rename
+                # the file (spec file copies cannot do that).
+                'cp data-for-testing.json dist/offlinehedy/database.json',
+                'cp OFFLINE_README_WINDOWS.txt dist/offlinehedy/README.txt',
+                # There are some research papers in the distribution that take up a lot
+                # of space.
+                'rm -rf dist/offlinehedy/_internal/content/research/*',
+            ],
+        )
+    else:
+        return dict(
+            title=lambda _: 'Build offline Hedy',
+            task_dep=['backend', 'frontend'],
+            actions=[
+                'pyinstaller -y app.spec',
+                # We copy this here instead of in the 'spec' file so that we can rename
+                # the file (spec file copies cannot do that).
+                'cp data-for-testing.json dist/offlinehedy/database.json',
+                'cp OFFLINE_README_UBUNTU.txt dist/offlinehedy/README.txt',
+                # There are some research papers in the distribution that take up a lot
+                # of space.
+                'rm -rf dist/offlinehedy/_internal/content/research/*',
+            ],
+        )
 
 
 def task__offline_macos():
@@ -528,7 +545,7 @@ def task__offline_macos():
             # We copy this here instead of in the 'spec' file so that we can rename
             # the file (spec file copies cannot do that).
             'cp data-for-testing.json dist/offlinehedy/database.json',
-            'cp OFFLINE_README.txt dist/offlinehedy/README.txt',
+            'cp OFFLINE_README_MACOS.txt dist/offlinehedy/README.txt',
             # There are some research papers in the distribution that take up a lot
             # of space.
             'rm -rf dist/offlinehedy/_internal/content/research/*',
@@ -546,6 +563,12 @@ def task__autopr():
     if we do that Weblate will nearly always be in a state of conflicts, which
     leads to scary warnings. Instead, we let Weblate decide what these files
     should look like.
+
+    The one thing we do match is Weblate's "Remove blank strings" add-on. 'extract'
+    writes an entry for every string into every language, translated or not, and the
+    add-on deletes the untranslated ones again the moment it sees them. That standoff
+    is what keeps Weblate permanently ahead of GitHub, so we write the files the way
+    it wants them instead.
     """
 
     return dict(
@@ -558,9 +581,8 @@ def task__autopr():
             # 'normalize_yaml',
         ],
         actions=[
-            # No normalization for now!
-            # Run a script to strip things that lead to conflicts from po files
-            # [python3, 'build-tools/github/normalize-pofiles.py'],
+            # Drop the untranslated entries 'extract' just wrote, as Weblate would
+            [python3, 'build-tools/github/strip-untranslated-pofiles.py'],
         ])
 
 

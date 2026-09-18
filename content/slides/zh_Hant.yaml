@@ -1,1 +1,2016 @@
-{}
+levels:
+    0:
+        1:
+            header: 歡迎來到 Hedy！
+            text: |-
+                歡迎使用 Hedy 程式語言！
+
+                教師請按下鍵盤上的 S 鍵，查看講者備註。
+            notes: 請學生寫下幾個讓他們聯想到程式設計的詞，接著快速輪流聽聽大家的答案。
+        2:
+            header: 程式設計
+            text: |-
+                程式設計就是使用電腦懂得的語言，向電腦下達指令。
+
+                這樣的語言稱為「程式語言」。
+            notes: |-
+                電腦無法理解英語等一般人使用的日常語言，而是使用自己的語言。
+                別擔心，你不需要輸入一長串 0 和 1；我們會學習如何用程式語言向電腦下達指令。
+        3:
+            header: 程式語言
+            text: |-
+                也許你已經知道一些程式語言？
+                例如：
+                * Scratch
+                * Python
+                * HTML
+            notes: 詢問學生自己的程式設計經驗，或他們是否認識從事資訊科技工作的人。
+        4:
+            header: 程式設計
+            text: |-
+                學會程式設計後，就能做出許多很酷的東西：
+                * 建立互動故事
+                * 製作電腦繪圖，還能把圖畫到紙張或布料上
+                * 製作能在手機上使用的應用程式
+            notes: 這聽起來可能很困難，不過我們會一步一步學習程式設計。
+        5:
+            header: 在 Hedy 中寫程式
+            text: 在 Hedy 中，我們會使用 `{print}` 等特殊的「關鍵字」。
+            code: '{print} 歡迎來到 Hedy！'
+            notes: |-
+                讓我們來看看 Hedy。在 Hedy 中，我們使用程式詞彙（關鍵字）向電腦下達指令。
+                我們在畫面左側輸入這些指令，這些內容就稱為程式碼或程式。
+        6:
+            header: 在 Hedy 中寫程式
+            text: 關鍵字會以粉紅色顯示。
+            code: '{print} 歡迎來到 Hedy！'
+            notes: 如你所見，正確使用程式詞彙（或關鍵字）時，它們會變成粉紅色。
+        7:
+            header: 在 Hedy 中寫程式
+            text: 按下程式碼下方的「執行程式碼」按鈕，就能啟動程式。
+            code: '{print} 歡迎來到 Hedy！'
+            notes: 若要讓電腦按照指令行動，就必須「執行」程式碼。按下按鈕，向學生展示會發生什麼事。
+        8:
+            header: 在 Hedy 中寫程式
+            text: 輸出會顯示在右側。
+            code: '{print} 歡迎來到 Hedy！'
+            notes: 執行程式碼後，就會出現輸出。輸出是程式執行後的結果。右側顯示輸出的畫面稱為輸出畫面。
+        9:
+            header: 在 Hedy 中寫程式
+            text: 輸出也可以是一幅圖。
+            code: |-
+                {forward} 100
+                {turn} {left}
+            notes: 在 Hedy 中，我們不只會讓文字出現，輸出也可以是一幅圖，或是……
+        10:
+            header: 在 Hedy 中寫程式
+            text: 輸出也可以是音樂！
+            code: |-
+                {play} C4
+                {play} D4
+                {play} E4
+            notes: 前往第一個級別，開始學習吧！
+        11:
+            header: 使用選單前往下一個冒險
+            text: 使用選單前往下一個冒險或下一個級別。
+            editor: /hedy/1
+            notes: 學生有時不知道如何前往下一個冒險，請在 Hedy 中示範操作方式。
+        12:
+            header: 在 Hedy 中寫程式
+            text: 寫程式時有時會犯錯。你可以使用除錯工具找出錯誤（bug）並修正。
+            code: |-
+                {print} 除錯就是找出錯誤
+                {print} 你可以逐行執行程式碼
+                {print} 這樣就很容易找到程式錯誤
+                {print} 再把它修好！
+                {print} 也可以按一下眼睛圖示來停用某一行程式碼
+            debug: 真
+            notes: |-
+                **如何為程式碼除錯**
+                觀看這部<a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">影片</a>了解除錯工具的使用方式，或閱讀以下說明。
+                你當然可以直接查看程式碼並自行找出錯誤，我們也提供了一些工具來協助你。
+                按一下輸入區下方的瓢蟲 🐞 按鈕，就會啟動**除錯工具**。除錯工具能逐行執行程式。
+                如果程式碼中有嚴重錯誤（例如除錯冒險中的錯誤），除錯工具會請你先修正這些錯誤。請閱讀錯誤訊息，找出修正方法。
+                修正嚴重錯誤後，除錯工具就會逐行執行程式。
+                若要執行下一行，請按右側的 ⏭️ 按鈕。這一行是否按照預期執行？太好了！再次按下按鈕來執行下一行，直到程式完全正常為止。
+                若要停止除錯工具，請按中間的 🛑 按鈕。
+                若要從頭開始執行程式碼，請按左側的 🔁 按鈕。
+                卡在某一行程式碼，想先跳過它測試程式嗎？
+                按一下行號前方的眼睛圖示，就能停用該行程式碼。這一行會被加上刪除線。
+                執行程式碼時，現在會跳過這一行。若要重新啟用，只要再按一次眼睛圖示，程式就不會再跳過它。
+    1:
+        1:
+            header: 歡迎來到第 1 級！
+            text: |-
+                完成這堂課後，你可以：
+                * 編寫能輸出文字的程式碼
+                * 製作互動故事
+        2:
+            header: '{print}'
+            text: |-
+                第 1 級可以使用的第一個指令是 `{print}`。
+
+                `{print}` 用來在畫面上顯示文字。
+            code: '{print} 在畫面上顯示這段文字'
+            notes: 先請學生猜猜輸出結果，再執行程式碼，讓他們看看執行「輸出」指令後會發生什麼事。
+        3:
+            header: '{print} 關鍵字'
+            text: |-
+                你可以把「輸出」關鍵字後的文字改成任何想要的內容。
+
+                也可以再加入一行以 `{print}` 開頭的程式碼，一次輸出多行文字。
+            code: |-
+                {print} 歡迎來到 Hedy！
+                {print} 現在就開始寫程式！
+            notes: 執行程式碼，接著自行修改內容。向學生示範，想輸出什麼都可以。
+        4:
+            header: '{ask}'
+            text: |-
+                第 1 級可以使用的第二個指令是 `{ask}`。
+
+                `{ask}` 用來提出可以回答的問題。
+            code: |-
+                {print} 歡迎來到你自己的剪刀石頭布遊戲！
+                {ask} 你要出什麼？
+            notes: |-
+                示範電腦現在會向你提出問題。輸入一個回答，也示範輸入回答後不會發生任何事。
+                提醒學生，電腦只會按照指令行動，不會自己做任何事。因此，如果想讓電腦輸出答案，就必須下達這個指令。
+        5:
+            header: '{answer}'
+            text: |-
+                若要在輸出畫面顯示回答，可以使用：`{answer}`。
+                `{answer}` 不會單獨使用，一定會和 `{ask}` 一起使用。
+            code: |-
+                {print} 哈囉！
+                {ask} 你叫什麼名字？
+                {print} 哈囉 {answer}
+            notes: 若要讓電腦把回答重複顯示給你看，可以使用 `答案` 關鍵字。
+        6:
+            header: 開始寫程式！
+            text: 這裡可以找到冒險清單。
+            editor: /hedy/1
+            notes: 開始前，先向學生展示冒險。別忘了指出練習的位置，學生必須在這裡閱讀冒險的詳細操作說明。
+        7:
+            header: 開始寫程式！
+            text: 黃色箭頭按鈕可以用來複製範例。
+            editor: /hedy#print_command
+            notes: 最後，向學生示範按下黃色按鈕，就能把範例程式碼複製到程式編輯區。
+        8:
+            header: 開始吧！
+            text: |-
+                現在很適合嘗試第一批冒險。
+                使用選單前往下一個冒險。如果想再閱讀一次關鍵字說明，請回到有燈泡圖示的冒險。
+            editor: /hedy/1
+            notes: 開始動手吧！
+        9:
+            header: 除錯
+            text: 為程式碼除錯，就是找出並排除其中的錯誤。一起來為這段程式碼除錯吧！按一下瓢蟲按鈕，啟動除錯工具。
+            code: |-
+                我是 DJ Hedy
+                {print} 你想聽哪一首歌？
+                {ask} 我也喜歡那首歌！
+                {print} 接下來播放…… {answer}
+            debug: 真
+            notes: |-
+                **如何為程式碼除錯**
+                觀看這部<a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">影片</a>了解除錯工具的使用方式，或閱讀以下說明。
+                你當然可以直接查看程式碼並自行找出錯誤，我們也提供了一些工具來協助你。
+                按一下輸入區下方的瓢蟲 🐞 按鈕，就會啟動**除錯工具**。除錯工具能逐行執行程式。
+                如果程式碼中有嚴重錯誤（例如除錯冒險中的錯誤），除錯工具會請你先修正這些錯誤。請閱讀錯誤訊息，找出修正方法。
+                修正嚴重錯誤後，除錯工具就會逐行執行程式。
+                若要執行下一行，請按右側的 ⏭️ 按鈕。這一行是否按照預期執行？太好了！再次按下按鈕來執行下一行，直到程式完全正常為止。
+                若要停止除錯工具，請按中間的 🛑 按鈕。
+                若要從頭開始執行程式碼，請按左側的 🔁 按鈕。
+                卡在某一行程式碼，想先跳過它測試程式嗎？
+                按一下行號前方的眼睛圖示，就能停用該行程式碼。這一行會被加上刪除線。
+                執行程式碼時，現在會跳過這一行。若要重新啟用，只要再按一次眼睛圖示，程式就不會再跳過它。
+        10:
+            header: 播放音樂
+            text: |-
+                使用 `{play}` 播放音符
+                音符依序是：C - D - E - F - G - A - B
+                在音符後加上數字可以選擇音階，音階範圍是 1 到 10。
+            code: |
+                {play} C4
+                {play} D4
+                {play} E4
+                {play} F4
+                {play} G4
+                {play} A4
+                {play} B4
+                {play} C5
+            notes: 向學生示範如何在 Hedy 中使用 `{play}` 關鍵字。這也很適合順便複習課堂上的耳機使用規則。
+        11:
+            header: 用海龜畫圖：{forward}
+            text: '`{forward}` 用來讓海龜向前移動。'
+            code: '{forward} 50'
+            notes: 看過文字程式碼後，現在來看看畫圖程式碼。向學生示範如何使用 forward 關鍵字。
+        12:
+            header: 用海龜畫圖：{forward}
+            text: 要怎麼向後移動？
+            code: '{forward} -50'
+            notes: 詢問學生是否知道如何向後移動。答案是使用負數，例如 -50。
+        13:
+            header: 用海龜畫圖：{turn}
+            text: '`{turn}` 用來讓海龜向左或向右轉。'
+            code: |-
+                {forward} 50
+                {turn} {left}
+        14:
+            header: 除錯
+            text: 畫圖時使用除錯工具
+            code: |-
+                {forward} 50
+                {turn} {left}
+                {forward} 100
+                {turn} {left}
+                {forward} 50
+                {turn} {left}
+            debug: 真
+            notes: 畫圖時，除錯工具也非常實用。
+        15:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        16:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        17:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。你可以前往班級頁面，再按一下學生的冒險來展示。
+        18:
+            header: 搶先看看下一個級別……
+            text: |-
+                下一個級別將學習使用變數，讓程式更有互動性！
+                你也會學習使用 `{sleep}` 關鍵字來暫停程式碼！
+    2:
+        1:
+            header: 歡迎來到第 2 級
+            text: |-
+                完成這堂課後，你可以：
+                * 將內容儲存在變數中
+                * 使用變數製作故事或圖畫
+            notes: 學生可能不容易理解變數的概念。我們發現，提供多個變數範例能幫助他們理解。
+        2:
+            header: 問題
+            text: 你在上一個級別可能遇過這個問題……
+            code: |-
+                {print} 歡迎光臨餐廳！
+                {ask} 你想吃什麼
+                {print} 你想吃…… {answer}
+                {ask} 你想喝什麼？
+                {print} 你想喝…… {answer}
+                {print} 謝謝你的點餐！
+                {print} 請好好享用你的…… {answer}
+            notes: |-
+                警告：這段程式碼在這個級別無法運作。請不要執行，只要一起討論。
+                請學生查看程式並預測輸出結果。
+                希望他們能發現，最後一行只會顯示「請享用你的（點的飲料）」，電腦已經忘記食物了。
+                使用 ask 時，電腦只能記住一個項目。這個級別將學習使用變數來解決問題。
+        3:
+            header: 變數是什麼？
+            text: |-
+                變數是電腦記憶體中的一個位置，用來儲存問題的回答。
+                這聽起來可能很難，不過先看看範例吧。
+            code: |-
+                answer {is} {ask} 你叫什麼名字？
+                {print} 哈囉 answer
+            notes: |-
+                在運算領域中，我們用「變數」描述電腦記憶體中儲存可變資訊的位置。
+                變數就像裝著變動內容的盒子或容器。盒子本身不變，但裡面的內容可以改變。
+                向學生示範變數的運作方式。請指出，最後一行的變數名稱 `answer` 會被變數的值取代。
+                輸出畫面中出現的藍色方框，會顯示使用過的變數以及它們的值。
+        4:
+            header: '`{is}` 指令'
+            text: 我們使用 `{is}` 指令建立或「設定」變數。變數名稱放在 `{is}` 前面，`{ask}` 指令放在後面。我們可以自行選擇變數名稱，不一定要使用 `answer`。
+            code: |-
+                name {is} {ask} 你叫什麼名字？
+                {print} 哈囉 name
+            notes: 請學生想出自己的範例。
+        5:
+            header: 變數
+            text: 我們也可以不提問，直接設定變數。變數名稱放在 `{is}` 前面，變數的值放在後面。
+            code: |-
+                food {is} 漢堡
+                drink {is} 水
+                {print} 我想吃 food。
+                {print} 我想喝一點 drink。
+            notes: 詢問學生是否想得到其他變數（例如身高、鞋子尺寸、髮色等），並把他們的例子加入程式碼。
+        6:
+            header: 多個變數
+            text: 現在有了變數，我們可以使用多個變數，不再只能使用一個 `answer`。
+            code: |-
+                name {is} Hedy
+                age {is} 15
+                {print} name 今年 age 歲
+        7:
+            header: 睡眠
+            text: 也可以使用 `{sleep}` 關鍵字，讓程式碼暫停一下。
+            code: |-
+                {print} 我最喜歡的顏色是……
+                {sleep} 2
+                {print} 綠色！
+            notes: |-
+                向學生展示「{sleep}」關鍵字，並問他們數字 2 代表什麼。
+                把 2 改成其他數字，示範他們可以決定程式暫停幾秒。
+        8:
+            header: 睡眠 5 秒
+            text: |-
+                如果想暫停久一點，可以在 `{sleep}` 關鍵字後加上數字。
+
+                你甚至可以不用數字，改用變數決定 sleep 關鍵字的暫停時間。
+            code: |-
+                pause {is} 10
+                {print} 我最喜歡的顏色是……
+                {sleep} pause
+                {print} 綠色！
+            notes: 展示程式碼。如果想試試看，甚至可以把 10 改成 {ask} 關鍵字。
+        9:
+            header: 使用變數畫圖
+            text: |-
+                你在第 1 級已學會如何使用 {forward} 100。
+                現在也可以搭配變數使用。
+            code: |-
+                distance {is} {ask} 我要走多遠？
+                {forward} distance
+            notes: |-
+                向學生示範，現在畫圖海龜也能搭配變數使用！
+                請使用不同的回答多次執行程式碼，展示變數的用法。
+        10:
+            header: 使用角度畫圖
+            text: 以前可以 {turn} {left} 或 {turn} {right}，現在還能使用角度！
+            code: |-
+                {forward} 100
+                {turn} 45
+                {forward} 100
+            notes: 向學生展示程式碼。下一張投影片會介紹不同的角度。
+        11:
+            header: 角度
+            text: |-
+                一整圈是 360 度。
+                半圈是 180 度。
+                向右轉是 90 度。
+                向左轉是 270 度。
+
+                你可以填入任何想要的數字。
+            code: |-
+                {turn} 90
+                {forward} 100
+            notes: |-
+                確認學生了解角度。他們可能已在數學課學過，也可能完全沒接觸過。
+                如果學生從未聽過角度，可以向他們展示角度轉盤，甚至列印一份給他們。
+                使用投影片上的範例程式碼，向學生展示多種角度。
+        12:
+            header: 角度與變數
+            text: 角度也可以是變數！
+            code: |-
+                degrees {is} {ask} 海龜要轉幾度？
+                {turn} degrees
+                {forward} 100
+            notes: 向學生示範，度數也可以設成變數。
+        13:
+            header: 除錯
+            text: 為程式碼除錯，就是找出並排除其中的錯誤。一起來為這段程式碼除錯吧！按一下瓢蟲按鈕，啟動除錯工具。
+            code: |-
+                {print} 歡迎來到甜甜圈店！
+                filling {is} 你想要哪一種內餡？
+                {print} 你選擇了…… Filling！真好吃！
+                topping {ask} 你想要哪一種配料？
+                topping 真好吃！
+                {print} 我去拿你的甜甜圈。{sleep}
+                {print} 來了！一個有 filling 內餡和 toping 配料的甜甜圈！
+                {ask} 祝你有美好的一天！
+            debug: 真
+            notes: 示範如何使用除錯工具和眼睛圖示。
+        14:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        15:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        16:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        17:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習如何製作清單，並讓電腦從清單中隨機挑選一個項目！
+    3:
+        1:
+            header: 歡迎來到第 3 級
+            text: |-
+                完成這堂課後，你可以：
+                * 在一個變數中儲存多個項目，這稱為清單。
+                * 製作會隨機發生事情的故事。
+                * 製作會隨機畫出內容的圖畫。
+        2:
+            header: 製作清單
+            text: |-
+                使用 `{is}` 製作清單。
+
+                用逗號分隔清單中的項目。
+            code: animals {is} 狗, 貓, 袋鼠
+            notes: 請學生寫下自己的清單範例。
+        3:
+            header: 隨機選擇
+            text: |-
+                你可以搭配 `{at}` `{random}` 關鍵字使用清單。
+                電腦會從清單中隨機挑選一個項目。
+                每次執行這段程式碼，輸出結果都會不同。
+            code: |-
+                animals {is} 狗, 貓, 袋鼠
+                {print} animals {at} {random}
+            notes: 執行程式碼幾次，向學生展示每次的輸出結果都不同。
+        4:
+            header: 在句子中隨機選擇
+            text: 也可以在句子中使用 `{at}` `{random}` 關鍵字。
+            code: |-
+                animals {is} 狗, 貓, 袋鼠
+                {print} 我最喜歡的動物是 animals {at} {random}
+            notes: |-
+                再次向學生示範，多次執行程式碼時，輸出結果會改變。
+                也可以調換單字順序，示範 `{print} animals {at} {random} 是我最喜歡的動物` 也是允許的寫法。
+                現在請學生在自己製作的清單下方，寫出 print 和 at random 關鍵字，再和另一位學生交換程式碼。
+                請另一位學生預測程式可能的輸出結果。
+                最後在全班簡短討論幾個答案。
+        5:
+            header: 開始吧！
+            text: 開始挑戰冒險吧！
+            notes: 一起完成第一批冒險吧！
+        6:
+            header: 加入清單
+            text: 使用 `{add}` `{to_list}` 關鍵字，可以將項目加入清單。
+            code: |-
+                animals {is} 狗, 貓, 袋鼠
+                {add} 綿羊 {to_list} animals
+                {print} 我選擇 animals {at} {random}
+            notes: |-
+                希望學生能發現，這樣使用 add to 關鍵字其實不太合理，因為一開始直接把綿羊放進清單就可以了。
+                下一張投影片會示範如何把 add to 和 ask、變數搭配使用，讓程式可以與使用者互動。
+        7:
+            header: 加入清單
+            text: |-
+                你可以自行選擇要加入清單的內容，也能搭配 `{ask}` 關鍵字使用 `{add}` `{to}` 關鍵字。
+                這樣就能讓玩家決定要把什麼加入清單，讓程式具有互動性。
+            code: |-
+                animals {is} 狗, 貓, 袋鼠
+                like {is} {ask} 你最喜歡哪一種動物？
+                {add} like {to_list} animals
+                {print} 我選擇 animals {at} {random}
+            notes: |-
+                多次執行程式，示範隨機選到的動物現在會加入清單。
+                輸出畫面中出現的藍色方框，會顯示使用過的變數以及它們的值。
+        8:
+            header: 從清單移除
+            text: |-
+                `{add}` `{to}` 關鍵字的相反操作是 `{remove}` `{from}`。
+                這個關鍵字會從清單中移除一個項目。
+            code: |-
+                animals {is} 狗, 貓, 袋鼠
+                dislike {is} {ask} 你不喜歡哪一種動物？
+                {remove} dislike {from} animals
+                {print} 我選擇 animals {at} {random}
+            notes: |-
+                學生了解 add to 後，通常也能很快學會 remove from 關鍵字。
+                請完成練習 4 和 5。
+        9:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                music_genres {is} 搖滾, 流行, 金屬, 獨立, 爵士
+                chosen_genre {is} music {at} {random}
+                {print} 一起來聽 chosen genre
+                nice {ask} 你喜歡這種音樂嗎？
+                {remove} chosen_genre {from} chosen_genre
+                second_choice {is} music_genres
+                {print} 還是你比較喜歡…… second_choice {at} {random}
+                {remove} second_choice {to} music_genres
+                {print} 我最喜歡 music_genre {random}！
+            debug: 真
+            notes: 示範如何使用除錯工具和眼睛圖示。
+        10:
+            header: 開始動手做吧！
+            text: 好好探索第 3 級的冒險吧！
+        11:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        12:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        13:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        14:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習如何使用引號！又向真正的 Python 程式碼前進一步了！
+    4:
+        1:
+            header: 歡迎來到第 4 級
+            text: |-
+                完成這堂課後，你可以：
+                * 了解為什麼寫程式時需要使用引號。
+                * 把引號放在正確的位置。
+                * 看懂因錯誤使用引號而出現的錯誤訊息。
+            code: "{print} '請使用引號！'"
+        2:
+            header: 問題
+            text: 你在前幾個級別可能遇過這個問題：
+            code: |-
+                name {is} Sophie
+                {print} 我的名字是 name
+            debug: 真
+            notes: |-
+                這段程式碼在這個級別無法運作！
+                請學生預測輸出結果。問題是使用變數名稱後，就不能再把 name 當成一般文字使用。
+                這段程式碼會輸出「My Sophie is Sophie」。
+        3:
+            header: 使用引號修正問題
+            text: |-
+                在這個級別中，我們會使用引號來解決這個問題。
+
+                這也會讓程式碼更像「真正的」Python 程式碼。
+            code: |-
+                name {is} Sophie
+                {print} '我叫' name
+            notes: |-
+                電腦現在知道文字「name」和變數 name 不一樣。
+                向學生示範電腦現在會輸出「My name is Sophie」。
+                有學生可能會說，只要替變數換一個名稱，就能輕鬆解決這個問題。確實如此，但向電腦指出不同的資料類型，並讓自己分清楚一般文字和變數，是程式設計中的重要技能。
+                請使用 ' 這樣的單引號，或 " 這樣的雙引號；` 這樣的反引號無法使用！
+        4:
+            header: 輸出時使用引號
+            text: 每次使用 `{print}` 關鍵字時，都必須把想顯示在畫面上的文字放進引號中。
+            code: "{print} '請使用引號！'"
+        5:
+            header: 詢問時使用引號
+            text: '`{ask}` 關鍵字也是如此。'
+            code: name {is} {ask} '請輸入名字？'
+        6:
+            header: 引號與變數
+            text: |-
+                我們不希望變數名稱原樣顯示在畫面上。
+                因此，變數應該放在引號外，像這樣：
+            code: |-
+                name {is} Harry
+                {print} '哈囉 ' name
+        7:
+            header: 引號與變數
+            text: |-
+                在句子中間使用變數名稱時，變數必須放在引號外。
+                不過，句子的其他部分仍要使用引號。寫法如下：
+            code: |-
+                name {is} Harry
+                {print} '哈囉 ' name '，你好嗎？'
+        8:
+            header: 引號與英文縮寫
+            text: |-
+                請小心！開始使用引號後，英文縮寫中的撇號可能會和引號衝突。
+
+                請在下方畫面嘗試輸出 "you're" 或 "I'm" 等英文縮寫，看看會發生什麼事……
+            code: "{print} '這樣無法運作'"
+            debug: 真
+        9:
+            header: 修正問題！
+            text: 如果文字中必須使用撇號，請改用雙引號來解決問題。
+            code: |-
+                {print} "我正在使用雙引號（I'm using double quotes）"
+                {print} "這很簡單！（It's easy to do!）"
+            notes: 開頭和結尾必須使用同一種引號，這一點很重要。例如，不能用 ' 開頭，卻用 " 結尾。
+        10:
+            header: 清除
+            text: |-
+                這個級別還會學習 {clear} 關鍵字。
+                使用這個關鍵字，可以清除輸出畫面中的所有文字。
+
+                請注意，一定要搭配 sleep 關鍵字使用。否則你還沒看清楚，電腦就會把所有文字清掉！
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} '驚喜！'
+            notes: 執行程式碼，向學生展示程式。你會發現根本看不到 3、2、1。請在 clear 關鍵字前加入 sleep 關鍵字，修正程式。
+        11:
+            header: 使用 `{color}` 畫圖
+            text: 最後，還可以使用 `{color}`，讓畫作變得更漂亮！
+            code: |-
+                {color} 藍色
+                {forward} 30
+                {color} 紅色
+                {forward} 30
+                {color} 粉紅色
+                {forward} 30
+                {color} 黃色
+                {forward} 30
+        12:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {clear}
+                {print} 真是適合去海邊的好天氣！
+                {ask} '你想堆沙堡，還是到海裡游泳？'
+                {print} '你想要 activity '
+                {print} '我也想這麼做'
+                {print} '快看這些美麗的貝殼！'
+                colors {is} '橙色, 銀色, 白色, 棕色'
+                {print} '我喜歡 {at} {random} 選到的顏色！'
+                choice {is} {ask} 你喜歡哪一個？
+            debug: 真
+            notes: 示範如何使用除錯工具和眼睛圖示。
+        13:
+            header: 各就各位，預備，開始！
+            text: 好好探索第 4 級的冒險吧！
+        14:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        15:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        16:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        17:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習如何讓電腦按照不同的輸入，做出不同反應！
+    5:
+        1:
+            header: 歡迎來到第 5 級
+            text: |-
+                完成這堂課後，你可以：
+                * 讓電腦按照不同的輸入做出不同反應。
+                * 使用 {if} 和 {else} 關鍵字
+        2:
+            header: 如果
+            text: '`{if}` 關鍵字能讓你在兩個選項中做選擇。'
+            code: |-
+                name {is} {ask} '你叫什麼名字？'
+                {if} name {is} Hedy {print} '很棒'
+            notes: |-
+                示範在這個範例中，如果回答是 Hedy，電腦就會輸出「很棒」。
+                如果回答不是 Hedy，電腦不會執行任何動作。
+        3:
+            header: 別忘了輸出
+            text: |-
+                使用 `{if}` 關鍵字時，別忘了使用 `{print}` 關鍵字。
+                這段程式碼無法運作！
+            code: "{if} name {is} Hedy '很棒'"
+            debug: 真
+            notes: 執行程式碼，並按照下一張投影片的方式修正錯誤。
+        4:
+            header: 條件
+            text: if 條件後方執行的程式碼稱為條件內容。
+            code: "{if} name {is} Hedy {print} '很棒'"
+            notes: 詢問學生認為哪一部分是條件。這裡的條件是：`{print} '很棒'`。
+        5:
+            header: 否則
+            text: 使用 `{if}` 關鍵字時，也可以加入 `{else}` 關鍵字。
+            code: "{if} name {is} Hedy {print} '很棒' {else} {print} '才不好！'"
+            notes: |-
+                向學生示範，這段程式碼會按照不同回答產生不同輸出：
+                如果回答 Hedy，電腦會輸出「很棒」。
+                如果回答其他內容，電腦會輸出「才不好！」。
+        6:
+            header: 很長的程式碼
+            text: |-
+                你可能已經發現，同時使用 `{if}` 和 `{else}` 關鍵字時，一行程式碼會變得很長。
+                你可以把關鍵字分開，改成兩行，像這樣：
+            code: |-
+                {if} name {is} Hedy {print} '很棒'
+                {else} {print} '才不好！'
+            notes: |-
+                如果學生不介意使用兩行，建議立刻開始改用兩行。
+                這會讓程式不那麼雜亂，也方便之後的級別繼續使用。
+        7:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} 歡迎來到 HedyAir 安全檢查！
+                boarding_pass {is} {ask} '你有登機證嗎？'
+                {if} bording_pass 是 {print} 太好了！
+                {else} 請準備好登機證。
+                passport {is} '可以讓我看看你的護照嗎？'
+                {if} passport {is} 是 '謝謝'
+                {else} '沒有護照就不能搭飛機'
+                declare {is} {ask} 你有任何物品要申報嗎？
+                {if} declare {is} 是
+                item_to_declare {is} {ask} '你想申報什麼？'
+                {else} 好的
+                {print} 謝謝，請前往 A22 登機門。'
+            debug: 真
+        8:
+            header: 開始吧！
+            text: 好好探索第 5 級的冒險吧！
+        9:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        10:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        11:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        12:
+            header: 搶先看看下一個級別……
+            text: 下一個級別會學習，想要 3 個以上的選項，而不只有 2 個（if 和 else）時該怎麼做。
+    6:
+        1:
+            header: 歡迎來到第 6 級
+            text: |-
+                完成這堂課後，你可以：
+                * 使用 `{elif}` 為條件加入第三個選項
+                * 使用 `{in}` 檢查某個項目是否在清單中
+        2:
+            header: 一起複習 if 和 else
+            text: 你想得到一段包含 `{if}` 和 `{else}` 的程式碼嗎？
+            code: |-
+                pizza {is} {ask} '你最喜歡哪一種披薩？'
+                {if} pizza {is} 臘腸
+                {print} '太棒了！臘腸披薩最好吃！'
+                {else}
+                {print} '臘腸披薩比較好吃！'
+            notes: |-
+                請學生一起編寫一段包含 if 和 else 的程式碼。
+                完成後，向他們展示範例程式碼，請他們預測執行結果。
+                也要提醒學生，{if} 陳述式後面的部分稱為條件。
+        3:
+            header: 使用多行程式碼
+            text: 條件是 {if} 或 {else} 後面的部分。從現在起，條件內容應該放在下一行。
+            code: |-
+                tidy {is} {ask} '你想讓程式碼看起來整齊又漂亮嗎？'
+                {if} tidy {is} '是'
+                {print} '太好了！條件一定要放在第二行！'
+                {else}
+                {print} '真可惜！不管怎樣，你還是要把條件放在下一行！'
+            notes: |
+                如果學生不明白為什麼條件內容要放在下一行，可以告訴他們，下一個級別會學習在 {if} 或 {else} 後面放置多行程式碼。
+        4:
+            header: '`{elif}`'
+            text: '`{elif}` 是 `{else}` 和 `{if}` 兩個關鍵字的組合。想設定 3 個（或更多！）選項時，就需要使用它。'
+            code: |-
+                pizza {is} {ask} '你最喜歡哪一種披薩？'
+                {if} pizza {is} 臘腸
+                {print} '太棒了！臘腸披薩最好吃！'
+                {elif} pizza {is} 夏威夷
+                {print} '你瘋了嗎？！夏威夷披薩最難吃！'
+                {else}
+                {print} '臘腸披薩比較好吃！'
+            notes: 向學生展示這段程式碼，請他們預測 3 種可能的結果。接著請他們自己想出包含 3 個以上選項的程式。
+        5:
+            header: '`{in}`'
+            text: 練習過 `{if}`、`{else}` 和 {elif} 關鍵字後，也可以試試 `{in}` 關鍵字。
+            code: |-
+                pretty_colors {is} 綠色, 黃色
+                favorite_color {is} {ask} '你最喜歡什麼顏色？'
+                {if} favorite_color {in} pretty_colors {print} '真漂亮！'
+                {else} {print} '還好'
+            notes: |-
+                使用 `{in}`，可以讓電腦檢查某個項目是否在清單中。請展示範例。
+                請注意，Hedy 會區分大小寫。也就是說，如果回答「Green」而不是「green」，Hedy 就會輸出「還好」。
+        6:
+            header: 保持程式碼整潔
+            text: |-
+                學會的指令越來越多後，程式也會越寫越長。
+                程式碼有時會變得雜亂、難以閱讀。若要讓程式碼整齊又容易看懂，可以在行首加上井字號，像這樣加入註解：
+            code: |-
+                # 為角色命名
+                name {is} {ask} '你的角色叫什麼名字？'
+                {print} '角色叫做' name
+
+                # 擲骰子
+                numbers = 1, 2, 3
+                throw = numbers {at} {random}
+
+                # 分配寵物
+                {if} throw {is} 1
+                    {print} name '得到一隻狗'
+                {elif} throw {is} 2
+                    {print} name '得到一隻貓'
+                {else}
+                    {print} name '得到一隻鸚鵡'
+        7:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} '歡迎光臨冰淇淋店。'
+                flavour {is} {ask} '你想要哪一種口味？'
+                {if} flavour 草莓
+                {print} '選得好！'
+                flavour {is} 香草
+                {print} '你確定不要草莓嗎？''
+                {else}
+                {print} 很抱歉，我們只有香草和草莓口味。
+                scoops {is} '你要幾球？'
+                {if} scoops {is} 1
+                {print} 請支付 1.50。
+                {elif} {is} 2
+                {print} '請支付 2.50。'
+                {else} '抱歉，這樣太多了。'
+            debug: 真
+        8:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        9:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        10:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        11:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習如何在 Hedy 中使用數學運算。
+    7:
+        1:
+            header: 歡迎來到第 7 級
+            text: |-
+                完成這堂課後，你可以：
+                * 在 Hedy 中使用數學運算
+                * 在 Hedy 中使用小數
+                * 在 Hedy 的數學運算中使用變數
+            notes: |-
+                請學生預測寫程式時會在什麼情況下用到數學（例如計算價格、人數、遊戲分數等）。
+                也可以請他們想像程式碼會長什麼樣子。他們很可能會自己想到 + 和 -。
+        2:
+            header: 加法
+            text: 如果要做加法，只要使用加號即可。
+            code: "{print} '5 加 5 等於' 5 + 5"
+            notes: 向學生簡短展示範例程式碼。
+        3:
+            header: 減法
+            text: 如果要做減法，可以使用減號。
+            code: "{print} '5 減 5 等於' 5 - 5"
+            notes: 向學生簡短展示範例程式碼。
+        4:
+            header: 乘法
+            text: 如果要做乘法，可以使用星號。
+            code: "{print} '5 乘以 5 等於' 5 * 5"
+            notes: 向學生簡短展示範例程式碼。
+        5:
+            header: 除法
+            text: 可以使用斜線做除法。
+            code: "{print} '5 除以 5 等於' 5 / 5"
+            notes: 向學生簡短展示範例程式碼。
+        6:
+            header: 摘要
+            text: 總而言之，可以使用 +、-、* 和 / 進行數學運算。
+            code: |-
+                {print} '5 加 5 等於' 5 + 5
+                {print} '5 減 5 等於' 5 - 5
+                {print} '5 乘以 5 等於' 5 * 5
+                {print} '5 除以 5 等於' 5 / 5
+            notes: |-
+                請注意，數學運算不需要使用引號。
+                請學生預測，如果把數學運算放進引號中，輸出結果會變成什麼。
+        7:
+            header: = 符號
+            text: |-
+                從現在起，也可以使用 = 符號代替 `{is}` 關鍵字。
+                數字和文字都能這樣使用，也能用在 `{if}` 或 `{else}` 關鍵字後。
+            code: |-
+                name = Hedy
+                answer = 20 + 4
+            notes: 向學生簡短展示範例程式碼。
+        8:
+            header: 使用變數計算
+            text: 除了直接用數字計算，也可以使用變數進行計算，像這樣：
+            code: |-
+                number_1 = {ask} '請輸入第一個數字：'
+                number_2 = {ask} '請輸入第二個數字：'
+                correct_answer = number_1 * number_2
+                {print} number_1 '乘以' number_2 '等於' correct_answer
+            notes: |-
+                向學生展示範例程式碼，請他們仔細看看引號放在哪裡。
+                如果你在前幾張投影片曾請他們想出 Hedy 中使用數學的例子，可以問他們這段程式碼會長什麼樣子。
+                例如，有學生回答「計算遊戲分數」，現在就能寫出以下程式碼：
+                ```
+                {if} answer = correct_answer
+                    points = points + 1
+                {else}
+                    points = points - 1
+                ```
+                如果你認為學生個人或兩人一組完成這項練習太困難，也可以帶著全班一起做。
+        9:
+            header: 小數
+            text: Hedy 之前不允許使用 1.5 這樣的小數，現在則可以了。請注意，電腦使用句點（.）表示小數點。
+            code: |-
+                {print} '二又二分之一加上二又二分之一等於……'
+                {print} 2.5 + 2.5
+        10:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} '這是水上樂園售票機'
+                {print} '價目表：12 歲以下兒童 3 美元，成人 5 美元'
+                {print} '星期一享有 75 折優惠'
+                amount_of_children = '你要買幾張兒童票？'
+                amount_of_adults = '你要買幾張成人票？'
+                day_of_the_week = {ask} '今天是星期幾？'
+                {clear}
+                child_price = amount of children * 3
+                adult_price = amount_of_adults + 5
+                total_price = adult_price * child_price
+                {if} day {is} 星期一
+                total_price = total_price * 0.25
+                {print} '請支付 total_price'
+            debug: 真
+            notes: 和學生一起為這段程式碼除錯。
+        11:
+            header: 開始動手做吧！
+            text: 好好探索第 7 級的冒險吧！
+            notes: 學生現在可以完成這個級別的所有冒險。
+        12:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        13:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        14:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        15:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習如何重複執行同一行程式碼！
+    8:
+        1:
+            header: 歡迎來到第 8 級
+            text: |-
+                完成這堂課後，你可以：
+                * 多次執行同一行程式碼
+        2:
+            header: 重複 3 次
+            text: 預測這段程式碼的輸出結果：
+            code: |-
+                {print} '王子不斷大喊求救'
+                {repeat} 5 {times} {print} '救命！'
+                {print} '為什麼沒有人來幫我？'
+            notes: |-
+                請學生預測輸出結果。
+                說明若要重複執行一行程式碼，可以使用 `{repeat}` 3 `{times}`。若要重複更多次，只要改變數字即可。
+                例如，故事中的角色大喊救命 5 次時，可以寫成範例中的樣子。
+        3:
+            header: 別忘了「輸出」關鍵字
+            text: 使用 repeat 關鍵字時，別忘了加上 `{print}` 關鍵字。
+            code: "{repeat} 5 {times} '救命！'"
+            debug: 真
+            notes: 和學生一起為這段程式碼除錯。
+        4:
+            header: 重複 `{ask}` 關鍵字
+            text: 也可以多次重複 `{ask}`、`{if}` 或 `{else}` 關鍵字。
+            code: |-
+                {repeat} 2 {times} answer = {ask} '你知道同一個問題可以問很多次嗎？'
+                {if} answer {is} 是
+                {repeat} 2 {times} {print} '你早就知道了！'
+                {else}
+                {repeat} 3 {times} {print} '你學到了新知識！'
+            notes: |
+                再次請學生預測輸出結果。
+        5:
+            header: '使用 # 整理程式碼'
+            text: '請記得在程式碼中加入以 # 開頭的說明，解釋各部分的作用，讓程式碼保持整齊又容易閱讀！'
+            code: |-
+                # 輸出建議
+                {print} '像這樣讓程式碼保持整齊！'
+        6:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} 你受困在荒島上。
+                {repeat} 3 '救命！'
+                rescued = {ask} 有人來救你嗎？
+                {if} rescued 是 {is}
+                {print} 真幸運！
+                {else} {repeat} 3 {times} '救命！'
+                rescued = '現在呢？'
+                {if} 是
+                {print} '太好了！
+                {else} '真可惜……算了……該搭建避難所並尋找食物了。'
+            debug: 真
+            notes: 和學生一起為這段程式碼除錯。
+        7:
+            header: 各就各位，預備，開始！
+            text: 好好探索第 8 級的冒險吧！
+            notes: 學生現在可以完成這個級別的所有冒險。
+        8:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        9:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        10:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        11:
+            header: 恭喜！
+            text: |-
+                你已完成 Hedy 基礎課程！
+                現在，你已了解程式設計的基本概念，也完成了自己的第一批程式！
+
+                如果想繼續學習，可以前往第 9 級，開始 Hedy 進階課程！
+        12:
+            header: 搶先看看下一個級別……
+            text: 現在你已學會重複一行程式碼，接著要一次重複多行程式碼！
+    9:
+        1:
+            header: 歡迎來到第 9 級
+            text: |-
+                歡迎來到 Hedy 進階課程！
+
+                你已在前面的級別學會運算思維的基礎！現在要繼續編寫更複雜的程式，並學習一些較難的關鍵字。
+
+                完成這堂課後，你可以：
+                * 重複執行多行程式碼
+                * 搭配 {repeat}、{if} 和 {else} 正確使用縮排
+        2:
+            header: 第 8 級的 `{repeat}` 關鍵字
+            text: repeat 關鍵字以前是這個樣子。
+            code: "{repeat} 5 {times} {print} '救命！'"
+            debug: 真
+            notes: |-
+                提醒學生，他們在上一個級別已學會使用 repeat 關鍵字。
+                當時只能重複一行程式碼，這個級別將學習如何重複多行程式碼。
+        3:
+            header: 現在的 `{repeat}` 關鍵字
+            text: 你認為輸出結果會是什麼？
+            code: |-
+                {repeat} 5 {times}
+                    {print} '大家好'
+                    {print} '這句話會輸出 5 次'
+            notes: |-
+                先再次請學生預測輸出結果，接著說明：
+                在這個級別中，可以重複執行多行程式碼。為此，必須告訴電腦哪些行屬於同一組並要一起重複。
+                做法是在每一個要重複的行首加入 4 個空格（或一個 Tab），也就是使用縮排。
+        4:
+            header: 現在的 `{repeat}` 關鍵字
+            text: 這段程式碼的輸出結果又會是什麼？
+            code: |-
+                {repeat} 3 {times}
+                    {print} '哈囉！'
+                {print} '重複完畢！'
+            notes: |-
+                詢問學生哪些行會重複執行，再執行程式碼。
+                說明：如果想繼續寫其他程式碼，可以在 `{repeat}` 關鍵字後結束縮排。
+                沒有以縮排開頭的行不會重複執行。
+        5:
+            header: 以前的 if 和 else
+            text: 加入縮排後，{if} 和 {else} 關鍵字會是什麼樣子？
+            code: |-
+                {if} name {is} Hedy
+                {print} '很棒'
+                {else}
+                {print} '才不好！'
+            debug: 真
+            notes: '{if} 和 {else} 一直都是這個樣子。現在可以使用縮排後，它們會變成什麼樣子？'
+        6:
+            header: 現在的 if 和 else
+            text: 這就是現在的 `{if}` 和 `{else}` 關鍵字。
+            code: |-
+                name = {ask} '你叫什麼名字？'
+                {if} name {is} Hedy
+                    {print} '歡迎你，Hedy'
+                {else}
+                    {print} '歡迎你，程式設計師！'
+            notes: |-
+                向學生說明，縮排不只是增加按 Tab 的工作，而是非常實用的功能。
+                在範例中加入幾行程式碼，示範現在可以在 {if} 或 {else} 後寫多行內容，不再只能寫一行。
+        7:
+            header: 結束縮排
+            text: 預測輸出結果
+            code: |-
+                name = {ask} '你叫什麼名字？'
+                {if} name {is} Hedy
+                    {print} '歡迎你，Hedy'
+                {else}
+                    {print} '歡迎你，程式設計師！' 
+                {print} '3..2..1.. 開始寫程式！'
+            notes: |-
+                請學生預測程式碼的輸出結果，並提醒他們仔細觀察縮排。
+                和 `{repeat}` 關鍵字一樣，結束縮排後的行一定會顯示，不只在陳述式為真時顯示。也就是說，沒有縮排的行不受 {if} 或 {else} 陳述式影響。
+        8:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} 'HedyWheels 公車售票機'
+                zone_1 = 市政廳, 圖書館, 校園, 市場
+                zone_2 = 游泳池, 滑板公園, 購物中心, 機場
+                destination = '你想去哪裡？'
+                {if} destination {in} zone 1
+                {print} destination '位於第 1 區'
+                price = 3 歐元
+                    {if} destination {is} zone_2
+                {print} destination '位於第 2 區'
+                price = 6
+                ticket_types = {ask} '按 1 購買單程票。
+                按 2 購買來回票：'
+                {if} ticket_type = 1
+                {print} '你選擇了單程票'
+                {else}
+                        {print} 你選擇了來回票'
+                price * 2
+                {print} '總共是' price '歐元'
+            debug: 真
+            notes: 和學生一起為這段程式碼除錯。
+        9:
+            header: 一起看看冒險吧！
+            text: 好好探索第 9 級的冒險吧！
+            notes: 學生現在可以完成第 9 級的所有冒險。
+        10:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        11:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        12:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        13:
+            header: 搶先看看下一個級別……
+            text: 下一個級別會看看把一個 {if} 放進另一個 {if} 時，會發生什麼事……
+            code: |-
+                {if} level = 9
+                    {if} student = 好奇
+                        {print} '下一個級別見！'
+            debug: 真
+    10:
+        1:
+            header: 歡迎來到第 10 級
+            text: |-
+                完成這堂課後，你可以：
+                * 將 {if} 和 {repeat} 關鍵字設為巢狀結構
+                * 搭配 {repeat}、{if} 和 {else} 正確使用縮排
+                * 使用 {and} 和 {or} 關鍵字
+            notes: 在一個 {if} 關鍵字中使用另一個 {if} 關鍵字，稱為巢狀結構。
+        2:
+            header: 使用 `{repeat}` 的巢狀結構
+            text: 在這個級別中，可以組合使用 `{repeat}` 和 `{if}`，這稱為巢狀結構。
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} '你想吃什麼？'
+                    {if} food {is} 披薩
+                        {print} '真棒！'
+                    {else}
+                        {print} '披薩比較好吃'
+            notes: 執行程式。請先回答一次「披薩」，再輸入其他回答。
+        3:
+            header: 縮排很重要！
+            text: 縮排非常重要，它能告訴電腦哪些行要重複執行，哪些行只要執行一次。
+            code: |-
+                {repeat} 3 {times}
+                    {print} '這一行會重複執行……'
+                    {print} '這一行也是……'
+                {print} '但這一行不會！'
+            notes: 再次向學生強調正確使用縮排的重要性。執行程式，並詢問學生，如果最後一行也以縮排開頭，會發生什麼事。
+        4:
+            header: 使用 `{if}` 的巢狀結構
+            text: 也可以在一個 `{if}` 中使用另一個 `{if}`。
+            code: |-
+                continue = {ask} '你要繼續嗎？'
+                {if} continue = 是
+                    sure = {ask} '你確定嗎？'
+                    {if} sure {is} 是
+                        {print} '我們會繼續'
+                    {else}
+                        {print} '你不確定'
+                {else}
+                    {print} '你不想繼續'
+            notes: 用不同的回答執行這個程式幾次。詢問學生，要得到其中一種輸出結果，應該輸入哪些回答。
+        5:
+            header: 縮排很重要
+            text: 縮排仍然非常重要，而且會讓程式碼的執行方式大不相同。
+            code: |-
+                continue = {ask} '你要繼續嗎？'
+                {if} continue = 是
+                    sure = {ask} '你確定嗎？'
+                    {if} sure {is} 是
+                        {print} '我們會繼續'
+                {else}
+                    {print} '你不確定'
+            notes: 調整縮排並向學生展示結果，例如移除第二個 {if} 關鍵字前的縮排，看看會發生什麼事。
+        6:
+            header: 雜亂的程式碼
+            text: 巢狀結構非常實用，但有時會讓程式碼看起來非常雜亂。請看看這個範例：
+            code: |-
+                {print} '讓我猜猜你是誰'
+                haircolor = {ask} '你的髮色是什麼？'
+                glasses = {ask} '你有戴眼鏡嗎？'
+                {if} haircolor {is} 黑色
+                    {if} glasses {is} 是
+                        {print} '你一定是 Jade！'
+                    {else}
+                        {print} '你一定是 Ahmed！'
+                {elif} haircolor {is} 金色
+                    {if} glasses {is} 是
+                        {print} '你一定是 Patrick！'
+                    {else}
+                        {print} '你一定是 Miranda！'
+                {else}
+                    {print} '你一定是 Jackie！'
+            notes: |-
+                詢問學生哪一個人有金色頭髮，而且沒戴眼鏡。他們需要花一點時間閱讀這段程式碼。
+                向學生指出，下一張投影片使用 and 關鍵字後，程式碼會更容易閱讀。
+        7:
+            header: '{and} 關鍵字'
+            text: |-
+                在這種情況下，`{and}` 關鍵字非常實用。
+
+                這樣程式碼更容易閱讀，也不必太擔心縮排！
+            code: |-
+                {print} '讓我猜猜你是誰'
+                haircolor = {ask} '你的髮色是什麼？'
+                glasses = {ask} '你有戴眼鏡嗎？'
+                {if} haircolor {is} 黑色 {and} glasses {is} 是
+                    {print} '你一定是 Jade！'
+                {elif} haircolor {is} 黑色 {and} glasses {is} 否
+                    {print} '你一定是 Ahmed！'
+                {elif} haircolor {is} 金色 {and} glasses {is} 是
+                    {print} '你一定是 Patrick！'
+                {elif} haircolor {is} 金色 {and} glasses {is} 否
+                    {print} '你一定是 Miranda！'
+                {else}
+                    {print} '你一定是 Jackie！'
+            notes: |-
+                現在如果詢問學生哪個人有金色頭髮又沒戴眼鏡，他們應該能更快回答。
+                讓程式碼容易閱讀是學生值得學會的重要技能，而 and 關鍵字對他們來說應該也很自然。
+        8:
+            header: '{or} 關鍵字'
+            text: 除了 `{and}` 關鍵字，也有 `{or}` 關鍵字！
+            code: |-
+                {print} '請從 1 到 6 中選一個數字'
+                {print} '其中兩個數字可以贏得獎品！'
+
+                list_of_numbers = 1, 2, 3, 4, 5, 6
+                price_number = list_of_numbers {at} {random}
+                {remove} price_number {from} list_of_numbers
+                second_price_number = list_of_numbers {at} {random}
+
+                chosen_number = {ask} '你選哪一個數字？'
+                {if} chosen_number {is} price_number {or} chosen_number {is} second_price_number
+                    {print} '太棒了！你贏得獎品了！'
+                {else}
+                    {print} '抱歉，你沒有獎品……'
+            notes: 向學生展示這段程式碼，他們應該很容易就能理解。
+        9:
+            header: 警告！
+            text: |-
+                使用 `{or}` 時，別忘了寫出兩個完整的條件。
+                請為這段程式碼除錯。
+            code: |-
+                color = {ask} '你的票是什麼顏色？'
+                {if} color {is} 藍色 {or} 紅色
+                    {print} "你贏得獎品了！"
+            debug: 真
+        10:
+            header: '使用 # 整理程式碼'
+            text: '請記得在程式碼中加入以 # 開頭的說明，解釋各部分的作用，讓程式碼保持整齊又容易閱讀！'
+            code: |-
+                # 輸出建議
+                {print} '像這樣讓程式碼保持整齊！'
+        11:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} '歡迎來到 HedyJumps 跳傘冒險！'
+                people = {ask} '你今天要和幾個人一起跳傘？
+                {print} '為了安全，我們要請每個人回答幾個問題。'
+                extra_instructions_people = a, b
+                {repeat} 3 {times}
+                    name = {ask} '你叫什麼名字？'
+                jumped_before = '你以前跳過傘嗎，' name '？'
+                {if} jumped_before  沒有
+                {print} '別擔心，你會在 13 號房接受額外的安全說明'
+                {add} name {to} extra_instructions_people
+                {else}
+                {print} '真有趣！'
+                {print} '謝謝大家填寫安全問題。祝你跳傘愉快！'
+            debug: 真
+            notes: 和學生一起為這段程式碼除錯。
+        12:
+            header: 一起看看冒險吧！
+            text: 好好探索第 10 級的冒險吧！
+            notes: 學生現在可以完成第 10 級的所有冒險。
+        13:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        14:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        15:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        16:
+            header: 搶先看看下一個級別……
+            text: 下一個級別會學習使用 {for} 關鍵字。
+            code: |-
+                animals = 狗, 貓, 水滴魚
+                {for} animal in animals
+                {print} '我喜歡' animal
+            debug: 真
+    11:
+        1:
+            header: 歡迎來到第 11 級
+            text: |-
+                完成這堂課後，你可以：
+                * 使用 `{for}` 關鍵字
+        2:
+            header: '`{for}` 關鍵字'
+            text: 使用 `{for}`，可以製作清單並逐一使用清單中的所有項目。
+            code: |-
+                animals = 狗, 貓, 水滴魚
+                {for} animal {in} animals
+                    {print} '我喜歡' animal
+            notes: |-
+                向學生展示 {for} 關鍵字如何建立一個以縮排開頭的程式碼區塊。
+                執行程式碼，讓學生看看會發生什麼事。
+                接著請學生編寫自己的 {for} 程式。
+        3:
+            header: '`{for}` 關鍵字'
+            text: 這裡是 `{for}` 關鍵字的另一個範例：
+            code: |-
+                days = 星期一, 星期二, 星期三, 星期四, 星期五, 星期六, 星期日
+                names = 媽媽, 爸爸, Emma, Sophie
+                {for} day {in} days
+                    {print} names {at} {random} '要在' day '洗碗'
+            notes: 請學生輪流分享自己想出的程式。接著展示下一個範例，請他們預測輸出結果。
+        4:
+            header: 除錯
+            text: 一起為這段程式碼除錯
+            code: |-
+                {print} '各位先生女士！'
+                {print} '只此一晚，就在 Hedy 馬戲團！'
+                acts = 從大砲射出, 走鋼索, 把自己塞進行李箱,
+                people = 神奇的 Iris 驚人的 Achmed 非凡的 Francis
+                    {for} people {in} acts
+                chosen_person {is} people {random}
+                    chosen_person '將會' act
+                {add} chosen_person {from} people
+                {print} '今晚快來欣賞我們的表演！'
+                {print} '門票只在售票櫃檯販售
+            debug: 真
+            notes: 一起為這段程式碼除錯。
+        5:
+            header: 一起看看冒險吧！
+            text: 好好探索第 11 級的冒險吧！
+            notes: 學生現在可以完成第 11 級的所有冒險。
+        6:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        7:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        8:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        9:
+            header: 搶先看看下一個級別……
+            text: 下一個級別會學習 `{for}` 關鍵字的另一種用法。
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} '不管你準備好了沒，我要來了！'
+            debug: 真
+    12:
+        1:
+            header: 歡迎來到第 12 級
+            text: |-
+                完成這堂課後，你可以：
+                * 使用函式
+            notes: |-
+                這個級別會讓學生認識函式。函式對孩子來說可能很難理解。
+                學生練習的冒險越多，就會理解得越好。
+                因此，請別讓學生花太多時間試圖想懂概念，而要多花時間親自動手做；他們會在實作中逐漸理解！
+        2:
+            header: 函式！
+            text: |-
+                這個級別將學習如何使用函式。函式是一段能輕鬆重複使用多次的程式碼。
+
+                練習：
+                * 寫下〈一閃一閃亮晶晶〉的歌詞
+                * 標出重複出現的歌詞
+            notes: |-
+                為了讓學生了解函式的用途，我們會使用〈一閃一閃亮晶晶〉。
+                重複的歌詞是：「一閃」、「一閃」、「亮晶晶」、「滿天都是小星星」。
+        3:
+            header: 一閃一閃亮晶晶！
+            text: |-
+                這個程式提供了一個函式範例。
+                來看看把這首歌的其餘部分填完後，會發生什麼事！
+            code: |-
+                {define} twinkle
+                     {print} '一閃'
+                     {print} '……'
+            notes: |-
+                把重複的歌詞加入函式：「一閃」、「亮晶晶」、「滿天都是小星星」。
+                告訴學生這個部分就是函式，並向他們指出你把函式命名為 twinkle。
+                下一張投影片會呼叫函式兩次，完成整首歌。
+        4:
+            header: 函式
+            text: 如範例所示，函式是一段能隨時呼叫的程式碼。使用 `{define}` 設定函式，再使用 `{call}` 執行它。
+            code: |-
+                {define} twinkle
+                     {print} '一閃'
+                     {print} '……'
+
+                {call} twinkle
+                {print} '掛在天上放光明'
+                {print} '好像許多小眼睛'
+                {call} twinkle
+        5:
+            header: '使用 # 整理程式碼'
+            text: |-
+                請記得在程式碼中加入以 # 開頭的說明，解釋各部分的作用，讓程式碼保持整齊又容易閱讀！
+                製作函式時，這個做法特別有用！
+            code: |-
+                # 這個函式會提供很棒的建議
+                {define} advise
+                    {print} '像這樣讓程式碼保持整齊！'
+                    {print} '以後的你會感謝自己！'
+        6:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {call} new_member
+                {print} '新會員你好！'
+                username = {ask} '你的使用者名稱是什麼？'
+                password = '你的密碼是什麼？'
+                {print} '歡迎加入我們的社團！'
+
+                username = {ask} '請輸入使用者名稱。你是新會員嗎？請輸入「新會員」'
+                {if} username = 新會員
+                {call} new member
+                    {else}
+                        password = {ask} '請輸入密碼'
+            debug: 真
+            notes: 這項除錯練習相當困難。建議先讓學生完成冒險，再請他們為這段程式碼除錯。
+        7:
+            header: 一起看看冒險吧！
+            text: 好好探索第 12 級的冒險吧！
+            notes: 學生現在可以完成第 12 級的所有冒險。
+        8:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        9:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        10:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        11:
+            header: 恭喜！
+            text: |-
+                你已完成 Hedy 進階課程！接下來可以繼續學習 Hedy 專家課程（第 13～16 級），學習如何編寫真正的 Python 程式碼。當然，你也可以留在 Hedy 進階課程，自由發想自己的程式！
+
+                下一個級別會調整一些語言規則，讓程式碼能在所有使用 Python 的地方執行。
+    13:
+        1:
+            header: 歡迎來到第 13 級
+            text: |-
+                歡迎來到 Hedy 專家課程（第 13～16 級）！
+
+                完成這堂課後，你可以：
+                * 編寫（幾乎）是真正 Python 的程式碼
+        2:
+            header: 真正的 Python 程式碼
+            text: |-
+                到目前為止，我們使用的是簡化的程式碼。
+                但從現在起，我們會使用能在其他地方執行的真正 Python 程式碼。
+            notes: |-
+                向學生說明，Python 是一種廣泛使用的程式語言。
+                到目前為止，我們使用的是這種語言的不同簡化版本。
+                現在，我們已經來到 Hedy 中所有語法都是真正 Python 程式碼的階段，因此程式碼也能在其他地方使用。
+                也要告訴學生，雖然有不少改變，但大多只是小幅調整。
+        3:
+            header: Python 中的 {print}
+            text: 從現在起，使用 {print} 時必須加上括號。
+            code: |-
+                {print} ('這段程式碼現在看起來就像真正的 Python 程式語言。')
+                {print} ('你現在也能在 Hedy 以外使用輸出指令。')
+                {print} ('恭喜，你已經成為程式設計高手了！')
+            notes: |-
+                請學生回想以前如何編寫「輸出」關鍵字。
+                接著展示新的程式碼，確認每個人都看得出括號的位置。
+        4:
+            header: '{ask}'
+            text: 我們也要將 `{ask}` 換成 Python 使用的 `{input}` 關鍵字，並同樣加上括號。
+            code: |-
+                age = {input} ('你幾歲？')
+                {print} ('你今年', age, '歲。')
+        5:
+            header: '{print} 搭配變數'
+            text: 使用逗號分隔，就能同時輸出變數和文字：
+            code: |-
+                level = {input}('你目前在第幾級？')
+                {print}('祝你順利完成第', level, '級')
+            notes: |-
+                請學生預測這段程式碼的執行結果。
+                接著執行程式，示範程式會原樣輸出引號內的文字，而引號外的內容則會顯示變數的值。
+                示範如果在最後一行也把 level 放進引號中，會發生什麼事。
+        6:
+            header: '`{if}` 和 `{else}`'
+            text: 在 if 陳述式中，必須使用兩個等號：==。大多數程式語言也是這樣。在 if 陳述式結尾，現在還要加上冒號。
+            code: |-
+                favorite_bird = input('你最喜歡哪一種鳥？')
+                {if} favorite_bird == '企鵝':
+                    {print}('太棒了，我也最喜歡企鵝！')
+                {elif} favorite_bird == '鸚鵡':
+                    {print}('選得真好！')
+                {else}:
+                    {print}("嗯，我不太同意")
+            notes: 學生需要時間適應所有新語法。這個過程可能有點困難，也容易令人挫折，請提供許多練習新語法的機會。
+        7:
+            header: 真正 Python 中的 {range}
+            text: 現在使用 {range} 關鍵字計數時，也需要加上括號。
+            code: |-
+                {for} i in {range} (1, 10):
+                    {print} (i)
+                {print} ('我們已經數到 10 了。')
+            notes: 請學生回想之前如何使用這個功能。
+        8:
+            header: 小於與大於
+            text: 你可能已經看過 < 和 > 符號。< 會檢查第一個數字是否小於第二個數字，例如 age < 12 會檢查 age 是否小於 12。> 會檢查第一個數字是否大於第二個數字，例如 points > 10 會檢查 points 是否大於 10。
+            code: |-
+                number = {input} ('請選一個小於 10 的數字')
+                {if} number < 10:
+                    {print}('很好，你選了一個數字！')
+                {if} number > 10:
+                    {print}('這不是小於 10 的數字。')
+            notes: |-
+                向學生展示程式碼，請他們預測各種數字會發生什麼事。
+                使用不同的數字執行程式碼。
+                最後試試數字 10，示範程式現在不會產生任何輸出。
+                10 既不大於 10，也不小於 10，所以沒有輸出；下一張投影片會解決這個問題。
+        9:
+            header: 大於或等於
+            text: |-
+                大於或等於也有專用符號。
+                你看得出它和前一段程式碼有什麼不同嗎？
+            code: |-
+                number = {input} ('請選一個小於 10 的數字')
+                {if} number < 10:
+                    print('很好，你選了一個數字！')
+                {if} number >= 10:
+                    print('這不是小於 10 的數字。')
+            notes: |-
+                現在你也可以試試看。使用不同的數字執行程式碼，也要使用 10 執行一次。
+                確認學生了解結果為何不同。
+        10:
+            header: 小於或等於
+            text: |-
+                小於或等於也有專用符號。
+                用法相同。
+            code: |-
+                number = {input} ('請選一個介於 10 到 20 之間的數字')
+                {if} number <= 10:
+                    print('請選另一個數字')
+                {if}
+                    print('很好，你選了一個數字！')
+                {if} number >= 10:
+                    print('這不是小於 10 的數字。')
+            notes: |-
+                現在你也可以試試看。使用不同的數字執行程式碼，也要使用 10 執行一次。
+                確認學生了解結果為何不同。
+                示範把 '>=' 改成 '>'，並把 '<=' 改成 '<'，就能用相同方式處理小於或等於。
+        11:
+            header: 等於或不等於
+            text: 從現在起，相等與不相等也要使用符號表示。
+            code: |-
+                answer = {input} ('5+5 等於多少？')
+                {if} answer = 10:
+                    {print} ('答對了！')
+                {if} answer != 10:
+                    {print} ('答錯了，請再試一次！')
+            notes: |-
+                詢問學生認為「!=」符號代表什麼。
+                接著執行程式碼，示範它代表「不等於」。
+        12:
+            header: '使用 # 整理程式碼'
+            text: '請記得在程式碼中加入以 # 開頭的說明，解釋各部分的作用，讓程式碼保持整齊又容易閱讀！'
+            code: |-
+                # 輸出建議
+                {print}('像這樣讓程式碼保持整齊！')
+        13:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            debug: 真
+            notes: 一起為這段程式碼除錯。
+        14:
+            header: 一起看看冒險吧！
+            text: 好好探索第 13 級的冒險吧！
+            notes: 學生現在可以完成第 13 級的所有冒險。
+        15:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        16:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        17:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        18:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習如何用真正的 Python 寫法使用清單。
+    14:
+        1:
+            header: 歡迎來到第 14 級
+            text: |-
+                完成這堂課後，你可以：
+                * 用真正的 Python 寫法使用清單。
+                * 用真正的 Python 寫法使用 {for}。
+        2:
+            header: 在 Python 中製作清單
+            text: 現在製作清單時，需要使用方括號。
+            code: numbers = [4, 8, 9]
+        3:
+            header: 包含文字的清單
+            text: 如果清單中放的是文字而不是數字，也必須使用引號。
+            code: favorite_animals = ['狗', '綿羊', '鸚鵡', '袋鼠']
+        4:
+            header: 取得清單中的項目
+            text: 只要把項目編號放在清單名稱後面，就能輕鬆輸出清單中的項目：
+            code: |-
+                winners = ['Amber', 'Bryan', 'Clara']
+
+                {print} (winners[1], '獲得第一名。')
+                {print} (winners[2], '獲得第二名。')
+                {print} (winners[3], '獲得第三名。')
+            notes: |-
+                先請學生猜猜第一部分程式碼的輸出結果。
+                接著執行程式碼，看看他們是否答對。
+        5:
+            header: 從清單中隨機選擇項目
+            text: 和先前一樣，我們也想從清單中隨機取得一個項目。
+            code: |-
+                candidates = ['Amber', 'Bryan', 'Clara']
+                winner = candidates[random]
+                {print} ('恭喜', winner, '，你贏得了一份獎品。')
+            notes: 多次執行程式碼，示範它確實會隨機選出名稱。
+        6:
+            header: 真正 Python 中的 {for}
+            text: 從現在起，每次使用 {for} 關鍵字時，都必須在該行結尾加上冒號：
+            code: |-
+                animals = 狗, 貓, 水滴魚
+                {for} animal in animals:
+                    {print} ('我喜歡' animal)
+            notes: |-
+                請學生注意，不只 {for} 關鍵字需要這樣做，只要下一行有縮排，前一行都會有相同的規則。
+                接下來的投影片會看到這些例子。
+        7:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} ('歡迎來到 Hedyclothes 線上商店。')
+                items = ['Hedy T 恤', 'Hedy 牛仔褲', 'Hedy 襪子']
+                prices = [15 25, 10]
+
+                total = 0
+
+                {for} i {range} (1,3):
+                    number = ('你想購買幾件', items[i], '？')
+                    total = total + prices*number
+
+                {if} total < 50:
+                total = + 10
+                {print} (你必須多付 10 元運費。)
+
+                presents = [耳環, 太陽眼鏡, 耳塞]
+                {else}
+                    {print} '你可以免運，還能得到一份小禮物。'
+                    present = present {random}
+                    {print} '你的禮物是一副', present
+
+                {print} (謝謝你在 Hedyclothes 購物。請支付, total,)
+            debug: 真
+            notes: 一起為這段程式碼除錯。
+        8:
+            header: 一起看看冒險吧！
+            text: 好好探索第 14 級的冒險吧！
+            notes: 學生現在可以完成第 14 級的所有冒險。
+        9:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        10:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        11:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        12:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習如何以真正的 Python 寫法使用函式。
+    15:
+        1:
+            header: 歡迎來到第 15 級！
+            text: |-
+                完成這堂課後，你可以：
+                * 使用函式，讓程式碼更短、更有效率。
+                * 使用含有引數的函式
+                * 在函式中使用 `{return} {value}`
+            notes: 請學生分享他們還記得哪些函式知識，以及函式可以用來做什麼。
+        2:
+            header: 還記得函式嗎？
+            text: |-
+                函式可以重複使用一段程式碼，讓程式碼更有條理、更整齊。
+                在真正的 Python 程式碼中，要先使用 `{def}`，接著輸入函式名稱和 () 來定義函式：
+                呼叫函式時不需要使用 `{call}`，只要輸入名稱和 () 即可。
+            code: |-
+                def square():
+                    {for} i {in} {range} (1,4):
+                        {turn} 90
+                        {forward} 10
+
+                square()
+                {forward} 50
+                square()
+                {forward} 50
+                square()
+                {forward} 50
+            notes: 向學生展示現在的函式寫法，並告訴他們之後會用到括號。
+        3:
+            header: 程式碼太多了嗎？
+            text: 下方程式碼有許多重複的部分。
+            code: |-
+                {print} ('這段程式碼會計算前 5 個平方數並輸出結果。')
+
+                square1 = 1*1
+                {print} ('1 的平方 =', square1)
+                square2 = 2*2
+                {print} ('2 的平方 =', square2)
+                square3 = 3*3
+                {print} ('3 的平方 =', square3)
+                square4 = 4*4
+                {print} ('4 的平方 =', square4)
+                square5 = 5*5
+                {print} ('5 的平方 =', square5)
+            notes: |-
+                向學生展示程式碼。他們是否看出有許多重複的部分？
+                詢問他們能不能想出用更少行程式碼完成的方法。
+                他們可能還想不到，所以接著展示下一張投影片吧！
+        4:
+            header: 使用函式！
+            text: |-
+                現在要試著用更少行程式碼，得到相同的輸出結果。
+                為此，我們要編寫一個函式：一段可以使用不同輸入、重複執行多次的程式碼。
+            code: |-
+                {def} calculate_square(number):
+                    square = number*number
+                    {print} ('數字', number, '的平方 =', square)
+
+                {print} ('這段程式碼會計算前 5 個平方數並輸出結果。')
+
+                calculate_square(1)
+                calculate_square(2)
+                calculate_square(3)
+                calculate_square(4)
+                calculate_square(5)
+            notes: |-
+                執行程式碼，確認學生看得出輸出結果是如何由程式碼產生的。
+                現在比上一張投影片少了兩行。
+
+                向學生說明，重複的程式碼越多，就越適合使用函式。
+                使用函式有幾項好處：程式碼更少、更有條理，也能更快寫完。
+                犯錯的機會更少，即使犯錯也更容易找到。
+
+                示範只要改變函式中的內容，所有輸出結果就會一起改變。
+        5:
+            header: 有多個引數的函式
+            text: |-
+                函式括號中的輸入稱為引數。
+                一個函式可以使用多個引數：
+            code: |-
+                {def} fairy_tale(princess, prince, something_poisonous, expression_of_love)
+                answer = {input}('你想聽我講一個童話故事嗎？')
+                {if} answer == 是:
+                    {print} ('從前從前，有一個女孩叫做', princess)
+                    {print} ('她吃了', something_poisonous, '，差點死掉……')
+                    {print} ('但是王子', prince, '前來探望她，並給了她一個', expression_of_love )
+                    {print} ('這治好了', princess '，她也愛上了', prince)
+                    {print} (princess, '和', prince, '從此過著幸福快樂的生活。')
+                {else}:
+                    {print} ('沒問題，下次再說吧。')
+
+                fairy_tale('白雪公主', '卡斯柏', '毒藥', '親吻')
+            notes: 執行程式碼，並示範改變四個引數，就能得到不同的故事。
+        6:
+            header: 回傳值
+            text: |-
+                有時候，你會想在函式外使用函式中計算出的數字。
+                可以使用 `{return}` 指令，把這個值帶到函式外使用。
+            code: |-
+                {def} calculate_new_price(amount, percentage):
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    {return} amount - discount_amount
+
+                old_price = input ('價格標籤上是多少錢？')
+                discount = input ('折扣是百分之多少？')
+
+                new_price = _ calculate_new_price(old_price, discount)
+                print('新價格是', new_price, '美元')
+            notes: 學生想得到其他適合讓函式回傳值的情況嗎？
+        7:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} ('這個程式會幫助你練習乘法。')
+
+                {def} check answer(question correct_answer)
+                    answer given = input('question 等於多少？' )
+                    {if} answer_given == correct_answer:
+                    {play} C5
+                    {print} (做得好，你答對了。)
+
+                    else
+                        {play} C2
+                        {print} '答錯了，下次再加油！'
+
+                çheck_answer 5*5, 25
+                check answer(6*7 42)
+            debug: 真
+            notes: 一起為這段程式碼除錯。
+        8:
+            header: 一起看看冒險吧！
+            text: 好好探索第 15 級的冒險吧！
+            notes: 學生現在可以完成第 15 級的所有冒險。
+        9:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        10:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        11:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        12:
+            header: 搶先看看下一個級別……
+            text: 下一個級別將學習最後一個關鍵字，用來製作 {while} 迴圈：
+            code: |-
+                level = 15
+                {while} level <= 16:
+                    {print} ('不要使用 while')
+                    level = level + 1
+    16:
+        1:
+            header: 歡迎來到第 16 級！
+            text: |-
+                完成這堂課後：
+                * 你可以製作 {while} 迴圈。
+                * 你已完成 Hedy 的所有課程！
+        2:
+            header: 新的迴圈
+            text: |-
+                使用 {while} 關鍵字可以製作新的迴圈。
+                只要陳述式為真，迴圈就會持續執行。
+            code: |-
+                temperature = 15
+                {while} temperature < 25:
+                    {print} ('現在是', temperature, '度。')
+                    {print} ('你必須穿外套才能出門。')
+                    temperature = temperature + 2
+                {print} ('現在是', temperature, '度。你可以不穿外套出門了。')
+            notes: |-
+                請學生預測這段程式碼的輸出結果。溫度到達多少時，程式會輸出可以不穿外套出門？
+                執行程式，看看他們是否答對。接著詢問學生，如果移除「temperature = temperature + 2」這一行會發生什麼事。
+                示範這會造成無限迴圈，因為溫度會一直低於 25。
+        3:
+            header: '{while} 和 {input}'
+            text: 也可以把 {while} 關鍵字和提問結合使用。
+            code: |-
+                {while} answer != Hedy:
+                    answer = {input} ('我叫什麼名字？')
+                {print} ('答對了，很高興認識你。我是 Hedy！')
+            notes: |-
+                再次請學生預測結果。問題會問幾次？
+                示範程式會一直提問，直到輸入正確答案，也就是「Hedy」為止。
+        4:
+            header: 除錯
+            text: 一起為這段程式碼除錯吧！
+            code: |-
+                {print} ('現在要製作改良版的計算工具。')
+
+                {def} check_answer question, correct_answer
+                    {while} answer_given != correct answer
+                    answer_given = {input} ('question 等於多少？' )
+                        {play} C2
+                        {print} (答錯了，請再試一次！)
+
+                        {print} (做得好，你答對了。)
+                    {play} C5
+
+
+                çheck_answer 3+9, 12
+                check answer (7*8, 56)
+            debug: 真
+            notes: 一起為這段程式碼除錯。
+        6:
+            header: 一起看看冒險吧！
+            text: 好好探索第 16 級的冒險吧！
+            notes: 學生現在可以完成第 16 級的所有冒險。
+        7:
+            header: 一起複習吧！
+            text: 你今天學到了什麼？
+            notes: 請學生列出今天學到的內容。
+        8:
+            header: 一起複習吧！
+            text: |-
+                你最喜歡哪一個冒險？為什麼？
+
+                你最不喜歡哪一個冒險？為什麼？
+            notes: 詢問學生的看法。
+        9:
+            header: 展示與分享！
+            text: 有人想向全班展示自己寫的程式嗎？
+            notes: 請幾位學生向全班展示自己的作品。
+        10:
+            header: 搶先看看你的未來……
+            text: |-
+                這是最後一個級別，但不代表你現在就得停止寫程式。
+                你已經學到很多，也能運用這些知識製作許多有趣的程式。
+                你想自己編寫什麼程式？
+            notes: 請學生討論未來想編寫哪些程式，並鼓勵他們動手實現！

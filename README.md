@@ -51,7 +51,7 @@ Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) server to di
 
 Great, thanks!!
 
-Before you start, please consult the ["before your first contribution"](https://github.com/hedyorg/hedy/wiki#getting-started-on-your-first-contribution) section of our Wiki. First contributions that are not linked to issues either labeled "good first issue" or "approved", or that do not link to any issues will be closed. We don't have the bandwidth to inspect pull requests that are not aligned with our goals. If you need any help getting started, the Wiki is the best place to start, and you can also always drop into the Discord! (in #programmers-general).
+Before you start, please consult the ["before your first contribution"](https://github.com/hedyorg/hedy/wiki#getting-started-on-your-first-contribution) section of our Wiki. We don't have the bandwidth to inspect pull requests that are not aligned with our goals. If you need any help getting started, drop into the Discord (in #programmers-general), and you can also always read the Wiki!
 
 ## Thanks to all Contributors
 

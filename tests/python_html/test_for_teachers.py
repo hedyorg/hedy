@@ -77,15 +77,33 @@ class TestPublicPages:
                 assert context['current_page'] == 'teacher-manual'
                 if url.startswith('/for-teachers/workbooks/'):
                     assert context['page_title']
-                    assert context['workbook']
+                    assert context['workbooks']
                 else:
                     assert context['section_title']
                     assert context['section_key'] in ('intro', 'this_does_not_exist')
 
+    def test_teacher_manual_section_resolves_in_every_language(self, client, template_variables):
+        """Weblate translates the section keys, so a manual URL has to work in any language."""
+        cases = [
+            '/for-teachers/manual/common_mistakes?language=en',
+            '/for-teachers/manual/common_mistakes?language=de',
+            # The German file calls this section 'häufige_fehler'; that URL keeps working.
+            '/for-teachers/manual/h%C3%A4ufige_fehler?language=de',
+        ]
+        for url in cases:
+            client.get(url)
+            context = template_variables[-1]
+            assert context['levels'], url
+            # English content fills the gaps a translation has not caught up with yet.
+            assert context['levels'][0]['concepts_and_changes'], url
+            # And the nav links to the English keys, whatever the content language is.
+            assert [key for key, _ in context['section_titles']] == ['intro', 'common_mistakes'], url
+        _clear_session(client)
 
 # ---------------------------------------------------------------------------
 # Authentication enforcement on teacher-only pages
 # ---------------------------------------------------------------------------
+
 
 class TestAuthEnforcement:
     def test_teacher_only_pages(self, client, given):
