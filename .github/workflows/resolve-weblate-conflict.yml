@@ -118,5 +118,36 @@ jobs:
         # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
         # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
         # command to finish, otherwise all our workflow executions show errors.
+        #
+        # It does not always work, though: when the reset is skipped or fails, Weblate keeps
+        # the commits this PR already carries, and since we squash merge it they never become
+        # ancestors of 'main'. Every sync after that conflicts. So check the outcome rather
+        # than trust it.
+        started_at=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)
         wlc reset &
-        sleep 10
+
+        # Wait for Weblate to log the reset. 'wlc repo' can't confirm it for us: it reports
+        # a clean state as soon as Weblate has nothing left to push, reset or not.
+        python3 - "$started_at" <<'PY'
+        import json, sys, time, urllib.request
+        from datetime import datetime
+
+        started_at = datetime.fromisoformat(sys.argv[1])
+        url = ("https://hosted.weblate.org/api/projects/hedy/changes/"
+               "?action=19&page_size=1")  # action 19 is "Repository reset"
+
+        for _ in range(30):
+            time.sleep(10)
+            with urllib.request.urlopen(url) as response:
+                results = json.load(response)["results"]
+            latest = datetime.fromisoformat(results[0]["timestamp"]) if results else None
+            print(f"last reset: {latest}, this run started: {started_at}", flush=True)
+            if latest is not None and latest > started_at:
+                print("Weblate has forgotten its commits")
+                sys.exit(0)
+
+        print("Weblate did not reset within five minutes of being asked to.")
+        print("Reset the 'adventures' component by hand, or the next sync will conflict:")
+        print("https://hosted.weblate.org/projects/hedy/adventures/#repository")
+        sys.exit(1)
+        PY
