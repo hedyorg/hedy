@@ -1755,7 +1755,7 @@ adventures:
 
                     Maka kamu dapat meminta komputer untuk memilih secara adil. Kamu dapat membuat programnya di level 2!
 
-                    Kamu pertama harus membuat daftar anggota keluargamu. Lalu pilihlah dengan `at random` dari dalam daftar tersebut.
+                    Kamu pertama harus membuat daftar anggota keluargamu. Lalu pilihlah dengan `{at} {random}` dari dalam daftar tersebut.
                 example_code: |
                     ```
                     orang {is} ibu, ayah, Emma, Sophie
@@ -1813,7 +1813,7 @@ adventures:
                     {else} {print} 'syukurlah tidak cuci piring karena ' dishwasher ' sudah mencuci'
                     ```
             7:
-                story_text: Dengan `repeat`, kamu dapat mengulang bagian-bagian kode. Kamu dapat melakukan ini untuk menentukan siapa yang akan mencuci piring selama seminggu kedepan.
+                story_text: Dengan `{repeat}`, kamu dapat mengulang bagian-bagian kode. Kamu dapat melakukan ini untuk menentukan siapa yang akan mencuci piring selama seminggu kedepan.
                 example_code: |
                     ```
                     people = mom, dad, Emma, Sophie
@@ -2051,7 +2051,7 @@ adventures:
                 answer_code: |
                     Jawaban sendiri
             8:
-                story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
+                story_text: Pada level 6 kamu dapat menggunakan perintah `{repeat}` untuk membuat mesin kamu meramal beberapa kali
                 example_code: "```\n{print} 'Aku punya bunga dengan kelopak ajaib'\n{print} 'Jika kamu memetik kelopaknya, bunga itu akan memberitahumu apakah gebetanmu mencintaimu juga'\namount = {ask} 'Berapa kelopak yang ingin kamu petik?'\noptions = they love you, they love you not\n_ _ _ _ options {at} {random}\n```\n"
                 answer_code: |
                     ```
@@ -2063,8 +2063,8 @@ adventures:
                     ```
             9:
                 story_text: |-
-                    Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk membuat sang peramal menjawab tiga pertanyaan sekaligus, namun kita masih tidak bisa menampilkan pertanyaan-pertanyaannya sekaligus.
-                    Pada level 7 masalah ini dapat diselesaikan, karena cara baru dalam penggunaan perintah `repeat`.
+                    Pada level 5 kamu telah belajar bagaimana menggunakan perintah `{repeat}` untuk membuat sang peramal menjawab tiga pertanyaan sekaligus, namun kita masih tidak bisa menampilkan pertanyaan-pertanyaannya sekaligus.
+                    Pada level 7 masalah ini dapat diselesaikan, karena cara baru dalam penggunaan perintah `{repeat}`.
                     Pada contoh berikut kamu dapat membuat sang peramal menanyakan 3 pertanyaan dan juga menampilkannya sekaligus!
                 example_code: |
                     ```
@@ -3299,7 +3299,7 @@ adventures:
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    Kamu dapat membuat lagu ini menjadi lebih pendek dengan sebuah `repeat`! Bisakah kamu menyelesaikan kodenya?
+                    Kamu dapat membuat lagu ini menjadi lebih pendek dengan sebuah `{repeat}`! Bisakah kamu menyelesaikan kodenya?
                 example_code: |
                     ```
                     verse = 99
@@ -3639,7 +3639,7 @@ adventures:
                     {forward} 100
                     ```
                 story_text_2: |
-                    Kamu bisa menggunakan variabel di dalam `turn` kura-kura.
+                    Kamu bisa menggunakan variabel di dalam `{turn}` kura-kura.
 
                     ### Latihan
                     Ubah kode sehingga membuat segitiga. Petunjuk: kamu hanya perlu mengubah kode di satu tempat.

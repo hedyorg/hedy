@@ -58,7 +58,7 @@ adventures:
                     - Boldog befejezés: Előveszi a kardját, és a szörny gyorsan elszalad
                     - Rossz befejezés: A szörny megeszi a hercegnőt
                     Biztosíthatod azt is, hogy egy név újra beírható legyen. Ez ugyanúgy működik, mint a 3.
-                    szinten. Kombinálhatod ezt egy `if`-fel, és akkor már készítettél is egy egész programot!
+                    szinten. Kombinálhatod ezt egy `{if}`-fel, és akkor már készítettél is egy egész programot!
                 example_code: |-
                     ```
                     nev {is} {ask} 'Ki jár az erdőben?'
@@ -183,7 +183,7 @@ adventures:
                     Ezúttal a minta kód nem egészen teljes. Be tudod fejezni a kódot?
             5:
                 story_text: |
-                    Ismét készíthetsz egy kockát a 4. szinten az `if` használatával.
+                    Ismét készíthetsz egy kockát a 4. szinten az `{if}` használatával.
                     Töltsd ki a mintakódot úgy, hogy a kód azt mondja: "Megállíthatod a dobást", miután
                     földigilisztát dobtál.
                     De lehet, hogy újra létre akarsz hozni egy kockát egy teljesen más játékból. Ez is
@@ -223,7 +223,7 @@ adventures:
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
             8:
                 story_text: |
-                    Az 5. szinten ismét készíthetsz kockát . A `repeat` kóddal könnyedén dobhatsz egy
+                    Az 5. szinten ismét készíthetsz kockát . A `{repeat}` kóddal könnyedén dobhatsz egy
                     csomó dobókockát.
                     Próbáld meg befejezni a mintakódot! A kötőjeleknek több parancsot és karaktert
                     kell tartalmazniuk.
@@ -289,7 +289,7 @@ adventures:
                     ```
             5:
                 story_text: |
-                    Az `if` segítségével most szórakoztatóbbá teheted a választást a programban.
+                    Az `{if}` segítségével most szórakoztatóbbá teheted a választást a programban.
                     Megkérheted a programot, hogy válaszoljon a számítógép választására.
                     Befejezheted a kódot úgy, hogy „túl rosszul” írja ki, amikor rajtad a sor, és egyébként
                     „igen!”?
@@ -321,7 +321,7 @@ adventures:
                     ```
             8:
                 story_text: |
-                    Az `repeat` segítségével megismételheted a kódrészleteket. Ennek segítségével
+                    Az `{repeat}` segítségével megismételheted a kódrészleteket. Ennek segítségével
                     kiszámíthatod, hogy kik fogj mosogatni az egész héten.
                 example_code: |
                     ```
@@ -367,7 +367,7 @@ adventures:
             3:
                 story_text: |
                     Az 1. szinten megalkottad első jóslásgépedet, de Hedy nem tudott igazán megjósolni semmit.
-                    A 2. szinten használhatsz egy változót és az `at random`  parancsot, hogy valóban engedd, hogy Hedy válaszoljon Neked. Nézd meg például ezt a kódot:
+                    A 2. szinten használhatsz egy változót és az `{at} {random}`  parancsot, hogy valóban engedd, hogy Hedy válaszoljon Neked. Nézd meg például ezt a kódot:
 
                     Most Hedy csak igennel, nemmel vagy talán válaszolhat. Adhatsz Hedynek több válaszlehetőséget, például „határozottan” vagy „kérdezz újra”
                 example_code: |
@@ -413,7 +413,7 @@ adventures:
                     ```
             8:
                 story_text: |-
-                    Az 6. szinten a `repeat` paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
+                    Az 6. szinten a `{repeat}` paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
 
                     Amint láthatod, a kérdések ebben a példában nincsenek kiíratva. Ennek az az oka, hogy a `kérdés` változót háromszor módosult.
                     Valahányszor a játékos kitölti az új választ, Hedy felülírja az előzőt, így a játékos első válaszát elfelejti.
@@ -751,7 +751,7 @@ adventures:
                     Például megengedheted, hogy a számítógép kő, papír és olló közül válogasson.
 
                     Újra használhatod a `ask'-t a 2. szinten. Kiírathatod számítógép a választását?
-                    Vigyázz, a `ask` most másképp működik, mint az 1. szinten. Előtte el kell nevezni.
+                    Vigyázz, a `{ask}` most másképp működik, mint az 1. szinten. Előtte el kell nevezni.
 
                     Véletlenül megpróbáltál olyan mondatot megfogalmazni, amely tartalmazza a valasztas
                     változót?
@@ -767,7 +767,7 @@ adventures:
             5:
                 story_text: |-
                     A 4. szinten meghatározhatjuk, hogy ki nyert.
-                    Ehhez szükséged van az új `if` kódra.
+                    Ehhez szükséged van az új `{if}` kódra.
 
                     Mentsd el a a számítógép választását egy tetszőleges névvel.
                     Ezután használhatod az `if' utasítást, hogy lásd, azonosak-e vagy különböznek-e.
@@ -801,7 +801,7 @@ adventures:
                     Most megismételheted a 2–9. Sort, ahányszor csak akarod, a sorok másolásával.
 
                     # Előretekintve
-                    Az 5. szinten megtanultunk 1 sort megismételni az `repeat` szóval, így:
+                    Az 5. szinten megtanultunk 1 sort megismételni az `{repeat}` szóval, így:
 
                     * {repeat} 3 {times} `{print}` 'Baby Shark Tutududududu'
 
@@ -828,7 +828,7 @@ adventures:
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    ezt a dalt sokkal rövidebbé teheted egy `repeat` utasítással! Be tudod fejezni a kódot?
+                    ezt a dalt sokkal rövidebbé teheted egy `{repeat}` utasítással! Be tudod fejezni a kódot?
 
                     A Baby Shark után természetesen más dalokat is programozhat. Sok dal van ismétléssel.
             9:
@@ -896,8 +896,8 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Iin level 3 you can use use `random` with the drawing turtle. A random choice makes the turtle walk a different path each time.
-                    Use `at random` to choose a value from a list. You can copy and paste lines 2 and 3 so create a longer random path.
+                    Iin level 3 you can use use `{random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.
+                    Use `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 so create a longer random path.
                 example_code: |
                     ```
                     angles {is} 10, 50, 90, 150, 250
@@ -915,7 +915,7 @@ adventures:
                     {forward} tavolsag
                     ```
             5:
-                story_text: "A 4. szinten választást hozhatsz létre az `if` utasítással. Például választhatsz különböző típusú alakzatok között.\n"
+                story_text: "A 4. szinten választást hozhatsz létre az `{if}` utasítással. Például választhatsz különböző típusú alakzatok között.\n"
                 example_code: |
                     ```
                     {print} 'Ábrák rajzolása'
@@ -965,7 +965,7 @@ adventures:
             9:
                 story_text: |
                     Most, hogy több sort megismételhetünk, könnyebben készíthetünk alakzatokat.
-                    Csak egyszer kell beállítani a szöget, majd ezt a változót használni a `repeat` utasítással.
+                    Csak egyszer kell beállítani a szöget, majd ezt a változót használni a `{repeat}` utasítással.
 
 
                     Továbbá javíthatjuk azt a programot, amely különböző alakzatokat rajzol.
