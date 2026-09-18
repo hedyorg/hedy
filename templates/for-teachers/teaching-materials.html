@@ -5,24 +5,24 @@
 
 {#
   A single entry in the list of teaching materials. A material that is still being
-  written gets no link: its title is greyed out and carries a "work in progress" pill,
-  so teachers can see it is coming without landing on a half-finished page.
+  written gets no link: its title is greyed out and a "work in progress" pill sits in the
+  card's top corner, so teachers can see it is coming without landing on a half-finished page.
 #}
 {% macro material_card(title, info, url, cy, work_in_progress=false) %}
 <div class="flex flex-row gap-4 mt-6">
   <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
-    <div class="flex items-center gap-3 flex-wrap">
+    <div class="flex items-center justify-between gap-3 flex-wrap">
       {% if work_in_progress %}
-      {# The same pill the archived class in view-class.html uses. #}
+      <h2 class="m-0 text-gray-500" data-cy="{{ cy }}">{{ title }}</h2>
+      {# The same pill the archived class in view-class.html uses, in the card's top corner. #}
       <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold
                    bg-gray-200 text-gray-800 border border-gray-400"
             data-cy="{{ cy }}_work_in_progress">{{ _('work_in_progress') }}</span>
-      <h2 class="m-0 text-gray-500" data-cy="{{ cy }}">{{ title }}</h2>
       {% else %}
       <h2 class="m-0"><a href="{{ url }}" data-cy="{{ cy }}">{{ title }}</a></h2>
       {% endif %}
     </div>
-    <div class="text-base {{ 'text-gray-500' if work_in_progress else 'text-black' }}">{{ info }}</div>
+    <div class="text-black text-base">{{ info }}</div>
   </div>
 </div>
 {% endmacro %}
