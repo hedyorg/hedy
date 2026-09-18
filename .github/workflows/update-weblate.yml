@@ -44,6 +44,7 @@ jobs:
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
     - name: Weblate commands
+      id: weblate_commands
       # Do a weblate pull, commit and push.
       # After pushing, clean the Weblate remote. This is necessary because we squash merge the
       # commits that Weblate pushes, and if the bytes aren't exactly equivalent (for example
@@ -58,9 +59,14 @@ jobs:
         set -x
         wlc repo | tee repo.txt
         if grep -q "needs_commit: False" repo.txt && grep -q "needs_push: False" repo.txt; then
+          # Nothing to translate today. Say so and let the later steps skip themselves,
+          # rather than letting them look for a PR that was never going to exist and
+          # report the quiet day as a failed workflow run.
           echo "Nothing to do"
+          echo "has_changes=false" >> $GITHUB_OUTPUT
           exit 0
         fi
+        echo "has_changes=true" >> $GITHUB_OUTPUT
 
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
         # (NOTE: this list is also below!)
@@ -80,27 +86,73 @@ jobs:
         sleep 60
 
     - name: Confirm that Weblate created a new PR
+      id: confirm_pr
+      if: steps.weblate_commands.outputs.has_changes == 'true'
       run: |
         prs=$(gh pr -R hedyorg/hedy list --author weblate --json title -q '.[].title')
         if [[ "$prs" == "" ]]; then
           echo "Weblate didn't create a PR! Not resetting because that would lose changes!"
-
-          # Unlock each component again so we don't stay locked
-          # (NOTE: this list is also above!)
-          for component in glossary adventures keywords client-messages web-texts webpages slides; do
-            wlc unlock hedy/$component
-          done
-
           exit 1
         fi
+        # From here on Weblate is supposed to stay locked until the PR is closed,
+        # so the unlock step at the bottom must not undo that.
+        echo "pr_created=true" >> $GITHUB_OUTPUT
       env:
         GH_TOKEN: ${{ github.token }}
 
     - name: Make Weblate forget its commits
+      if: steps.weblate_commands.outputs.has_changes == 'true'
       run: |
+        started_at=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)
+
         # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
         # https://github.com/WeblateOrg/weblate/issues/11368
         wlc reset &
-        sleep 10
+
+        # The reset is what stops Weblate's branch from diverging from 'main': we squash
+        # merge its PRs, so its own commits never become ancestors of 'main' and every
+        # later merge conflicts until it forgets them. A reset that silently fails is
+        # therefore the start of a conflict loop, so check that it happened instead of
+        # assuming it did.
+        #
+        # 'wlc repo' can't tell us whether it worked: right after a push Weblate has nothing
+        # left to push, so it reports a clean state either way. Comparing repository heads
+        # doesn't work either, because add-ons commit regenerated files moments after a
+        # reset. Weblate does log the reset itself, so wait for that entry to appear.
+        python3 - "$started_at" <<'PY'
+        import json, sys, time, urllib.request
+        from datetime import datetime
+
+        started_at = datetime.fromisoformat(sys.argv[1])
+        url = ("https://hosted.weblate.org/api/projects/hedy/changes/"
+               "?action=19&page_size=1")  # action 19 is "Repository reset"
+
+        for _ in range(30):
+            time.sleep(10)
+            with urllib.request.urlopen(url) as response:
+                results = json.load(response)["results"]
+            latest = datetime.fromisoformat(results[0]["timestamp"]) if results else None
+            print(f"last reset: {latest}, this run started: {started_at}", flush=True)
+            if latest is not None and latest > started_at:
+                print("Weblate has forgotten its commits")
+                sys.exit(0)
+
+        print("Weblate did not reset within five minutes of being asked to.")
+        print("Every sync from now on will conflict until it is reset by hand:")
+        print("https://hosted.weblate.org/projects/hedy/adventures/#repository")
+        sys.exit(1)
+        PY
+
+    # Any failure before the PR exists leaves every component locked, which stops
+    # translators from working until someone notices. Unlock again in that case; once
+    # the PR exists the lock is deliberate and 'unlock-weblate.yml' lifts it when the
+    # PR closes.
+    - name: Unlock Weblate if we failed before opening a PR
+      if: failure() && steps.confirm_pr.outputs.pr_created != 'true'
+      run: |
+        # (NOTE: this list is also above!)
+        for component in glossary adventures keywords client-messages web-texts webpages slides; do
+          wlc unlock hedy/$component
+        done
 
 
