@@ -57,6 +57,28 @@ jobs:
       # only happen as the result of a PR being merged.
       run: |
         set -x
+
+        # Weblate runs one repository operation at a time and refuses the rest with
+        # HTTP 423, and it stays busy for minutes after a merge while it re-reads the
+        # changed files into its database, logging nothing while it does. Since the lock
+        # covers every component sharing the repository, and 'wlc' asks for all of them
+        # at once, any push to main shortly before this job runs is enough to collide.
+        # Wait for Weblate to finish rather than giving up on the first refusal.
+        wlc_when_free() {
+          for attempt in $(seq 1 10); do
+            if output=$(wlc "$@" 2>&1); then
+              echo "$output"
+              return 0
+            fi
+            echo "$output"
+            grep -q 'HTTP error 423' <<< "$output" || return 1
+            echo "Weblate is busy with another repository operation; retrying '$*' in 30s ($attempt/10)"
+            sleep 30
+          done
+          echo "Weblate stayed busy for five minutes, so '$*' never ran."
+          return 1
+        }
+
         wlc repo | tee repo.txt
         if grep -q "needs_commit: False" repo.txt && grep -q "needs_push: False" repo.txt; then
           # Nothing to translate today. Say so and let the later steps skip themselves,
@@ -74,15 +96,15 @@ jobs:
           wlc lock hedy/$component
         done
 
-        wlc pull
+        wlc_when_free pull
 
         # 'commit' seems to be an async process, as sometimes nothing is pushed if we run this
         # too quickly in succession. Add a short sleep to reduce chances of this happening.
         # https://github.com/WeblateOrg/weblate/issues/12400
-        wlc commit
+        wlc_when_free commit
         sleep 30
 
-        wlc push
+        wlc_when_free push
         sleep 60
 
     - name: Confirm that Weblate created a new PR
