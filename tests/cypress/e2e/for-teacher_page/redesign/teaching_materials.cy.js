@@ -39,7 +39,9 @@ describe('Teaching materials', () => {
 
     cy.getDataCy('teaching_materials_level_dropdown').should('contain', 'Level 3');
     cy.getDataCy('teaching_materials_slides_link').should('have.attr', 'href', '/for-teachers/slides/3');
-    cy.getDataCy('teaching_materials_workbook_link').should('have.attr', 'href', '/for-teachers/workbooks/3');
+    cy.getDataCy('teaching_materials_workbook').should('be.visible');
+    cy.getDataCy('teaching_materials_workbook_work_in_progress').should('be.visible');
+    cy.get('a[href="/for-teachers/workbooks/3"]').should('not.exist');
     cy.getDataCy('teaching_materials_common_mistakes').should('be.visible');
   });
 
@@ -70,6 +72,6 @@ describe('Teaching materials', () => {
     cy.visit('/for-teachers/teaching-materials/12');
 
     cy.getDataCy('teaching_materials_slides_link').should('have.attr', 'href', '/for-teachers/slides/12');
-    cy.getDataCy('teaching_materials_workbook_link').should('not.exist');
+    cy.getDataCy('teaching_materials_workbook').should('not.exist');
   });
 });

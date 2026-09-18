@@ -2,6 +2,7 @@
 
 {% block regular_content %}
 {% from 'incl/breadcrumb.html' import breadcrumb %}
+{% from 'incl/work-in-progress-pill.html' import work_in_progress_pill %}
 
 {#
   A single entry in the list of teaching materials. A material that is still being
@@ -14,10 +15,7 @@
     <div class="flex items-center justify-between gap-3 flex-wrap">
       {% if work_in_progress %}
       <h2 class="m-0 text-gray-500" data-cy="{{ cy }}">{{ title }}</h2>
-      {# The same pill the archived class in view-class.html uses, in the card's top corner. #}
-      <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold
-                   bg-gray-200 text-gray-800 border border-gray-400"
-            data-cy="{{ cy }}_work_in_progress">{{ _('work_in_progress') }}</span>
+      {{ work_in_progress_pill(cy) }}
       {% else %}
       <h2 class="m-0"><a href="{{ url }}" data-cy="{{ cy }}">{{ title }}</a></h2>
       {% endif %}

@@ -3,20 +3,30 @@
 {% block regular_content %}
 {% from 'incl/breadcrumb.html' import breadcrumb %}
 {% from 'incl/level-guide.html' import concepts_and_changes, common_mistakes %}
+{% from 'incl/work-in-progress-pill.html' import work_in_progress_pill %}
 
 {#
   One material a teacher can use to prepare this level: what it is, and a way in.
-  Only materials with a page behind them are listed.
+  Only materials with a page behind them are listed. A material that is still being
+  written gets no link: its name is greyed out and a "work in progress" pill sits at
+  the far end of the row.
 #}
-{% macro material(label, description, icon, cy, view_url) %}
+{% macro material(label, description, icon, cy, view_url, work_in_progress=false) %}
 <li class="flex flex-row items-center justify-between gap-4 py-4 border-b border-gray-300">
   <span class="flex flex-row items-center gap-4 min-w-0">
     <i class="fa-solid {{ icon }} text-xl w-6 text-center text-blue-700" aria-hidden="true"></i>
     <span class="flex flex-col gap-1 min-w-0">
+      {% if work_in_progress %}
+      <span class="material-name text-gray-500" data-cy="{{ cy }}">{{ label }}</span>
+      {% else %}
       <a href="{{ view_url }}" data-cy="{{ cy }}_link" class="material-name">{{ label }}</a>
+      {% endif %}
       <span class="text-sm text-gray-600">{{ description }}</span>
     </span>
   </span>
+  {% if work_in_progress %}
+  {{ work_in_progress_pill(cy) }}
+  {% endif %}
 </li>
 {% endmacro %}
 
@@ -79,7 +89,7 @@
         {% if has_workbook %}
         {{ material(_('workbook'), _('workbook_level_info'),
                     'fa-book', 'teaching_materials_workbook',
-                    '/for-teachers/workbooks/' ~ selected_level) }}
+                    none, work_in_progress=true) }}
         {% endif %}
       </ul>
     </section>

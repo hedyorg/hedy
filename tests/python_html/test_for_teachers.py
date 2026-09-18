@@ -124,9 +124,18 @@ class TestPublicPages:
         with_workbook = client.get('/for-teachers/teaching-materials/3').get_data(as_text=True)
         without_workbook = client.get('/for-teachers/teaching-materials/12').get_data(as_text=True)
 
-        assert 'href="/for-teachers/workbooks/3"' in with_workbook
+        assert 'teaching_materials_workbook' in with_workbook
         assert 'href="/for-teachers/slides/12"' in without_workbook
-        assert 'teaching_materials_workbook_link' not in without_workbook
+        assert 'teaching_materials_workbook' not in without_workbook
+
+    def test_teaching_materials_level_marks_the_workbook_as_work_in_progress(self, client):
+        """The workbook row is labelled rather than linked, like the card that leads here."""
+        page = client.get('/for-teachers/teaching-materials/3').get_data(as_text=True)
+
+        assert 'teaching_materials_workbook_work_in_progress' in page
+        assert '/for-teachers/workbooks/3' not in page
+        # The slides at this level are ready, so they keep their link.
+        assert 'href="/for-teachers/slides/3"' in page
 
     def test_teaching_materials_every_level_renders(self, client, template_variables):
         """Every level has a page, whether or not its guide has been written yet."""
