@@ -28,7 +28,7 @@ levels:
             -   正确
             -   警告
             type: MC-code
-        -   contents: "### 要求输入\n\n只有文本有点无聊。您还可以在 Hedy 中要求输入。输入是您提供给计算机的文本。\n计算机会记住该文本，并可以在以后显示给您。\n 此代码显示问题“你叫什么名字？”\n\n```hedy\n问你叫什么名字？\n```\n\n### 显示输入\n\nask 命令保存答案，但尚未显示。为此，您需要 `echo` 命令。`echo` 将在句子末尾显示答案。\n像这样：\n\n```hedy\n问你叫什么名字？\necho so your name is:\n```\n\n如果有人叫 Olivia 使用此代码，则输出将是：\n\n```\nso your name is: Olivia\n```\n \n请注意，计算机将准确打印您输入的文本。因此，使用冒号和大写或小写字母！\n\n#### 练习 3：预测输出\n\n预测这些程序的输出。假设已经填写了你自己的名字。"
+        -   contents: "### 要求输入\n\n只有文本有点无聊。您还可以在 Hedy 中要求输入。输入是您提供给计算机的文本。\n计算机会记住该文本，并可以在以后显示给您。\n 此代码显示问题“你叫什么名字？”\n\n```hedy\n问你叫什么名字？\n```\n\n### 显示输入\n\nask 命令保存答案，但尚未显示。为此，您需要 `{echo}` 命令。`{echo}` 将在句子末尾显示答案。\n像这样：\n\n```hedy\n问你叫什么名字？\necho so your name is:\n```\n\n如果有人叫 Olivia 使用此代码，则输出将是：\n\n```\nso your name is: Olivia\n```\n \n请注意，计算机将准确打印您输入的文本。因此，使用冒号和大写或小写字母！\n\n#### 练习 3：预测输出\n\n预测这些程序的输出。假设已经填写了你自己的名字。"
             type: 文本
         -   code: "ask 你叫什么名字？\necho 所以你的名字是："
             answer: 所以你的名字是：**name**
@@ -52,25 +52,25 @@ levels:
             lines: '1'
             type: 定义
             word: 输出
-        -   contents: "#### 练习 5：命令\n\n到目前为止，我们已经学习了 3 个命令：`print`、`ask` 和 `echo`。它们有什么作用？用你自己的话解释一下。"
+        -   contents: "#### 练习 5：命令\n\n到目前为止，我们已经学习了 3 个命令：`{print}`、`{ask}` 和 `{echo}`。它们有什么作用？用你自己的话解释一下。"
             type: 文本
         -   answer: 在屏幕上显示文本。
             lines: '1'
             type: 定义
-            word: '`print` 命令'
+            word: '`{print}` 命令'
         -   answer: 要求用户输入。
             lines: '1'
             type: 定义
-            word: '`ask` 命令'
+            word: '`{ask}` 命令'
         -   answer: 重复用户的输入。
             lines: '1'
             type: 定义
-            word: '`echo` 命令'
+            word: '`{echo}` 命令'
     2:
         intro: "### 变量\n在本课结束时，您可以：\n* 将某些内容保存在变量中\n* 使用变量创建故事或绘图"
         exercises:
         -   code: "名字是 Mo\n打印名字"
-            contents: "### 使用变量\n\n您刚刚在屏幕上看到了 `is` 命令。\n`is` 命令将某些内容保存在计算机内存中并为其命名。我们称之为变量。\n变量中保存的内容称为变量的值。"
+            contents: "### 使用变量\n\n您刚刚在屏幕上看到了 `{is}` 命令。\n`{is}` 命令将某些内容保存在计算机内存中并为其命名。我们称之为变量。\n变量中保存的内容称为变量的值。"
             type: 文本
         -   contents: '#### 练习 1：标记正确的代码片段'
             type: 文本
@@ -124,7 +124,7 @@ levels:
             contents: "### 请求输入\n\n仅保存文本并不是很有用。在第 1 级中，我们已看到代码“ask”。\n\n从现在开始，您可以将“ask”与“is”组合在一起，如下所示："
             type: 文本
         -   code: "name is ask What is your name?\nprint so you are called: name"
-            contents: "### 显示输入\n有了变量，我们就不再需要 `echo` 了。只需使用 `print` 即可显示答案。"
+            contents: "### 显示输入\n有了变量，我们就不再需要 `{echo}` 了。只需使用 `{print}` 即可显示答案。"
             type: 文本
         -   contents: "如果某个名叫 Olivia 的人使用此代码，则输出将是：“所以你叫：Olivia”\n#### 练习 4：预测输出\n预测这些程序的输出。假装使用了你自己的名字。"
             type: 文本
@@ -154,21 +154,21 @@ levels:
             lines: '1'
             type: 定义
             word: 交互
-        -   contents: "#### 练习 6：命令\n我们一起学习了新命令：`is` 和 `is ask`。它们做什么？用你自己的话解释一下。"
+        -   contents: "#### 练习 6：命令\n我们一起学习了新命令：`{is}` 和 `{is} {ask}`。它们做什么？用你自己的话解释一下。"
             type: 文本
-        -   answer: 将值（在 `is` 之后）保存到变量中（在 `is` 之前）
+        -   answer: 将值（在 `{is}` 之后）保存到变量中（在 `{is}` 之前）
             lines: '1'
             type: 定义
-            word: '`is` 命令'
+            word: '`{is}` 命令'
         -   answer: 要求用户输入并将其保存在变量中。
             lines: '1'
             type: 定义
-            word: '`is ask` 命令'
+            word: '`{is} {ask}` 命令'
     3:
         intro: "### 列表和随机性\n在本课结束时，您可以：\n* 将多个项目保存在一个变量中，这称为列表。\n* 创建一个故事，其中会发生随机的事情。\n * 创建一个将绘制随机事物的绘图。"
         exercises:
         -   code: "friends is Mo, Layla, Danny\n打印 今天我将拜访 friends at random"
-            contents: "### 变量\n您刚刚看到了`is`命令与列表一起使用。\n就像常规变量一样，我们使用`is`来保存某些内容。"
+            contents: "### 变量\n您刚刚看到了`{is}`命令与列表一起使用。\n就像常规变量一样，我们使用`{is}`来保存某些内容。"
             type: 文本
         -   contents: '#### 练习 1：标记正确的代码片段'
             type: 文本
@@ -180,7 +180,7 @@ levels:
             answer: 第 2 行结束
             goal: 使用列表中的文本的地方
             type: circle
-        -   contents: "#### 练习 2：预测输出\n很难吗？再次使用这些步骤来预测变量的输出。\n1. 标记设置变量的位置\n2. 标记使用变量的位置\n 3. 在这两个位置之间画一条线\n4. 当使用 `at` `random` 时，从列表中随机选择一个项目。"
+        -   contents: "#### 练习 2：预测输出\n很难吗？再次使用这些步骤来预测变量的输出。\n1. 标记设置变量的位置\n2. 标记使用变量的位置\n 3. 在这两个位置之间画一条线\n4. 当使用 `{at}` `{random}` 时，从列表中随机选择一个项目。"
             type: 文本
         -   code: "teachers is Hermans, Merbis, Bagci, Senkal\nprint 今天有老师 teachers at random 来教你!"
             answer: 今天**选一位老师**来教你！
@@ -264,12 +264,12 @@ levels:
             lines: '1'
             type: define
             word: add
-        -   contents: "#### 练习 7：命令\n`is` 命令在此级别已发生改变，我们学习了一些新命令。\n它们起什么作用？用你自己的话解释一下。"
+        -   contents: "#### 练习 7：命令\n`{is}` 命令在此级别已发生改变，我们学习了一些新命令。\n它们起什么作用？用你自己的话解释一下。"
             type: 文本
         -   answer: 将值（is 之前）保存在变量或列表中（is 之后）
             lines: '1'
             type: define
-            word: '`is` 命令（注意：`is` 现在可以做多件事！）'
+            word: '`{is}` 命令（注意：`{is}` 现在可以做多件事！）'
         -   answer: '将项目添加到列表中。如下所示: add item to list'
             lines: '1'
             type: define
@@ -281,7 +281,7 @@ levels:
         -   answer: 从列表中随机挑选一个项目。
             lines: '1'
             type: define
-            word: '`at random` 指令 '
+            word: '`{at} {random}` 指令 '
         -   contents: '#### 你的看法是什么？'
             type: 文本
         -   text: 您最喜欢这一级别的哪项练习？
@@ -300,7 +300,7 @@ levels:
         intro: "## 引号\n在本课结束时，您可以：\n* 了解为什么编程中需要引号。\n* 将引号放在正确的位置。\n* 理解有关错误使用引号的错误消息。"
         exercises:
         -   code: "朋友is ask '你叫什么名字？'\nprint '太棒了！我会和朋友一起去商场'"
-            contents: "### 引号\n\n我们已经学会了使用引号，当文本需要在屏幕上按字面意思显示时。\n我们在`print` 和 `ask`中使用引号。"
+            contents: "### 引号\n\n我们已经学会了使用引号，当文本需要在屏幕上按字面意思显示时。\n我们在`{print}` 和 `{ask}`中使用引号。"
             type: 文本
         -   contents: "#### 练习 1：完成代码。\n分两步完成此练习：\n1. 在代码中正确放置引号。\n2. 你做到了吗？然后预测此代码的输出。"
             type: 文本
@@ -352,7 +352,7 @@ levels:
             -   正确
             -   错误
             type: MC-code
-        -   contents: "#### Ask\n记得在 `ask` 后面也使用引号！\n\n#### 练习 3：错误？\n仔细阅读程序！哪些是正确的？"
+        -   contents: "#### Ask\n记得在 `{ask}` 后面也使用引号！\n\n#### 练习 3：错误？\n仔细阅读程序！哪些是正确的？"
             type: 文本
         -   code: 问'你看到那两只兔子吗？'
             answer: 不正确。请记住在 ask 中使用变量！
@@ -401,11 +401,11 @@ levels:
         -   answer: 清空屏幕
             lines: '1'
             type: define
-            word: '`clear` 指令'
+            word: '`{clear}` 指令'
         -   answer: 改变乌龟的颜色
             lines: '1'
             type: define
-            word: '`color` 指令'
+            word: '`{color}` 指令'
         -   contents: '#### 你怎么认为？'
             type: 文本
         -   text: 您最喜欢这个级别的哪项练习？
