@@ -98,6 +98,16 @@ class TestPublicPages:
                 assert context['current_page'] == 'for-teachers'
                 assert context['levels']
 
+    def test_teaching_materials_marks_the_workbooks_as_work_in_progress(self, client):
+        """The workbooks are not written yet, so the card labels them rather than linking."""
+        page = client.get('/for-teachers/teaching-materials').get_data(as_text=True)
+
+        assert 'Work in progress' in page
+        assert '/for-teachers/workbooks/all' not in page
+        # The materials that do exist keep their links.
+        assert 'href="/for-teachers/slides"' in page
+        assert 'href="/for-teachers/manual"' in page
+
     def test_teaching_materials_level_shows_the_teacher_guide(self, client, template_variables):
         """The prepare page carries the level's own guide content, not just links."""
         client.get('/for-teachers/teaching-materials/1')
