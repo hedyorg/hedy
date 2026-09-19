@@ -4205,6 +4205,55 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
+    monster:
+        name: monster
+        default_save_name: monster
+        description: monster generator
+        levels:
+            4:
+                story_text: |-
+                    Make a monster generator. Ask the player questions sbout what they want their monster to be like and then generate a story for them.
+
+                    ### Exercise
+                    * Create at least 5 more questions about the monster
+                    * Create a (fake) loading screen, that shows the word 'Generating...' for 3 seconds and then clears the screen.
+                    * Write the rest of the story using the new variables you've made.
+                example_code: |-
+                    ```
+                    # Welcome and questions
+                    {print} 'Welcome to the monster generator!'
+                    name_monster {is} {ask} 'What is your monster called?'
+                    adjective_monster {is} {ask} 'How would you describe your monster?'
+                    color_eyes {is} {ask} 'What color eyes does your monster have?'
+                    amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
+                    _ Create more questions here_
+
+                    # Generating
+                    _ Create a loading screen _
+
+                    # Write a story about the monster
+                    {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
+                    {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
+                    _ Write the rest of the story including your new variables_
+                    ```
+                answer_code: |-
+                    ```
+                    # Welcome and questions
+                    {print} 'Welcome to the monster generator!'
+                    name_monster {is} {ask} 'What is your monster called?'
+                    adjective_monster {is} {ask} 'How would you describe your monster?'
+                    color_eyes {is} {ask} 'What color eyes does your monster have?'
+                    amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
+
+                    # Generating
+                    {print} 'Generating...'
+                    {sleep} 3
+                    {clear}
+
+                    # Write a story about the monster
+                    {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
+                    {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
+                    ```
     music:
         name: music
         default_save_name: music
