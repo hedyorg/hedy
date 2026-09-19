@@ -1,0 +1,43 @@
+adventures:
+    story:
+        name: História
+        default_save_name: Príbeh
+        description: Vytvoriť krátky príbeh
+        levels:
+            1:
+                story_text: |
+                    V úrovni 1 si môžete vytvoriť príbeh s inou hlavnou postavou, ktorú si sami zadáte.
+
+                    V prvom riadku použite `{ask}` a opýtajte sa, kto bude hlavnou postavou príbehu. Potom použite {answer}, ak chcete použiť meno postavy.
+                example_code: |
+                    ```
+                    {ask} Hlavná postava tohto príbehu je
+                    {print} {answer} sa teraz ide prejsť do lesa
+                    {print} Trochu vystrašený, {answer} kráča ďalej
+                    {print} {answer} počuje všade bláznivé zvuky
+                    {print} Boja sa, že je to strašidelný les
+                    ```
+                story_text_2: |
+                    ### Cvičenie
+                    Teraz si vytvorte vlastný príbeh s minimálne 6 riadkami kódu.
+                    Tento príbeh nemôže byť rovnaký ako vzorový kód.
+                    Použite aspoň jeden `{ask}` a jeden `{answer}`.
+                    Môžete si ho vytvoriť na akúkoľvek tému, ktorá sa vám páči.
+                    Ak si neviete predstaviť žiadnu tému, použite jednu z našich možností: ísť do kina, na športový zápas alebo na deň v zoo.
+                answer_code: |
+                    ```
+                    {print} Jedného dňa som išiel do zoo
+                    {ask} Aké zviera som uvidel ako prvé?
+                    {print} Najprv som uvidel {answer}
+                    {print} Potom som uvidel tučniaka
+                    {print} Obedoval
+                    {ask} Čo jedol tučniak?
+                    {print} Tučniak mal na obed {answer}
+                    ```
+            2:
+                story_text: |
+                    V úrovni 2 si môžete príbeh urobiť zábavnejším. Meno vašej hlavnej postavy sa teraz môže nachádzať kdekoľvek vo vete.
+
+                    Na to však musíte naprogramovať trochu viac. Teraz musíte najprv pomenovať svoju hlavnú postavu.
+
+                    Toto meno potom môžete uviesť kdekoľvek vo vete.
