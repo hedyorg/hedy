@@ -1,12 +1,11 @@
 {% set level = level|default(1) %}
 {% set class_id = class_id|default('') %}
 <div id="level_availability_panel" class="flex flex-col gap-2">
-    {{
-        render_partial(
-            'for-teachers/classes/htmx-customize-level-availability-status.html',
-            level=level,
-            customizations=customizations
-        )
+    {{ render_partial(
+        'for-teachers/classes/htmx-customize-level-availability-status.html',
+        level=level,
+        customizations=customizations
+    )
     }}
 
     <div class="flex items-center gap-3">
@@ -23,6 +22,6 @@
             >
             <span class="slider round"></span>
         </label>
-        <span class="text-base">{{ _('available_for_students') }}</span>
+        <span class="text-base">{{ _("available_for_students") }}</span>
     </div>
 </div>

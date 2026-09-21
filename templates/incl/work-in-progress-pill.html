@@ -10,7 +10,9 @@
     cy  – prefix for the data-cy attribute; the pill gets '<cy>_work_in_progress'.
 #}
 {% macro work_in_progress_pill(cy) %}
-<span class="inline-flex items-center shrink-0 rounded-full px-3 py-1 text-xs font-semibold
-             bg-gray-200 text-gray-800 border border-gray-400"
-      data-cy="{{ cy }}_work_in_progress">{{ _('work_in_progress') }}</span>
+    <span
+        class="inline-flex items-center shrink-0 rounded-full px-3 py-1 text-xs font-semibold
+               bg-gray-200 text-gray-800 border border-gray-400"
+        data-cy="{{ cy }}_work_in_progress"
+    >{{ _("work_in_progress") }}</span>
 {% endmacro %}
