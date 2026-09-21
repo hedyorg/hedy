@@ -1,33 +1,90 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
-    {% from 'incl/breadcrumb.html' import breadcrumb %}
-    <div class="flex-col md:px-16">
-        {{ breadcrumb([
-            {'label': _('teaching_materials')}
-        ], 'mt-2 mb-4') }}
+  {% from 'incl/breadcrumb.html' import breadcrumb %}
+  {% from 'incl/work-in-progress-pill.html' import work_in_progress_pill %}
 
-        <h1 class="my-5">{{ _("teaching_materials") }}</h1>
-
-        <div class="flex flex-row gap-4">
-            <div
-                class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8"
-            >
-                <h2 class="m-0"><a
-    href="/for-teachers/manual"
-    data-cy="background_information_link"
->{{ _("background_information") }}</a></h2>
-                <div class="text-black text-base">{{ _("background_information_info") }}</div>
-            </div>
+  {#
+  A single entry in the list of teaching materials. A material that is still being
+  written gets no link: its title is greyed out and a "work in progress" pill sits in the
+  card's top corner, so teachers can see it is coming without landing on a half-finished page.
+#}
+  {% macro material_card(title, info, url, cy, work_in_progress=false) %}
+    <div class="flex flex-row gap-4 mt-6">
+      <div
+        class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8"
+      >
+        <div class="flex items-center justify-between gap-3 flex-wrap">
+          {% if work_in_progress %}
+            <h2 class="m-0 text-gray-500" data-cy="{{ cy }}">{{ title }}</h2>
+            {{ work_in_progress_pill(cy) }}
+          {% else %}
+            <h2 class="m-0"><a href="{{ url }}" data-cy="{{ cy }}">{{ title }}</a></h2>
+          {% endif %}
         </div>
-
-        <div class="flex flex-row gap-4 mt-10">
-            <div
-                class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8"
-            >
-                <h2 class="m-0"><a href="/for-teachers/slides" data-cy="slides_link">{{ _("slides") }}</a></h2>
-                <div class="text-black text-base">{{ _("slides_card_info") }}</div>
-            </div>
-        </div>
+        <div class="text-black text-base">{{ info }}</div>
+      </div>
     </div>
+  {% endmacro %}
+
+  <div class="flex-col md:px-16">
+    {{ breadcrumb([
+      {'label': _('teaching_materials')}
+    ], 'mt-2 mb-4') }}
+
+    <h1 class="my-5">{{ _("teaching_materials") }}</h1>
+
+    {# Its own card, like the materials below it. #}
+    <div class="flex flex-row gap-4 mt-6">
+      <div
+        class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8"
+      >
+        <h2 class="m-0">{{ _("prepare_a_level") }}</h2>
+        <div class="text-black text-base">{{ _("prepare_a_level_info") }}</div>
+        {#
+        Hedy's own dropdown rather than a native select, matching the level picker on the
+        page it leads to. It reuses the ids hedyApp.open_index_dropdown() toggles, so it
+        needs no extra JavaScript; each level is a link, so there is nothing to submit.
+      #}
+        <div class="dropdown relative w-fit">
+          <button
+            type="button"
+            id="dropdown_open_button"
+            data-cy="prepare_level_button"
+            class="blue-btn-new inline-flex items-center gap-3"
+            onclick="hedyApp.open_index_dropdown()"
+          >
+            <span>{{ _("pick_a_level") }}</span>
+            <i
+              class="fa-solid fa-chevron-down transition-all ease-in duration-300"
+              id="dropdown_index_arrow"
+            ></i>
+          </button>
+          <div
+            id="dropdown-level"
+            data-cy="prepare_level_options"
+            class="absolute block rounded-md ltr:left-0 rtl:right-0 w-max overflow-y-auto p-2 shadow-lg
+                   dropdown-blue z-30 min-w-full max-h-96"
+            style="display: none"
+          >
+            {% for level in levels %}
+              <a
+                href="/for-teachers/teaching-materials/{{ level }}"
+                data-cy="prepare_level_{{ level }}"
+                class="flex flex-row items-center rounded-lg px-3 py-1 text-lg font-extralight
+                       text-blue-900 no-underline ease-in transition duration-100 hover:bg-blue-200"
+              >{{ _("level_title") }} {{ level }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-cy="teaching_materials_cards">
+      {{ material_card(_('background_information'), _('background_information_info'),
+        '/for-teachers/manual', 'background_information_link') }}
+      {{ material_card(_('slides'), _('slides_card_info'), '/for-teachers/slides', 'slides_link') }}
+      {{ material_card(_('workbooks'), _('workbooks_info'), none, 'workbooks_card', work_in_progress=true) }}
+    </div>
+  </div>
 {% endblock %}
