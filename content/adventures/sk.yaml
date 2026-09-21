@@ -41,3 +41,43 @@ adventures:
                     Na to však musíte naprogramovať trochu viac. Teraz musíte najprv pomenovať svoju hlavnú postavu.
 
                     Toto meno potom môžete uviesť kdekoľvek vo vete.
+                example_code: |-
+                    ```
+                    meno {is} {ask} Ako sa volá hlavná postava?
+                    {print} meno teraz pobeží v lese
+                    {print} meno je trochu vystrašené
+                    {print} Zrazu začuje bláznivý zvuk...
+                    {sleep}
+                    {print} meno sa bojí, že je to strašidelný les
+                    ```
+                story_text_2: |
+                    ### Cvičenie
+                    Teraz je čas pridať premenné do vášho príbehu, ktorý ste vytvorili v predchádzajúcej úrovni.
+                    Prejdite do svojho príbehového dobrodružstva úrovne 1 a skopírujte kód. Vložte kód do vstupnej obrazovky v tejto úrovni.
+
+                    Tento kód nebude v tejto úrovni fungovať, pretože ste ešte nepoužili premenné.
+                    Opravte kód pomocou premenných a `{is}` pomocou príkazu `{ask}`, ako ste sa naučili v tejto úrovni.
+
+                    **Extra** Pridajte do kódu príkaz `{sleep}`, aby ste vo svojom príbehu zvýšili napätie.
+                answer_code: |
+                    ```
+                    {print} Jedného dňa som išiel do zoo
+                    first_animal {is} {ask} Aké zviera som videl ako prvé?
+                    {print} Najprv som videl first_animal
+                    {print} Potom som videl tučniaka
+                    {print} Obedoval
+                    jedlo {is} {ask} Čo jedol tučniak?
+                    {print} Tučniak jedol...
+                    {sleep} 3
+                    {print} jedlo
+                    ```
+            3:
+                story_text: |
+                    V 3. úrovni si môžete príbeh urobiť zábavnejším. Náhodnosť môžete použiť pre akékoľvek monštrum, zviera alebo inú prekážku, napríklad takto:
+                example_code: |
+                    ```
+                    zvieratá {is} 🦔, 🐿, 🦉, 🦇
+                    {print} Teraz počujú zvuk zvierat {at} {random}
+                    ```
+                story_text_2: |
+                    Príkaz `{add}` sa vám môže vo vašom príbehu tiež hodiť.
