@@ -563,6 +563,12 @@ def task__autopr():
     if we do that Weblate will nearly always be in a state of conflicts, which
     leads to scary warnings. Instead, we let Weblate decide what these files
     should look like.
+
+    The one thing we do match is Weblate's "Remove blank strings" add-on. 'extract'
+    writes an entry for every string into every language, translated or not, and the
+    add-on deletes the untranslated ones again the moment it sees them. That standoff
+    is what keeps Weblate permanently ahead of GitHub, so we write the files the way
+    it wants them instead.
     """
 
     return dict(
@@ -575,9 +581,8 @@ def task__autopr():
             # 'normalize_yaml',
         ],
         actions=[
-            # No normalization for now!
-            # Run a script to strip things that lead to conflicts from po files
-            # [python3, 'build-tools/github/normalize-pofiles.py'],
+            # Drop the untranslated entries 'extract' just wrote, as Weblate would
+            [python3, 'build-tools/github/strip-untranslated-pofiles.py'],
         ])
 
 

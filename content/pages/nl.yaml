@@ -201,7 +201,7 @@ teacher-guide:
             Mocht dit voor jouw context niet voldoen, dan kunnen we een dan kunnen we een verwerkersovereenkomst tekenen voor het verwerken van jullie persoonsgegevens.
     -   title: Steun Hedy
         text: |-
-             Om Hedy in de lucht te houden is er geld nodig. Doneren kan geheel vrijblijvend en eenmalig. We waarderen elke bijdrage enorm! <a href="https://donate.stripe.com/28EcMZ1xJ5O747V8gR1Jm00" target="_blank">Klik hier om een bijdrage te leveren </a>. We gebruiken het geld om de server in de lucht te houden en om de website te onderhouden en te verberteren.
+            Om Hedy in de lucht te houden is er geld nodig. Doneren kan geheel vrijblijvend en eenmalig. We waarderen elke bijdrage enorm! <a href="https://donate.stripe.com/28EcMZ1xJ5O747V8gR1Jm00" target="_blank">Klik hier om een bijdrage te leveren </a>. We gebruiken het geld om de server in de lucht te houden en om de website te onderhouden en te verberteren.
 -   title: Veelgemaakte fouten
     key: common_mistakes
     intro: |-
@@ -589,14 +589,7 @@ teacher-guide:
                     {elif} dieren {is} kat {print} 'Katten zijn oke'
                     {else} {print} 'Cool dier'
                 solution_text: "Vanaf dit level moet je niet alleen `{if}` en `{else}` op afzonderlijke regels zetten. Je moet ook de voorwaarde en het commando op afzonderlijke regels zetten. Zo:"
-                solution_code:
-                    dieren {is} {ask} 'Wat is je lievelingsdier?'
-                    {if} dieren {is} hond
-                    {print} 'Ik houd ook van honden!'
-                    {elif} dieren {is} kat
-                    {print} 'Katten zijn oke'
-                    {else}
-                    {print} 'Cool dier'
+                solution_code: dieren {is} {ask} 'Wat is je lievelingsdier?' {if} dieren {is} hond {print} 'Ik houd ook van honden!' {elif} dieren {is} kat {print} 'Katten zijn oke' {else} {print} 'Cool dier'
         -   title: Studenten gebruiken `{elif}` net als `{else}`, dus zonder voorwaarde
             example:
                 error_text: Studenten vergeten dat ze een voorwaarde nodig hebben
@@ -664,11 +657,9 @@ teacher-guide:
         -   title: Leerlinge vergeten het = symbool
             example:
                 error_text: Het kan dat leerlingen {is} blijven gebruiken in plaats van =. Ga bij jezelf na wat je met je leerlingen wil bereiken. Wil je de de leerlingen laagdrempelig kennismaken met programmeren? Laat ze dan lekker verder werken met {is}. Wil je dat ze later overstappen op Python of een andere programmeertaal, moedig ze dan aan om het =-teken te gebruiken.
-                error_code:
-                    naam {is} Hedy
+                error_code: naam {is} Hedy
                 solution_text: Het = teken
-                solution_code:
-                    naam = Hedy
+                solution_code: naam = Hedy
         -   title: Leerlingen gebruiken een komma in plaats van een punt bij kommagetallen
             example:
                 error_text: In het Nederlands gebruiken we een komma in decimale getallen, helaas gebruiken programmeertalen een punt en zal dat in Hedy dus ook moeten.
@@ -1095,11 +1086,11 @@ teacher-guide:
                     print('Je kamernummer is ', kamernummer)
     -   level: '16'
         concepts_and_changes: |-
-                In dit laatste level van Hedy leren de leerlingen de {while} loop gebruiken en oefenen met nieuwe syntax.
-                Na dit level kunnen leerlingen verder programmeren in 'echte' Python compilers.
+            In dit laatste level van Hedy leren de leerlingen de {while} loop gebruiken en oefenen met nieuwe syntax.
+            Na dit level kunnen leerlingen verder programmeren in 'echte' Python compilers.
 
-                Nieuw in dit level:
-                * De {while} loop
+            Nieuw in dit level:
+            * De {while} loop
         sections:
         -   title: Leerlingen vergeten in te springen bij de {while} loop
             example:
