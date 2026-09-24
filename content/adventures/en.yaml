@@ -1756,18 +1756,6 @@ adventures:
                     choices {is} 1, 2, 3, 4, 5, 6
                     {print} You throw... choices {at} {random}
                     ```
-            4:
-                story_text: |
-                    In this level you can also create dice. But this time you can try it yourself, without an example code!
-
-                    ### Exercise
-                    Make your own dice in this level.
-                    Tip: If you have no idea how to make dice. Take a peek at your dice from the previous level, but don't forget to add quotation marks.
-                answer_code: |
-                    ```
-                    choices is 1, 2, 3, 4, 5, 6
-                    {print} 'I throw ' choices {at} {random}
-                    ```
             5:
                 story_text: |
                     We are going to add the `{if}` and `{else}` commands to our dice!
@@ -1987,27 +1975,6 @@ adventures:
                     name {is} {ask} what is your name?
                     {remove} name {from} people
                     {print} people {at} {random} has to do the dishes
-                    ```
-            4:
-                story_text: |
-                    With quotation marks you can make your dishwashing program even better.
-
-                    ### Exercise
-                    First, fill in right symbols or commands on the blanks to make this example program work.
-                    Did you get it? Great! Now copy your own code from the previous level and make it work in this level by adding quotation marks in the right spots.
-                example_code: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} _ the dishes are done by _
-                    {sleep}
-                    {print} people {at} _
-                    ```
-                answer_code: |
-                    ```
-                    people is mom, dad, Emma, Sophie
-                    {print} 'the dishes are done by...'
-                    {sleep}
-                    {print} people {at} {random}
                     ```
             5:
                 story_text: |
@@ -6156,24 +6123,6 @@ adventures:
                     player_2 {is} {ask} Name of player 2:
                     {print} player_1 chooses choices {at} {random}
                     {print} player_2 chooses choices {at} {random}
-                    ```
-            4:
-                story_text: |
-                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    ### Exercise
-                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chooses... _ choices {at} {random}
-                    ```
-                answer_code: |
-                    ```
-                    choices is rock, paper, scissors
-                    player_1 {is} {ask} 'Name of player 1:'
-                    player_2 {is} {ask} 'Name of player 2:'
-                    {print} player_1 ' chooses ' choices {at} {random}
-                    {print} player_2 ' chooses ' choices {at} {random}
                     ```
             5:
                 story_text: |

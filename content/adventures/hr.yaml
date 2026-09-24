@@ -1590,18 +1590,6 @@ adventures:
                     izbori {is} 1, 2, 3, 4, 5, 6
                     {print} Bacaš... izbori {at} {random}
                     ```
-            4:
-                story_text: |
-                    U ovoj razini također možeš napraviti kocku. Ali ovaj put pokušaj sam/a, bez primjera koda!
-
-                    ### Vježba
-                    Napravi vlastitu kocku u ovoj razini.
-                    Savjet: Ako nemaš pojma kako napraviti kocku, baci pogled na svoju kocku iz prethodne razine, ali ne zaboravi dodati navodnike.
-                answer_code: |
-                    ```
-                    izbori is 1, 2, 3, 4, 5, 6
-                    {print} 'Bacam ' izbori {at} {random}
-                    ```
             5:
                 story_text: |
                     Dodat ćemo naredbe `{if}` i `{else}` našoj kocki!
@@ -1821,27 +1809,6 @@ adventures:
                     ime {is} {ask} kako se zoveš?
                     {remove} ime {from} osobe
                     {print} osobe {at} {random} mora prati suđe
-                    ```
-            4:
-                story_text: |
-                    Navodnicima svoj program za pranje suđa možeš učiniti još boljim.
-
-                    ### Vježba
-                    Prvo upiši prave simbole ili naredbe u praznine da ovaj primjer programa proradi.
-                    Uspio/la si? Odlično! Sad kopiraj vlastiti kod iz prethodne razine i učini ga da radi u ovoj razini dodavanjem navodnika na prava mjesta.
-                example_code: |
-                    ```
-                    osobe {is} mama, tata, Ema, Sofija
-                    {print} _ suđe pere _
-                    {sleep}
-                    {print} osobe {at} _
-                    ```
-                answer_code: |
-                    ```
-                    osobe is mama, tata, Ema, Sofija
-                    {print} 'suđe pere...'
-                    {sleep}
-                    {print} osobe {at} {random}
                     ```
             5:
                 story_text: |
@@ -4605,7 +4572,6 @@ adventures:
         name: Kasica-prasica
         description: Izračunaj svoju ušteđevinu!
         default_save_name: Kasica-prasica
-
     print_command:
         levels:
             1:
@@ -5416,24 +5382,6 @@ adventures:
                     igrac_2 {is} {ask} Ime igrača 2:
                     {print} igrac_1 bira izbori {at} {random}
                     {print} igrac_2 bira izbori {at} {random}
-                    ```
-            4:
-                story_text: |
-                    U ovoj razini možemo dalje programirati kamen, papir, škare. Ali ako želiš dodati tekst, i ovdje moraš koristiti navodnike.
-                    ### Vježba
-                    Upiši navodnike u praznine. Pazi da varijabla `choices` bude izvan navodnika.
-                example_code: |
-                    ```
-                    izbori {is} kamen, papir, škare
-                    {print} _ Računalo bira... _ izbori {at} {random}
-                    ```
-                answer_code: |
-                    ```
-                    izbori is kamen, papir, škare
-                    igrac_1 {is} {ask} 'Ime igrača 1:'
-                    igrac_2 {is} {ask} 'Ime igrača 2:'
-                    {print} igrac_1 ' bira ' izbori {at} {random}
-                    {print} igrac_2 ' bira ' izbori {at} {random}
                     ```
             5:
                 story_text: |
