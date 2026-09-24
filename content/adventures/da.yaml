@@ -157,10 +157,6 @@ adventures:
                     ```
                     muligheder {is} _
                     ```
-            4:
-                story_text: |
-                    På dette niveau kan vi lave sætninger med terningeværdien i en sætning, med anførselstegn selvfølgelig.
-                    Denne gang er kodeeksemplet ikke helt færdigt. Kan du færdiggøre den?
             5:
                 story_text: |
                     Du kan også lave en terning igen på dette niveau ved at bruge `{if}`.
@@ -191,21 +187,6 @@ adventures:
                     ```
                 story_text_2: |
                     Har du ikke lyst til at tage opvasken? Hack programmet ved at fjerne dit navn fra listen med `{remove}` `{from}` kommandoen.
-            4:
-                story_text: |
-                    Med anførselstegn kan du lave din opvaskeplan pænere.
-                    Denne gang er eksemplet ikke helt færdig.
-
-                    Kan du færdiggøre koden ved at udfylde de tomme felter? Hvert af de tomme felter skal erstattes med et ord eller symbol.
-
-                    Tip: Glem ikke anførselstegn!
-                example_code: |
-                    ```
-                    personer {is} mor, far, Emma, Sophie
-                    {print} _ opvasken tages af _
-                    {sleep}
-                    {print} personer {at} _
-                    ```
             5:
                 story_text: |
                     Med `{if}` kan du nu have endnu mere sjov med valg i dit program. Du kan få dit program til at reagere på et valg lavet af computeren.
@@ -310,7 +291,6 @@ adventures:
         levels: {}
     piggybank:
         levels: {}
-
     print_command:
         default_save_name: skriv
         levels: {}
