@@ -122,7 +122,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'haunted',
         'fortune',
         'restaurant',
-        'monster'
+        'house',
+        'monster',
         'debugging',
         'hospital'
     ],

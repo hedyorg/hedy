@@ -3772,6 +3772,51 @@ adventures:
                     ```
                 answer_code: |
                     Own Answer
+    house:
+        name: home decorator
+        default_save_name: home_decorator
+        description: home decorator
+        levels:
+            4:
+                story_text: |-
+                    Decorate the living room the way you want it to be!
+
+                    ### Exercise
+                    Ask the player at least 6 more questions about their dream living room. You could, for example, ask them what type of couch they would like, how big the dining table should be, what kind of art they want on their walls etc.
+                    Then use that information in the describtion of the house. So if you've asked about their tv, write a line about what kind of tv they have chosen.
+                example_code: |-
+                    ```
+                    {print} "Let's redecorate the living room!"
+
+                    #Asking the player for input
+                    color_walls {is} {ask} 'What color would you like the walls to be?'
+                    color_carpet {is} {ask} 'What color would you like the carpet to be?'
+                    type_couch _
+
+                    #Describtion of your dream house
+                    {print} 'Your house will have ' color_walls ' walls and a ' color_carpet ' carpet.'
+                    {print} _
+                    ```
+                answer_code: |-
+                    ```
+                    {print} "Let's redecorate the living room!"
+
+                    #Asking the player for input
+                    color_walls {is} {ask} 'What color would you like the walls to be?'
+                    color_carpet {is} {ask} 'What color would you like the carpet to be?'
+                    type_couch {is} {ask} 'What kind of couch would you like?'
+                    color_couch {is} {ask} 'And what color should that couch be?'
+                    wall_art {is} {ask} 'What kind of art would you like to put on your wall?'
+                    brand_tv {is} {ask} 'What brand of tv would you like?'
+                    color_tv {is} {ask} 'What color should the tv be?'
+                    size_tv {is} {ask} 'What size should the tv be?'
+
+                    #Describtion of your dream house
+                    {print} 'Your house will have ' color_walls ' walls and a ' color_carpet ' carpet.'
+                    {print} 'You will have a ' color_couch ' ' type_of_couch ' couch.'
+                    {print} 'You will have ' wall_art ' on your wall.'
+                    {print} 'You will have a ' size_tv ', ' color_tv ', ' brand_tv ' tv.'
+                    ```
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
