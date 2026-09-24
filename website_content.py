@@ -124,6 +124,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'house',
         'monster',
+        'party_planner',
         'debugging',
         'hospital'
     ],

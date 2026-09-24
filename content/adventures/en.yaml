@@ -5221,6 +5221,68 @@ adventures:
                     {if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'
                     {else} {print} '🧒 No, Hedy! Say ' new_word
                     ```
+    party_planner:
+        name: party planner
+        default_save_name: party_planner
+        description: party planner
+        levels:
+            4:
+                story_text: |-
+                    Create a party planning tool that creates an invite to your party!
+
+                    #Execrise
+                    * First fill in the right questions to ask the player
+                    * Then create a party invitation using the input the player gave you
+
+                example_code: |-
+                    ```
+                    #asking for input
+                    print 'PARTY PLANNER'
+                    name_host {is} {ask} _
+                    name_guest {is} {ask} _
+                    reason_party {is} {ask} _
+                    date_party {is} {ask} _
+                    time_party {is} {ask} _
+                    location_party {is} {ask} _
+                    theme_party {is} {ask} _
+                    dress_code {is} {ask} _
+
+                    #loading the invite
+                    {print} 'please wait... loading invite'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Dear ' name_guest ','
+                    _
+                    ```
+                answer_code: |-
+                    ```
+                    #asking for input
+                    print 'PARTY PLANNER'
+                    name_host {is} {ask} 'What is your name?'
+                    name_guest {is} {ask} 'Who would you like to invite?'
+                    reason_party {is} {ask} 'What are you celebrating?'
+                    date_party {is} {ask} 'When is the party?'
+                    time_party {is} {ask} 'What time is the party?'
+                    location_party {is} {ask} 'Where is the party?'
+                    theme_party {is} {ask} 'What is the party theme?'
+                    dress_code {is} {ask} 'What is the party dresscode?'
+
+                    #loading the invite
+                    {print} 'please wait... loading invite'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Dear ' name_guest ','
+                    {print} 'I would like to invite you to celebrate ' reason_party
+                    {print} 'The party is on ' date_party ' at ' time_party
+                    {print} 'The location is ' location_party
+                    {print} 'The theme of the party is ' theme_party ' and the dresscode is: ' dress_code
+                    {print} 'Hope to see you there!'
+                    {print} 'Love, ' name_host
+                    ```
     piggybank:
         name: piggy bank
         default_save_name: Piggy Bank
