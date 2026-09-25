@@ -82,6 +82,75 @@ class TestPublicPages:
                     assert context['section_title']
                     assert context['section_key'] in ('intro', 'this_does_not_exist')
 
+    def test_teaching_materials_pages(self, client, template_variables):
+        cases = [
+            ('/for-teachers/teaching-materials', 200),
+            ('/for-teachers/teaching-materials/1', 200),
+            ('/for-teachers/teaching-materials/0', 404),
+            ('/for-teachers/teaching-materials/999', 404),
+            ('/for-teachers/teaching-materials/notanumber', 404),
+        ]
+        for url, expected in cases:
+            response = client.get(url, check=False)
+            assert response.status_code == expected
+            if response.status_code == 200:
+                context = template_variables[-1]
+                assert context['current_page'] == 'for-teachers'
+                assert context['levels']
+
+    def test_teaching_materials_marks_the_workbooks_as_work_in_progress(self, client):
+        """The workbooks are not written yet, so the card labels them rather than linking."""
+        page = client.get('/for-teachers/teaching-materials').get_data(as_text=True)
+
+        assert 'Work in progress' in page
+        assert '/for-teachers/workbooks/all' not in page
+        # The materials that do exist keep their links.
+        assert 'href="/for-teachers/slides"' in page
+        assert 'href="/for-teachers/manual"' in page
+
+    def test_teaching_materials_level_shows_the_teacher_guide(self, client, template_variables):
+        """The prepare page carries the level's own guide content, not just links."""
+        client.get('/for-teachers/teaching-materials/1')
+        context = template_variables[-1]
+
+        assert context['level_concepts_and_changes']
+        assert context['common_mistakes_sections']
+        # Keywords are localized before rendering, so no placeholder survives.
+        assert '{print}' not in context['level_concepts_and_changes']
+
+    def test_teaching_materials_level_lists_only_existing_materials(self, client):
+        """A material with no page at this level is left out rather than labelled."""
+        # Workbooks stop after level 8; slides go further.
+        with_workbook = client.get('/for-teachers/teaching-materials/3').get_data(as_text=True)
+        without_workbook = client.get('/for-teachers/teaching-materials/12').get_data(as_text=True)
+
+        assert 'teaching_materials_workbook' in with_workbook
+        assert 'href="/for-teachers/slides/12"' in without_workbook
+        assert 'teaching_materials_workbook' not in without_workbook
+
+    def test_teaching_materials_level_marks_the_workbook_as_work_in_progress(self, client):
+        """The workbook row is labelled rather than linked, like the card that leads here."""
+        page = client.get('/for-teachers/teaching-materials/3').get_data(as_text=True)
+
+        assert 'teaching_materials_workbook_work_in_progress' in page
+        assert '/for-teachers/workbooks/3' not in page
+        # The slides at this level are ready, so they keep their link.
+        assert 'href="/for-teachers/slides/3"' in page
+
+    def test_teaching_materials_every_level_renders(self, client, template_variables):
+        """Every level has a page, whether or not its guide has been written yet."""
+        import hedy
+
+        for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
+            response = client.get(f'/for-teachers/teaching-materials/{level}')
+            context = template_variables[-1]
+
+            assert response.status_code == 200, level
+            assert context['selected_level'] == level
+            # The text is optional; the mistakes are written for every level.
+            assert isinstance(context['level_concepts_and_changes'], str), level
+            assert context['common_mistakes_sections'], level
+
     def test_teacher_manual_section_resolves_in_every_language(self, client, template_variables):
         """Weblate translates the section keys, so a manual URL has to work in any language."""
         cases = [

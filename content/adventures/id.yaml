@@ -620,13 +620,13 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Di level sebelumnya, kamu sudah membuat kalkulator. Di level ini, kamu bisa mengembangkan kode itu agar menanyakan beberapa pertanyaan.
+                    Di level sebelumnya, anda membuat kalkulator. Di level ini, anda dapat memperluas kode tersebut sehingga menanyakan banyak pertanyaan.
 
                     ### Latihan 1
-                    Bisakah kamu menyelesaikan baris 10 agar kode berjalan?
+                    Bisakah Anda menyelesaikan baris 10 agar program berfungsi?
 
                     ### Latihan 2
-                    Beri pemain umpan balik saat mereka memasukkan jawaban, seperti `{print} 'Benar!'` atau `{print} 'Salah! Jawaban yang benar adalah ' correct_answer`.
+                    Berikan umpan balik kepada pemain ketika memasukkan jawaban, `{print} 'Correct!'`or `{print} 'Wrong! The correct answer is ' correct_answer`
                 example_code: |
                     ```
                     score = 0
@@ -1992,7 +1992,7 @@ adventures:
                     person {is} {ask} 'Siapa kamu?'
                     good_answer {is} Hore! Timmu akan menang!, Timmu pasti akan menang!, Timmu akan menang! Hore!
                     bad_answer {is} Sial! Timmu tidak akan menang!, Yah... Tim olahraga favoritmu akan kalah..., Tim favoritmu akan kalah
-                    {if} person {in} friends
+                    {if} person {is} {in} friends
                     {print} bad_answer {at} {random}
                     {else}
                     {print} good_answer {at} {random}
@@ -2549,10 +2549,10 @@ adventures:
                         minggu = untuk_menyimpan / uang saku
                         {if} berharap _ uang:
                             {print}('Anda perlu menabung lebih banyak lagi!')
-                            {print}('Anda memerlukan ' minggu ' minggu lagi.')
+                            {print}("Anda memerlukan ' minggu, ' minggu lagi.")
                         {else}:
                             {print}('Bagus! Kamu punya cukup')
-                            {print}('Ayo berbelanja!')
+                            {print}("Ayo berbelanja!")
 
                     uang = {input}('Berapa banyak uang yang sudah kamu tabung?')
                     harapan = {input}('Berapa banyak uang yang Anda perlukan?')
@@ -2791,7 +2791,7 @@ adventures:
                     ```
                     food_in_stock {is} burger, fries, pancakes, chicken nuggets
                     food {is} {ask} 'Apa yang ingin kamu makan?'
-                    {if} food {in} food_in_stock
+                    {if} food {is} {in} food_in_stock
                     {print} 'Satu ' food ' segera datang!'
                     {else}
                     {print} 'Maaf, kami tidak menjual itu'
@@ -3906,7 +3906,7 @@ adventures:
 
                     ### Latihan 3
                     Buat gambarmu sendiri dengan bentuk berbeda.
-                    Ubah jumlah bentuk dengan `{repeat}` dan bentuk bentuk dalam `{define}`
+                    Ubah jumlah bentuk dengan `{repeat}` dan bentuknya menggunakan `{define}`
                 example_code: |
                     ```
                     #Membuat fungsi untuk persegi:
@@ -4295,7 +4295,7 @@ adventures:
                         {print}(i)
                     ```
                 story_text_2: |
-                    Ingat, perintah ini juga sangat berguna jika dikombinasikan dengan daftar.
+                    Ingat, perintah ini juga sangat berguna jika di kombinasikan dengan daftar.
                     Kamu bisa mencocokkan 2 daftar menggunakan variabel `{in} {range}`. 
                 example_code_2: |
                     ```
@@ -7478,10 +7478,18 @@ adventures:
                     {forward} 100
                     {turn} 90
                     {forward} 100
+                    {turn} 65
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
                     {turn} 90
                     ```
 
-                    Heksagon sederhana
+                    Hexagon sederhana
                     ```
                     {forward} 60
                     {turn} 60
@@ -7903,7 +7911,7 @@ adventures:
                     Bintang <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
                 example_code_3: |
                     Bintang
-                    Bintang biasanya digambar menggunakan putaran 144 derajat. Jika kamu mengubah ini sedikit menjadi 143 derajat misalnya dan mengulang pola beberapa kali dengan loop {while} kamu bisa membuat bentuk ini.
+                    Sebuah bintang biasanya digambar menggunakan putaran 144 derajat. Jika kamu mengubah ini sedikit menjadi 143 derajat misalnya dan mengulang pola beberapa kali dengan loop {while} kamu bisa membuat bentuk ini.
                 answer_code: |
                     ```
                     distance = 5
