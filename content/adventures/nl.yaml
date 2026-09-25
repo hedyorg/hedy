@@ -871,12 +871,6 @@ adventures:
                     ```
                     keuze {is} _
                     ```
-            4:
-                story_text: |
-                    Ook in dit level kun je een dobbelsteen maken. Maar nu mag je het zelf proberen, zonder voorbeeld!
-
-                    ### Opdracht
-                    Programmeer een dobbelsteen. Tip: Weet je niet hoe? Spiek dan bij jouw dobbelsteen uit het vorige level, maar vergeet de aanhalingstekens niet.
             5:
                 story_text: |
                     Je kunt ook in dit level weer een dobbelsteen maken en daarbij de `{if}` en `{else}` gebruiken.
@@ -983,19 +977,6 @@ adventures:
                     Daarna bedenk je een taak die gedaan moet worden en laat je de computer kiezen wie de taak moet doen met het `{at} {random}` commando.
 
                     **Extra** Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen met het `{remove}` `{from}` commando.
-            4:
-                story_text: |
-                    Met aanhalingstekens kun je je afwasprogramma beter maken.
-
-                    ### Opdracht
-                    Vul eerst de lege plekken in de voorbeeldcode in om hem aan de praat te krijgen.
-                    Is dat gelukt? Fantastisch! Dan kun je nu je eigen code van het vorige level kopiëren en werkend maken in dit level door aanhalingstekens toe te voegen op de juiste plekken.
-                example_code: |
-                    ```
-                    mensen {is} mama, papa, Emma, Sophie
-                    {print} _ de afwas wordt gedaan door _
-                    {print} mensen {at} _
-                    ```
             5:
                 story_text: |
                     Met de `{if}` kun je jouw programma nu nog leuker maken. Je kan je programma laten reageren op de keuze.
@@ -1921,6 +1902,51 @@ adventures:
                     * De student feedback geven op basis van hun score: 12 punten: Geweldig!, 8 - 11 punten: Goed gedaan, blijf oefenen!, 7 of minder: Je moet meer studeren!
     hotel:
         levels: {}
+    house:
+        name: huizenstylist
+        default_save_name: home_decorator
+        description: home decorator
+        levels:
+            4:
+                story_text: |-
+                    Richt de woonkamer in als een echte stylist.
+
+                    ### Opdracht
+                    Vraag aan de speler nog minstens 6 vragen over hun droomhuis. Zo kun je bijvoorbeeld vragen wat voor bank ze willen, hoe groot de eettafel moet zijn of wat voor kunst ze aan de muur willen etc.
+                    Gebruik vervolgens deze informatie om een omschrijving te maken van hun droomhuis. Laat alle antwoorden terugkomen in je omschrijving, dus heb je ze gevraagd wat voor tv ze willen, zorg er dan voor dat dat ook in het verhaaltje te lezen is.
+                example_code: |-
+                    ```
+                    {print} "Laten we de woonkamer inrichten!"
+
+                    #Vraag naar input van de speler
+                    kleur_muur {is} {ask} 'Wat voor kleur verf wil je op de muren?'
+                    kleur_tapijt {is} {ask} 'Wat voor kleur tapijt wil je?'
+                    soort_bank _
+
+                    #Describtion of your dream house
+                    {print} 'Je krijgt ' kleur_muur ' muren en ' kleur_tapijt ' tapijt.'
+                    {print} _
+                    ```
+                answer_code: |-
+                    ```
+                    {print} "Laten we de woonkamer inrichten!"
+
+                    #Vraag naar input van de speler
+                    kleur_muur {is} {ask} 'Wat voor kleur verf wil je op de muren?'
+                    kleur_tapijt {is} {ask} 'Wat voor kleur tapijt wil je?'
+                    soort_bank {is} {ask} 'Wat voor soort bank wil je?'
+                    kleur_bank {is} {ask} 'Welke kleur bank wil je?'
+                    kunst {is} {ask} 'Wat voor kunst wil je aan de muur?'
+                    merk_tv {is} {ask} 'Welk merk tv wil je?'
+                    kleur_tv {is} {ask} 'Welke kleur tv wil je?'
+                    grootte_tv {is} {ask} 'Hoe groot moet de tv worden?'
+
+                    #Describtion of your dream house
+                    {print} 'Je krijgt ' kleur_muur ' muren en ' kleur_tapijt ' tapijt.'
+                    {print} 'Je krijt een ' kleur_bank ' ' soort_bank ' bank.'
+                    {print} 'Aan de muur hangt ' kunst '.'
+                    {print} 'Je krijgt een ' grootte_tv ', ' kleur_tv ', ' merk_tv ' tv.'
+                    ```
     if_command:
         default_save_name: als
         description: introduceert het {if} commando
@@ -2193,6 +2219,64 @@ adventures:
                     mensen = {ask} 'Hoeveel kaartjes wil je?'
                     prijs = mensen * 2
                     {print} 'Dat is €' prijs
+                    ```
+    monster:
+        name: monster
+        default_save_name: monster
+        description: monster generator
+        levels:
+            4:
+                story_text: |-
+                    Maaak je eigen monstergenerator. Vraag de speler hoe ze willen dat kun monster eruit komt te zien en genereer daarna een verhaaltje voor ze over hun zelfbedachte monster.
+
+                    ### Opdracht
+                    * Stel nog minstens 5 extra vragen over het monster
+                    * Maak een (nep) laadscherm, waarop 'Monster genereren... Even geduld a.u.b.' wordt getoond voor 3 seconden en wis daarna het scherm.
+                    * Schrijf de rest van het monsterverhaaltje met de nieuwe variabelen die jij bedacht hebt.
+                example_code: |-
+                    ```
+                    # Welkom en vragen stellen
+                    {print} 'Welkom bij de monstergenerator!'
+                    naam_monster {is} {ask} 'Hoe heet jouw monster?'
+                    omschrijving_monster {is} {ask} 'Hoe omschrijf je jouw monster?'
+                    kleur_ogen {is} {ask} 'Welke kleur hebben de ogen van jouw monster?'
+                    aantal_ogen {is} {ask} 'Hoeveel ogen heeft jouw monster?'
+                    _ Maak hier meer vragen _
+
+                    # Monster genereren
+                    _ Maak hier het laadscherm _
+
+                    # Schrijf hier het verhaaltje
+                    {print} 'Dit is ' naam_monster ' het ' omschrijving_monster ' monster'
+                    {print} naam_monster ' heeft ' aantal_ogen ' ' kleur_ogen ' ogen.'
+                    _ Schrijf hier de rest van het verhaaltje. Gebruik je variabelen _
+                    ```
+                answer_code: |-
+                    ```
+                    # Welcome and questions
+                    {print} 'Welkom bij de monstergenerator!'
+                    naam_monster {is} {ask} 'Hoe heet jouw monster?'
+                    omschrijving_monster {is} {ask} 'Hoe omschrijf je jouw monster?'
+                    kleur_ogen {is} {ask} 'Welke kleur hebben de ogen van jouw monster?'
+                    aantal_ogen {is} {ask} 'Hoeveel ogen heeft jouw monster?'
+                    aantal_tanden {is} {ask} 'Hoeveel tanden heeft jouw monster?'
+                    vorm_neus {is} {ask} 'Welke vorm heeft zijn neus?'
+                    lengte_monster {is} {ask} 'Hoe lang is jouw monster in cm?'
+                    breedte_monster {is} {ask} 'En hoe breed is het monster?'
+                    soort_huid {is} {ask} 'Wat voor huid heeft het monster (vacht, schubben, veren etc)?'
+
+                    # Monster genereren
+                    {print} 'Monster genereren... Even geduld a.u.b.'
+                    {sleep} 3
+                    {clear}
+
+                    # Schrijf hier het verhaaltje
+                    {print} 'Dit is ' naam_monster ' het ' omschrijving_monster ' monster'
+                    {print} naam_monster ' heeft ' aantal_ogen ' ' kleur_ogen ' ogen.'
+                    {print} 'In zijn mond heeft ' naam_monster ' ' aantal_tanden ' tanden'
+                    {print} 'en hij ruikt met zijn ' vorm_neus ' neus.'
+                    {print} naam_monster ' is ' lengte_monster ' lang en ' breedte_monster ' breed.'
+                    {print} 'Zijn lijf is bedekt met ' soort_huid
                     ```
     music:
         name: muziek
@@ -2754,6 +2838,68 @@ adventures:
                     {print} '🦜 ' gezegd_woord
                     _ gezegd_woord {is} nieuw_woord _ '🧒 Goedzo! 🍪'
                     _ _ '🧒 Nee! Zeg ' nieuw_woord
+                    ```
+    party_planner:
+        name: party planner
+        default_save_name: party_planner
+        description: party planner
+        levels:
+            4:
+                story_text: |-
+                    Maak je eigen party planner die een uitnodiging voor je feestje voor je schrijft!
+
+                    ### Opdracht
+                    * Bedenk de juiste vragen om aan de speler te stellen
+                    * Maak een uitnodiging met de informatie die je van de speler hebt opgevraagd
+
+                example_code: |-
+                    ```
+                    #informatie ophalen
+                    {print} 'PARTY PLANNER'
+                    jouw_naam {is} {ask} _
+                    naam_gast {is} {ask} _
+                    reden_feest {is} {ask} _
+                    datum_feest {is} {ask} _
+                    tijd_feest {is} {ask} _
+                    locatie_feest {is} {ask} _
+                    thema_feest {is} {ask} _
+                    dresscode_feest {is} {ask} _
+
+                    #uitnodiging laden
+                    {print} 'Even geduld... Uitnodiging laden'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Beste ' naam_gast ','
+                    _
+                    ```
+                answer_code: |-
+                    ```
+                    #informatie ophalen
+                    {print} 'PARTY PLANNER'
+                    jouw_naam {is} {ask} 'Wat is jouw naam?'
+                    naam_gast {is} {ask} 'Hoe heet je gast?'
+                    reden_feest {is} {ask} 'Wat vier je op het feest?'
+                    datum_feest {is} {ask} 'Welke datum is het feest?'
+                    tijd_feest {is} {ask} 'Hoe laat begint het?'
+                    locatie_feest {is} {ask} 'Waar is het feestje?'
+                    thema_feest {is} {ask} 'Wat is het thema van het feest?'
+                    dresscode_feest {is} {ask} 'Wat is de dresscode?'
+
+                    #uitnodiging laden
+                    {print} 'Even geduld... Uitnodiging laden'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Beste' naam_gast ','
+                    {print} 'Ik nodig je graag uit om ' reden_feest 'met mij te vieren'
+                    {print} 'Het feest is op ' datum_feest ' om ' tijd_feest
+                    {print} 'De locatie is ' locatie_feest
+                    {print} 'Het thema is ' thema_feest' en de dresscode is: ' dresscode_feest
+                    {print} 'Ik hoop dat je kunt komen!'
+                    {print} 'Liefs, ' jouw_naam
                     ```
     piggybank:
         name: spaarvarken
@@ -3367,16 +3513,6 @@ adventures:
                     keuzes {is} steen, papier, schaar
                     speler_1 {is} {ask} Naam van speler 1:
                     _
-                    ```
-            4:
-                story_text: |
-                    In dit level kunnen we steen, papier, schaar verder programmeren. Maar als je er tekst bij wilt, moet je ook hier nu aanhalingstekens gebruiken.
-                    ### Opdracht
-                    Vul aanhalingstekens in op de streepjes. Let op, de variabele `keuzes` moet buiten de aanhalingstekens blijven.
-                example_code: |
-                    ```
-                    keuzes {is} steen, papier, schaar
-                    {print} _ De computer kiest... _ keuzes {at} {random}
                     ```
             5:
                 story_text: |

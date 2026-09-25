@@ -166,8 +166,6 @@ adventures:
                 example_code: "```\nmožnosti {is} 1, 2, 3, 4, 5, žížala\n{print} Hodil jsi _ {at} {random} !\n```\n"
                 story_text_2: "### Cvičení\nKostky ve výše uvedeném příkladu jsou kostky pro konkrétní hru. Dokážete vyrobit normální kostky?\nNebo jiné speciální kostky z jiné hry?\n"
                 example_code_2: "```\nvolby {is} _\n```\n"
-            4:
-                story_text: "V této úrovni můžete také vytvářet kostky. Tentokrát si to však můžete vyzkoušet sami, bez ukázkového kódu!\n\n### Cvičení\nV této úrovni si vytvořte vlastní kostky.\nTip: Pokud netušíte, jak kostky vyrobit. Podívejte se na své kostky z předchozí úrovně, ale nezapomeňte přidat uvozovky.\n"
             5:
                 story_text: "Přidáme příkazy `{if}` a `{else}` do naší kostky!\n\n### Cvičení\nDoplňte ukázkový kód tak, aby kód říkal „Můžete přestat házet“, jakmile hodíte žížalu. Měl by říkat „Musíš házet znovu“, pokud jsi hodil něco jiného.\n**Extra** Možná chcete znovu vytvořit kostku z úplně jiné hry. To je také v pořádku! Pak si vymyslete vlastní reakci, např. „ano“ pro 6 a „škoda“ pro něco jiného.\n"
                 example_code: "```\nmožnosti {is} 1, 2, 3, 4, 5, žížala\nhodit {is} možnosti {at} {random}\n{print} 'hodil jsi ' hodit\n_ hodit {is} žížala {print} 'Můžeš přestat házet.'\n_ {print} 'Musíš házet znovu!'\n```\n"
@@ -441,9 +439,6 @@ adventures:
                 example_code: "```\nvolby {is} kámen, papír, nůžky\n{print} výběr _\n```\n"
                 story_text_2: "**Extra** Vytvořte hru pro dva hráče. Nejprve požádejte oba hráče, aby vyplnili svá jména. Poté nechte počítač náhodně vybrat jejich volby.\n"
                 example_code_2: "```\nvolby {is} kámen, papír, nůžky\nhráč_1 {is} {ask} Jméno hráče 1:\n_\n```\n"
-            4:
-                story_text: "V této úrovni můžeme dále programovat kámen, nůžky, papír. Pokud však chcete přidat text, musíte i zde použít uvozovky.\n### Cvičení\nDoplňte uvozovky na prázdná místa. Nezapomeňte, že proměnná `choices` by měla být mimo uvozovky.\n"
-                example_code: "```\nvolby {is} kámen, nůžky, papír\n{print} _Počítač vybírá..._ volby {at} {random}\n```\n"
             5:
                 story_text: "V této úrovni můžeme určit, zda se jedná o remízu, nebo ne. K tomu potřebujeme nový kód `{if}`.\n\n### Cvičení\nDokončete kód doplněním prázdných míst:\n* Nechte počítač vybrat náhodnou možnost\n* Zeptejte se hráče, co chce vybrat\n* Vyplňte správné proměnné na řádcích 4 a 5.\n* Dokončete řádek 6 tak, aby Hedy mohla zkontrolovat, zda se jedná o nerozhodný výsledek.\n"
             10:
@@ -563,9 +558,6 @@ adventures:
             11:
                 story_text: "### Cvičení\nPřidejte druhou povinnost, například vysávání nebo úklid, a ujistěte se, že je také rozdělena na celý týden.\n<br> **Extra** Program není spravedlivý, můžete mít smůlu a umývat celý týden. Jak byste mohli program udělat spravedlivější?\n"
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
-            4:
-                story_text: "Pomocí uvozovek můžete svůj program mytí nádobí ještě vylepšit.\n\n### Cvičení\nNejprve doplňte správné symboly nebo příkazy na prázdná místa, aby tento ukázkový program fungoval.\nPodařilo se vám to? Skvěle! Nyní zkopírujte svůj vlastní kód z předchozí úrovně a zprovozněte ho v této úrovni přidáním uvozovek na správná místa.\n"
-                example_code: "```\nlidé {is} máma, táta, Emma, Sophie\n{print} _ the nádobí je umyté _\n{sleep}\n{print} lidé {at} _\n```\n"
             5:
                 example_code: "```\nlidé {is} máma, táta, Emma, Sophie\nmyčka nádobí {is} lidé {at} {random}\nmyčka {is} Sophie {print} _ škoda, že musím umýt nádobí _\n_ {print} 'naštěstí žádné nádobí, protože ' _ ' už myje nádobí'\n```\n"
                 story_text: "S funkcí `{if}` si nyní můžete v programu užít více zábavy s výběrem. Můžete nechat program reagovat na volbu, kterou provedl počítač.\n### Cvičení\nDokážete dokončit kód tak, aby vypsal 'příliš špatně', když na vás přijde řada, a v opačném případě 'ano!'?\nNezapomeňte na uvozovky!\n"

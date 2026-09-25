@@ -1756,18 +1756,6 @@ adventures:
                     choices {is} 1, 2, 3, 4, 5, 6
                     {print} You throw... choices {at} {random}
                     ```
-            4:
-                story_text: |
-                    In this level you can also create dice. But this time you can try it yourself, without an example code!
-
-                    ### Exercise
-                    Make your own dice in this level.
-                    Tip: If you have no idea how to make dice. Take a peek at your dice from the previous level, but don't forget to add quotation marks.
-                answer_code: |
-                    ```
-                    choices is 1, 2, 3, 4, 5, 6
-                    {print} 'I throw ' choices {at} {random}
-                    ```
             5:
                 story_text: |
                     We are going to add the `{if}` and `{else}` commands to our dice!
@@ -1987,27 +1975,6 @@ adventures:
                     name {is} {ask} what is your name?
                     {remove} name {from} people
                     {print} people {at} {random} has to do the dishes
-                    ```
-            4:
-                story_text: |
-                    With quotation marks you can make your dishwashing program even better.
-
-                    ### Exercise
-                    First, fill in right symbols or commands on the blanks to make this example program work.
-                    Did you get it? Great! Now copy your own code from the previous level and make it work in this level by adding quotation marks in the right spots.
-                example_code: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} _ the dishes are done by _
-                    {sleep}
-                    {print} people {at} _
-                    ```
-                answer_code: |
-                    ```
-                    people is mom, dad, Emma, Sophie
-                    {print} 'the dishes are done by...'
-                    {sleep}
-                    {print} people {at} {random}
                     ```
             5:
                 story_text: |
@@ -3772,6 +3739,51 @@ adventures:
                     ```
                 answer_code: |
                     Own Answer
+    house:
+        name: home decorator
+        default_save_name: home_decorator
+        description: home decorator
+        levels:
+            4:
+                story_text: |-
+                    Decorate the living room the way you want it to be!
+
+                    ### Exercise
+                    Ask the player at least 6 more questions about their dream living room. You could, for example, ask them what type of couch they would like, how big the dining table should be, what kind of art they want on their walls etc.
+                    Then use that information in the describtion of the house. So if you've asked about their tv, write a line about what kind of tv they have chosen.
+                example_code: |-
+                    ```
+                    {print} "Let's redecorate the living room!"
+
+                    #Asking the player for input
+                    color_walls {is} {ask} 'What color would you like the walls to be?'
+                    color_carpet {is} {ask} 'What color would you like the carpet to be?'
+                    type_couch _
+
+                    #Describtion of your dream house
+                    {print} 'Your house will have ' color_walls ' walls and a ' color_carpet ' carpet.'
+                    {print} _
+                    ```
+                answer_code: |-
+                    ```
+                    {print} "Let's redecorate the living room!"
+
+                    #Asking the player for input
+                    color_walls {is} {ask} 'What color would you like the walls to be?'
+                    color_carpet {is} {ask} 'What color would you like the carpet to be?'
+                    type_couch {is} {ask} 'What kind of couch would you like?'
+                    color_couch {is} {ask} 'And what color should that couch be?'
+                    wall_art {is} {ask} 'What kind of art would you like to put on your wall?'
+                    brand_tv {is} {ask} 'What brand of tv would you like?'
+                    color_tv {is} {ask} 'What color should the tv be?'
+                    size_tv {is} {ask} 'What size should the tv be?'
+
+                    #Describtion of your dream house
+                    {print} 'Your house will have ' color_walls ' walls and a ' color_carpet ' carpet.'
+                    {print} 'You will have a ' color_couch ' ' type_of_couch ' couch.'
+                    {print} 'You will have ' wall_art ' on your wall.'
+                    {print} 'You will have a ' size_tv ', ' color_tv ', ' brand_tv ' tv.'
+                    ```
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
@@ -4205,6 +4217,64 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
+    monster:
+        name: monster
+        default_save_name: monster
+        description: monster generator
+        levels:
+            4:
+                story_text: |-
+                    Make a monster generator. Ask the player questions about what they want their monster to be like and then generate a story for them.
+
+                    ### Exercise
+                    * Create at least 5 more questions about the monster
+                    * Create a (fake) loading screen, that shows the word 'Generating...' for 3 seconds and then clears the screen.
+                    * Write the rest of the story using the new variables you've made.
+                example_code: |-
+                    ```
+                    # Welcome and questions
+                    {print} 'Welcome to the monster generator!'
+                    name_monster {is} {ask} 'What is your monster called?'
+                    adjective_monster {is} {ask} 'How would you describe your monster?'
+                    color_eyes {is} {ask} 'What color eyes does your monster have?'
+                    amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
+                    _ Create more questions here _
+
+                    # Generating
+                    _ Create a loading screen _
+
+                    # Write a story about the monster
+                    {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
+                    {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
+                    _ Write the rest of the story including your new variables _
+                    ```
+                answer_code: |-
+                    ```
+                    # Welcome and questions
+                    {print} 'Welcome to the monster generator!'
+                    name_monster {is} {ask} 'What is your monster called?'
+                    adjective_monster {is} {ask} 'How would you describe your monster?'
+                    color_eyes {is} {ask} 'What color eyes does your monster have?'
+                    amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
+                    amount_of_teeth {is} {ask} 'How many teeth does the monster have?'
+                    shape_nose {is} {ask} 'What is the shape of its neus?'
+                    length_monster {is} {ask} 'How tall is the monster?'
+                    width_monster {is} {ask} 'How wide is the monster?'
+                    kind_of_skin {is} {ask} 'What kind of skin does the monster have? Scales, fur, feathers etc?'
+
+                    # Generating
+                    {print} 'Generating...'
+                    {sleep} 3
+                    {clear}
+
+                    # Write a story about the monster
+                    {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
+                    {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
+                    {print} 'In its mouth there are ' amount_of_teeth ' teeth.'
+                    {print} 'and it smells with its ' shape_nose ' nose.'
+                    {print} name_monster ' is ' lenth_monster ' tall and ' width_monster ' wide.'
+                    {print} 'Its covered from head to toe in ' kind_of_skin
+                    ```
     music:
         name: music
         default_save_name: music
@@ -5127,6 +5197,68 @@ adventures:
                     {if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'
                     {else} {print} '🧒 No, Hedy! Say ' new_word
                     ```
+    party_planner:
+        name: party planner
+        default_save_name: party_planner
+        description: party planner
+        levels:
+            4:
+                story_text: |-
+                    Create a party planning tool that creates an invite to your party!
+
+                    ### Execrise
+                    * First fill in the right questions to ask the player
+                    * Then create a party invitation using the input the player gave you
+
+                example_code: |-
+                    ```
+                    #asking for input
+                    {print} 'PARTY PLANNER'
+                    name_host {is} {ask} _
+                    name_guest {is} {ask} _
+                    reason_party {is} {ask} _
+                    date_party {is} {ask} _
+                    time_party {is} {ask} _
+                    location_party {is} {ask} _
+                    theme_party {is} {ask} _
+                    dress_code {is} {ask} _
+
+                    #loading the invite
+                    {print} 'please wait... loading invite'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Dear ' name_guest ','
+                    _
+                    ```
+                answer_code: |-
+                    ```
+                    #asking for input
+                    {print} 'PARTY PLANNER'
+                    name_host {is} {ask} 'What is your name?'
+                    name_guest {is} {ask} 'Who would you like to invite?'
+                    reason_party {is} {ask} 'What are you celebrating?'
+                    date_party {is} {ask} 'When is the party?'
+                    time_party {is} {ask} 'What time is the party?'
+                    location_party {is} {ask} 'Where is the party?'
+                    theme_party {is} {ask} 'What is the party theme?'
+                    dress_code {is} {ask} 'What is the party dresscode?'
+
+                    #loading the invite
+                    {print} 'please wait... loading invite'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Dear ' name_guest ','
+                    {print} 'I would like to invite you to celebrate ' reason_party
+                    {print} 'The party is on ' date_party ' at ' time_party
+                    {print} 'The location is ' location_party
+                    {print} 'The theme of the party is ' theme_party ' and the dresscode is: ' dress_code
+                    {print} 'Hope to see you there!'
+                    {print} 'Love, ' name_host
+                    ```
     piggybank:
         name: piggy bank
         default_save_name: Piggy Bank
@@ -6000,24 +6132,6 @@ adventures:
                     player_2 {is} {ask} Name of player 2:
                     {print} player_1 chooses choices {at} {random}
                     {print} player_2 chooses choices {at} {random}
-                    ```
-            4:
-                story_text: |
-                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    ### Exercise
-                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chooses... _ choices {at} {random}
-                    ```
-                answer_code: |
-                    ```
-                    choices is rock, paper, scissors
-                    player_1 {is} {ask} 'Name of player 1:'
-                    player_2 {is} {ask} 'Name of player 2:'
-                    {print} player_1 ' chooses ' choices {at} {random}
-                    {print} player_2 ' chooses ' choices {at} {random}
                     ```
             5:
                 story_text: |

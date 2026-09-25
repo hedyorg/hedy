@@ -710,13 +710,6 @@ adventures:
                     ```
                     choix {is} _
                     ```
-            4:
-                story_text: |
-                    À ce niveau, tu peux aussi créer un dé. Mais cette fois, tu peux essayer par toi-même sans exemple de code !
-
-                    ### Exercice
-                    Fais ton propre dé à ce niveau.
-                    Astuce : si tu manques d'idée sur comment faire un dé. Jette un œil au dé que tu as fait au niveau d'avant, mais n'oublie pas d'ajouter les guillemets.
             5:
                 story_text: |
                     Nous allons ajouter les commandes `{if}` et le `{else}` à notre dé !
@@ -799,20 +792,6 @@ adventures:
                     Ensuite, pense à une tâche qui doit être faite, et demande à l'ordinateur de décider qui doit faire la tâche avec la commande `{at} {random}`.
 
                     **Bonus** Pas envie de faire la vaisselle ? Hack le programme en retirant ton nom de la liste avec la commande `{remove}` `{from}`.
-            4:
-                story_text: |
-                    Avec les guillemets, tu peux rendre le programme de la vaisselle encore mieux.
-
-                    ### Exercice
-                    D'abord, remplace les blancs avec les bons symboles ou commandes pour que cet exemple fonctionne.
-                    As-tu saisi ? Génial ! Maintenant, copie le code que tu as fait au niveau précédent et fais le fonctionner à ce niveau en ajoutant les guillemets aux bons endroits.
-                example_code: |
-                    ```
-                    personnes {is} maman, papa, Emma, Sophie
-                    {print} _ la vaisselle sera faite par _
-                    {sleep}
-                    {print} personnes {at} _
-                    ```
             5:
                 story_text: |
                     Avec le `{if}` tu peux maintenant t'amuser à faire des choix dans ton programme. Tu peux faire que ton programme réponde au choix fait par l'ordinateur.
@@ -2052,11 +2031,6 @@ adventures:
                     joueur_1 {is} {ask} Nom du joueur 1 :
                     _
                     ```
-            4:
-                story_text: |
-                    À ce niveau nous pouvons continuer le programme pierre, papier, ciseaux. Mais si tu veux ajouter du texte, tu dois utiliser les guillemets ici aussi.
-                    ### Exercise
-                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
             5:
                 story_text: |
                     À ce niveau, nous pouvons déterminer s'il y a égalité ou non. En utilisant le nouveau `{if}` évidemment !
