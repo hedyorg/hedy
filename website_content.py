@@ -329,7 +329,6 @@ HOUR_OF_CODE_ADVENTURES = {
         'hospital'
     ],
     4: [
-        'dishes',
         'parrot',
         'story',
         'debugging',
