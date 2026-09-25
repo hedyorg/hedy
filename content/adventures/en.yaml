@@ -4224,7 +4224,7 @@ adventures:
         levels:
             4:
                 story_text: |-
-                    Make a monster generator. Ask the player questions sbout what they want their monster to be like and then generate a story for them.
+                    Make a monster generator. Ask the player questions about what they want their monster to be like and then generate a story for them.
 
                     ### Exercise
                     * Create at least 5 more questions about the monster
@@ -4238,7 +4238,7 @@ adventures:
                     adjective_monster {is} {ask} 'How would you describe your monster?'
                     color_eyes {is} {ask} 'What color eyes does your monster have?'
                     amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
-                    _ Create more questions here_
+                    _ Create more questions here _
 
                     # Generating
                     _ Create a loading screen _
@@ -4246,7 +4246,7 @@ adventures:
                     # Write a story about the monster
                     {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
                     {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
-                    _ Write the rest of the story including your new variables_
+                    _ Write the rest of the story including your new variables _
                     ```
                 answer_code: |-
                     ```
@@ -4256,6 +4256,11 @@ adventures:
                     adjective_monster {is} {ask} 'How would you describe your monster?'
                     color_eyes {is} {ask} 'What color eyes does your monster have?'
                     amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
+                    amount_of_teeth {is} {ask} 'How many teeth does the monster have?'
+                    shape_nose {is} {ask} 'What is the shape of its neus?'
+                    length_monster {is} {ask} 'How tall is the monster?'
+                    width_monster {is} {ask} 'How wide is the monster?'
+                    kind_of_skin {is} {ask} 'What kind of skin does the monster have? Scales, fur, feathers etc?'
 
                     # Generating
                     {print} 'Generating...'
@@ -4265,6 +4270,10 @@ adventures:
                     # Write a story about the monster
                     {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
                     {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
+                    {print} 'In its mouth there are ' amount_of_teeth ' teeth.'
+                    {print} 'and it smells with its ' shape_nose ' nose.'
+                    {print} name_monster ' is ' lenth_monster ' tall and ' width_monster ' wide.'
+                    {print} 'Its covered from head to toe in ' kind_of_skin
                     ```
     music:
         name: music
@@ -5204,7 +5213,7 @@ adventures:
                 example_code: |-
                     ```
                     #asking for input
-                    print 'PARTY PLANNER'
+                    {print} 'PARTY PLANNER'
                     name_host {is} {ask} _
                     name_guest {is} {ask} _
                     reason_party {is} {ask} _
@@ -5226,7 +5235,7 @@ adventures:
                 answer_code: |-
                     ```
                     #asking for input
-                    print 'PARTY PLANNER'
+                    {print} 'PARTY PLANNER'
                     name_host {is} {ask} 'What is your name?'
                     name_guest {is} {ask} 'Who would you like to invite?'
                     reason_party {is} {ask} 'What are you celebrating?'

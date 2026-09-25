@@ -119,9 +119,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'clear_command',
         'music',
-        'monster',
         'house',
-        'party_planner',
+        'party',
+        'monster',
         'debugging',
         'hospital'
     ],
