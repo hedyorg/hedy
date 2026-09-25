@@ -120,7 +120,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'clear_command',
         'music',
         'house',
-        'party',
+        'party_planner',
         'monster',
         'debugging',
         'hospital'
