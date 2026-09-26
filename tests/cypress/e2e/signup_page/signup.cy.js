@@ -8,7 +8,7 @@ beforeEach(() => {
 })
 
 describe('Test signing up', () => {
-it('Is able to sign up as a student', () => {
+  it('Is able to sign up as a student', () => {
     cy.getDataCy('signup_student').click()
 
     // basic info
@@ -32,20 +32,20 @@ it('Is able to sign up as a student', () => {
     cy.getDataCy('subscribe').should('not.exist')
     cy.getDataCy('pair_with_teacher').should('not.exist')
     cy.getDataCy('connect_guest_teacher').should('not.exist')
-  
+
     // experience
     cy.getDataCy('prog_experience_yes').check()
     cy.getDataCy('scratch').check()
     cy.getDataCy('other_block').check()
     cy.getDataCy('python').check()
     cy.getDataCy('other_text').check()
-  
-    cy.getDataCy('agree_terms').check()    
+
+    cy.getDataCy('agree_terms').check()
     cy.intercept('/auth/signup').as('sign_up');
     cy.getDataCy('submit_button').click()
     cy.wait('@sign_up').should('have.nested.property', 'response.statusCode', 200)
-    cy.url().should('contain', Cypress.config('baseUrl') + Cypress.env('hedy_page'));
-    
+    cy.url().should('contain', Cypress.config('baseUrl') + Cypress.expose('hedy_page'));
+
     // delete profile
     goToProfilePage();
     cy.getDataCy('delete_profile').click()
@@ -56,7 +56,7 @@ it('Is able to sign up as a student', () => {
     cy.url().should('contain', Cypress.config('baseUrl'));
   })
 
-it('Is able to sign up as a teacher', () => {
+  it('Is able to sign up as a teacher', () => {
     cy.getDataCy('signup_teacher').click()
     // basic info
     let username = `teacher_${Math.random()}`
@@ -89,13 +89,13 @@ it('Is able to sign up as a teacher', () => {
     cy.getDataCy('connect_guest_teacher').check()
     // phone will open when connect_guest_teacher is checked
     cy.getDataCy('phone').type('0612345678')
-  
+
     cy.getDataCy('agree_terms').check()
     cy.intercept('/auth/signup').as('sign_up');
     cy.getDataCy('submit_button').click()
     cy.wait('@sign_up').should('have.nested.property', 'response.statusCode', 200)
-    cy.url().should('contain', Cypress.env('teachers_page'));
-    
+    cy.url().should('contain', Cypress.expose('teachers_page'));
+
     //delete profile
     goToProfilePage();
     cy.getDataCy('delete_profile').click()
