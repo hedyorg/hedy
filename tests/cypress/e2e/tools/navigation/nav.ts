@@ -1,12 +1,9 @@
 import { loginForAdmin } from "../login/login";
 import { openAdventureView } from '../../tools/adventures/adventure.js';
 
-export function goToPage(page, options = {}) {
-    if (typeof page === 'string' || page instanceof String) {
-        if (page != "") {
-            cy.visit(page, options);
-        }
-
+export function goToPage(page: string, options = {}) {
+    if (page != "") {
+        cy.visit(page, options);
     }
 }
 
@@ -46,7 +43,7 @@ export function goToProfilePage() {
     goToPage(Cypress.expose('profile_page'));
 }
 
-export function goToHedyLevel(level) {
+export function goToHedyLevel(level: string | number) {
     goToPage(`${Cypress.expose('hedy_page')}/${level}#default`);
 }
 
@@ -77,7 +74,7 @@ export function goToEditAdventure() {
     cy.get('body').then(($body) => {
         if ($body.find('[data-cy^="edit_link_"]').length > 0) {
             cy.get('[data-cy^="edit_link_"]').first().invoke('attr', 'href').then((href) => {
-                const adventureId = href.split('/').pop();
+                const adventureId = href?.split('/').pop();
                 cy.visit(`/for-teachers/legacy/customize-adventure/${adventureId}`);
             });
             return;
@@ -85,7 +82,7 @@ export function goToEditAdventure() {
 
         if ($body.find('#my-adventures-table a[href*="/for-teachers/customize-adventure/"]').length > 0) {
             cy.get('#my-adventures-table a[href*="/for-teachers/customize-adventure/"]').first().invoke('attr', 'href').then((href) => {
-                const adventureId = href.split('/').pop();
+                const adventureId = href?.split('/').pop();
                 cy.visit(`/for-teachers/legacy/customize-adventure/${adventureId}`);
             });
             return;
@@ -101,7 +98,7 @@ export function goToEditAdventure() {
     });
 }
 
-export function navigateHomeButton(button, path) {
+export function navigateHomeButton(button: string, path: string) {
     goToHome();
     cy.getDataCy(button).click();
     cy.location().should((loc) => {

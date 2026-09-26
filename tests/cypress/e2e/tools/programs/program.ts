@@ -11,18 +11,22 @@ function clickRunButtonWhenUncovered() {
     });
 
     cy.get('#dropdown-level').should('not.be.visible');
+
+    const originalScrollBehavior = Cypress.config('scrollBehavior');
+    Cypress.config('scrollBehavior', { block: 'center' });
     cy.getDataCy('runit')
-        .scrollIntoView({ block: 'center' })
+        .scrollIntoView()
         .should('be.visible')
         .should('not.be.disabled')
-        .click()
+        .click();
+    Cypress.config('scrollBehavior', originalScrollBehavior)
 }
 
-export function executeHelloWorldProgram(name) {
-    cy.visit(`${Cypress.expose('hedy_page')}#${name}`);
+export function executeHelloWorldProgram(adventureName: string) {
+    cy.visit(`${Cypress.expose('hedy_page')}#${adventureName}`);
     // make sure to navigate to the wanted program tab.
     cy.getDataCy('dropdown_open_button').click();
-    cy.getDataCy(`${name}`).click();
+    cy.getDataCy(`${adventureName}`).click();
     // close dropdown
     cy.getDataCy('dropdown_open_button').click();
     // Execute program to save it
@@ -34,16 +38,16 @@ export function executeHelloWorldProgram(name) {
     clickRunButtonWhenUncovered()
     cy.getDataCy('output').should('contain.text', 'Hello world');
     cy.visit(`${Cypress.expose('programs_page')}`);
-    cy.getDataCy('programs').should("contain.text", name)
+    cy.getDataCy('programs').should("contain.text", adventureName)
     // cy.get('#program_1').should('contain.text', 'print Hello world');
 }
 
-export function deleteProgram(name) {
+export function deleteProgram(programName: string) {
     cy.visit(`${Cypress.expose('programs_page')}`);
     cy.getDataCy('programs')
         .each(($program, i) => {
-            if ($program.text().includes(name)) {
-                cy.getDataCy(`${name}`)
+            if ($program.text().includes(programName)) {
+                cy.getDataCy(`${programName}`)
                     .first()
                     .then($el => {
                         const programId = $el[0].getAttribute("data-id");
