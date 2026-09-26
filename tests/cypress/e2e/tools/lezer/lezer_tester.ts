@@ -1,7 +1,7 @@
 import { testTree } from "@lezer/generator/dist/test"
 import { PARSER_FACTORIES } from '../../../../../static/js/lezer-parsers/language-packages';
 
-export function multiLevelTester(testName, code, expectedTree, from, to, language = 'en') {
+export function multiLevelTester(testName: string, code: string, expectedTree: string, from: number, to: number, language = 'en') {
 
     for (let i = from; i <= to; i++) {
         it(`${testName} for level ${i}`, () => {
@@ -11,7 +11,7 @@ export function multiLevelTester(testName, code, expectedTree, from, to, languag
     }
 }
 
-export function singleLevelTester(testName, code, expectedTree, level, language = 'en') {
+export function singleLevelTester(testName: string, code: string, expectedTree: string, level: number, language = 'en') {
     it(testName, () => {
         const parser = PARSER_FACTORIES[level](language);
         testTree(parser.parse(code), expectedTree);

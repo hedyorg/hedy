@@ -20,7 +20,7 @@ export function loginForAdmin() {
     cy.wait(500);
 }
 
-export function login(username, password) {
+export function login(username: string, password: string) {
     const submitLoginForm = () => {
         cy.intercept('POST', '/auth/login').as('loginUi')
         goToLogin();
