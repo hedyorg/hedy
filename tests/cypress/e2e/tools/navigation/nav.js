@@ -1,91 +1,74 @@
 import { loginForAdmin } from "../login/login";
 import { openAdventureView } from '../../tools/adventures/adventure.js';
 
-export function goToPage(page, options = {})
-{
-    if (typeof page === 'string' || page instanceof String)
-    {
-        if(page != "")
-        {
+export function goToPage(page, options = {}) {
+    if (typeof page === 'string' || page instanceof String) {
+        if (page != "") {
             cy.visit(page, options);
         }
 
     }
 }
 
-export function goToHome()
-{
+export function goToHome() {
     goToPage('/');
 }
 
-export function goToSignup()
-{
-    goToPage(Cypress.env('signup_page'));
+export function goToSignup() {
+    goToPage(Cypress.expose('signup_page'));
 }
 
-export function goToLogin()
-{
-    goToPage(Cypress.env('login_page'));
+export function goToLogin() {
+    goToPage(Cypress.expose('login_page'));
 }
 
-export function goToRecover()
-{
-    goToPage(Cypress.env('recover_page'));
+export function goToRecover() {
+    goToPage(Cypress.expose('recover_page'));
 }
 
-export function goToTeachersPage()
-{
-    goToPage(Cypress.env('teachers_page'));
+export function goToTeachersPage() {
+    goToPage(Cypress.expose('teachers_page'));
 }
 
-export function goToHedyPage(options = {})
-{
-    goToPage(Cypress.env('hedy_page'), options);
+export function goToHedyPage(options = {}) {
+    goToPage(Cypress.expose('hedy_page'), options);
 }
 
-export function goToHedyPageWithEnKeywords()
-{
-    goToPage(Cypress.env('hedy_english_keywords'));
+export function goToHedyPageWithEnKeywords() {
+    goToPage(Cypress.expose('hedy_english_keywords'));
 }
 
-export function goToAdventurePage()
-{
-    goToPage(Cypress.env('adventure_page'));
+export function goToAdventurePage() {
+    goToPage(Cypress.expose('adventure_page'));
 }
 
-export function goToProfilePage()
-{
-    goToPage(Cypress.env('profile_page'));
+export function goToProfilePage() {
+    goToPage(Cypress.expose('profile_page'));
 }
 
 export function goToHedyLevel(level) {
-    goToPage(`${Cypress.env('hedy_page')}/${level}#default`);
+    goToPage(`${Cypress.expose('hedy_page')}/${level}#default`);
 }
 
-export function goToAdminUsersPage()
-{
+export function goToAdminUsersPage() {
     loginForAdmin();
-    goToPage(Cypress.env('admin_users_page'));
+    goToPage(Cypress.expose('admin_users_page'));
 }
 
-export function goToAdminAdventuresPage()
-{
-   goToPage(Cypress.env('admin_adventures_page'));
+export function goToAdminAdventuresPage() {
+    goToPage(Cypress.expose('admin_adventures_page'));
 }
 
-export function goToAdminAchievementsPage()
-{
-   goToPage(Cypress.env('admin_achievements_page'));
+export function goToAdminAchievementsPage() {
+    goToPage(Cypress.expose('admin_achievements_page'));
 }
 
-export function goToAdminClassesPage()
-{
-   goToPage(Cypress.env('admin_classes_page'));
+export function goToAdminClassesPage() {
+    goToPage(Cypress.expose('admin_classes_page'));
 }
 
 // Must be logged in and able to edit an adventure
-export function goToEditAdventure()
-{
+export function goToEditAdventure() {
     goToTeachersPage();
 
     // takes the first adventures and goes to its edit page
@@ -118,24 +101,21 @@ export function goToEditAdventure()
     });
 }
 
-export function navigateHomeButton(button, path)
-{
+export function navigateHomeButton(button, path) {
     goToHome();
     cy.getDataCy(button).click();
     cy.location().should((loc) => {
-      expect(loc.pathname).equal(path);
+        expect(loc.pathname).equal(path);
     })
 }
 
-export function goToSubscribePage()
-{
-   goToPage(Cypress.env('subscribe_page'));
+export function goToSubscribePage() {
+    goToPage(Cypress.expose('subscribe_page'));
 }
 
-export function clickAdventureIndexButton()
-{
+export function clickAdventureIndexButton() {
     cy.getDataCy('dropdown_open_button').click();
 }
 
-export default {goToPage}
+export default { goToPage }
 

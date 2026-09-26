@@ -18,7 +18,7 @@ module.exports = defineConfig({
       return config
     },
   },
-  env: {
+  expose: {
     login_page: '/login',
     recover_page: '/recover',
     hedy_page: '/hedy',
@@ -34,7 +34,7 @@ module.exports = defineConfig({
     customize_class_page: '/for-teachers/customize-class/', // You should concatenate this with the class id e.g. /for-teachers/customize_class/<class id>
     stats_page: '/stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>
     logs_page: '/logs/class/', // You should concatenate this with the class id e.g. /logs/class/<class id>
-    grid_overview_page: '/grid_overview/class', 
+    grid_overview_page: '/grid_overview/class',
     signup_page: '/signup',
     profile_page: '/my-profile',
     admin_page: '/admin',
@@ -47,5 +47,6 @@ module.exports = defineConfig({
     subscribe_page: '/subscribe',
     learn_more_page: '/learn-more',
     privacy_page: '/privacy',
-  }
+  },
+  allowCypressEnv: false,
 });
