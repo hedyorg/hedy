@@ -10,6 +10,7 @@ on:
 
 jobs:
   update-weblate:
+    if: github.repository == 'hedyorg/hedy'
     runs-on: ubuntu-latest
 
     steps:
