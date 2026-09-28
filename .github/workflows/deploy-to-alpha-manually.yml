@@ -3,6 +3,7 @@ on:
   workflow_dispatch: {}
 jobs:
   deploy:
+    if: github.repository == 'hedyorg/hedy'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
