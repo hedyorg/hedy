@@ -96,8 +96,8 @@ export function initializeManualPage(_options: InitializeManualPageOptions) {
   /**
    * Watch the band between the reading line and the bottom third of the window, rather
    * than listening for scroll events: it also notices a heading that moves across the
-   * line without the window scrolling, when the banner above the text is dismissed or
-   * when a code block finishes loading and pushes the rest of the page down.
+   * line without the window scrolling, as when a code block finishes loading and pushes
+   * the rest of the page down.
    */
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {

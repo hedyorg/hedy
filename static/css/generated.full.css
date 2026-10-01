@@ -446297,9 +446297,20 @@ body[dir='rtl'] .right-hand-shadow {
 */
 
 /* The entry of the index for the heading being read, in the blue `.adv-selected` marks
-   the open adventure with. */
+   the open adventure with. Its piece of the line down the side of the index turns blue
+   with it. */
 
 .manual-index-link-active {
+  --tw-border-opacity: 1;
+  border-inline-start-color: rgb(43 108 176 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 248 255 / var(--tw-bg-opacity, 1));
+}
+
+/* On a row that folds, the line belongs to the row rather than to the entry inside it, so
+   it has to follow what that entry is doing. */
+
+.manual-index-row:has(.manual-index-link-active) {
   --tw-border-opacity: 1;
   border-inline-start-color: rgb(43 108 176 / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
@@ -447441,11 +447452,6 @@ div[class^="ace_incorrect_hedy_code"] {
 .hover\:text-yellow-700:hover {
   --tw-text-opacity: 1;
   color: rgb(183 121 31 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-yellow-900:hover {
-  --tw-text-opacity: 1;
-  color: rgb(116 66 16 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover {

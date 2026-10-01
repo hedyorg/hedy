@@ -8,30 +8,21 @@
   The index of the manual.
 
   The whole manual is one page, so every entry in here is an anchor into the text below
-  and the index is what you move around it with.  It is rendered twice -- as a column
-  beside the text on wide screens, and as a list that folds away above the text on narrow
-  ones -- so everything in here takes an `instance` to keep the ids of the two copies
-  apart.  It works as it stands with JavaScript turned off; the highlighting that follows
-  along as you read is added by `manual-index.ts`.
-
-  The anchors are built from the section key, the level number and the position of the
-  entry, never from the title: `slugify` keeps only `[a-z0-9_]`, so a title in Arabic,
-  Hebrew or Chinese slugifies to a single dash and every anchor on the page would point
-  at the same heading.
+  and the index is what you move around it with.
 #}
 {% macro manual_index(instance) %}
 {#
-  One entry of the index, and one of the mistakes nested under a level. Written out once
-  here rather than repeated on every link below.
+  One entry of the index, and one of the mistakes nested under a level.
 #}
-{% set entry = 'block flex-1 px-3 py-0.5 -ms-px border-s-2 border-transparent text-sm font-normal leading-snug text-blue-900 no-underline hover:bg-gray-200 ease-in transition duration-100' %}
-{% set entry_deep = 'block px-3 py-0.5 -ms-px border-s-2 border-transparent text-xs font-normal leading-snug text-blue-900 no-underline hover:bg-gray-200 ease-in transition duration-100' %}
-{% set fold_row = 'flex items-baseline gap-0.5 rounded-lg hover:bg-blue-200 ease-in transition duration-100' %}
-{% set fold_entry = 'block flex-1 px-2 py-0.5 -ms-px border-s-2 border-transparent text-base font-light leading-snug text-blue-900 no-underline' %}
+{% set entry = 'block flex-1 ps-2 pe-3 py-0.5 border-s-2 border-gray-300 text-sm font-normal leading-snug text-blue-900 no-underline hover:bg-gray-200 ease-in transition duration-100' %}
+{% set entry_deep = 'block ps-2 pe-3 py-0.5 border-s-2 border-gray-300 text-xs font-normal leading-snug text-blue-900 no-underline hover:bg-gray-200 ease-in transition duration-100' %}
+{% set fold_row = 'manual-index-row flex items-baseline gap-0.5 hover:bg-blue-200 ease-in transition duration-100' %}
+{% set fold_line = 'ps-2 border-s-2 border-gray-300' %}
+{% set fold_entry = 'block flex-1 px-2 py-0.5 text-base font-light leading-snug text-blue-900 no-underline' %}
 {% set fold_arrow = 'flex-none w-5 py-0.5 text-xs text-blue-900' %}
 {# The step in at each level of the index has to clear the arrow in front of the entry
    above it, which is why it is this wide. #}
-{% set nested = 'list-none m-0 p-0 ms-8 ps-2 border-s border-gray-300' %}
+{% set nested = 'list-none m-0 p-0' %}
 <nav aria-label="{{ _('on_this_page') }}" data-manual-index data-cy="manual_index">
     <ul class="list-none m-0 p-0">
         {% for section in sections %}
@@ -48,10 +39,10 @@
                     <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                 </button>
                 <a href="#manual-{{ section.key }}"
-                   class="block flex-1 px-2 py-0.5 border-s-2 border-transparent text-base font-light text-blue-900 no-underline"
+                   class="block flex-1 px-2 py-0.5 text-base font-light text-blue-900 no-underline"
                    data-cy="manual_index_section_{{ section.key }}">{{ section.title }}</a>
             </div>
-            <ul id="manual-index-{{ instance }}-{{ section.key }}" class="{{ nested }}"
+            <ul id="manual-index-{{ instance }}-{{ section.key }}" class="{{ nested }} ms-8"
                 data-manual-index-children>
                 {# The plain-text parts of a section. #}
                 {% for subsection in section.subsections %}
@@ -72,7 +63,7 @@
                 #}
                 {% for level in section.levels %}
                 <li data-manual-index-group data-manual-index-autofold>
-                    <div class="{{ fold_row }}">
+                    <div class="{{ fold_row }} {{ fold_line }}">
                         <button type="button" class="{{ fold_arrow }}"
                                 aria-expanded="false" aria-label="{{ level.title }}"
                                 aria-controls="manual-index-{{ instance }}-level-{{ level.level }}"
@@ -83,7 +74,7 @@
                            data-cy="manual_index_link">{{ level.title }}</a>
                     </div>
                     <ul id="manual-index-{{ instance }}-level-{{ level.level }}"
-                        class="{{ nested }} hidden" data-manual-index-children>
+                        class="{{ nested }} ms-4 hidden" data-manual-index-children>
                         {% for mistake in level.sections %}
                         {% if mistake.title %}
                         <li>
@@ -108,18 +99,6 @@
         {'label': _('teaching_materials'), 'url': '/for-teachers/teaching-materials'},
         {'label': _('background_information')}
       ], 'mt-2 mb-4') }}
-
-    <div id="manual-out-of-date-banner" class="mb-4 flex items-start justify-between gap-4 rounded-md border border-yellow-400 bg-yellow-100 p-4 text-yellow-800">
-        <div>{{ _('manual_out_of_date') }}</div>
-        <button
-            type="button"
-            class="text-yellow-700 hover:text-yellow-900"
-            aria-label="{{ _('close') }}"
-            _="on click add .hidden to #manual-out-of-date-banner"
-        >
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-    </div>
 
     <h1 class="my-5">{{ _('background_information') }}</h1>
 

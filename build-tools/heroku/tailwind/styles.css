@@ -673,9 +673,16 @@ body[dir='rtl'] .right-hand-shadow {
 */
 
 /* The entry of the index for the heading being read, in the blue `.adv-selected` marks
-   the open adventure with. */
+   the open adventure with. Its piece of the line down the side of the index turns blue
+   with it. */
 .manual-index-link-active {
   @apply bg-blue-100 border-s-blue-700;
+}
+
+/* On a row that folds, the line belongs to the row rather than to the entry inside it, so
+   it has to follow what that entry is doing. */
+.manual-index-row:has(.manual-index-link-active) {
+  @apply border-s-blue-700 bg-blue-100;
 }
 
 /* Inline code, light instead of the dark editor theme. The global `code` rule sets its
