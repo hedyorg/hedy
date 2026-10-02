@@ -250,10 +250,6 @@ adventures:
                     valgene {is} 1, 2, 3, 4, 5, makk
                     {print} valgene {at} {random}
                     ```
-            4:
-                story_text: |
-                    På dette nivået kan vi lage setninger med terningens verdi i setningen, med fnutter så klart.
-                    Denne gangen er ikke eksempelkoden helt ferdig. Kan du fullføre koden?
             5:
                 story_text: |
                     Du ha også lage en terning igjen på dette nivået ved å bruke `{if}`.
@@ -324,21 +320,6 @@ adventures:
                     You first make a list of the members of your family. Then choose '{at} {random}' from the list.
                 story_text_2: |
                     Føler du ikke for å ta oppvasken selv? Hack programmet til å fjerne navnet ditt fra listen.
-            4:
-                story_text: |
-                    Med fnutter kan du gjøre oppvaskeplanleggingen penere.
-                    Denne gangen er eksempelkoden ikke helt ferdig.
-
-                    Kan du fullføre koden ved å fylle inn det som mangler? Hver tomme plass må erstattes med et ord eller et symbol.
-
-                    Tips: Ikke glem fnutter!
-                example_code: |
-                    ```
-                    familie {is} mamma, pappa, Emma, Sofie
-                    {print} _ oppvasken blir tatt av _
-                    {sleep}
-                    {print} familie {at} _
-                    ```
             5:
                 story_text: |
                     Med `{if}`kan du nå ha det mer gøy med valg i programmet. Du kan få programmet til å respondere med det valget maskinen har tatt.
@@ -500,7 +481,6 @@ adventures:
         default_save_name: Sparebøsse
         description: Tell sparepengene dine!
         levels: {}
-
     print_command:
         levels: {}
     quizmaster:
