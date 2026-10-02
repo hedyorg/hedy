@@ -69,7 +69,7 @@
                     </div>
                     {% if adventure.example_code %}
                     <div class="border"></div>
-                    <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                    <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2" data-cid="{{adv_name}}_code">
                         {% if adventure.is_teacher_adventure %}{{ adventure.example_code|safe }}{% else %}{{
                         adventure.example_code|commonmark }}{% endif %}
                     </div>
@@ -85,7 +85,7 @@
                         </div>
                         {% if story.example_code %}
                         <div class="border"></div>
-                        <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2" data-cid="extra_{{adv_name}}_code{{loop.index}}">
                             {{ story.example_code|commonmark }}
                         </div>
                         {% endif %}

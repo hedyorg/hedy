@@ -76,7 +76,6 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
 
 export class HedyCodeMirrorEditor implements HedyEditor {
     private view: EditorView;
-    private readMode = new Compartment; // Configuration for the editor read mode
     private editorEvent = new EventEmitter<EditorEvent>({
         change: true,
         guttermousedown: true,
@@ -85,6 +84,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     });
     private currentDebugLine?: number;
     private incorrectLineMapping: Record<string, number> = {};
+
+     // Configuration for the editor read mode. We need to set readonly and editable 
+     // together for proper accessibility. readonly = !editable.
+    private readMode = {readonly: new Compartment(), editable: new Compartment()};
 
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, __: string = "ltr") {
         const levelStr = $(element).closest('[data-level]').attr('data-level');
@@ -165,7 +168,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     indentUnit.of(indentSize),
                     indentService.of(basicIndent),
                     monokai,
-                    this.readMode.of(EditorState.readOnly.of(isReadOnly)),
+                    this.readMode.readonly.of(EditorState.readOnly.of(isReadOnly)),
+                    this.readMode.editable.of(EditorView.editable.of(!isReadOnly)),
                     errorLineField,
                     debugLineField,
                     incorrectLineField,
@@ -173,7 +177,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     placeholders,
                     theLevel ? level.of(theLevel) : [],
                     keywordLanguage.of(lang),
-                    Prec.highest(variableHighlighter)
+                    Prec.highest(variableHighlighter),
+                    EditorView.contentAttributes.of({'aria-label': ClientMessages["edit_code"], 'id': "main_editor"}),
                 ]
             });
         } else { // the editor is a read only editor
@@ -190,19 +195,27 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 drawSelection(),
                 syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
                 monokai,
-                this.readMode.of(EditorState.readOnly.of(isReadOnly)),
+                this.readMode.readonly.of(EditorState.readOnly.of(isReadOnly)),
+                this.readMode.editable.of(EditorView.editable.of(!isReadOnly)),
                 placeholders,
                 theLevel ? level.of(theLevel) : [],
                 keywordLanguage.of(lang),
                 Prec.high(decorationsTheme),
                 Prec.highest(variableHighlighter)
             ];
+            // Attributes to set on the editable DOM component
+            const editorId = $(element).closest('[data-cid]').attr('data-cid');
+            let contentAttributes: Record<string, string> = editorId ? {"id": `${editorId}_editor`} : {};
 
             switch (editorType) {
                 case EditorType.CHEATSHEET:
                 case EditorType.EXAMPLE:
                     theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
-                    extensions.push(EditorView.theme(theme));
+                    contentAttributes["aria-label"] = ClientMessages["example_code"];
+                    extensions.push(
+                        EditorView.theme(theme),
+                        EditorView.contentAttributes.of(contentAttributes)
+                    );
                     break;
                 case EditorType.WORKBOOK:
                     theme["&"] = {
@@ -212,7 +225,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                         borderRadius: '4px',
                         marginRight: '5px'
                     }
-                    extensions.push([EditorView.theme(theme)])
+                    contentAttributes['aria-label'] = ClientMessages["workbook"];
+                    extensions.push([EditorView.theme(theme), EditorView.contentAttributes.of(contentAttributes)])
                     break;
                 case EditorType.COMMON_MISTAKES:
                     theme["&"] = {
@@ -222,11 +236,13 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                         borderRadius: '4px',
                         marginRight: '5px'
                     }
+                    contentAttributes['aria-label'] = ClientMessages["common_mistakes"];
                     extensions.push([
                         EditorView.theme(theme),
                         lineNumbers(),
                         highlightActiveLine(),
-                        highlightActiveLineGutter()
+                        highlightActiveLineGutter(),
+                        EditorView.contentAttributes.of(contentAttributes),
                     ]);
                     break;
                 case EditorType.VIEW_PROGRAM:
@@ -241,7 +257,14 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     theme[".cm-scroller"] = { "overflow": "auto" }
                     theme[".cm-gutters"] = { "borderRadius": '4px' }
                     theme[".cm-name"] = { "color": '#009975' }
-                    extensions.push([EditorView.theme(theme), lineNumbers(), highlightActiveLine(), highlightActiveLineGutter()]);
+                    contentAttributes['aria-label'] = ClientMessages["code"];
+                    extensions.push([
+                        EditorView.theme(theme),
+                        lineNumbers(),
+                        highlightActiveLine(),
+                        highlightActiveLineGutter(),
+                        EditorView.contentAttributes.of(contentAttributes),
+                    ]);
                     break;
             }
 
@@ -347,7 +370,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      */
     public set isReadOnly(isReadMode: boolean) {
         this.view.dispatch({
-            effects: this.readMode.reconfigure(EditorState.readOnly.of(isReadMode))
+            effects: [
+                this.readMode.readonly.reconfigure(EditorState.readOnly.of(isReadMode)),
+                this.readMode.editable.reconfigure(EditorView.editable.of(!isReadMode)),
+            ]
         });
     }
 

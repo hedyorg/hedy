@@ -224,16 +224,21 @@ function initializePreviewCodeBlocks(previewContainer: HTMLElement) {
         if (preview.classList.contains('show-copy-button') || preview.closest('.show-copy-button')) {
             const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
             const symbol = dir === 'rtl' ? '⇤' : '⇥';
+            const codeId = preview.closest('data-cid')?.getAttribute('data-cid');
             $('<button>')
                 .css({ fontFamily: 'sans-serif' })
                 .addClass('yellow-btn')
                 .attr('data-cy', 'paste_example_code_preview')
                 .attr('aria-label', `${ClientMessages['copy_to_editor']}`)
+                .attr('aria-description', `${ClientMessages['copy_code_to_editor_description']} ${code}`)
+                .attr('aria-controls', codeId ? `${codeId}_editor` : null)
                 .text(symbol)
                 .appendTo(buttonContainer)
                 .on('click', () => {
                     if (!theGlobalEditor?.isReadOnly) {
                         theGlobalEditor.contents = `${exampleEditor.contents}\n`;
+                        // Move focus to the editor.
+                        theGlobalEditor.focus();
                     }
                     stopit();
                 });
