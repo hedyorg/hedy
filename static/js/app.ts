@@ -1,7 +1,7 @@
 import JSZip from "jszip";
 import * as Tone from 'tone';
 import { initializeLoginLinks } from './auth';
-import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
+import { onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import { ClientMessages } from './client-messages';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { postJson, postNoResponse } from './comm';
@@ -283,7 +283,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       }
     }
     reconfigurePageBasedOnTab();
-    checkNow();
     theLocalSaveWarning.switchTab();
   });
 
@@ -405,12 +404,12 @@ export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: 
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('data-lang', theKeywordLanguage);
-      // If the request comes from HTMX initialize all directly
-      if (initializeAll) {
+      // If the request comes from HTMX initialize all directly, except for common mistakes:
+      // those pages hold dozens of examples, and building them all up front is SUPER SLOW.
+      if (initializeAll && !preview.classList.contains('common-mistakes')) {
         convertPreviewToEditor(preview, container, dir)
       } else {
-        // Only turn into an editor if the editor scrolls into view
-        // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+        // Only turn into an editor once the editor scrolls into view
         onElementBecomesVisible(preview, () => {
           convertPreviewToEditor(preview, container, dir)
         });

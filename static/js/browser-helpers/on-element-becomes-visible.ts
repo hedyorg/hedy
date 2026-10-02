@@ -1,30 +1,24 @@
-const SCROLL_HANDLERS = new Array<[HTMLElement, () => void]>();
+const HANDLERS = new Map<Element, () => void>();
 
-function isInView(elem: HTMLElement) {
-  var docViewTop = $(window).scrollTop()!;
-  var docViewBottom = docViewTop + $(window).height()!;
-  var elemTop = $(elem).offset()!.top;
-  return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
-}
-
-export function checkNow() {
-  for (let i = 0; i < SCROLL_HANDLERS.length; ) {
-    const [element, handler] = SCROLL_HANDLERS[i];
-    if (isInView(element)) {
-      handler();
-      SCROLL_HANDLERS.splice(i, 1);
-    } else {
-      i += 1;
-    }
+/**
+ * Watches elements with an IntersectionObserver rather than the window's scroll event,
+ * so it also notices an element that comes into view without the window scrolling:
+ * a tab being switched, a layout change above it, or a scroll inside a container.
+ *
+ * The margin starts the work a little before the element is on screen, so by the
+ * time the user gets there it is already done.
+ */
+const observer = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    const handler = HANDLERS.get(entry.target);
+    HANDLERS.delete(entry.target);
+    observer.unobserve(entry.target);
+    handler?.();
   }
-}
-
-$(window).on('scroll', checkNow);
+}, { rootMargin: '300px 0px' });
 
 export function onElementBecomesVisible(element: HTMLElement, handler: () => void) {
-  if (isInView(element)) {
-    handler();
-  } else {
-    SCROLL_HANDLERS.push([element, handler]);
-  }
+  HANDLERS.set(element, handler);
+  observer.observe(element);
 }
