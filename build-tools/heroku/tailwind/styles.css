@@ -665,6 +665,73 @@ body[dir='rtl'] .right-hand-shadow {
   @apply  bg-blue-100;
 }
 
+/*
+  The teacher manual.  Nearly all of that page is built out of Tailwind classes on the
+  elements themselves; these are the few places Tailwind cannot reach -- markup written by
+  the markdown filter, a state held in an ARIA attribute, a class JavaScript puts on and
+  takes off, and an inset that depends on the device.
+*/
+
+/* The entry of the index for the heading being read, in the blue `.adv-selected` marks
+   the open adventure with. Its piece of the line down the side of the index turns blue
+   with it. */
+.manual-index-link-active {
+  @apply bg-blue-100 border-s-blue-700;
+}
+
+/* On a row that folds, the line belongs to the row rather than to the entry inside it, so
+   it has to follow what that entry is doing. */
+.manual-index-row:has(.manual-index-link-active) {
+  @apply border-s-blue-700 bg-blue-100;
+}
+
+/* Inline code, light instead of the dark editor theme. The global `code` rule sets its
+   background with `!important`, so this has to as well; it wins on specificity. */
+.teacher-manual code {
+  @apply text-red-600 border border-gray-300;
+  @apply bg-gray-200 !important;
+}
+
+/* The markdown filter wraps the title of a mistake in a `p`, out of reach of the classes
+   on the heading around it. */
+.teacher-manual .mistake-title p {
+  font: inherit;
+  color: inherit;
+}
+
+/* One mistake told apart from the next. The macro that writes them is shared with the
+   "prepare a level" page, which separates them its own way. */
+.teacher-manual .mistake + .mistake {
+  @apply mt-7 pt-7 border-t border-gray-200;
+}
+
+/*
+  The arrow that folds a part of the index away turns to point at what it has opened.
+  Which way it points depends on both the state in `aria-expanded` and the direction the
+  page runs in, and the two have to combine; utilities would race each other.
+*/
+.teacher-manual [data-manual-index-toggle] i {
+  @apply transition-transform duration-150 ease-in;
+}
+
+.teacher-manual [data-manual-index-toggle][aria-expanded="true"] i {
+  @apply rotate-90;
+}
+
+[dir="rtl"] .teacher-manual [data-manual-index-toggle] i {
+  @apply rotate-180;
+}
+
+[dir="rtl"] .teacher-manual [data-manual-index-toggle][aria-expanded="true"] i {
+  @apply rotate-90;
+}
+
+/* Clear of the home indicator at the bottom of a phone screen, which Tailwind's spacing
+   scale knows nothing about. */
+.teacher-manual .manual-to-top {
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+}
+
 .not-selected-adv {
 }
 /* EDITOR WARNINGS & ERRORS */

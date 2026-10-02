@@ -9609,6 +9609,10 @@ code {
   max-height: calc(100dvh - 2rem);
 }
 
+.max-h-\[calc\(100vh-2rem\)\] {
+  max-height: calc(100vh - 2rem);
+}
+
 .max-h-dvh {
   max-height: 100dvh;
 }
@@ -446285,6 +446289,101 @@ body[dir='rtl'] .right-hand-shadow {
   background-color: rgb(235 248 255 / var(--tw-bg-opacity, 1));
 }
 
+/*
+  The teacher manual.  Nearly all of that page is built out of Tailwind classes on the
+  elements themselves; these are the few places Tailwind cannot reach -- markup written by
+  the markdown filter, a state held in an ARIA attribute, a class JavaScript puts on and
+  takes off, and an inset that depends on the device.
+*/
+
+/* The entry of the index for the heading being read, in the blue `.adv-selected` marks
+   the open adventure with. Its piece of the line down the side of the index turns blue
+   with it. */
+
+.manual-index-link-active {
+  --tw-border-opacity: 1;
+  border-inline-start-color: rgb(43 108 176 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 248 255 / var(--tw-bg-opacity, 1));
+}
+
+/* On a row that folds, the line belongs to the row rather than to the entry inside it, so
+   it has to follow what that entry is doing. */
+
+.manual-index-row:has(.manual-index-link-active) {
+  --tw-border-opacity: 1;
+  border-inline-start-color: rgb(43 108 176 / var(--tw-border-opacity, 1));
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 248 255 / var(--tw-bg-opacity, 1));
+}
+
+/* Inline code, light instead of the dark editor theme. The global `code` rule sets its
+   background with `!important`, so this has to as well; it wins on specificity. */
+
+.teacher-manual code {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(229 62 62 / var(--tw-text-opacity, 1));
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(237 242 247 / var(--tw-bg-opacity, 1)) !important;
+}
+
+/* The markdown filter wraps the title of a mistake in a `p`, out of reach of the classes
+   on the heading around it. */
+
+.teacher-manual .mistake-title p {
+  font: inherit;
+  color: inherit;
+}
+
+/* One mistake told apart from the next. The macro that writes them is shared with the
+   "prepare a level" page, which separates them its own way. */
+
+.teacher-manual .mistake + .mistake {
+  margin-top: 1.75rem;
+  border-top-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(237 242 247 / var(--tw-border-opacity, 1));
+  padding-top: 1.75rem;
+}
+
+/*
+  The arrow that folds a part of the index away turns to point at what it has opened.
+  Which way it points depends on both the state in `aria-expanded` and the direction the
+  page runs in, and the two have to combine; utilities would race each other.
+*/
+
+.teacher-manual [data-manual-index-toggle] i {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.teacher-manual [data-manual-index-toggle][aria-expanded="true"] i {
+  --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+[dir="rtl"] .teacher-manual [data-manual-index-toggle] i {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+[dir="rtl"] .teacher-manual [data-manual-index-toggle][aria-expanded="true"] i {
+  --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+/* Clear of the home indicator at the bottom of a phone screen, which Tailwind's spacing
+   scale knows nothing about. */
+
+.teacher-manual .manual-to-top {
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+}
+
 .not-selected-adv {
 }
 
@@ -447215,6 +447314,11 @@ div[class^="ace_incorrect_hedy_code"] {
   border-radius: 9999px;
 }
 
+.hover\:border-blue-300:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(144 205 244 / var(--tw-border-opacity, 1));
+}
+
 .hover\:\!bg-\[\#eee\]:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(238 238 238 / var(--tw-bg-opacity, 1)) !important;
@@ -447348,11 +447452,6 @@ div[class^="ace_incorrect_hedy_code"] {
 .hover\:text-yellow-700:hover {
   --tw-text-opacity: 1;
   color: rgb(183 121 31 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-yellow-900:hover {
-  --tw-text-opacity: 1;
-  color: rgb(116 66 16 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover {
@@ -447709,6 +447808,22 @@ div[class^="ace_incorrect_hedy_code"] {
 .checked\:focus\:after\:bg-transparent:focus:checked::after {
   content: var(--tw-content);
   background-color: transparent;
+}
+
+.focus-visible\:outline:focus-visible {
+  outline-style: solid;
+}
+
+.focus-visible\:outline-2:focus-visible {
+  outline-width: 2px;
+}
+
+.focus-visible\:outline-offset-2:focus-visible {
+  outline-offset: 2px;
+}
+
+.focus-visible\:outline-blue-700:focus-visible {
+  outline-color: #2b6cb0;
 }
 
 .active\:bg-\[\#cacfd1\]:active {
@@ -448807,6 +448922,10 @@ div[class^="ace_incorrect_hedy_code"] {
     gap: 2rem;
   }
 
+  .md\:p-12 {
+    padding: 3rem;
+  }
+
   .md\:p-6 {
     padding: 1.5rem;
   }
@@ -449009,10 +449128,6 @@ div[class^="ace_incorrect_hedy_code"] {
   margin-left: 0.75rem;
 }
 
-.ltr\:ml-8:where([dir="ltr"], [dir="ltr"] *) {
-  margin-left: 2rem;
-}
-
 .ltr\:ml-auto:where([dir="ltr"], [dir="ltr"] *) {
   margin-left: auto;
 }
@@ -449139,10 +449254,6 @@ div[class^="ace_incorrect_hedy_code"] {
 
 .rtl\:mr-3:where([dir="rtl"], [dir="rtl"] *) {
   margin-right: 0.75rem;
-}
-
-.rtl\:mr-8:where([dir="rtl"], [dir="rtl"] *) {
-  margin-right: 2rem;
 }
 
 .rtl\:mr-auto:where([dir="rtl"], [dir="rtl"] *) {
