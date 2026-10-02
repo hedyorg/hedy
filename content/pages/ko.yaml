@@ -429,7 +429,7 @@ teacher-guide:
                     {else} {print} '별로야!'
         -   title: 학생들은 여전히 양쪽의 인용문을 잊어버린다
             example:
-                error_text: "`if` 명령어를 사용하는 코드는 매우 길어질 수 있고 학생들은 따옴표'를 사용하는 것을 잊어버리는 경향이 있다."
+                error_text: "`{if}` 명령어를 사용하는 코드는 매우 길어질 수 있고 학생들은 따옴표'를 사용하는 것을 잊어버리는 경향이 있다."
                 error_code: |-
                     {if} 이름 {is} Hedy {print} 재밌다
                     {else} {print} '그냥 그래!
@@ -458,7 +458,7 @@ teacher-guide:
                 error_text: 예를 들어 이 학생 Hedy는 그의 모든 친구들에게는 재미있지만, 다른 반 친구들은 그렇지 않다고 말할 것이다.
                 error_code: "{if} 이름 {is} 철수, 길동, 영희 print  너는 재미있어  {else} {print} '저는 재미없어'"
                 solution_text: |-
-                    여기에서 `in` 명령어를 사용할 수 있다.. 더 높은 레벨에서 자세히 설명됩니다만, 5단계에서 사용 하실수 있습니다.
+                    여기에서 `{in}` 명령어를 사용할 수 있다.. 더 높은 레벨에서 자세히 설명됩니다만, 5단계에서 사용 하실수 있습니다.
                     다른 해결책은 if 명령어를 여러 개 사용하고 다른 명령어는 사용하지 않는 것이다. 단점은 다른 반 친구들에게 그들이 재미없다고 말하지 않는다는 것이다.
                 solution_code: |-
                     친구들 {is} 철수, 길동, 영희
@@ -706,7 +706,7 @@ teacher-guide:
                 solution_code: "{print} 2.5 + 2.5"
     -   level: "13"
         sections:
-        -   title: 학생들은 `and`와 `or`를 혼동한다
+        -   title: 학생들은 `{and}`와 `{or}`를 혼동한다
             example:
                 error_text: 두 명령은 유사하게 보일 수 있지만 기능은 매우 다릅니다.
                 error_code: |-
@@ -714,7 +714,7 @@ teacher-guide:
                     시간 {is} {ask} '너 시간은 괜찮지?'
                     {if} 게임 {is} '네' {or} 시간 {is} '네'
                         {print} '놀자!'
-                solution_text: 이 경우에는, 두 질문 모두에 대해 예 라고 대답해야 하며, 그래서 당신은 `and`를 사용해야 한다.
+                solution_text: 이 경우에는, 두 질문 모두에 대해 예 라고 대답해야 하며, 그래서 당신은 `{and}`를 사용해야 한다.
                 solution_code: |-
                     게임 {is} {ask} '너 나랑 같이 놀래?'
                     시간 {is} {ask} '너 시간은 괜찮지?'

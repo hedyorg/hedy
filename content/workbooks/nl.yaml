@@ -8,11 +8,11 @@ levels:
         exercises:
         -   contents: |-
                 ### Opdrachten
-                Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
+                Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `{print}`.
 
                 ### Tekst printen
-                Je hebt net op het bord de `print` opdracht gezien.
-                Een `print` opdracht print een woord uit, als het tussen aanhalingstekens staat. Bijvoorbeeld zo `print hallo`.
+                Je hebt net op het bord de `{print}` opdracht gezien.
+                Een `{print}` opdracht print een woord uit, als het tussen aanhalingstekens staat. Bijvoorbeeld zo `print hallo`.
                 #### Opdracht 1: Voorspel de uitvoer
             type: text
         -   code: "print Hallo allemaal"
@@ -51,7 +51,7 @@ levels:
 
                 ### Invoer laten zien
 
-                Alleen een ask slaat het antwoord op, maar laat het niet zien. Daarvoor heb je de opdracht `echo` nodig. Die laat het antwoord zien op het einde van de zin.
+                Alleen een ask slaat het antwoord op, maar laat het niet zien. Daarvoor heb je de opdracht `{echo}` nodig. Die laat het antwoord zien op het einde van de zin.
                 Bijvoorbeeld zo:
 
                 ```hedy
@@ -103,20 +103,20 @@ levels:
         -   contents: |-
                 #### Opdracht 5: Codes
 
-                We hebben tot nu toe 3 codes geleerd: `print`, `ask` en `echo`. Wat doen die? Leg het uit in je eigen woorden.
+                We hebben tot nu toe 3 codes geleerd: `{print}`, `{ask}` en `{echo}`. Wat doen die? Leg het uit in je eigen woorden.
             type: text
         -   answer: "Zet tekst op het scherm."
             lines: '1'
             type: define
-            word: het commando `print`
+            word: het commando `{print}`
         -   answer: "Vraagt om invoer van de gebruiker."
             lines: '1'
             type: define
-            word: het commando `ask`
+            word: het commando `{ask}`
         -   answer: "Herhaalt de invoer van de gebruiker."
             lines: '1'
             type: define
-            word: het commando `echo`
+            word: het commando `{echo}`
     2:
         intro: |-
             ### Variabelen
@@ -132,8 +132,8 @@ levels:
             contents: |-
                 ### Variabele opslaan en gebruiken
 
-                Je hebt net op het bord de `is` opdracht gezien.
-                Een `is` opdracht slaat iets op in de computer, en geeft het een naam. We noemen dat een variabelen.
+                Je hebt net op het bord de `{is}` opdracht gezien.
+                Een `{is}` opdracht slaat iets op in de computer, en geeft het een naam. We noemen dat een variabelen.
                 Wat in de variabele is opgeslagen noemen we de waarde van de variabele.
             type: text
         -   contents: |-
@@ -170,7 +170,7 @@ levels:
                 1. Omcirkel de plek waar een variabele wordt ingesteld
                 2. Omcirkel de plek waar de variabele wordt gebruikt
                 3. Trek een lijn tussen deze plekken
-                4. Zet de waarde (aan de rechterkant van de `is`) op de plek van het gebruik.
+                4. Zet de waarde (aan de rechterkant van de `{is}`) op de plek van het gebruik.
             type: text
         -   code: |-
                 naam is Mo
@@ -218,16 +218,16 @@ levels:
             contents: |-
                 ### Invoer vragen
 
-                Alleen tekst opslaan is nog niet krachtig. In level 1 hebben we de code `ask` gezien.
+                Alleen tekst opslaan is nog niet krachtig. In level 1 hebben we de code `{ask}` gezien.
 
-                Die code mag je nu combineren met een `is`. Dat gaat zo:
+                Die code mag je nu combineren met een `{is}`. Dat gaat zo:
             type: text
         -   code: |-
                 naam is ask Hoe heet jij?
                 print dus jij heet: naam
             contents: |-
                 ### Invoer laten zien
-                Je kan nu gewoon met een `print` het antwoord laten zien, zonder `echo`.
+                Je kan nu gewoon met een `{print}` het antwoord laten zien, zonder `{echo}`.
             type: text
         -   contents: |-
                 Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer: `dus jij heet: Maan`
@@ -268,16 +268,16 @@ levels:
             word: interactief
         -   contents: |-
                 #### Opdracht 6: Codes
-                We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit in je eigen woorden.
+                We hebben nieuwe codes geleerd: `{is}`, `{is} {ask}` samen. Wat doen die? Leg het uit in je eigen woorden.
             type: text
         -   answer: "Waarde (rechts van de is) opslaan in een variabele (links van de is)"
             lines: '1'
             type: define
-            word: het commando `is`
+            word: het commando `{is}`
         -   answer: "Vraagt om invoer van de gebruiker en die opslaan in de variabele links van de is."
             lines: '1'
             type: define
-            word: het commando `is ask`
+            word: het commando `{is} {ask}`
     3:
         intro: |-
             ### Lijsten en willekeurigheid
@@ -292,8 +292,8 @@ levels:
                 print Ik ga vandaag naar vrienden at random
             contents: |-
                 ### Variabelen
-                Je hebt net op het bord de `is` opdracht gezien met een lijst.
-                Net als bij een gewone variabele, slaan we iets op in een lijst met `is`.
+                Je hebt net op het bord de `{is}` opdracht gezien met een lijst.
+                Net als bij een gewone variabele, slaan we iets op in een lijst met `{is}`.
             type: text
         -   contents: |-
                 #### Opdracht 1: Omcirkel het juiste stukje code
@@ -318,7 +318,7 @@ levels:
                 1. Omcirkel de plek waar de lijst wordt ingesteld
                 2. Omcirkel de plek waar de lijst wordt gebruikt
                 3. Trek een lijn tussen deze plekken
-                4. Bij een `at` `random` mag je zelf willekeurig iets uit de lijst kiezen.
+                4. Bij een `{at}` `{random}` mag je zelf willekeurig iets uit de lijst kiezen.
             type: text
         -   code: |-
                 docenten is Hermans, Merbis, Bagci, Senkal
@@ -388,7 +388,7 @@ levels:
                 print het was een dieren at random
             contents: |-
                 Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
-                Dat doe je met een `add` en een `to` commando. Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
+                Dat doe je met een `{add}` en een `{to}` commando. Je kan ook iets uit een lijst verwijderen, met `{remove}` en `{from}`.
             type: text
         -   contents: |-
                 #### Opdracht 4: Goed of fout?
@@ -452,25 +452,25 @@ levels:
             word: toevoegen
         -   contents: |-
                 #### Opdracht 7: Codes
-                De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd.
+                De code `{is}` is in dit level veranderd, en we hebben ook nieuwe codes geleerd.
                 Wat doen die? Leg het uit in je eigen woorden.
             type: text
         -   answer: "Waarde (rechts van de is) opslaan in een variabele of lijst (links van de is)"
             lines: '1'
             type: define
-            word: "het commando `is` (Let op: `is` kan dus meerdere dingen doen!)"
-        -   answer: "Voeg iets aan een lijst toe. Het element om toe te voegen staat tussen `add` en `to`, en de lijst staat erachter."
+            word: "het commando `{is}` (Let op: `{is}` kan dus meerdere dingen doen!)"
+        -   answer: "Voeg iets aan een lijst toe. Het element om toe te voegen staat tussen `{add}` en `{to}`, en de lijst staat erachter."
             lines: '1'
             type: define
             word: "het commando `add to` "
-        -   answer: "Verwijdert iets uit een lijst. Het element om te verwijderen staat tussen `add` en `to`, en de lijst staat erachter."
+        -   answer: "Verwijdert iets uit een lijst. Het element om te verwijderen staat tussen `{add}` en `{to}`, en de lijst staat erachter."
             lines: '1'
             type: define
             word: "het commando `remove from` "
         -   answer: "Kiest een willekeurig element uit de lijst."
             lines: '1'
             type: define
-            word: "het commando `at random` "
+            word: "het commando `{at} {random}` "
         -   contents: |-
                 #### Wat vond jij?
             type: text
@@ -502,7 +502,7 @@ levels:
                 ### Aanhalingstekens
 
                 We hebben geleerd om aanhalingstekens te gebruiken, als iets letterlijk zo in beeld moet komen.
-                We gebruiken aanhalingstekens bij `print` en bij `ask`.
+                We gebruiken aanhalingstekens bij `{print}` en bij `{ask}`.
             type: text
         -   contents: |-
                 #### Opdracht 1: Maak de code af.
@@ -572,7 +572,7 @@ levels:
             type: MC-code
         -   contents: |-
                 #### Ask
-                Vergeet niet dat je ook bij `ask` aanhalingstekens gebruikt!
+                Vergeet niet dat je ook bij `{ask}` aanhalingstekens gebruikt!
 
                 #### Opdracht 3: Foutje?
                 Lees de codes goed! Welke zijn er goed of fout.
@@ -633,11 +633,11 @@ levels:
         -   answer: "Maakt het scherm leeg"
             lines: '1'
             type: define
-            word: het commando `clear`?
+            word: het commando `{clear}`?
         -   answer: "Verandert de kleur van de turtle"
             lines: '1'
             type: define
-            word: het commando `color`?
+            word: het commando `{color}`?
         -   contents: |-
                 #### Wat vond jij?
             type: text
@@ -664,8 +664,8 @@ levels:
                 if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
             contents: |-
                 ### Keuzes maken
-                Tot nu toe voerde Hedy altijd alle regels code uit. Vanaf nu kan je met een `if` bepaalde regels uitvoeren, alleen in bepaalde gevallen.
-                De code die je na `if` schrijft, noem je een conditie.
+                Tot nu toe voerde Hedy altijd alle regels code uit. Vanaf nu kan je met een `{if}` bepaalde regels uitvoeren, alleen in bepaalde gevallen.
+                De code die je na `{if}` schrijft, noem je een conditie.
                 In dit voorbeeld is de conditie `vriend is Jasmijn`.
             type: text
         -   contents: |-
@@ -795,7 +795,7 @@ levels:
                 #### Opdracht 5: Programmeerwoorden
                 We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
             type: text
-        -   answer: "Iets dat waar of niet waar is. Het staat achter de code `if`"
+        -   answer: "Iets dat waar of niet waar is. Het staat achter de code `{if}`"
             lines: '1'
             type: define
             word: conditie
@@ -806,11 +806,11 @@ levels:
         -   answer: "Bepaalt welke regel wordt uitgevoerd. Als de conditie waar is, wordt de code erachter uitgevoerd."
             lines: '1'
             type: define
-            word: het commando `if`
+            word: het commando `{if}`
         -   answer: "Bepaalt welke regel wordt uitgevoerd. Als de conditie niet waar is, wordt de code erachter uitgevoerd."
             lines: '1'
             type: define
-            word: het commando `else`
+            word: het commando `{else}`
         -   contents: |-
                 #### Wat vond jij?
             type: text
@@ -879,10 +879,10 @@ levels:
             type: output
         -   contents: |-
                 ### Opdracht 2: Rekenen met ask en variabelen
-                Je kan een rekensom ook opslaan in een variabele, vergelijken met een `ask` en een som uitvoeren in een `if`.
+                Je kan een rekensom ook opslaan in een variabele, vergelijken met een `{ask}` en een som uitvoeren in een `{if}`.
                 Dat gaan we nu oefenen.
                 Voorspel wat de uitvoer van deze programma's is.
-                Bij een `ask` en `random` mag je zelf kiezen wat het antwoord wordt, maar het moet wel kunnen!
+                Bij een `{ask}` en `{random}` mag je zelf kiezen wat het antwoord wordt, maar het moet wel kunnen!
             type: text
         -   code: |-
                 som = 2 * 5
@@ -1061,7 +1061,7 @@ levels:
             type: MC-code
         -   contents: |-
                 #### Opdracht 4: Programmeerwoorden
-                We hebben deze les een nieuw programmeerwoord geleerd: `repeat`.
+                We hebben deze les een nieuw programmeerwoord geleerd: `{repeat}`.
             type: text
         -   answer: "een regel code herhalen"
             lines: '1'
@@ -1155,7 +1155,7 @@ levels:
             type: output
         -   contents: |
                 ## If en else
-                Ook bij `if` en `else` moet je inspringen gebruiken. Zo kan je als een conditie waar of niet waar is, ook meerdere regels uitvoeren.
+                Ook bij `{if}` en `{else}` moet je inspringen gebruiken. Zo kan je als een conditie waar of niet waar is, ook meerdere regels uitvoeren.
 
                 ### Opdracht 3: Voorspel de uitvoer
 
@@ -1232,7 +1232,7 @@ levels:
             type: MC-code
         -   contents: |-
                 #### Opdracht 5: Schrijf de code
-                Je krijgt uitvoer in beeld, en jij moet er kloppende code bij schrijven. Gebruik een `repeat` waar het kan
+                Je krijgt uitvoer in beeld, en jij moet er kloppende code bij schrijven. Gebruik een `{repeat}` waar het kan
 
                 Kijk ook goed naar het aantal regels code dat je nodig hebt!
             type: text
