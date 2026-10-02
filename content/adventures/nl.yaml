@@ -1077,7 +1077,7 @@ adventures:
                 story_text: |-
                     **Voor elk item op mijn lijstje**
                     In dit level leren we een nieuwe code, de code `{for}`. Met `{for}` kun je alle dingen in een lijstje gebruiken.
-                    `{for}` mag meerdere regels gebruiken, net zoals de `{repeat}` en `{if}`, dus alle regels eronder moeten met spaties beginnen.
+                    `{for}` mag meerdere regels gebruiken, net zoals de `{repeat}` en `{if}`, dus alle regels eronder moeten met een tab of 4 spaties beginnen.
                 example_code: |
                     ```
                     dieren = hond, kat, papegaai
@@ -1151,13 +1151,13 @@ adventures:
                     Kopieer je eigen waarszeggerscode van het vorige level en voeg aanhalingstekens toe om de code ook in dit level te laten werken.
                 example_code: |
                     ```
-                    _ Voeg aanhalingstekens toe aan deze code _
+                    # Voeg aanhalingstekens toe aan deze code
                     {print} Hoi ik ben Hedy de Waarzegger!
                     voorspelling {is} {ask} Wat wil je weten?
                     {print}  Dit is je vraag:  voorspelling
                     antwoorden {is} ja, nee, misschien
                     {print} Mijn glazen bol zegt...
-                    {sleep} 2
+                    {sleep} _
                     {print} antwoorden {at} {random}
                     ```
             6:
@@ -1516,14 +1516,14 @@ adventures:
                     Kopieer je eigen spookhuiscode van het vorige level en voeg aanhalingstekens toe om de code ook in dit level te laten werken.
                 example_code: |
                     ```
-                    _ Voeg aanhalingstekens toe aan deze code _
+                    # Voeg aanhalingstekens toe aan deze code
                     {print} Ontsnap uit het spookhuis!
                     {print} Voor je staan drie deuren...
                     keuze {is} {ask} Welke deur kies je?
                     {print} Je koos deur keuze
                     monsters {is} een zombie, een vampier, NIKS JE ONTSNAPT
                     {print} Jij ziet...
-                    {sleep}
+                    {sleep} _
                     {print} monsters {at} {random}
                     ```
             5:
@@ -1985,7 +1985,7 @@ adventures:
                     Kijk maar naar het voorbeeld.
 
                     ### Opdracht
-                    Voeg een `{else}` commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspringen doe je door de regel te starten met 4 spaties.
+                    Voeg een `{else}` commando toe aan de voorbeeldcode. Maak een blok van de regels code door in te springen. Inspringen doe je door de regel te starten met een tab of 4 spaties.
                 example_code: |
                     ```
                     naam = {ask} 'Hoe heet je?'
@@ -3054,13 +3054,16 @@ adventures:
                     In het voorbeeldje hieronder zie je wat er gebeurt als je de hoge komma's wel gewoon blijft gebruiken.
                 example_code_2: |
                     ```
-                    _ Let op dit voorbeeld laat zien hoe het NIET moet _
+                    # Let op dit voorbeeld laat zien hoe het NIET moet
                     {print} 'Daar rijden twee oma's in hun auto's '
                     {print} 'Zouden zij liever 's middags of 's avonds rijden?'
 
-                    _ Dit is hoe het WEL moet _
+                    # Dit is hoe het WEL moet
                     {print} "Daar rijden twee oma's in hun auto's"
                     {print} "Zouden zij liever 's middags of 's avonds rijden?"
+
+                    # Probeer nu zelf een regel code te schrijven met aanhalingstekens
+                    _
                     ```
     random_command:
         default_save_name: willekeurig
@@ -3120,7 +3123,7 @@ adventures:
             9:
                 story_text: |
                     In dit level kun je meerdere regels code herhalen met slechts één `{repeat}` commando.
-                    Dit doe je door deze regels te laten beginnen met vier spaties.
+                    Dit doe je door deze regels te laten beginnen met een tab of vier spaties.
                     Dit noemen we ook wel: "de regels **inspringen**". De ingesprongen regels vormen dan samen een blok van code dat herhaald zal worden.
                     Ook als je maar één regel wilt herhalen, zal je die moeten inspringen.
 
@@ -3263,7 +3266,7 @@ adventures:
                 story_text: "Ook in het restaurant moet je aanhalingstekens gebruiken bij de commando's `{print}` en `{ask}` .\n\n### Opdracht\nKun jij de voorbeeldcode aan de praat krijgen door aanhalingstekens toe te voegen? Let op: variabelen moeten niet binnen de aanhalingstekens staan. \nVoeg daarna `{clear}` commando's toe om steeds maar 1 regel tekst in je uitvoerscherm te hebben.\n\n### Opdracht 2\nKopieer je eigen restaurantcode van het vorige level en zet aanhalingstekens op de juiste plaats. Voeg ook `{clear}` commando's toe.\n"
                 example_code: |
                     ```
-                    _ Voeg aanhalingstekens toe aan deze code _
+                    # Voeg aanhalingstekens toe aan deze code
                     {print} Welkom bij Hedys restaurant!
                     {print} Vandaag serveren we pizza of lasagna.
                     eten {is} {ask} Wat wil je eten?
@@ -3273,6 +3276,8 @@ adventures:
                     drank {is} {ask} Wat wil je erbij drinken?
                     {print} Bedankt voor de bestelling.
                     {print} Jouw  eten  en  drank  komen er zo aan!
+                    {sleep} _
+                    {print} Uw bestelling is klaar! Asltublieft!
                     ```
             6:
                 story_text: |

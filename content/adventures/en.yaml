@@ -274,7 +274,7 @@ adventures:
                         {print} 'Robin goes home'
                     ```
                 story_text_2: |
-                    By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.
+                    By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask multiple questions and respond to the combination of answers.
 
                     ### Exercise 1
                     Look at the example code and finish it. Then add at least 2 more `{if}` codes with `{and}` or `{or}`.
@@ -2142,7 +2142,7 @@ adventures:
                 story_text: |-
                     ## For
                     In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
+                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with a tab or 4 spaces.
                 example_code: |
                     ```
                     animals = dog, cat, blobfish
@@ -2271,13 +2271,13 @@ adventures:
                     Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
+                    # Add the quotation marks to this code
                     {print} I'm Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
                     {print} This is your question:  question
                     answers {is} yes, no, maybe
                     {print} My crystal ball says...
-                    {sleep} 2
+                    {sleep} _
                     {print} answers {at} {random}
                     ```
                 answer_code: |
@@ -2876,14 +2876,14 @@ adventures:
                     Go back to the previous level and copy your haunted house code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    _ Add quotation marks to this code _
+                    # Add quotation marks to this code
                     {print} Escape from the haunted house!
                     {print} There are 3 doors in front of you...
                     choice {is} {ask} Which door do you choose?
                     {print} You picked door ... choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
                     {print} You see...
-                    {sleep}
+                    {sleep} _
                     {print} monsters {at} {random}
                      ```
                 answer_code: |
@@ -2894,7 +2894,7 @@ adventures:
                     {print} 'You picked door ...' choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
                     {print} 'You see...'
-                    {sleep}
+                    {sleep} 3
                     {print} monsters {at} {random}
                     ```
             5:
@@ -3831,7 +3831,7 @@ adventures:
                     Check out the example code.
 
                     ### Exercise
-                    Add an `{else}` command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
+                    Add an `{else}` command to the example code. Make a block of line using indentation. You do this by starting each line with a tab or 4 spaces.
                 example_code: |
                     ```
                     name = {ask} 'What is your name?'
@@ -5454,12 +5454,16 @@ adventures:
                     Check out the example code to see the wrong way of using apostrophes.
                 example_code_2: |
                     ```
-                    _ This is the wrong way of using apostrophes _
+                    #This is the wrong way of using apostrophes
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
-                    _ This is how you solve it _
+
+                    #This is how you solve it
                     {print} "I'm babysitting my sister's kids"
                     {print} "What's more fun than that?"
+
+                    # Try it out! Create a line of code with quotationmarks below
+                    _
                     ```
                 answer_code: |
                     Own answer
@@ -5552,7 +5556,7 @@ adventures:
                     In this level you can repeat multiple lines of code with only 1 `{repeat}` command.
                     You do this by making a block of lines that you want to repeat.
                     The lines in this block will need **indentation** .
-                    That means putting four spaces at the beginning of each line. You will also have to indent when you want to create a block of just one line.
+                    That means putting a tab or 4 spaces at the beginning of each line. You will also have to indent when you want to create a block of just one line.
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -5766,7 +5770,7 @@ adventures:
                     Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
+                    # Add the quotation marks to this code
                     {print} Welcome to Restaurant Chez Hedy!
                     {print} Today we are serving pizza or lasagna.
                     food {is} {ask} What would you like to eat?
@@ -5776,6 +5780,8 @@ adventures:
                     drinks {is} {ask} What would you like to drink with that?
                     {print} Thank you for your order.
                     {print} Your  food  and  drinks  will be right there!
+                    {sleep} _
+                    {print} Your food is ready! Here you go!
                     ```
                 answer_code: |
                     ```
@@ -5788,6 +5794,8 @@ adventures:
                     drinks {is} {ask} 'What would you like to drink with that?'
                     {print} 'Thank you for your order.'
                     {print} 'Your  food  and  drinks  will be right there!'
+                    {sleep} 3
+                    {print} 'Your food is ready! Here you go!'
                     ```
             6:
                 story_text: |
