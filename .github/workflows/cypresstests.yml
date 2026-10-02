@@ -13,6 +13,7 @@ on:
 jobs:
   # This identifier gets used in .mergify.yml
   cypress:
+    if: github.repository == 'hedyorg/hedy'
     runs-on: ubuntu-latest
 
     steps:

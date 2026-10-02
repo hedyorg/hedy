@@ -113,7 +113,7 @@ export function initializeFormSubmits() {
       if (response['first_time']) {
         return afterLogin({"first_time": true});
       }
-      return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
+      return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher'] || false});
     });
   });
 

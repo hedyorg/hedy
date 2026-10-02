@@ -11,7 +11,7 @@ on:
 jobs:
   deploy:
     # Deploy ONLY IF the tests actually succeeded (if they failed, we don't wanna deploy)
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.repository == 'hedyorg/hedy' && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
