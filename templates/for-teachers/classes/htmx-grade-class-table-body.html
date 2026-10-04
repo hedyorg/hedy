@@ -28,7 +28,7 @@
             </div>
             <div class="grow-0 grid sliding-content-closed ease-in transition-all duration-300 min-h-0 max-h-80 w-full" id="program_{{ program.program_id }}">
                 <div class="turn-pre-into-ace  overflow-auto rounded-md">
-                    <pre level="{{ program.level }}" class="view-program min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
+                    <pre level="{{ program.level }}" class="view-program defer-editor min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
                     <div class="flex flex-row gap-5 items-center">
                         <a href="/hedy/{{ program.program_id }}/view/redesign" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
                         {% if not program.is_modified %}
