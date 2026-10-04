@@ -403,9 +403,8 @@ class ForTeachersModule(WebsiteModule):
                                page_title='All workbooks',
                                workbooks=workbooks)
 
-    @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
-    @route("/manual/<section_key>", methods=["GET"])
-    def get_teacher_manual(self, section_key):
+    @route("/manual", methods=["GET"])
+    def get_teacher_manual(self):
         translations = hedyweb.PageTranslations("for-teachers")
         content = translations.get_page_translations(g.lang)
         english = translations.get_page_translations('en')
@@ -416,58 +415,58 @@ class ForTeachersModule(WebsiteModule):
         guide = content['teacher-guide']
         english_guide = english['teacher-guide']
 
-        # Weblate translates the value of `key` along with everything else, so in several
-        # languages this section is called `häufige_fehler` or `erreurs_courantes`. Look the
-        # requested key up in both the translated and the English guide, and address the
-        # section by the position the two agree on. The nav below then links to the English
-        # keys, so a manual URL means the same thing in every language.
-        def index_of(sections, key):
-            return next((i for i, section in enumerate(sections)
-                         if isinstance(section, dict) and section.get('key') == key), None)
+        sections = []
+        for i, section in enumerate(guide):
+            if not isinstance(section, dict):
+                continue
 
-        index = index_of(guide, section_key)
-        if index is None:
-            index = index_of(english_guide, section_key)
-        if index is None or index >= len(guide):
-            index = 0
+            # Weblate translates the value of `key` along with everything else, so in several
+            # languages a section is called `häufige_fehler` or `erreurs_courantes`. The anchors
+            # are built from the English key instead, so that a link into the manual points at
+            # the same section in every language.
+            key = english_guide[i].get('key', '') if i < len(english_guide) else section.get('key', '')
+            key = key or f'section-{i + 1}'
 
-        section_titles = [
-            (english_guide[i].get('key', '') if i < len(english_guide) else section.get('key', ''),
-             section.get('title', ''))
-            for i, section in enumerate(guide)
-        ]
-        section_key = section_titles[index][0] if index < len(section_titles) else section_key
-        current_section = guide[index]
+            # Some sections have 'subsections', others have 'levels'. We're going to treat them
+            # ~the same. Give levels a 'title' field as well (doesn't have it in the YAML).
+            subsections = section.get('subsections') or []
+            for subsection in subsections:
+                subsection.setdefault('title', '')
+            # The per-level entries are rebuilt from scratch rather than read off this section,
+            # so that every language gets the same 18 levels with English as a fallback, and so
+            # that the titles below are not written back into the cached YAML.
+            levels = teacher_guide_levels(g.lang) if section.get('levels') else []
+            for level in levels:
+                level['title'] = gettext('level') + ' ' + str(level['level'])
 
-        if not current_section:
+            sections.append(dict(
+                key=key,
+                title=section.get('title', ''),
+                intro=section.get('intro'),
+                subsections=subsections,
+                levels=hedy_content.deep_translate_keywords(levels, g.keyword_lang),
+            ))
+
+        if not sections:
             return utils.error_page(error=404, ui_message=gettext("page_not_found"))
 
-        intro = current_section.get('intro')
-
-        # Some pages have 'subsections', others have 'levels'. We're going to treat them ~the same.
-        # Give levels a 'title' field as well (doesn't have it in the YAML).
-        subsections = current_section.get('subsections', [])
-        for subsection in subsections:
-            subsection.setdefault('title', '')
-        # The per-level entries are rebuilt from scratch rather than read off this section,
-        # so that every language gets the same 18 levels with English as a fallback, and so
-        # that the titles below are not written back into the cached YAML.
-        levels = teacher_guide_levels(g.lang) if current_section.get('levels') else []
-        for level in levels:
-            level['title'] = gettext('level') + ' ' + str(level['level'])
-
-        subsection_titles = [x.get('title', '') for x in subsections + levels]
-        levels = hedy_content.deep_translate_keywords(levels, g.keyword_lang)
         return render_template("teacher-manual.html",
                                current_page="teacher-manual",
+                               javascript_page_options=dict(page='teacher-manual'),
                                page_title=page_title,
-                               section_titles=section_titles,
-                               section_key=section_key,
-                               section_title=current_section['title'],
-                               intro=intro,
-                               subsection_titles=subsection_titles,
-                               subsections=subsections,
-                               levels=levels)
+                               sections=sections)
+
+    @route("/manual/<section_key>", methods=["GET"])
+    def get_teacher_manual_section(self, section_key):
+        """Send the links to what used to be a page per section to their place on the manual.
+
+        The anchors carry the English keys the old pages were addressed by, so a link that
+        was handed out before the manual became one page lands on the same text. A key we
+        do not recognise -- a translated one, from a browser that kept it -- simply opens
+        the manual at the top.
+        """
+        anchor = f'#manual-{section_key}' if re.fullmatch(r'[A-Za-z0-9_-]+', section_key) else ''
+        return redirect(f'/for-teachers/manual{anchor}')
 
     @route("/class/all", methods=["GET"])
     @requires_teacher

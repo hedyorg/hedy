@@ -584,10 +584,6 @@ adventures:
                     ```
                     escolhas {is} _
                     ```
-            4:
-                story_text: |
-                    In this level we can make sentences with the die value in the sentence, with quotes of course.
-                    This time the sample code is not quite complete. Can you finish the code?
             5:
                 story_text: |
                     You can also make a die again in this level using the `{if}`.
@@ -668,21 +664,6 @@ adventures:
                     Então, pense em uma tarefa que precisa ser feita e deixe que o computador decida quem terá de fazê-la, usando o comando `{at} {random}`.
 
                     **Extra** Não está a fim de lavar a louça? Hackeie o programa removendo o seu próprio nome da lista com o comando `{remove}``{from}`.
-            4:
-                story_text: |
-                    Com as aspas simples você pode deixar seu planejamento de lavagem de louça mais bonito.
-                    Desta vez, o código de exemplo não está completo.
-
-                    Você pode completar o código preenchendo os espaços em branco? Cada espaço em branco deve ser substituído por uma palavra de símbolo.
-
-                    Dica: Não se esqueça das aspas!
-                example_code: |
-                    ```
-                    pessoas {is} mãe, pai, Eva, Sofia
-                    {print} _ os pratos são limpos por _
-                    {sleep}
-                    {print} pessoas {at} _
-                    ```
             5:
                 story_text: |
                     Com o `{if}` agora você pode se divertir mais com a escolha do programa. Você pode fazer com que seu programa responda à escolha que o computador fez.
@@ -1619,9 +1600,6 @@ adventures:
                     jogadores = _
                     {for} _
                     ```
-            4:
-                example_code: "```\nescolhas {is} pedra, papel, tesoura\n{print} _O computador escolhe..._ escolhas {at} {random}\n```\n"
-                story_text: "Neste nível, podemos continuar programando o jogo de pedra, papel e tesoura. Mas se quiser adicionar texto, você terá de usar aspas aqui também.\n### Exercício\nPreencha as lacunas com aspas. Note que a variável `escolhas` deve ficar fora das aspas.\n"
             5:
                 example_code: "```\nopções {is} pedra, papel, tesoura\nescolha_do_computador {is} _\nescolha {is} _\n{print} 'você escolheu ' _\n{print} 'o computador escolheu ' _\n{if} _ {is} _ {print} 'empatado!' {else} {print} 'sem empate'\n```\n\nPreencha as lacunas com o código certo para ver se há empate.\n"
                 story_text: "Neste nível, podemos determinar se houve ou não um empate. Para tanto, você precisa do novo comando `{if}`.\n\n### Exercício\nComplete o código preenchendo as lacunas:\n* Deixe o computador escolher aleatoriamente\n* Pergunte ao(à) jogador(a) qual opção ele(a) quer escolher\n* Preencha as linhas 4 e 5 com as variáveis corretas\n* Complete a linha 6 para que Hedy possa checar se houve ou não um empate.\n"

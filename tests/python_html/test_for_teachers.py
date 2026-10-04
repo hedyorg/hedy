@@ -67,8 +67,10 @@ class TestPublicPages:
             ('/for-teachers/workbooks/999', 404),
             ('/for-teachers/workbooks/notanumber', 404),
             ('/for-teachers/manual', 200),
-            ('/for-teachers/manual/intro', 308),
-            ('/for-teachers/manual/this_does_not_exist', 200),
+            # The manual used to be a page per section. Those URLs now point into the one
+            # page it has become, and a key we do not recognise opens it at the top.
+            ('/for-teachers/manual/intro', 302),
+            ('/for-teachers/manual/this_does_not_exist', 302),
         ]
         for url, expected in cases:
             response = client.get(url, check=False)
@@ -80,8 +82,9 @@ class TestPublicPages:
                     assert context['page_title']
                     assert context['workbooks']
                 else:
-                    assert context['section_title']
-                    assert context['section_key'] in ('intro', 'this_does_not_exist')
+                    assert [section['key'] for section in context['sections']] == [
+                        'intro', 'common_mistakes']
+                    assert all(section['title'] for section in context['sections'])
 
     def test_teaching_materials_pages(self, client, template_variables):
         cases = [
@@ -154,20 +157,30 @@ class TestPublicPages:
 
     def test_teacher_manual_section_resolves_in_every_language(self, client, template_variables):
         """Weblate translates the section keys, so a manual URL has to work in any language."""
-        cases = [
-            '/for-teachers/manual/common_mistakes?language=en',
-            '/for-teachers/manual/common_mistakes?language=de',
-            # The German file calls this section 'häufige_fehler'; that URL keeps working.
-            '/for-teachers/manual/h%C3%A4ufige_fehler?language=de',
+        # A link to what used to be a section's own page lands on that section of the one
+        # page, addressed by its English key whatever the language of the content is.
+        redirects = [
+            ('/for-teachers/manual/common_mistakes?language=en', '#manual-common_mistakes'),
+            ('/for-teachers/manual/common_mistakes?language=de', '#manual-common_mistakes'),
+            # The German file calls this section 'häufige_fehler'. That key is not one we
+            # hand out, so it opens the manual at the top rather than failing.
+            ('/for-teachers/manual/h%C3%A4ufige_fehler?language=de', '/for-teachers/manual'),
         ]
-        for url in cases:
-            client.get(url)
+        for url, expected in redirects:
+            response = client.get(url, check=False, follow_redirects=False)
+            assert response.status_code == 302, url
+            assert response.headers['Location'].endswith(expected), url
+
+        for language in ('en', 'de'):
+            client.get(f'/for-teachers/manual?language={language}')
             context = template_variables[-1]
-            assert context['levels'], url
+            # The anchors are built from the English keys in every language.
+            assert [section['key'] for section in context['sections']] == [
+                'intro', 'common_mistakes'], language
+            mistakes = context['sections'][1]
+            assert mistakes['levels'], language
             # English content fills the gaps a translation has not caught up with yet.
-            assert context['levels'][0]['concepts_and_changes'], url
-            # And the nav links to the English keys, whatever the content language is.
-            assert [key for key, _ in context['section_titles']] == ['intro', 'common_mistakes'], url
+            assert mistakes['levels'][0]['concepts_and_changes'], language
         _clear_session(client)
 
 # ---------------------------------------------------------------------------
