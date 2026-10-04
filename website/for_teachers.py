@@ -732,9 +732,7 @@ class ForTeachersModule(WebsiteModule):
         Builds the student adventures dictionary for grading.
         Args:
             Class: The class object
-            students: List of student IDs
-            class_adventures_formatted: Adventures formatted for the class
-            adventure_names: Mapping of adventure names
+            user: The teacher looking at the page
             levels: List of levels to include
         Returns:
             student_adventures: dict
@@ -742,7 +740,11 @@ class ForTeachersModule(WebsiteModule):
         students, class_adventures_formatted, adventure_names = (
             self.get_class_information(Class, user)
         )
-        student_adventures = {}
+
+        # Collect the rows first and look up their ticked state in one go afterwards. A class
+        # can easily have hundreds of submitted programs, and reading them one at a time is a
+        # round trip per row.
+        rows = []
         for student in students:
             all_programs = self.db.last_programs_for_user_all_levels(student)
             for level in levels:
@@ -769,32 +771,30 @@ class ForTeachersModule(WebsiteModule):
                         student_adventure_id = (
                             f"{student}-{program['adventure_name']}-{level}"
                         )
-                        current_adventure = self.db.student_adventure_by_id(
-                            student_adventure_id
-                        )
-                        if not current_adventure:
-                            current_adventure = self.db.store_student_adventure(
-                                dict(
-                                    id=f"{student_adventure_id}",
-                                    ticked=False,
-                                    program_id=program["id"],
-                                )
-                            )
-                        current_program = dict(
-                            level=str(program["level"]),
-                            name=name,
-                            program_id=program["id"],
-                            code=program["code"],
-                            student=student,
-                            adventure_name=program["adventure_name"],
-                            ticked=current_adventure["ticked"],
-                            is_modified=program.get("is_modified"),
-                            timestamp=program["date"],
-                            date=utils.localized_date_format(
-                                program["date"], only_date=True
-                            ),
-                        )
-                        student_adventures[student_adventure_id] = current_program
+                        rows.append((student_adventure_id, student, name, program))
+
+        ticked_adventures = self.db.student_adventures_by_ids([row[0] for row in rows])
+
+        student_adventures = {}
+        for student_adventure_id, student, name, program in rows:
+            # A row without a record has never been ticked. One is written when a teacher
+            # actually ticks the box, so that looking at this page does not write to the
+            # database once per program shown.
+            current_adventure = ticked_adventures.get(student_adventure_id)
+            student_adventures[student_adventure_id] = dict(
+                level=str(program["level"]),
+                name=name,
+                program_id=program["id"],
+                code=program["code"],
+                student=student,
+                adventure_name=program["adventure_name"],
+                ticked=current_adventure["ticked"] if current_adventure else False,
+                is_modified=program.get("is_modified"),
+                timestamp=program["date"],
+                date=utils.localized_date_format(
+                    program["date"], only_date=True
+                ),
+            )
         return student_adventures
 
     def filter_student_adventures(self, student_adventures: dict, filter_student: str, filter_adventure: str):
@@ -1472,17 +1472,27 @@ class ForTeachersModule(WebsiteModule):
         level = request.args.get("level")
         student_name = request.args.get("student", type=str)
         adventure_name = request.args.get("adventure_name", type=str)
+        program_id = request.args.get("program_id", type=str)
         student_adventure_id = f"{student_name}-{adventure_name}-{level}"
         student_adventure = self.db.student_adventure_by_id(student_adventure_id)
-        if not student_adventure:
+        if student_adventure:
+            student_adventure = self.db.update_student_adventure(
+                student_adventure_id, student_adventure["ticked"]
+            )
+        elif program_id:
+            # Looking at the grading page no longer writes a record per program shown, so
+            # the first tick of a box is what creates one.
+            student_adventure = self.db.store_student_adventure(
+                dict(id=student_adventure_id, ticked=True, program_id=program_id)
+            )
+        else:
             return utils.error_page(error=404, ui_message=gettext("no_programs"))
-        self.db.update_student_adventure(student_adventure_id, student_adventure["ticked"])
-        student_adventure = self.db.student_adventure_by_id(student_adventure_id)
         return jinja_partials.render_partial(
             "for-teachers/classes/htmx-grade-class-checkbox.html",
             is_ticked=student_adventure["ticked"],
             student=student_name,
             adventure_name=adventure_name,
+            program_id=student_adventure.get("program_id", program_id),
             level=level,
             class_id=class_id
         )

@@ -1,4 +1,5 @@
 """Tests for the for_teachers.py endpoints."""
+import time
 import uuid
 import pytest
 from flask import g, session
@@ -1228,6 +1229,9 @@ class TestForTeachersHeavyInternalMethods:
         def student_adventure_by_id(self, adventure_id):
             return self.student_adventures.get(adventure_id)
 
+        def student_adventures_by_ids(self, ids):
+            return {id: self.student_adventures[id] for id in ids if id in self.student_adventures}
+
         def store_student_adventure(self, adventure):
             self.student_adventures[adventure['id']] = adventure
             return adventure
@@ -1681,3 +1685,186 @@ class TestForTeachersHeavyInternalMethods:
 
         custom = mod.db.get_class_customizations('cid')
         assert isinstance(custom, dict)
+
+
+# ---------------------------------------------------------------------------
+# GET /for-teachers/class/<class_id>/grade  (load / performance)
+# ---------------------------------------------------------------------------
+
+def _seed_class_with_submitted_programs(given, students, programs_per_student, teacher=None):
+    """Create a class whose students each have `programs_per_student` submitted programs.
+
+    Every program gets its own (level, adventure) pair, because the grading page only
+    shows the newest submitted program per level and adventure, so reusing a pair would
+    collapse two programs into one row.
+
+    Returns (class, student usernames, expected number of grading rows).
+    """
+    teacher = teacher or given.logged_in_as_new_teacher()
+    cls = given.a_class(teacher['username'])
+
+    adventures_per_level = hedy_content.adventures_order_per_level()
+    levels = sorted(adventures_per_level)
+    # Spread the programs over the levels first, so a class looks like a class that has
+    # worked its way up through the levels instead of one that submitted everything in
+    # level 1.
+    slots = [
+        (level, adventures_per_level[level][round_])
+        for round_ in range(max(len(adventures) for adventures in adventures_per_level.values()))
+        for level in levels
+        if round_ < len(adventures_per_level[level])
+    ]
+    assert len(slots) >= programs_per_student, 'not enough adventures to give every program its own row'
+
+    usernames = []
+    for index in range(students):
+        student = given.a_student_account(username=_unique_username(f'grade{index}_'))
+        given.db.add_student_to_class(cls['id'], student['username'])
+        usernames.append(student['username'])
+        for level, adventure in slots[:programs_per_student]:
+            given.some_saved_program(
+                student['username'],
+                level=level,
+                adventure_name=adventure,
+                name=f'{adventure}-{level}',
+                code=f'print {adventure}',
+                submitted=True,
+            )
+
+    return cls, usernames, students * programs_per_student
+
+
+def _count_storage_calls(db):
+    """Wrap the storage layer of `db` so we can count the calls it makes.
+
+    Returns a dict that is filled in as the storage is used. Every grading page row used
+    to cost a read of its own and a write of its own, so these counters are what show the
+    page no longer scales with the number of submitted programs.
+    """
+    counters = {'get_item': 0, 'batch_get_item': 0, 'query': 0, 'query_index': 0, 'put': 0,
+                'update': 0, 'student_adventure_writes': 0}
+
+    def wrap(name):
+        original = getattr(db.storage, name)
+
+        def wrapper(table_name, *args, **kwargs):
+            counters[name] += 1
+            if name in ('put', 'update') and table_name == 'student_adventures':
+                counters['student_adventure_writes'] += 1
+            return original(table_name, *args, **kwargs)
+
+        return wrapper
+
+    for name in counters:
+        if hasattr(db.storage, name):
+            setattr(db.storage, name, wrap(name))
+    return counters
+
+
+class TestGradingPageLoad:
+    """The grading page builds every row for every student, for every level, up front.
+
+    These tests seed a realistic class and pin down what that costs, so that the page
+    cannot go back to one database round trip per row.
+    """
+
+    def test_grading_page_shows_all_100_submitted_programs(self, client, given, template_variables):
+        cls, students, expected_rows = _seed_class_with_submitted_programs(
+            given, students=10, programs_per_student=10
+        )
+        assert expected_rows == 100
+
+        started = time.perf_counter()
+        response = client.get(f'/for-teachers/class/{cls["id"]}/grade')
+        elapsed = time.perf_counter() - started
+
+        assert_useful_response(response)
+        context = template_variables[-1]
+        student_adventures = context['student_adventures']
+        assert len(student_adventures) == expected_rows
+        assert sorted({row['student'] for row in student_adventures.values()}) == sorted(students)
+        # Nothing has been ticked, and nothing was written to say so.
+        assert not any(row['ticked'] for row in student_adventures.values())
+        print(f'\ngrading page with {expected_rows} submitted programs rendered in {elapsed:.2f}s')
+
+    def test_grading_page_reads_the_ticked_state_in_batches(self, client, given, app):
+        """The rows are fetched in batches, so the reads do not grow one per program."""
+        measurements = {}
+        for students, programs_per_student in [(10, 1), (10, 10)]:
+            cls, _, expected_rows = _seed_class_with_submitted_programs(
+                given, students=students, programs_per_student=programs_per_student
+            )
+            db = app.config['hedy_globals']['DATABASE']
+            counters = _count_storage_calls(db)
+
+            client.get(f'/for-teachers/class/{cls["id"]}/grade')
+
+            measurements[expected_rows] = dict(counters)
+            print(f'\n{expected_rows:>3} submitted programs: {dict(counters)}')
+
+        # Ten times the programs costs one batch either way: a batch holds 100 keys, so one
+        # covers either class. A page that reads a row at a time would do none at all.
+        #
+        # The individual `get_item` count is not worth asserting on here: the in-memory
+        # storage these tests run against implements `batch_get_item` by calling `get_item`
+        # once per key, while DynamoDB does one request per 100 keys. What matters in
+        # production is the number of requests, which is the batch count.
+        assert measurements[10]['batch_get_item'] == 1
+        assert measurements[100]['batch_get_item'] == 1
+
+    def test_grading_page_does_not_write_while_it_is_read(self, client, given, app):
+        """Opening the page used to write a student_adventures record per program shown."""
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        db = app.config['hedy_globals']['DATABASE']
+        counters = _count_storage_calls(db)
+
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+
+        # A class that has never been customized still gets its customizations written once,
+        # which is per class, not per row. What must not happen is a write per program.
+        assert counters['student_adventure_writes'] == 0
+
+    def test_ticking_a_box_creates_the_record_the_page_no_longer_writes(
+        self, client, given, app, template_variables
+    ):
+        """A box that has never been ticked has no record, so the first tick writes one."""
+        cls, students, _ = _seed_class_with_submitted_programs(given, students=1, programs_per_student=1)
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+        student_adventure_id, row = next(iter(template_variables[-1]['student_adventures'].items()))
+
+        db = app.config['hedy_globals']['DATABASE']
+        assert db.student_adventure_by_id(student_adventure_id) is None
+
+        response = client.post(
+            f'/for-teachers/program/{cls["id"]}/grade'
+            f'?level={row["level"]}&student={row["student"]}'
+            f'&adventure_name={row["adventure_name"]}&program_id={row["program_id"]}'
+        )
+        assert_useful_response(response)
+        assert 'checked' in response.get_data(as_text=True)
+
+        stored = db.student_adventure_by_id(student_adventure_id)
+        assert stored['ticked'] is True
+        assert stored['program_id'] == row['program_id']
+
+        # And ticking it again switches it back off, through the existing record.
+        client.post(
+            f'/for-teachers/program/{cls["id"]}/grade'
+            f'?level={row["level"]}&student={row["student"]}'
+            f'&adventure_name={row["adventure_name"]}&program_id={row["program_id"]}'
+        )
+        assert db.student_adventure_by_id(student_adventure_id)['ticked'] is False
+
+    def test_grading_page_shows_what_has_been_ticked(self, client, given, app, template_variables):
+        """A record that exists is still what decides whether a box is ticked."""
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=1, programs_per_student=2)
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+        student_adventure_id = sorted(template_variables[-1]['student_adventures'])[0]
+
+        db = app.config['hedy_globals']['DATABASE']
+        db.store_student_adventure(dict(id=student_adventure_id, ticked=True, program_id='whatever'))
+
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+        rows = template_variables[-1]['student_adventures']
+        assert rows[student_adventure_id]['ticked'] is True
+        assert sum(1 for row in rows.values() if row['ticked']) == 1
