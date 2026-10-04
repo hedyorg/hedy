@@ -24,6 +24,10 @@ let draftUploadInterval: ReturnType<typeof setInterval> | undefined;
 let lastPersistedDraftFingerprint = '';
 let lastUploadedDraftFingerprint = '';
 let isUploadingAdventureDraft = false;
+// Set when a change comes in while an upload is still in flight, so that change is uploaded
+// after it instead of being thrown away.
+let adventureDraftUploadPending = false;
+let adventureDraftUploadPendingForce = false;
 const previewEditorCreator = new HedyCodeMirrorEditorCreator();
 
 const ADVENTURE_DRAFT_STORAGE_PREFIX = 'hedy.customize_adventure_draft.';
@@ -141,6 +145,11 @@ function loadAdventureDraftIntoEditors() {
 
 function uploadAdventureDraftIfChanged(force = false) {
     if (isUploadingAdventureDraft) {
+        // Dropping this upload would lose the change for good: nothing asks for it again,
+        // so a teacher who flips two settings in quick succession would silently keep only
+        // the first. Remember it and send it once the current upload is done.
+        adventureDraftUploadPending = true;
+        adventureDraftUploadPendingForce = adventureDraftUploadPendingForce || force;
         return;
     }
 
@@ -174,6 +183,12 @@ function uploadAdventureDraftIfChanged(force = false) {
         })
         .always(() => {
             isUploadingAdventureDraft = false;
+            if (adventureDraftUploadPending) {
+                const pendingForce = adventureDraftUploadPendingForce;
+                adventureDraftUploadPending = false;
+                adventureDraftUploadPendingForce = false;
+                uploadAdventureDraftIfChanged(pendingForce);
+            }
         });
 }
 

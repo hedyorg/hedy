@@ -31,12 +31,23 @@ describe('Teacher manual index', () => {
   it('folds a whole section of the manual away, and keeps it away while you read', () => {
     cy.visit('/for-teachers/manual');
 
+    // The index is a column that scrolls on its own, so a section far down it sits outside
+    // the visible part of that column until it is scrolled to. Scroll to the section first,
+    // or whether its entries count as visible depends on the height of the window.
+    const expectUnfolded = () => {
+      cy.get('@toggle').scrollIntoView();
+      cy.get('#manual-index-wide-common_mistakes').should('not.have.class', 'hidden');
+      cy.get('#manual-index-wide-common_mistakes').find('a').first().should('be.visible');
+    };
+
     cy.getDataCy('manual_index_section_toggle_common_mistakes').filter(':visible').first().as('toggle');
     cy.get('@toggle').should('have.attr', 'aria-expanded', 'true');
-    cy.get('#manual-index-wide-common_mistakes').should('be.visible');
+    expectUnfolded();
 
     cy.get('@toggle').click();
     cy.get('@toggle').should('have.attr', 'aria-expanded', 'false');
+    // Folded away is a class, not a scroll position, so assert on both.
+    cy.get('#manual-index-wide-common_mistakes').should('have.class', 'hidden');
     cy.get('#manual-index-wide-common_mistakes').should('not.be.visible');
 
     // Folding a section away is deliberate, so reading inside it does not undo it.
@@ -44,7 +55,7 @@ describe('Teacher manual index', () => {
     cy.get('@toggle').should('have.attr', 'aria-expanded', 'false');
 
     cy.get('@toggle').click();
-    cy.get('#manual-index-wide-common_mistakes').should('be.visible');
+    expectUnfolded();
   });
 
   it('folds the mistakes of a level open and shut', () => {
