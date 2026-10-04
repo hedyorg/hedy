@@ -741,8 +741,6 @@ adventures:
                     ```
                     opcions {is} _
                     ```
-            4:
-                story_text: "En aquest nivell també pots crear daus. Però aquesta vegada ho has de fer tu sol, sense codi d'exemple!\n\n### Exercici\nCrea els teus propis daus en aquest nivell.  \nAjuda: Si no tens ni idea de com fer daus, dona una ullada als daus del nivell anterior, sobretot no oblidis afegir-hi cometes.\n"
             5:
                 story_text: |
                     Afegirem les comandes `{if}` i `{else}` als nostres daus!
@@ -820,15 +818,6 @@ adventures:
                     {print} gent {at} {random} li toca rentar plats
                     ```
                 story_text_2: "### Exercici\nCrea la teva pròpia versió del programa del rentaplats. Primer, fes una llista amb els membres de la teva família.\nDesprés, pensa en una tasca que cal fer i deixa que l'ordinador decideixi qui ha de fer la tasca amb la comanda `{at} {random}`.\n\n**Extra** No tens ganes que et toqui a tu? Hackeja el programa eliminant el teu nom de la llista amb la comanda `{remove}` `{from}`.\n"
-            4:
-                story_text: "Amb les cometes pots millorar encara més el teu programa de rentaplats.\n\n### Exercici\nPrimer, omple els símbols o comandes correctes als buits perquè aquest programa d'exemple funcioni.\nHo has aconseguit? Genial! Ara copia el teu propi codi del nivell anterior i fes-lo funcionar en aquest nivell afegint cometes als llocs adequats.\n"
-                example_code: |
-                    ```
-                    gent {is} mama, papa, Emma, Sofia
-                    {print} _ els plats son rentats per _
-                    {sleep}
-                    {print} gent {at} _
-                    ```
             5:
                 story_text: "Amb la comanda `{if}` ara pots divertir-te més amb les eleccions al programa. Pots fer que el teu programa respongui a l'elecció que ha fet l'ordinador.\n### Exercici\nPots completar el codi perquè imprimeixi 'mala sort' quan sigui el teu torn i, altrament, 'sí!'?  \nNo oblidis les cometes!\n"
                 example_code: "```\ngent {is} mama, papa, Emma, Sofia\nnetejador {is} gent {at} {random}\n_ netejador {is} Sofia {print} _ Pffff... em toca rentar plats _\n_ {print} \"per sort no hi ha plats perquè \" _ \" ja els està rentant\"\n```\n"
@@ -1567,9 +1556,6 @@ adventures:
             11:
                 story_text: "### Exercici\nEn els nivells anteriors has fet sovint el teu propi joc de pedra, paper, tisores. Pots acabar el codi i utilitzar correctament la comanda `{for}` i fer que el joc funcioni?\n"
                 example_code: "```\nopcions = _\njugadors = _\n{for} _\n```\n"
-            4:
-                story_text: "En aquest nivell podem programar encara més el joc de pedra, paper, tisores. Però si vols afegir text recorda que hauràs d'utilitzar cometes.\n### Exercici\nOmple les cometes en els buits. Recorda que la variable `opcions` ha d'estar fora de les cometes.\n"
-                example_code: "```\nopcions {is} pedra, paper, tisores\n{print} _ L'ordinador ha escollit ... _ opcions {at} {random}\n```\n"
             5:
                 example_code: "```\nopcions {is} pedra, paper, tisores\neleccio_ordinador {is} _\neleccio {is} _\n{print} \"Has escollit \" _\n{print} \"L'ordinador ha escollit \" _\n{if} _ {is} _ {print} \"empat!\" {else} {print} \"no hi ha empat\"\n```\n\nOmple els buits amb codi correcte per veure si és un empat.\n"
                 story_text: "En aquest nivell podem determinar si hi ha empat o no. Per això necessites la nova comanda `{if}`.\n\n### Exercici\nAcaba el codi omplint els buits:\n* Fes que l'ordinador triï una opció aleatòria\n* Pregunta al jugador què vol triar\n* Omple les variables correctes a la línia 4 i 5\n* Acaba la línia 6 perquè Hedy pugui comprovar si hi ha empat o no.\n"

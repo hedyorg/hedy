@@ -1542,15 +1542,6 @@ adventures:
                     choices {is} 1, 2, 3, 4, 5, 6
                     {print} Kamu melempar... choices {at} {random}
                     ```
-            4:
-                story_text: |-
-                    Pada level 3 kita dapat membuat kalimat-kalimat dengan nilai dadu didalamnya, menggunakan tanda kutip satu tentunya.
-                    Kali ini kode contoh belum sempurna. Dapatkah kamu menyempurnakannya?
-                answer_code: |
-                    ```
-                    choices is 1, 2, 3, 4, 5, 6
-                    {print} 'Aku melempar ' choices {at} {random}
-                    ```
             5:
                 story_text: |
                     Kita akan menambahkan perintah `{if}` dan `{else}` ke dadu kita!
@@ -1773,28 +1764,6 @@ adventures:
                     name {is} {ask} siapa namamu?
                     {remove} name {from} people
                     {print} people {at} {random} harus mencuci piring
-                    ```
-            4:
-                story_text: |-
-                    Dengan kutip satu, kamu dapat membuat rencana cuci piring kamu lebih cantik.
-                    Kali ini kode contohnya tidak terlalu lengkap.
-
-                    Dapatkah kamu melengkapi kode tersebut dengan mengisi bagian yang kosong? Setiap bagian harus diisi dengan sebuah kata atau simbol.
-
-                    Tip: Jangan lupa tanda kutip satu!
-                example_code: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} _ piring dicuci oleh _
-                    {sleep}
-                    {print} people {at} _
-                    ```
-                answer_code: |
-                    ```
-                    people is mom, dad, Emma, Sophie
-                    {print} 'piring dicuci oleh...'
-                    {sleep}
-                    {print} people {at} {random}
                     ```
             5:
                 story_text: "Dengan `{if}` sekarang kamu bisa lebih seru dengan pilihan di program. Kamu bisa membuat programmu merespons pilihan yang dibuat komputer.\n### Latihan\nBisakah kamu menyelesaikan kode agar mencetak 'sayang sekali' saat giliranmu dan jika tidak 'ya!'?\nJangan lupa tanda kutip!\n"
@@ -3155,24 +3124,6 @@ adventures:
                     ```
                     choice {is} {ask} Batu, kertas, atau gunting?
                     {print} Aku memilih choice
-                    ```
-            4:
-                story_text: |
-                    Di level ini kita bisa lebih lanjut memprogram batu, kertas, gunting. Tapi jika kamu ingin menambahkan teks, kamu juga harus menggunakan tanda kutip di sini.
-                    ### Latihan
-                    Isi tanda kutip pada bagian kosong. Perhatikan bahwa variabel `choices` harus berada di luar tanda kutip.
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ Komputer memilih... _ choices {at} {random}
-                    ```
-                answer_code: |
-                    ```
-                    choices is rock, paper, scissors
-                    player_1 {is} {ask} 'Nama pemain 1:'
-                    player_2 {is} {ask} 'Nama pemain 2:'
-                    {print} player_1 ' memilih ' choices {at} {random}
-                    {print} player_2 ' memilih ' choices {at} {random}
                     ```
             10:
                 story_text: |
