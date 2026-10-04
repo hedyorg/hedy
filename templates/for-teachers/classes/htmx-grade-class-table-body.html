@@ -54,4 +54,42 @@
         </td>
     </tr>
 {% endfor %}
+
+{#
+  The pager. It lives inside the table body because that is what htmx swaps, so paging,
+  filtering and sorting all replace the same thing.
+
+  Both addresses carry the filter and the sort the server rendered this table with, rather
+  than collecting them from the inputs on the page, so that a page opened straight from the
+  browser's history pages on with the same ones. The filter form itself sends no page, so
+  filtering starts again at the first page.
+#}
+{% if pagination and pagination.pages > 1 %}
+<tr>
+    <td colspan="5" class="py-3">
+        <div class="flex flex-row flex-wrap items-center justify-center gap-2">
+            {% for link in pagination.numbers %}
+                {% if link %}
+                <button type="button"
+                        class="{% if link.current %}green-btn-new{% else %}blue-btn-new{% endif %} px-3"
+                        {% if link.current %}aria-current="page"{% endif %}
+                        data-cy="grade_page_{{ link.page }}"
+                        hx-get="{{ link.rows_url }}"
+                        hx-target="#grade-class-table-body"
+                        hx-swap="innerHTML"
+                        hx-push-url="{{ link.url }}">
+                    {{ link.page }}
+                </button>
+                {% else %}
+                <span class="px-1 text-blue-800" aria-hidden="true">&hellip;</span>
+                {% endif %}
+            {% endfor %}
+            {# Numbers only: they read the same in every language. #}
+            <span class="ms-2 text-blue-800" data-cy="grade_page_count">
+                {{ pagination.first }}&ndash;{{ pagination.last }} / {{ pagination.total }}
+            </span>
+        </div>
+    </td>
+</tr>
+{% endif %}
 {% endif %}

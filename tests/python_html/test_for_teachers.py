@@ -1768,7 +1768,9 @@ class TestGradingPageLoad:
     cannot go back to one database round trip per row.
     """
 
-    def test_grading_page_shows_all_100_submitted_programs(self, client, given, template_variables):
+    def test_grading_page_renders_one_page_of_a_hundred_submitted_programs(
+        self, client, given, template_variables
+    ):
         cls, students, expected_rows = _seed_class_with_submitted_programs(
             given, students=10, programs_per_student=10
         )
@@ -1781,8 +1783,10 @@ class TestGradingPageLoad:
         assert_useful_response(response)
         context = template_variables[-1]
         student_adventures = context['student_adventures']
-        assert len(student_adventures) == expected_rows
-        assert sorted({row['student'] for row in student_adventures.values()}) == sorted(students)
+        # All 100 rows are found and counted, one page of them is rendered.
+        assert context['pagination']['total'] == expected_rows
+        assert len(student_adventures) == for_teachers_module.GRADING_PAGE_SIZE
+        assert {row['student'] for row in student_adventures.values()} <= set(students)
         # Nothing has been ticked, and nothing was written to say so.
         assert not any(row['ticked'] for row in student_adventures.values())
         print(f'\ngrading page with {expected_rows} submitted programs rendered in {elapsed:.2f}s')
@@ -1868,3 +1872,166 @@ class TestGradingPageLoad:
         rows = template_variables[-1]['student_adventures']
         assert rows[student_adventure_id]['ticked'] is True
         assert sum(1 for row in rows.values() if row['ticked']) == 1
+
+
+class TestGradingPagePagination:
+    """The grading table shows one page at a time, so a big class is not one huge table."""
+
+    def _filter_sort(self, client, cls, **params):
+        query = '&'.join(f'{key}={value}' for key, value in params.items())
+        return client.get(f'/for-teachers/class/{cls["id"]}/grade/filter_sort?{query}')
+
+    def test_first_page_shows_one_page_of_a_hundred_rows(self, client, given, template_variables):
+        cls, _, expected_rows = _seed_class_with_submitted_programs(
+            given, students=10, programs_per_student=10
+        )
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+        context = template_variables[-1]
+
+        assert len(context['student_adventures']) == for_teachers_module.GRADING_PAGE_SIZE
+        pagination = context['pagination']
+        # The pager's own addresses are checked in TestGradingPageUrlState.
+        assert {key: pagination[key] for key in
+                ('page', 'pages', 'total', 'first', 'last', 'has_previous', 'has_next')} == dict(
+            page=1, pages=4, total=expected_rows, first=1, last=25,
+            has_previous=False, has_next=True,
+        )
+
+    def test_paging_walks_through_every_row_exactly_once(self, client, given, template_variables):
+        cls, _, expected_rows = _seed_class_with_submitted_programs(
+            given, students=10, programs_per_student=10
+        )
+        seen = []
+        for page in range(1, 5):
+            self._filter_sort(
+                client, cls, filter_level='all', filter_student='all', filter_adventure='all',
+                student='ascendent', page=page,
+            )
+            context = template_variables[-1]
+            seen.extend(context['student_adventures'])
+            assert context['pagination']['page'] == page
+
+        assert len(seen) == expected_rows
+        assert len(set(seen)) == expected_rows, 'a row showed up on two pages'
+
+    def test_a_page_past_the_end_lands_on_the_last_one(self, client, given, template_variables):
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        self._filter_sort(
+            client, cls, filter_level='all', filter_student='all', filter_adventure='all', page=99,
+        )
+        pagination = template_variables[-1]['pagination']
+        assert pagination['page'] == 4
+        assert pagination['has_next'] is False
+        assert (pagination['first'], pagination['last']) == (76, 100)
+
+    def test_filtering_pages_through_the_filtered_rows_only(self, client, given, template_variables):
+        """The pager counts what the filter left, not the whole class."""
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        self._filter_sort(
+            client, cls, filter_level='1', filter_student='all', filter_adventure='all',
+        )
+        context = template_variables[-1]
+
+        # One program per student sits in level 1, so the filter leaves ten rows: one page.
+        assert len(context['student_adventures']) == 10
+        assert context['pagination']['total'] == 10
+        assert context['pagination']['pages'] == 1
+        assert context['pagination']['has_next'] is False
+
+    def test_a_class_without_submitted_programs_has_an_empty_page(self, client, given, template_variables):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+        pagination = template_variables[-1]['pagination']
+        assert pagination['total'] == 0
+        assert pagination['pages'] == 1
+        assert (pagination['first'], pagination['last']) == (0, 0)
+        assert pagination['has_previous'] is pagination['has_next'] is False
+
+
+class TestGradingPageUrlState:
+    """The grading page can be opened at a page, a filter and a sort.
+
+    The pager puts that address in the browser's history, so going back has to land on the
+    table you were looking at rather than leaving the page, and opening the address again
+    has to give the same table with the controls set the way it describes.
+    """
+
+    def test_the_page_route_takes_a_page_number(self, client, given, template_variables):
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        client.get(f'/for-teachers/class/{cls["id"]}/grade?page=3')
+        pagination = template_variables[-1]['pagination']
+        assert (pagination['page'], pagination['first'], pagination['last']) == (3, 51, 75)
+
+    def test_the_page_route_takes_a_filter(self, client, given, template_variables):
+        cls, students, _ = _seed_class_with_submitted_programs(
+            given, students=10, programs_per_student=10
+        )
+        student = sorted(students)[3]
+        client.get(f'/for-teachers/class/{cls["id"]}/grade?filter_student={student}')
+        context = template_variables[-1]
+        assert {row['student'] for row in context['student_adventures'].values()} == {student}
+        assert context['pagination']['total'] == 10
+        # And the control says so, so that paging on does not quietly drop the filter.
+        assert context['filters']['filter_student'] == student
+
+    def test_the_page_route_takes_a_sort(self, client, given, template_variables):
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        client.get(f'/for-teachers/class/{cls["id"]}/grade?student=descendent')
+        context = template_variables[-1]
+        assert context['sort_orders'] == {'student': False}
+        students_shown = [row['student'] for row in context['student_adventures'].values()]
+        assert students_shown == sorted(students_shown, reverse=True)
+
+    def test_the_pager_points_at_the_page_and_carries_the_filter_and_sort(
+        self, client, given, template_variables
+    ):
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        client.get(f'/for-teachers/class/{cls["id"]}/grade?page=2&student=descendent')
+        numbers = template_variables[-1]['pagination']['numbers']
+
+        assert [link['page'] for link in numbers] == [1, 2, 3, 4]
+        assert [link['current'] for link in numbers] == [False, True, False, False]
+
+        third = numbers[2]
+        # What goes into the browser's history is the page, not the htmx endpoint, so that
+        # going back to it loads a whole page.
+        assert third['url'] == (
+            f'/for-teachers/class/{cls["id"]}/grade'
+            f'?filter_level=all&filter_student=all&filter_adventure=all&page=3&student=descendent'
+        )
+        # What fills the table is the htmx endpoint, carrying the same filter and sort.
+        assert '/grade/filter_sort?' in third['rows_url']
+        assert third['rows_url'].endswith('page=3&student=descendent')
+
+    def test_the_pager_breaks_a_long_list_of_pages_with_an_ellipsis(self):
+        """A None in the list is where the template draws the ellipsis."""
+        numbers = for_teachers_module.ForTeachersModule.pager_page_numbers
+
+        # Few enough pages to list them all.
+        assert numbers(1, 1) == [1]
+        assert numbers(3, 7) == [1, 2, 3, 4, 5, 6, 7]
+        # The first and the last page are always offered, with the current one in the middle.
+        assert numbers(1, 35) == [1, 2, 3, None, 35]
+        assert numbers(18, 35) == [1, None, 16, 17, 18, 19, 20, None, 35]
+        assert numbers(35, 35) == [1, None, 33, 34, 35]
+        # A gap of a single page is spelled out rather than hidden behind an ellipsis.
+        assert numbers(4, 35) == [1, 2, 3, 4, 5, 6, None, 35]
+
+    def test_an_address_from_the_history_gives_back_the_same_rows(self, client, given, template_variables):
+        """Following the pager and opening its address cold have to agree."""
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+
+        client.get(f'/for-teachers/class/{cls["id"]}/grade?page=1&student=descendent')
+        next_url = template_variables[-1]['pagination']['numbers'][1]['url']
+
+        client.get(next_url)
+        from_history = list(template_variables[-1]['student_adventures'])
+
+        client.get(
+            f'/for-teachers/class/{cls["id"]}/grade/filter_sort'
+            f'?filter_level=all&filter_student=all&filter_adventure=all&page=2&student=descendent'
+        )
+        from_htmx = list(template_variables[-1]['student_adventures'])
+
+        assert from_history == from_htmx

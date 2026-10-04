@@ -1,6 +1,7 @@
 import collections
 from difflib import SequenceMatcher
 import functools
+import math
 import os
 import re
 import time
@@ -97,6 +98,12 @@ def teacher_guide_levels(language):
             "sections": level.get("sections") or en_level.get("sections") or [],
         })
     return levels
+
+
+# How many rows of the grading table one page shows. Every row costs the browser markup,
+# a fold handler and a checkbox to wire up, and a class of twenty students can have many
+# hundreds of submitted programs.
+GRADING_PAGE_SIZE = 25
 
 
 class ForTeachersModule(WebsiteModule):
@@ -703,9 +710,10 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        # For now, only level 1 is supported as in the original code
-        levels = [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)]
-        student_adventures = self.build_student_adventures(Class, user, levels)
+        filters, sort_orders, page = self.grading_table_request()
+        page_of_adventures, pagination = self.grading_table_rows(
+            Class, user, filters, sort_orders, page
+        )
         session["class_id"] = class_id
         customizations = get_customizations(self.db, Class["id"])
         adventures_per_level = hedy_website_utils.load_all_adventures_for_index(
@@ -721,7 +729,10 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=sorted(Class.get("students", [])),
             adventures=adventure_list,
-            student_adventures=student_adventures,
+            student_adventures=page_of_adventures,
+            pagination=self.with_pager_urls(class_id, pagination, filters, sort_orders),
+            filters=filters,
+            sort_orders=sort_orders,
             javascript_page_options=dict(
                 page="grade-class",
             ),
@@ -796,6 +807,138 @@ class ForTeachersModule(WebsiteModule):
                 ),
             )
         return student_adventures
+
+    @staticmethod
+    def grading_table_request():
+        """Read the filter, the sort and the page the request asks for.
+
+        The page route and the htmx route both take the same parameters, so that the URL a
+        pager pushes is a page that can be opened, reloaded and gone back to.
+        """
+        filters = dict(
+            filter_level=request.args.get("filter_level", "all", type=str),
+            filter_student=request.args.get("filter_student", "all", type=str),
+            filter_adventure=request.args.get("filter_adventure", "all", type=str),
+        )
+        sort_orders = {}
+        for column in ("level", "student", "name", "timestamp", "ticked"):
+            if request.args.get(column, "none") != "none":
+                sort_orders[column] = request.args[column] == "ascendent"
+        return filters, sort_orders, request.args.get("page", 1, type=int)
+
+    def grading_table_rows(self, Class, user, filters, sort_orders, page):
+        """Build, filter, sort and then page the rows of the grading table."""
+        if filters["filter_level"] == "all":
+            levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+        else:
+            try:
+                levels = [int(filters["filter_level"])]
+            except ValueError:
+                levels = [1]
+
+        student_adventures = self.build_student_adventures(Class, user, levels)
+        student_adventures = self.filter_student_adventures(
+            student_adventures, filters["filter_student"], filters["filter_adventure"]
+        )
+        student_adventures = self.sort_student_adventures(student_adventures, sort_orders)
+        # Last, so that filtering and sorting still see every row and the pager tells the
+        # truth about what it is paging through.
+        return self.paginate_student_adventures(student_adventures, page)
+
+    # How many pages are listed on either side of the one being looked at, before the list
+    # is broken by an ellipsis. First and last are always listed.
+    PAGER_WINDOW = 2
+
+    @classmethod
+    def pager_page_numbers(cls, page, pages):
+        """The page numbers to offer, with None where the list is broken by an ellipsis.
+
+        A class with hundreds of submitted programs runs to dozens of pages, and listing
+        every one of them would be its own wall of buttons.
+        """
+        if pages <= 2 * cls.PAGER_WINDOW + 3:
+            return list(range(1, pages + 1))
+
+        shown = {1, pages}
+        shown.update(range(max(1, page - cls.PAGER_WINDOW), min(pages, page + cls.PAGER_WINDOW) + 1))
+
+        numbers = []
+        previous = 0
+        for number in sorted(shown):
+            # A gap of exactly one page is not worth an ellipsis: it is the same width.
+            if number - previous == 2:
+                numbers.append(previous + 1)
+            elif number - previous > 2:
+                numbers.append(None)
+            numbers.append(number)
+            previous = number
+        return numbers
+
+    def with_pager_urls(self, class_id, pagination, filters, sort_orders):
+        """Add everything the pager needs to a pagination dict.
+
+        Every page gets two addresses: the page to put in the browser's history, and the
+        htmx endpoint that fills the table. Both carry the filter and the sort, so a page
+        opened straight from the history pages on with the same ones.
+        """
+        def query(page):
+            parameters = dict(filters, page=page)
+            parameters.update({
+                column: "ascendent" if ascending else "descendent"
+                for column, ascending in sort_orders.items()
+            })
+            return parameters
+
+        def page_link(page):
+            if page is None:
+                return None
+            return dict(
+                page=page,
+                current=page == pagination["page"],
+                url=url_for("teachers.get_grading_page", class_id=class_id, **query(page)),
+                rows_url=url_for(
+                    "teachers.filter_sort_grading_page", class_id=class_id, **query(page)
+                ),
+            )
+
+        return dict(
+            pagination,
+            numbers=[
+                page_link(number)
+                for number in self.pager_page_numbers(pagination["page"], pagination["pages"])
+            ],
+        )
+
+    def paginate_student_adventures(self, student_adventures: dict, page: int):
+        """Return one page of the grading table, and what a pager needs to describe it.
+
+        A class of twenty students can have many hundreds of submitted programs, and every
+        row costs the browser markup, a fold handler and a checkbox to wire up. Sorting and
+        filtering have to see the whole set, so this runs last.
+
+        Args:
+            student_adventures: dict mapping id -> program dict, already filtered and sorted
+            page: the page to return, counting from 1
+        Returns:
+            (dict of this page's student_adventures, dict describing the page)
+        """
+        total = len(student_adventures)
+        pages = max(1, math.ceil(total / GRADING_PAGE_SIZE))
+        page = min(max(page, 1), pages)
+        start = (page - 1) * GRADING_PAGE_SIZE
+
+        rows = list(student_adventures.items())[start:start + GRADING_PAGE_SIZE]
+        pagination = dict(
+            page=page,
+            pages=pages,
+            total=total,
+            # Counting from 1, and 0 of 0 rather than 1 of 0 when there is nothing to show.
+            first=start + 1 if rows else 0,
+            last=start + len(rows),
+            has_previous=page > 1,
+            has_next=page < pages,
+        )
+        return dict(rows), pagination
 
     def filter_student_adventures(self, student_adventures: dict, filter_student: str, filter_adventure: str):
         """
@@ -926,31 +1069,10 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        # Get filter values from form (htmx)
-        filter_level = request.args.get("filter_level", "all", type=str)
-        filter_student = request.args.get("filter_student", "all", type=str)
-        filter_adventure = request.args.get("filter_adventure", "all", type=str)
 
-        if filter_level == "all":
-            levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
-        else:
-            try:
-                levels = [int(filter_level)]
-            except ValueError:
-                levels = [1]
-        # Get sort values from form (htmx)
-        sort_columns = ["level", "student", "name", "timestamp", "ticked"]
-        sort_orders = {}
-        for col in sort_columns:
-            if request.args.get(col, "none") != "none":
-                sort_orders[col] = request.args[col] == "ascendent"
-
-        student_adventures = self.build_student_adventures(Class, user, levels)
-        filtered_adventures = self.filter_student_adventures(
-            student_adventures, filter_student, filter_adventure
-        )
-        filtered_adventures = self.sort_student_adventures(
-            filtered_adventures, sort_orders
+        filters, sort_orders, page = self.grading_table_request()
+        page_of_adventures, pagination = self.grading_table_rows(
+            Class, user, filters, sort_orders, page
         )
 
         return render_partial(
@@ -958,7 +1080,8 @@ class ForTeachersModule(WebsiteModule):
             class_id=class_id,
             class_info=Class,
             students=sorted(Class.get("students", [])),
-            student_adventures=filtered_adventures,
+            student_adventures=page_of_adventures,
+            pagination=self.with_pager_urls(class_id, pagination, filters, sort_orders),
             sort_orders=sort_orders
         )
 
