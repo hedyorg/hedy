@@ -2035,3 +2035,67 @@ class TestGradingPageUrlState:
         from_htmx = list(template_variables[-1]['student_adventures'])
 
         assert from_history == from_htmx
+
+
+class TestGradingPageTickedState:
+    """Which rows are ticked is read for the page being shown, not for the whole class.
+
+    Reading them all is a database request per hundred rows, against a table that throttles,
+    which is what made the page take seconds on a real class.
+    """
+
+    def test_only_the_shown_rows_are_looked_up(self, client, given, app, monkeypatch):
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        db = app.config['hedy_globals']['DATABASE']
+
+        asked_for = []
+        original = db.student_adventures_by_ids
+        monkeypatch.setattr(db, 'student_adventures_by_ids',
+                            lambda ids: asked_for.append(list(ids)) or original(ids))
+
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+
+        assert asked_for, 'the ticked state was never read'
+        assert sum(len(ids) for ids in asked_for) == for_teachers_module.GRADING_PAGE_SIZE
+
+    def test_sorting_on_ticked_still_sees_every_row(self, client, given, app, template_variables):
+        """Sorting by the checkbox cannot be done without knowing all of them."""
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        db = app.config['hedy_globals']['DATABASE']
+
+        # Tick one row that sorting has to bring to the front.
+        client.get(f'/for-teachers/class/{cls["id"]}/grade')
+        every_id = sorted(
+            db.student_adventures_by_ids([]) or [],
+        )
+        assert every_id == []  # nothing has been written by looking at the page
+
+        client.get(
+            f'/for-teachers/class/{cls["id"]}/grade/filter_sort'
+            f'?filter_level=all&filter_student=all&filter_adventure=all&page=4'
+        )
+        last_page = template_variables[-1]['student_adventures']
+        ticked_id, ticked_row = next(iter(last_page.items()))
+        db.store_student_adventure(dict(id=ticked_id, ticked=True, program_id=ticked_row['program_id']))
+
+        client.get(
+            f'/for-teachers/class/{cls["id"]}/grade/filter_sort'
+            f'?filter_level=all&filter_student=all&filter_adventure=all&ticked=descendent&page=1'
+        )
+        rows = template_variables[-1]['student_adventures']
+        assert ticked_id in rows, 'the ticked row should sort to the first page'
+        assert rows[ticked_id]['ticked'] is True
+        assert sum(1 for row in rows.values() if row['ticked']) == 1
+
+    def test_a_ticked_row_shows_as_ticked_on_its_page(self, client, given, app, template_variables):
+        cls, _, _ = _seed_class_with_submitted_programs(given, students=10, programs_per_student=10)
+        db = app.config['hedy_globals']['DATABASE']
+
+        client.get(f'/for-teachers/class/{cls["id"]}/grade?page=2')
+        rows = template_variables[-1]['student_adventures']
+        row_id, row = next(iter(rows.items()))
+        assert row['ticked'] is False
+
+        db.store_student_adventure(dict(id=row_id, ticked=True, program_id=row['program_id']))
+        client.get(f'/for-teachers/class/{cls["id"]}/grade?page=2')
+        assert template_variables[-1]['student_adventures'][row_id]['ticked'] is True

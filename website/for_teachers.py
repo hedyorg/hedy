@@ -738,13 +738,17 @@ class ForTeachersModule(WebsiteModule):
             ),
         )
 
-    def build_student_adventures(self, Class, user, levels):
+    def build_student_adventures(self, Class, user, levels, with_ticked=True):
         """
         Builds the student adventures dictionary for grading.
         Args:
             Class: The class object
             user: The teacher looking at the page
             levels: List of levels to include
+            with_ticked: whether to read which of these have been ticked off. Reading them
+                costs a request per hundred rows, so a caller that only shows a page of the
+                rows is better off leaving this out and calling `fill_ticked_state` on the
+                page it ends up showing.
         Returns:
             student_adventures: dict
         """
@@ -784,7 +788,9 @@ class ForTeachersModule(WebsiteModule):
                         )
                         rows.append((student_adventure_id, student, name, program))
 
-        ticked_adventures = self.db.student_adventures_by_ids([row[0] for row in rows])
+        ticked_adventures = (
+            self.db.student_adventures_by_ids([row[0] for row in rows]) if with_ticked else {}
+        )
 
         student_adventures = {}
         for student_adventure_id, student, name, program in rows:
@@ -836,14 +842,42 @@ class ForTeachersModule(WebsiteModule):
             except ValueError:
                 levels = [1]
 
-        student_adventures = self.build_student_adventures(Class, user, levels)
+        # Which rows have been ticked is read separately, because a class can have many
+        # hundreds of them and only a page of them is ever shown. Reading all of them is a
+        # request per hundred rows against a table that will throttle long before that is
+        # free.
+        sorting_on_ticked = "ticked" in sort_orders
+
+        student_adventures = self.build_student_adventures(
+            Class, user, levels, with_ticked=sorting_on_ticked
+        )
         student_adventures = self.filter_student_adventures(
             student_adventures, filters["filter_student"], filters["filter_adventure"]
         )
         student_adventures = self.sort_student_adventures(student_adventures, sort_orders)
-        # Last, so that filtering and sorting still see every row and the pager tells the
-        # truth about what it is paging through.
-        return self.paginate_student_adventures(student_adventures, page)
+        # Paging comes last, so that filtering and sorting still see every row and the pager
+        # tells the truth about what it is paging through.
+        page_of_adventures, pagination = self.paginate_student_adventures(
+            student_adventures, page
+        )
+        if not sorting_on_ticked:
+            page_of_adventures = self.fill_ticked_state(page_of_adventures)
+        return page_of_adventures, pagination
+
+    def fill_ticked_state(self, student_adventures: dict):
+        """Read which of these rows have been ticked off, and say so on them.
+
+        A row with no record has never been ticked: one is written when a teacher actually
+        ticks the box.
+        """
+        ticked_adventures = self.db.student_adventures_by_ids(list(student_adventures))
+        return {
+            student_adventure_id: dict(
+                row,
+                ticked=bool(ticked_adventures.get(student_adventure_id, {}).get("ticked")),
+            )
+            for student_adventure_id, row in student_adventures.items()
+        }
 
     # How many pages are listed on either side of the one being looked at, before the list
     # is broken by an ellipsis. First and last are always listed.
