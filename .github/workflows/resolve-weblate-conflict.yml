@@ -67,6 +67,45 @@ jobs:
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
 
+    # Translator edits live in Weblate's database until something serializes them into a
+    # commit, which by default does not happen for 'commit_pending_age' hours. The merge
+    # script below reads Weblate's *git* branch, so anything still pending is invisible to
+    # it and would be missing from the PR -- and then destroyed by the reset that runs once
+    # the PR is merged. Commit first, so that everything this PR is meant to resolve is
+    # actually in the branch we resolve it from.
+    - name: Commit pending translations before reading Weblate's branch
+      run: |
+        set -x
+
+        # Weblate runs one repository operation at a time and refuses the rest with
+        # HTTP 423. Wait for it rather than giving up on the first refusal.
+        for attempt in $(seq 1 10); do
+          if output=$(wlc commit 2>&1); then
+            echo "$output"
+            break
+          fi
+          echo "$output"
+          grep -q 'HTTP error 423' <<< "$output" || exit 1
+          echo "Weblate is busy with another repository operation; retrying in 30s ($attempt/10)"
+          sleep 30
+        done
+
+        # 'commit' is asynchronous, and the git export lags behind it, so wait for Weblate
+        # to report that nothing is pending before anyone fetches the branch.
+        # https://github.com/WeblateOrg/weblate/issues/12400
+        for attempt in $(seq 1 10); do
+          sleep 30
+          wlc repo | tee repo.txt
+          if grep -q "needs_commit: False" repo.txt; then
+            echo "Weblate has written its pending translations to git"
+            exit 0
+          fi
+        done
+
+        echo "Weblate still reports pending changes after five minutes. Stopping, because"
+        echo "resolving from a branch that is missing them would lose those translations."
+        exit 1
+
     #----------------------------------------------------------------------
     #  Set up cache so that running snippet tests is somewhat cheap
     - name: Calculate hedy cache key
@@ -79,6 +118,8 @@ jobs:
         key: "hedy-test-cache-${{ steps.hedy_cache_key.outputs.value }}"
 
     - name: Run weblate merge script
+      env:
+        WEBLATE_MERGE_REPORT: ${{ runner.temp }}/weblate-merge-report.md
       run: |
         bash tools/merge-weblate-resolving-conflicts.sh
 
@@ -91,63 +132,62 @@ jobs:
         git reset --soft main
         git checkout main
 
+    - name: Compose the pull request body
+      id: pr_body
+      env:
+        WEBLATE_MERGE_REPORT: ${{ runner.temp }}/weblate-merge-report.md
+      run: |
+        {
+          echo 'body<<WEBLATE_PR_BODY'
+          echo 'This PR merges pending commits from the Weblate repository that were'
+          echo 'conflicting with changes on `main`.'
+          echo
+          echo 'The content YAML files are merged as YAML rather than as text, by'
+          echo '`tools/merge-weblate-yaml.py`. So `main` decides which keys exist and what'
+          echo 'each one says, while new and updated strings from translators come along'
+          echo 'with it. Everything else, the `.po` files especially, is resolved hunk by'
+          echo 'hunk in favour of Weblate.'
+          echo
+          echo 'Whatever the merge had to decide is listed below. None of it blocks this'
+          echo 'PR, but a translator may want to re-apply a version that was passed over.'
+          echo
+          if [ -s "$WEBLATE_MERGE_REPORT" ]; then
+            cat "$WEBLATE_MERGE_REPORT"
+          else
+            echo 'Nothing was contested; every conflict resolved cleanly.'
+          fi
+          echo 'WEBLATE_PR_BODY'
+        } >> "$GITHUB_OUTPUT"
+
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v8
       with:
         token: ${{ steps.secret.outputs.secret }}
         commit-message: 'Changes from Weblate repository'
         title: 'Translations from Hosted Weblate'
-        body: >
-          This PR merges pending commits from the Weblate repository that are conflicting
-          with changes on `main`, while resolving conflicts in favor of the Weblate side.
+        body: ${{ steps.pr_body.outputs.body }}
         labels: translations
         branch: automatic/weblate-conflicts
         delete-branch: true
         base: main
 
-    # After we've created the PR, lock weblate and tell it to forget pending
-    # changes. The changes are now in the PR which will be merged in due time, and
-    # Weblate will be unlocked when the PR is merged.
+    # After we've created the PR, lock Weblate so that nothing new lands while the PR is
+    # open. The resolved content is in the PR now and Weblate is unlocked again when it
+    # closes.
+    #
+    # Note that this deliberately does NOT reset Weblate here. Resetting while the PR is
+    # still open puts us straight back into the loop this workflow exists to break: 'main'
+    # does not carry the resolved content yet, Weblate's add-ons start committing
+    # regenerated files within minutes of the reset, and the squash merge that eventually
+    # lands then arrives as unrelated history and conflicts again. 'unlock-weblate.yml'
+    # owns the reset and runs it once the PR is merged, when both sides agree.
+    #
+    # The cost is that Weblate keeps reporting this merge conflict (and emailing about it)
+    # for as long as the PR is open. That is noise rather than breakage: the resolution is
+    # already in the PR, and merging it is what clears the conflict.
     - name: Prevent updates and merge conflicts until merged
       run: |
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
         for component in glossary adventures keywords client-messages web-texts webpages slides; do
           wlc lock hedy/$component
         done
-
-        # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
-        # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
-        # command to finish, otherwise all our workflow executions show errors.
-        #
-        # It does not always work, though: when the reset is skipped or fails, Weblate keeps
-        # the commits this PR already carries, and since we squash merge it they never become
-        # ancestors of 'main'. Every sync after that conflicts. So check the outcome rather
-        # than trust it.
-        started_at=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)
-        wlc reset &
-
-        # Wait for Weblate to log the reset. 'wlc repo' can't confirm it for us: it reports
-        # a clean state as soon as Weblate has nothing left to push, reset or not.
-        python3 - "$started_at" <<'PY'
-        import json, sys, time, urllib.request
-        from datetime import datetime
-
-        started_at = datetime.fromisoformat(sys.argv[1])
-        url = ("https://hosted.weblate.org/api/projects/hedy/changes/"
-               "?action=19&page_size=1")  # action 19 is "Repository reset"
-
-        for _ in range(30):
-            time.sleep(10)
-            with urllib.request.urlopen(url) as response:
-                results = json.load(response)["results"]
-            latest = datetime.fromisoformat(results[0]["timestamp"]) if results else None
-            print(f"last reset: {latest}, this run started: {started_at}", flush=True)
-            if latest is not None and latest > started_at:
-                print("Weblate has forgotten its commits")
-                sys.exit(0)
-
-        print("Weblate did not reset within five minutes of being asked to.")
-        print("Reset the 'adventures' component by hand, or the next sync will conflict:")
-        print("https://hosted.weblate.org/projects/hedy/adventures/#repository")
-        sys.exit(1)
-        PY
