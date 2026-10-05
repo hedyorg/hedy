@@ -118,6 +118,8 @@ jobs:
         key: "hedy-test-cache-${{ steps.hedy_cache_key.outputs.value }}"
 
     - name: Run weblate merge script
+      env:
+        WEBLATE_MERGE_REPORT: ${{ runner.temp }}/weblate-merge-report.md
       run: |
         bash tools/merge-weblate-resolving-conflicts.sh
 
@@ -130,22 +132,40 @@ jobs:
         git reset --soft main
         git checkout main
 
+    - name: Compose the pull request body
+      id: pr_body
+      env:
+        WEBLATE_MERGE_REPORT: ${{ runner.temp }}/weblate-merge-report.md
+      run: |
+        {
+          echo 'body<<WEBLATE_PR_BODY'
+          echo 'This PR merges pending commits from the Weblate repository that were'
+          echo 'conflicting with changes on `main`.'
+          echo
+          echo 'The content YAML files are merged as YAML rather than as text, by'
+          echo '`tools/merge-weblate-yaml.py`. So `main` decides which keys exist and what'
+          echo 'each one says, while new and updated strings from translators come along'
+          echo 'with it. Everything else, the `.po` files especially, is resolved hunk by'
+          echo 'hunk in favour of Weblate.'
+          echo
+          echo 'Whatever the merge had to decide is listed below. None of it blocks this'
+          echo 'PR, but a translator may want to re-apply a version that was passed over.'
+          echo
+          if [ -s "$WEBLATE_MERGE_REPORT" ]; then
+            cat "$WEBLATE_MERGE_REPORT"
+          else
+            echo 'Nothing was contested; every conflict resolved cleanly.'
+          fi
+          echo 'WEBLATE_PR_BODY'
+        } >> "$GITHUB_OUTPUT"
+
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v8
       with:
         token: ${{ steps.secret.outputs.secret }}
         commit-message: 'Changes from Weblate repository'
         title: 'Translations from Hosted Weblate'
-        body: >
-          This PR merges pending commits from the Weblate repository that are conflicting
-          with changes on `main`, while resolving conflicts in favor of the Weblate side.
-
-
-          Conflicts are resolved with `-X ours`, so on every conflicting hunk Weblate wins.
-          That keeps the translations, but it also reverts whatever `main` did in those same
-          hunks -- deletions and rewrites of source content included. Please read the diff
-          against `main` before approving: unlike the daily translations PR, this one is
-          deliberately not auto-approved.
+        body: ${{ steps.pr_body.outputs.body }}
         labels: translations
         branch: automatic/weblate-conflicts
         delete-branch: true
