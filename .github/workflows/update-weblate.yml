@@ -11,6 +11,11 @@ on:
 jobs:
   update-weblate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      # To start 'resolve-weblate-conflict.yml' when Weblate cannot merge 'main'.
+      actions: write
 
     steps:
     # If an open Weblate/translations PR still exists, we shouldn't tell Weblate to push again.
@@ -100,7 +105,17 @@ jobs:
           wlc lock hedy/$component
         done
 
-        wlc_when_free pull
+        # When Weblate cannot merge 'main' into its branch, every later run fails the same
+        # way until someone resolves the conflict, and nothing else tells anyone it is
+        # stuck. Say so, so the step below can hand it to 'resolve-weblate-conflict.yml'.
+        if ! pull_output=$(wlc_when_free pull 2>&1); then
+          echo "$pull_output"
+          if grep -Eq 'Could not (merge|rebase)' <<< "$pull_output"; then
+            echo "merge_conflict=true" >> $GITHUB_OUTPUT
+          fi
+          exit 1
+        fi
+        echo "$pull_output"
 
         # 'commit' seems to be an async process, as sometimes nothing is pushed if we run this
         # too quickly in succession. Add a short sleep to reduce chances of this happening.
@@ -125,6 +140,26 @@ jobs:
         # so the unlock step at the bottom must not undo that. Closing the PR is also
         # what triggers the reset, over in 'unlock-weblate.yml'.
         echo "pr_created=true" >> $GITHUB_OUTPUT
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+    # Weblate could not merge 'main'. Resolving that is what 'resolve-weblate-conflict.yml'
+    # is for, and it opens a PR a human reviews before anything lands, so start it rather
+    # than failing quietly every morning. This job still fails, so the run shows why.
+    #
+    # It cannot loop: while the PR it opens is open, the first step of this job stops
+    # before reaching Weblate at all.
+    - name: Resolve the merge conflict
+      if: failure() && steps.weblate_commands.outputs.merge_conflict == 'true'
+      run: |
+        running=$(gh run list -R hedyorg/hedy --workflow resolve-weblate-conflict.yml \
+          --json status -q '[.[] | select(.status != "completed")] | length')
+        if [[ "$running" != "0" ]]; then
+          echo "A conflict resolution run is already in progress; not starting another."
+          exit 0
+        fi
+        gh workflow run resolve-weblate-conflict.yml -R hedyorg/hedy --ref main
+        echo "Started 'resolve-weblate-conflict.yml'; review the PR it opens."
       env:
         GH_TOKEN: ${{ github.token }}
 
