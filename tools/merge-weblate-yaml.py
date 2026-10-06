@@ -28,20 +28,31 @@ whole adventure or level, a translation that only existed inside it goes with it
 reported too, because "the team deleted the level this was written for" is something a
 reviewer should see rather than discover from a line count.
 
+With --template, the English file for the component is used as well, and any key a
+translator added that it does not have is dropped (and reported with the other drops).
+Every language file has to be a structural subset of the English one -- that is what
+tools/check-yaml-structure.py enforces in CI -- and a key that only Weblate's side has
+can still be missing from it: Weblate cannot pull 'main' while it is in conflict, so its
+copy of the English file goes stale, and translators keep translating levels the team
+has meanwhile removed. The language file's own history cannot show that removal, because
+the key was never in its base; only the template can.
+
 The merge works by mutating a copy of the 'main' side in place, rather than building a
 fresh tree. That keeps two things that matter: ruamel's round-trip metadata, which records
 the blank lines between keys and would otherwise shift, and 'main' as the key order, so
 the resulting pull request reads as a small diff against it.
 
 Usage:
-    merge-weblate-yaml.py BASE OURS THEIRS OUT
+    merge-weblate-yaml.py [--template EN] BASE OURS THEIRS OUT
 
 where BASE is the merge base, OURS is the 'main' side and THEIRS is the Weblate side.
-Pass '-' as OUT to write to stdout. Conflicts and dropped translations are listed on
+BASE and OURS may be empty files, for a language file that did not exist before or that
+only Weblate has. Pass '-' as OUT to write to stdout. Conflicts and dropped translations are listed on
 stderr; the exit code is 0 even then, because a reported conflict is a resolved one, and
 2 if a file could not be read or has a shape this cannot merge.
 """
 
+import argparse
 import copy
 import sys
 from io import StringIO
@@ -65,7 +76,9 @@ def make_yaml():
 
 def load(path):
     with open(path, 'r', encoding='utf-8') as fp:
-        return make_yaml().load(fp)
+        data = make_yaml().load(fp)
+    # An empty file stands for "this side has no such file yet".
+    return ruamel_yaml.comments.CommentedMap() if data is None else data
 
 
 def dump(data, out):
@@ -117,7 +130,28 @@ def decide(base, ours, theirs, path, conflicts, coined):
     return ours
 
 
-def merge_into(target, base, theirs, path, conflicts, coined, discarded):
+def prune_to_template(value, template, path, discarded):
+    """Drop keys from 'value' that the template does not have, recursively.
+
+    'template' is None where there is nothing to compare against -- no template given,
+    or a part of the file the template does not describe as a mapping -- and then
+    nothing is pruned.
+    """
+    if not isinstance(value, dict) or not isinstance(template, dict):
+        return
+    for key in list(value.keys()):
+        if key not in template:
+            discarded.extend(translator_work_in(MISSING, value[key], path + [str(key)]))
+            del value[key]
+        else:
+            prune_to_template(value[key], template[key], path + [str(key)], discarded)
+
+
+def template_child(template, key):
+    return template.get(key) if isinstance(template, dict) else None
+
+
+def merge_into(target, base, theirs, template, path, conflicts, coined, discarded):
     """Mutate 'target' (a copy of our node) into the merged node."""
     base_dict = base if isinstance(base, dict) else {}
     theirs_dict = theirs if isinstance(theirs, dict) else {}
@@ -132,8 +166,8 @@ def merge_into(target, base, theirs, path, conflicts, coined, discarded):
         # one value, which is the conservative reading for lists like 'mp_choice_options'
         # where merging element by element would invent combinations nobody wrote.
         if isinstance(ours_value, dict) and isinstance(theirs_value, dict):
-            merge_into(ours_value, base_value, theirs_value, path + [str(key)],
-                       conflicts, coined, discarded)
+            merge_into(ours_value, base_value, theirs_value, template_child(template, key),
+                       path + [str(key)], conflicts, coined, discarded)
             continue
 
         result = decide(base_value, ours_value, theirs_value, path + [str(key)],
@@ -147,21 +181,31 @@ def merge_into(target, base, theirs, path, conflicts, coined, discarded):
             continue
         base_value = base_dict.get(key, MISSING)
         if base_value is MISSING:
+            if isinstance(template, dict) and key not in template:
+                # The team removed it from the English file; see the module docstring.
+                discarded.extend(translator_work_in(MISSING, theirs_value, path + [str(key)]))
+                continue
+            prune_to_template(theirs_value, template_child(template, key),
+                              path + [str(key)], discarded)
             target[key] = theirs_value
         else:
             discarded.extend(translator_work_in(base_value, theirs_value, path + [str(key)]))
 
 
 def main():
-    if len(sys.argv) != 5:
-        sys.stderr.write(__doc__)
-        return 2
+    parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
+    parser.add_argument('--template', help='the English file of the same component')
+    parser.add_argument('base')
+    parser.add_argument('ours')
+    parser.add_argument('theirs')
+    parser.add_argument('out')
+    args = parser.parse_args()
 
-    base_path, ours_path, theirs_path, out = sys.argv[1:5]
     try:
-        base = load(base_path)
-        ours = load(ours_path)
-        theirs = load(theirs_path)
+        base = load(args.base)
+        ours = load(args.ours)
+        theirs = load(args.theirs)
+        template = load(args.template) if args.template else None
     except Exception as e:  # noqa: BLE001 - any read or parse problem means we must not merge
         sys.stderr.write(f'could not read the files to merge: {e}\n')
         return 2
@@ -174,9 +218,9 @@ def main():
     conflicts = []
     coined = []
     discarded = []
-    merge_into(merged, base, theirs, [], conflicts, coined, discarded)
+    merge_into(merged, base, theirs, template, [], conflicts, coined, discarded)
 
-    dump(merged, out)
+    dump(merged, args.out)
 
     if conflicts:
         sys.stderr.write(
