@@ -4360,11 +4360,11 @@ adventures:
                     {print} 'Jij kiest ' jouw_keuze
                     {print} 'De computer kiest ' computer_keuze
                     # De winnaar printen:
-                    {if} jouw_keuze {is} jouw_keuze
+                    {if} computer_keuze {is} jouw_keuze
                         {print} 'Gelijkspel'
-                    {elif} jouw_keuze {is} steen {and} jouw_keuze {is} papier
+                    {elif} computer_keuze {is} steen {and} jouw_keuze {is} papier
                         {print} 'Jij wint!'
-                    {elif} jouw_keuze {is} steen {and} jouw_keuze {is} schaar
+                    {elif} computer_keuze {is} steen {and} jouw_keuze {is} schaar
                         {print} 'De computer wint!'
                     _
                     ```
