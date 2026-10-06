@@ -61,6 +61,10 @@ jobs:
     # layers in the GitHub Actions cache so unchanged layers don't get rebuilt.
     - name: Build Docker container
       uses: docker/build-push-action@v6
+      env:
+        # Skip the build summary and its uploaded build record, which we don't use
+        DOCKER_BUILD_SUMMARY: false
+        DOCKER_BUILD_RECORD_UPLOAD: false
       with:
         context: .
         tags: hedy:latest
