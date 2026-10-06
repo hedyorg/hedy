@@ -1,4 +1,6 @@
-# This workflow runs Cypress tests against the app in Docker using doit.
+# This workflow runs a few Cypress smoke tests against the app in Docker using doit.
+# The full Cypress suite already runs in cypresstests.yml; this only checks that the
+# container builds and serves a working app.
 
 name: Cypress tests (Docker PR)
 
@@ -11,16 +13,30 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
+    env:
+      # Puppeteer is only used to print workbooks, so skip its Chrome download
+      PUPPETEER_SKIP_DOWNLOAD: true
+
     steps:
     - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
 
     - name: Set up Python 3.12
       uses: actions/setup-python@v6
       with:
         python-version: 3.12
         cache: pip
+
+    - name: Set up NodeJS 22
+      uses: actions/setup-node@v6
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Cache the Cypress binary
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/Cypress
+        key: cypress-binary-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
     - name: Install Python dependencies
       run: |
@@ -62,6 +78,7 @@ jobs:
         install: false
         record: false
         working-directory: tests/
+        spec: cypress/e2e/home_page/start_buttons.cy.js,cypress/e2e/hedy_page/run_code_button.cy.js,cypress/e2e/for-teacher_page/general/see_teacher_page.cy.js,cypress/e2e/signup_page/signup.cy.js
 
     - name: Print container logs on failure
       if: failure()
