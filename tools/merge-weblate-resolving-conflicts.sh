@@ -38,56 +38,78 @@ conflicted_merge=0
 git merge origin/main --no-commit --no-ff || conflicted_merge=1
 
 unresolved=""
+merge_base=$(git merge-base HEAD origin/main)
 
-# 'git merge' leaves the three sides in the index: stage 1 is the merge base, stage 2 is
-# HEAD (this branch, so the Weblate side) and stage 3 is what we are merging in (origin/
-# main). A stage is missing when a file was added or deleted on only one side.
-stage_to() {
-  git show ":$1:$2" > "$3" 2>/dev/null
+show_to() {
+  git show "$1:$2" > "$3" 2>/dev/null
 }
 
+# Content YAML: every language file Weblate touched, whether git flagged it or not. While
+# Weblate is stuck in conflict it cannot pull 'main', so its copy of the English files goes
+# stale and translators keep translating levels the team has since removed. Such a file can
+# merge cleanly as text and still fail tools/check-yaml-structure.py, so the YAML merge has
+# to see it either way; it drops whatever the current English file no longer has.
+for file in $(git diff --name-only "$merge_base" HEAD -- 'content/*.yaml'); do
+  case "$file" in
+    */en.yaml) continue ;;  # the English files are ours alone; git's merge stands
+  esac
+  base=$(mktemp); weblate=$(mktemp); upstream=$(mktemp); template=$(mktemp); notes=$(mktemp)
+
+  if ! show_to HEAD "$file" "$weblate"; then
+    # Weblate deleted it, which it does not do on its own; leave it to git.
+    rm -f "$base" "$weblate" "$upstream" "$template" "$notes"
+    continue
+  fi
+  show_to "$merge_base" "$file" "$base" || : > "$base"
+  if ! show_to origin/main "$file" "$upstream"; then
+    if [ -s "$base" ]; then
+      # The team deleted a language file that Weblate went on to change. Whether it
+      # should exist is a judgement call this script has no basis for making.
+      unresolved="$unresolved $file"
+      rm -f "$base" "$weblate" "$upstream" "$template" "$notes"
+      continue
+    fi
+    : > "$upstream"  # a language only Weblate has so far
+  fi
+
+  # merge-weblate-yaml.py takes BASE OURS THEIRS with OURS meaning 'main'.
+  template_args=()
+  if show_to origin/main "$(dirname "$file")/en.yaml" "$template"; then
+    template_args=(--template "$template")
+  fi
+  if python3 tools/merge-weblate-yaml.py ${template_args[@]+"${template_args[@]}"} \
+      "$base" "$upstream" "$weblate" "$file" 2> "$notes"; then
+    git add "$file"
+  else
+    unresolved="$unresolved $file"
+  fi
+  if [ -s "$notes" ]; then
+    { echo "### \`$file\`"; echo; echo '```'; cat "$notes"; echo '```'; echo; } >> "$REPORT"
+  fi
+
+  rm -f "$base" "$weblate" "$upstream" "$template" "$notes"
+done
+
+# Everything else that conflicted -- the .po files especially -- is resolved hunk by hunk
+# in favour of Weblate, which is what '-X ours' used to do for the whole tree. Git's index
+# has the three sides as stages: 1 is the merge base, 2 is HEAD (Weblate), 3 is origin/main.
 if [ "$conflicted_merge" = 1 ]; then
 for conflicted in $(git diff --name-only --diff-filter=U); do
   base=$(mktemp); weblate=$(mktemp); upstream=$(mktemp)
 
-  if ! stage_to 2 "$conflicted" "$weblate" || ! stage_to 3 "$conflicted" "$upstream"; then
-    # Added on one side only, or deleted on one side and changed on the other. Both need
-    # a judgement call about whether the file should exist at all, which this script has
-    # no basis for making.
-    unresolved="$unresolved $conflicted"
-    rm -f "$base" "$weblate" "$upstream"
-    continue
-  fi
-  # No stage 1 means both sides created the file; an empty base reads as "nothing here
-  # before", which is exactly right.
-  stage_to 1 "$conflicted" "$base" || : > "$base"
-
   case "$conflicted" in
-    content/*.yaml)
-      # merge-weblate-yaml.py takes BASE OURS THEIRS, where OURS is the 'main' side, so
-      # the two stages go in swapped relative to git's sense of "ours" on this branch.
-      {
-        echo "### \`$conflicted\`"
-        echo
-        echo '```'
-      } >> "$REPORT"
-      if python3 tools/merge-weblate-yaml.py "$base" "$upstream" "$weblate" "$conflicted" \
-          2>> "$REPORT"; then
+    content/*.yaml) unresolved="$unresolved $conflicted" ;;  # the loop above skipped it
+    *)
+      if show_to :2 "$conflicted" "$weblate" && show_to :3 "$conflicted" "$upstream"; then
+        show_to :1 "$conflicted" "$base" || : > "$base"
+        # 'git merge-file' writes its result into the first file it is given.
+        git merge-file --ours "$weblate" "$base" "$upstream" || true
+        cp "$weblate" "$conflicted"
         git add "$conflicted"
       else
+        # Added or deleted on one side only: whether it should exist is not ours to guess.
         unresolved="$unresolved $conflicted"
       fi
-      {
-        echo '```'
-        echo
-      } >> "$REPORT"
-      ;;
-    *)
-      # Hunk-by-hunk, preferring Weblate, which is what '-X ours' used to do everywhere.
-      # 'git merge-file' writes its result into the first file it is given.
-      git merge-file --ours "$weblate" "$base" "$upstream" || true
-      cp "$weblate" "$conflicted"
-      git add "$conflicted"
       ;;
   esac
 
