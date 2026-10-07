@@ -1,6 +1,9 @@
 """Tests for the for_teachers.py endpoints."""
+import html
+import re
 import time
 import uuid
+from urllib.parse import quote
 import pytest
 from flask import g, session
 
@@ -270,6 +273,49 @@ class TestDeleteClass:
         _clear_session(client)
         response = client.delete(f'/for-teachers/class/{cls["id"]}', check=False)
         assert response.status_code == 401
+
+
+# ---------------------------------------------------------------------------
+# GET  /for-teachers/class/<class_id>/manage/remove_student_modal/<student_id>
+# POST /for-teachers/class/<class_id>/manage/remove_student/<student_id>
+# ---------------------------------------------------------------------------
+
+class TestRemoveStudent:
+    def _remove_endpoint_from_modal(self, client, class_id, student_id):
+        response = client.get(
+            f'/for-teachers/class/{class_id}/manage/remove_student_modal/{student_id}?is_invite=0')
+        match = re.search(r'hx-post="([^"]+)"', response.get_data(as_text=True))
+        assert match, 'modal should contain an hx-post endpoint'
+        return html.unescape(match.group(1))
+
+    @pytest.mark.parametrize('prefix', ['stu', 'stu l.', 'stu a b'])
+    def test_remove_student_via_modal_endpoint(self, client, given, prefix):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        student = given.a_student_account(f'{prefix}{uuid.uuid4().hex[:8]}')
+        given.db.add_student_to_class(cls['id'], student['username'])
+
+        endpoint = self._remove_endpoint_from_modal(client, cls['id'], student['username'])
+        assert ' ' not in endpoint
+        client.post(endpoint)
+
+        assert cls['id'] not in given.db.get_student_classes_ids(student['username'])
+        assert student['username'] not in given.db.get_class(cls['id']).get('students', [])
+
+    def test_removed_student_with_space_is_searchable_again(self, client, given):
+        teacher = given.logged_in_as_new_teacher()
+        old_class = given.a_class(teacher['username'])
+        new_class = given.a_class(teacher['username'])
+        username = f'stu {uuid.uuid4().hex[:8]}.'
+        given.a_student_account(username)
+        given.db.add_student_to_class(old_class['id'], username)
+
+        endpoint = self._remove_endpoint_from_modal(client, old_class['id'], username)
+        client.post(endpoint)
+
+        response = client.get(
+            f'/search?search={quote(username)}&user_type=student&class_id={new_class["id"]}')
+        assert html.escape(username) in response.get_data(as_text=True)
 
 
 # ---------------------------------------------------------------------------
