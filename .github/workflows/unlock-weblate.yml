@@ -86,7 +86,19 @@ jobs:
 
         # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
         # https://github.com/WeblateOrg/weblate/issues/11368
-        wlc reset hedy/adventures &
+        #
+        # But do look at how it starts. Merging the PR makes GitHub notify Weblate, which
+        # starts pulling right away, and a reset that arrives while that pull runs is
+        # refused with HTTP 423 within a second. Retry those, like 'update-weblate.yml'
+        # does, instead of waiting five minutes for a reset that was never accepted.
+        for attempt in $(seq 1 10); do
+          wlc reset hedy/adventures > reset.txt 2>&1 &
+          sleep 15
+          cat reset.txt
+          grep -q 'HTTP error 423' reset.txt || break
+          echo "Weblate is busy with another repository operation; retrying the reset in 30s ($attempt/10)"
+          sleep 30
+        done
 
         # A reset that silently fails is the start of a conflict loop, so check the outcome
         # rather than assume it. 'wlc repo' can't tell us whether it worked: right after a
