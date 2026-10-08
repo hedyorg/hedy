@@ -1,16 +1,19 @@
 queue_rules:
+  # Squash Weblate PRs so we dont have to lock weblate while the PR is opened
+  - name: translations_queue
+    batch_size: 1
+    queue_conditions: &checks
+      - "#approved-reviews-by>=1"
+      - "#changes-requested-reviews-by=0"
+      - "check-success=build"
+      - "check-success=cypress"
+    merge_conditions: *checks
+    merge_method: merge
+
   - name: default_queue
     batch_size: 1
-    queue_conditions:
-      - "#approved-reviews-by>=1"
-      - "#changes-requested-reviews-by=0"
-      - "check-success=build"
-      - "check-success=cypress"
-    merge_conditions:
-      - "#approved-reviews-by>=1"
-      - "#changes-requested-reviews-by=0"
-      - "check-success=build"
-      - "check-success=cypress"
+    queue_conditions: *checks
+    merge_conditions: *checks
     merge_method: squash
     commit_message_format:
       title: pr-title
@@ -19,13 +22,21 @@ queue_rules:
         - co-authored-by
 
 pull_request_rules:
+  - name: Automatic merge of translations on approval
+    conditions:
+      - or:
+          - "author=weblate"
+          - "label=translations"
+      - and: *checks
+    actions:
+      queue:
+        name: translations_queue
+
   - name: Automatic squash merge on approval
     conditions:
-      - and:
-          - "#approved-reviews-by>=1"
-          - "#changes-requested-reviews-by=0"
-          - "check-success=build"
-          - "check-success=cypress"
+      - "-author=weblate"
+      - "-label=translations"
+      - and: *checks
     actions:
       comment:
         message: Thank you for contributing! Your pull request is now going on the merge train (choo choo! Do not click update from main anymore, and be sure to [allow changes to be pushed to your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork)).
