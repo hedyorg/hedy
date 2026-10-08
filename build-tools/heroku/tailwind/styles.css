@@ -665,6 +665,48 @@ body[dir='rtl'] .right-hand-shadow {
   @apply  bg-blue-100;
 }
 
+.manual-index-link-active {
+  @apply bg-blue-100 border-s-blue-700;
+}
+
+.manual-index-row:has(.manual-index-link-active) {
+  @apply border-s-blue-700 bg-blue-100;
+}
+
+.teacher-manual code {
+  @apply text-red-600 border border-gray-300;
+  @apply bg-gray-200 !important;
+}
+
+.teacher-manual .mistake-title p {
+  font: inherit;
+  color: inherit;
+}
+
+.teacher-manual .mistake + .mistake {
+  @apply mt-7 pt-7 border-t border-gray-200;
+}
+
+.teacher-manual [data-manual-index-toggle] i {
+  @apply transition-transform duration-150 ease-in;
+}
+
+.teacher-manual [data-manual-index-toggle][aria-expanded="true"] i {
+  @apply rotate-90;
+}
+
+[dir="rtl"] .teacher-manual [data-manual-index-toggle] i {
+  @apply rotate-180;
+}
+
+[dir="rtl"] .teacher-manual [data-manual-index-toggle][aria-expanded="true"] i {
+  @apply rotate-90;
+}
+
+.teacher-manual .manual-to-top {
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+}
+
 .not-selected-adv {
 }
 /* EDITOR WARNINGS & ERRORS */

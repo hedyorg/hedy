@@ -1,10 +1,12 @@
 import collections
 from difflib import SequenceMatcher
 import functools
+import math
 import os
 import re
 import time
 import uuid
+from urllib.parse import quote
 from venv import logger
 
 from bs4 import BeautifulSoup
@@ -97,6 +99,12 @@ def teacher_guide_levels(language):
             "sections": level.get("sections") or en_level.get("sections") or [],
         })
     return levels
+
+
+# How many rows of the grading table one page shows. Every row costs the browser markup,
+# a fold handler and a checkbox to wire up, and a class of twenty students can have many
+# hundreds of submitted programs.
+GRADING_PAGE_SIZE = 25
 
 
 class ForTeachersModule(WebsiteModule):
@@ -396,9 +404,8 @@ class ForTeachersModule(WebsiteModule):
                                page_title='All workbooks',
                                workbooks=workbooks)
 
-    @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
-    @route("/manual/<section_key>", methods=["GET"])
-    def get_teacher_manual(self, section_key):
+    @route("/manual", methods=["GET"])
+    def get_teacher_manual(self):
         translations = hedyweb.PageTranslations("for-teachers")
         content = translations.get_page_translations(g.lang)
         english = translations.get_page_translations('en')
@@ -409,58 +416,58 @@ class ForTeachersModule(WebsiteModule):
         guide = content['teacher-guide']
         english_guide = english['teacher-guide']
 
-        # Weblate translates the value of `key` along with everything else, so in several
-        # languages this section is called `häufige_fehler` or `erreurs_courantes`. Look the
-        # requested key up in both the translated and the English guide, and address the
-        # section by the position the two agree on. The nav below then links to the English
-        # keys, so a manual URL means the same thing in every language.
-        def index_of(sections, key):
-            return next((i for i, section in enumerate(sections)
-                         if isinstance(section, dict) and section.get('key') == key), None)
+        sections = []
+        for i, section in enumerate(guide):
+            if not isinstance(section, dict):
+                continue
 
-        index = index_of(guide, section_key)
-        if index is None:
-            index = index_of(english_guide, section_key)
-        if index is None or index >= len(guide):
-            index = 0
+            # Weblate translates the value of `key` along with everything else, so in several
+            # languages a section is called `häufige_fehler` or `erreurs_courantes`. The anchors
+            # are built from the English key instead, so that a link into the manual points at
+            # the same section in every language.
+            key = english_guide[i].get('key', '') if i < len(english_guide) else section.get('key', '')
+            key = key or f'section-{i + 1}'
 
-        section_titles = [
-            (english_guide[i].get('key', '') if i < len(english_guide) else section.get('key', ''),
-             section.get('title', ''))
-            for i, section in enumerate(guide)
-        ]
-        section_key = section_titles[index][0] if index < len(section_titles) else section_key
-        current_section = guide[index]
+            # Some sections have 'subsections', others have 'levels'. We're going to treat them
+            # ~the same. Give levels a 'title' field as well (doesn't have it in the YAML).
+            subsections = section.get('subsections') or []
+            for subsection in subsections:
+                subsection.setdefault('title', '')
+            # The per-level entries are rebuilt from scratch rather than read off this section,
+            # so that every language gets the same 18 levels with English as a fallback, and so
+            # that the titles below are not written back into the cached YAML.
+            levels = teacher_guide_levels(g.lang) if section.get('levels') else []
+            for level in levels:
+                level['title'] = gettext('level') + ' ' + str(level['level'])
 
-        if not current_section:
+            sections.append(dict(
+                key=key,
+                title=section.get('title', ''),
+                intro=section.get('intro'),
+                subsections=subsections,
+                levels=hedy_content.deep_translate_keywords(levels, g.keyword_lang),
+            ))
+
+        if not sections:
             return utils.error_page(error=404, ui_message=gettext("page_not_found"))
 
-        intro = current_section.get('intro')
-
-        # Some pages have 'subsections', others have 'levels'. We're going to treat them ~the same.
-        # Give levels a 'title' field as well (doesn't have it in the YAML).
-        subsections = current_section.get('subsections', [])
-        for subsection in subsections:
-            subsection.setdefault('title', '')
-        # The per-level entries are rebuilt from scratch rather than read off this section,
-        # so that every language gets the same 18 levels with English as a fallback, and so
-        # that the titles below are not written back into the cached YAML.
-        levels = teacher_guide_levels(g.lang) if current_section.get('levels') else []
-        for level in levels:
-            level['title'] = gettext('level') + ' ' + str(level['level'])
-
-        subsection_titles = [x.get('title', '') for x in subsections + levels]
-        levels = hedy_content.deep_translate_keywords(levels, g.keyword_lang)
         return render_template("teacher-manual.html",
                                current_page="teacher-manual",
+                               javascript_page_options=dict(page='teacher-manual'),
                                page_title=page_title,
-                               section_titles=section_titles,
-                               section_key=section_key,
-                               section_title=current_section['title'],
-                               intro=intro,
-                               subsection_titles=subsection_titles,
-                               subsections=subsections,
-                               levels=levels)
+                               sections=sections)
+
+    @route("/manual/<section_key>", methods=["GET"])
+    def get_teacher_manual_section(self, section_key):
+        """Send the links to what used to be a page per section to their place on the manual.
+
+        The anchors carry the English keys the old pages were addressed by, so a link that
+        was handed out before the manual became one page lands on the same text. A key we
+        do not recognise -- a translated one, from a browser that kept it -- simply opens
+        the manual at the top.
+        """
+        anchor = f'#manual-{section_key}' if re.fullmatch(r'[A-Za-z0-9_-]+', section_key) else ''
+        return redirect(f'/for-teachers/manual{anchor}')
 
     @route("/class/all", methods=["GET"])
     @requires_teacher
@@ -703,9 +710,10 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        # For now, only level 1 is supported as in the original code
-        levels = [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)]
-        student_adventures = self.build_student_adventures(Class, user, levels)
+        filters, sort_orders, page = self.grading_table_request()
+        page_of_adventures, pagination = self.grading_table_rows(
+            Class, user, filters, sort_orders, page
+        )
         session["class_id"] = class_id
         customizations = get_customizations(self.db, Class["id"])
         adventures_per_level = hedy_website_utils.load_all_adventures_for_index(
@@ -721,28 +729,37 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=sorted(Class.get("students", [])),
             adventures=adventure_list,
-            student_adventures=student_adventures,
+            student_adventures=page_of_adventures,
+            pagination=self.with_pager_urls(class_id, pagination, filters, sort_orders),
+            filters=filters,
+            sort_orders=sort_orders,
             javascript_page_options=dict(
                 page="grade-class",
             ),
         )
 
-    def build_student_adventures(self, Class, user, levels):
+    def build_student_adventures(self, Class, user, levels, with_ticked=True):
         """
         Builds the student adventures dictionary for grading.
         Args:
             Class: The class object
-            students: List of student IDs
-            class_adventures_formatted: Adventures formatted for the class
-            adventure_names: Mapping of adventure names
+            user: The teacher looking at the page
             levels: List of levels to include
+            with_ticked: whether to read which of these have been ticked off. Reading them
+                costs a request per hundred rows, so a caller that only shows a page of the
+                rows is better off leaving this out and calling `fill_ticked_state` on the
+                page it ends up showing.
         Returns:
             student_adventures: dict
         """
         students, class_adventures_formatted, adventure_names = (
             self.get_class_information(Class, user)
         )
-        student_adventures = {}
+
+        # Collect the rows first and look up their ticked state in one go afterwards. A class
+        # can easily have hundreds of submitted programs, and reading them one at a time is a
+        # round trip per row.
+        rows = []
         for student in students:
             all_programs = self.db.last_programs_for_user_all_levels(student)
             for level in levels:
@@ -769,33 +786,193 @@ class ForTeachersModule(WebsiteModule):
                         student_adventure_id = (
                             f"{student}-{program['adventure_name']}-{level}"
                         )
-                        current_adventure = self.db.student_adventure_by_id(
-                            student_adventure_id
-                        )
-                        if not current_adventure:
-                            current_adventure = self.db.store_student_adventure(
-                                dict(
-                                    id=f"{student_adventure_id}",
-                                    ticked=False,
-                                    program_id=program["id"],
-                                )
-                            )
-                        current_program = dict(
-                            level=str(program["level"]),
-                            name=name,
-                            program_id=program["id"],
-                            code=program["code"],
-                            student=student,
-                            adventure_name=program["adventure_name"],
-                            ticked=current_adventure["ticked"],
-                            is_modified=program.get("is_modified"),
-                            timestamp=program["date"],
-                            date=utils.localized_date_format(
-                                program["date"], only_date=True
-                            ),
-                        )
-                        student_adventures[student_adventure_id] = current_program
+                        rows.append((student_adventure_id, student, name, program))
+
+        ticked_adventures = (
+            self.db.student_adventures_by_ids([row[0] for row in rows]) if with_ticked else {}
+        )
+
+        student_adventures = {}
+        for student_adventure_id, student, name, program in rows:
+            # A row without a record has never been ticked. One is written when a teacher
+            # actually ticks the box, so that looking at this page does not write to the
+            # database once per program shown.
+            current_adventure = ticked_adventures.get(student_adventure_id)
+            student_adventures[student_adventure_id] = dict(
+                level=str(program["level"]),
+                name=name,
+                program_id=program["id"],
+                code=program["code"],
+                student=student,
+                adventure_name=program["adventure_name"],
+                ticked=current_adventure["ticked"] if current_adventure else False,
+                is_modified=program.get("is_modified"),
+                timestamp=program["date"],
+                date=utils.localized_date_format(
+                    program["date"], only_date=True
+                ),
+            )
         return student_adventures
+
+    @staticmethod
+    def grading_table_request():
+        """Read the filter, the sort and the page the request asks for.
+
+        The page route and the htmx route both take the same parameters, so that the URL a
+        pager pushes is a page that can be opened, reloaded and gone back to.
+        """
+        filters = dict(
+            filter_level=request.args.get("filter_level", "all", type=str),
+            filter_student=request.args.get("filter_student", "all", type=str),
+            filter_adventure=request.args.get("filter_adventure", "all", type=str),
+        )
+        sort_orders = {}
+        for column in ("level", "student", "name", "timestamp", "ticked"):
+            if request.args.get(column, "none") != "none":
+                sort_orders[column] = request.args[column] == "ascendent"
+        return filters, sort_orders, request.args.get("page", 1, type=int)
+
+    def grading_table_rows(self, Class, user, filters, sort_orders, page):
+        """Build, filter, sort and then page the rows of the grading table."""
+        if filters["filter_level"] == "all":
+            levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+        else:
+            try:
+                levels = [int(filters["filter_level"])]
+            except ValueError:
+                levels = [1]
+
+        # Which rows have been ticked is read separately, because a class can have many
+        # hundreds of them and only a page of them is ever shown. Reading all of them is a
+        # request per hundred rows against a table that will throttle long before that is
+        # free.
+        sorting_on_ticked = "ticked" in sort_orders
+
+        student_adventures = self.build_student_adventures(
+            Class, user, levels, with_ticked=sorting_on_ticked
+        )
+        student_adventures = self.filter_student_adventures(
+            student_adventures, filters["filter_student"], filters["filter_adventure"]
+        )
+        student_adventures = self.sort_student_adventures(student_adventures, sort_orders)
+        # Paging comes last, so that filtering and sorting still see every row and the pager
+        # tells the truth about what it is paging through.
+        page_of_adventures, pagination = self.paginate_student_adventures(
+            student_adventures, page
+        )
+        if not sorting_on_ticked:
+            page_of_adventures = self.fill_ticked_state(page_of_adventures)
+        return page_of_adventures, pagination
+
+    def fill_ticked_state(self, student_adventures: dict):
+        """Read which of these rows have been ticked off, and say so on them.
+
+        A row with no record has never been ticked: one is written when a teacher actually
+        ticks the box.
+        """
+        ticked_adventures = self.db.student_adventures_by_ids(list(student_adventures))
+        return {
+            student_adventure_id: dict(
+                row,
+                ticked=bool(ticked_adventures.get(student_adventure_id, {}).get("ticked")),
+            )
+            for student_adventure_id, row in student_adventures.items()
+        }
+
+    # How many pages are listed on either side of the one being looked at, before the list
+    # is broken by an ellipsis. First and last are always listed.
+    PAGER_WINDOW = 2
+
+    @classmethod
+    def pager_page_numbers(cls, page, pages):
+        """The page numbers to offer, with None where the list is broken by an ellipsis.
+
+        A class with hundreds of submitted programs runs to dozens of pages, and listing
+        every one of them would be its own wall of buttons.
+        """
+        if pages <= 2 * cls.PAGER_WINDOW + 3:
+            return list(range(1, pages + 1))
+
+        shown = {1, pages}
+        shown.update(range(max(1, page - cls.PAGER_WINDOW), min(pages, page + cls.PAGER_WINDOW) + 1))
+
+        numbers = []
+        previous = 0
+        for number in sorted(shown):
+            # A gap of exactly one page is not worth an ellipsis: it is the same width.
+            if number - previous == 2:
+                numbers.append(previous + 1)
+            elif number - previous > 2:
+                numbers.append(None)
+            numbers.append(number)
+            previous = number
+        return numbers
+
+    def with_pager_urls(self, class_id, pagination, filters, sort_orders):
+        """Add everything the pager needs to a pagination dict.
+
+        Every page gets two addresses: the page to put in the browser's history, and the
+        htmx endpoint that fills the table. Both carry the filter and the sort, so a page
+        opened straight from the history pages on with the same ones.
+        """
+        def query(page):
+            parameters = dict(filters, page=page)
+            parameters.update({
+                column: "ascendent" if ascending else "descendent"
+                for column, ascending in sort_orders.items()
+            })
+            return parameters
+
+        def page_link(page):
+            if page is None:
+                return None
+            return dict(
+                page=page,
+                current=page == pagination["page"],
+                url=url_for("teachers.get_grading_page", class_id=class_id, **query(page)),
+                rows_url=url_for(
+                    "teachers.filter_sort_grading_page", class_id=class_id, **query(page)
+                ),
+            )
+
+        return dict(
+            pagination,
+            numbers=[
+                page_link(number)
+                for number in self.pager_page_numbers(pagination["page"], pagination["pages"])
+            ],
+        )
+
+    def paginate_student_adventures(self, student_adventures: dict, page: int):
+        """Return one page of the grading table, and what a pager needs to describe it.
+
+        A class of twenty students can have many hundreds of submitted programs, and every
+        row costs the browser markup, a fold handler and a checkbox to wire up. Sorting and
+        filtering have to see the whole set, so this runs last.
+
+        Args:
+            student_adventures: dict mapping id -> program dict, already filtered and sorted
+            page: the page to return, counting from 1
+        Returns:
+            (dict of this page's student_adventures, dict describing the page)
+        """
+        total = len(student_adventures)
+        pages = max(1, math.ceil(total / GRADING_PAGE_SIZE))
+        page = min(max(page, 1), pages)
+        start = (page - 1) * GRADING_PAGE_SIZE
+
+        rows = list(student_adventures.items())[start:start + GRADING_PAGE_SIZE]
+        pagination = dict(
+            page=page,
+            pages=pages,
+            total=total,
+            # Counting from 1, and 0 of 0 rather than 1 of 0 when there is nothing to show.
+            first=start + 1 if rows else 0,
+            last=start + len(rows),
+            has_previous=page > 1,
+            has_next=page < pages,
+        )
+        return dict(rows), pagination
 
     def filter_student_adventures(self, student_adventures: dict, filter_student: str, filter_adventure: str):
         """
@@ -926,31 +1103,10 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        # Get filter values from form (htmx)
-        filter_level = request.args.get("filter_level", "all", type=str)
-        filter_student = request.args.get("filter_student", "all", type=str)
-        filter_adventure = request.args.get("filter_adventure", "all", type=str)
 
-        if filter_level == "all":
-            levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
-        else:
-            try:
-                levels = [int(filter_level)]
-            except ValueError:
-                levels = [1]
-        # Get sort values from form (htmx)
-        sort_columns = ["level", "student", "name", "timestamp", "ticked"]
-        sort_orders = {}
-        for col in sort_columns:
-            if request.args.get(col, "none") != "none":
-                sort_orders[col] = request.args[col] == "ascendent"
-
-        student_adventures = self.build_student_adventures(Class, user, levels)
-        filtered_adventures = self.filter_student_adventures(
-            student_adventures, filter_student, filter_adventure
-        )
-        filtered_adventures = self.sort_student_adventures(
-            filtered_adventures, sort_orders
+        filters, sort_orders, page = self.grading_table_request()
+        page_of_adventures, pagination = self.grading_table_rows(
+            Class, user, filters, sort_orders, page
         )
 
         return render_partial(
@@ -958,7 +1114,8 @@ class ForTeachersModule(WebsiteModule):
             class_id=class_id,
             class_info=Class,
             students=sorted(Class.get("students", [])),
-            student_adventures=filtered_adventures,
+            student_adventures=page_of_adventures,
+            pagination=self.with_pager_urls(class_id, pagination, filters, sort_orders),
             sort_orders=sort_orders
         )
 
@@ -1472,17 +1629,27 @@ class ForTeachersModule(WebsiteModule):
         level = request.args.get("level")
         student_name = request.args.get("student", type=str)
         adventure_name = request.args.get("adventure_name", type=str)
+        program_id = request.args.get("program_id", type=str)
         student_adventure_id = f"{student_name}-{adventure_name}-{level}"
         student_adventure = self.db.student_adventure_by_id(student_adventure_id)
-        if not student_adventure:
+        if student_adventure:
+            student_adventure = self.db.update_student_adventure(
+                student_adventure_id, student_adventure["ticked"]
+            )
+        elif program_id:
+            # Looking at the grading page no longer writes a record per program shown, so
+            # the first tick of a box is what creates one.
+            student_adventure = self.db.store_student_adventure(
+                dict(id=student_adventure_id, ticked=True, program_id=program_id)
+            )
+        else:
             return utils.error_page(error=404, ui_message=gettext("no_programs"))
-        self.db.update_student_adventure(student_adventure_id, student_adventure["ticked"])
-        student_adventure = self.db.student_adventure_by_id(student_adventure_id)
         return jinja_partials.render_partial(
             "for-teachers/classes/htmx-grade-class-checkbox.html",
             is_ticked=student_adventure["ticked"],
             student=student_name,
             adventure_name=adventure_name,
+            program_id=student_adventure.get("program_id", program_id),
             level=level,
             class_id=class_id
         )
@@ -1845,8 +2012,9 @@ class ForTeachersModule(WebsiteModule):
             modal_text = modal_text_template.format(student='', student_name='')
         except (KeyError, IndexError, ValueError):
             modal_text = modal_text_template
-        htmx_endpoint = f'/for-teachers/class/{class_id}\
-            /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
+        # Usernames can contain spaces quote them instead of stripping whitespace
+        htmx_endpoint = (f'/for-teachers/class/{class_id}/manage/remove_student/'
+                         f'{quote(student_id, safe="")}?is_invite={is_invite}')
         htmx_target = "#students-table"
         hyperscript = ""
         htmx_success_message = gettext("student_removed_successfully")

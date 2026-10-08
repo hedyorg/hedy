@@ -1,78 +1,172 @@
 {% extends "auth.html" %}
 
-{% block full_width_content %}
+{% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
 {% from 'incl/level-guide.html' import concepts_and_changes, common_mistakes %}
-    <div class="bg-blue-200 mb-4">
-        <div class="py-4 flex items-center w-full copy-container mx-auto">
-            <div class="tracking-wide text-xl font-extralight">{{ page_title }}</div>
-        </div>
-    </div>
-    <div class="copy-container text-business-copy" id="teacher_documentation">
-        <div id="manual-out-of-date-banner" class="mb-4 flex items-start justify-between gap-4 rounded-md border border-yellow-400 bg-yellow-100 p-4 text-yellow-800">
-            <div>{{ _('manual_out_of_date') }}</div>
-            <button
-                type="button"
-                class="text-yellow-700 hover:text-yellow-900"
-                aria-label="{{ _('close') }}"
-                _="on click add .hidden to #manual-out-of-date-banner"
-            >
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        <div class="flex gap-8">
-            <div class="flex-0 text-links-plain rounded-md bg-gray-200 p-4">
-                {# Section nav #}
-                {% for key, title in section_titles %}
-                {% if key == section_key %}
-                    <div class="font-bold my-2">
-                        <a href="/for-teachers/manual/{{key}}">
-                            <div class="flex flex-row items-center gap-2">
-                                <i class="fa-solid fa-chevron-down w-4"></i>
-                                <span>{{ title }}</span>
-                            </div>
-                        </a>
-                    </div>
-                    {# Subsection nav #}
-                    {% for title in subsection_titles %}
-                        <div class="ltr:ml-8 rtl:mr-8 text-sm"><a href="#{{title|slugify}}">· {{ title }}</a></div>
-                    {% endfor %}
-                {% else %}
-                    <div class="my-2">
-                        <a href="/for-teachers/manual/{{key}}">
-                            <div class="flex flex-row items-center gap-2">
-                                <i class="fa-solid fa-chevron-right w-4"></i>
-                                <span>{{ title }}</span>
-                            </div>
-                        </a>
-                    </div>
-                {% endif %}
-                {% endfor %}
+
+{#
+  The index of the manual.
+
+  The whole manual is one page, so every entry in here is an anchor into the text below
+  and the index is what you move around it with.
+#}
+{% macro manual_index(instance) %}
+{#
+  One entry of the index, and one of the mistakes nested under a level.
+#}
+{% set entry = 'block flex-1 ps-2 pe-3 py-0.5 border-s-2 border-gray-300 text-sm font-normal leading-snug text-blue-900 no-underline hover:bg-gray-200 ease-in transition duration-100' %}
+{% set entry_deep = 'block ps-2 pe-3 py-0.5 border-s-2 border-gray-300 text-xs font-normal leading-snug text-blue-900 no-underline hover:bg-gray-200 ease-in transition duration-100' %}
+{% set fold_row = 'manual-index-row flex items-baseline gap-0.5 hover:bg-blue-200 ease-in transition duration-100' %}
+{% set fold_line = 'ps-2 border-s-2 border-gray-300' %}
+{% set fold_entry = 'block flex-1 px-2 py-0.5 text-base font-light leading-snug text-blue-900 no-underline' %}
+{% set fold_arrow = 'flex-none w-5 py-0.5 text-xs text-blue-900' %}
+{# The step in at each level of the index has to clear the arrow in front of the entry
+   above it, which is why it is this wide. #}
+{% set nested = 'list-none m-0 p-0' %}
+<nav aria-label="{{ _('on_this_page') }}" data-manual-index data-cy="manual_index">
+    <ul class="list-none m-0 p-0">
+        {% for section in sections %}
+        {# A section of the manual folds away whole, so a teacher can push the part they are
+           not teaching from out of the way. They start open: the index is there to show
+           what the manual holds. #}
+        <li class="{% if not loop.first %}mt-4{% endif %}" data-manual-index-group>
+            <div class="{{ fold_row }}">
+                <button type="button" class="{{ fold_arrow }}"
+                        aria-expanded="true" aria-label="{{ section.title }}"
+                        aria-controls="manual-index-{{ instance }}-{{ section.key }}"
+                        data-manual-index-toggle
+                        data-cy="manual_index_section_toggle_{{ section.key }}">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <a href="#manual-{{ section.key }}"
+                   class="block flex-1 px-2 py-0.5 text-base font-light text-blue-900 no-underline"
+                   data-cy="manual_index_section_{{ section.key }}">{{ section.title }}</a>
             </div>
-
-            <div class="flex-1">
-                {# Main content #}
-                <h2>{{ section_title }}</h2>
-
-                {% if intro %}
-                    <p>{{ intro|commonmark }}</p>
-                {% endif %}
-
-                {# Plain text content #}
-                {% for subsection in subsections %}
-                    <h3 id="{{subsection.title|slugify}}">{{ subsection.title }}</h3>
-                    <p>{{ subsection.text|commonmark }}</p>
+            <ul id="manual-index-{{ instance }}-{{ section.key }}" class="{{ nested }} ms-8"
+                data-manual-index-children>
+                {# The plain-text parts of a section. #}
+                {% for subsection in section.subsections %}
+                <li>
+                    <a href="#manual-{{ section.key }}-{{ loop.index }}" class="{{ entry }}"
+                       data-cy="manual_index_link">{{ subsection.title }}</a>
+                </li>
                 {% endfor %}
 
-                {# Per-level content, has different structure #}
-                {% for level in levels %}
-                    <h3 id="{{level.title|slugify}}">{{ level.title }}</h3>
-                    {{ concepts_and_changes(level.concepts_and_changes) }}
-                    {% if level.sections %}
-                        <h4 class="mt-6">{{ _('common_mistakes') }}</h4>
-                        {{ common_mistakes(level.sections, level.level) }}
+                {#
+                  The per-level parts.  A level holds a list of mistakes of its own, so it
+                  gets a group that folds open: eighteen levels with everything under them
+                  unfolded would be a longer list than the page it indexes.
+
+                  `autofold` marks the groups the page may open and shut as you read. The
+                  sections above are not marked: folding one away is a deliberate act, and
+                  scrolling into it should not undo it.
+                #}
+                {% for level in section.levels %}
+                <li data-manual-index-group data-manual-index-autofold>
+                    <div class="{{ fold_row }} {{ fold_line }}">
+                        <button type="button" class="{{ fold_arrow }}"
+                                aria-expanded="false" aria-label="{{ level.title }}"
+                                aria-controls="manual-index-{{ instance }}-level-{{ level.level }}"
+                                data-manual-index-toggle data-cy="manual_index_toggle_{{ level.level }}">
+                            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                        <a href="#manual-level-{{ level.level }}" class="{{ fold_entry }}"
+                           data-cy="manual_index_link">{{ level.title }}</a>
+                    </div>
+                    <ul id="manual-index-{{ instance }}-level-{{ level.level }}"
+                        class="{{ nested }} ms-4 hidden" data-manual-index-children>
+                        {% for mistake in level.sections %}
+                        {% if mistake.title %}
+                        <li>
+                            <a href="#manual-level-{{ level.level }}-mistake-{{ loop.index }}"
+                               class="{{ entry_deep }}"
+                               data-cy="manual_index_mistake">{{ mistake.title|commonmark|striptags|trim }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endmacro %}
+
+<div class="flex flex-col px-4 md:px-16 teacher-manual">
+    {{ breadcrumb([
+        {'label': _('teaching_materials'), 'url': '/for-teachers/teaching-materials'},
+        {'label': _('background_information')}
+      ], 'mt-2 mb-4') }}
+
+    <h1 class="my-5">{{ _('background_information') }}</h1>
+
+    {#
+      The index comes first in the document so that it is the first thing a screen reader
+      and the keyboard reach, and so that the copy of it a teacher can actually see is the
+      one found first.  On a narrow screen it is hidden here and repeated inside the text
+      column, where it folds away above the first heading.
+    #}
+    <div class="flex flex-row gap-8 items-start mt-2">
+        <aside class="hidden md:block flex-none w-72 sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto overscroll-contain"
+               data-manual-index-scroll>
+            {{ manual_index('wide') }}
+        </aside>
+
+        <div class="flex-1 min-w-0">
+            <details class="md:hidden mb-4 px-4 py-3 bg-white border border-gray-300 rounded-lg" data-manual-index-fold>
+                <summary class="cursor-pointer font-slab text-blue-700" data-cy="manual_index_summary">{{ _('on_this_page') }}</summary>
+                <div class="mt-3">{{ manual_index('narrow') }}</div>
+            </details>
+
+            <div class="bg-white border border-gray-300 rounded-lg p-6 md:p-12 text-business-copy"
+                 id="teacher_documentation">
+                {% for section in sections %}
+                <section data-cy="manual_section">
+                    <h2 id="manual-{{ section.key }}"
+                        class="scroll-mt-24 text-3xl font-bold text-blue-800 pb-2 mb-5 border-b border-gray-300
+                               {% if not loop.first %}mt-14{% endif %}">{{ section.title }}</h2>
+
+                    {% if section.intro %}
+                        <p>{{ section.intro|commonmark }}</p>
                     {% endif %}
+
+                    {# Plain text content #}
+                    {% for subsection in section.subsections %}
+                        <h3 id="manual-{{ section.key }}-{{ loop.index }}" class="scroll-mt-24 text-2xl mb-2">{{ subsection.title }}</h3>
+                        <p>{{ subsection.text|commonmark }}</p>
+                    {% endfor %}
+
+                    {# Per-level content, has different structure #}
+                    {% for level in section.levels %}
+                        <h3 id="manual-level-{{ level.level }}" class="scroll-mt-24 text-2xl mb-2">{{ level.title }}</h3>
+                        {{ concepts_and_changes(level.concepts_and_changes) }}
+                        {% if level.sections %}
+                            <h4 class="mt-9 mb-3 font-slab text-xl font-bold text-blue-800">{{ _('common_mistakes') }}</h4>
+                            {{ common_mistakes(level.sections, level.level,
+                                               id_prefix='manual-level-' ~ level.level ~ '-mistake',
+                                               title_class='scroll-mt-24 font-slab text-lg font-normal leading-tight text-blue-700') }}
+                        {% endif %}
+                    {% endfor %}
+                </section>
                 {% endfor %}
             </div>
         </div>
     </div>
+
+    {#
+      The manual is one long page now, so there is a way back to the top of it that does not
+      involve scrolling all the way. It only appears once the top of the page is out of
+      sight, which is why it starts hidden.
+    #}
+    <button type="button" data-manual-to-top data-cy="manual_to_top"
+            class="manual-to-top hidden fixed end-5 z-30 flex items-center gap-2 px-4 py-2 rounded-full
+                   border border-gray-400 bg-white shadow-lg font-slab text-blue-800
+                   hover:bg-blue-100 hover:border-blue-300 focus-visible:outline focus-visible:outline-2
+                   focus-visible:outline-offset-2 focus-visible:outline-blue-700">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+        <span>{{ _('back_to_top') }}</span>
+    </button>
+</div>
 {% endblock %}

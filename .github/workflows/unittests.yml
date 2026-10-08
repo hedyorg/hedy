@@ -15,6 +15,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      # These tests don't need the Cypress binary or Puppeteer's Chrome, which are slow to download
+      CYPRESS_INSTALL_BINARY: 0
+      PUPPETEER_SKIP_DOWNLOAD: true
+
     steps:
     - uses: actions/checkout@v6
     - name: Set up Python 3.12

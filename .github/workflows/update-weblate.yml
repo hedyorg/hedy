@@ -11,11 +11,15 @@ on:
 jobs:
   update-weblate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      # To start 'resolve-weblate-conflict.yml' when Weblate cannot merge 'main'.
+      actions: write
 
     steps:
-    # If an open Weblate/translations PR still exists, we shouldn't tell Weblate to push again.
-    # Because we ended our previous push with a 'reset', Weblate would otherwise force-push
-    # new changes over the unmerged old changes, causing them to lost.
+    # If an open Weblate/translations PR still exists, don't push more onto it while it is
+    # waiting for review and checks; whatever accumulates goes out with the next run.
     #
     # This covers both the PRs Weblate opens itself and the ones 'resolve-weblate-conflict.yml'
     # opens as hedybot (labeled 'translations'), the same PRs 'unlock-weblate.yml' reacts to.
@@ -46,15 +50,11 @@ jobs:
     - name: Weblate commands
       id: weblate_commands
       # Do a weblate pull, commit and push.
-      # After pushing, clean the Weblate remote. This is necessary because we squash merge the
-      # commits that Weblate pushes, and if the bytes aren't exactly equivalent (for example
-      # if we wrap or we revert a broken bit of code) it will trigger a merge
-      # conflict.
       #
-      # To prevent merge conflicts, lock the repository while we're merging this; otherwise,
-      # any translations in the merge window will cause merge conflicts. Only lock if we're
-      # going to create a Pull Request while doing this, since unlocking will
-      # only happen as the result of a PR being merged.
+      # Weblate is not locked while the PR is open, and not reset after it merges. Mergify
+      # merges translations PRs with a merge commit (see .mergify.yml), so Weblate's commits
+      # end up in the history of 'main' as they are, and its next pull finds them there.
+      # Translations made while the PR is open simply go out with the next one.
       run: |
         set -x
 
@@ -90,13 +90,17 @@ jobs:
         fi
         echo "has_changes=true" >> $GITHUB_OUTPUT
 
-        # Have to lock each component individually. Not in the UI, but using the CLI we do.
-        # (NOTE: this list is also below!)
-        for component in glossary adventures keywords client-messages web-texts webpages slides; do
-          wlc lock hedy/$component
-        done
-
-        wlc_when_free pull
+        # When Weblate cannot merge 'main' into its branch, every later run fails the same
+        # way until someone resolves the conflict, and nothing else tells anyone it is
+        # stuck. Say so, so the step below can hand it to 'resolve-weblate-conflict.yml'.
+        if ! pull_output=$(wlc_when_free pull 2>&1); then
+          echo "$pull_output"
+          if grep -Eq 'Could not (merge|rebase)' <<< "$pull_output"; then
+            echo "merge_conflict=true" >> $GITHUB_OUTPUT
+          fi
+          exit 1
+        fi
+        echo "$pull_output"
 
         # 'commit' seems to be an async process, as sometimes nothing is pushed if we run this
         # too quickly in succession. Add a short sleep to reduce chances of this happening.
@@ -113,68 +117,28 @@ jobs:
       run: |
         prs=$(gh pr -R hedyorg/hedy list --author weblate --json title -q '.[].title')
         if [[ "$prs" == "" ]]; then
-          echo "Weblate didn't create a PR! Not resetting because that would lose changes!"
+          echo "Weblate pushed, but no PR from it is open."
           exit 1
         fi
-        # From here on Weblate is supposed to stay locked until the PR is closed,
-        # so the unlock step at the bottom must not undo that.
-        echo "pr_created=true" >> $GITHUB_OUTPUT
       env:
         GH_TOKEN: ${{ github.token }}
 
-    - name: Make Weblate forget its commits
-      if: steps.weblate_commands.outputs.has_changes == 'true'
+    # Weblate could not merge 'main'. Resolving that is what 'resolve-weblate-conflict.yml'
+    # is for, and it opens a PR a human reviews before anything lands, so start it rather
+    # than failing quietly every morning. This job still fails, so the run shows why.
+    #
+    # It cannot loop: while the PR it opens is open, the first step of this job stops
+    # before reaching Weblate at all.
+    - name: Resolve the merge conflict
+      if: failure() && steps.weblate_commands.outputs.merge_conflict == 'true'
       run: |
-        started_at=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)
-
-        # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
-        # https://github.com/WeblateOrg/weblate/issues/11368
-        wlc reset &
-
-        # The reset is what stops Weblate's branch from diverging from 'main': we squash
-        # merge its PRs, so its own commits never become ancestors of 'main' and every
-        # later merge conflicts until it forgets them. A reset that silently fails is
-        # therefore the start of a conflict loop, so check that it happened instead of
-        # assuming it did.
-        #
-        # 'wlc repo' can't tell us whether it worked: right after a push Weblate has nothing
-        # left to push, so it reports a clean state either way. Comparing repository heads
-        # doesn't work either, because add-ons commit regenerated files moments after a
-        # reset. Weblate does log the reset itself, so wait for that entry to appear.
-        python3 - "$started_at" <<'PY'
-        import json, sys, time, urllib.request
-        from datetime import datetime
-
-        started_at = datetime.fromisoformat(sys.argv[1])
-        url = ("https://hosted.weblate.org/api/projects/hedy/changes/"
-               "?action=19&page_size=1")  # action 19 is "Repository reset"
-
-        for _ in range(30):
-            time.sleep(10)
-            with urllib.request.urlopen(url) as response:
-                results = json.load(response)["results"]
-            latest = datetime.fromisoformat(results[0]["timestamp"]) if results else None
-            print(f"last reset: {latest}, this run started: {started_at}", flush=True)
-            if latest is not None and latest > started_at:
-                print("Weblate has forgotten its commits")
-                sys.exit(0)
-
-        print("Weblate did not reset within five minutes of being asked to.")
-        print("Every sync from now on will conflict until it is reset by hand:")
-        print("https://hosted.weblate.org/projects/hedy/adventures/#repository")
-        sys.exit(1)
-        PY
-
-    # Any failure before the PR exists leaves every component locked, which stops
-    # translators from working until someone notices. Unlock again in that case; once
-    # the PR exists the lock is deliberate and 'unlock-weblate.yml' lifts it when the
-    # PR closes.
-    - name: Unlock Weblate if we failed before opening a PR
-      if: failure() && steps.confirm_pr.outputs.pr_created != 'true'
-      run: |
-        # (NOTE: this list is also above!)
-        for component in glossary adventures keywords client-messages web-texts webpages slides; do
-          wlc unlock hedy/$component
-        done
-
-
+        running=$(gh run list -R hedyorg/hedy --workflow resolve-weblate-conflict.yml \
+          --json status -q '[.[] | select(.status != "completed")] | length')
+        if [[ "$running" != "0" ]]; then
+          echo "A conflict resolution run is already in progress; not starting another."
+          exit 0
+        fi
+        gh workflow run resolve-weblate-conflict.yml -R hedyorg/hedy --ref main
+        echo "Started 'resolve-weblate-conflict.yml'; review the PR it opens."
+      env:
+        GH_TOKEN: ${{ github.token }}

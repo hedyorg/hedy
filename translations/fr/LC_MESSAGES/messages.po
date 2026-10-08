@@ -8,120 +8,98 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-02-02 19:49+0000\n"
-"Last-Translator: Martin Constantino–Bodin <martin.bodin@ens-lyon.org>\n"
+"PO-Revision-Date: 2026-09-25 15:34+0000\n"
+"Last-Translator: islas <hedy@jouf.fr>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
-msgstr "Tu as essayé d'utiliser la variable {name} à la ligne {access_line_number}, mais tu ne l'as défini qu'à la ligne {definition_line_number}. Défini ta variable avant de l'utiliser."
+msgstr "Nous avons détecté que la variable {name} est utilisée à la ligne {access_line_number}, mais elle n'a jamais été définie avant. Peux-tu définir ta variable avant de l'utiliser ?"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "Le nom `{variable}` doit être défini avant que tu puisses l’utiliser à droite de la commande `is`."
+msgstr "Nous avons détecté que la variable`{variable}` est utilisée dans l'expression à droite de la commande `{is}` avant d'avoir été définie. Peux-tu définir la variable avant de l'utiliser ?"
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr "Ton code est incomplet. Il contient des blancs que tu dois remplacer par du code."
+msgstr "Nous avaons détecté que ton code est incomplet. Peux-tu remplir les blancs avec du code ?"
 
-#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "Il semble que tu as oublié d'utiliser `{command}` avec la commande repeat qui est à la ligne {line_number}."
+msgstr "Nous avons détecté que la commande `{repeat}` à la ligne {line_number} ne contient pas la commande `{command}`. Peux-tu essayer de l'ajouter ?"
 
 #, fuzzy
 msgid "Invalid"
 msgstr "`{invalid_command}` n’est pas une commande du niveau {level} d’Hedy. Voulais-tu écrire `{guessed_command}` ?"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr "Tu ne peux pas utiliser la commande `{command}` avec `{invalid_argument}`. Essaye de remplacer `{invalid_argument}` par {allowed_types}."
+msgstr "Nous avons détecté que la commande `{command}` ne peut pas être utilisée avec `{invalid_argument}`. Peux-tu remplacer `{invalid_argument}` par {allowed_types} ?"
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr "Tu ne peux pas utiliser `{command}` avec `{invalid_argument}` car c’est {invalid_type}. Essaie de modifier `{invalid_argument}` en {allowed_types}."
+msgstr "Nous avons détecté que la commande `{command}` ne fonctionne pas avec `{invalid_argument}` car c’est {invalid_type}. Peux-tu modifier `{invalid_argument}` en {allowed_types} ?"
 
-#, fuzzy
 msgid "Invalid At Command"
-msgstr "La commande `{command}` n'est pas utilisable avant le niveau 16. Tu peux utiliser des crochets pour utiliser un élément d'une liste, par exemple `friends[i]`, `lucky_numbers[{random}]`."
+msgstr "Nous avons détecté que la commande `{command}` n'est pas utilisable avant le niveau 16. Peux-tu essayer d'utiliser des crochets `[]` pour les listes ?"
 
 #, fuzzy
 msgid "Invalid Space"
 msgstr "Oups ! Tu as commencé une ligne par une espace à la ligne {line_number}. Les espaces en début de ligne rendent les ordinateurs perplexes, peux-tu le supprimer ?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "Tu ne peux pas utiliser `{invalid_argument}` et `{invalid_argument_2}` avec `{command}` car l'un est {invalid_type} et l'autre est {invalid_type_2}. Essaye de changer `{invalid_argument}` en {invalid_type_2} ou `{invalid_argument_2}` en {invalid_type}."
+msgstr "Nous avons détecté que `{invalid_argument}` et `{invalid_argument_2}` ne peuvent pas être utilisés avec `{command}` car l'un est {invalid_type} et l'autre est {invalid_type_2}. Peux-tu essayer de changer `{invalid_argument}` en {invalid_type_2} ou `{invalid_argument_2}` en {invalid_type} ?"
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "Tu as utilisé `echo` avant `ask`, ou bien `echo` sans `ask`. Il faut d’abord utiliser `ask` pour demander, puis `echo`."
+msgstr "Nous avons détecté que tu as utilisé la commande `{echo}` avant d'utiliser ou sans utiliser la commande `{ask}`. Peux-tu essayer d'utiliser `{ask}` pour demander, puis `{echo}` ?"
 
 #, fuzzy
 msgid "Lonely Text"
 msgstr "Il semble que tu as oublié de mettre une commande avec le texte de la ligne {line_number}"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "Il semble que vous avez oublié d'utiliser une commande à la ligne {line_number}."
+msgstr "Nous avons détecté qu'il manque une commande à la ligne {line_number}. Peux-tu essaer de regarder la section d'exercices pour touver la commande à utiliser ?"
 
-#, fuzzy
 msgid "Missing Inner Command"
-msgstr "Il semble que tu as oublié d'utiliser une commande avec la déclaration `{command}` que tu as utilisé à la ligne {line_number}."
+msgstr "Nous avons détecté q'il manque une commande dans la déclaration `{command}` à la ligne {line_number}. Peux-tu essayer de regarder la section d'exercices pour trouver quelle commande utiliser ?"
 
 #, fuzzy
 msgid "No Indentation"
 msgstr "Tu as utilisé trop peu d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui n’est pas assez. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
 
-#, fuzzy
 msgid "Parse"
-msgstr "Le code que vous avez entré n'est pas un code Hedy valide. Il y a une erreur sur la ligne {location[0]}, à la position {location[1]}. Vous avez tapé `{character_found}`, mais ce n'est pas permis."
+msgstr "Nous avons détecté que `{character_found}` est utilisé à la ligne {location[0]}, ce qui n'est pas autorisé. Peux+tu essayer de trouver un caractère manquant ou en trop dans ton code ?"
 
-#, fuzzy
 msgid "Pressit Missing Else"
-msgstr "Tu as oublié d'ajouter ce qu'il se passe si tu presses une touche différente, ajouter un `{else}` à ton code"
+msgstr "Nous avons détecté que le code n'a pas de `{else}` pour gérer les cas où d'autres touches sont pressées. Peux-tu ajouter un `{else}` à ton code ?"
 
-#, fuzzy
 msgid "Runtime Index Error"
-msgstr "Tu as essayé d'accéder à la liste {name} mais celle-ci est vide ou sans index."
+msgstr "Nous avons détecté que la liste {name} est vide ou qu'elle n'a pas d'index. Peux-tu vérifier que la liste ne soit pas vide ou bien essayer d'écrire un nombre dans `[]` pour l'index manquant ?"
 
-#, fuzzy
 msgid "Too Big"
-msgstr "Waouh ! Ton programme a un nombre impressionnant de lignes de code : {lines_of_code} lignes ! Mais Hedy ne peut traiter que {max_lines} lignes à ce niveau. Rends ton programme plus court et ressaie."
+msgstr "Nous avons détecté que le programme a {lines_of_code} lignes, mais nous ne pouvons exécuter que {max_lines} lignes aux maximum. Peux-tu raccourcir ton programme ?"
 
-#, fuzzy
 msgid "Unexpected Indentation"
-msgstr "Tu as utilisé trop d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui est trop. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
+msgstr "Nous avons détecté que la ligne {line_number} commence avec trop d'espaces ({leading_spaces}).Peux tu essayer d'ajouter {indent_size} espaces lors ce que tu écris un nouveau bloc ?"
 
-#, fuzzy
 msgid "Unquoted Assignment"
-msgstr "À partir de ce niveau, le texte à droite de `is` doit être mis entre guillemets. Tu as oublié cela pour le texte {text}."
+msgstr "Nous avons détecté que le texte à la droite de `{is}` n'a pas été mis entre apostrophes. Pour ce niveau, tu dois commencer à écrire le texte entre apostrophes. Essaye de le faire pour le texte {text}"
 
-#, fuzzy
 msgid "Unquoted Equality Check"
-msgstr "Lorsque tu veux vérifier si une variable correspond à plusieurs mots, ces mots doivent être mis entre guillemets !"
+msgstr "Nous avons détecté que le code essaye de vérifier qu'une variable correspond à plusieurs mots. Peux tu essayer de mettre ces mots entre guillemets ?"
 
-#, fuzzy
 msgid "Unquoted Text"
-msgstr "Attention : si tu affiche ou demande quelque chose, le texte doit commencer et se terminer par des guillemets. Il en manque quelque part."
+msgstr "Nous avons détecté que le texte pour `{ask}` ou `{print}` n'a pas de guillemets. Peux-tu ajouter des guillements pour{unquotedtext} ?"
 
-#, fuzzy
 msgid "Unsupported Float"
-msgstr "Les nombres non-entiers ne sont pas encore disponible, mais ils le seront dans quelques niveaux. Pour l'instant, change `{value}` en un entier."
+msgstr "Nous avons détecté quele code utilise des nombre qui ne sont pas des entiers, ce qui n'est pas encore disponible. Peux-tu changer`{value}` pour qu'il soit entier ?"
 
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "Les valeurs textes ne peuvent pas contenir `{invalid_value}`."
+msgstr "Nous avons détecté que le texte utilise des valeurs qui contiennent `{invalid_value}`. Peux-tu enlever cette valeur ou changer son type ?"
 
-#, fuzzy
 msgid "Var Undefined"
-msgstr "Tu as essayé d’utiliser la variable `{name}`, mais tu ne l’as pas définie. Ou bien tu essayais d’utiliser le mot `{name}`, mais tu as oublié les guillemets."
+msgstr "Nous avons détecté que la variable `{name}` est utilisée avant d'avoir été définie. Peux-tu la définir avant de l'utiliser ou alors d'utiliser des guillemets pour `{name}` ?"
 
 #, fuzzy
 msgid "Wrong Level"
@@ -313,9 +291,8 @@ msgstr "Il semble que vous ne soyez pas autorisé…"
 msgid "default_404"
 msgstr "Nous n’avons pas trouvé cette page…"
 
-#, fuzzy
 msgid "default_500"
-msgstr "Quelque chose ne s’est pas bien passé…"
+msgstr "Quelque chose ne s’est pas bien passé. Tu peux nous envoyer un rapport à hello@hedy.org."
 
 msgid "delete"
 msgstr "Supprimer"
@@ -324,7 +301,7 @@ msgid "delete_adventure_prompt"
 msgstr "Es-tu sur de vouloir supprimer cette aventure ?"
 
 msgid "delete_class_prompt"
-msgstr "Es-tu sur de vouloir supprimer cette classe ?"
+msgstr "Es-tu sur de vouloir supprimer cette classe ? Cette action ne peut pas être annulée."
 
 msgid "delete_confirm"
 msgstr "Êtes-vous sûr de vouloir supprimer le programme ?"
@@ -368,9 +345,8 @@ msgstr "Télécharger"
 msgid "duplicate"
 msgstr "Dupliquer"
 
-#, fuzzy
 msgid "echo_and_ask_mismatch_exception"
-msgstr "{echo} et `{ask}` ne correspondent pas"
+msgstr "réponds et demande ne correspondent pas"
 
 #, fuzzy
 msgid "echo_out"
@@ -1046,9 +1022,8 @@ msgstr "un espace"
 msgid "star"
 msgstr "une étoile"
 
-#, fuzzy
 msgid "start_learning"
-msgstr "Apprendre"
+msgstr "C'est parti !"
 
 #, fuzzy
 msgid "start_teaching"
@@ -1115,17 +1090,16 @@ msgstr "Enseignant"
 msgid "teacher_welcome"
 msgstr "Bienvenue chez Hedy ! Vous êtes maintenant l'heureux propriétaire d'un compte enseignant qui vous permet de créer des cours et d'inviter des étudiants."
 
-#, fuzzy
 msgid "template_code"
 msgstr ""
 "C'est l'explication de mon aventure !\n"
 "\n"
-"De cette manière, je peux montrer une commande : <code>{print}</code>\n"
+"De cette manière, je peux montrer une commande : <code>affiche</code>\n"
 "\n"
 "Mais parfois, je pourrais vouloir montrer un bout de code comme cela :\n"
 "<pre>\n"
-"ask Quel est ton nom ?\n"
-"echo Ainsi ton nom est\n"
+"demande Quel est ton nom ?\n"
+"affiche Ainsi ton nom est\n"
 "</pre>"
 
 msgid "this_turns_in_assignment"

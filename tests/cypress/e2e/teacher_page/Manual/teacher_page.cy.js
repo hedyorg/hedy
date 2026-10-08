@@ -1,6 +1,8 @@
 import { loginForTeacher } from '../../tools/login/login.js'
 import { goToPage } from "../../tools/navigation/nav.js";
 
+// The index of the manual has a spec of its own, in
+// `for-teacher_page/redesign/manual_index.cy.js`.
 describe('Teacher page', () => {
   beforeEach(() => {
     loginForTeacher();
@@ -13,18 +15,5 @@ describe('Teacher page', () => {
 
   it('contains a link to Discord', () => {
     cy.contains('Discord').should('have.attr', 'href').and('include', 'https://discord.gg/8yY7dEme9r');
-  });
-
-  it('contains a link to Introduction', () => {
-    cy.contains('Introduction').should('be.visible').and('have.attr', 'href');
-  });
-
-  it('contains a link to Frequently Made Mistakes', () => {
-    cy.contains('Common mistakes').should('be.visible').and('have.attr', 'href');
-  });
-
-  it('contains Levels under Frequently Made Mistakes', () => {
-    cy.contains('Common mistakes').click();
-    cy.contains('Level 1').should('be.visible');
   });
 });
