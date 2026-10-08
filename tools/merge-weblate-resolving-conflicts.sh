@@ -13,9 +13,15 @@
 # Everything else -- the .po files especially -- is still resolved hunk by hunk in favour
 # of Weblate, which is what '-X ours' did for the whole tree.
 #
+# Weblate's branch is merged *into* 'main', not the other way round, and the result keeps
+# its history: the workflow pushes this merge commit as the PR branch, and Mergify merges
+# translations PRs with a merge commit too. Weblate's own commits so become ancestors of
+# 'main', so its next pull finds them there and goes through without a reset. 'main' being
+# the first parent also means the merge only adds translation changes on top of it.
+#
 # A markdown summary of what had to be decided is written to $WEBLATE_MERGE_REPORT, for
 # the workflow to put in the pull request body. It is deliberately not written inside the
-# repository, because 'create-pull-request' commits whatever it finds there.
+# repository.
 set -eu
 set -x
 
@@ -31,14 +37,18 @@ git checkout -B weblate-hedy-adventures-conflicts weblate-main/main
 doit run _autopr _autopr_weblate
 git commit -am 'Normalize Weblate branch' --allow-empty
 
-# Merge from origin. No '-X ours' here: we want to see which files actually disagree, so
-# that each kind can be resolved on its own terms below.
+weblate_head=$(git rev-parse HEAD)
+
+# Merge into 'main'. No '-X' strategy option here: we want to see which files actually
+# disagree, so that each kind can be resolved on its own terms below.
 git fetch origin
+git checkout -B weblate-conflict-resolution origin/main
 conflicted_merge=0
-git merge origin/main --no-commit --no-ff || conflicted_merge=1
+git merge "$weblate_head" --no-commit --no-ff -m 'Merge translations from Hosted Weblate' \
+  || conflicted_merge=1
 
 unresolved=""
-merge_base=$(git merge-base HEAD origin/main)
+merge_base=$(git merge-base "$weblate_head" origin/main)
 
 show_to() {
   git show "$1:$2" > "$3" 2>/dev/null
@@ -49,13 +59,13 @@ show_to() {
 # stale and translators keep translating levels the team has since removed. Such a file can
 # merge cleanly as text and still fail tools/check-yaml-structure.py, so the YAML merge has
 # to see it either way; it drops whatever the current English file no longer has.
-for file in $(git diff --name-only "$merge_base" HEAD -- 'content/*.yaml'); do
+for file in $(git diff --name-only "$merge_base" "$weblate_head" -- 'content/*.yaml'); do
   case "$file" in
     */en.yaml) continue ;;  # the English files are ours alone; git's merge stands
   esac
   base=$(mktemp); weblate=$(mktemp); upstream=$(mktemp); template=$(mktemp); notes=$(mktemp)
 
-  if ! show_to HEAD "$file" "$weblate"; then
+  if ! show_to "$weblate_head" "$file" "$weblate"; then
     # Weblate deleted it, which it does not do on its own; leave it to git.
     rm -f "$base" "$weblate" "$upstream" "$template" "$notes"
     continue
@@ -91,8 +101,8 @@ for file in $(git diff --name-only "$merge_base" HEAD -- 'content/*.yaml'); do
 done
 
 # Everything else that conflicted -- the .po files especially -- is resolved hunk by hunk
-# in favour of Weblate, which is what '-X ours' used to do for the whole tree. Git's index
-# has the three sides as stages: 1 is the merge base, 2 is HEAD (Weblate), 3 is origin/main.
+# in favour of Weblate, as before. Git's index has the three sides as stages: 1 is the
+# merge base, 2 is HEAD ('main', which we are on) and 3 is what is being merged (Weblate).
 if [ "$conflicted_merge" = 1 ]; then
 for conflicted in $(git diff --name-only --diff-filter=U); do
   base=$(mktemp); weblate=$(mktemp); upstream=$(mktemp)
@@ -100,7 +110,7 @@ for conflicted in $(git diff --name-only --diff-filter=U); do
   case "$conflicted" in
     content/*.yaml) unresolved="$unresolved $conflicted" ;;  # the loop above skipped it
     *)
-      if show_to :2 "$conflicted" "$weblate" && show_to :3 "$conflicted" "$upstream"; then
+      if show_to :3 "$conflicted" "$weblate" && show_to :2 "$conflicted" "$upstream"; then
         show_to :1 "$conflicted" "$base" || : > "$base"
         # 'git merge-file' writes its result into the first file it is given.
         git merge-file --ours "$weblate" "$base" "$upstream" || true
@@ -126,11 +136,11 @@ if [ -n "$unresolved" ]; then
 fi
 
 # Finish the merge. The '--no-commit' above means even a clean merge is still only staged,
-# and the step after this one expects a committed tree. There is no MERGE_HEAD at all when
-# origin/main held nothing new, and committing then would have nothing to say.
+# and the step after this one pushes a commit. There is no MERGE_HEAD at all when 'main'
+# already has everything Weblate has, and committing then would have nothing to say.
 if git rev-parse -q --verify MERGE_HEAD > /dev/null; then
   git commit --no-edit
 else
   set +x
-  echo "Already up to date with origin/main; nothing was merged."
+  echo "'main' already has everything on Weblate's branch; nothing was merged."
 fi
