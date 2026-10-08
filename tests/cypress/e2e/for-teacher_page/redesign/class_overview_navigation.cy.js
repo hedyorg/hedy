@@ -145,6 +145,8 @@ describe('Redesigned class overview navigation', () => {
       cy.get('@targetRow').find('button[data-cy="archive_class"]').should('be.visible').click();
       cy.getDataCy('redesign_confirm_yes_button').click();
       cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
+      // Wait for htmx to swap the tables in, or the row found below is the old one.
+      cy.get(`#menu-active-${classId}`).should('not.exist');
 
       cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('archivedRow');
       cy.get('@archivedRow').find('button.blue-btn-new').first().click();
@@ -152,6 +154,7 @@ describe('Redesigned class overview navigation', () => {
       cy.get('@archivedRow').find('button[data-cy="unarchive_class"]').should('be.visible').click();
       cy.getDataCy('redesign_confirm_yes_button').click();
       cy.wait('@unarchiveClass').its('response.statusCode').should('eq', 200);
+      cy.get(`#menu-archived-${classId}`).should('not.exist');
 
       cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('activeRow');
       cy.get('@activeRow').find('button.blue-btn-new').first().click();
