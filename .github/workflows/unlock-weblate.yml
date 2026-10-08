@@ -1,16 +1,9 @@
-# Weblate is locked when a daily translations PR is created. Unlock Weblate
-# when that PR gets closed (either as merged or rejected).
+# Unlock Weblate when a translations PR gets closed (either as merged or rejected).
 #
-# We do this to avoid conflicts.
-#
-# If the PR was merged, this is also where Weblate is told to forget the commits that
-# PR carried. That has to happen here rather than in 'update-weblate.yml': we squash
-# merge these PRs, so Weblate's commits never become ancestors of 'main' and its branch
-# has to be reset for the next sync to be a fast-forward. Resetting while the PR was
-# still open -- which is what 'update-weblate.yml' used to do -- left a window in which
-# 'main' did not have the translations yet, so the squash merge arrived as unrelated
-# history and Weblate conflicted on it seconds later. Resetting after the merge means
-# the two sides already agree on the content.
+# Nothing locks Weblate any more: translations PRs are merged with a merge commit (see
+# .mergify.yml), so Weblate's commits become ancestors of 'main', no reset is needed after
+# a merge, and so there is nothing for a lock to protect. This stays as a safety net for a
+# lock left behind some other way, and can be started by hand for the same reason.
 name: Unlock Weblate when PR is closed
 on:
   workflow_dispatch: { }
@@ -48,82 +41,7 @@ jobs:
         echo 'translation = hedy' >> .weblate
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
-    - name: Make Weblate forget the commits the PR carried
-      # Only worth doing when the PR was actually merged: 'main' then holds the
-      # translations, so Weblate can safely throw its own copy away and read them back
-      # from us. If the PR was closed without merging, 'main' holds nothing and a reset
-      # would destroy the translations instead. 'workflow_dispatch' has no pull request
-      # at all, so the manual escape hatch stays unlock-only.
-      #
-      # Scoped to 'adventures' on purpose. It owns the clone of 'hedyorg/hedy' that
-      # 'client-messages', 'web-texts', 'webpages', 'slides' and 'workbooks' are linked
-      # to, so resetting it covers every component on that repository. A bare 'wlc reset'
-      # is project-wide and would also reset 'keywords', which tracks a different
-      # repository ('hedyorg/hedylang') and so can never be the cause of a conflict here.
-      # That is exactly what destroyed a translator's keyword edits in May 2026.
-      if: github.event.pull_request.merged == true
-      run: |
-        set -x
-
-        # Never reset on top of work that exists only in Weblate's database. Edits sit
-        # there unserialized for up to 'commit_pending_age' and are invisible to git, so a
-        # reset would drop them silently. Skipping the reset is the recoverable failure --
-        # the next sync conflicts and 'resolve-weblate-conflict.yml' resolves that without
-        # losing anything -- whereas a reset over pending work loses translations for good.
-        #
-        # 'needs_push' is deliberately not checked. Weblate's add-ons regenerate files
-        # moments after every merge, so it is nearly always true at this point, and those
-        # commits hold no translations that 'main' is missing.
-        wlc repo | tee repo.txt
-        if ! grep -q "needs_commit: False" repo.txt; then
-          echo "Weblate still has uncommitted changes, so resetting it now could discard"
-          echo "translations that were never written to git. Leaving its branch alone."
-          echo "The next sync may conflict; 'resolve-weblate-conflict.yml' can fix that."
-          exit 0
-        fi
-
-        started_at=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)
-
-        # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
-        # https://github.com/WeblateOrg/weblate/issues/11368
-        wlc reset hedy/adventures &
-
-        # A reset that silently fails is the start of a conflict loop, so check the outcome
-        # rather than assume it. 'wlc repo' can't tell us whether it worked: right after a
-        # push Weblate has nothing left to push, so it reports a clean state either way.
-        # Comparing repository heads doesn't work either, because add-ons commit
-        # regenerated files moments after a reset. Weblate does log the reset itself, so
-        # wait for that entry to appear.
-        python3 - "$started_at" <<'PY'
-        import json, sys, time, urllib.request
-        from datetime import datetime
-
-        started_at = datetime.fromisoformat(sys.argv[1])
-        url = ("https://hosted.weblate.org/api/projects/hedy/changes/"
-               "?action=19&page_size=1")  # action 19 is "Repository reset"
-
-        for _ in range(30):
-            time.sleep(10)
-            with urllib.request.urlopen(url) as response:
-                results = json.load(response)["results"]
-            latest = datetime.fromisoformat(results[0]["timestamp"]) if results else None
-            print(f"last reset: {latest}, this run started: {started_at}", flush=True)
-            if latest is not None and latest > started_at:
-                print("Weblate has forgotten its commits")
-                sys.exit(0)
-
-        print("Weblate did not reset within five minutes of being asked to.")
-        print("Every sync from now on will conflict until it is reset by hand:")
-        print("https://hosted.weblate.org/projects/hedy/adventures/#repository")
-        sys.exit(1)
-        PY
-
-    # Unlock even if the reset above failed or was skipped. A missed reset only means the
-    # next sync conflicts, which is recoverable; leaving every component locked stops
-    # translators from working until somebody notices, which is how this workflow became
-    # useless the last time. The job still reports the reset failure.
     - name: Unlock every component
-      if: always()
       run: |
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
         set -x
