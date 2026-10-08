@@ -119,6 +119,9 @@ describe('Redesigned class overview navigation', () => {
         cy.getDataCy('redesign_confirm_yes_button').click();
         cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
         cy.getDataCy('redesign_confirm_modal').should('not.be.visible');
+        // The response arrives before htmx swaps the table in, and a click before the swap
+        // opens a menu that is then replaced by a closed one.
+        cy.get(`#menu-active-${firstClassId}`).should('not.exist');
 
         // Regression assertion: context menu should still open for another class
         openClassesContextMenuForClass(secondClassId);
