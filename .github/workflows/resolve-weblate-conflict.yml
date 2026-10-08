@@ -70,9 +70,8 @@ jobs:
     # Translator edits live in Weblate's database until something serializes them into a
     # commit, which by default does not happen for 'commit_pending_age' hours. The merge
     # script below reads Weblate's *git* branch, so anything still pending is invisible to
-    # it and would be missing from the PR -- and then destroyed by the reset that runs once
-    # the PR is merged. Commit first, so that everything this PR is meant to resolve is
-    # actually in the branch we resolve it from.
+    # it and would be missing from the PR. Commit first, so that everything this PR is
+    # meant to resolve is actually in the branch we resolve it from.
     - name: Commit pending translations before reading Weblate's branch
       run: |
         set -x
@@ -123,60 +122,34 @@ jobs:
       run: |
         bash tools/merge-weblate-resolving-conflicts.sh
 
-    # The create-pull-request action wants to commit the changes, and wants to
-    # have them be on the main branch. Hence, move the current working tree to
-    # main (detach HEAD, move working tree, then reattach)
-    - name: Switch back to main
-      run: |
-        git checkout --detach
-        git reset --soft main
-        git checkout main
-
-    - name: Compose the pull request body
-      id: pr_body
+    # Push the merge commit itself, history and all, instead of a single new commit on top
+    # of 'main'. Mergify merges translations PRs with a merge commit (see .mergify.yml), so
+    # Weblate's own commits end up as ancestors of 'main' and its next pull goes through
+    # without a reset. A flattened commit would leave Weblate's branch diverged from 'main'
+    # and conflicting again, which is what used to need a reset and a lock on Weblate.
+    #
+    # Weblate is not locked while this PR is open: nothing is reset when it merges, so
+    # translations made in the meantime are not lost and go out with the next PR.
+    - name: Create Pull Request
       env:
+        GH_TOKEN: ${{ steps.secret.outputs.secret }}
         WEBLATE_MERGE_REPORT: ${{ runner.temp }}/weblate-merge-report.md
       run: |
+        if git diff --quiet origin/main HEAD; then
+          echo "'main' already has everything on Weblate's branch; no PR needed."
+          exit 0
+        fi
+
+        body="$RUNNER_TEMP/pr-body.md"
         {
-          echo 'body<<WEBLATE_PR_BODY'
           echo 'This PR merges pending commits from the Weblate repository that are conflicting'
           echo 'with changes on `main`, while resolving conflicts in favor of `main`.'
           if [ -s "$WEBLATE_MERGE_REPORT" ]; then
             echo
             cat "$WEBLATE_MERGE_REPORT"
           fi
-          echo 'WEBLATE_PR_BODY'
-        } >> "$GITHUB_OUTPUT"
+        } > "$body"
 
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v8
-      with:
-        token: ${{ steps.secret.outputs.secret }}
-        commit-message: 'Changes from Weblate repository'
-        title: 'Translations from Hosted Weblate'
-        body: ${{ steps.pr_body.outputs.body }}
-        labels: translations
-        branch: automatic/weblate-conflicts
-        delete-branch: true
-        base: main
-
-    # After we've created the PR, lock Weblate so that nothing new lands while the PR is
-    # open. The resolved content is in the PR now and Weblate is unlocked again when it
-    # closes.
-    #
-    # Note that this deliberately does NOT reset Weblate here. Resetting while the PR is
-    # still open puts us straight back into the loop this workflow exists to break: 'main'
-    # does not carry the resolved content yet, Weblate's add-ons start committing
-    # regenerated files within minutes of the reset, and the squash merge that eventually
-    # lands then arrives as unrelated history and conflicts again. 'unlock-weblate.yml'
-    # owns the reset and runs it once the PR is merged, when both sides agree.
-    #
-    # The cost is that Weblate keeps reporting this merge conflict (and emailing about it)
-    # for as long as the PR is open. That is noise rather than breakage: the resolution is
-    # already in the PR, and merging it is what clears the conflict.
-    - name: Prevent updates and merge conflicts until merged
-      run: |
-        # Have to lock each component individually. Not in the UI, but using the CLI we do.
-        for component in glossary adventures keywords client-messages web-texts webpages slides; do
-          wlc lock hedy/$component
-        done
+        git push --force origin HEAD:refs/heads/automatic/weblate-conflicts
+        gh pr create -R hedyorg/hedy --base main --head automatic/weblate-conflicts \
+          --title 'Translations from Hosted Weblate' --label translations --body-file "$body"
