@@ -18,9 +18,8 @@ jobs:
       actions: write
 
     steps:
-    # If an open Weblate/translations PR still exists, we shouldn't tell Weblate to push again.
-    # Because we ended our previous push with a 'reset', Weblate would otherwise force-push
-    # new changes over the unmerged old changes, causing them to lost.
+    # If an open Weblate/translations PR still exists, don't push more onto it while it is
+    # waiting for review and checks; whatever accumulates goes out with the next run.
     #
     # This covers both the PRs Weblate opens itself and the ones 'resolve-weblate-conflict.yml'
     # opens as hedybot (labeled 'translations'), the same PRs 'unlock-weblate.yml' reacts to.
@@ -52,18 +51,10 @@ jobs:
       id: weblate_commands
       # Do a weblate pull, commit and push.
       #
-      # Weblate's remote has to be reset once the PR this opens has landed, because we
-      # squash merge those PRs: Weblate's own commits never become ancestors of 'main', so
-      # without a reset every later merge conflicts. That reset used to happen here, right
-      # after the PR was opened -- but at that moment 'main' does not carry the translations
-      # yet, so the squash merge that follows still arrives as foreign history and Weblate
-      # conflicts on it within seconds of the merge. It now runs from 'unlock-weblate.yml'
-      # when the PR actually closes, by which time 'main' and Weblate agree on the content.
-      #
-      # To prevent merge conflicts, lock the repository while we're merging this; otherwise,
-      # any translations in the merge window will cause merge conflicts. Only lock if we're
-      # going to create a Pull Request while doing this, since unlocking will
-      # only happen as the result of a PR being merged.
+      # Weblate is not locked while the PR is open, and not reset after it merges. Mergify
+      # merges translations PRs with a merge commit (see .mergify.yml), so Weblate's commits
+      # end up in the history of 'main' as they are, and its next pull finds them there.
+      # Translations made while the PR is open simply go out with the next one.
       run: |
         set -x
 
@@ -99,12 +90,6 @@ jobs:
         fi
         echo "has_changes=true" >> $GITHUB_OUTPUT
 
-        # Have to lock each component individually. Not in the UI, but using the CLI we do.
-        # (NOTE: this list is also below!)
-        for component in glossary adventures keywords client-messages web-texts webpages slides; do
-          wlc lock hedy/$component
-        done
-
         # When Weblate cannot merge 'main' into its branch, every later run fails the same
         # way until someone resolves the conflict, and nothing else tells anyone it is
         # stuck. Say so, so the step below can hand it to 'resolve-weblate-conflict.yml'.
@@ -132,14 +117,9 @@ jobs:
       run: |
         prs=$(gh pr -R hedyorg/hedy list --author weblate --json title -q '.[].title')
         if [[ "$prs" == "" ]]; then
-          echo "Weblate didn't create a PR, so nothing will ever close to unlock it again."
-          echo "Fail here so the unlock step below lifts the lock we took."
+          echo "Weblate pushed, but no PR from it is open."
           exit 1
         fi
-        # From here on Weblate is supposed to stay locked until the PR is closed,
-        # so the unlock step at the bottom must not undo that. Closing the PR is also
-        # what triggers the reset, over in 'unlock-weblate.yml'.
-        echo "pr_created=true" >> $GITHUB_OUTPUT
       env:
         GH_TOKEN: ${{ github.token }}
 
@@ -162,17 +142,3 @@ jobs:
         echo "Started 'resolve-weblate-conflict.yml'; review the PR it opens."
       env:
         GH_TOKEN: ${{ github.token }}
-
-    # Any failure before the PR exists leaves every component locked, which stops
-    # translators from working until someone notices. Unlock again in that case; once
-    # the PR exists the lock is deliberate and 'unlock-weblate.yml' lifts it when the
-    # PR closes.
-    - name: Unlock Weblate if we failed before opening a PR
-      if: failure() && steps.confirm_pr.outputs.pr_created != 'true'
-      run: |
-        # (NOTE: this list is also above!)
-        for component in glossary adventures keywords client-messages web-texts webpages slides; do
-          wlc unlock hedy/$component
-        done
-
-
