@@ -110,18 +110,18 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     4: [
         'quotation_marks',
-        'rock',
-        'dice',
-        'dishes',
         'parrot',
-        'turtle',
-        'turtle_draw_it',
-        'clear_command',
-        'music',
         'story',
         'haunted',
         'fortune',
         'restaurant',
+        'turtle',
+        'turtle_draw_it',
+        'clear_command',
+        'music',
+        'house',
+        'party_planner',
+        'monster',
         'debugging',
         'hospital'
     ],
@@ -329,7 +329,6 @@ HOUR_OF_CODE_ADVENTURES = {
         'hospital'
     ],
     4: [
-        'dishes',
         'parrot',
         'story',
         'debugging',

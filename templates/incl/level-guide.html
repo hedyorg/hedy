@@ -22,11 +22,18 @@
   should keep the plain run of prose and code it has today; the open and close tags are
   wrapped in their own conditionals so that when it is off, the markup is unchanged
   rather than merely restyled.
+
+  `title_class` styles the title of a mistake where the page it is on wants it to look
+  different; the "prepare a level" page has a stylesheet rule of its own instead.
+
+  `id_prefix` gives every mistake an anchor of its own, `<prefix>-<position>`, so that the
+  manual's index can link straight to it. It is opt-in as well: the page that prepares a
+  single level lists its mistakes without an index, and has nothing to link to them with.
 #}
-{% macro common_mistakes(sections, level, beats=False) %}
+{% macro common_mistakes(sections, level, beats=False, id_prefix=none, title_class='') %}
 {% for mistake_section in sections %}
 <div class="mistake" data-cy="common_mistake">
-  {% if mistake_section.title %}<h4 class="mistake-title">{{ mistake_section.title|commonmark }}</h4>{% endif %}
+  {% if mistake_section.title %}<h4 class="mistake-title {{ title_class }}"{% if id_prefix %} id="{{ id_prefix }}-{{ loop.index }}"{% endif %}>{{ mistake_section.title|commonmark }}</h4>{% endif %}
   {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
     {% if beats and (mistake_section.example.error_text or mistake_section.example.error_code) %}
     <div class="mistake-beat beat-problem">
