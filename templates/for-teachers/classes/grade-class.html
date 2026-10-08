@@ -33,7 +33,7 @@
                     <div id="level_button" class="dropdown relative">
                         <button type="button" class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-base sm:text-xl whitespace-nowrap" id="dropdown_level_button"
                             onclick="$('#level_dropdown').slideToggle('medium');">
-                            <span id="level-button-span">{{ _('all') }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
+                            <span id="level-button-span">{% if filters.filter_level == 'all' %}{{ _('all') }}{% else %}{{ filters.filter_level }}{% endif %}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
                         </button>
                         <div class="absolute block rounded-md ltr:right-0 rtl:left-0 sm:ltr:left-0 sm:rtl:right-0 ltr:mr-1 rtl:ml-1 w-max max-w-[85vw] overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
                             style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
@@ -60,7 +60,8 @@
                             {% for dropdown_level in range(1, 19) %}
                             <div id="level_button_{{dropdown_level}}"
                                 class="level-select cursor-pointer flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-                                    rounded-lg no-underline hover:bg-blue-200"
+                                    rounded-lg no-underline hover:bg-blue-200
+                                    {% if filters.filter_level == dropdown_level|string %}selected bg-green-200{% endif %}"
                                 _="on click
                                     set @data-temp-value of #level-filter-input to {{ dropdown_level }}
                                     put '{{ dropdown_level }}' into #level-button-span
@@ -71,7 +72,8 @@
                             </div>
                             {% endfor %}
                         </div>
-                        <input id="level-filter-input" type="hidden" name="filter_level" data-temp-value="all"  value="all">
+                        <input id="level-filter-input" type="hidden" name="filter_level"
+                               data-temp-value="{{ filters.filter_level }}" value="{{ filters.filter_level }}">
                     </div>    
                 </div>
                 <!-- STUDENTS -->
@@ -80,7 +82,7 @@
                     <div id="student_button" class="dropdown relative">
                         <button type="button" class="blue-btn-new w-max rounded inline-flex items-center w-fit gap-2 text-base sm:text-xl whitespace-nowrap"
                             id="dropdown_student_button" onclick="$('#student_dropdown').slideToggle('medium');">
-                            <span id="student-button-span">{{ _('all') }}</span> <i id="student-arrow" class="fa-solid fa-angle-down"></i>
+                            <span id="student-button-span">{% if filters.filter_student == 'all' %}{{ _('all') }}{% else %}{{ filters.filter_student }}{% endif %}</span> <i id="student-arrow" class="fa-solid fa-angle-down"></i>
                         </button>
                         <div class="absolute block rounded-md ltr:right-0 rtl:left-0 sm:ltr:left-0 sm:rtl:right-0 ltr:mr-1 rtl:ml-1 w-max max-w-[85vw] overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
                             style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
@@ -106,7 +108,8 @@
                             {% for student in students %}
                             <div id="student_button_{{student}}" class="student-select cursor-pointer flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                                 rounded-lg no-underline
-                                hover:bg-blue-200"
+                                hover:bg-blue-200
+                                {% if filters.filter_student == student %}selected bg-green-200{% endif %}"
                                 _="on click
                                     set @data-temp-value of #student-filter-input to '{{ student }}'
                                     put '{{ student }}' into #student-button-span
@@ -117,7 +120,8 @@
                             </div>
                             {% endfor %}
                         </div>
-                        <input id="student-filter-input" type="hidden" name="filter_student" data-temp-value="all" value="all">
+                        <input id="student-filter-input" type="hidden" name="filter_student"
+                               data-temp-value="{{ filters.filter_student }}" value="{{ filters.filter_student }}">
                     </div>
                 </div>
                 <!-- ADVENTURES -->
@@ -152,7 +156,8 @@
                             {% for adventure in adventures %}
                             <div id="adventure_button_{{ adventure.short_name }}"
                                 class="adventure-select cursor-pointer flex flex-row w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-                                    rounded-lg no-underline hover:bg-blue-200"
+                                    rounded-lg no-underline hover:bg-blue-200
+                                    {% if filters.filter_adventure == adventure.short_name %}selected bg-green-200{% endif %}"
                                 _="on click
                                     set @data-temp-value of #adventure-filter-input to '{{ adventure.short_name }}'
                                     put '{{ adventure.name|replace("'", "") }}' into #adventure-button-span
@@ -163,7 +168,8 @@
                             </div>
                             {% endfor %}
                         </div>
-                        <input id="adventure-filter-input" type="hidden" name="filter_adventure" data-temp-value="all" value="all">
+                        <input id="adventure-filter-input" type="hidden" name="filter_adventure"
+                               data-temp-value="{{ filters.filter_adventure }}" value="{{ filters.filter_adventure }}">
                     </div>
                 </div>
             </div>
@@ -195,7 +201,9 @@
                 'for-teachers/classes/htmx-grade-class-table.html',
                 class_info=class_info,
                 students=students,
-                student_adventures=student_adventures
+                student_adventures=student_adventures,
+                pagination=pagination,
+                sort_orders=sort_orders
             )
         }}
     </div>

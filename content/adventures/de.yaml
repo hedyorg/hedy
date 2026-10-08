@@ -8,25 +8,32 @@ adventures:
                 story_text: |
                     In Level 1 kannst du die Hauptfigur deiner Geschichte ändern, indem du ihren Namen selbst eingibst.
 
-                    Nutze `{ask}` in der ersten Zeile um zu fragen, wer der Hauptcharakter der Geschichte sein soll.
-
-                    Beginne anschließend eine Zeile mit `{print}`, wenn ein Satz ausgegeben werden soll.
-                    Nutze `{echo}`, wenn du möchtest, dass der Name deiner Hauptfigur am Ende des Satzes steht.
+                    Nutze `{ask}` in der ersten Zeile um zu fragen, wer der Hauptcharakter der Geschichte sein soll. Dann verwende {answer}, wenn du den Namen des Charakters verwenden möchtest.
                 example_code: |
                     ```
                     {ask} Der Name der Hauptfigur lautet
                     {print} {answer} läuft nun durch einen dunklen Wald
-                    {print} Er ist etwas verängstigt, {answer}
-                    {print} Er hört überall seltsame Geräusche
-                    {print} Er befürchtet, dass es in diesem Wald spukt
+                    {print} Ein wenig ängstlich geht {answer} weiter.
+                    {print} {answer} hört überall seltsame Geräusche
+                    {print} Man befürchtet, dass es in diesem Wald spukt.
                     ```
                 story_text_2: |
                     ### Übung
                     Erstelle nun deine eigene Geschichte aus mindestens 6 Zeilen Code.
                     Diese Geschichte soll nicht die gleiche sein wie im Beispiel-Code.
-                    Benutze mindestens einen `{ask}` und einen `{echo}` Befehl.
+                    Benutze mindestens einen `{ask}` und einen `{answer}` Befehl.
                     Du kannst das Thema frei wählen.
                     Wenn dir kein Thema einfällt, nimm eines der folgenden: ins Kino gehen, ein Sportwettkampf oder ein Tag im Zoo.
+                answer_code: |
+                    ```
+                    {print} Eines Tages ging ich zum Zoo
+                    {ask} Welches Tier habe ich zuerst gesehen?
+                    {print} Zuerst sah ich ein {answer}
+                    {print} Dann sah ich ein Pinguin
+                    {print} Es aß gerade Mittag
+                    {ask} Was aß das Pinguin?
+                    {print} Das Pinguin aß {answer} zum Mittag
+                    ```
             2:
                 story_text: |
                     In Level 2 kannst du deine Geschichte noch etwas spannender machen. Der Name deiner Hauptfigur kann nun an jeder Stelle im Satz auftauchen.
@@ -844,13 +851,6 @@ adventures:
                     ```
                     Auswahlmöglichkeiten {is} _
                     ```
-            4:
-                story_text: |
-                    In diesem Level kannst du auch Würfel erstellen. Aber dieses Mal kannst du es selbst versuchen, ohne Beispiel-Code!
-
-                    ### Übung
-                    Erstelle deinen eigenen Würfel in diesem Level.
-                    Tipp: Falls du keine Idee hast, wie man einen Würfel erstellt, schau dir deinen Würfel vom vorigen Level an, aber vergiss nicht, Anführungszeichen hinzuzufügen.
             5:
                 story_text: |
                     Wir werden die `{if}` und `{else}` Befehle zu unseren Würfeln hinzufügen!
@@ -935,20 +935,6 @@ adventures:
                     Denke dann an eine Aufgabe, die erledigt werden soll, und lasse den Computer entscheiden, wer die Aufgabe erledigen muss, indem du `{at} {random}` benutzt.
 
                     **Extra** Keine Lust auf selbst abwaschen? Hacke das Spülmaschinenprogramm und entferne deinen Namen von der Liste mit dem `{remove}` `{from}` Befehl.
-            4:
-                story_text: |
-                    Mit Anführungszeichen kannst du dein Abwaschprogramm noch besser machen.
-
-                    ### Übung
-                    Fülle zuerst die richtigen Symbole in die Lücken, um dieses Beispielprogramm zum Laufen zu bringen.
-                    Hast du es hinbekommen? Großartig! Kopiere nun deinen eigenen Code aus den vorigen Leveln und bring ihn in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
-                example_code: |
-                    ```
-                    Familienmitglieder {is} Mama, Papa, Emma, Sophie
-                    {print} _ den Abwasch macht heute _
-                    {sleep}
-                    {print} Familienmitglieder {at} _
-                    ```
             5:
                 story_text: |
                     Mit dem Befehl `{if}` kannst Du noch etwas mehr Spaß haben, wenn Du die Auswahl auswertest. Du kannst Dein Programm auf die Auswahl, die der Computer trifft, reagieren lassen.
@@ -2358,16 +2344,6 @@ adventures:
                     wahlmöglichkeiten {is} Schere, Stein, Papier
                     spieler_1 {is} {ask} Name von Spieler 1:
                     _
-                    ```
-            4:
-                story_text: |
-                    In diesem Level können wir Schere, Stein, Papier weiter programmieren. Aber wenn du Text hinzufügen möchtest, musst du auch hier Anführungszeichen verwenden.
-                    ### Übung
-                    Fülle die Lücken in Anführungszeichen aus. Beachte, dass die `wahlmöglichkeiten` Variable außerhalb der Anführungszeichen stehen sollte.
-                example_code: |
-                    ```
-                    wahlmöglichkeiten {is} Schere, Stein, Papier
-                    {print} _Der Computer wählt..._ wahlmöglichkeiten {at} {random}
                     ```
             5:
                 story_text: |
