@@ -470,6 +470,10 @@ adventures:
                     {print} '作者是你最喜欢的作者'
                     {print} 嗯...我想你应该尝试...书籍{at} {random}
                     ```
+            5:
+                story_text: |-
+                    ### 练习
+                    请为这段代码调试。 祝你好运！
     dice:
         name: 骰子
         default_save_name: 骰子
@@ -495,6 +499,14 @@ adventures:
                 example_code_2: |
                     ```
                     选择 {is} _
+                    ```
+                answer_code: |
+                    ```
+
+                    点数 {is} 1, 2, 3, 4, 5, 6
+
+                    {print} 你掷出了... 点数 {at} {random}
+
                     ```
             5:
                 story_text: |
@@ -2583,3 +2595,7 @@ adventures:
         name: 新年
         default_save_name: 新年倒计时
         description: 新年倒计时!
+    and_or_command:
+        name: '{and}和{or}'
+    congratulations:
+        name: 恭喜
