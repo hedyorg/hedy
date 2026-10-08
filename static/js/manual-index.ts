@@ -158,8 +158,10 @@ function initializeBackToTop() {
     return;
   }
 
-  new IntersectionObserver(([entry]) => {
-    button.classList.toggle('hidden', entry.isIntersecting);
+  // A scroll right after the page loads can arrive in the same batch as the first report,
+  // so only the last entry says where the heading is now.
+  new IntersectionObserver((entries) => {
+    button.classList.toggle('hidden', entries[entries.length - 1].isIntersecting);
   }).observe(top);
 
   button.addEventListener('click', () => {

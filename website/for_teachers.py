@@ -6,6 +6,7 @@ import os
 import re
 import time
 import uuid
+from urllib.parse import quote
 from venv import logger
 
 from bs4 import BeautifulSoup
@@ -2011,8 +2012,9 @@ class ForTeachersModule(WebsiteModule):
             modal_text = modal_text_template.format(student='', student_name='')
         except (KeyError, IndexError, ValueError):
             modal_text = modal_text_template
-        htmx_endpoint = f'/for-teachers/class/{class_id}\
-            /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
+        # Usernames can contain spaces quote them instead of stripping whitespace
+        htmx_endpoint = (f'/for-teachers/class/{class_id}/manage/remove_student/'
+                         f'{quote(student_id, safe="")}?is_invite={is_invite}')
         htmx_target = "#students-table"
         hyperscript = ""
         htmx_success_message = gettext("student_removed_successfully")

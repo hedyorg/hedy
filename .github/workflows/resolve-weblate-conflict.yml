@@ -139,22 +139,11 @@ jobs:
       run: |
         {
           echo 'body<<WEBLATE_PR_BODY'
-          echo 'This PR merges pending commits from the Weblate repository that were'
-          echo 'conflicting with changes on `main`.'
-          echo
-          echo 'The content YAML files are merged as YAML rather than as text, by'
-          echo '`tools/merge-weblate-yaml.py`. So `main` decides which keys exist and what'
-          echo 'each one says, while new and updated strings from translators come along'
-          echo 'with it. Everything else, the `.po` files especially, is resolved hunk by'
-          echo 'hunk in favour of Weblate.'
-          echo
-          echo 'Whatever the merge had to decide is listed below. None of it blocks this'
-          echo 'PR, but a translator may want to re-apply a version that was passed over.'
-          echo
+          echo 'This PR merges pending commits from the Weblate repository that are conflicting'
+          echo 'with changes on `main`, while resolving conflicts in favor of `main`.'
           if [ -s "$WEBLATE_MERGE_REPORT" ]; then
+            echo
             cat "$WEBLATE_MERGE_REPORT"
-          else
-            echo 'Nothing was contested; every conflict resolved cleanly.'
           fi
           echo 'WEBLATE_PR_BODY'
         } >> "$GITHUB_OUTPUT"

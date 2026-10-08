@@ -8,25 +8,32 @@ adventures:
                 story_text: |
                     In Level 1 kannst du die Hauptfigur deiner Geschichte ändern, indem du ihren Namen selbst eingibst.
 
-                    Nutze `{ask}` in der ersten Zeile um zu fragen, wer der Hauptcharakter der Geschichte sein soll.
-
-                    Beginne anschließend eine Zeile mit `{print}`, wenn ein Satz ausgegeben werden soll.
-                    Nutze `{echo}`, wenn du möchtest, dass der Name deiner Hauptfigur am Ende des Satzes steht.
+                    Nutze `{ask}` in der ersten Zeile um zu fragen, wer der Hauptcharakter der Geschichte sein soll. Dann verwende {answer}, wenn du den Namen des Charakters verwenden möchtest.
                 example_code: |
                     ```
                     {ask} Der Name der Hauptfigur lautet
                     {print} {answer} läuft nun durch einen dunklen Wald
-                    {print} Er ist etwas verängstigt, {answer}
-                    {print} Er hört überall seltsame Geräusche
-                    {print} Er befürchtet, dass es in diesem Wald spukt
+                    {print} Ein wenig ängstlich geht {answer} weiter.
+                    {print} {answer} hört überall seltsame Geräusche
+                    {print} Man befürchtet, dass es in diesem Wald spukt.
                     ```
                 story_text_2: |
                     ### Übung
                     Erstelle nun deine eigene Geschichte aus mindestens 6 Zeilen Code.
                     Diese Geschichte soll nicht die gleiche sein wie im Beispiel-Code.
-                    Benutze mindestens einen `{ask}` und einen `{echo}` Befehl.
+                    Benutze mindestens einen `{ask}` und einen `{answer}` Befehl.
                     Du kannst das Thema frei wählen.
                     Wenn dir kein Thema einfällt, nimm eines der folgenden: ins Kino gehen, ein Sportwettkampf oder ein Tag im Zoo.
+                answer_code: |
+                    ```
+                    {print} Eines Tages ging ich zum Zoo
+                    {ask} Welches Tier habe ich zuerst gesehen?
+                    {print} Zuerst sah ich ein {answer}
+                    {print} Dann sah ich ein Pinguin
+                    {print} Es aß gerade Mittag
+                    {ask} Was aß das Pinguin?
+                    {print} Das Pinguin aß {answer} zum Mittag
+                    ```
             2:
                 story_text: |
                     In Level 2 kannst du deine Geschichte noch etwas spannender machen. Der Name deiner Hauptfigur kann nun an jeder Stelle im Satz auftauchen.

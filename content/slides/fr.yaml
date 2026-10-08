@@ -47,12 +47,398 @@ levels:
             notes: Comme vous pouvez le voir, les mots clés (ou mots code) deviennent roses si vous les utilisez correctement.
         7:
             header: Programmer dans Hedy
+            text: Pour lancer le code, appuie sur le bouton Lancer en-dessous du code.
+            code: '{print} Bienvenue dans Hedy !'
+            notes: Pour qu'un ordinateur exécute les instructions, il faut 'lancer' le code. Appuyez sur le bouton pour montrer aux élèves ce qui se passe.
         8:
             header: Programmer dans Hedy
+            text: La sortie apparait sur la droite.
+            code: '{print} Bienvenue dans Hedy !'
+            notes: Quand nos exécutons le code, la sortie apparait. La sortie est le résultat de notre programme. La partie droite de l'écran où apparait la sortie est appelée écran de sortie.
         9:
             header: Programmer dans Hedy
+            text: La sortie peut être un dessin.
+            code: |-
+                {forward} 100
+                {turn} {left}
+            notes: Dans Hedy, nous ne nous contentons pas d'afficher du texte, mais la sortie peut aussi être du texte ou...
         10:
             header: Programmer dans Hedy
+            text: Ou la sortie peut etre de la musque !
+            code: |-
+                {play} C4
+                {play} D4
+                {play} E4
+            notes: C'est parti pour le premier niveau !
         12:
             header: Programmer dans Hedy
             debug: Vrai
+            text: Vous ferez parfois des erreurs dans votre code. Vous pourrez alors utiliser le débogueur pour trouver l'erreur (bogue) et la corriger.
+            code: |-
+                {print} Déboguer signifie trouver une erreur
+                {print} Vous pouvez exécuter le code ligne par ligne
+                {print} Ceci facilite la recherche de bogue
+                {print} et sa correction !
+                {print} Ou alors cliquez sur l'icône en forme d'oeil pour désactiver une ligne de code
+            notes: |-
+                **Comment déboguer du code**
+                Regardez <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">cette vidéo</a> pour comprendre comment fonctionne le débogueur, ou bien lisez les instructions.
+                Vous pouvez évidemment juste regarder le code et trouver les erreurs, mais il existe des outils pour vous aider dans cette tâche.
+                Cliquez sur le bouton coccinelle (en anglais, une coccinelle s'appelle ladybug, et une bogue s'appel bug, c'est la ressemblance entre ladybug et bug qui a permis de choisir la coccinelle comme icône) sous le champ de code. Ceci démarre le **débogueur**. Le débogueur permet d'exécuter le code ligne par ligne.
+                S'il y a une grosse erreur dans votre code (comme par exemple dans les aventures de débogage), le débogueur vous dira de commencer par corriger ces grosses erreurs. Lisez bien les messages d'erreur pour trouver comment corriger les erreurs.
+                Si les erreurs principales sont corrigées, le débogeur exécutera le code ligne par ligne.
+                Pour exécuter la ligne suivante, cliquez sur le bouton ⏭️ qui se trouve à droite. Est-ce que la ligne fait ce à quoi vous vous attendiez ? Bien ! Cliquez ce bouton à nouveau pour exécuter la nouvelle ligne jusqu'à ce que le programme fonctionne parfaitement.
+                Pour arrêter le débogueur, cliquez sur le bouton 🛑 qui se situe au milieu.
+                Pour exécuter le code depuis le début, cliquez sur le bouton 🔁 qui se trouve à gauche.
+                Êtes vous resté coincé sur une ligne de code et vous voulez exécuter le code sans cette ligne ?
+                Vous pouvez désactiver cette ligne en cliquant sur l'icône en forme d'oeil devant le numéro de ligne. Cette ligne sera barrée.
+                Désormais, la ligne sera ignorée lors de l'exécution du code. Pour la réactiver, il suffit simplement de clicker sur l'icône en forme d'oeil et la ligne ne sera plus ignorée.
+        11:
+            header: Passez à la prochaine aventure en utilisant le menu
+            text: Utilisez le menu pour avancer à la prochaine aventure ou au prochain niveau.
+            editor: /hedy/1
+            notes: Parfois, les élèves ne savent pas comment passer à la prochaine aventure, montrez-leur comment faire dans Hedy.
+    1:
+        5:
+            text: |-
+                Pour afficher la réponse à l'écran, tu peux utiliser : `{answer}`.
+                `{answer}` n'est jamais utilisé tout seul, toujours avec un `{ask}`.
+            header: '{réponse}'
+            code: |-
+                {affiche} Bonjour !
+                {demande} Comment vous appelez-vous ?
+                {affiche} Bonjour {réponse}
+            notes: Pour dire à l'ordinateur de vous répéter la réponse, vous pouvez utiliser le mot-clé `réponse`.
+        6:
+            text: Tu peux trouver ici la liste des aventures.
+            header: Programmation !
+            editor: /hedy/1
+            notes: Avant de commencer, montrez aux élèves les aventures. N'oubliez pas de montrer aussi les exercices. C'es là que les élèves devront lire ce qu'ils et elles doivent faire dans cette aventure.
+        1:
+            header: Bienvenue au niveau 1 !
+            text: |-
+                A la fin de cette leçon, vous saurez :
+                * écrire un code qui affiche du texte
+                * créer une histoire interactive
+        2:
+            header: '{affiche}'
+            text: |-
+                La première instruction que vous pouvez utiliser au niveau 1 est la commande `{affiche}`.
+
+                `{affiche}` est utilisée pour afficher du texte à l'écran.
+            code: "{affiche} affiche ce texte à l'écran"
+            notes: Tout d'abord, laissez les élèves deviner ce qui sera affiché en sortie. Puis exécutez le code pour montrer aux élèves ce qui se passe lorsque la commande `affiche` est exécutée.
+        3:
+            header: Le mot-clé {affiche}
+            text: |-
+                Vous pouvez changer le texte après le mot clé affiche avec ce que vous voulez.
+
+                Ou alors vous pouvez afficher plusieurs ligne en ajoutant une nouvelle ligne de code qui commence aussi par `{affiche}`.
+            code: |-
+                {affiche} Bienvenue dans Hedy !
+                {affiche} Commencez à programmer maintenant !
+            notes: Exécutez le code, puis changez le code à votre convenance. Montrer ensuite que vous pouvez afficher ce que vous voulez.
+        4:
+            header: '{demande}'
+            text: |-
+                La seconde commande que vous pouvez utiliser au niveau 1 est `{demande}`.
+
+                `{demande}` est utilisé pour poser une question à l'utilisateur ou l'utilisatrice, qui doit y répondre.
+            code: |-
+                {affiche} Bienvenue dans votre propre jeu de pierre, feuille, ciseau !
+                {demande} Lequel choisissez-vous ?
+            notes: |-
+                Montrez maintenant que l'ordinateur vous pose une question. Entrez une réponse et montrez aussi qu'il ne se passe rien ensuite.
+                Assurez-vous que vos élèves savent que l'ordinateur ne va exécuter que vos instructions, il ne va rien faire d'autre. Cela signifie que si vous voulez que l'ordinateur affiche la réponse, il faut lui donner cette instruction.
+        7:
+            header: Programmation !
+            text: Les boutons avec une flèche jaune peuvent être utilisés pour copier les exemples.
+            editor: /hedy#commande_affiche
+            notes: Montrez aux élèves qu'ils et elles peuvent copier le code d'exemple dans leur champ de programmation en appuyant sur la flèche jaune.
+        8:
+            header: Commençons !
+            text: |-
+                C'est le bon moment pour essayer les premières aventures.
+                Utilisez le menu pour naviguer jusqu'à la prochaine aventure. Si vous voulez lire l'explication d'un mot clé, retournez sur l'aventure avec une icône en forme d'ampoule.
+            editor: /hedy/1
+            notes: On y va !
+        9:
+            header: Débogage
+            text: Déboguer du code signifie corriger toutes les erreurs dans ce code. Débogons ensemble ce code. Cliquez sur le bouton coccinelle pour démarrer le débogueur.
+            code: |-
+                Je suis DJ Hedy
+                {affiche} Quelle musique voulez-vous écouter ?
+                {demande} Moi aussi, j'aime cette musique !
+                {affiche} La suivante sera... {réponse}
+            debug: Vrai
+            notes: |-
+                **Comment déboguer du code**
+                Regardez <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">cette vidéo</a> pour comprendre comment fonctionne le débogueur, ou bien lisez les instructions.
+                Vous pouvez évidemment juste regarder le code et trouver les erreurs, mais il existe des outils pour vous aider dans cette tâche.
+                Cliquez sur le bouton coccinelle (en anglais, une coccinelle s'appelle ladybug, et une bogue s'appel bug, c'est la ressemblance entre ladybug et bug qui a permis de choisir la coccinelle comme icône) sous le champ de code. Ceci démarre le **débogueur**. Le débogueur permet d'exécuter le code ligne par ligne.
+                S'il y a une grosse erreur dans votre code (comme par exemple dans les aventures de débogage), le débogueur vous dira de commencer par corriger ces grosses erreurs. Lisez bien les messages d'erreur pour trouver comment corriger les erreurs.
+                Si les erreurs principales sont corrigées, le débogeur exécutera le code ligne par ligne.
+                Pour exécuter la ligne suivante, cliquez sur le bouton ⏭️ qui se trouve à droite. Est-ce que la ligne fait ce à quoi vous vous attendiez ? Bien ! Cliquez ce bouton à nouveau pour exécuter la nouvelle ligne jusqu'à ce que le programme fonctionne parfaitement.
+                Pour arrêter le débogueur, cliquez sur le bouton 🛑 qui se situe au milieu.
+                Pour exécuter le code depuis le début, cliquez sur le bouton 🔁 qui se trouve à gauche.
+                Êtes vous resté coincé sur une ligne de code et vous voulez exécuter le code sans cette ligne ?
+                Vous pouvez désactiver cette ligne en cliquant sur l'icône en forme d'oeil devant le numéro de ligne. Cette ligne sera barrée.
+                Désormais, la ligne sera ignorée lors de l'exécution du code. Pour la réactiver, il suffit simplement de clicker sur l'icône en forme d'oeil et la ligne ne sera plus ignorée.
+        10:
+            header: Jouer de la musique
+            text: |-
+                Joue des notes de musique avec `{joue}`
+                Les notes sont : C - D - E - F - G - A - B
+                Placez un numéro derrière la note pour avoir une échelle, l'échelle va de 1 à 10.
+            code: |
+                {joue} C4
+                {joue} D4
+                {joue} E4
+                {joue} F4
+                {joue} G4
+                {joue} A4
+                {joue} B4
+                {joue} C5
+            notes: Montrez aux élèves comment utiliser le mot-clé `{joue}` dans Hedy. C'est aussi le bon moment pour voir avec la classe les bonne pratiques concernant l'usage des écouteurs.
+        11:
+            header: 'Dessiner avec la torue : {avance}'
+            text: '`{avance}` est utilisé pour faire avancer la tortue tout droit.'
+            code: '{avance} 50'
+            notes: Maintenant que nous avons vu du code qui permet d'afficher du texte, nous allons voir comment dessiner. Montrez aux élèves comment utiliser le mot clé avance.
+        12:
+            header: 'Dessiner avec la torue : {avance}'
+            text: Comment aller en arrière ?
+            code: '{avance} -50'
+            notes: Demandez aux élèves s'il et elles ont une idée de la manière d'aller en arrière. La réponse est l'utilisation d'un nombre négatif, comme -50.
+        13:
+            header: 'Dessiner avec la tortue : {tourne}'
+            text: '`{tourne}` est utilisé pour faire tourner la tortue à droite au à gauche.'
+            code: |-
+                {avance} 50
+                {tourne} {gauche}
+        14:
+            header: Débogage
+            text: Utiliser le débogueur en dessinant
+            code: |-
+                {avance} 50
+                {tourne} {gauche}
+                {avance} 100
+                {tourne} {gauche}
+                {avance} 50
+                {tourne} {gauche}
+            debug: Vrai
+            notes: Le débogueur peut s'avérer très utile lorsque vous faite un dessin.
+        15:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        16:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    8:
+        6:
+            header: Débogage
+            debug: Vrai
+        3:
+            debug: Vrai
+        8:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        9:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    12:
+        6:
+            header: Débogage
+            debug: Vrai
+        8:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        9:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    16:
+        4:
+            header: Débogage
+            debug: Vrai
+        8:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+        7:
+            text: Qu'avez-vous appris aujourd'hui ?
+    9:
+        8:
+            header: Débogage
+            debug: Vrai
+        2:
+            debug: Vrai
+        5:
+            debug: Vrai
+        13:
+            debug: Vrai
+        10:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        11:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    14:
+        7:
+            header: Débogage
+            debug: Vrai
+        10:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+        9:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+    6:
+        7:
+            header: Débogage
+            debug: Vrai
+        9:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        8:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    11:
+        4:
+            header: Débogage
+            debug: Vrai
+        9:
+            debug: Vrai
+        7:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+        6:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+    2:
+        13:
+            header: Débogage
+            debug: Vrai
+        14:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        15:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+            header: On récapitule !
+    3:
+        9:
+            header: Débogage
+            debug: Vrai
+        12:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+        11:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+    4:
+        12:
+            header: Débogage
+            debug: Vrai
+        2:
+            debug: Vrai
+        8:
+            debug: Vrai
+        15:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+        14:
+            text: Qu'avez-vous appris aujourd'hui ?
+    7:
+        10:
+            header: Débogage
+            debug: Vrai
+        13:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        12:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    10:
+        11:
+            header: Débogage
+            debug: Vrai
+        9:
+            debug: Vrai
+        16:
+            debug: Vrai
+        13:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        14:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    13:
+        13:
+            header: Débogage
+            debug: Vrai
+        15:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        16:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+    15:
+        7:
+            header: Débogage
+            debug: Vrai
+        10:
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
+        9:
+            text: Qu'avez-vous appris aujourd'hui ?
+    5:
+        7:
+            header: Débogage
+            debug: Vrai
+        3:
+            debug: Vrai
+        9:
+            header: On récapitule !
+            text: Qu'avez-vous appris aujourd'hui ?
+        10:
+            header: On récapitule !
+            text: |-
+                Quelle aventure avez-vous préféré, et pourquoi ?
+
+                Quelle aventure avez-vous le moins aimé, et pourquoi ?
