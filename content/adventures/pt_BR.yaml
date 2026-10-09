@@ -6,9 +6,9 @@ adventures:
         levels:
             1:
                 story_text: |
-                    No nível 1 você pode criar uma história com um personagem principal diferente que você mesmo(a) insere.
+                    No nível 1 , você pode criar uma história com um personagem principal diferente, que você mesmo insere.
 
-                    Na primeira linha, use `{ask}` e pergunte quem será o personagem principal da história. Daí use `{answer}` quando você quiser usar o nome do personagem
+                    Na primeira linha, use `{ask}` e pergunte quem será o personagem principal da história. Depois, use `{answer}` quando você quiser usar o nome do personagem
                 example_code: |
                     ```
                     {ask} O(a) personagem principal desta história é
@@ -50,9 +50,21 @@ adventures:
                     Volte na história do nível 1 e copie o código. Cole ele aqui nesse nível.
 
                     Esse código não vai funcionar nesse nível porque você ainda não está usando variáveis.
-                    Corrija o código usando as variáveis `{é}` junto do comando `{ask}` como você aprendeu nesse nível.
+                    Corrija o código usando as variáveis, e, `{is}` junto do comando `{ask}` como você aprendeu nesse nível.
 
-                    **Extra** Inclua  um `{sleep}` no seu código para aumentar a tensão na história.
+                    **Extra** Inclua um comando `{sleep}` no seu código para aumentar a tensão na história.
+                answer_code: |
+                    ```
+                    {print} Um dia eu fui ao zoológico
+                    primeiro_animal {is}{ask} Qual animal você viu primeiro?
+                    {print} Primeiro eu vi o(a) first_animal
+                    {print} Depois, vi um pinguim
+                    {print} O pinguim estava almoçando
+                    comida {is}{ask} O que o pinguim estava comendo?
+                    {print} O pinguim estava comendo...
+                    {sleep} 3
+                    {print} comida
+                    ```
             3:
                 story_text: |
                     No nível 3 você pode tornar sua história mais divertida. Você pode usar aleatoriedade para qualquer monstro, animal ou outro obstáculo, assim:
@@ -86,6 +98,19 @@ adventures:
                     lixo {is} {ask} Qual item deve ser descartado?
                     {remove} lixo {from} mochila
                     ```
+                answer_code: |
+                    ```
+                    animais {is} leão, zebra, flamingo
+                    {print} Olá crianças! Hoje nós vamos ao zoológico!
+                    animal_favorito {is}{ask} Para qual animal você quer ir hoje?
+                    {add} animal_favorito {to} animais
+                    {sleep} 2
+                    {print} Vamos para o animais {at}{random}
+                    {sleep}
+                    animal_menos_favorito {is}{ask} Qual animal você não quer ver?
+                    {remove} animal_menos_favorito {from} animais
+                    {print} Vamos para o animais {at}{random} agora
+                    ```
             4:
                 story_text: |
                     ### Exercício
@@ -106,6 +131,16 @@ adventures:
                     animais {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Ele(a) ouve um som de _ animais {at} {random}
                     {print} nome _ tem medo de que esta seja uma floresta mal-assombrada _
+                    ```
+                answer_code: |
+                    ```
+                    nome {is}{ask} 'Qual é o seu nome?'
+                    {print} 'A personagem principal é o(a)' nome
+                    {print} nome 'está indo caminhar na floresta'
+                    {print} nome 'está um pouco assustado(a)'
+                    animais {is} 🦔, 🐿, 🦉, 🦇
+                    {print} ' Ele(a) ouve o som de um(a) animais{at}{random}
+                    {print} nome ' está com medo dessa floresta ser assombrada'
                     ```
             5:
                 story_text: |
@@ -132,6 +167,15 @@ adventures:
                     {if} final {is} feliz {print} nome ' pega a espada e o monstro foge rapidamente'
                     {else} {print} 'O monstro devora ' nome
                     ```
+                answer_code: |
+                    ```
+                    nome {is}{ask} 'Quem é o herói?'
+                    {print} 'Oh não o avião está caindo, quem vai nos salvar?
+                    {print}"Olha quem está voando pelo ar, é o(a)" nome
+                    fim{is}{ask}'Você vai salvar ou destruir o avião?'
+                    {if} fim {is} salvar {print} nome "pousou o avião, ele nos salvou!"
+                    {else}{print} "Oh não!" nome "está destruindo o avião, ajuda!"
+                    ```
             8:
                 story_text: |
                     Em uma história, alguém diz a mesma palavra várias vezes. Por exemplo, quando alguém pede ajuda ou canta uma música.
@@ -146,6 +190,9 @@ adventures:
                     {repeat} 5 {times} {print} 'Socorro!'
                     {print} 'Por que ninguém está me ajudando?'
                     ```
+                answer_code: |
+                    {print} 'Todas as crianças queriam ir ao zoológico e não paravam de gritar!'
+                    {repeat} 3 {times}{print} "Vamos para o zoológico!"
             9:
                 story_text: |
                     Neste nível você pode usar várias linhas em seus comandos `{if}`, desta forma você pode atualizar seu final feliz ou triste!
@@ -161,12 +208,27 @@ adventures:
                     ```
                     {print} 'OH NÃO! O T-rex está se aproximando!'
                     final = {ask} 'Você quer um final feliz ou triste?'
+                    #Contando o final feliz da história:
                     {if} final {is} feliz
                         {print} 'Bem a tempo Ricardo volta para a máquina do tempo!'
                         {print} _
+                    #Contando o final triste da história
                     {else}
                         {print} 'Oh não! Ricardo foi lento demais...'
                         {print} _
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'OH NÂO! O dinossauro rex está chegando perto!'
+                    final = {ask} 'Você quer um final feliz ou um final triste?'
+                    {if} final {is} feliz
+                        {print}'No último instante Richard entra na máquina do tempo!'
+                        {print}'Pfiew ainda bem que conseguimos'
+                        {print}'No último instante'
+                    {else}
+                        {print}'Oh não! Richard é muito lento...'
+                        {print}'O dinossauro rex solta um grande RUGIDO'
+                        {print}'Abre sua boca e devora Richard em uma mordida'
                     ```
             10:
                 story_text: |
@@ -196,18 +258,22 @@ adventures:
                     {else}
                         {print} 'Roberta vai para casa'
                     ```
-                story_text_2: "Usando os comandos `{and}` e `{or}`, você pode tornar suas histórias mais versáteis. Você pode fazer duas perguntas e responder à combinação de respostas.\n\n### Exercício 1\nObserve o código de exemplo e complete-o. Em seguida, adicione pelo menos mais 2 códigos `{if}` com `{and}` ou `{or}`.\n\n### Exercício 2\nEncontre uma história de um nível anterior e adicione um `{and}` ou `{or}`.\nexample_code: |\n```\n{print} 'Nosso herói está caminhando pela floresta'\n{print} 'O caminho se divide em dois'\npath = {ask} 'Qual caminho ela deve escolher?'\nweapon = {ask} 'Qual arma ela saca?'\n{if} path {is} 'left' {and} weapon {is} 'sword'\n_\n```\n"
+                story_text_2: "Usando os comandos `{and}` e `{or}`, você pode tornar suas histórias mais versáteis. Você pode fazer duas perguntas e responder à combinação de respostas.\n\n### Exercício 1\nObserve o código de exemplo e complete-o. Em seguida, adicione pelo menos mais 2 codigos `{if}` com `{and}` ou `{or}`.\n\n### Exercício 2\nEncontre uma história de um nível anterior e adicione um `{and}` ou `{or}`.\n"
             11:
                 story_text: |
                     Neste nível você pode usar o comando {for} em sua história. Desta forma, você poderia facilmente programar o livro infantil 'urso pardo, urso pardo, o que você vê'.
+
+                    ###Exercício
+
+                    Veja <a href="https://fliphtml5.com/jmlya/nquy"> a história</a> se você não a conhece. Verifique se ela está impressa como no livro.
                 example_code: "```\nanimais = _ , _ , _ \n{print} 'Urso marrom, Urso marrom'\n{print} 'O que você vê?'\n```\n"
             16:
                 story_text: |
-                    Usar o laço `{while}` pode tornar suas histórias mais interessantes. Por exemplo, você pode usar `{while} jogo == 'ligado'` para poder jogar até que o jogo termine.
-                    Ou você pode usar `{while} espada == 'perdida'` para que o(a) jogador(a) não possa continuar o jogo até encontrar algo.
+                    Usar o laço de repetição `{while}` pode tornar suas histórias mais interessantes. Por exemplo, você pode usar `{while} game == 'on'` para poder jogar até que o jogo termine.
+                    Ou você pode usar `{while} sword == 'lost'` para que o(a) jogador(a) não possa continuar o jogo até encontrar algo.
 
                     ### Exercício
-                    O código exemplo mostra como usar o laço `{while}` em uma história. Agora **invente o seu próprio cenário** em que o(a) jogador(a) precisa encontrar algo antes de continuar.
+                    O código de exemplo mostra como usar o laço de repetição `{while}` em uma história. Agora **invente o seu próprio cenário** em que o(a) jogador(a) precisa encontrar algo antes de continuar.
                 example_code: |
                     ```
                     chaves = 'perdidas'
@@ -231,7 +297,9 @@ adventures:
                     ```
             6:
                 story_text: "Agora que você pode usar `{elif}`, pode criar uma história ainda mais interativa! Você pode criar vários personagens, por exemplo, com características diferentes.\nOu você pode fazer com que seu jogador escolha qual caminho seguir, qual porta abrir ou qual poção mágica beber...\n\n### Exercício\nCrie sua própria história com 3 ou mais opções usando {elif}."
-                example_code: "```\ncharacter = {ask} 'Quem vai te ajudar na sua jornada?'\n{if} character {is} 'Daisy'\n{print} 'Você escolheu Daisy! Ela é a mais inteligente de todas!'\n{print} \"Daisy imediatamente diz que você não deve comer aquelas frutas ali.\"\n{elif} character {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{print} 'Jason levanta uma pedra, mostrando um mapa secreto embaixo'\n{elif} character {is} 'Sam'\n{print} 'Você escolheu Sam! Elas são as mais rápidas de todas!'\n{print} 'Sam sobe em uma árvore e vê que há uma vila não muito longe...'\n```\n"
+                example_code: "```\npersonagem {is} {ask} 'Quem vai te ajudar na sua jornada?'\n{if} personagem {is} 'Daisy'\n{print} 'Você escolheu a Daisy! Ela é a mais inteligente de todas!'\n{elif} personagem {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{elif} personagem {is} 'Sam'\n{print} 'Você escolheu Sam! A pessoa mais rápidas de todas!'\n```\n"
+                answer_code: |
+                    Própria resposta
     add_remove_command:
         default_save_name: comando_some_remova
         description: introduzindo {add} {to_list} e {remove} {from}
@@ -347,15 +415,18 @@ adventures:
                     Você consegue completar a linha 10 para fazer o programa funcionar?
 
                     ### Exercício 2
-                    Dê um retorno ao(à) jogador(a) depois que ele(a) responder, como `{print} 'Correto!'` ou `{print} 'Errado! A resposta correta é ' resposta_correta`.
+                    Dê um retorno ao(à) jogador(a) depois que ele(a) responder, como `{print} 'Correct!'` ou `{print} 'Wrong! The correct answer is ' correct_answer`.
                 example_code: |
                     ```
                     pontuação = 0
+                    #Fazendo 10 perguntas de matemática:
                     {repeat} 10 {times}
+                        #Escolhendo uma pergunta aleatória:
                         números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         número_1 = números {at} {random}
                         número_2 = números {at} {random}
                         resposta_correta = número_1 * número_2
+                        #Fazendo a pergunta:
                         {print} 'Quanto é ' número_1 ' vezes ' número_2 '?'
                         resposta = {ask} 'Digite aqui a sua resposta...'
                         {print} 'Você respondeu ' resposta
@@ -377,15 +448,13 @@ adventures:
                     {print}('A sua média foi ', media)
                     ```
                 story_text: |
-                    Nesta aventura, você construirá uma calculadora que calcula sua média de notas. Se você conseguir fazer sua calculadora funcionar, poderá passar para a próxima aventura, que permite adicionar dois recursos extras.
+                    Nesta aventura, você construirá uma calculadora que calcula a média das suas notas. Se você conseguir fazer sua calculadora funcionar, poderá passar para a próxima aventura, que permite adicionar dois recursos extras.
 
                     ### Exercício 1
                     Preencha os espaços em branco para fazer a calculadora funcionar.
-
-                    * Comece na quarta linha e adicione uma pergunta para descobrir qual nota o aluno tirou.
+                    * Comece na quarta linha, adicione uma pergunta para descobrir qual nota o aluno tirou.
                     * Na quinta linha, você deverá calcular o total de todas as notas, então o total = total + nota.
                     * Em seguida, defina o valor de retorno. Queremos retornar a média, então o total dividido pela quantidade de provas (4).
-
                     * Por fim, finalize o código chamando a função na linha 8.
 
                     Conseguiu? Ótimo! Gostaria de adicionar ainda mais recursos à sua calculadora? **Esta aventura continua na próxima aventura!**

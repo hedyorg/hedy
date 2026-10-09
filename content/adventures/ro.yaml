@@ -14,6 +14,20 @@ adventures:
                     {print} {answer} este frica de o pădure bântuita
                     ```
                 story_text_2: "### Exercițiu\nCrează acum povestea ta cu cel puțin 6 line de cod.\nAceastă poveste nu poate fi la fel ca si codul din examplu. \nUtilizează cel puțin o dată comanda `{ask}` și o comandă `{echo}` .\nPoți scrie ceva despre ceea ce iți place ție. \nDacă nu ai idei, alege unul din următoarele subiecte: cinema, meci de fotbal sau o zi la grădina zoologică.\n"
+                story_text: |
+                    La nivelul 1 poți crea o poveste cu un personaj principal diferit pe care îl introduci chiar tu.
+
+                    La prima linie, folosește `{ask}` și întreabă cine va fi personajul principal al poveștii. Apoi folosește {answer} dacă vrei să folosești numele personajului.
+                answer_code: |
+                    ```
+                    {print} Întro zi am fost la grădina zoologică
+                    {ask} Ce animal am văzut prima dată?
+                    {print} Prima data am văzut un {answer}
+                    {print} Apoi am văzut un pinguin
+                    {print} Mânca prânzul
+                    {ask} Ce mânca pinguinul?
+                    {print} Pinguinul manca {answer} la prânz
+                    ```
             2:
                 story_text: "In nivelul 2 poți face o poveste mai frumoasă și interesantă. Numele personajului principal poate fi oriunde în propoziție.\n\nPentru a crea asta trebuie să programezi un pic mai mult de data asta. Trebuie să decizi numele personajului principal. \n\nPoți pune acum numele oriunde vrei in propoziție.\n"
             10:
