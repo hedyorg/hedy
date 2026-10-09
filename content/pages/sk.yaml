@@ -793,7 +793,7 @@ teacher-guide:
                     time = {ask} 'Máš čas hrať sa?'
                     {if} game {is} 'áno' {or} time {is} 'áno'
                         {print} 'Poďme sa hrať!'
-                solution_text: V tomto prípade má osoba na obe otázky odpovedať áno, takže treba použiť `and`.
+                solution_text: V tomto prípade má osoba na obe otázky odpovedať áno, takže treba použiť `{and}`.
                 solution_code: |-
                     game = {ask} 'Chceš sa hrať hru?'
                     time = {ask} 'Máš čas hrať sa?'

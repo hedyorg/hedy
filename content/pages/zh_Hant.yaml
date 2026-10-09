@@ -91,7 +91,7 @@ teacher-guide:
                     {print} 因為我把大寫字母改掉了！
             title: 學生輸入指令時使用大寫字母
         -   example:
-                error_text: '`answer` 用來在 `ask` 指令之後重複顯示回答。若沒有先使用 `ask`，`answer` 就不會有任何作用。'
+                error_text: '`{answer}` 用來在 `{ask}` 指令之後重複顯示回答。若沒有先使用 `{ask}`，`{answer}` 就不會有任何作用。'
                 error_code: '{print} 你的名字是 {answer}'
                 solution_text: 加入 ask 指令，程式就能正常運作。
                 solution_code: |-
@@ -103,7 +103,7 @@ teacher-guide:
                 error_code: |-
                     {forward} 300
                     {turn} 90
-                solution_text: 在這個範例中，學生常以為 `turn` 指令沒有作用，其實它已正確執行，只是海龜走出了畫面範圍。使用較小的數字就能避免這個情況。
+                solution_text: 在這個範例中，學生常以為 `{turn}` 指令沒有作用，其實它已正確執行，只是海龜走出了畫面範圍。使用較小的數字就能避免這個情況。
                 solution_code: |-
                     {forward} 100
                     {turn} 90
@@ -111,7 +111,7 @@ teacher-guide:
         -   example:
                 error_text: '`backward` 不是 Hedy 指令。'
                 error_code: 後退 100
-                solution_text: 若要讓海龜向後走，請使用 `forward` 指令和負數。例如：
+                solution_text: 若要讓海龜向後走，請使用 `{forward}` 指令和負數。例如：
                 solution_code: '{forward} -100'
             title: 海龜：學生使用 `backward` 指令，但沒有這個指令。
         level: '1'
@@ -123,11 +123,11 @@ teacher-guide:
                 solution_code: '{print} 請不要拼錯字'
             title: 學生拼錯指令
         -   example:
-                error_text: 學生會在這個等級學習變數。`ask` 指令也需要搭配變數，但學生常會忘記。
+                error_text: 學生會在這個等級學習變數。`{ask}` 指令也需要搭配變數，但學生常會忘記。
                 error_code: 問 你想吃什麼
                 solution_text: 在這個等級中，你必須告訴 Hedy 要把回答儲存在哪裡，之後才能再次使用。這個儲存位置稱為變數。
                 solution_code: 餐點 {is} {ask} 你想吃什麼？
-            title: 學生忘了 `ask` 指令已經改變
+            title: 學生忘了 `{ask}` 指令已經改變
         -   example:
                 error_text: 有些學生發現 `{echo}` 指令不能再使用時，可能會感到挫折。因此，向學生說明使用變數的好處非常重要。例如，一段程式碼中可以使用多個變數，而且能把變數放在句子中想放的任何位置！
                 error_code: |-
@@ -205,7 +205,7 @@ teacher-guide:
                 error_code: |-
                     鳥類 {is} 麻雀, 海鷗, 知更鳥
                     {print} 鳥類 random
-                solution_text: 加上 `at` 就能解決這個問題。
+                solution_text: 加上 `{at}` 就能解決這個問題。
                 solution_code: |-
                     鳥類 {is} 麻雀, 海鷗, 知更鳥
                     {print} 鳥類 {at} {random}
@@ -247,7 +247,7 @@ teacher-guide:
                     your_name {is} {ask} 你是誰？
                     {add} your_name {to} names
                     {print} names {at} {random}
-                solution_text: 程式中必須先有清單，所以要加入第二個名字（例如 Amy），把 `names` 變成清單。如果不想讓 Amy 留在清單中，之後可以使用 `remove` 將她移除。
+                solution_text: 程式中必須先有清單，所以要加入第二個名字（例如 Amy），把 `names` 變成清單。如果不想讓 Amy 留在清單中，之後可以使用 `{remove}` 將她移除。
                 solution_code: |-
                     names {is} Jake, Amy
                     your_name {is} {ask} 你是誰？
@@ -255,7 +255,7 @@ teacher-guide:
                     {print} names {at} {random}
             title: 學生在沒有清單時嘗試使用 add/remove
         -   example:
-                error_text: '`add`／`remove` 指令少了 `to`／`from` 就無法運作。'
+                error_text: '`{add}`／`{remove}` 指令少了 `{to}`／`{from}` 就無法運作。'
                 error_code: |-
                     adventures {is} 故事, 鸚鵡, 骰子
                     choice {is} 你最喜歡哪一個冒險？
@@ -273,7 +273,7 @@ teacher-guide:
         level: '3'
     -   sections:
         -   example:
-                error_text: 在這個等級中，「輸出」和 `ask` 使用的文字前後都需要引號。
+                error_text: 在這個等級中，「輸出」和 `{ask}` 使用的文字前後都需要引號。
                 error_code: |-
                     {print} 你好
                     心情 {is} {ask} '你今天好嗎？
@@ -325,7 +325,7 @@ teacher-guide:
                     {else} {print} '沒那麼酷！'
             title: 學生可能用兩個不同的名稱代表同一個變數
         -   example:
-                error_text: 使用 `if` 指令可能會讓程式碼變得很長，學生也常因此忘了加上引號。
+                error_text: 使用 `{if}` 指令可能會讓程式碼變得很長，學生也常因此忘了加上引號。
                 error_code: |-
                     {if} name {is} Hedy {print} 好玩
                     {else} {print} '還好！
@@ -610,7 +610,7 @@ teacher-guide:
                     時間 {is} {ask} '你有時間玩嗎？'
                     {if} 遊戲 {is} '是' {or} 時間 {is} '是'
                         {print} '一起玩吧！'
-                solution_text: 在這個例子中，對方必須在兩個問題都回答「是」，所以應該使用 `and`。
+                solution_text: 在這個例子中，對方必須在兩個問題都回答「是」，所以應該使用 `{and}`。
                 solution_code: |-
                     遊戲 {is} {ask} '你想玩遊戲嗎？'
                     時間 {is} {ask} '你有時間玩嗎？'
@@ -644,7 +644,7 @@ teacher-guide:
                         {print} '你不是 Hedy'
             title: 學生使用錯誤的 `!=`、`<=` 和 `>=` 符號
         -   example:
-                error_text: 在這個等級中，學生仍可使用 `=` 或 `is`，但在其他等級或 Python 中，這樣寫可能會造成問題。因此，最好讓學生練習使用正確的寫法。
+                error_text: 在這個等級中，學生仍可使用 `=` 或 `{is}`，但在其他等級或 Python 中，這樣寫可能會造成問題。因此，最好讓學生練習使用正確的寫法。
                 error_code: |-
                     名字 = {ask} '你叫什麼名字？'
                     {if} 名字 = 'Hedy'
@@ -670,7 +670,7 @@ teacher-guide:
                     {while} 回答 != 25
                         回答 = {ask} '5 乘以 5 是多少？'
                     {print} '答對了'
-            title: 學生忘了在 `while` 迴圈中縮排
+            title: 學生忘了在 `{while}` 迴圈中縮排
         level: '15'
     -   sections:
         -   example:

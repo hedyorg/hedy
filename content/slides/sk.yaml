@@ -112,7 +112,7 @@ levels:
 
                 `{print}` ukáže text na obrazovke.
             code: '{print} Ukáž tento text na obrazovke'
-            notes: Najprv nechaj žiakov odhadnúť výstup. Potom kód spusti a ukáž, čo sa stane, keď beží kód `print`.
+            notes: Najprv nechaj žiakov odhadnúť výstup. Potom kód spusti a ukáž, čo sa stane, keď beží kód `{print}`.
         3:
             header: Kľúčové slovo {print}
             text: |-
@@ -144,7 +144,7 @@ levels:
                 {print} Ahoj!
                 {ask} Ako sa voláš?
                 {print} ahoj {answer}
-            notes: Aby počítač odpoveď zopakoval, použije sa kľúčové slovo `answer`.
+            notes: Aby počítač odpoveď zopakoval, použije sa kľúčové slovo `{answer}`.
         6:
             header: Programovanie!
             text: Tu je zoznam dobrodružstiev.
@@ -271,7 +271,7 @@ levels:
                 Pozor: tento kód na tejto úrovni nefunguje. Program nespúšťaj, len ho preber.
                 Nechaj žiakov pozrieť sa na program a odhadnúť výstup.
                 Snáď dôjdu k tomu, že posledný riadok povie len „Nech chutí (nápoj z objednávky)“ a jedlo počítač zabudne.
-                S `ask` si počítač pamätá len jednu vec. Na tejto úrovni sa na tento problém použijú premenné.
+                S `{ask}` si počítač pamätá len jednu vec. Na tejto úrovni sa na tento problém použijú premenné.
         3:
             header: Čo je premenná?
             text: |-
@@ -283,11 +283,11 @@ levels:
             notes: |-
                 Slovo premenná v informatike označuje miesto v pamäti počítača, kde sa ukladá informácia, ktorá sa mení.
                 Premenná je ako krabica, v ktorej je to, čo sa mení. Krabica ostáva rovnaká, ale vnútro sa môže meniť.
-                Ukáž žiakom, ako premenné fungujú. Upozorni, že názov premennej `answer` v poslednom riadku sa nahradí hodnotou premennej.
+                Ukáž žiakom, ako premenné fungujú. Upozorni, že názov premennej `{answer}` v poslednom riadku sa nahradí hodnotou premennej.
                 Modrý rámik na obrazovke výstupu ukazuje použité premenné a na čo sú nastavené.
         4:
             header: Príkaz `{is}`
-            text: Premennú vytvoríš alebo „nastavíš“ príkazom `{is}`. Názov premennej je pred `{is}` a príkaz `{ask}` za ním. Názov premennej si môžeš vybrať a použiť aj niečo iné než `answer`.
+            text: Premennú vytvoríš alebo „nastavíš“ príkazom `{is}`. Názov premennej je pred `{is}` a príkaz `{ask}` za ním. Názov premennej si môžeš vybrať a použiť aj niečo iné než `{answer}`.
             code: |-
                 name {is} {ask} Ako sa voláš?
                 {print} Ahoj name
@@ -303,7 +303,7 @@ levels:
             notes: Opýtaj sa žiakov, či vedia ďalšiu premennú (výška, číslo topánky, farba vlasov a podobne) a pridaj do kódu vlastné príklady.
         6:
             header: Viac premenných
-            text: Keď sa používajú premenné, dá sa ich použiť viac, nielen jedno `answer`.
+            text: Keď sa používajú premenné, dá sa ich použiť viac, nielen jedno `{answer}`.
             code: |-
                 name {is} Hedy
                 age {is} 15

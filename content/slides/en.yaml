@@ -124,7 +124,7 @@ levels:
                 `{print}` is used to show text on the screen.
             code: '{print} Show this text on the screen'
             notes: |-
-                First let the students guess what they think the output will be. Then run the code to show the students what happens when a `print` code is run.
+                First let the students guess what they think the output will be. Then run the code to show the students what happens when a `{print}` code is run.
         3:
             header: The {print} keyword
             text: |-
@@ -158,7 +158,7 @@ levels:
                 {ask} What is your name?
                 {print} hello {answer}
             notes: |-
-                To make the computer repeat the answer back to you, you use the `answer` keyword.
+                To make the computer repeat the answer back to you, you use the `{answer}` keyword.
         6:
             header: Programming!
             text: Here you can find a list of the adventures.
@@ -310,12 +310,12 @@ levels:
             notes: |-
                 We use the word variable in computing to describe a place in a computer’s memory where it stores information that changes.
                 The variable is a like a box or container that holds the thing that is changing. The box stays the same but whatever is inside can change or vary.
-                Show the students how the variables work. Point out that the name of the variable `answer` in the last line are replaced with the value of the variable.
+                Show the students how the variables work. Point out that the name of the variable `{answer}` in the last line are replaced with the value of the variable.
                 The blue box that appears in your output screen shows you the variables you've used and what they have been set to.
         4:
             header: The `{is}` command
             text: |- 
-                To make or 'set' a variable we use the `{is}` command. The name of the variable comes before the `{is}` and the `{ask}` command behind it. We can choose the name of the variable and use something else than `answer`.
+                To make or 'set' a variable we use the `{is}` command. The name of the variable comes before the `{is}` and the `{ask}` command behind it. We can choose the name of the variable and use something else than `{answer}`.
             code: |-
                 name {is} {ask} What is your name?
                 {print} Hello name
@@ -334,7 +334,7 @@ levels:
                 Ask students if they could think of another variable (length, shoe size, haircolor etc.) and add your own examples to the code.
         6:
             header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `answer`.
+            text: Now that we use variables, we can use multiple variables instead of just one `{answer}`.
             code: |-
                 name {is} Hedy
                 age {is} 15

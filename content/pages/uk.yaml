@@ -328,7 +328,7 @@ teacher-guide:
                     {else} {print} 'less cool!'
         -   title: Students still forget the quotes on both sides
             example:
-                error_text: Using the `if` command can make the code lines very long and students tend to forget to use quotes.
+                error_text: Using the `{if}` command can make the code lines very long and students tend to forget to use quotes.
                 error_code: |-
                     {if} name {is} Hedy {print} fun
                     {else} {print} 'meh!
@@ -613,7 +613,7 @@ teacher-guide:
                     time {is} {ask} 'Do you have time to play?'
                     {if} game {is} 'yes' {or} time {is} 'yes'
                         {print} 'Lets play!'
-                solution_text: In this case, the person should answer yes on both questions, so you should use `and`.
+                solution_text: In this case, the person should answer yes on both questions, so you should use `{and}`.
                 solution_code: |-
                     game {is} {ask} 'Do you want to play a game?'
                     time {is} {ask} 'Do you have time to play?'
