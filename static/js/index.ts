@@ -30,3 +30,4 @@ export * from './microbit';
 export * from './autosave';
 export * from './custom-elements';
 export * from './admin';
+export * from './manual-index';

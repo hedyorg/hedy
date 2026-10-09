@@ -22,6 +22,9 @@ describe('teacher login redirect behavior', () => {
     cy.window().then((win) => {
       win.localStorage.setItem('login-redirect', JSON.stringify({ url: `${Cypress.config('baseUrl')}/hedy/1` }))
     })
+    // A response still in flight from the previous test can set its session cookie again
+    // after Cypress clears it, and then /login sends a logged-in teacher to /my-profile.
+    cy.clearCookies()
     cy.visit('/login')
     cy.location('pathname', { timeout: 15000 }).should('eq', '/login')
 

@@ -56,11 +56,14 @@ function seedGradeProgramsAndReturnToTeacher() {
   });
 }
 
-function getManageTableUsernames() {
-  return cy.get('#manage-students-table-body tr').then(($rows) => {
-    return Cypress.$($rows).map((_, row) => {
+// Inside a single `should`, so the rows are read again until htmx has swapped the sorted
+// table in. A `.then` reads them once, possibly before the swap.
+function expectManageTableUsernames(expected) {
+  cy.get('#manage-students-table-body tr').should(($rows) => {
+    const usernames = Cypress.$($rows).map((_, row) => {
       return Cypress.$(row).find('td').first().text().trim();
     }).get();
+    expect(usernames).to.deep.equal(expected);
   });
 }
 
@@ -146,12 +149,12 @@ describe('Redesigned class grading and management pages', () => {
         cy.getDataCy('sort_student').click();
         cy.wait('@manageFilterSort').its('response.statusCode').should('eq', 200);
         cy.get('#student-sort-input').should('have.value', 'ascendent');
-        getManageTableUsernames().should('deep.equal', ascStudents);
+        expectManageTableUsernames(ascStudents);
 
         cy.getDataCy('sort_student').click();
         cy.wait('@manageFilterSort').its('response.statusCode').should('eq', 200);
         cy.get('#student-sort-input').should('have.value', 'descendent');
-        getManageTableUsernames().should('deep.equal', descStudents);
+        expectManageTableUsernames(descStudents);
       });
     });
   });

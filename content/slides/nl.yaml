@@ -513,9 +513,9 @@ levels:
             text: |-
                 Je kunt items aan een lijst toevoegen met het `{add}` `{to}` commando.
             code: |-
-                animals {is} dog, cat, kangaroo
-                {add} sheep {to_list} animals
-                {print} I choose animals {at} {random}
+                dieren {is} hond, kat, kangoeroe
+                {add} shaap {to_list} dieren
+                {print} ik kies dieren {at} {random}
             notes: |-
                 De leerlingen zullen als het goed is opmerken dat het geen zin heeft om het commando op deze manier te gebruiken, want je had 'schapen' gelijk bij de lijst kunnen zetten waar je mee begint
                 De volgende slide laat zien hoe je {add} kan gebruiken in combinatie met {ask} en een variabele om het programma ineractief te maken.
@@ -690,15 +690,15 @@ levels:
         11:
             header: Drawing in `{color}`
             text: |-
-                Lastly, you can use `{color}` to make your drawings even better!
+                Ten slotte, kan je `{color}`gebruiken om je tekeningen beter te maken!
             code: |-
-                {color} blue
+                {color} blauw
                 {forward} 30
-                {color} red
+                {color} rood
                 {forward} 30
-                {color} pink
+                {color} roze
                 {forward} 30
-                {color} yellow
+                {color} geel
                 {forward} 30
         12:
             header: Foutzoeken
@@ -933,8 +933,8 @@ levels:
                 {else}
                      {print} naam 'krijgt een papegaai'
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggen
+            text: Debug deze code!
             code: |-
                 {print} 'Welkom bij de ijssalon.'
                 smaak {is} {ask} 'Welke smaak wilt u graag hebben?'
@@ -1418,7 +1418,7 @@ levels:
                 Vraag aan de leerlingen wie er blond haar heeft en geen bril. Je zult merken dat de leerlingen echt even goed moeten kijken voordat ze het zien.
                 Laat ze dan de code op de volgende slide zien. Die code is veel beter leesbaar door het gebruik van {and}.
         7:
-            header: '{and} keyword'
+            header: '{and} sleutelwoord'
             text: |-
                 Het `{and}` keyword komt hier goed van pas.
 
@@ -1543,6 +1543,10 @@ levels:
                 Laat de leerlingen zien hoe je met het {for} commando ook een block nodig hebt dat met inspringing begint.
                 Voer de code uit en laat zien wat er gebeurt.
                 Vraag de leerlingen daarna om hun eigen versie van een programma met {for} erin te schrijven.
+            code: |-
+                dieren = hond, kat, blobvis
+                {for} dier {in} dieren
+                    {print} 'Ik hou van ' dier
         3:
             header: '{for}'
             text: 'Hier zie je een ander voorbeeld van `{for}`:'
@@ -1601,7 +1605,160 @@ levels:
             text: |-
                 In het volgende level leren we het {for} commando op een andere manier te gebruiken.
             code: |-
-                {for} counter {in} {range} 1 {to} 10
-                    {print} counter
-                {print} 'Ready or not. Here I come!'
+                {for} teller {in} {range} 1 {to} 10
+                    {print} teller
+                {print} 'Klaar of niet. Hier kom ik!'
             debug: 'True'
+    12:
+        1:
+            text: |-
+                Aan het einde van deze les kun je:
+                * functies gebruiken
+            notes: |-
+                In dit level maken de leerlingen kennis met functies. Dit kan voor kinderen een lastig concept zijn om te begrijpen.
+                Hoe meer de leerlingen met de avonturen oefenen, hoe beter ze het zullen begrijpen.
+                Zorg er daarom voor dat de leerlingen niet te veel tijd besteden aan het begrijpen ervan, maar vooral zelf aan de slag gaan. Door het te doen, zullen ze het vanzelf begrijpen!
+            header: Welkom bij level 12
+        2:
+            header: Functies!
+            text: |-
+                In dit level leer je hoe je functies gebruikt. Een functie is een blok code dat je gemakkelijk meerdere keren kunt gebruiken.
+
+                Opdracht:
+                * Schrijf de tekst van ‘Twinkel, twinkel, kleine ster’ op
+                * Markeer de terugkerende songtekst
+            notes: |-
+                Om de leerlingen te laten zien waarvoor je een functie kunt gebruiken, gebruiken we ‘Twinkel, twinkel, kleine ster’.
+                De herhaalde songtekst is: ‘Twinkel’, ‘twinkel’, ‘kleine ster’, ‘hoe wonderlijk ben je!’
+        3:
+            header: Twinkel, twinkel, kleine ster!
+            text: |-
+                In dit programma zie je een voorbeeld van een functie.
+                Laten we kijken wat er gebeurt als je de rest van het liedje invult!
+            code: |-
+                {define} twinkel
+                     {print} 'Twinkel'
+                     {print} '...'
+            notes: |-
+                Voeg de herhalende songtekst toe aan de functie: ‘Twinkel’, ‘kleine ster’, ‘hoe wonderlijk ben je?’.
+                Vertel de leerlingen dat dit deel de functie is en laat zien dat je de functie `twinkle` hebt aangeroepen.
+                Op de volgende slide roepen we de functie twee keer aan om het liedje af te maken.
+        4:
+            header: Functies
+            text: Zoals je in het voorbeeld kon zien, is een functie een blok code dat je op elk moment kunt aanroepen. Je gebruikt `{define}` om de functie in te stellen en `{call}` om de functie te gebruiken.
+            code: |-
+                {define} twinkel
+                     {print} 'Twinkel'
+                     {print} '...'
+
+                {call} twinkel
+                {print} 'Hoog boven de wereld zo hoog'
+                {print} 'Als een diamant aan de hemel'
+                {call} twinkel
+        5:
+            header: 'Gebruik # voor nette code'
+            text: |-
+                Vergeet niet je code netjes en leesbaar te houden door regels te gebruiken die beginnen met # en uitleggen wat dat deel van de code doet!
+                Dit is vooral handig bij het maken van functies!
+            code: |-
+                # Deze functie geeft je goed advies
+                {define} advies
+                    {print} 'Houd je code zo overzichtelijk!'
+                    {print} 'Je zult jezelf later dankbaar zijn!'
+        6:
+            header: Debuggen
+            text: Laten we deze code debuggen!
+            code: |-
+                {call} nieuw_lid
+                {print} 'Hoi nieuw lid!'
+                gebruikersnaam = {ask} 'Wat is je gebruikersnaam?'
+                wachtwoord = 'Wat is je wachtwoord?'
+                {print} 'Welkom bij onze club!'
+
+                gebruikersnaam = {ask} 'Vul je gebruikersnaam in. Ben je een nieuw lid? Typ Nieuw lid'
+                {if} gebruikersnaam = Nieuw lid
+                {call} nieuw lid
+                    {else}
+                        wachtwoord = {ask} 'Vul je wachtwoord in'
+            notes: Deze debugopdracht is best lastig. We raden aan om de leerlingen eerst aan de avonturen te laten werken voordat je ze deze code laat debuggen.
+        7:
+            header: Laten we de avonturen bekijken!
+            text: Veel plezier met de avonturen in level 12!
+            notes: Je leerlingen kunnen nu aan alle avonturen van level 12 werken.
+        8:
+            header: Laten we terugkijken!
+            text: Wat heb je vandaag geleerd?
+            notes: Vraag de leerlingen om op te noemen wat ze vandaag hebben geleerd.
+        9:
+            header: Laten we terugkijken!
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+            notes: Vraag de leerlingen naar hun mening.
+        10:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: Laat enkele leerlingen hun werk aan de klas zien.
+        11:
+            header: Gefeliciteerd!
+            text: |-
+                Je hebt het einde van Hedy Advanced bereikt! Je kunt verder leren in Hedy Expert (levels 13-16), waar je echte Python-code leert schrijven. Of blijf gerust in Hedy Advanced en bedenk natuurlijk je eigen programma's!
+
+                In het volgende level brengen we enkele veranderingen aan in de taal, zodat je Hedy overal kunt gebruiken waar Python wordt gebruikt.
+    13:
+        1:
+            header: Welkom bij level 13
+            text: |-
+                Welkom bij Hedy Expert (levels 13-16)!
+
+                Aan het einde van deze les kun je:
+                * code schrijven die (bijna) echte Python-code is
+        2:
+            header: Echte Python-code
+            text: |-
+                De code die we tot nu toe hebben gebruikt, was vereenvoudigd.
+                Maar vanaf nu gebruiken we echte Python-code, die je ook ergens anders kunt gebruiken.
+            notes: |-
+                Leg je leerlingen uit dat Python een veelgebruikte programmeertaal is.
+                Tot nu toe gebruikten we verschillende vereenvoudigde versies van deze taal.
+                Maar nu zijn we op het punt aangekomen waarop alle code die je in Hedy gebruikt echte Python-code is en dus ook ergens anders gebruikt kan worden.
+                Vertel ook dat er behoorlijk wat veranderingen zijn, maar dat het relatief kleine veranderingen zijn.
+        3:
+            header: '{print} in Python'
+            text: Bij {print} moet je voortaan haakjes gebruiken.
+            code: |-
+                {print} ('Deze code lijkt nu op echte Python-code.')
+                {print} ('Je kunt nu ook buiten Hedy printen.')
+                {print} ('Gefeliciteerd, je bent een echte programmeerpro geworden!')
+            notes: Vraag je leerlingen zich te herinneren hoe je het keyword {print} eerder schreef. Laat daarna de nieuwe code zien en wijs aan waar de haakjes staan.
+        4:
+            header: '{ask}'
+            text: We vervangen `{ask}` ook door het keyword `{input}`, dat in Python wordt gebruikt. Ook hierbij gebruiken we haakjes.
+            code: |-
+                leeftijd = {input} ('Hoe oud ben je?')
+                {print} ('Je bent', leeftijd, 'jaar oud.')
+        5:
+            header: '{print} met variabelen'
+            text: "Je kunt variabelen en tekst combineren in een printopdracht door ze met komma's van elkaar te scheiden:"
+            code: |-
+                level = {input}('Op welk level zit je?')
+                {print}('Veel succes met level', level)
+            notes: |-
+                Laat je leerlingen voorspellen wat de uitvoer van deze code zal zijn. 
+                Voer de code daarna uit en laat zien dat de tekst tussen aanhalingstekens letterlijk wordt afgedrukt en dat de variabele erbuiten wordt vervangen door de waarde ervan.
+                Laat ook zien wat er gebeurt als je 'level' op de laatste regel eveneens tussen aanhalingstekens zet.
+        6:
+            header: '`{if}` en `{else}`'
+            text: 'In de if-instructie moet je voortaan twee gelijktekens gebruiken: ==. De meeste programmeertalen doen dat ook. Daarnaast moet er nu een dubbele punt aan het einde van de if-instructie staan.'
+        13:
+            header: Debuggen
+    14:
+        7:
+            header: Debuggen
+    16:
+        4:
+            header: Debuggen
+    15:
+        7:
+            header: Debuggen

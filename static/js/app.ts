@@ -404,6 +404,12 @@ export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: 
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('data-lang', theKeywordLanguage);
+      // A page can hold a code block back altogether. The grading page has one per row and
+      // every row starts folded shut, so building them is work for nothing: an observer
+      // counts a folded row as visible and builds it anyway. Those are built on expand.
+      if (preview.classList.contains('defer-editor')) {
+        continue;
+      }
       // If the request comes from HTMX initialize all directly, except for common mistakes:
       // those pages hold dozens of examples, and building them all up front is SUPER SLOW.
       if (initializeAll && !preview.classList.contains('common-mistakes')) {

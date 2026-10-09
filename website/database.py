@@ -542,6 +542,18 @@ class Database:
         # Fetch a student adventure with id formatted as studentID-adventureName-level
         return self.STUDENT_ADVENTURES.get({"id": id})
 
+    def student_adventures_by_ids(self, ids):
+        """Fetch many student adventures at once, by ids formatted as studentID-adventureName-level.
+
+        Returns: { id -> student adventure }, leaving out the ids that have no record yet.
+        The grading page needs one of these per row it shows, and fetching them one by one
+        is a round trip per row.
+        """
+        if not ids:
+            return {}
+        found = self.STUDENT_ADVENTURES.batch_get({id: {"id": id} for id in ids})
+        return {id: adventure for id, adventure in found.items() if adventure}
+
     def update_student_adventure(self, id, ticked):
         # Swap the ticked value when a request is sent
         return self.STUDENT_ADVENTURES.update({"id": id}, {"ticked": not ticked})

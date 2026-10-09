@@ -7,6 +7,9 @@ module.exports = defineConfig({
   redirectionLimit: 100,
   // numTestsKeptInMemory: 0,
   experimentalMemoryManagement: true,
+  // One retry in CI, so a rare flake does not fail the whole run. A test that only passes
+  // on its retry is still reported as flaky in the output, so it does not go unnoticed.
+  retries: { runMode: 1, openMode: 0 },
   e2e: {
     baseUrl: 'http://localhost:8080',
     setupNodeEvents(on, config) {

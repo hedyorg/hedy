@@ -25,6 +25,11 @@ WORKDIR /app
 # the runtime stage, it's purely for the build).
 ENV DYNO=1
 
+# The build only needs the npm packages, not the Cypress binary or Puppeteer's Chrome,
+# which are large and slow to download.
+ENV CYPRESS_INSTALL_BINARY=0
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+
 # First copy only requirements so that we can cache the pip install layer, which is slow to run.
 COPY requirements.txt requirements-prod.txt /app/
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install -r requirements.txt

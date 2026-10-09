@@ -1,5 +1,4 @@
-# Automatically approve certain Pu
-# which will be auto-approved.
+# Automatically approve the translations PRs, which nobody reviews by hand.
 name: Autoapprove
 
 on:
@@ -8,9 +7,16 @@ on:
 
 jobs:
   auto-approve:
+    # Skip the PR that 'resolve-weblate-conflict.yml' opens. It resolves conflicts with
+    # '-X ours', so it reverts whatever 'main' changed in every conflicting hunk, and
+    # somebody has to read that before it lands. It is matched on its branch rather than a
+    # label, because 'create-pull-request' applies labels only after the PR is opened, and
+    # it keeps the 'translations' label so 'update-weblate.yml' still sees it as an open
+    # translations PR and 'unlock-weblate.yml' still reacts when it closes.
     if: |
-      github.event.pull_request.user.login == 'weblate' ||
-      contains(github.event.pull_request.labels.*.name, 'translations')
+      (github.event.pull_request.user.login == 'weblate' ||
+       contains(github.event.pull_request.labels.*.name, 'translations')) &&
+      github.event.pull_request.head.ref != 'automatic/weblate-conflicts'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

@@ -1,7 +1,9 @@
-# Weblate is locked when a daily translations PR is created. Unlock Weblate
-# when that PR gets closed (either as merged or rejected).
+# Unlock Weblate when a translations PR gets closed (either as merged or rejected).
 #
-# We do this to avoid conflicts.
+# Nothing locks Weblate any more: translations PRs are merged with a merge commit (see
+# .mergify.yml), so Weblate's commits become ancestors of 'main', no reset is needed after
+# a merge, and so there is nothing for a lock to protect. This stays as a safety net for a
+# lock left behind some other way, and can be started by hand for the same reason.
 name: Unlock Weblate when PR is closed
 on:
   workflow_dispatch: { }
@@ -39,7 +41,8 @@ jobs:
         echo 'translation = hedy' >> .weblate
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
-    - run: |
+    - name: Unlock every component
+      run: |
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
         set -x
         for component in glossary adventures keywords client-messages web-texts webpages slides; do

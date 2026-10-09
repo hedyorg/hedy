@@ -6,6 +6,7 @@ import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { FeatureFlags, FrontendEnvironment, initializeFeatureFlags } from './feature-flags';
 import { logs } from './logs';
+import { initializeManualPage, InitializeManualPageOptions } from './manual-index';
 import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeConfigureClassPage, InitializeConfigureClassPageOptions, initializeCustomizeLevelPage, InitializeCustomizeLevelPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeContextMenuPageOptions, initializeContextMenuEventHandler, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
 
 export interface InitializeOptions {
@@ -67,6 +68,7 @@ type InitializePageOptions =
   | InitializeClassPerformanceGraphPageOptions
   | InitializeGradePageOptions
   | InitializeCustomizeLevelPageOptions
+  | InitializeManualPageOptions
   ;
 
 
@@ -131,6 +133,10 @@ export function initialize(options: InitializeOptions) {
     
     case 'customize-adventure':
       initializeCustomAdventurePage(options.javascriptPageOptions);
+      break;
+
+    case 'teacher-manual':
+      initializeManualPage(options.javascriptPageOptions);
       break;
 
     case 'my-profile':

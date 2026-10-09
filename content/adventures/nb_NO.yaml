@@ -5,7 +5,7 @@ adventures:
         description: Fortelling
         levels:
             1:
-                story_text: "På nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n"
+                story_text: "På nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nI første linje, bruk `{ask}` og spør hvem hovedpersonen i fortellingen skal være. Etter det, bruk `{answer}` hvis du vil bruke navnet til karakteren.\n"
                 example_code: |
                     ```
                     {ask} Hovedpersonen i fortellingen er
@@ -49,7 +49,12 @@ adventures:
                     {print} det var en dyrene {at} {random}
                     ```
                 story_text_3: |
-                    Dette er et eksempel på `{remove}` kommandoen i historien din
+                    Dette er et eksempel på `{remove}` kommandoen i fortellingen din
+
+                    ### Øvelse
+                    Kopier fortellingen din fra de tidligere nivåene og lim dem inn her.
+                    I dette nivået har du lært 3 nye kommandoer `{at}{random}`, `{add}{to_list}` og `{remove}{from}`.
+                    Legg til nye linjer med kode til fortellingen din slik at alle de nye kommandoene er brukt minst en gang i fortellingen din.
                 example_code_3: |
                     ```
                     {print} Ryggsekken hans ble alt for tung.
@@ -60,17 +65,20 @@ adventures:
                     ```
             5:
                 story_text: |
-                    På dette nivået kan du programmere forskjellige avsluttninger, som vil gjøre fortellingen din enda gøyere.
+                    På dette nivået kan du programmere forskjellige slutter, som vil gjøre fortellingen din enda morsommere.
+                    I eksempelkoden kan du se hvordan man lager 2 forskjellige slutter.
 
-                    Tenk på to avslutninger på fortellingen, for eksempel:
+                    ### Oppgave 1
+                    Skriv en kort, ny fortelling med minst 6 linjer kode om et valgfritt tema.
+                    Null inspirasjon? Velg et av disse temaene: En superhelt, en kjedelig skoledag, strandet på en øde øy.
 
-                    - Prinsessen går gjennom skogen
-                    - Hun treffer på et monster
+                    Gi så spilleren muligheten til å velge enten en god eller dårlig slutt, akkurat som i eksempelkoden.
+                    Programmer begge sluttene.
 
-                    - Lykkelig slutt: Hun tar sverdet sitt og monsteret løper sin vei
-                    - Ulykkelig slutt: Monsteret spiser prinsessen
-
-                    Du kan også sørge for at et navn kan bli skrevet inn på nytt. Det fungerer akkurat som på de forrige nivåene. Du kan kombinere det med en `{if}`, så har du allerede laget et helt program!
+                    ### Oppgave 2
+                    Kopier fortellingen du lagde i ditt eget fortelling eventyr i de tidligere nivåene.
+                    Finn en måte å legge til minst 2 `{if}` og `{else}` kommandoer i fortellingen din.
+                    Dette kan gjøres enten med en god eller dårlig slutt, men du kan også prøve å finne andre måter å inkludere kommandoene.
                 example_code: |
                     ```
                     navn {is} {ask} 'Hvem er det som går i skogen?'
@@ -83,7 +91,11 @@ adventures:
             8:
                 story_text: |
                     I en fortelling sier noen ord flere ganger. For eksempel når noen roper etter hjelp eller synger en sang.
-                    Du kan putte inn slike repetisjoner i historien din på dette nivået med `{repeat}`.
+                    Du kan legge til slike repetisjoner i fortellingen din på dette nivået med `{repeat}`.
+
+                    ### Oppgave
+                    Legg til repetisjon i din egen fortelling. Gå tilbake til de lagrede programmene dine, velg ditt fortellingprogram fra et tidligere nivå og
+                    finn en linje som inneholder `{print}` og repeter den!
                 example_code: |
                     ```
                     {print} 'Prinsen ropte og ropte etter hjelp'
@@ -92,24 +104,41 @@ adventures:
                     ```
             9:
                 story_text: |
-                    På dette nivået kan du bruke flere linjer i din {if} kommando. På denne måten kan du oppgradere din lykkelige eller triste slutt!
+                    På dette nivået kan du bruke flere linjer i `{if}` kommandoen din, og på denne måten kan du oppgradere din lykkelige eller triste slutt!
+
+                    ### Oppgave 1
+                    Eksempelkoden viser to forskjellige slutter; en hvor hovedpersonene hopper inn i en tidsmaskin og en hvor de ikke gjør det.
+                    Fyll inn de blanke feltene med minst en setning per slutt.
+                    **Ekstra** Gjør fortellingen lenger. Hva skjer i fortellingen? Du kan også legge til en `{ask}` til med flere valg.
+
+                    ### Oppgave 2
+                    Gå tilbake til de lagrede programmene dine og velg fortellingsprogrammet ditt fra nivå 5. Skriv en god og en dårlig slutt som er minst tre linjer lange hver!
                 example_code: |
                     ```
                     {print} 'Å NEI! T-rexen haler innpå!'
                     slutt = {ask} 'Vil du ha en lykkelig eller en trist slutt?'
+                    #Forteller den lykkelige slutten:
                     {if} slutt {is} lykkelig
                         {print} 'Akkurat i tide hopper Rolf tilbake i tidsmaskinen!'
-                        {print} 'Mikal skriver inn koden og...'
-                        {print} '💥PANG!💥'
-                        {print} 'De er tilbake i garasjen sin'
+                        {print} _
+                    #Forteller den triste slutten:
                     {else}
-                        {print} 'Mikal roper KOM IGJEN ROLF! LØP RASKERE!'
-                        {print} 'Men Rolf løper for sakte...'
-                        {print} 'T-rexen haler innpå og spiser ham i ett stort jafs!🦖'
+                        {print} 'Å nei, Rolf løper for sakte...'
+                        {print} _
                     ```
             10:
                 story_text: |
-                    På dette nivået kan du bruke nøsting til å putte {if}, {repeat} eller {for}kommandoer inne i andre {if}, {repeat} eller {for}kommandoer. Dette gir deg mange muligheter og virkelig gjør fortellingen din interaktiv.
+                    På dette nivået kan du bruke `{if}` og `{repeat}` inne i andre `{if}` og `{repeat}` kommandoer.
+                     Dette gir deg mange muligheter og hjelper virkelig til å gjøre fortellingen din interaktiv.
+
+                    ### Oppgave 1
+                    Skriv ferdig koden slik at `{if}` kommandoen funker som den skal.
+
+                    ### Oppgave 2
+                    Legg til en `{if}` og `{else}` for den delen av fortellingen hvor Robin også drar hjem.
+
+                    ### Oppgave 3
+                    Gå tilbake til fortellingen din fra nivå 8 og bruk minst to `{if}`er inni en annen `{if}`.
                 example_code: |
                     ```
                     {print} 'Robin er på tur i byen'
@@ -127,7 +156,11 @@ adventures:
                     ```
             11:
                 story_text: |
-                    På dette nivået kan du bruke {for} kommandoen i fortellingen din. På denne måten kan du enkelt programmere barneboken 'brunbjørn, brunbjørn, hva ser du'.
+                    På dette nivået kan du bruke `{for}` kommandoen i fortellingen din. På denne måten kan du enkelt programmere barneboken 'Brunbjørn, brunbjørn, hva ser du'.
+
+                    ### Oppgave 
+
+                    Se på <a href="https://fliphtml5.com/jmlya/nquy"> fortellingen</a> hvis du ikke kjenner til den, og pass på et den er skrevet slik som i boken.
                 example_code: |
                     ```
                     dyreliste = rød fugl, svart sau, grønn frosk, gul and, lite barn

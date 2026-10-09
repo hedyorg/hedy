@@ -1,7 +1,10 @@
 import { loginAndOpenClasses, createRedesignClass, createStudentsForClass, openClassSubpage, assertBreadcrumbLinks, uniqueName } from './helpers';
 import { login } from '../../tools/login/login';
 
-function getCreatedStudentCredentials() {
+function getCreatedStudentCredentials(count) {
+  // The rows are added after the response arrives, and `.then` reads them only once, so
+  // wait for all of them first.
+  cy.getDataCy('create_accounts_output').find('tr:has(td)').should('have.length', count);
   return cy.getDataCy('create_accounts_output').find('tr').then(($rows) => {
     const credentials = [];
 
@@ -84,7 +87,7 @@ describe('Redesigned class performance graph page', () => {
       classId = createdClass.classId;
       return createStudentsForClass(classId, 3);
     }).then(() => {
-      return getCreatedStudentCredentials();
+      return getCreatedStudentCredentials(3);
     }).then((studentCredentials) => {
       students = studentCredentials.map(({ username }) => username);
       return seedSubmittedPrograms(studentCredentials);

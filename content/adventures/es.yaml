@@ -8,22 +8,32 @@ adventures:
                 story_text: |
                     En el nivel 1 puedes crear una historia con un protagonista que tú elijas.
 
-                    En la primera línea, usa `{ask}` y pregunta quién es el personaje principal de tu historia.
+                    En la primera línea, usa `{ask}` y pregunta quién es el personaje principal de tu historia. Luego utiliza {answer} para usar el nombre del personaje.
                 example_code: |
                     ```
                     {ask} El protagonista de esta historia es
                     {print} {answer} camina por un bosque
-                    {print} Está bastante asustado {answer}
-                    {print} Por todos lados se oyen extraños ruidos
-                    {print} Tiene miedo de que éste sea un bosque encantado
+                    {print} Está bastante asustado, {answer} sigue caminando
+                    {print} {answer} oye ruidos extraños por todos lados
+                    {print} Tiene miedo de que éste sea un bosque embrujado
                     ```
                 story_text_2: |
-                    ### ejercicio
+                    ### Ejercicio
                     Ahora crea tu propia historia de un mínimo de 6 líneas de código.
                     Esta historia no puede ser la misma que el código de ejemplo.
-                    Utiliza mínimo un comando `{ask}` y un comando `{echo}`.
-                    Lo puedes hacer sobre cualquier tema que quieras.
+                    Utiliza mínimo un comando `{ask}` y un comando `{answer}`.
+                    La puedes hacer sobre cualquier tema que quieras.
                     Si no se te ocurre ningún tema, usa uno de estos: en el cine, un partido o un día en el zoológico.
+                answer_code: |
+                    ```
+                    {print} Un día fui al zoológico
+                    {ask} ¿Qué animal vi primero?
+                    {print} Primero vi al {answer}
+                    {print} Después vi un pingüino
+                    {print} Estaba almorzando
+                    {ask} ¿Qué comía el pingüino?
+                    {print} El pingüino estaba almorzando {answer}
+                    ```
             2:
                 story_text: |
                     En el nivel 2 puedes hacer tu historia más divertida. El nombre de tu protagonista ahora puede estar en cualquier posición de la frase.
