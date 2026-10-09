@@ -11,18 +11,42 @@ on:
 
 
 jobs:
-  # This identifier gets used in .mergify.yml
-  cypress:
+  # The specs are split over several machines that run at the same time.
+  cypress-shard:
+    name: cypress shard ${{ matrix.shard }}
     runs-on: ubuntu-latest
+
+    strategy:
+      # Let every shard finish, so one run shows all failing specs
+      fail-fast: false
+      matrix:
+        # If you change the number of shards, change SHARD_COUNT too
+        shard: [0, 1, 2, 3]
+
+    env:
+      SHARD_COUNT: 4
+      # Puppeteer is only used to print workbooks, so skip its Chrome download
+      PUPPETEER_SKIP_DOWNLOAD: true
+      # Forks don't get the secret, and recording without it fails when using groups
+      HAS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
 
     steps:
     - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
     - name: Set up Python 3.12
       uses: actions/setup-python@v6
       with:
         python-version: 3.12
+        cache: 'pip'
+    - name: Set up NodeJS 22
+      uses: actions/setup-node@v6
+      with:
+        node-version: 22
+        cache: 'npm'
+    - name: Cache the Cypress binary
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/Cypress
+        key: cypress-binary-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
     - name: Install Python dependencies
       run: |
         python3 -m pip install --upgrade pip
@@ -34,6 +58,14 @@ jobs:
       run: |
         doit run deploy devdb
 
+    - name: Pick the specs for this shard
+      id: specs
+      working-directory: tests
+      # Round-robin over the sorted spec files keeps the shards roughly equally long
+      run: |
+        specs=$(find cypress/e2e -name '*.cy.js' | LC_ALL=C sort | awk -v n=$SHARD_COUNT -v k=${{ matrix.shard }} 'NR % n == k' | paste -sd, -)
+        echo "list=$specs" >> "$GITHUB_OUTPUT"
+
     - name: Start the server
       # Runs in the background
       run: build-tools/github/start-debug-server --daemon
@@ -43,8 +75,11 @@ jobs:
       with:
         # We have already installed all dependencies
         install: false
+        spec: ${{ steps.specs.outputs.list }}
         # Record to cypress cloud to inspect possible failing tests.
-        record: true
+        # Each shard is a group, so all shards end up in the same recorded run.
+        record: ${{ env.HAS_RECORD_KEY == 'true' }}
+        group: ${{ env.HAS_RECORD_KEY == 'true' && format('shard {0}', matrix.shard) || '' }}
         # Where cypress.config.js and all the other cypress files live, requires 'install: false'
         working-directory: tests/
       env:
@@ -53,3 +88,16 @@ jobs:
         # pass GitHub token to allow accurately detecting a build vs a re-run build
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # This identifier gets used in .mergify.yml and in the branch protection rules,
+  # so it only passes when every shard passed.
+  cypress:
+    runs-on: ubuntu-latest
+    needs: cypress-shard
+    if: always()
+    steps:
+    - name: Check that all shards passed
+      run: |
+        if [[ "${{ needs.cypress-shard.result }}" != "success" ]]; then
+          echo "One or more Cypress shards did not pass: ${{ needs.cypress-shard.result }}"
+          exit 1
+        fi

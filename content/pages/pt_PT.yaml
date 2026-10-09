@@ -1,16 +1,16 @@
-title: Documentação da Hedy
+title: Documentação do Hedy
 home-sections:
 -   title: Programação textual facilitada!
     text: |-
-        Muitas escolas e professores, por todo o mundo, querem ensinar programação aos seus alunos. Habitualmente, começam com ferramentas divertidas , que vão desde o robot Beebot até ao
-        Scratch Junior ou Scratch. Após utilizarem estas ferramentas, as crianças frequentemente querem passar para linguagens de programação textual mais poderosas, como Python.
+        Muitas escolas e professores pelo mundo querem ensinar programação aos seus alunos.
+        Inicialmente isto é frequentemente feito com ferramentas lúdicas, que vão desde o robô Bee-Bota até o Scratch Junior ou Scratch. Após usar essas ferramentas, as crianças muitas vezes querem progredir para linguagens de programação textuais mais poderosas, como Python.
 
-        No entanto, Python é difícil, porque apenas está disponível em Inglês e requer que os alunos aprendam conceitos de programação complexos e síntaxe, em simultâneo.
-        A Hedy é a forma fácil para começar a aprender linguagens de programação textual! A Hedy é gratuita, em código aberto e diferente de qualquer outra linguagem de programação textual em três aspectos.
+        No entanto, Python é difícil, pois está disponível apenas em inglês e exige que os alunos aprendam conceitos complexos de programação e sintaxe de uma só vez.
+        Hedy é a maneira fácil de começar com linguagens de programação textuais! Hedy é gratuita, de código aberto e se diferencia de qualquer outra linguagem textual de três formas:
 
-        1. A Hedy é multilingue, podes usar a Hedy na tua própria língua
-        2. A Hedy é gradual, por isso, podes aprender um conceito e a sua síntaxe de cada vez
-        3. A Hedy foi construída para a sala de aula, permitindo aos professores personalizar a experiência dos seus alunos por completo
+        1. Hedy é multilíngue, permitindo que a use no seu próprio idioma.
+        2. Hedy é gradual, para que possa aprender um conceito e a sua sintaxe por vez.
+        3. Hedy foi desenvolvida para a sala de aula, permitindo que os professores personalizem totalmente a experiência dos alunos
 -   title: Programação multilingue
     text: Enquanto quase todas as linguagens de programação textual têm palavras-chave em Inglês, como `for` ou `repeat`, a Hedy pode ser usada em qualquer idioma! Atualmente suportamos 47 idiomas diferentes, incluindo Holandês, Espanhol, Árabe, Turco, Chinês e Hindi. Se o teu idioma não está disponível podes sempre começar uma nova tradução.
 -   title: Aprendizagem passo a passo
@@ -51,7 +51,7 @@ join-sections:
         Hedy está desenhada para apoiar professores na tarefa de ensinar programação na sala de aula. Temos funcionalidades específicas para professores, tais como a opção de criar uma turma, customizá-la e acompanhar a evolução dos seus alunos.
         Se gostas da Hedy, podes contactar escolas que conheces e oferecer-te para ajudar os professores a começar! Nós também te podemos ajudar a encontrar escolas ou professores através do <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord</a>.
 learn-more-sections:
--   {}
+-   title: A fundação Hedy
 -   title: Um mergulho profundo!
     text: 'Queres saber mais sobre a filosofia de Hedy e o seu design? Aproveita para dar uma vista de olhos por esta conferência que a Felienne deu no StrangeLoop em 2022. <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/fmF7HpU_-9k?wmode=opaque" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>'
 -   title: Hedy nas notícias
@@ -134,13 +134,131 @@ teacher-guide:
             Com uma conta de professor, pode criar contas anónimas para os seus alunos, e.g. aluno-unicornio1, aluno-unicornio2, etc (Aceda a 'Preparações para ensino' para um manual detalhado). Desta forma, pode usar todas as funcionalidades da Hedy, incluindo guardar o progresso, sem partilhar os seus dados ou dos seus alunos.
 
             Se a explicação acima é insuficiente para o contextualizar, podemos assinar um acordo de processamento para processar os seus dados pessoais.
+    -   title: Doar para o Hedy
 -   levels:
     -   sections:
+        -   example:
+                error_text: Por exemplo, escrever uma frase sem usar imprima.
+                error_code: Hedy não consegue imprimir isto
+                solution_text: Ensine os seus alunos a sempre começar uma linha de código com um comando.
+                solution_code: '{print} ¡Hedy consegue imprimir isto!'
+            title: Os alunos esquecem de digitar os comandos
+        -   example:
+                error_text: Os comandos não funcionam quando escritos em maiúsculas.
+                error_code: |-
+                    Pergunte Por que o meu código não funciona?
+                    Imprima Porque estou usando maiúsculas.
+                solution_text: Tire as maiúsculas.
+                solution_code: |-
+                    {ask} Por que o meu código funciona agora?
+                    {print} Porque tirei as maiúsculas!
+            title: Os alunos usam maiúsculas ao digitar os comandos
+        -   example:
+                error_text: Os alunos às vezes gostam de tentar números enormes ao usar a tartaruga, o que faz ela sair do ecrã.
+                solution_text: Nesse exemplo, os alunos costumam achar que o comando «gire» falhou, apesar de ter feito o que devia. O que aconteceu é que a tartaruga andou além dos limites do ecrã. Use números menores para evitar que isso ocorra.
+                solution_code: |-
+                    {forward} 100
+                    {turn} 90
+            title: 'Tartaruga: os alunos fazem a tartaruga sair do ecrã'
+        -   example:
+                error_text: Voltar não é um comando.
+        -   example: {}
+        level: '1'
+    -   sections:
+        -   example:
+                error_text: Hedy não consegue reconhecer comandos digitados incorretamente.
+                error_code: imprimma Não cometa erros de digitação
+                solution_text: Ensine os seus alunos a ler as mensagens de erro. Assim eles conseguem descobrir por si mesmos o que deu errado.
+                solution_code: '{print} Não cometa erros de digitação'
+            title: Os alunos cometem erros de digitação nos comandos
+        -   example:
+                error_text: Neste nível, os alunos aprendem sobre variáveis. O comando perguntar também requer variáveis, mas os alunos esquecem-se disso.
+                error_code: pergunte o que gostaria de comer
+                solution_text: Neste nível, precisa dizer a Hedy onde guardar a resposta para usá-la depois. Isto chama-se uma variável.
+            title: Os estudantes esquecem-se que o comando perguntar mudou
+        -   example: {}
+        -   example:
+                error_text: No exemplo abaixo, a palavra 'nome' é usada como uma variável, mas também como parte do texto. O resultado desse código será 'Olá, o meu Hedy é Hedy'.
+                error_code: |-
+                    nome {is} Hedy
+                    {print} Olá, chamo-me nome
+                solution_text: Portanto não use uma palavra que queira usar no texto como nome de variável. No nível 4, isto será resolvido com aspas.
+                solution_code: |-
+                    nome {is} Hedy
+                    {print} Olá, chamo-me nome
+            title: Os alunos usam o nome de uma variável como uma palavra normal
+        -   example:
+                error_text: Um nome de variável deve ter aoenas uma palavra. Pode-se usar um traço sublinhado '_' para unir duas palavras, assim conta como se fosse uma palavra.
+                error_code: porta escolhida é pergunte Qual porta escolhe
+                solution_code: porta_escolhida {is} {ask} Qual porta escolhe
+            title: Os estudantes usam nomes de variáveis grandes que contém duas palavras.
+        -   example:
+                error_text: Nesse exemplo, o aluno usou 'cavalo' e 'nome' para a mesma variável.
+                error_code: |-
+                    cavalo {is} {ask} Como se chama o seu cavalo
+                    {print} O seu cavalo chama-se nome
+                solution_text: Sempre verifique que uma variável tenha o mesmo nome em todo o código. Pequenas diferenças podem ser difíceis de perceber (como plurais, por exemplo) mas interferem com o código.
+                solution_code: |-
+                    nome {is} {ask} Como se chama o seu cavalo
+                    {print} O seu cavalo chama-se nome
+            title: Os alunos às vezes usam dois nomes diferentes para a mesma variável
+        level: '2'
+    -   sections:
+        -   example:
+                error_text: Não se pode imprimir uma lista. Só se pode imprimir um único elemento de uma lista com {at} {random} .
+                error_code: |-
+                    compras {is} maçãs, leite, chocolate
+                    {print} compras
+                solution_text: Para imprimir uma lista de todas as compras, simplesmente põe-as depois de um comando `{print}`. Ou depois usa a lista para imprimir um elemento com `{at}` `{random}`.
+                solution_code: |-
+                    {print} maçãs, leite, chocolate
+
+                    #ou
+
+                    compras {is} maçãs, leite, chocolate
+                    {print} compras {at} {random}
+            title: Os alunos tentam imprimir listas inteiras
+        -   example:
+                error_text: Provavelmente esse problema já ocorria no nível 2. Agora pode acontecer com listas também.
+                error_code: |-
+                    nome {is} Hedy
+                    {print} Oi, chamo-me nome
+
+                    #o
+
+                    animal {is} rinoceronte, abelha, cisne
+                    {print} O melhor animal é... animal {at} {random}
+                solution_text: Não use o nome de variáveis em texto normal para imprimir. No nível 4 este problema é resolvido com aspas.
+                solution_code: |-
+                    nome {is} Hedy
+                    {print} Olá, sou nome
+
+                    #o
+
+                    animais {is} rinoceronte, abelha, cisne
+                    {print} O melhor animal é... animais {at} {random}
+            title: Os alunos usam um nome de variável ou lista como texto normal
+        -   example:
+                error_text: Como no exemplo
+                error_code: |-
+                    aves {is} pardal, gaivota, sabiá
+                    {print} aves aleatório
+                solution_text: Este problema resolve-se usando a palavra 'em'.
+                solution_code: |-
+                    aves {is} pardal, gaivota, sabiá
+                    {print} aves {at} {random}
+            title: Os alunos esquecem-se do `{at}`em `{at}` `{random}`
         -   example: {}
         -   example: {}
         -   example: {}
         -   example: {}
         -   example: {}
+        level: '3'
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}
+        level: '4'
     -   sections:
         -   example: {}
         -   example: {}
@@ -148,30 +266,12 @@ teacher-guide:
         -   example: {}
         -   example: {}
         -   example: {}
+        -   example: {}
+        level: '5'
     -   sections:
         -   example: {}
         -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-    -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
-    -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-        -   example: {}
-    -   sections:
-        -   example: {}
-        -   example: {}
+        level: '6'
     -   sections:
         -   example: {}
         -   example: {}
@@ -182,24 +282,32 @@ teacher-guide:
         -   example: {}
     -   sections:
         -   example: {}
+        level: '9'
     -   sections:
         -   example: {}
         -   example: {}
+        level: '10'
     -   sections:
         -   example: {}
         -   example: {}
-    -   sections:
-        -   example: {}
-        -   example: {}
-        -   example: {}
-    -   sections:
-        -   example: {}
+        level: '11'
     -   sections:
         -   example: {}
         -   example: {}
         -   example: {}
+        level: '12'
+    -   sections:
+        -   example: {}
+        level: '13'
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}
     -   sections:
         -   example: {}
     -   sections:
         -   example: {}
         -   example: {}
+    title: Erros frequentes
+    key: common_mistakes
+    intro: A gente aprende com os erros, especialmente na programação! Cometer erros é inevitável e uma ótima oportunidade de aprendizado, mas para os professores, pode ser um desafio encontrar a correção certa para um erro! Especialmente à medida que os programas ficam cada vez mais longos conforme os alunos progridem nos níveis. É por isso que criamos uma lista com erros frequentes em cada nível e as suas soluções.
