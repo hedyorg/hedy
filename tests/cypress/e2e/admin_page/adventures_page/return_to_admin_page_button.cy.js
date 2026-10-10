@@ -11,5 +11,5 @@ it('should return to admin page button', () => {
     .click();
 
   cy.url()
-    .should('eq', Cypress.config('baseUrl') + Cypress.env('admin_page'));
+    .should('eq', Cypress.config('baseUrl') + Cypress.expose('admin_page'));
 })
