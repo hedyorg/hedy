@@ -159,8 +159,10 @@ adventures:
                     {print} 'OH NEIN! Der T-Rex kommt immer näher!'
                     Ende = {ask} 'Soll das Ende gut oder schlecht sein?'
                     {if} Ende {is} gut
+                    # Die Geschichte geht gut aus:
                         {print} 'Richard springt gerade noch rechtzeitig zurück in seine Zeitmaschine.'
                         {print} _
+                    # Die Geschichte geht schlecht aus:
                     {else}
                         {print} 'Oh nein! Richard ist zu langsam...'
                         {print} _
@@ -194,29 +196,20 @@ adventures:
                         {print} 'Robin geht nach Hause.'
                     ```
                 story_text_2: |
-                    Durch die Befehle `{and}` und `{or}` können Sie Ihre Geschichten vielseitiger gestalten. Sie können zwei Fragen stellen und auf die Kombination von Antworten reagieren.
+                    Durch die Befehle `{and}` und `{or}` kannst du deine Geschichten vielseitiger gestalten. Du kannst mehrere Fragen stellen und auf mehrere Antworten gleichzeitig reagieren.
 
                     ### Exercise 1
-                    Sehen Sie sich den Beispielcode an und beenden Sie ihn. Dann mindestens 2 weitere `{if}` Codes mit `{and}` oder `{or}` hinzufügen.
+                    Sieh dir den Beispielcode an und schreibe ihn fertig. Füge dann mindestens 2 weitere `{if}` -Befehle mit `{and}` oder `{or}` hinzu.
 
                     ### Exercise 2
-                    Finde eine Geschichte aus einer vorherigen Ebene und füge eine `{and}` oder `{or}` hinzu.
-                    Beispiel_Code: |
-                    `` `
-                    {print} 'Unser Held geht durch den Wald '
-                    {print} 'Der Pfad teilt zwei Wege '
-                    path = {ask} 'Welcher Pfad sollte sie wählen? '
-                    Waffe = {ask} 'Welche Waffe zieht sie? '
-                    {if} Pfad {is} 'link' {and} Waffe {is} Schwert '
-                        _.
-                    `` `
+                    Finde eine Geschichte aus einer vorherigen Ebene und füge ein `{and}` oder ein `{or}` hinzu.
             11:
                 story_text: |
                     In diesem Level kannst du den `{for}` Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, wen siehst denn Du?" programmieren.
 
                     ### Übung
 
-                    Schau dir <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">die Geschichte</a> an, falls du sie nicht kennst und stelle sicher, dass es wie im Buch ausgegeben wird.
+                    Schau dir <a href="https://fliphtml5.com/jmlya/nquy">die Geschichte</a> an, falls du sie nicht kennst und stelle sicher, dass es wie im Buch ausgegeben wird.
                 example_code: "```\ntiere = _ , _ , _ \n{print} 'Brauner Bär'\n{print} 'Was siehst du?'\n```\n"
 
             16:
@@ -248,7 +241,7 @@ adventures:
                     {print}('Willkommen in dieser Geschichte!')
                     ```
             6:
-                story_text: "Nun da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte kreieren! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du {elif} einsetzt."
+                story_text: "Nun, da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte bauen! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen, oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du `{elif}` einsetzt."
                 example_code: |
                     ```
                     character = {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
@@ -379,13 +372,16 @@ adventures:
                     ```
                     Punkte = 0
                     {repeat} 10 {times}
+                    # Eine zufällige Frage auswählen:
                         Nummern = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         Nummer1 = Nummern {at} {random}
                         Nummer2 = Nummern {at} {random}
                         richtige_antwort = Nummer1 * Nummer2
+                    # Frage stellen:
                         {print} 'Was ist ' Nummer1 ' mal ' Nummer2 '?'
                         Antwort = {ask} 'Tippe deine Antwort hier ein...'
                         {print} 'Deine Antwort ist ' Antwort
+                    # Punkte zusammenzählen:
                         {if} _ {is} _
                             Punkte = Punkte + 1
                     {print} 'Großartig gemacht! Dein Punktestand ist... ' Punkte ' von 10!'
