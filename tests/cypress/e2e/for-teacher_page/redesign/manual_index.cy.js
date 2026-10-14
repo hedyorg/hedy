@@ -8,9 +8,10 @@ describe('Teacher manual index', () => {
   it('holds the whole manual on one page', () => {
     cy.visit('/for-teachers/manual');
 
-    cy.getDataCy('manual_section').should('have.length', 2);
+    cy.getDataCy('manual_section').should('have.length', 3);
     cy.get('#manual-intro').should('exist');
     cy.get('#manual-common_mistakes').should('exist');
+    cy.get('#manual-manual').should('exist');
 
     // Everything in the index points into this page, so none of it loads another one.
     cy.getDataCy('manual_index').filter(':visible').within(() => {
