@@ -16,6 +16,10 @@
     </div>
     <div class="px-5 py-5 sm:px-6">
       <p class="m-0 leading-7 text-lg text-gray-700">{{ _('weblate_modal_text')|safe }}</p>
+      <div class="mt-5 flex flex-row items-start gap-2">
+        <input id="weblate_modal_dismiss" type="checkbox" data-cy="weblate_modal_dismiss" class="mt-1.5 shrink-0 cursor-pointer">
+        <label for="weblate_modal_dismiss" class="cursor-pointer leading-7 text-gray-700">{{ _('dont_show_message_again') }}</label>
+      </div>
     </div>
     <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
       <button type="button" class="weblate-modal-close blue-btn-new">{{ _('cancel') }}</button>

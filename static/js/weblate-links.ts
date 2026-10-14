@@ -22,6 +22,26 @@ export function weblateUrl(lang: string, adventure: string, level: string, field
   return `${WEBLATE_COMPONENT_URL}/${encodeURIComponent(lang)}/?q=${encodeURIComponent(query)}`;
 }
 
+// Set when a teacher ticks "don't show this message again" and continues to Weblate
+const DISMISS_STORAGE_KEY = 'weblate-modal-dismissed';
+
+function isWeblateModalDismissed() {
+  try {
+    return window.localStorage.getItem(DISMISS_STORAGE_KEY) === 'true';
+  } catch {
+    // Storage can be blocked, then we just keep showing the modal
+    return false;
+  }
+}
+
+function dismissWeblateModal() {
+  try {
+    window.localStorage.setItem(DISMISS_STORAGE_KEY, 'true');
+  } catch {
+    // Storage can be blocked, then the modal will just show again next time
+  }
+}
+
 function hideWeblateModal() {
   $('#weblate_modal').addClass('hidden').removeClass('flex');
 }
@@ -30,6 +50,10 @@ document.addEventListener('click', (e) => {
   const target = e.target as HTMLElement | null;
 
   if (target?.closest('.weblate-modal-close')) {
+    // Only remember the choice when they actually go to Weblate, not when they cancel
+    if (target.closest('#weblate_continue') && $('#weblate_modal_dismiss').is(':checked')) {
+      dismissWeblateModal();
+    }
     hideWeblateModal();
     return;
   }
@@ -48,7 +72,14 @@ document.addEventListener('click', (e) => {
     return;
   }
 
-  $('#weblate_continue').attr('href', weblateUrl(lang, adventure, level, field));
+  const url = weblateUrl(lang, adventure, level, field);
+  if (isWeblateModalDismissed()) {
+    window.open(url, '_blank', 'noopener');
+    return;
+  }
+
+  $('#weblate_continue').attr('href', url);
+  $('#weblate_modal_dismiss').prop('checked', false);
   $(weblateModal).removeClass('hidden').addClass('flex');
 });
 
