@@ -86,7 +86,7 @@ class TestPublicPages:
                     assert context['workbooks']
                 else:
                     assert [section['key'] for section in context['sections']] == [
-                        'intro', 'common_mistakes']
+                        'intro', 'common_mistakes', 'manual']
                     assert all(section['title'] for section in context['sections'])
 
     def test_teaching_materials_pages(self, client, template_variables):
@@ -179,7 +179,7 @@ class TestPublicPages:
             context = template_variables[-1]
             # The anchors are built from the English keys in every language.
             assert [section['key'] for section in context['sections']] == [
-                'intro', 'common_mistakes'], language
+                'intro', 'common_mistakes', 'manual'], language
             mistakes = context['sections'][1]
             assert mistakes['levels'], language
             # English content fills the gaps a translation has not caught up with yet.

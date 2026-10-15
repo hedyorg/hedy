@@ -14,7 +14,9 @@ describe('Teacher manual index', () => {
     cy.get('#manual-manual').should('exist');
 
     // Everything in the index points into this page, so none of it loads another one.
-    cy.getDataCy('manual_index').filter(':visible').within(() => {
+    // The index is taller than the sticky column it scrolls in, so Cypress does not count it
+    // as visible; pick the wide one by its column instead.
+    cy.get('[data-manual-index-scroll]').find('[data-cy="manual_index"]').within(() => {
       cy.get('a').should('have.length.at.least', 20);
       cy.get('a:not([href^="#"])').should('not.exist');
       cy.getDataCy('manual_index_link').first().should('have.attr', 'href', '#manual-intro-1');
