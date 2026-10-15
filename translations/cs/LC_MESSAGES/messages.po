@@ -8,141 +8,994 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-02-02 19:44+0000\n"
-"Last-Translator: Yılmaz Durmaz <yilmaz_durmaz@hotmail.com>\n"
+"PO-Revision-Date: 2026-10-15 01:59+0000\n"
+"Last-Translator: Michal Várady <majkl82@users.noreply.hosted.weblate.org>\n"
 "Language-Team: cs <LL@li.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
+msgid "Access Before Assign"
+msgstr "Proměnná `{name}` se na řádku {access_line_number} používá, ale ještě nemá nastavenou hodnotu. Zkus jí před použitím nastavit hodnotu."
+
+msgid "Cyclic Var Definition"
+msgstr "Proměnná `{variable}` se používá napravo od příkazu `{is}`, ale ještě nemá nastavenou hodnotu. Zkus jí před použitím nastavit hodnotu."
+
+msgid "Else Without If Error"
+msgstr "Na řádku {line_number} se používá `{else}` před `{if}`. Zkus napsat `{if}` před `{else}`."
+
+msgid "Function Undefined"
+msgstr "Funkce {name} se používá, ale není definovaná. Zkus ji před použitím definovat."
+
+msgid "Has Blanks"
+msgstr "Zdá se, že tvůj kód není úplný. Dokážeš na prázdná místa doplnit kód?"
+
+msgid "Incomplete"
+msgstr "Zdá se, že v příkazu `{incomplete_command}` na řádku {line_number} část kódu chybí. Zkus doplnit, co chybí."
+
+msgid "Incomplete Repeat"
+msgstr "V příkazu `{repeat}` na řádku {line_number} chybí příkaz `{command}`. Zkus ho doplnit."
+
 msgid "Invalid"
-msgstr "`{invalid_command}` není příkaz v Hedy na úrovni {level}. Nemyslel*a jsi spíš `{guessed_command}`?"
+msgstr "`{invalid_command}` není příkaz Hedy pro úroveň {level}. Zkus použít `{guessed_command}`."
 
-#, fuzzy
+msgid "Invalid Argument"
+msgstr "Příkaz `{command}` nelze použít s `{invalid_argument}`. Zkus `{invalid_argument}` změnit na {allowed_types}."
+
+msgid "Invalid Argument Type"
+msgstr "Příkaz `{command}` nefunguje s `{invalid_argument}`, protože jde o {invalid_type}. Zkus `{invalid_argument}` změnit na {allowed_types}."
+
+msgid "Invalid At Command"
+msgstr "Příkaz `{command}` se od úrovně 16 už nesmí používat. Zkus pro seznamy použít hranaté závorky `[]`."
+
 msgid "Invalid Space"
-msgstr "Jejda, řádek číslo {line_number} začíná mezerou! Mezery dokáží počítač pořádně zmást, mohl*a bys ji prosím vymazat?"
+msgstr "Řádek {line_number} začíná mezerou. Zkus ji odstranit."
 
-#, fuzzy
+msgid "Invalid Type Combination"
+msgstr "`{invalid_argument}` a `{invalid_argument_2}` nelze použít s `{command}`, protože jedno je {invalid_type} a druhé {invalid_type_2}. Zkus `{invalid_argument}` změnit na {invalid_type_2} nebo `{invalid_argument_2}` na {invalid_type}."
+
+msgid "Lonely Echo"
+msgstr "Příkaz `{echo}` se používá před `{ask}` nebo bez něj. Zkus před `{echo}` napsat `{ask}`."
+
+msgid "Lonely Text"
+msgstr "Zdá se, že k textu na řádku {line_number} chybí příkaz. Zkus k textu napsat potřebný příkaz"
+
+msgid "Missing Additional Command"
+msgstr "V příkazu `{command}` na řádku {line_number} něco chybí. Zkus v kódu použít `{missing_command}`."
+
+msgid "Missing Colon Error"
+msgstr "Příkaz `{command}` vyžaduje na konci řádku {line_number} znak `:`. Od úrovně 17 zkus přidávat `:` na konec řádků s příkazy."
+
+msgid "Missing Command"
+msgstr "Zdá se, že na řádku {line_number} chybí příkaz. Podívej se do části s cvičením a zjisti, jaký příkaz použít."
+
+msgid "Missing Inner Command"
+msgstr "Zdá se, že u příkazu `{command}` na řádku {line_number} chybí příkaz. Podívej se do části s cvičením a zjisti, jaký příkaz použít."
+
+msgid "Missing Square Brackets"
+msgstr "Seznam vytvořený na řádku {line_number} nemá hranaté závorky `[]`. Zkus seznam uzavřít do hranatých závorek `[]`."
+
+msgid "Missing Variable"
+msgstr "U příkazu `{command}` chybí proměnná na začátku řádku. Zkus ji napsat před `{command}`."
+
+msgid "Misspelled At Command"
+msgstr "Zdá se, že v `{invalid_argument}` na řádku {line_number} je překlep. Zkus místo toho napsat `{command}`."
+
+msgid "No Indentation"
+msgstr "Zdá se, že na řádku {line_number} je příliš málo mezer ({leading_spaces}). Zkus u každého nového bloku zvětšit odsazení o {indent_size}."
+
+msgid "Non Decimal Variable"
+msgstr "Na řádku {line_number} používáš číslo, které Hedy nepodporuje! Zkus číslo v desítkové soustavě, třeba 2."
+
+msgid "Output"
+msgstr "Výstup"
+
 msgid "Parse"
-msgstr "Tebou zadaný kód není platný kód v Hedy. Chyba je na řádku {location[0]}, na pozici {location[1]}. Napsal*a jsi tam `{character_found}`, ale to není povoleno."
+msgstr "Na řádku {location[0]} je použit znak `{character_found}`, který není povolený. Zkus v kódu najít chybějící nebo přebytečný znak."
 
-#, fuzzy
+msgid "Pressit Missing Else"
+msgstr "V kódu chybí `{else}` pro ostatní stisky kláves. Zkus do kódu doplnit `{else}`."
+
+msgid "Runtime Index Error"
+msgstr "Seznam {name} je prázdný nebo mu chybí index. Zkontroluj, jestli není prázdný, nebo zkus do `[]` napsat číslo pro chybějící index."
+
+msgid "Runtime Value Error"
+msgstr "Příkaz `{command}` dostal nepovolenou hodnotu `{value}`. {tip}."
+
+msgid "Runtime Values Error"
+msgstr "Příkaz `{command}` dostal nepovolené hodnoty `{value}` a `{value}`. {tip}."
+
+msgid "Save Microbit code "
+msgstr "Uložit kód pro Microbit"
+
+msgid "Too Big"
+msgstr "Tvůj program má {lines_of_code} řádků, ale zpracovat dokážeme jen {max_lines} řádků. Zkus program zkrátit."
+
+msgid "Too Few Indents"
+msgstr "Na řádku {line_number} je příliš málo mezer ({leading_spaces}). Zkus přidat jednu mezeru."
+
+msgid "Too Many Indents"
+msgstr "Na řádku {line_number} je příliš mnoho mezer ({leading_spaces}). Zkus přebytečnou mezeru odstranit."
+
+msgid "Unexpected Indentation"
+msgstr "Na řádku {line_number} je příliš mnoho mezer ({leading_spaces}). Zkus u každého nového bloku přidat ještě {indent_size} mezer."
+
+msgid "Unquoted Assignment"
+msgstr "Text napravo od `{is}` není v uvozovkách. Od této úrovně je potřeba psát text do uvozovek. Zkus do nich dát text {text}"
+
+msgid "Unquoted Equality Check"
+msgstr "Kód se snaží ověřit, jestli se proměnná rovná více slovům. Zkus slova, která chceš porovnat, dát do uvozovek."
+
 msgid "Unquoted Text"
-msgstr "Dávej si pozor, pokud chceš něco vypsat, musí text začínat a končit uvozovkami. Někde jsi nějakou zapomněl*a."
+msgstr "Zdá se, že u textu pro `{ask}` nebo `{print}` chybí uvozovky. Zkus text {unquotedtext} dát do uvozovek."
 
-#, fuzzy
+msgid "Unsupported Float"
+msgstr "Kód používá čísla, která nejsou celá a zatím nejsou podporovaná. Zkus `{value}` změnit na celé číslo."
+
+msgid "Unsupported String Value"
+msgstr "Text obsahuje hodnotu `{invalid_value}`, kterou obsahovat nemůže. Zkus ji odstranit nebo změnit její typ."
+
+msgid "Unused Variable"
+msgstr "Proměnná {variable_name} je na řádku {line_number} definovaná, ale nepoužívá se. Zkus ji použít nebo odstranit."
+
 msgid "Var Undefined"
-msgstr "Pokusil*a ses vypsat `{name}`, ale neinicializoval*a ji."
+msgstr "Proměnná `{name}` se používá, ale ještě nemá nastavenou hodnotu. Zkus jí před použitím nastavit hodnotu nebo dát `{name}` do uvozovek."
 
-#, fuzzy
 msgid "Wrong Level"
-msgstr "Toto je správný kód v Hedy, ale na špatné úrovni. Napsal jsi kód `{offending_keyword}` na úrovni {working_level}. Tip: {tip}"
+msgstr "Tvůj kód je platný kód Hedy, ale `{offending_keyword}` se používá na úrovni {working_level}. {tip}"
 
-#, fuzzy
+msgid "Wrong Number of Arguments"
+msgstr "Funkce {name} má nesprávný počet argumentů: {used_number}. Zkus místo toho napsat {defined_number}."
+
+msgid "about_this_adventure"
+msgstr "O tomto dobrodružství"
+
+msgid "accept_program"
+msgstr "Přijmout program"
+
+msgid "account_overview"
+msgstr "Přehled účtu"
+
+msgid "actions"
+msgstr "Akce"
+
+msgid "active_classes"
+msgstr "Aktivní třídy"
+
+msgid "add"
+msgstr "Přidat"
+
+msgid "add_adventures"
+msgstr "Přidat dobrodružství"
+
 msgid "add_students"
-msgstr "students"
+msgstr "Přidat žáky"
+
+msgid "add_your_language"
+msgstr "Přidej svůj jazyk!"
+
+msgid "additional_teachers"
+msgstr "Další učitelé"
+
+msgid "admin"
+msgstr "Správce"
 
 msgid "adventure"
 msgstr "Dobrodružství"
 
+msgid "adventure_cloned"
+msgstr "Byla vytvořena kopie dobrodružství"
+
+msgid "adventure_code_button"
+msgstr "Zobrazí příkaz uvnitř věty, například <code>print</code>. Žáci ho nemohou spustit. Pro kód, který mají žáci spouštět, použijte tlačítko níže."
+
+msgid "adventure_codeblock_button"
+msgstr "Přidá blok ukázkového kódu, který si žáci mohou poslat do vlastního editoru a spustit. <b>Opuštění bloku:</b> umístěte kurzor na konec posledního řádku a stiskněte klávesu se šipkou dolů."
+
+msgid "adventure_duplicate"
+msgstr "Už máte dobrodružství s tímto názvem."
+
+msgid "adventure_empty"
+msgstr "Nezadali jste název dobrodružství!"
+
+msgid "adventure_exp_classes"
+msgstr "Vaše dobrodružství se používá v těchto třídách"
+
+msgid "adventure_flagged"
+msgstr "Dobrodružství bylo úspěšně nahlášeno."
+
+msgid "adventure_id_invalid"
+msgstr "Tento identifikátor dobrodružství není platný."
+
+msgid "adventure_length"
+msgstr "Vaše dobrodružství musí mít alespoň 20 znaků."
+
+msgid "adventure_name_invalid"
+msgstr "Tento název dobrodružství není platný."
+
+msgid "adventure_terms"
+msgstr "Souhlasím s tím, že mé dobrodružství může být veřejně dostupné v Hedy."
+
+msgid "adventure_updated"
+msgstr "Dobrodružství bylo aktualizováno!"
+
+msgid "adventures"
+msgstr "Dobrodružství"
+
+msgid "adventures_at_level"
+msgstr "Dobrodružství na úrovni"
+
+msgid "adventures_completed"
+msgstr "Dokončená dobrodružství: {number_of_adventures}"
+
+msgid "adventures_info"
+msgstr "Každá úroveň Hedy obsahuje vestavěná cvičení pro žáky, kterým říkáme dobrodružství. Můžete vytvářet vlastní dobrodružství a přidávat je do svých tříd. Díky vlastním dobrodružstvím můžete žákům nabídnout dobrodružství, která jsou pro ně relevantní a zajímavá. Více informací o vytváření vlastních dobrodružství najdete <a href=\"/for-teachers/manual\">zde</a>."
+
+msgid "adventures_restored"
+msgstr "Výchozí dobrodružství byla obnovena."
+
+msgid "adventures_ticked"
+msgstr "Zaškrtnutá dobrodružství"
+
+msgid "adventures_tried"
+msgstr "Vyzkoušená dobrodružství"
+
+msgid "ago"
+msgstr "před {timestamp}"
+
+msgid "agree_invalid"
+msgstr "Musíš souhlasit s podmínkami ochrany soukromí."
+
+msgid "agree_with"
+msgstr "Souhlasím s"
+
 msgid "ajax_error"
-msgstr "Nastala chyba, prosím zkus to znova."
+msgstr "Nastala chyba. Zkus to prosím znovu."
+
+msgid "all"
+msgstr "Vše"
+
+msgid "all_rows_missing_separator"
+msgstr "Žádný řádek neobsahuje středník. Možná chcete, abychom hesla vygenerovali automaticky? Pokud ano, přepněte volbu hesel a vytvořte účty znovu. Jinak oddělte uživatelská jména a hesla středníkem na těchto řádcích: {rows}"
+
+msgid "allow_resubmit"
+msgstr "Povolit opětovné odevzdání"
 
 msgid "already_account"
 msgstr "Už máš svůj účet?"
 
+msgid "already_program_running"
+msgstr "Už běží jiný program. Nejprve ho dokonči."
+
+msgid "archive"
+msgstr "Archivovat"
+
+msgid "archive_class"
+msgstr "Archivovat třídu"
+
+msgid "archived"
+msgstr "Archivováno"
+
+msgid "archived_classes"
+msgstr "Archivované třídy"
+
 msgid "are_you_sure"
 msgstr "Opravdu to chceš udělat? Tato akce je nevratná."
+
+msgid "are_you_sure_soft"
+msgstr "Opravdu chcete pokračovat?"
+
+msgid "ask_needs_var"
+msgstr "Od úrovně 2 je potřeba používat `{ask}` s proměnnou. Příklad: jmeno `{is}` `{ask}` Jak se jmenuješ?"
+
+msgid "available"
+msgstr "Dostupné"
+
+msgid "available_for_students"
+msgstr "Dostupné žákům"
+
+msgid "available_in"
+msgstr "Dostupné v:"
+
+msgid "available_levels"
+msgstr "Dostupné úrovně"
+
+msgid "back_to_class"
+msgstr "Zpět do třídy"
+
+msgid "back_to_top"
+msgstr "Zpět nahoru"
+
+msgid "background_information"
+msgstr "Základní informace"
+
+msgid "background_information_info"
+msgstr "Vše, co potřebujete vědět, než začnete s Hedy učit: didaktické myšlenky, na kterých jazyk stojí, tipy pro jednotlivé úrovně, časté chyby žáků a jak na ně reagovat."
+
+msgid "become_a_sponsor"
+msgstr "Stát se sponzorem"
 
 msgid "birth_year"
 msgstr "Rok narození"
 
+msgid "built_in"
+msgstr "Vestavěné"
+
+msgid "built_in_adventures"
+msgstr "Vestavěná dobrodružství"
+
 msgid "by"
 msgstr "od"
+
+msgid "cancel"
+msgstr "Zrušit"
+
+msgid "cant_parse_exception"
+msgstr "Program se nepodařilo zpracovat"
+
+msgid "certified_teacher"
+msgstr "Certifikovaný učitel"
 
 msgid "change_password"
 msgstr "Změnit heslo"
 
+msgid "cheatsheet_title"
+msgstr "Tahák"
+
+msgid "choose_a_voice"
+msgstr "Vybrat hlas"
+
 msgid "class"
-msgstr "Class"
+msgstr "Třída"
+
+msgid "class_already_joined"
+msgstr "Už jsi žákem třídy"
+
+msgid "class_customize_success"
+msgstr "Třída byla úspěšně přizpůsobena."
+
+msgid "class_graph_explanation"
+msgstr "Tento graf zobrazuje počet dobrodružství, která si vaši žáci vyzkoušeli (tedy v nich odvedli smysluplnou práci), v souvislosti s počtem chyb a úspěšných spuštění."
+
+msgid "class_logs"
+msgstr "Poslední přihlášení"
+
+msgid "class_name"
+msgstr "Název třídy"
+
+msgid "class_name_duplicate"
+msgstr "Už máte třídu s tímto názvem."
+
+msgid "class_name_empty"
+msgstr "Nezadali jste název třídy!"
+
+msgid "class_name_invalid"
+msgstr "Tento název třídy není platný."
+
+msgid "class_name_prompt"
+msgstr "Zadejte prosím název nové třídy"
+
+msgid "class_survey_description"
+msgstr "Rádi bychom získali lepší přehled o uživatelích Hedy. Vaše odpovědi nám pomohou Hedy zlepšovat. Děkujeme!"
+
+msgid "class_survey_later"
+msgstr "Připomenout zítra"
+
+msgid "class_survey_question1"
+msgstr "Jaké je věkové rozmezí žáků ve vaší třídě?"
+
+msgid "class_survey_question2"
+msgstr "Jakým jazykem se ve vaší třídě mluví?"
+
+msgid "class_survey_question3"
+msgstr "Jaké je ve vaší třídě zastoupení jednotlivých pohlaví?"
+
+msgid "class_survey_question4"
+msgstr "Čím se vaši žáci liší od ostatních?"
+
+msgid "class_updated_successfully"
+msgstr "Třída byla úspěšně aktualizována."
+
+msgid "class_without_adventures"
+msgstr "Třída bez dobrodružství"
+
+msgid "class_without_adventures_explanation"
+msgstr "Vytvořit třídu bez přidaných dobrodružství."
+
+msgid "classes"
+msgstr "Třídy"
+
+msgid "classes_info"
+msgstr "Vytvořte třídu, abyste mohli v přehledu sledovat pokrok každého žáka, přizpůsobovat dobrodružství, která vaši žáci vidí, a přidávat i vlastní! Můžete vytvořit libovolný počet tříd a každá třída může mít více učitelů s různými rolemi. Přidat můžete také libovolný počet žáků, ale pamatujte, že každý žák může být v jednu chvíli jen v jedné třídě. Více informací o třídách najdete v <a href=\"/for-teachers/manual\">příručce učitele</a>."
+
+msgid "clone"
+msgstr "Vytvořit kopii"
+
+msgid "cloned_times"
+msgstr "Kopie"
+
+msgid "close"
+msgstr "Zavřít"
 
 msgid "comma"
 msgstr "čárka"
 
+msgid "command_not_available_yet_exception"
+msgstr "Příkaz zatím není dostupný"
+
+msgid "command_unavailable_exception"
+msgstr "Příkaz už není správný"
+
+msgid "commands"
+msgstr "Příkazy"
+
+msgid "common_mistakes"
+msgstr "Časté chyby"
+
+msgid "configure"
+msgstr "Nastavit"
+
+msgid "configure_class"
+msgstr "Nastavit třídu"
+
+msgid "configure_class_info"
+msgstr "Zde si můžete přizpůsobit některá nastavení třídy. Můžete přidávat, odstraňovat nebo přeuspořádat dobrodružství a zpřístupnit některé úrovně od určitého data."
+
+msgid "confirm"
+msgstr "Potvrdit"
+
+msgid "connect_guest_teacher"
+msgstr "Chci se spojit s hostujícím učitelem, který by mohl odučit několik lekcí"
+
+msgid "constant_variable_role"
+msgstr "stálá hodnota"
+
+msgid "containing"
+msgstr "Obsahuje"
+
+msgid "content"
+msgstr "Obsah"
+
+msgid "content_invalid"
+msgstr "Toto dobrodružství není platné."
+
+msgid "continue"
+msgstr "Pokračovat"
+
+msgid "contributor"
+msgstr "Přispěvatel"
+
+msgid "copy_accounts_to_clipboard"
+msgstr "Zkopírovat do schránky"
+
+msgid "copy_class"
+msgstr "Zkopírovat existující třídu"
+
+msgid "copy_class_explanation"
+msgstr "Vytvořit novou třídu včetně nastavení a dobrodružství z existující třídy. Žáci se do ní nepřevedou."
+
 msgid "copy_clipboard"
-msgstr "Úspěšně skopírováno do schránky"
+msgstr "Úspěšně zkopírováno do schránky"
+
+msgid "copy_code"
+msgstr "Zkopírovat kód"
 
 msgid "copy_link_to_share"
 msgstr "Zkopírovat odkaz ke sdílení"
 
+msgid "copy_mail_link"
+msgstr "Zkopíruj prosím tento odkaz a vlož ho do nové karty:"
+
+msgid "copy_second_teachers"
+msgstr "Pozvat další učitele z druhé třídy do této třídy?"
+
+msgid "copy_to_editor"
+msgstr "Zkopírovat kód do editoru"
+
 msgid "country"
 msgstr "Země"
+
+msgid "country_invalid"
+msgstr "Vyber prosím platnou zemi."
 
 msgid "create_account"
 msgstr "Vytvořit účet"
 
+msgid "create_accounts"
+msgstr "Vytvořit účty"
+
+msgid "create_accounts_placeholder"
+msgstr "Napište údaje účtů nebo je vložte z tabulky"
+
+msgid "create_accounts_prompt"
+msgstr "Vytvoříte {number_of_accounts} žákovských účtů. Opravdu chcete pokračovat?"
+
+msgid "create_adventure"
+msgstr "Vytvořit dobrodružství"
+
+msgid "create_class"
+msgstr "Vytvořit novou třídu"
+
+msgid "create_student_account"
+msgstr "Vytvořit účet"
+
+msgid "create_student_account_explanation"
+msgstr "S účtem si můžeš ukládat vlastní programy."
+
+msgid "create_student_accounts"
+msgstr "Vytvořit žákovské účty pro"
+
+msgid "create_teacher_account"
+msgstr "Vytvořit učitelský účet"
+
+msgid "create_teacher_account_explanation"
+msgstr "S učitelským účtem si můžete ukládat programy a sledovat výsledky svých žáků."
+
+msgid "create_usernames_and_passwords_desc"
+msgstr "Na každý řádek zadejte jedno uživatelské jméno a heslo oddělené středníkem. Pokud máte údaje v tabulce se dvěma sloupci, zkopírujte obsah souboru a vložte ho sem."
+
+msgid "create_usernames_and_passwords_title"
+msgstr "Uživatelská jména a hesla"
+
+msgid "create_usernames_desc"
+msgstr "Zadejte na každý řádek jedno uživatelské jméno nebo je vložte z tabulky."
+
+msgid "create_usernames_title"
+msgstr "Uživatelská jména"
+
+msgid "created"
+msgstr "Vytvořeno"
+
+msgid "creator"
+msgstr "Autor"
+
+msgid "current_password"
+msgstr "Současné heslo"
+
+msgid "custom_adventures"
+msgstr "Vlastní dobrodružství"
+
+msgid "customization_deleted"
+msgstr "Vlastní nastavení byla úspěšně odstraněna."
+
+msgid "customize"
+msgstr "Přizpůsobit"
+
+msgid "customize_adventure"
+msgstr "Přizpůsobit dobrodružství"
+
+msgid "customize_class"
+msgstr "Přizpůsobit třídu"
+
+msgid "customize_levels"
+msgstr "Přizpůsobit úrovně"
+
+msgid "danger_zone"
+msgstr "Rizikové akce"
+
 msgid "dash"
 msgstr "pomlčka"
 
+msgid "debug"
+msgstr "Ladit"
+
+msgid "default_401"
+msgstr "Zdá se, že nemáš oprávnění..."
+
+msgid "default_403"
+msgstr "Zdá se, že tato akce není povolená..."
+
+msgid "default_404"
+msgstr "Tuto stránku se nám nepodařilo najít..."
+
+msgid "default_500"
+msgstr "Něco se pokazilo. Nahlas nám to prosím na hello@hedy.org."
+
+msgid "delete"
+msgstr "Smazat"
+
+msgid "delete_adventure_prompt"
+msgstr "Opravdu chcete odebrat toto dobrodružství?"
+
+msgid "delete_class"
+msgstr "Smazat třídu"
+
+msgid "delete_class_prompt"
+msgstr "Opravdu chcete smazat třídu? Tuto akci nelze vrátit zpět."
+
+msgid "delete_confirm"
+msgstr "Opravdu chceš smazat program?"
+
+msgid "delete_invite"
+msgstr "Smazat pozvánku"
+
+msgid "delete_invite_prompt"
+msgstr "Opravdu chcete odebrat tuto pozvánku do třídy?"
+
+msgid "delete_public"
+msgstr "Smazat veřejný profil"
+
+msgid "delete_success"
+msgstr "Program byl úspěšně smazán."
+
+msgid "delete_tag_prompt"
+msgstr "Opravdu chcete smazat tento štítek?"
+
 msgid "destroy_account"
-msgstr "Trvale odstranit účet"
+msgstr "Smazat účet"
+
+msgid "destroy_account_message"
+msgstr "Smazání účtu nelze vrátit zpět. Odstraní se tvůj účet i všechna související data, například veřejný profil, programy, dobrodružství a třídy. Ujisti se prosím, že chceš pokračovat, protože tato akce je nevratná."
+
+msgid "directly_available"
+msgstr "Ihned dostupné"
+
+msgid "disable"
+msgstr "Zakázat"
+
+msgid "disabled"
+msgstr "Zakázáno"
+
+msgid "discord_server"
+msgstr "Server Discord"
+
+msgid "distinguished_user"
+msgstr "Významný uživatel"
 
 msgid "double quotes"
 msgstr "dvojité uvozovky"
 
+msgid "download"
+msgstr "Stáhnout"
+
+msgid "duplicate"
+msgstr "Vytvořit kopii"
+
+msgid "echo_and_ask_mismatch_exception"
+msgstr "Nesoulad příkazů echo a ask"
+
+msgid "echo_out"
+msgstr "Od úrovně 2 už `{echo}` není potřeba. Odpověď teď můžeš zopakovat pomocí `{ask}` a `{print}`. Příklad: `jmeno {is} {ask} Jak se jmenuješ? {print} ahoj jmeno`"
+
+msgid "edit_adventure"
+msgstr "Upravit dobrodružství"
+
 msgid "edit_code_button"
 msgstr "Upravit kód"
 
+msgid "editor"
+msgstr "Editor kódu"
+
+msgid "email"
+msgstr "E-mail"
+
 msgid "email_invalid"
-msgstr "Prosím zadej platný email."
+msgstr "Zadej prosím platný e-mail."
+
+msgid "english"
+msgstr "Angličtina"
+
+msgid "enter"
+msgstr "Odeslat"
+
+msgid "enter_password"
+msgstr "Zadejte nové heslo pro"
 
 msgid "enter_text"
 msgstr "Zde napiš svou odpověď..."
+
+msgid "error_logo_alt"
+msgstr "Logo chyby"
+
+msgid "errors"
+msgstr "Chyby"
 
 msgid "exclamation mark"
 msgstr "vykřičník"
 
 msgid "exists_email"
-msgstr "Tento email už někdo používá."
+msgstr "Tento e-mail už někdo používá."
 
 msgid "exists_username"
 msgstr "Toto uživatelské jméno už někdo používá."
 
+msgid "exit_preview_mode"
+msgstr "Ukončit režim náhledu"
+
+msgid "expand_output"
+msgstr "Rozbalit výstup"
+
+msgid "experience_invalid"
+msgstr "Vyber prosím platnou odpověď na otázku o zkušenostech: Ano nebo Ne."
+
+msgid "expiration_date"
+msgstr "Datum vypršení platnosti"
+
+msgid "favorite_program"
+msgstr "Oblíbený program"
+
+msgid "favourite_confirm"
+msgstr "Opravdu chceš nastavit tento program jako oblíbený?"
+
+msgid "favourite_program"
+msgstr "Oblíbený program"
+
+msgid "favourite_program_invalid"
+msgstr "Program, který sis vybral*a jako oblíbený, není platný."
+
+msgid "favourite_success"
+msgstr "Tvůj program je nastavený jako oblíbený."
+
+msgid "feedback_message_error"
+msgstr "Něco se pokazilo. Zkus to prosím později znovu."
+
 msgid "female"
 msgstr "Žena"
+
+msgid "filter"
+msgstr "Filtrovat"
+
+msgid "flag_adventure_prompt"
+msgstr "Chcete nahlásit toto dobrodružství, abychom zkontrolovali jeho vhodnost?"
+
+msgid "float"
+msgstr "číslo"
+
+msgid "for_teachers"
+msgstr "Pro učitele"
 
 msgid "forgot_password"
 msgstr "Zapomněl*a jsi heslo?"
 
+msgid "from_another_teacher"
+msgstr "Od jiného učitele"
+
+msgid "from_magazine_website"
+msgstr "Z časopisu nebo webu"
+
+msgid "from_video"
+msgstr "Z videa"
+
 msgid "gender"
 msgstr "Pohlaví"
 
+msgid "gender_invalid"
+msgstr "Vyber prosím platné pohlaví z možností Žena, Muž a Jiné."
+
+msgid "general_settings"
+msgstr "Obecná nastavení"
+
+msgid "give_link_to_teacher"
+msgstr "Dej svému učiteli tento odkaz:"
+
+msgid "go_back"
+msgstr "Zpět"
+
+msgid "go_back_to_main"
+msgstr "Zpět na hlavní stránku"
+
+msgid "go_to_your_clone"
+msgstr "Přejít na vaši kopii"
+
+msgid "goto_profile"
+msgstr "Přejít na můj profil"
+
+msgid "grading"
+msgstr "Hodnocení"
+
+msgid "grading_class_info"
+msgstr "Zde můžete vidět programy odevzdané svými žáky."
+
+msgid "grading_table_explanation"
+msgstr "Tabulka zobrazuje programy, které odevzdali vaši žáci. Filtry umožňují vybrat všechny nebo jen jednu úroveň, žáka či dobrodružství a tyto volby kombinovat. Filtr se použije po kliknutí na tlačítko „Filtrovat“. Kliknutím na tlačítka vedle záhlaví můžete tabulku také seřadit."
+
+msgid "graph_title"
+msgstr "Chyby v jednotlivých dokončených dobrodružstvích na úrovni {level}"
+
+msgid "hand_in"
+msgstr "Odevzdat"
+
+msgid "hand_in_exercise"
+msgstr "Odevzdat cvičení"
+
+msgid "heard_about_hedy"
+msgstr "Jak jste se dozvěděli o Hedy?"
+
+msgid "heard_about_invalid"
+msgstr "Vyberte prosím platnou možnost, jak jste se o nás dozvěděli."
+
+msgid "hedy_introduction_slides"
+msgstr "Úvodní snímky Hedy"
+
+msgid "hedy_logo_alt"
+msgstr "Logo Hedy"
+
+msgid "hedy_on_github"
+msgstr "Hedy na GitHubu"
+
+msgid "hedy_teacher_update_content"
+msgstr "Výrazně jsme upravili obsah, aby Hedy byla ještě lepší! Dobrodružství a úrovně se tak mohly přesunout nebo odstranit, což může způsobit problémy s vaším současným vlastním nastavením tříd.<br /><br />Abyste se vyhnuli problémům a získali nejnovější verzi obsahu, klikněte v tabulce tříd na tlačítko Aktualizovat. Odstraní ze třídy zastaralá dobrodružství a přidá nová, vylepšená.<br /><br />Více informací o změnách najdete v tomto <a href='https://mailchi.mp/8fd6211e776a/8w1lcvtsd8-16537057'>výňatku z našeho zpravodaje</a>."
+
+msgid "hedy_teacher_update_title"
+msgstr "Důležité změny v Hedy"
+
 msgid "hello_logo"
-msgstr "Ahoj!"
+msgstr "ahoj"
+
+msgid "hide_adventures"
+msgstr "Skrýt dobrodružství"
+
+msgid "hide_classes"
+msgstr "Skrýt třídy"
+
+msgid "hide_keyword_switcher"
+msgstr "Skrýt přepínač klíčových slov"
+
+msgid "hide_slides"
+msgstr "Skrýt snímky"
+
+msgid "highest_level_reached"
+msgstr "Nejvyšší dosažená úroveň"
+
+msgid "ill_work_some_more"
+msgstr "Ještě na tom chvíli zapracuju"
+
+msgid "image_invalid"
+msgstr "Vybraný obrázek není platný."
+
+msgid "incomplete_command_exception"
+msgstr "Neúplný příkaz"
+
+msgid "incorrect_handling_of_quotes_exception"
+msgstr "Nesprávné použití uvozovek"
+
+msgid "incorrect_use_of_types_exception"
+msgstr "Nesprávné použití typů"
+
+msgid "incorrect_use_of_variable_exception"
+msgstr "Nesprávné použití proměnné"
+
+msgid "indentation_exception"
+msgstr "Nesprávné odsazení"
+
+msgid "input"
+msgstr "vstup z `{ask}`"
+
+msgid "input_variable_role"
+msgstr "vstupní hodnota"
+
+msgid "integer"
+msgstr "číslo"
+
+msgid "invalid_class_link"
+msgstr "Odkaz pro vstup do třídy není platný."
+
+msgid "invalid_command_exception"
+msgstr "Neplatný příkaz"
+
+msgid "invalid_keyword_language_comment"
+msgstr "# Zadaný jazyk klíčových slov není platný, jazyk klíčových slov je nastavený na angličtinu"
+
+msgid "invalid_language_comment"
+msgstr "# Zadaný jazyk není platný, jazyk je nastavený na angličtinu"
+
+msgid "invalid_level_comment"
+msgstr "# Zadaná úroveň není platná, úroveň je nastavená na 1"
+
+msgid "invalid_program_comment"
+msgstr "# Zadaný program není platný, zkus to prosím znovu"
+
+msgid "invalid_teacher_invitation_code"
+msgstr "Kód pozvánky pro učitele není platný. Pokud se chcete stát učitelem, napište na hello@hedy.org."
 
 msgid "invalid_username_password"
 msgstr "Neplatné uživatelské jméno/heslo."
 
+msgid "invitations_sent"
+msgstr "Všechny pozvánky byly úspěšně odeslány!"
+
+msgid "invite"
+msgstr "Pozvat"
+
+msgid "invite_by_username"
+msgstr "Pozvat pomocí uživatelského jména"
+
+msgid "invite_date"
+msgstr "Datum pozvání"
+
+msgid "invite_message"
+msgstr "Dostal*a jsi pozvánku do třídy"
+
+msgid "invite_prompt"
+msgstr "Zadejte uživatelské jméno"
+
+msgid "invite_teacher"
+msgstr "Pozvat učitele"
+
+msgid "invited_on"
+msgstr "Datum pozvání"
+
+msgid "join_class"
+msgstr "Přidat se do třídy"
+
+msgid "join_prompt"
+msgstr "Abys mohl*a vstoupit do třídy, potřebuješ účet. Chceš se teď přihlásit?"
+
+msgid "keybinding_waiting_for_keypress"
+msgstr "Čeká na stisk klávesy..."
+
+msgid "keyword_language_invalid"
+msgstr "Vyber prosím platný jazyk klíčových slov (angličtinu nebo svůj jazyk)."
+
+msgid "landcode_phone_number"
+msgstr "Přidejte prosím i mezinárodní předvolbu své země"
+
+msgid "language"
+msgstr "Jazyk"
+
+msgid "language_invalid"
+msgstr "Vyber prosím platný jazyk."
+
 msgid "languages"
-msgstr "Které z těchto programovacích jazyku jsi už někdy použil*a?"
+msgstr "Které z těchto programovacích jazyků už jsi někdy použil*a?"
+
+msgid "last_changed"
+msgstr "Poslední změna"
+
+msgid "last_edited"
+msgstr "Poslední úprava"
+
+msgid "last_update"
+msgstr "Poslední aktualizace"
 
 msgid "lastname"
 msgstr "Příjmení"
 
+msgid "leave_class"
+msgstr "Opustit třídu"
+
+msgid "level"
+msgstr "Úroveň"
+
+msgid "level_accessible"
+msgstr "Úroveň je dostupná žákům"
+
+msgid "level_disabled"
+msgstr "Úroveň je zakázaná"
+
+msgid "level_future"
+msgstr "Tato úroveň se automaticky zpřístupní dne "
+
+msgid "level_invalid"
+msgstr "Tato úroveň Hedy není platná."
+
 msgid "level_not_class"
-msgstr "Jste ve třídě, kde tato úroveň ještě nebyla zpřístupněna"
+msgstr "Tato úroveň ještě není ve tvé třídě dostupná"
 
 msgid "level_title"
 msgstr "Úroveň"
 
-#, fuzzy
+msgid "levels"
+msgstr "úrovně"
+
 msgid "link"
-msgstr "Přihlásit se"
+msgstr "Odkaz"
+
+msgid "linkedin_page"
+msgstr "Hedy na LinkedInu"
+
+msgid "list"
+msgstr "seznam"
+
+msgid "list_variable_role"
+msgstr "seznam"
+
+msgid "logged_in_to_share"
+msgstr "Abys mohl*a uložit a sdílet program, musíš se přihlásit."
 
 msgid "login"
 msgstr "Přihlásit se"
@@ -150,55 +1003,147 @@ msgstr "Přihlásit se"
 msgid "login_long"
 msgstr "Přihlásit se ke svému účtu"
 
+msgid "login_to_save_your_work"
+msgstr "Přihlas se, abys mohl*a uložit svou práci"
+
 msgid "logout"
 msgstr "Odhlásit se"
 
-#, fuzzy
 msgid "mail_change_password_body"
-msgstr "Změnit heslo"
+msgstr ""
+"Tvé heslo do Hedy bylo změněno. Pokud jsi ho změnil*a ty, je vše v pořádku.\n"
+"Pokud jsi heslo nezměnil*a, ihned nás prosím kontaktuj odpovědí na tento e-mail."
 
-#, fuzzy
 msgid "mail_change_password_subject"
-msgstr "Změnit heslo"
+msgstr "Tvé heslo do Hedy bylo změněno"
 
-#, fuzzy
+msgid "mail_error_change_processed"
+msgstr "Při odesílání ověřovacího e-mailu se něco pokazilo. Změny přesto byly správně zpracovány."
+
 msgid "mail_goodbye"
 msgstr ""
-"Thank you!\n"
-"The Hedy team"
+"Programuj dál!\n"
+"Tým Hedy"
+
+msgid "mail_hello"
+msgstr "Ahoj {username}!"
+
+msgid "mail_recover_password_body"
+msgstr ""
+"Kliknutím na tento odkaz si můžeš nastavit nové heslo do Hedy. Odkaz platí <b>4</b> hodiny.\n"
+"Pokud jsi o obnovení hesla nežádal*a, tento e-mail ignoruj: {link}"
 
 msgid "mail_recover_password_subject"
 msgstr "Požádat o obnovení hesla."
 
-#, fuzzy
 msgid "mail_reset_password_body"
-msgstr "Obnovit heslo"
+msgstr ""
+"Tvé heslo do Hedy bylo obnoveno a nahrazeno novým. Pokud jsi to udělal*a ty, je vše v pořádku.\n"
+"Pokud jsi heslo nezměnil*a, ihned nás prosím kontaktuj odpovědí na tento e-mail."
 
-#, fuzzy
 msgid "mail_reset_password_subject"
-msgstr "Obnovit heslo"
+msgstr "Tvé heslo do Hedy bylo obnoveno"
 
-#, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
-"<strong>Welcome!</strong>\n"
-"Congratulations on your brand new Hedy teachers account. Welcome to the world wide community of Hedy teachers!\n"
-"<strong>What teachers accounts can do</strong>\n"
-"With your teacher account, you have the option to create classes. Your students can than join your classes and you can see their progress. Classes are made and managed though the for <a href=\"https://hedycode.com/for-teachers\">teachers page</a>.\n"
-"<strong>How to share ideas</strong>\n"
-"If you are using Hedy in class, you probably have ideas for improvements! You can share those ideas with us on the <a href=\"https://github.com/hedyorg/hedy/discussions/categories/ideas\">Ideas Discussion</a>.\n"
-"<strong>How to ask for help</strong>\n"
-"If anything is unclear, you can post in the <a href=\"https://github.com/hedyorg/hedy/discussions/categories/q-a\">Q&A discussion</a>, or <a href=\"mailto: hello@hedy.org\">send us an email</a>.\n"
-"Keep programming!"
+"<strong>Vítejte!</strong>\n"
+"Gratulujeme k vašemu novému učitelskému účtu v Hedy. Vítejte v celosvětové komunitě učitelů Hedy!\n"
+"\n"
+"<strong>Co umožňují učitelské účty</strong>\n"
+"Teď máte k dispozici několik dalších možností.\n"
+"\n"
+"1. Další vysvětlení najdete v <a href=\"https://hedy.org/for-teachers/manual\">příručce učitele</a>.\n"
+"2. S učitelským účtem můžete vytvářet třídy. Vaši žáci se pak mohou do vašich tříd přidat a vy můžete sledovat jejich pokrok. Třídy se vytvářejí a spravují na <a href=\"https://hedycode.com/for-teachers\">stránce pro učitele</a>.\n"
+"3. Své třídy si můžete plně přizpůsobit: například zpřístupnit či uzavřít úrovně, povolit či zakázat dobrodružství a vytvářet vlastní dobrodružství!\n"
+"\n"
+"<strong>Přidejte se k naší online komunitě!</strong>\n"
+"Všichni učitelé, programátoři a další příznivci Hedy jsou vítáni na našem <a href=\"https://discord.gg/8yY7dEme9r\">serveru Discord</a>. Je to ideální místo k povídání o Hedy: máme kanály, kde můžete ukázat své zajímavé projekty a lekce, kanály pro hlášení chyb i kanály pro rozhovory s dalšími učiteli a týmem Hedy.\n"
+"\n"
+"<strong>Jak požádat o pomoc </strong>\n"
+"Pokud je vám něco nejasné, můžete nám dát vědět na Discordu nebo nám <a href=\"mailto: hello@hedy.org\">poslat e-mail</a>.\n"
+"\n"
+"<strong>Jak hlásit chyby</strong>\n"
+"Na Discordu máme kanál pro hlášení chyb, který se jmenuje #bugs. Je to ideální místo, kde nám můžete dát vědět o problémech, na které narazíte. Pokud umíte používat GitHub, můžete tam vytvořit <a href=\"https://github.com/hedyorg/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">hlášení</a>.\n"
+
+msgid "mail_welcome_teacher_subject"
+msgstr "Váš učitelský účet Hedy je připraven"
+
+msgid "mail_welcome_verify_body"
+msgstr ""
+"Tvůj účet Hedy byl úspěšně vytvořen. Vítej!\n"
+"Klikni prosím na tento odkaz a ověř svou e-mailovou adresu: {link}"
+
+msgid "mail_welcome_verify_subject"
+msgstr "Vítej v Hedy"
 
 msgid "mailing_title"
-msgstr "Přihlaš se k odběru Hedy newsletteru"
+msgstr "Přihlas se k odběru zpravodaje Hedy"
 
 msgid "main_subtitle"
-msgstr "Stupňovitý programovací jazyk"
+msgstr "Textové programování pro školní výuku"
+
+msgid "main_title"
+msgstr "Hedy"
+
+msgid "make_public"
+msgstr "Zveřejnit"
+
+msgid "make_sure_you_are_done"
+msgstr "Ujisti se, že máš hotovo! Po kliknutí na „Odevzdat“ už nebudeš moct svůj program změnit."
 
 msgid "male"
 msgstr "Muž"
+
+msgid "manage_students"
+msgstr "Správa žáků"
+
+msgid "manage_students_info"
+msgstr "Zde můžete přidávat žáky vytvořením jejich účtů, zvát je nebo je odebírat ze své třídy."
+
+msgid "mistake_how_to_fix"
+msgstr "Jak chybu opravit"
+
+msgid "mistake_what_goes_wrong"
+msgstr "V čem žáci chybují"
+
+msgid "more_adventures"
+msgstr "Další dobrodružství"
+
+msgid "more_info"
+msgstr "Další informace"
+
+msgid "more_options"
+msgstr "Další možnosti"
+
+msgid "multiple_keywords_warning"
+msgstr "Pokoušíte se použít klíčové slovo {orig_keyword}, ale může mít více významů. Vyberte ze seznamu ten, který chcete použít, a zkopírujte ho do kódu i se složenými závorkami: {keyword_list}"
+
+msgid "multiple_levels_warning"
+msgstr "Vybrali jste více úrovní a do svého dobrodružství jste vložili ukázky kódu. To může způsobit problémy se zvýrazňováním syntaxe a automatickým překladem klíčových slov"
+
+msgid "mute"
+msgstr "Ztlumit"
+
+msgid "my_account"
+msgstr "Můj účet"
+
+msgid "my_adventures"
+msgstr "Moje dobrodružství"
+
+msgid "my_classes"
+msgstr "Moje třídy"
+
+msgid "my_messages"
+msgstr "Moje zprávy"
+
+msgid "my_public_profile"
+msgstr "Můj veřejný profil"
+
+msgid "name"
+msgstr "Název"
+
+msgid "nav_hedy"
+msgstr "Hedy"
 
 msgid "nav_learn_more"
 msgstr "Zjisti víc"
@@ -206,20 +1151,74 @@ msgstr "Zjisti víc"
 msgid "nav_start"
 msgstr "Domů"
 
+msgid "never"
+msgstr "Nikdy"
+
+msgid "new_class_page"
+msgstr "Nová třída"
+
 msgid "new_password"
 msgstr "Nové heslo"
 
+msgid "new_password_repeat"
+msgstr "Zopakuj nové heslo"
+
 msgid "newline"
 msgstr "nový řádek"
+
+msgid "newsletter"
+msgstr "Zpravodaj"
+
+msgid "next_adventure"
+msgstr "Další dobrodružství"
+
+msgid "next_page"
+msgstr "Další stránka"
+
+msgid "next_student"
+msgstr "Další žák"
 
 msgid "no"
 msgstr "Ne"
 
 msgid "no_account"
-msgstr "Zatím nemáš svů účet?"
+msgstr "Ještě nemáš účet?"
+
+msgid "no_accounts"
+msgstr "Nejsou tu žádné účty k vytvoření."
+
+msgid "no_adventures_in_level"
+msgstr "V úrovni nejsou žádná dobrodružství"
+
+msgid "no_adventures_yet"
+msgstr "Těmto podmínkám neodpovídá žádné veřejné dobrodružství. Zkus hledat něco jiného."
+
+msgid "no_built_in_adventures_available"
+msgstr "Nejsou dostupná žádná vestavěná dobrodružství"
+
+msgid "no_custom_adventures_available"
+msgstr "Nejsou dostupná žádná vlastní dobrodružství"
+
+msgid "no_existing_class"
+msgstr "Nejsou tu žádné existující třídy"
+
+msgid "no_more_flat_if"
+msgstr "Od úrovně 8 je potřeba kód za `{if}` napsat na další řádek a začít ho 4 mezerami."
+
+msgid "no_programs"
+msgstr "Nejsou tu žádné programy."
+
+msgid "no_shared_programs"
+msgstr "nemá žádné sdílené programy..."
+
+msgid "no_students"
+msgstr "V této třídě nejsou žádní žáci"
 
 msgid "no_such_adventure"
 msgstr "Toto dobrodružství neexistuje!"
+
+msgid "no_such_class"
+msgstr "Taková třída v Hedy neexistuje."
 
 msgid "no_such_level"
 msgstr "Neexistující úroveň jazyka Hedy!"
@@ -227,11 +1226,69 @@ msgstr "Neexistující úroveň jazyka Hedy!"
 msgid "no_such_program"
 msgstr "Neexistující program jazyka Hedy!"
 
+msgid "no_tag"
+msgstr "Chybí štítek!"
+
+msgid "no_usernames_found"
+msgstr "Nebyli nalezeni žádní uživatelé"
+
+msgid "not_adventure_yet"
+msgstr "Nejprve musíte zadat název dobrodružství"
+
 msgid "not_enrolled"
 msgstr "Zdá se, že do této třídy nepatříte!"
 
+msgid "not_in_class_no_handin"
+msgstr "Nejsi v žádné třídě, takže nemusíš nic odevzdávat."
+
+msgid "not_logged_in_cantsave"
+msgstr "Tvůj program se neuloží."
+
+msgid "not_logged_in_handin"
+msgstr "Abys mohl*a odevzdat úkol, musíš se přihlásit."
+
 msgid "not_teacher"
 msgstr "Zdá se, že nejste učitel!"
+
+#, fuzzy
+msgid "not_used_in_classes"
+msgstr "Momentálně se nepoužívá v žádné třídě "
+
+msgid "number"
+msgstr "číslo"
+
+msgid "number_lines"
+msgstr "Počet řádků"
+
+msgid "number_of_errors"
+msgstr "Počet chyb: {number_of_errors}"
+
+msgid "ok"
+msgstr "OK"
+
+msgid "on_this_page"
+msgstr "Na této stránce"
+
+msgid "one_level_error"
+msgstr "Musíte vybrat alespoň jednu úroveň."
+
+msgid "only_you_can_see"
+msgstr "Tento program vidíš jen ty."
+
+msgid "open"
+msgstr "Otevřít"
+
+msgid "opening_date"
+msgstr "Datum zpřístupnění"
+
+msgid "opening_dates"
+msgstr "Data zpřístupnění"
+
+msgid "option"
+msgstr "Možnost"
+
+msgid "or"
+msgstr "nebo"
 
 msgid "other"
 msgstr "Jiné"
@@ -239,20 +1296,50 @@ msgstr "Jiné"
 msgid "other_block"
 msgstr "Jiný blokový jazyk"
 
+msgid "other_settings"
+msgstr "Další nastavení"
+
+msgid "other_source"
+msgstr "Jiné"
+
 msgid "other_text"
 msgstr "Jiný textový jazyk"
+
+msgid "outdated_class_warning"
+msgstr "Tato třída má zastaralý obsah."
+
+msgid "overwrite_warning"
+msgstr "Už máš program s tímto názvem. Když tento program uložíš, nahradí ten původní. Opravdu chceš pokračovat?"
+
+msgid "owner"
+msgstr "Vlastník"
 
 msgid "page_not_found"
 msgstr "Tuto stránku nelze najít!"
 
+msgid "pair_with_teacher"
+msgstr "Chci se spojit s jiným učitelem, který mi může pomoci"
+
 msgid "password"
 msgstr "Heslo"
+
+msgid "password_change_not_allowed"
+msgstr "Nemáte oprávnění změnit heslo tohoto uživatele."
+
+msgid "password_change_prompt"
+msgstr "Opravdu chcete změnit toto heslo?"
+
+msgid "password_change_success"
+msgstr "Heslo vašeho žáka bylo úspěšně změněno."
+
+msgid "password_invalid"
+msgstr "Tvé heslo není platné."
 
 msgid "password_repeat"
 msgstr "Zopakuj heslo"
 
 msgid "password_resetted"
-msgstr "Tvé heslo bylo úspěšně obnoveno. Prosím přihlaš se."
+msgstr "Tvé heslo bylo úspěšně obnoveno. Přesměrováváme tě na přihlašovací stránku."
 
 msgid "password_six"
 msgstr "Heslo musí obsahovat alespoň šest znaků."
@@ -260,33 +1347,197 @@ msgstr "Heslo musí obsahovat alespoň šest znaků."
 msgid "password_updated"
 msgstr "Heslo bylo změněno."
 
+msgid "passwords_six"
+msgstr "Všechna hesla musí mít alespoň šest znaků."
+
+msgid "passwords_too_short"
+msgstr "Hesla musí mít alespoň 6 znaků. Upravte tato hesla tak, aby měla alespoň 6 znaků: {passwords}"
+
+msgid "pending_invites"
+msgstr "Nevyřízené pozvánky"
+
+msgid "people_with_a_link"
+msgstr "Tento program uvidí i ostatní lidé, kteří mají odkaz. Pokud máš veřejný profil, objeví se i na jeho stránce."
+
+msgid "performance_graph"
+msgstr "Graf výsledků"
+
+msgid "performance_graph_info"
+msgstr "Graf zobrazuje, kolik dobrodružství vaši žáci dokončili a kolik spuštění a chyb měli v jednotlivých úrovních."
+
 msgid "period"
 msgstr "tečka"
 
-msgid "previous_campaigns"
-msgstr "Prohlédnout si zprávy z minulosti"
+msgid "personal_text"
+msgstr "Osobní text"
 
-#, fuzzy
+msgid "personal_text_invalid"
+msgstr "Tvůj osobní text není platný."
+
+msgid "phone_number"
+msgstr "Telefonní číslo"
+
+msgid "pick_a_level"
+msgstr "Vybrat úroveň"
+
+msgid "preferred_keyword_language"
+msgstr "Preferovaný jazyk klíčových slov"
+
+msgid "preferred_language"
+msgstr "Preferovaný jazyk"
+
+msgid "prepare_a_level"
+msgstr "Připravit úroveň"
+
+msgid "prepare_a_level_info"
+msgstr "Vše, co potřebujete pro jednu úroveň, na jednom místě: co je v ní nového, snímky pro výuku, pracovní sešit k rozdání a chyby, které žáci pravděpodobně udělají."
+
+msgid "prepare_level"
+msgstr "Připravit úroveň"
+
+msgid "present"
+msgstr "Prezentovat"
+
+msgid "preview"
+msgstr "Náhled"
+
+msgid "preview_as_student"
+msgstr "Náhled třídy z pohledu žáka"
+
+msgid "previewing_adventure"
+msgstr "Náhled dobrodružství"
+
+msgid "previewing_class"
+msgstr "Prohlížíte si náhled třídy <em>{class_name}</em> jako učitel."
+
+msgid "previous_campaigns"
+msgstr "Zobrazit předchozí zpravodaje"
+
+msgid "previous_page"
+msgstr "Předchozí stránka"
+
+msgid "print_accounts"
+msgstr "Vytisknout"
+
+msgid "print_accounts_title"
+msgstr "Žákovské účty pro hedy.org"
+
+msgid "print_logo"
+msgstr "print"
+
+msgid "privacy_terms"
+msgstr "Podmínky ochrany soukromí"
+
+msgid "private"
+msgstr "Soukromý"
+
 msgid "profile_logo_alt"
-msgstr "Profil byl upraven."
+msgstr "Ikona profilu."
+
+msgid "profile_picture"
+msgstr "Profilový obrázek"
 
 msgid "profile_updated"
 msgstr "Profil byl upraven."
 
+msgid "profile_updated_reload"
+msgstr "Profil byl aktualizován. Stránka se znovu načte."
+
 msgid "program_contains_error"
-msgstr "Tento program obsahuje chybu, přesto jej chcete sdílet?"
+msgstr "Tento program obsahuje chybu. Opravdu ho chceš sdílet?"
 
 msgid "program_header"
 msgstr "Moje programy"
 
+msgid "program_size_too_long"
+msgstr "Tvůj program nesmí mít více než {amount_lines} řádků!"
+
+msgid "program_status_accepted"
+msgstr "Program je přijatý"
+
+msgid "program_status_not_accepted"
+msgstr "Program není přijatý"
+
+msgid "program_too_large_exception"
+msgstr "Příliš velké programy"
+
 msgid "programming_experience"
-msgstr "Máš nějaké skušenosti s programováním?"
+msgstr "Máš zkušenosti s programováním?"
+
+msgid "programming_invalid"
+msgstr "Vyber prosím platný programovací jazyk."
+
+msgid "programs"
+msgstr "Programy"
+
+msgid "prompt_join_class"
+msgstr "Chceš se přidat do této třídy?"
+
+msgid "provided_username_duplicates"
+msgstr "Tato uživatelská jména jste zadali vícekrát: {usernames}"
+
+msgid "public"
+msgstr "Veřejný"
+
+msgid "public_adventures"
+msgstr "Procházet veřejná dobrodružství"
+
+msgid "public_content"
+msgstr "Veřejný obsah"
+
+msgid "public_content_info"
+msgstr "Zde najdete naše veřejná dobrodružství. Vytvořili je jiní učitelé z celého světa. Prohlédněte si je a klidně je využijte ve vlastní výuce."
+
+msgid "public_invalid"
+msgstr "Tato volba souhlasu není platná"
+
+msgid "public_profile"
+msgstr "Veřejný profil"
+
+msgid "public_profile_info"
+msgstr "Zaškrtnutím tohoto políčka zpřístupním svůj profil všem. Dávej pozor, abys nesdílel*a osobní údaje, jako je tvé jméno nebo adresa bydliště, protože je uvidí každý!"
+
+msgid "public_profile_updated"
+msgstr "Veřejný profil byl aktualizován. Stránka se znovu načte."
 
 msgid "question mark"
 msgstr "otazník"
 
+msgid "recent"
+msgstr "Moje poslední programy"
+
 msgid "recover_password"
 msgstr "Požádat o obnovení hesla"
+
+msgid "reject_program"
+msgstr "Odmítnout program"
+
+msgid "remove"
+msgstr "Odebrat"
+
+msgid "remove_customization"
+msgstr "Odstranit vlastní nastavení"
+
+msgid "remove_customizations_prompt"
+msgstr "Opravdu chcete odstranit vlastní nastavení této třídy?"
+
+msgid "remove_student_prompt"
+msgstr "Opravdu chcete odebrat žáka ze třídy?"
+
+msgid "remove_user_prompt"
+msgstr "Potvrďte odebrání tohoto uživatele ze třídy."
+
+msgid "rename_class"
+msgstr "Přejmenovat třídu"
+
+msgid "rename_class_prompt"
+msgstr "Jak chcete tuto třídu pojmenovat?"
+
+msgid "repair_program_logo_alt"
+msgstr "Ikona opravy programu"
+
+msgid "repeat_dep"
+msgstr "Od úrovně 8 je potřeba používat `{repeat}` s odsazením. Příklady najdeš na záložce `{repeat}` v úrovni 8."
 
 msgid "repeat_match_password"
 msgstr "Zopakované heslo se neshoduje."
@@ -294,14 +1545,59 @@ msgstr "Zopakované heslo se neshoduje."
 msgid "repeat_new_password"
 msgstr "Zopakuj nové heslo"
 
+msgid "report_failure"
+msgstr "Tento program neexistuje nebo není veřejný"
+
+msgid "report_program"
+msgstr "Opravdu chceš nahlásit tento program?"
+
+msgid "report_success"
+msgstr "Tento program byl nahlášen"
+
+msgid "request_invalid"
+msgstr "Neplatný požadavek"
+
+msgid "request_teacher"
+msgstr "Chcete se stát učitelem?"
+
+msgid "request_teacher_account"
+msgstr "Stát se učitelem"
+
 msgid "required_field"
-msgstr "* povinná pole"
+msgstr "Pole označená * jsou povinná"
+
+msgid "reset_adventure_prompt"
+msgstr "Opravdu chcete obnovit všechna vybraná dobrodružství?"
+
+msgid "reset_adventures"
+msgstr "Obnovit vybraná dobrodružství"
+
+msgid "reset_button"
+msgstr "Obnovit"
 
 msgid "reset_password"
 msgstr "Obnovit heslo"
 
+msgid "restart"
+msgstr "Spustit znovu"
+
+msgid "retrieve_adventure_error"
+msgstr "Nemáte oprávnění zobrazit toto dobrodružství!"
+
+msgid "retrieve_class_error"
+msgstr "Třídy mohou načítat jen učitelé"
+
+msgid "retrieve_tag_error"
+msgstr "Chyba při načítání štítků"
+
+msgid "role"
+msgstr "Role"
+
 msgid "run_code_button"
 msgstr "Spustit kód"
+
+msgid "save_parse_warning"
+msgstr "Tento program obsahuje chybu. Opravdu ho chceš uložit?"
 
 msgid "save_prompt"
 msgstr "Potřebuješ vlastní uživatelský účet, abys mohl*a uložit svůj program. Chceš se nyní přihlásit?"
@@ -309,100 +1605,574 @@ msgstr "Potřebuješ vlastní uživatelský účet, abys mohl*a uložit svůj pr
 msgid "save_success_detail"
 msgstr "Program byl úspěšně uložen."
 
+msgid "save_turtle_drawing"
+msgstr "Uložit kresbu"
+
+msgid "saving_language_failed"
+msgstr "Změna jazyka dobrodružství se nezdařila."
+
+msgid "search"
+msgstr "Hledat..."
+
 msgid "search_button"
 msgstr "Vyhledat"
+
+msgid "search_results"
+msgstr "Výsledky hledání"
+
+msgid "second_teacher"
+msgstr "Druhý učitel"
+
+msgid "second_teacher_copy_prompt"
+msgstr "Opravdu chcete zkopírovat tohoto učitele?"
+
+msgid "second_teacher_prompt"
+msgstr "Zadejte uživatelské jméno učitele, kterého chcete pozvat."
+
+msgid "second_teacher_warning"
+msgstr "Všichni učitelé v této třídě ji mohou přizpůsobovat."
+
+msgid "see_adventure_shared_class"
+msgstr "Toto dobrodružství vidíte, protože sdílíte třídu {class_name} s uživatelem {creator}"
+
+msgid "see_certificate"
+msgstr "Podívej se na certifikát uživatele {username}!"
 
 msgid "select"
 msgstr "Vyber"
 
+msgid "select_adventures"
+msgstr "Vybrat a seřadit dobrodružství"
+
+msgid "select_all"
+msgstr "Vybrat vše"
+
+msgid "select_classes"
+msgstr "Vybrat třídy"
+
+msgid "select_lang"
+msgstr "Vybrat jazyk"
+
+msgid "select_levels"
+msgstr "Vybrat úrovně"
+
+msgid "selected"
+msgstr "Vybráno"
+
+msgid "self_removal_prompt"
+msgstr "Opravdu chceš odejít z této třídy?"
+
 msgid "send_password_recovery"
-msgstr "Pošlete mi odkaz na obnovení hesla"
+msgstr "Poslat mi odkaz na obnovení hesla"
+
+msgid "sent_by"
+msgstr "Tuto pozvánku posílá"
+
+msgid "sent_password_recovery"
+msgstr "Brzy by ti měl přijít e-mail s pokyny k obnovení hesla."
+
+msgid "set_adventure_name"
+msgstr "Jak chcete své dobrodružství pojmenovat?"
+
+msgid "settings"
+msgstr "Moje osobní nastavení"
+
+msgid "settings_header"
+msgstr "Nastavení"
+
+msgid "share_by_giving_link"
+msgstr "Ukaž svůj program ostatním: pošli jim tento odkaz:"
+
+msgid "share_with_teachers"
+msgstr "Sdílet s učiteli"
+
+msgid "share_your_program"
+msgstr "Sdílet svůj program"
+
+msgid "show_editor"
+msgstr "Zobrazit editor"
+
+msgid "signup_student_or_teacher"
+msgstr "Jsi žák, nebo učitel?"
 
 msgid "single quotes"
-msgstr "jednoduché uvozovky"
+msgstr "jednoduchá uvozovka"
 
 msgid "slash"
 msgstr "lomítko"
 
+msgid "sleeping"
+msgstr "Čeká..."
+
+msgid "slides"
+msgstr "Snímky"
+
+msgid "slides_card_info"
+msgstr "Hotové snímky pro každou úroveň Hedy, které můžete využít při výuce. Prezentovat je můžete přímo v prohlížeči."
+
+msgid "slides_for_level"
+msgstr "Snímky pro úroveň"
+
+msgid "slides_info"
+msgstr "Pro každou úroveň Hedy jsme připravili snímky, které vám pomohou s výukou. Obsahují vysvětlení jednotlivých úrovní a příklady kódu Hedy, které můžete spustit přímo ve snímcích. Úvodní snímky obecně představují Hedy. Stačí kliknout na „Prezentovat“ a můžete začít! Během prezentace můžete stisknutím klávesy S zobrazit poznámky pro přednášejícího. Ty vás provedou lekcí a nabídnou tipy pro výuku."
+
+msgid "slides_level_info"
+msgstr "Představte úroveň postupně, jeden koncept za druhým"
+
+msgid "social_media"
+msgstr "Sociální sítě"
+
+msgid "solution"
+msgstr "Řešení"
+
+msgid "solution_example"
+msgstr "Příklad řešení"
+
+msgid "solution_example_explanation"
+msgstr "Sem patří řešení vašeho dobrodružství. Může se hodit, pokud chcete dobrodružství sdílet s jinými učiteli, aby věděli, jaké řešení navrhujete."
+
+msgid "some_rows_missing_separator"
+msgstr "Na těchto řádcích chybí středník, takže chybí buď uživatelské jméno, nebo heslo: {rows}"
+
+#, fuzzy
+msgid "something_went_wrong_keyword_parsing"
+msgstr "V dobrodružství je chyba. Jsou všechna klíčová slova správně uzavřená do { }?"
+
 msgid "space"
 msgstr "mezera"
+
+msgid "standard_new_class"
+msgstr "Standardní nová třída"
+
+msgid "standard_new_class_explanation"
+msgstr "Vytvořit třídu s dobrodružstvími od týmu Hedy."
 
 msgid "star"
 msgstr "hvězdička"
 
+msgid "start_learning"
+msgstr "Pusť se do toho!"
+
+msgid "start_teaching"
+msgstr "Vytvořit účet"
+
 msgid "step_title"
 msgstr "Úkol"
+
+msgid "stepper_variable_role"
+msgstr "počítadlo cyklu"
+
+msgid "stop"
+msgstr "Zastavit"
 
 msgid "stop_code_button"
 msgstr "Zastavit program"
 
+msgid "string"
+msgstr "text"
+
+msgid "student_accounts_created"
+msgstr "Žákovské účty byly úspěšně vytvořeny"
+
+msgid "student_adventures_table"
+msgstr "Dobrodružství žáků"
+
+msgid "student_adventures_table_explanation"
+msgstr "Tato tabulka zobrazuje programy, které žáci vytvořili pro každé dobrodružství v dané úrovni. Kliknutím na ikonu oka zobrazíte stránku programu. Po jeho kontrole můžete zaškrtnutím označit dokončení."
+
+msgid "student_already_invite"
+msgstr "Tento žák už má nevyřízenou pozvánku."
+
+msgid "student_in_another_class"
+msgstr "Tento žák je v jiné třídě. Požádejte ho, aby opustil všechny třídy, a zkuste to znovu."
+
+msgid "student_information"
+msgstr "Informace o žácích"
+
+msgid "student_information_explanation"
+msgstr "Tato tabulka zobrazuje základní informace o žácích ve vaší třídě. Můžete v ní také provádět několik akcí: změnit žákovi heslo kliknutím na ikonu tužky, zobrazit stránku s jeho programy kliknutím na ikonu kódu a odebrat žáka ze třídy kliknutím na ikonu červeného koše."
+
+msgid "student_removed_successfully"
+msgstr "Žák byl úspěšně odebrán ze třídy"
+
+msgid "student_signup_header"
+msgstr "Žák"
+
+msgid "students"
+msgstr "žáci"
+
+msgid "submission_time"
+msgstr "Čas odevzdání"
+
+msgid "submit_program"
+msgstr "Odevzdat"
+
+msgid "submit_warning"
+msgstr "Opravdu chceš odevzdat tento program?"
+
+msgid "submitted"
+msgstr "Odevzdáno"
+
+msgid "submitted_header"
+msgstr "Tento program byl úspěšně odevzdán a už ho nelze upravovat."
+
 msgid "subscribe"
-msgstr "Potvrdit"
+msgstr "Přihlásit se k odběru"
+
+msgid "subscribe_message"
+msgstr "Přihlas se k odběru zpravodaje a sleduj naše nejnovější zprávy a akce. K odběru se můžeš přihlásit kliknutím na tlačítko níže. Pokud si to později rozmyslíš, použij odkaz pro odhlášení v kterémkoli z našich e-mailů."
 
 msgid "subscribe_newsletter"
-msgstr "Přihlásit se k newsletteru"
+msgstr "Přihlásit se k odběru zpravodaje"
+
+msgid "subscribed_header"
+msgstr "Odběr je aktivní"
+
+msgid "subscribed_message"
+msgstr "Děkujeme za přihlášení k odběru našeho zpravodaje! Doufáme, že se ti líbí, a rádi si přečteme tvé připomínky na našem <a target=\"_blank\" href=\"https://discord.gg/8yY7dEme9r\">serveru Discord</a>. Pokud si to později rozmyslíš, použij odkaz pro odhlášení v kterémkoli z našich e-mailů."
+
+msgid "successful_runs"
+msgstr "Úspěšná spuštění: {successful_runs}"
+
+msgid "successfully_subscribed"
+msgstr "Přihlášení k odběru našeho zpravodaje proběhlo úspěšně"
 
 msgid "surname"
 msgstr "Jméno"
 
-#, fuzzy
+msgid "survey_skip"
+msgstr "Příště už nezobrazovat"
+
+msgid "survey_submit"
+msgstr "Odeslat"
+
+msgid "tag_in_adventure"
+msgstr "Štítek v dobrodružství"
+
+msgid "tag_input_placeholder"
+msgstr "Zadejte nový štítek"
+
+msgid "tags"
+msgstr "Štítky"
+
+msgid "teacher"
+msgstr "Učitel"
+
+msgid "teacher_invalid"
+msgstr "Hodnota tvého údaje o učitelském statusu není platná."
+
+msgid "teacher_invitation_require_login"
+msgstr "Abyste si nastavili učitelský profil, musíte se přihlásit. Pokud ještě nemáte účet, vytvořte si ho prosím."
+
+msgid "teacher_manual"
+msgstr "Příručka učitele"
+
+msgid "teacher_signup_header"
+msgstr "Učitel"
+
+msgid "teacher_welcome"
+msgstr "Vítejte v Hedy! Teď máte učitelský účet, díky kterému můžete vytvářet třídy a zvát žáky."
+
+msgid "teachers"
+msgstr "Učitelé"
+
+msgid "teaching_materials"
+msgstr "Výukové materiály"
+
+msgid "teaching_materials_info"
+msgstr "Zde najdete výukové materiály."
+
 msgid "template_code"
 msgstr ""
-"This is the explanation of my adventure!\n"
+"Toto je vysvětlení mého dobrodružství!\n"
 "\n"
-"This way I can show a command: <code>{print}</code>\n"
+"Takto můžu ukázat příkaz: <code>print</code>\n"
 "\n"
-"But sometimes I might want to show a piece of code, like this:\n"
+"Někdy ale můžu chtít ukázat část kódu, třeba takto:\n"
 "<pre>\n"
-"ask What's your name?\n"
-"echo so your name is \n"
+"ask Jak se jmenuješ?\n"
+"print takže se jmenuješ _\n"
 "</pre>"
 
+msgid "template_code_solution"
+msgstr ""
+"Toto je řešení mého dobrodružství!\n"
+"\n"
+"A toto je správný kód:\n"
+"<pre>\n"
+"ask Jak se jmenuješ?\n"
+"print takže se jmenuješ answer\n"
+"</pre>"
+
+msgid "this_adventure_has_an_example_solution"
+msgstr "Toto dobrodružství má ukázkové řešení"
+
+msgid "this_turns_in_assignment"
+msgstr "Tím odevzdáš svůj úkol učiteli."
+
+msgid "title"
+msgstr "Název"
+
+msgid "title_admin"
+msgstr "Hedy - Stránka správce"
+
+msgid "title_class-overview"
+msgstr "Hedy - Přehled třídy"
+
+msgid "title_customize-adventure"
+msgstr "Hedy - Přizpůsobení dobrodružství"
+
+msgid "title_customize-class"
+msgstr "Hedy - Přizpůsobení třídy"
+
 msgid "title_for-teacher"
-msgstr "Hedy - pro učitele"
+msgstr "Hedy - Pro učitele"
+
+msgid "title_grade_class"
+msgstr "Hodnocení třídy"
 
 msgid "title_learn-more"
-msgstr "Hedy - dozvědět se více"
+msgstr "Hedy - Zjisti víc"
 
 msgid "title_login"
-msgstr "Hedy - přihlášení"
+msgstr "Hedy - Přihlášení"
 
 msgid "title_my-profile"
-msgstr "Hedy - můj účet"
+msgstr "Hedy - Můj účet"
+
+msgid "title_performance_graph"
+msgstr "Graf výsledků"
+
+msgid "title_privacy"
+msgstr "Hedy - Podmínky ochrany soukromí"
 
 msgid "title_programs"
 msgstr "Hedy - Moje programy"
 
+msgid "title_public-adventures"
+msgstr "Hedy - Veřejná dobrodružství"
+
 msgid "title_recover"
-msgstr "Hedy - obnovení účtu"
+msgstr "Hedy - Obnovení účtu"
 
 msgid "title_reset"
-msgstr "Hedy - obnovení hesla"
+msgstr "Hedy - Obnovení hesla"
 
 msgid "title_signup"
-msgstr "Hedy - vytvoření účtu"
+msgstr "Hedy - Vytvoření účtu"
+
+msgid "title_start"
+msgstr "Hedy - Textové programování snadno"
+
+msgid "title_view-adventure"
+msgstr "Hedy - Zobrazení dobrodružství"
+
+msgid "token_invalid"
+msgstr "Tvůj token není platný."
+
+msgid "too_many_accounts"
+msgstr "Nelze vytvořit více než 100 žákovských účtů."
+
+msgid "tooltip_level_locked"
+msgstr "Tvůj učitel tuto úroveň zakázal"
 
 msgid "translate_error"
-msgstr "Při provádění kódu se něco pokazilo. Zkuste kód spustit a zjistit, zda neobsahuje chybu. Kód s chybami nelze provést."
+msgstr "Při překladu kódu se něco pokazilo. Zkus kód spustit a zjistit, jestli obsahuje chybu. Kód s chybami nelze přeložit."
+
+msgid "translating_hedy"
+msgstr "Překládání Hedy"
+
+msgid "translator"
+msgstr "Překladatel"
+
+msgid "turned_into_teacher"
+msgstr "Gratulujeme! Úspěšně jste se stali učitelem."
+
+msgid "unarchive"
+msgstr "Obnovit z archivu"
+
+msgid "unarchive_class"
+msgstr "Obnovit třídu z archivu"
 
 msgid "unauthorized"
-msgstr "Nemáte oprávnění k přístupu na tuto stránku"
+msgstr "Nemáš oprávnění k přístupu na tuto stránku"
 
-#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Opravdu chceš odebrat tento program z oblíbených?"
+
+msgid "unfavourite_success"
+msgstr "Tvůj program byl odebrán z oblíbených."
+
+msgid "unknown_variable_role"
+msgstr "neznámá role"
+
+msgid "unsaved_class_changes"
+msgstr "Některé změny nejsou uložené. Opravdu chcete opustit tuto stránku?"
+
+msgid "unsubmit_program"
+msgstr "Zrušit odevzdání programu"
+
+msgid "unsubmit_warning"
+msgstr "Opravdu chceš zrušit odevzdání tohoto programu?"
+
+msgid "unsubmitted"
+msgstr "Neodevzdáno"
+
+msgid "unsubscribed_header"
+msgstr "Odběr byl odhlášen"
+
+msgid "unsubscribed_message"
+msgstr "Mrzí nás, že odcházíš. Pokud došlo k odhlášení omylem, můžeš se znovu přihlásit vyplněním <a href=\"http://eepurl.com/hk77Mv\">tohoto formuláře</a>."
+
+msgid "update"
+msgstr "Aktualizovat"
+
+msgid "update_adventure_prompt"
+msgstr "Opravdu chcete aktualizovat toto dobrodružství?"
+
+msgid "update_class_prompt"
+msgstr "Opravdu chcete aktualizovat třídu?"
+
+msgid "update_public"
+msgstr "Aktualizovat veřejný profil"
+
+msgid "updated"
+msgstr "Aktualizováno"
+
+msgid "updating_indicator"
+msgstr "Aktualizuje se"
+
+msgid "use_custom_passwords"
+msgstr "Zadat vlastní hesla"
+
+msgid "use_generated_passwords"
+msgstr "Automaticky vygenerovat hesla"
+
+msgid "use_of_blanks_exception"
+msgstr "Prázdná místa v programech"
+
+msgid "use_of_nested_functions_exception"
+msgstr "Použití vnořených funkcí"
+
+msgid "used_in"
+msgstr "Používá se v:"
+
 msgid "user"
-msgstr "Uživatelské jméno"
+msgstr "uživatel"
+
+msgid "user_not_private"
+msgstr "Tento uživatel buď neexistuje, nebo nemá veřejný profil"
 
 msgid "username"
 msgstr "Uživatelské jméno"
 
+msgid "username_contains_separator"
+msgstr "Uživatelská jména nesmí obsahovat středník. Možná chcete zadat vlastní hesla? Pokud ano, přepněte volbu hesel a vytvořte účty znovu. Jinak odstraňte středník z těchto uživatelských jmen: {usernames}"
+
+msgid "username_empty"
+msgstr "Nezadal*a jsi uživatelské jméno!"
+
+msgid "username_invalid"
+msgstr "Tvé uživatelské jméno není platné."
+
 msgid "username_three"
 msgstr "Uživatelské jméno musí obsahovat alespoň tři znaky."
 
+msgid "usernames_too_short"
+msgstr "Uživatelská jména musí mít alespoň 3 znaky. Upravte tato uživatelská jména tak, aby měla 3 nebo více znaků: {usernames}"
+
+msgid "usernames_unavailable"
+msgstr "Tato uživatelská jména nejsou dostupná: {usernames}. Podobné účty můžete vytvořit například přidáním podtržítka nebo názvu své třídy."
+
+msgid "view_adventures"
+msgstr "Zobrazit dobrodružství"
+
+msgid "view_classes"
+msgstr "Zobrazit třídy"
+
+msgid "view_program"
+msgstr "Zobrazit program"
+
+msgid "view_slides"
+msgstr "Zobrazit snímky"
+
+msgid "waiting_for_submit"
+msgstr "Čeká na odeslání"
+
+msgid "walker_variable_role"
+msgstr "položka seznamu"
+
+msgid "website"
+msgstr "Web"
+
+msgid "what_is_new_in_level"
+msgstr "Co je v této úrovni nového?"
+
+msgid "what_is_your_role"
+msgstr "Jaká je tvoje role?"
+
+msgid "work_in_progress"
+msgstr "Rozpracováno"
+
+msgid "workbook"
+msgstr "Pracovní sešit"
+
+msgid "workbook_circle_question_text"
+msgstr "**Otázka**: Zakroužkuj v tomto kódu {goal}:"
+
+msgid "workbook_circle_question_title"
+msgstr "Označení"
+
+msgid "workbook_define_question_text"
+msgstr "**Otázka**: Co znamená {word}?"
+
+msgid "workbook_define_question_title"
+msgstr "Vysvětlení"
+
+msgid "workbook_input_question_text"
+msgstr "**Otázka**: Která ukázka kódu vytvořila tento výstup?"
+
+msgid "workbook_input_question_title"
+msgstr "Vstup"
+
+msgid "workbook_level_info"
+msgstr "Cvičení k vytištění, bez obrazovky"
+
+msgid "workbook_multiple_choice_question_text"
+msgstr "**Otázka**: Je tento kód správný, nebo obsahuje chybu?"
+
+msgid "workbook_multiple_choice_question_title"
+msgstr "Výběr"
+
+msgid "workbook_open_question_title"
+msgstr "Otevřená otázka"
+
+msgid "workbook_output_question_text"
+msgstr "**Otázka**: Jaký je výstup tohoto kódu?"
+
+msgid "workbook_output_question_title"
+msgstr "Výstup"
+
+msgid "workbooks"
+msgstr "Pracovní sešity"
+
+msgid "workbooks_info"
+msgstr "Cvičení k vytištění pro jednotlivé úrovně, aby si žáci mohli procvičovat čtení a psaní kódu Hedy i bez počítače."
+
+msgid "written_by"
+msgstr "Autor"
+
 msgid "year_invalid"
-msgstr "Prosím zadej rok mezi 1900 a {current_year}"
+msgstr "Zadej prosím rok mezi 1900 a {current_year}."
 
 msgid "yes"
 msgstr "Ano"
+
+msgid "your_personal_text"
+msgstr "Tvůj osobní text..."
+
+msgid "your_program"
+msgstr "Tvůj program"
 
 #~ msgid "create_account_explanation"
 #~ msgstr "Vlastní účet ti umožňuje ukládat si své programy."
@@ -805,6 +2575,3 @@ msgstr "Ano"
 
 #~ msgid "adventure_exp_3"
 #~ msgstr "You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
-
-#~ msgid "username_special"
-#~ msgstr "Uživatelské jméno nesmí obsahovat `:` a `@`."
