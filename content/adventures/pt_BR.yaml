@@ -352,6 +352,24 @@ adventures:
                     {print} Olá!
                     {ask} Qual é o seu nome?
                     ```
+                story_text_2: |
+                    ## O `{answer}`
+                    Se você quer imprimir a resposta, você pode fazer deste jeito:
+                example_code_2: |
+                    ```
+                    {print} Olá!
+                    {ask} Qual é o seu nome?
+                    {print} Oi, {answer}!
+                    ```
+                story_text_3: |
+                    ### Exercício
+                    Experimente o comando `{ask}` e o comando `{answer}`. Primeiro, preencha as lacunas para fazer este programa funcionar.
+                    Em seguida, faça mais duas perguntas usando o comando `{ask}`. Depois de cada `{ask}`, coloque um `{answer}` para imprimir a resposta na tela.
+                example_code_3: |
+                    ```
+                    _ Como você está?
+                    _ Você está _
+                    ```
             2:
                 example_code: |
                     ```
@@ -359,6 +377,25 @@ adventures:
                     {print} Olá nome
                     idade {is} {ask} Quantos anos você tem?
                     {print} nome tem idade anos.
+                    ```
+                story_text: |
+                    ## Usando variáveis
+                    Em níveis anteriores, você aprendeu a usar `{answer}` para imprimir a resposta de uma pergunta, mas e se você quiser usar mais de uma resposta?
+                    Neste nível, você vai aprender a usar **variáveis**. Uma variável é um lugar para guardar uma resposta (ou *entrada*) dada por usuários. Você já esteve usando a variável `{answer}`, mas agora você vai aprender a usar mais variáveis!
+                    Este exemplo mostra como você pode usar as variáveis "nome" e "idade".
+
+                    ## {ask}
+                    Você percebeu como o comando `{ask}` também mudou? Para dizer ao computador em qual variável você quer guardar sua resposta, você começa sua linha com o nome da variável, seguido de `{is}` e então de `{ask}`.
+                story_text_2: |
+                    ### Exercício
+                    É hora de criar suas próprias variáveis! Pergunte ao(à) jogador(a) qual a sua bebida favorita e então imprima as respostas.
+                    Complete o programa listando todas as coisas de que o(a) jogador(a) gosta, em uma linha.
+                example_code_2: |
+                    ```
+                    animal_favorito {is} {ask} Qual é o seu animal favorito?
+                    {print} Eu gosto de animal_favorito
+
+                    {print} Então você gosta de _ , de _ e de _ .
                     ```
             13:
                 example_code: |
@@ -1232,6 +1269,24 @@ adventures:
                     idade {is} 15
                     {print} nome tem idade anos
                     ```
+                story_text: |
+                    ## Definindo variáveis
+                    Você aprendeu a definir variáveis com a entrada de usuário obtida usando o `{ask}`, mas sabia que você também pode definir livremente uma variável com um valor de sua escolha?
+                story_text_2: |
+                    ### Exercício
+                    Complete o programa definindo as 6 variáveis.
+                example_code_2: |
+                    ```
+                    nome {is} _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} Eu sou nome e tenho idade anos.
+                    {print} Eu vivo em lugar e estudo em nome_escola.
+                    {print} Minha matéria favorita é matéria_favorita, mas eu não gosto de matéria_que_menos_gosto.
+                    ```
             7:
                 example_code: "```\nnome = Hedy\nresposta = 20 + 4\n```\n"
                 story_text: "Também mudamos a forma como você guarda uma palavra em uma variável! Agora você pode usar `=` em vez de `{is}` para guardar um nome ou número numa variável, assim:\n"
@@ -1694,8 +1749,8 @@ adventures:
             2:
                 story_text: |
                     Mais um comando novo deste nível é o `{sleep}`, que pausa o seu programa por um segundo. Se você digitar um número depois do comando `{sleep}`, o programa pausa por essa quantidade de segundos.
-                    ### Exercí
-                    cio
+
+                    ### Exercício
                     Pratique esse novo comando fazendo um código de sua própria autoria, em que você usa o `{sleep}` pelo menos 3 vezes. Para cada comando `{sleep}`, o tempo de pausa tem de ser diferente.
                 example_code: |
                     ```
