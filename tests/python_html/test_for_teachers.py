@@ -684,6 +684,35 @@ class TestCreateAccounts:
         )
         assert response.status_code == 400
 
+    def test_create_accounts_generate_passwords_username_with_space_returns_400(self, client, given):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        response = client.post_json(
+            '/for-teachers/create-accounts',
+            {
+                'class': cls['id'],
+                'generate_passwords': True,
+                'accounts': 'first last',
+            },
+            check=False,
+        )
+        assert response.status_code == 400
+
+    def test_create_accounts_manual_passwords_invalid_symbol_returns_400(self, client, given):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        for username in ['bad@user', 'first last']:
+            response = client.post_json(
+                '/for-teachers/create-accounts',
+                {
+                    'class': cls['id'],
+                    'generate_passwords': False,
+                    'accounts': f'{username};test123',
+                },
+                check=False,
+            )
+            assert response.status_code == 400
+
     def test_create_accounts_manual_passwords_missing_separator_returns_400(self, client, given):
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
