@@ -713,6 +713,21 @@ class TestCreateAccounts:
             )
             assert response.status_code == 400
 
+    def test_create_accounts_invalid_username_is_escaped_in_error(self, client, given):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        response = client.post_json(
+            '/for-teachers/create-accounts',
+            {
+                'class': cls['id'],
+                'generate_passwords': False,
+                'accounts': '<b>bold</b>;test123',
+            },
+            check=False,
+        )
+        assert response.status_code == 400
+        assert '&lt;b&gt;bold&lt;/b&gt;' in response.get_json()['error']
+
     def test_create_accounts_manual_passwords_missing_separator_returns_400(self, client, given):
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])

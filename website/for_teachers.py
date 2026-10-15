@@ -12,6 +12,7 @@ from venv import logger
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
+from markupsafe import escape
 from website import hedy_website_utils
 from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
@@ -3014,7 +3015,7 @@ class ForTeachersModule(WebsiteModule):
         # Validate the characters in the usernames, for both ways of entering accounts
         invalid_usernames = [usr for (usr, _) in accounts if has_invalid_username_characters(usr)]
         if invalid_usernames:
-            err = safe_format(gettext('usernames_invalid_characters'), usernames=', '.join(invalid_usernames))
+            err = safe_format(gettext('usernames_invalid_characters'), usernames=escape(', '.join(invalid_usernames)))
             return make_response({"error": err}, 400)
 
         # Validate that the user supplied no duplicate usernames
