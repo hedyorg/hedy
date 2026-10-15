@@ -54,9 +54,10 @@ class AuthModule(WebsiteModule):
         if not isinstance(body.get("password"), str):
             return make_response(gettext("password_invalid"), 400)
 
-        # If username has an @-sign, then it's an email
+        # If username has an @-sign, then it's an email. Some older accounts have an @-sign in their
+        # username though, so if no e-mail matches we look for the username as well.
         if "@" in body["username"]:
-            user = self.db.user_by_email(body["username"])
+            user = self.db.user_by_email(body["username"]) or self.db.user_by_username(body["username"])
         else:
             user = self.db.user_by_username(body["username"])
 
@@ -379,9 +380,11 @@ class AuthModule(WebsiteModule):
         if not isinstance(body.get("username"), str):
             return make_response(gettext("username_invalid"), 400)
 
-        # If username has an @-sign, then it's an email
+        # If username has an @-sign, then it's an email. Some older accounts have an @-sign in their
+        # username though, so if no e-mail matches we look for the username as well.
         if "@" in body["username"]:
-            user = self.db.user_by_email(body["username"].strip().lower())
+            user = (self.db.user_by_email(body["username"].strip().lower())
+                    or self.db.user_by_username(body["username"].strip().lower()))
         else:
             user = self.db.user_by_username(body["username"].strip().lower())
 
