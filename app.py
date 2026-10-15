@@ -234,7 +234,8 @@ def load_adventures_for_level(level, subset=None):
         extra_stories = [
             ExtraStory(
                 text=adventure_level.get(f'story_text_{i}'),
-                example_code=adventure_level.get(f'example_code_{i}'))
+                example_code=adventure_level.get(f'example_code_{i}'),
+                number=i)
             for i in range(2, 10)
             if adventure_level.get(f'story_text_{i}', '')
         ]
