@@ -98,6 +98,25 @@ def test_signup_username_with_colon_rejected(client: Client):
     assert response.status_code == 400
 
 
+def test_signup_username_with_space_rejected(client: Client):
+    """Usernames containing a space are rejected."""
+    response = client.post_json('/auth/signup', signup_body(username='first last'), check=False)
+    assert response.status_code == 400
+
+
+def test_signup_username_with_slash_rejected(client: Client):
+    """Only letters, digits and _ - . are allowed, so other symbols are rejected too."""
+    response = client.post_json('/auth/signup', signup_body(username='user/name'), check=False)
+    assert response.status_code == 400
+
+
+def test_signup_username_with_allowed_symbols_accepted(client: Client):
+    """Letters from other alphabets, digits and the symbols _ - . are accepted."""
+    unique = uuid.uuid4().hex[:6]
+    response = client.post_json('/auth/signup', signup_body(username=f'नमस्ते_مرحبا-j.{unique}'))
+    assert 'token' in response.get_json()
+
+
 def test_signup_username_two_chars_rejected(client: Client):
     """Usernames shorter than 3 characters are rejected."""
     response = client.post_json('/auth/signup', signup_body(username='ab'), check=False)
