@@ -5,10 +5,12 @@ import collections
 import logging
 import datetime
 import os
+import io
 import re
 # TEST
 import subprocess
 import sys
+import tempfile
 import traceback
 import textwrap
 import unicodedata
@@ -33,6 +35,7 @@ from urllib.parse import quote_plus
 
 import hedy
 import website_content as hedy_content
+from hedy import data as hedy_data
 from hedy import translation as hedy_translation
 import hedyweb
 import envs
@@ -781,69 +784,88 @@ def parse_by_id(user):
         return make_response(gettext("request_invalid"), 400)
 
 
+MACHINE_FILES_NAME = 'hedy_drawing'
+MACHINE_FILES_EXTENSIONS = ['dst', 'png']
+MACHINE_FILES_TIMEOUT_SECONDS = 10
+
+with open(os.path.join(hedy_data.prefixes_dir, 'normal.py'), encoding='utf-8') as f:
+    # The transpiled code relies on the same helpers (localize, number_with_error, Value, ...)
+    # that the front-end prepends before running a program
+    MACHINE_FILES_NORMAL_PREFIX = f.read()
+
+# turtlethread has no notion of colors or of showing/hiding the turtle, so those calls become
+# no-ops. The sleeps are skipped for speed by shadowing the time module in the generated script.
+# We have to turn the turtle 90 degrees to align with the user perspective, like the turtle prefix does.
+MACHINE_FILES_TURTLE_PREFIX = textwrap.dedent("""
+    import types as __types
+    from turtlethread import Turtle as __ThreadTurtle
+
+
+    class __EmbroideryTurtle(__ThreadTurtle):
+        def pencolor(self, *args, **kwargs):
+            pass
+
+        def hideturtle(self):
+            pass
+
+        def showturtle(self):
+            pass
+
+        def save(self, filename):
+            # pyembroidery has the y-axis pointing down, like a screen, while the turtle has it pointing up.
+            # Without mirroring, the drawing would be stitched upside down.
+            from pyembroidery import write
+            pattern = self.pattern.to_pyembroidery()
+            pattern.stitches = [(x, -y, command) for x, y, command in pattern.stitches]
+            write(pattern, filename)
+
+
+    time = __types.SimpleNamespace(sleep=lambda *args, **kwargs: None)
+
+    t = __EmbroideryTurtle()
+    t.left(90)
+    with t.running_stitch(stitch_length=20):
+    """)
+
+
 @app.route("/generate_machine_files", methods=['POST'])
 def prepare_files():
     body = request.json
-    # Prepare the file -> return the "secret" filename as response
     initialize_hedylang_feature_flags_for_request()
-    transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
-    filename = utils.random_id_generator(12)
+    try:
+        transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
+    except Exception:
+        return make_response({'error': gettext('ajax_error')}, 400)
 
-    # We have to turn the turtle 90 degrees to align with the user perspective app.ts#16
-    # This is not a really nice solution, but as we store the prefix on the
-    # front-end it should be good for now
-    threader = textwrap.dedent("""
-        import time
-        from turtlethread import Turtle
-        def int_with_error(value, error_message):
-            try:
-                return int(value)
-            except ValueError:
-                raise ValueError(error_message.format(value))
+    threader = MACHINE_FILES_NORMAL_PREFIX + MACHINE_FILES_TURTLE_PREFIX
+    threader += textwrap.indent(transpiled_code.code, '    ') + '\n'
+    for extension in MACHINE_FILES_EXTENSIONS:
+        threader += f't.save({MACHINE_FILES_NAME + "." + extension!r})\n'
 
-        t = Turtle()
-        t.left(90)
-        with t.running_stitch(stitch_length=20):
-        """)
-    lines = transpiled_code.code.split("\n")
+    # The files are sent back in this same response instead of being kept for a separate download
+    # request, since that request could be served by another dyno that doesn't have the files.
+    with tempfile.TemporaryDirectory() as directory:
+        with open(os.path.join(directory, 'program.py'), 'w', encoding='utf-8') as f:
+            f.write(threader)
 
-    # remove all sleeps for speeed, and remove all colors for compatibility:
-    lines = [x for x in lines if ("time.sleep" not in x) and ("t.pencolor" not in x)]
-
-    threader += "  " + "\n  ".join(lines)
-    threader += "\n" + 't.save("machine_files/' + filename + '.dst")'
-    threader += "\n" + 't.save("machine_files/' + filename + '.png")'
-    if not os.path.isdir('machine_files'):
-        os.makedirs('machine_files')
-    exec(threader)
-
-    # stolen from: https://stackoverflow.com/questions/28568687/send-with-multiple-csvs-using-flask
-
-    zip_file = zipfile.ZipFile(f'machine_files/{filename}.zip', 'w', zipfile.ZIP_DEFLATED)
-    for root, dirs, files in os.walk('machine_files/'):
-        # only zip files for this request, and exclude the zip file itself:
-        for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
-            zip_file.write('machine_files/' + file)
-    zip_file.close()
-    return make_response({'filename': filename}, 200)
-
-
-@app.route("/download_machine_files/<filename>", methods=['GET'])
-def download_machine_file(filename, extension="zip"):
-    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
-
-    # Once the file is downloaded -> remove it
-    @after_this_request
-    def remove_file(response):
+        # Run the program in a separate process, so that it can't touch the state of the server
+        # and so that infinite loops or programs waiting for input (ask) can't block a worker
         try:
-            os.remove("machine_files/" + filename + ".zip")
-            os.remove("machine_files/" + filename + ".dst")
-            os.remove("machine_files/" + filename + ".png")
-        except BaseException:
-            print("Error removing one of the generated files!")
-        return response
+            subprocess.run([sys.executable, '-I', 'program.py'], cwd=directory,
+                           stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
+                           timeout=MACHINE_FILES_TIMEOUT_SECONDS, check=True)
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            logger.warning('Generating machine files failed: %s %s', e, (e.stderr or b'')[-1000:])
+            return make_response({'error': gettext('ajax_error')}, 400)
 
-    return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+            for extension in MACHINE_FILES_EXTENSIONS:
+                file = f'{MACHINE_FILES_NAME}.{extension}'
+                zip_file.write(os.path.join(directory, file), file)
+    zip_buffer.seek(0)
+    return send_file(zip_buffer, mimetype='application/zip', as_attachment=True,
+                     download_name=f'{MACHINE_FILES_NAME}.zip')
 
 
 MICROBIT_FEATURE = False

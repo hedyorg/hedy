@@ -1,7 +1,10 @@
 """Tests for main app.py routes and functions."""
+import io
 import json
 import uuid
+import zipfile
 from types import SimpleNamespace
+import pyembroidery
 import pytest
 import app as hedy_app
 from tests.python_html.fixtures.flask import Client
@@ -332,17 +335,51 @@ class TestParseEndpoint:
 class TestMachineAndMicrobitFiles:
     """Test machine and microbit file generation routes."""
 
-    def test_generate_machine_files(self, client):
-        """Test generating machine files."""
-        # Test with minimal valid request
-        response = client.post(
+    def generate_machine_files(self, client, code, level=1):
+        return client.post(
             '/generate_machine_files',
-            data=json.dumps({'code': 'print "hello"', 'level': 1, 'lang': 'en'}),
+            data=json.dumps({'code': code, 'level': level, 'lang': 'en'}),
             content_type='application/json',
             check=False
         )
+
+    def test_generate_machine_files(self, client):
+        """Test generating machine files."""
+        # Test with minimal valid request
+        response = self.generate_machine_files(client, 'print "hello"')
         assert response.status_code == 200
-        assert 'filename' in response.get_json()
+        assert response.mimetype == 'application/zip'
+
+    @pytest.mark.parametrize('level, code', [
+        (1, 'color red\nforward 100\nturn left\nforward 50'),
+        (3, 'angles is 90, 180\nturn angles at random\nforward 50'),
+        (5, 'x is 3\nif x is 3 color red else forward 50\nforward 20'),
+        (12, 'define square\n    forward 50.5\n    turn 90\ncall square'),
+        (14, 'x = 1\nwhile x < 3\n    forward 20\n    x = x + 1'),
+    ])
+    def test_generate_machine_files_for_turtle_program(self, client, level, code):
+        response = self.generate_machine_files(client, code, level)
+        assert response.status_code == 200
+        assert 'attachment' in response.headers['Content-Disposition']
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            assert sorted(zip_file.namelist()) == ['hedy_drawing.dst', 'hedy_drawing.png']
+
+    def test_generated_machine_files_have_the_same_orientation_as_the_screen(self, client, tmp_path):
+        response = self.generate_machine_files(client, 'forward 100\nturn right\nforward 50')
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            zip_file.extract('hedy_drawing.dst', tmp_path)
+
+        stitches = pyembroidery.read(str(tmp_path / 'hedy_drawing.dst')).stitches
+        xs = [x for x, _, _ in stitches]
+        ys = [y for _, y, _ in stitches]
+        # pyembroidery has the y-axis pointing down: the turtle first goes up and then to the right
+        assert ys[-1] == min(ys) < max(ys)
+        assert xs[-1] == max(xs) > min(xs)
+
+    def test_generate_machine_files_with_ask_returns_error(self, client):
+        response = self.generate_machine_files(client, 'ask how far?\nforward 100')
+        assert response.status_code == 400
+        assert response.get_json()['error']
 
     def test_generate_microbit_files(self, client):
         """Test generating microbit files."""
