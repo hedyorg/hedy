@@ -100,16 +100,16 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    animais {is} leão, zebra, flamingo
-                    {print} Olá crianças! Hoje nós vamos ao zoológico!
-                    animal_favorito {is}{ask} Para qual animal você quer ir hoje?
-                    {add} animal_favorito {to} animais
+                    animais {is} onça, tamanduá, pica pau
+                    {print} Olá, crianças! Hoje, nós vamos ao zoológico!
+                    animal_favorito {is} {ask} Que animal você quer ver hoje?
+                    {add} animal_favorito {to_list} animais
                     {sleep} 2
-                    {print} Vamos para o animais {at}{random}
+                    {print} Vamos ver animais {at} {random}
                     {sleep}
-                    animal_menos_favorito {is}{ask} Qual animal você não quer ver?
+                    animal_menos_favorito {is} {ask} Que animal você não quer ver?
                     {remove} animal_menos_favorito {from} animais
-                    {print} Vamos para o animais {at}{random} agora
+                    {print} Vamos ver animais {at} {random} agora
                     ```
             4:
                 story_text: |
