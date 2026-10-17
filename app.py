@@ -6,13 +6,12 @@ import logging
 import datetime
 import os
 import io
+import math
 import re
 # TEST
 import subprocess
 import sys
-import tempfile
 import traceback
-import textwrap
 import unicodedata
 import zipfile
 import jinja_partials
@@ -34,8 +33,9 @@ from flask_compress import Compress
 from urllib.parse import quote_plus
 
 import hedy
+import pyembroidery
+import turtlethread
 import website_content as hedy_content
-from hedy import data as hedy_data
 from hedy import translation as hedy_translation
 import hedyweb
 import envs
@@ -785,85 +785,47 @@ def parse_by_id(user):
 
 
 MACHINE_FILES_NAME = 'hedy_drawing'
-MACHINE_FILES_EXTENSIONS = ['dst', 'png']
-MACHINE_FILES_TIMEOUT_SECONDS = 10
-
-with open(os.path.join(hedy_data.prefixes_dir, 'normal.py'), encoding='utf-8') as f:
-    # The transpiled code relies on the same helpers (localize, number_with_error, Value, ...)
-    # that the front-end prepends before running a program
-    MACHINE_FILES_NORMAL_PREFIX = f.read()
-
-# turtlethread has no notion of colors or of showing/hiding the turtle, so those calls become
-# no-ops. The sleeps are skipped for speed by shadowing the time module in the generated script.
-# We have to turn the turtle 90 degrees to align with the user perspective, like the turtle prefix does.
-MACHINE_FILES_TURTLE_PREFIX = textwrap.dedent("""
-    import types as __types
-    from turtlethread import Turtle as __ThreadTurtle
+# Has to match the maximum number of points the front-end records, see turtle_recording_prefix in app.ts
+MACHINE_FILES_MAX_POINTS = 20000
 
 
-    class __EmbroideryTurtle(__ThreadTurtle):
-        def pencolor(self, *args, **kwargs):
-            pass
+def is_valid_turtle_path(points):
+    def is_number(value):
+        return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
-        def hideturtle(self):
-            pass
-
-        def showturtle(self):
-            pass
-
-        def save(self, filename):
-            # pyembroidery has the y-axis pointing down, like a screen, while the turtle has it pointing up.
-            # Without mirroring, the drawing would be stitched upside down.
-            from pyembroidery import write
-            pattern = self.pattern.to_pyembroidery()
-            pattern.stitches = [(x, -y, command) for x, y, command in pattern.stitches]
-            write(pattern, filename)
-
-
-    time = __types.SimpleNamespace(sleep=lambda *args, **kwargs: None)
-
-    t = __EmbroideryTurtle()
-    t.left(90)
-    with t.running_stitch(stitch_length=20):
-    """)
+    return (isinstance(points, list) and len(points) <= MACHINE_FILES_MAX_POINTS
+            and all(isinstance(p, list) and len(p) == 2 and all(is_number(v) for v in p) for p in points))
 
 
 @app.route("/generate_machine_files", methods=['POST'])
 def prepare_files():
-    body = request.json
-    initialize_hedylang_feature_flags_for_request()
-    try:
-        transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
-    except Exception:
+    # The front-end records the positions of the turtle while the program runs, so we only have to turn
+    # that path into machine files instead of running the program again.
+    points = (request.get_json(silent=True) or {}).get('points')
+    if not is_valid_turtle_path(points):
         return make_response({'error': gettext('ajax_error')}, 400)
 
-    threader = MACHINE_FILES_NORMAL_PREFIX + MACHINE_FILES_TURTLE_PREFIX
-    threader += textwrap.indent(transpiled_code.code, '    ') + '\n'
-    for extension in MACHINE_FILES_EXTENSIONS:
-        threader += f't.save({MACHINE_FILES_NAME + "." + extension!r})\n'
+    t = turtlethread.Turtle()
+    with t.running_stitch(stitch_length=20):
+        for x, y in points:
+            t.goto(x, y)
 
+    pattern = t.pattern.to_pyembroidery()
+    # pyembroidery has the y-axis pointing down, like a screen, while the turtle has it pointing up.
+    # Without mirroring, the drawing would be stitched upside down.
+    # The stitches are also rounded, like the dst writer does: the png writer truncates them instead,
+    # so tiny float errors (99.99999999999999 vs 100) would show up as crooked lines in the png.
+    pattern.stitches = [(round(x), -round(y), command) for x, y, command in pattern.stitches]
+
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        for extension, write in [('dst', pyembroidery.write_dst), ('png', pyembroidery.write_png)]:
+            file_buffer = io.BytesIO()
+            write(pattern, file_buffer)
+            zip_file.writestr(f'{MACHINE_FILES_NAME}.{extension}', file_buffer.getvalue())
+    zip_buffer.seek(0)
     # The files are sent back in this same response instead of being kept for a separate download
     # request, since that request could be served by another dyno that doesn't have the files.
-    with tempfile.TemporaryDirectory() as directory:
-        with open(os.path.join(directory, 'program.py'), 'w', encoding='utf-8') as f:
-            f.write(threader)
-
-        # Run the program in a separate process, so that it can't touch the state of the server
-        # and so that infinite loops or programs waiting for input (ask) can't block a worker
-        try:
-            subprocess.run([sys.executable, '-I', 'program.py'], cwd=directory,
-                           stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
-                           timeout=MACHINE_FILES_TIMEOUT_SECONDS, check=True)
-        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
-            logger.warning('Generating machine files failed: %s %s', e, (e.stderr or b'')[-1000:])
-            return make_response({'error': gettext('ajax_error')}, 400)
-
-        zip_buffer = io.BytesIO()
-        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-            for extension in MACHINE_FILES_EXTENSIONS:
-                file = f'{MACHINE_FILES_NAME}.{extension}'
-                zip_file.write(os.path.join(directory, file), file)
-    zip_buffer.seek(0)
     return send_file(zip_buffer, mimetype='application/zip', as_attachment=True,
                      download_name=f'{MACHINE_FILES_NAME}.zip')
 

@@ -335,37 +335,30 @@ class TestParseEndpoint:
 class TestMachineAndMicrobitFiles:
     """Test machine and microbit file generation routes."""
 
-    def generate_machine_files(self, client, code, level=1):
+    def generate_machine_files(self, client, body):
         return client.post(
             '/generate_machine_files',
-            data=json.dumps({'code': code, 'level': level, 'lang': 'en'}),
+            data=json.dumps(body),
             content_type='application/json',
             check=False
         )
 
     def test_generate_machine_files(self, client):
         """Test generating machine files."""
-        # Test with minimal valid request
-        response = self.generate_machine_files(client, 'print "hello"')
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50.5, 100], [50.5, 130]]})
         assert response.status_code == 200
         assert response.mimetype == 'application/zip'
-
-    @pytest.mark.parametrize('level, code', [
-        (1, 'color red\nforward 100\nturn left\nforward 50'),
-        (3, 'angles is 90, 180\nturn angles at random\nforward 50'),
-        (5, 'x is 3\nif x is 3 color red else forward 50\nforward 20'),
-        (12, 'define square\n    forward 50.5\n    turn 90\ncall square'),
-        (14, 'x = 1\nwhile x < 3\n    forward 20\n    x = x + 1'),
-    ])
-    def test_generate_machine_files_for_turtle_program(self, client, level, code):
-        response = self.generate_machine_files(client, code, level)
-        assert response.status_code == 200
         assert 'attachment' in response.headers['Content-Disposition']
         with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
             assert sorted(zip_file.namelist()) == ['hedy_drawing.dst', 'hedy_drawing.png']
 
+    def test_generate_machine_files_without_points(self, client):
+        response = self.generate_machine_files(client, {'points': []})
+        assert response.status_code == 200
+
     def test_generated_machine_files_have_the_same_orientation_as_the_screen(self, client, tmp_path):
-        response = self.generate_machine_files(client, 'forward 100\nturn right\nforward 50')
+        # forward 100, turn right, forward 50
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
         with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
             zip_file.extract('hedy_drawing.dst', tmp_path)
 
@@ -376,8 +369,16 @@ class TestMachineAndMicrobitFiles:
         assert ys[-1] == min(ys) < max(ys)
         assert xs[-1] == max(xs) > min(xs)
 
-    def test_generate_machine_files_with_ask_returns_error(self, client):
-        response = self.generate_machine_files(client, 'ask how far?\nforward 100')
+    @pytest.mark.parametrize('body', [
+        {'code': 'forward 100', 'level': 1, 'lang': 'en'},
+        {'points': 'forward 100'},
+        {'points': [[0, 100, 5]]},
+        {'points': [['0', 100]]},
+        {'points': [[True, 100]]},
+        {'points': [[0, 100]] * (hedy_app.MACHINE_FILES_MAX_POINTS + 1)},
+    ])
+    def test_generate_machine_files_with_invalid_points_returns_error(self, client, body):
+        response = self.generate_machine_files(client, body)
         assert response.status_code == 400
         assert response.get_json()['error']
 
