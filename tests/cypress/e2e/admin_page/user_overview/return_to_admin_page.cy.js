@@ -6,6 +6,6 @@ it('should return to admin page', () => {
   cy.getDataCy('return_button').should('be.not.disabled').should('be.visible').click();
 
   cy.location().should((loc) => {
-      expect(loc.pathname).equal(Cypress.env('admin_page'));
+    expect(loc.pathname).equal(Cypress.expose('admin_page'));
   })
 })
