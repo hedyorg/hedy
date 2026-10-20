@@ -2737,16 +2737,18 @@ adventures:
             4:
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
-                    {print} Selamat datang di rumah makan Hedy!
-                    {print} Hari ini kami menyediakan pizza atau lasagna.
-                    makanan {is} {ask} Apa yang ingin kamu makan?
-                    {print} Pilihan baik! Makanan itu juga kesukaanku!
-                    topping {is} {ask} Apakah kamu mau daging atau sayuran diatas makanan itu?
-                    {print} makanan  dengan  topping sedang dipersiapkan!
-                    minuman {is} {ask} Apa minuman yang kamu inginkan?
-                    {print} Terima kasih atas pesanannya.
-                    {print} makanan  dan minuman kamu akan segera tersedia!
+                    # Tambahkan tanda kutip ke kode ini
+                    {print} Selamat datang di Restoran Chez Hedy!
+                    {print} Hari ini kami menyajikan pizza atau lasagna.
+                    food {is} {ask} Kamu mau makan apa?
+                    {print} Pilihan bagus!  food  itu favoritku!
+                    topping {is} {ask} Mau ditambah daging atau sayuran?
+                    {print} food  dengan  topping  sedang disiapkan!
+                    drinks {is} {ask} Kamu mau minum apa sebagai pendampingnya?
+                    {print} Terima kasih atas pesananmu.
+                    {print} Pesanan  food  dan  drinks  kamu akan segera datang!
+                    {sleep} _
+                    {print} Makananmu sudah siap! Silakan!
                     ```
                 story_text: |
                     Di restoran kamu juga harus menggunakan tanda kutip saat menggunakan perintah `{print}` atau `{ask}`.
@@ -2761,13 +2763,15 @@ adventures:
                     ```
                     {print} 'Selamat datang di Restoran Chez Hedy!'
                     {print} 'Hari ini kami menyajikan pizza atau lasagna.'
-                    food {is} {ask} 'Apa yang ingin kamu makan?'
-                    {print} 'Pilihan bagus! food itu favoritku!'
-                    topping {is} {ask} 'Kamu mau daging atau sayuran di atasnya?'
-                    {print} food ' dengan topping sedang dalam perjalanan!'
-                    drinks {is} {ask} 'Apa yang ingin kamu minum dengan itu?'
+                    food {is} {ask} 'Kamu mau makan apa?'
+                    {print} 'Pilihan bagus!  food  itu favoritku!'
+                    topping {is} {ask} 'Mau ditambah daging atau sayuran?'
+                    {print} food ' dengan topping sedang disiapkan!'
+                    drinks {is} {ask} 'Kamu mau minum apa sebagai pendampingnya?'
                     {print} 'Terima kasih atas pesananmu.'
-                    {print} 'food dan drinksmu akan segera datang!'
+                    {print} 'Pesanan  food  dan  drinks  kamu akan segera datang!'
+                    {sleep} 3
+                    {print} 'Makananmu sudah siap! Silakan!'
                     ```
             6:
                 story_text: |
@@ -5334,12 +5338,12 @@ adventures:
             9:
                 story_text: |
                     ## If... Else...
-                    Kamu sudah belajar mengulang blok baris kode setelah perintah `{repeat}`.
+                    Kamu sudah belajar mengulang satu blok kode setelah perintah `{repeat}`.
                     Sekarang kamu juga bisa menggunakan indentasi untuk membuat blok setelah perintah `{if}` atau `{else}`.
-                    Lihat kode contoh.
+                    Lihat contoh kodenya.
 
                     ### Latihan
-                    Tambahkan perintah `{else}` ke kode contoh. Buat blok baris menggunakan indentasi. Kamu melakukannya dengan memulai setiap baris dengan 4 spasi.
+                    Tambahkan perintah `{else}` ke contoh kode. Buat satu blok kode dengan indentasi. Caranya, awali setiap baris dengan satu tab atau 4 spasi.
                 example_code: |
                     ```
                     name = {ask} 'Siapa namamu?'
@@ -5472,7 +5476,7 @@ adventures:
             2:
                 story_text: |
                     ## Mengatur Variabel
-                    Kamu sudah belajar mengatur variabel dengan menggunakan input dari pemain menggunakan ask, tapi tahukah kamu bahwa kamu juga bisa mengatur variabel sendiri?
+                    Kamu sudah belajar mengatur variabel dari masukan pemain menggunakan `{ask}`, tapi tahukah kamu kalau kamu juga bisa mengatur variabelnya sendiri?
                 example_code: |
                     ```
                     name {is} Hedy
@@ -6618,12 +6622,16 @@ adventures:
                     Lihat kode contoh untuk melihat cara yang salah menggunakan apostrof.
                 example_code_2: |
                     ```
-                    _ Ini cara yang salah menggunakan apostrof _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
-                    _ Ini cara menyelesaikannya _
-                    {print} "I'm babysitting my sister's kids"
-                    {print} "What's more fun than that?"
+                    #Ini cara yang salah untuk menggunakan apostrof
+                    {print} 'Aku sedang menjaga anak-anak saudara perempuanku'
+                    {print} 'Apa yang lebih seru dari itu?'
+
+                    #Begini cara mengatasinya
+                    {print} "Aku sedang menjaga anak-anak saudara perempuanku"
+                    {print} "Apa yang lebih seru dari itu?"
+
+                    # Coba sendiri! Buat satu baris kode dengan tanda kutip di bawah ini
+                    _
                     ```
                 answer_code: |
                     Jawaban sendiri
@@ -6713,10 +6721,10 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Di level ini kamu bisa mengulang beberapa baris kode dengan hanya 1 perintah `{repeat}`.
-                    Kamu melakukannya dengan membuat blok baris yang ingin kamu ulangi.
-                    Baris dalam blok ini akan membutuhkan **indentasi**.
-                    Itu berarti meletakkan empat spasi di awal setiap baris. Kamu juga harus melakukan indentasi saat ingin membuat blok hanya satu baris.
+                    Di level ini, kamu bisa mengulang beberapa baris kode hanya dengan 1 perintah `{repeat}`.
+                    Caranya, buat satu blok berisi baris-baris yang ingin kamu ulang.
+                    Baris-baris dalam blok ini perlu **indentasi** .
+                    Artinya, tambahkan satu tab atau 4 spasi di awal setiap baris. Kamu juga harus menggunakan indentasi saat membuat blok yang hanya berisi satu baris.
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -8050,3 +8058,167 @@ adventures:
                     ```
                 answer_code: |
                     Jawaban sendiri
+    house:
+        name: dekorator rumah
+        default_save_name: home_decorator
+        description: dekorator rumah
+        levels:
+            4:
+                story_text: |-
+                    Dekorasi ruang tamu sesuai keinginanmu!
+
+                    ### Latihan
+                    Ajukan setidaknya 6 pertanyaan lagi kepada pemain tentang ruang tamu impian mereka. Misalnya, kamu bisa menanyakan jenis sofa yang mereka inginkan, seberapa besar meja makannya, karya seni seperti apa yang ingin mereka pajang di dinding, dan sebagainya.
+                    Lalu gunakan informasi itu dalam deskripsi rumahnya. Jadi, kalau kamu sudah bertanya tentang TV mereka, tulis satu baris tentang TV seperti apa yang mereka pilih.
+                example_code: |-
+                    ```
+                    {print} "Ayo dekorasi ulang ruang tamunya!"
+
+                    #Meminta masukan dari pemain
+                    color_walls {is} {ask} 'Kamu ingin dindingnya berwarna apa?'
+                    color_carpet {is} {ask} 'Kamu ingin karpetnya berwarna apa?'
+                    type_couch _
+
+                    #Deskripsi rumah impianmu
+                    {print} 'Rumahmu akan punya dinding berwarna ' color_walls ' dan karpet berwarna ' color_carpet '.'
+                    {print} _
+                    ```
+                answer_code: |-
+                    ```
+                    {print} "Ayo dekorasi ulang ruang tamunya!"
+
+                    #Meminta masukan dari pemain
+                    color_walls {is} {ask} 'Kamu ingin dindingnya berwarna apa?'
+                    color_carpet {is} {ask} 'Kamu ingin karpetnya berwarna apa?'
+                    type_couch {is} {ask} 'Kamu ingin sofa jenis apa?'
+                    color_couch {is} {ask} 'Lalu, sofanya mau warna apa?'
+                    wall_art {is} {ask} 'Karya seni seperti apa yang ingin kamu pajang di dinding?'
+                    brand_tv {is} {ask} 'Kamu ingin TV merek apa?'
+                    color_tv {is} {ask} 'TV-nya mau warna apa?'
+                    size_tv {is} {ask} 'TV-nya mau ukuran berapa?'
+
+                    #Deskripsi rumah impianmu
+                    {print} 'Rumahmu akan punya dinding berwarna ' color_walls ' dan karpet berwarna ' color_carpet '.'
+                    {print} 'Kamu akan punya sofa berwarna ' color_couch ' dengan jenis ' type_couch '.'
+                    {print} 'Kamu akan memajang ' wall_art ' di dinding.'
+                    {print} 'Kamu akan punya TV berukuran ' size_tv ', berwarna ' color_tv ', bermerek ' brand_tv '.'
+                    ```
+    monster:
+        name: monster
+        default_save_name: monster
+        description: generator monster
+        levels:
+            4:
+                story_text: |-
+                    Buat generator monster. Ajukan pertanyaan kepada pemain tentang monster seperti apa yang mereka inginkan, lalu buat cerita untuk mereka.
+
+                    ### Latihan
+                    * Buat setidaknya 5 pertanyaan lagi tentang monster
+                    * Buat layar pemuatan (palsu) yang menampilkan tulisan 'Sedang membuat...' selama 3 detik, lalu bersihkan layar.
+                    * Tulis lanjutan ceritanya menggunakan variabel baru yang sudah kamu buat.
+                example_code: |-
+                    ```
+                    # Sambutan dan pertanyaan
+                    {print} 'Selamat datang di generator monster!'
+                    name_monster {is} {ask} 'Siapa nama monstermu?'
+                    adjective_monster {is} {ask} 'Seperti apa monstermu?'
+                    color_eyes {is} {ask} 'Apa warna mata monstermu?'
+                    amount_of_eyes {is} {ask} 'Berapa jumlah mata monstermu?'
+                    _ Buat pertanyaan lain di sini _
+
+                    # Membuat monster
+                    _ Buat layar pemuatan _
+
+                    # Tulis cerita tentang monster
+                    {print} 'Ini ' name_monster ' si monster ' adjective_monster
+                    {print} name_monster ' punya ' amount_of_eyes ' mata berwarna ' color_eyes
+                    _ Tulis lanjutan ceritanya dengan menyertakan variabel barumu _
+                    ```
+                answer_code: |-
+                    ```
+                    # Sambutan dan pertanyaan
+                    {print} 'Selamat datang di generator monster!'
+                    name_monster {is} {ask} 'Siapa nama monstermu?'
+                    adjective_monster {is} {ask} 'Seperti apa monstermu?'
+                    color_eyes {is} {ask} 'Apa warna mata monstermu?'
+                    amount_of_eyes {is} {ask} 'Berapa jumlah mata monstermu?'
+                    amount_of_teeth {is} {ask} 'Berapa jumlah gigi monster itu?'
+                    shape_nose {is} {ask} 'Seperti apa bentuk hidungnya?'
+                    length_monster {is} {ask} 'Seberapa tinggi monster itu?'
+                    width_monster {is} {ask} 'Seberapa lebar monster itu?'
+                    kind_of_skin {is} {ask} 'Seperti apa kulit monster itu? Bersisik, berbulu halus, berbulu unggas, atau lainnya?'
+
+                    # Membuat monster
+                    {print} 'Sedang membuat...'
+                    {sleep} 3
+                    {clear}
+
+                    # Tulis cerita tentang monster
+                    {print} 'Ini ' name_monster ' si monster ' adjective_monster
+                    {print} name_monster ' punya ' amount_of_eyes ' mata berwarna ' color_eyes
+                    {print} 'Di dalam mulutnya ada ' amount_of_teeth ' gigi.'
+                    {print} 'dan ia mencium bau dengan hidungnya yang berbentuk ' shape_nose '.'
+                    {print} name_monster ' tingginya ' length_monster ' dan lebarnya ' width_monster '.'
+                    {print} 'Seluruh tubuhnya dari kepala sampai kaki tertutup ' kind_of_skin
+                    ```
+    party_planner:
+        name: perencana pesta
+        default_save_name: party_planner
+        description: perencana pesta
+        levels:
+            4:
+                story_text: |-
+                    Buat alat perencanaan pesta yang bisa membuat undangan pestamu!
+
+                    ### Latihan
+                    * Pertama, isi pertanyaan yang tepat untuk diajukan kepada pemain
+                    * Lalu buat undangan pesta menggunakan masukan dari pemain
+                example_code: |-
+                    ```
+                    #meminta masukan
+                    {print} 'PERENCANA PESTA'
+                    name_host {is} {ask} _
+                    name_guest {is} {ask} _
+                    reason_party {is} {ask} _
+                    date_party {is} {ask} _
+                    time_party {is} {ask} _
+                    location_party {is} {ask} _
+                    theme_party {is} {ask} _
+                    dress_code {is} {ask} _
+
+                    #memuat undangan
+                    {print} 'tunggu sebentar... sedang memuat undangan'
+                    {sleep} 2
+                    {clear}
+
+                    #menampilkan undangan
+                    {print} 'Untuk ' name_guest ','
+                    _
+                    ```
+                answer_code: |-
+                    ```
+                    #meminta masukan
+                    {print} 'PERENCANA PESTA'
+                    name_host {is} {ask} 'Siapa namamu?'
+                    name_guest {is} {ask} 'Siapa yang ingin kamu undang?'
+                    reason_party {is} {ask} 'Apa yang kamu rayakan?'
+                    date_party {is} {ask} 'Kapan pestanya?'
+                    time_party {is} {ask} 'Jam berapa pestanya?'
+                    location_party {is} {ask} 'Di mana pestanya?'
+                    theme_party {is} {ask} 'Apa tema pestanya?'
+                    dress_code {is} {ask} 'Apa aturan pakaian untuk pestanya?'
+
+                    #memuat undangan
+                    {print} 'tunggu sebentar... sedang memuat undangan'
+                    {sleep} 2
+                    {clear}
+
+                    #menampilkan undangan
+                    {print} 'Untuk ' name_guest ','
+                    {print} 'Aku ingin mengundangmu untuk merayakan ' reason_party
+                    {print} 'Pestanya diadakan pada ' date_party ' pukul ' time_party
+                    {print} 'Lokasinya di ' location_party
+                    {print} 'Tema pestanya adalah ' theme_party ' dan aturan pakaiannya: ' dress_code
+                    {print} 'Semoga kamu bisa datang!'
+                    {print} 'Salam sayang, ' name_host
+                    ```
