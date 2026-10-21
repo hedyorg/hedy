@@ -85,3 +85,103 @@ levels:
                 {print} ...und auszubessern!
                 {print} Du kannst auch auf das Augen-Symbol klicken, um eine Code-Zeile auszuschalten
             debug: Wahr
+            notes: |-
+                **Code debuggen**
+                Schau dir <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">dieses Video</a> an, um zu sehen, wie ein Debugger funktioniert, oder lies die Anleitung.
+                Natürlich könntest du auch einfach den Code lesen und die Fehler selber finden, aber es gibt auch Werkzeuge, um dir zu helfen.
+                Clicke auf den Marienkäfer-Knopf 🐞 unter dem Eingabefeld. Es startet den **Debugger**. Mit dem Debugger kannst du ein Programm Zeile für Zeile ausführen.
+                Wenn es einen Fehler in deinem Code gibt (wie in den Debugging-Abenteuern), wird dich der Debugger große Fehler zuerst ausbessern lassen. Lies die Fehlermeldungen, um herauszufinden, wie man Fehler ausbessert.
+                Wenn die wichtigsten Fehler behoben sind, wird der Debugger dein Programm Zeile für Zeile ausführen.
+                Um die nächste Zeile auszuführen, klickst du auf den Fortsetzungs-Knopf ⏭️ auf der rechten Seite. Macht die Zeile, was sie soll? Super! Klicke den Knopf noch einmal, um mit der nächsten Zeile weiterzumachen, bis dein Programm perfekt funktioniert.
+                Um den Debugger zu stoppen, klickst du auf den Stop-Knopf 🛑 in der Mitte.
+                Um dein Programm von Anfang an auszuführen, klickst du den Wiederholen-Knopf 🔁 auf der linken Seite.
+                Bist du bei einer Code-Zeile steckengeblieben und möchtest dein Programm ohne diese Zeile ausprobieren?
+                Du kannst eine Zeile deaktivieren, indem du auf das Augen-Zeichen neben der Zeilennummber klickst. Die Zeile wird dann durchgestrichen.
+                Diese Zeile wird nun übersprungen, wenn der Code ausgeführt wird. Um die Zeile wieder zu aktivieren, klickst du einfach nochmal auf das Augenzeichen, und die Zeile wird nicht mehr übersprungen.
+    1:
+        1:
+            header: Willkommen in Level 1!
+            text: |-
+                Am Ende dieser Lektion kannst du:
+                * Code schreiben, der Text ausgibt
+                * Eine interaktive Geschichte erstellen
+        2:
+            text: |-
+                Das erste Kommando, das du in Level 1 benutzen kannst, ist `{print}`.
+
+                `{print}` wird benutzt, um Text auf dem Bildschirm anzuzeigen.
+            code: '{print} Text auf dem Bildschirm anzeigen'
+            notes: Lass die Schülerinnen und Schüler zuerst raten, was das Ergebnis sein wird. Führe dann den Code aus, um den Schülerinnen und Schüler zu zeigen, was passiert, wenn `{print}` ausgeführt wird.
+            header: '{print}'
+        3:
+            header: Der Befehlt {print}
+            code: |-
+                {print} Willkommen bei Hedy!
+                {print} Beginne jetzt mit dem Programmieren!
+            notes: Führe den Code aus und ändere dann deinen Code. Zeige, dass du ausgeben kannst, was du willst.
+        4:
+            header: '{ask}'
+            text: |-
+                Der zweite Befehl, den du in Level 1 benutzen kannst, ist `{ask}`.
+
+                `{ask}` wird benutzt, um eine Frage zu stellen, die beantwortet werden kann.
+            code: |-
+                {print} Willkommen zu deinem eigenen Schere, Stein, Papier!
+                {ask} Was wählst du?
+            notes: |-
+                Zeige, dass dir der Computer jetzt eine Frage stellt. Gib eine Antwort und zeige auch, dass nichts geschieht, wenn du die Antwort eingegeben hast.
+                Mache deine Schülerinnen und Schüler darauf aufmerksam, dass der Computer nur Befehle ausführt, und nicht von sich aus tut. Das bedeutet, dass du erst einen Befehl geben musst, wenn du möchtest, dass der Computer eine Antwort ausgibt.
+        5:
+            header: '{answer}'
+            text: |-
+                Um die Antwort im Ausgabefenster anzuzeigen, kannst du `{answer}`benutzen.
+                `{answer}` wird nie allein benutzt, sondern immer zusammen mit `{ask}`.
+            code: |-
+                {print} Hallo!
+                {ask} Wie heißt du?
+                {echo} Hallo {answer}
+            notes: Um den Computer die Antwort zurückgeben zu lassen, benutzt du den Befehl `{answer}`.
+        6:
+            header: Programmieren!
+            text: Hier findest du eine Liste von Abenteuern.
+            editor: /hedy/1
+            notes: Bevor wir anfangen, zeige den Schülerinnen und Schüler die Abenteuer. Vergiss nicht, auf die Übungen hinzuweisen. Dort müssen die Schülerinnen und Schüler lesen, was in einem Abenteuer genau zu tun ist.
+        7:
+            header: Programmieren!
+            text: Du kannst die gelben Pfeiltasten benutzen, um Beispiele zu kopieren.
+            editor: /hedy#print_command
+            notes: Zeige dein Schülerinnen und Schülern als letztes, dass sie mit dem gelben Knopf den Beispiel-Code in ihr Programmierfenster kopieren können.
+        8:
+            header: Lass uns anfangen!
+            text: |-
+                Jetzt ist ein guter Zeitpunkt, um die ersten Abenteuer auszuprobieren.
+                Verwende das Menü, um zum nächsten Abenteuer weiterzugehen. Wenn du die Erklärung eines Befehls noch einmal lesen möchtest, gehe mit dem Glühbirnen-Symbol zu dem Abenteuer zurück.
+            editor: /hedy/1
+            notes: Packen wir's an!
+        9:
+            header: Debuggen
+            text: Code zu debuggen heißt, Fehler im Code auszubessern. Lass uns dieses Programm zusammen debuggen. Klicke auf das Marienkäfer-Symbol, um den Debugger zu starten.
+            code: |-
+                Ich bin DJ Hedy
+                {print} Welches Lied möchtest du hören?
+                {ask} Ich mag dieses Lied auch!
+                {print} Als nächstes hören wir... {answer}
+            debug: Wahr
+        10:
+            header: Musik abspielen
+            text: |-
+                Spiele Noten mit `{play}`.
+                Es gibt diese Noten: C - D - E - F - G - A - B
+                Setze eine Zahl hinter die Note, um eine Skala auszuwählen. Die Skalen gehen von 1 bis 10.
+            code: |
+                {play} C4
+                {play} D4
+                {play} E4
+                {play} F4
+                {play} G4
+                {play} A4
+                {play} B4
+                {play} C5
+            notes: Zeige den Schülerinnen und Schülern, wie man den `{play}`-Befehl in Hedy benutzt. Das ist ein guter Zeitpunkt, um die Klassenregeln für Kopfhörer zu wiederholen.
+        11:
+            header: 'Zeichnen mit der Schildkröte: {forward}'
