@@ -1,1 +1,2017 @@
-{}
+levels:
+    0:
+        1:
+            header: Benvenuti in Hedy!
+            text: |-
+                Benvenuti nel linguaggio di programmazione Hedy!
+
+                Insegnanti, premete S sulla tastiera per vedere le note del relatore.
+            notes: Chiedi ai tuoi studenti di scrivere alcune parole che associano alla programmazione. Fai un breve giro per ascoltare le risposte.
+        2:
+            header: Programmazione
+            text: |-
+                Programmare significa dare istruzioni a un computer, usando la lingua del computer.
+
+                Una lingua di questo tipo si chiama "linguaggio di programmazione".
+            notes: |-
+                Purtroppo i computer non capiscono la lingua delle persone, come l'italiano, ma parlano una loro lingua.
+                Niente panico, non dovrete scrivere una sequenza di zeri e uno: impareremo a dare istruzioni al computer con un linguaggio di programmazione.
+        3:
+            header: Linguaggio di programmazione
+            text: |-
+                Forse conosci già qualche linguaggio di programmazione?
+                Alcuni esempi sono:
+                * Scratch
+                * Python
+                * HTML
+            notes: Chiedi agli studenti se hanno già esperienza di programmazione, o se magari conoscono qualcuno che lavora nell'informatica.
+        4:
+            header: Programmazione
+            text: |-
+                Se sai programmare, puoi fare tante cose fantastiche:
+                * Creare storie interattive
+                * Creare disegni al computer e disegnarli su carta o su stoffa
+                * Creare app tutte tue da usare sul telefono
+            notes: Può sembrare molto difficile, ma impareremo a programmare passo dopo passo.
+        5:
+            header: Programmare in Hedy
+            text: In Hedy usiamo delle 'parole chiave' speciali, come `{print}`.
+            code: '{print} Benvenuto in Hedy!'
+            notes: |-
+                Diamo un'occhiata a Hedy. In Hedy usiamo delle parole del codice (parole chiave) per dare un'istruzione al computer.
+                Scriviamo queste istruzioni nella schermata a sinistra. Questo è ciò che chiamiamo codice, o programma.
+        6:
+            header: Programmare in Hedy
+            text: Le parole chiave vengono mostrate in rosa.
+            code: '{print} Benvenuto in Hedy!'
+            notes: Come puoi vedere, le parole del codice (o parole chiave) diventano rosa se le usi correttamente.
+        7:
+            header: Programmare in Hedy
+            text: Avviamo il codice con il pulsante Esegui codice, che si trova sotto il codice.
+            code: '{print} Benvenuto in Hedy!'
+            notes: Per far seguire le istruzioni al computer devi 'eseguire' il codice. Premi il pulsante per mostrare agli studenti cosa succede.
+        8:
+            header: Programmare in Hedy
+            text: L'output appare sul lato destro.
+            code: '{print} Benvenuto in Hedy!'
+            notes: Quando eseguiamo il codice, appare l'output. L'output è il risultato dell'esecuzione del nostro programma. La schermata a destra, dove appare l'output, si chiama schermata di output.
+        9:
+            header: Programmare in Hedy
+            text: L'output può anche essere un disegno.
+            code: |-
+                {forward} 100
+                {turn} {left}
+            notes: "In Hedy non facciamo apparire solo del testo: l'output può anche essere un disegno, oppure..."
+        10:
+            header: Programmare in Hedy
+            text: Oppure l'output può essere musica!
+            code: |-
+                {play} C4
+                {play} D4
+                {play} E4
+            notes: Andiamo al primo livello per cominciare!
+        11:
+            header: Usa il menu per passare all'avventura successiva
+            text: Usa il menu per passare all'avventura o al livello successivo.
+            editor: /hedy/1
+            notes: "A volte gli studenti non sanno come passare all'avventura successiva: mostra loro in Hedy come si fa."
+        12:
+            header: Programmare in Hedy
+            text: A volte capita di fare un errore nel codice. Puoi usare il debugger per trovare l'errore (bug) e correggerlo.
+            code: |-
+                {print} Fare debugging significa trovare un errore
+                {print} Puoi eseguire il codice riga per riga
+                {print} Così è facile trovare il bug
+                {print} E correggerlo!
+                {print} Oppure clicca sull'icona a forma di occhio per disattivare una riga di codice
+            debug: 'True'
+            notes: |-
+                **Come fare il debugging di un codice**
+                Guarda questo <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> per vedere come funziona il debugger, oppure leggi le istruzioni.
+                Naturalmente puoi semplicemente guardare il codice e trovare gli errori da solo, ma abbiamo anche degli strumenti per aiutarti.
+                Clicca sul pulsante con la coccinella 🐞 sotto il campo di inserimento. Questo avvia il **debugger**. Con il debugger puoi eseguire un programma riga per riga.
+                Se nel tuo codice c'è un errore grave (come nelle avventure di debugging), il debugger ti dirà di correggere prima gli errori gravi. Leggi i messaggi di errore per capire come correggerli.
+                Quando gli errori principali sono stati eliminati, il debugger eseguirà il tuo programma riga per riga.
+                Per eseguire la riga successiva, clicca sul pulsante ⏭️ a destra. La riga fa quello che deve fare? Ottimo! Clicca di nuovo il pulsante per eseguire la riga successiva, finché il tuo programma non funziona perfettamente.
+                Per fermare il debugger, clicca sul pulsante 🛑 al centro.
+                Per eseguire di nuovo il codice dall'inizio, clicca sul pulsante 🔁 a sinistra.
+                Ti sei bloccato su una riga di codice e vuoi provare il programma senza quella riga?
+                Puoi disattivare una riga di codice cliccando sull'icona a forma di occhio davanti al numero di riga. La riga verrà barrata.
+                Ora la riga verrà saltata quando esegui il codice. Per riattivarla, clicca di nuovo sull'icona a forma di occhio e la riga non verrà più saltata.
+    1:
+        1:
+            header: Benvenuti al livello 1!
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * Scrivere un codice che stampa un testo
+                * Creare una storia interattiva
+        2:
+            header: '{print}'
+            text: |-
+                Il primo comando che puoi usare nel livello 1 è `{print}`.
+
+                `{print}` serve a mostrare un testo sullo schermo.
+            code: '{print} Mostra questo testo sullo schermo'
+            notes: Prima chiedi agli studenti di indovinare quale sarà secondo loro l'output. Poi esegui il codice per mostrare cosa succede quando viene eseguito un comando `print`.
+        3:
+            header: La parola chiave {print}
+            text: |-
+                Puoi cambiare il testo dopo la parola chiave print con quello che vuoi.
+
+                Oppure puoi stampare più righe aggiungendo un'altra riga di codice che inizia anch'essa con `{print}`.
+            code: |-
+                {print} Benvenuto in Hedy!
+                {print} Inizia subito a programmare!
+            notes: Esegui il codice e poi modificalo tu stesso. Mostra che puoi stampare tutto quello che vuoi.
+        4:
+            header: '{ask}'
+            text: |-
+                Il secondo comando che puoi usare nel livello 1 è `{ask}`.
+
+                `{ask}` serve a fare una domanda a cui si può rispondere.
+            code: |-
+                {print} Benvenuto nel tuo gioco di sasso carta forbici!
+                {ask} Cosa scegli?
+            notes: |-
+                Mostra che ora il computer ti fa una domanda. Inserisci una risposta e mostra anche che, una volta inserita la risposta, non succede nulla.
+                Fai capire ai tuoi studenti che il computer seguirà solo le tue istruzioni, non farà nulla da solo. Questo significa che se vuoi che il computer stampi la risposta, devi dargli questa istruzione.
+        5:
+            header: '{answer}'
+            text: |-
+                Per mostrare la risposta nella schermata di output, puoi usare: `{answer}`.
+                `{answer}` non si usa mai da solo, sempre insieme a un `{ask}`.
+            code: |-
+                {print} Ciao!
+                {ask} Come ti chiami?
+                {print} ciao {answer}
+            notes: Per far ripetere al computer la tua risposta, usi la parola chiave `answer`.
+        6:
+            header: Programmiamo!
+            text: Qui trovi l'elenco delle avventure.
+            editor: /hedy/1
+            notes: "Prima di iniziare, mostra agli studenti le avventure. Non dimenticare di far notare gli esercizi: è lì che gli studenti dovranno leggere cosa fare esattamente in un'avventura."
+        7:
+            header: Programmiamo!
+            text: I pulsanti gialli con la freccia servono a copiare gli esempi.
+            editor: /hedy#print_command
+            notes: Infine mostra agli studenti che possono copiare il codice di esempio nel loro campo di programmazione premendo il pulsante giallo.
+        8:
+            header: Cominciamo!
+            text: |-
+                Questo è un buon momento per provare le prime avventure.
+                Usa il menu per passare all'avventura successiva. Se vuoi rileggere la spiegazione di una parola chiave, torna all'avventura con l'icona della lampadina.
+            editor: /hedy/1
+            notes: Al lavoro!
+        9:
+            header: Debugging
+            text: Fare debugging di un codice significa eliminare gli errori dal codice. Facciamo insieme il debugging di questo codice. Clicca sul pulsante con la coccinella per avviare il debugger.
+            code: |-
+                Sono DJ Hedy
+                {print} Quale canzone vuoi ascoltare?
+                {ask} Piace anche a me questa canzone!
+                {print} Prossima canzone... {answer}
+            debug: 'True'
+            notes: |-
+                **Come fare il debugging di un codice**
+                Guarda questo <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> per vedere come funziona il debugger, oppure leggi le istruzioni.
+                Naturalmente puoi semplicemente guardare il codice e trovare gli errori da solo, ma abbiamo anche degli strumenti per aiutarti.
+                Clicca sul pulsante con la coccinella 🐞 sotto il campo di inserimento. Questo avvia il **debugger**. Con il debugger puoi eseguire un programma riga per riga.
+                Se nel tuo codice c'è un errore grave (come nelle avventure di debugging), il debugger ti dirà di correggere prima gli errori gravi. Leggi i messaggi di errore per capire come correggerli.
+                Quando gli errori principali sono stati eliminati, il debugger eseguirà il tuo programma riga per riga.
+                Per eseguire la riga successiva, clicca sul pulsante ⏭️ a destra. La riga fa quello che deve fare? Ottimo! Clicca di nuovo il pulsante per eseguire la riga successiva, finché il tuo programma non funziona perfettamente.
+                Per fermare il debugger, clicca sul pulsante 🛑 al centro.
+                Per eseguire di nuovo il codice dall'inizio, clicca sul pulsante 🔁 a sinistra.
+                Ti sei bloccato su una riga di codice e vuoi provare il programma senza quella riga?
+                Puoi disattivare una riga di codice cliccando sull'icona a forma di occhio davanti al numero di riga. La riga verrà barrata.
+                Ora la riga verrà saltata quando esegui il codice. Per riattivarla, clicca di nuovo sull'icona a forma di occhio e la riga non verrà più saltata.
+        10:
+            header: Suonare musica
+            text: |-
+                Suona le note musicali con `{play}`
+                Le note sono: C - D - E - F - G - A - B (Do - Re - Mi - Fa - Sol - La - Si)
+                Metti un numero dopo la nota per scegliere l'ottava, le ottave vanno da 1 a 10.
+            code: |
+                {play} C4
+                {play} D4
+                {play} E4
+                {play} F4
+                {play} G4
+                {play} A4
+                {play} B4
+                {play} C5
+            notes: Mostra agli studenti come usare la parola chiave `{play}` in Hedy. Questo è anche un buon momento per ripassare le regole della classe sull'uso delle cuffie.
+        11:
+            header: 'Disegnare con la tartaruga: {forward}'
+            text: '`{forward}` serve a far avanzare la tartaruga.'
+            code: '{forward} 50'
+            notes: Dopo aver visto i comandi per il testo, ora vediamo i comandi per disegnare. Mostra agli studenti come usare la parola chiave forward.
+        12:
+            header: 'Disegnare con la tartaruga: {forward}'
+            text: Come facciamo ad andare indietro?
+            code: '{forward} -50'
+            notes: Chiedi agli studenti se hanno idea di come andare indietro. La risposta è usare un numero negativo, come -50.
+        13:
+            header: 'Disegnare con la tartaruga: {turn}'
+            text: '`{turn}` serve a far girare la tartaruga a sinistra o a destra.'
+            code: |-
+                {forward} 50
+                {turn} {left}
+        14:
+            header: Debugging
+            text: Usare il debugger quando si disegna
+            code: |-
+                {forward} 50
+                {turn} {left}
+                {forward} 100
+                {turn} {left}
+                {forward} 50
+                {turn} {left}
+            debug: 'True'
+            notes: Il debugger può tornare utile quando si fa un disegno.
+        15:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        16:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        17:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe. Puoi farlo andando alla pagina della classe e cliccando sulle avventure degli studenti.
+        18:
+            header: Un'anteprima del prossimo livello...
+            text: |-
+                Nel prossimo livello imparerai a usare una variabile per rendere i tuoi programmi ancora più interattivi!
+                E imparerai a usare la parola chiave `{sleep}` per mettere in pausa il codice!
+    2:
+        1:
+            header: Benvenuti al livello 2
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * Salvare qualcosa in una variabile
+                * Creare una storia o un disegno usando le variabili
+            notes: Gli studenti potrebbero avere difficoltà a capire il concetto di variabile. Abbiamo notato che dare agli studenti molti esempi di variabili li aiuta a comprendere meglio il concetto.
+        2:
+            header: Problema
+            text: Nel livello precedente potresti aver incontrato questo problema...
+            code: |-
+                {print} Benvenuti al ristorante!
+                {ask} Cosa vorresti mangiare
+                {print} Vorresti mangiare... {answer}
+                {ask} Cosa vorresti bere?
+                {print} Vorresti bere... {answer}
+                {print} Grazie per aver ordinato da noi!
+                {print} Buon appetito con il tuo... {answer}
+            notes: |-
+                Attenzione: questo codice non funziona in questo livello. Non eseguire il programma, limitati a discuterne.
+                Fai guardare il programma ai tuoi studenti e chiedi loro di prevedere l'output.
+                Speriamo che arrivino alla conclusione che l'ultima riga dirà solo 'Buon appetito con il tuo (bevanda ordinata)' e che il computer si sarà dimenticato del cibo.
+                Con 'ask' il computer può ricordare una sola cosa. In questo livello imparerai a usare le variabili per risolvere questo problema.
+        3:
+            header: Cos'è una variabile?
+            text: |-
+                Una variabile è uno spazio nella memoria del computer, dove viene salvata la risposta alla domanda.
+                Può sembrare difficile, ma guarda l'esempio.
+            code: |-
+                risposta {is} {ask} Come ti chiami?
+                {print} Ciao risposta
+            notes: |-
+                In informatica usiamo la parola variabile per indicare uno spazio nella memoria del computer in cui vengono salvate informazioni che cambiano.
+                La variabile è come una scatola o un contenitore che contiene la cosa che cambia. La scatola rimane la stessa, ma il suo contenuto può cambiare o variare.
+                Mostra agli studenti come funzionano le variabili. Fai notare che il nome della variabile `risposta` nell'ultima riga viene sostituito con il valore della variabile.
+                Il riquadro blu che appare nella schermata di output ti mostra le variabili che hai usato e il valore che hanno.
+        4:
+            header: Il comando `{is}`
+            text: Per creare o 'impostare' una variabile usiamo il comando `{is}`. Il nome della variabile va prima di `{is}` e il comando `{ask}` dopo. Possiamo scegliere noi il nome della variabile e usare qualcosa di diverso da `risposta`.
+            code: |-
+                nome {is} {ask} Come ti chiami?
+                {print} Ciao nome
+            notes: Chiedi agli studenti di inventare i loro esempi.
+        5:
+            header: Variabili
+            text: Possiamo anche impostare una variabile senza fare una domanda. Il nome della variabile va prima di `{is}` e il valore della variabile dopo.
+            code: |-
+                cibo {is} hamburger
+                bevanda {is} acqua
+                {print} Da mangiare vorrei cibo.
+                {print} Da bere vorrei bevanda.
+            notes: Chiedi agli studenti se riescono a pensare a un'altra variabile (altezza, numero di scarpe, colore dei capelli ecc.) e aggiungi i loro esempi al codice.
+        6:
+            header: Più variabili
+            text: Ora che usiamo le variabili, possiamo usarne più di una invece della sola `answer`.
+            code: |-
+                nome {is} Hedy
+                eta {is} 15
+                {print} nome ha eta anni
+        7:
+            header: Pausa
+            text: Puoi anche usare la parola chiave `{sleep}` per mettere in pausa il codice per un po'.
+            code: |-
+                {print} Il mio colore preferito è...
+                {sleep} 2
+                {print} il verde!
+            notes: |-
+                Mostra agli studenti la parola chiave '{sleep}'. Chiedi loro cosa pensano che indichi il 2.
+                Cambia il 2 con un altro numero per mostrare che possono decidere per quanti secondi il codice resterà in pausa.
+        8:
+            header: Pausa 5
+            text: |-
+                Puoi aggiungere un numero dopo la parola chiave `{sleep}` se vuoi che la pausa duri di più.
+
+                Se vuoi, puoi anche usare una variabile invece di un numero per decidere la durata della pausa.
+            code: |-
+                pausa {is} 10
+                {print} Il mio colore preferito è...
+                {sleep} pausa
+                {print} il verde!
+            notes: Mostra il codice e, se vuoi, puoi anche sostituire il 10 con una parola chiave {ask}.
+        9:
+            header: Disegnare con le variabili
+            text: |-
+                Nel livello 1 hai imparato a usare {forward} 100.
+                Ora puoi usare anche una variabile.
+            code: |-
+                distanza {is} {ask} Di quanto devo andare avanti?
+                {forward} distanza
+            notes: |-
+                Mostra agli studenti che ora possono usare le variabili anche con la tartaruga che disegna!
+                Esegui il codice più volte con risposte diverse, per mostrare l'uso delle variabili.
+        10:
+            header: Disegnare con i gradi
+            text: Prima potevi fare {turn} {left} o {turn} {right}, ora possiamo usare i gradi!
+            code: |-
+                {forward} 100
+                {turn} 45
+                {forward} 100
+            notes: Mostra il codice agli studenti. Nella prossima slide mostreremo diversi angoli.
+        11:
+            header: Gradi
+            text: |-
+                Un giro completo è di 360 gradi.
+                Mezzo giro è di 180 gradi.
+                Una svolta a destra è di 90 gradi.
+                Una svolta a sinistra è di 270 gradi.
+
+                Puoi inserire qualsiasi numero tu voglia.
+            code: |-
+                {turn} 90
+                {forward} 100
+            notes: |-
+                Assicurati che gli studenti capiscano i gradi. Potrebbero averli già studiati in matematica, ma potrebbero anche essere una novità assoluta per loro.
+                Se gli studenti non hanno mai sentito parlare di gradi, potrebbe essere utile mostrare loro un goniometro. Potresti anche stamparne uno per loro.
+                Usa il codice di esempio nelle slide per mostrare agli studenti diversi angoli.
+        12:
+            header: Gradi e variabili
+            text: Anche i gradi possono essere variabili!
+            code: |-
+                gradi {is} {ask} Di quanti gradi deve girare la tartaruga?
+                {turn} gradi
+                {forward} 100
+            notes: Mostra agli studenti che anche il numero di gradi può essere una variabile.
+        13:
+            header: Debugging
+            text: Fare debugging di un codice significa eliminare gli errori dal codice. Facciamo insieme il debugging di questo codice. Clicca sul pulsante con la coccinella per avviare il debugger.
+            code: |-
+                {print} Benvenuti nel negozio di ciambelle!
+                ripieno {is} Che ripieno vorresti?
+                {print} Hai scelto... Ripieno! Gnam!
+                copertura {ask} Che copertura vorresti?
+                copertura è deliziosa!
+                {print} Vado a prendere la tua ciambella. {sleep}
+                {print} Ecco a te! Una ciambella ripieno con copetura!
+                {ask} Buona giornata!
+            debug: 'True'
+            notes: Mostra come usare il debugger e l'icona a forma di occhio.
+        14:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        15:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        16:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        17:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai a creare una lista e a far scegliere al computer un elemento a caso da quella lista!
+    3:
+        1:
+            header: Benvenuti al livello 3
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * Salvare più elementi in una variabile: questa si chiama lista.
+                * Creare una storia in cui succedono cose a caso.
+                * Creare un disegno in cui vengono disegnate cose a caso.
+        2:
+            header: Creare una lista
+            text: |-
+                Crei una lista con `{is}`.
+
+                Separa gli elementi della lista con una virgola.
+            code: animali {is} cani, gatti, canguri
+            notes: Chiedi agli studenti di scrivere un esempio di una loro lista.
+        3:
+            header: A caso
+            text: |-
+                Puoi usare la lista con la parola chiave `{at}` `{random}`.
+                Il computer sceglierà a caso un elemento della lista.
+                Ogni volta che esegui questo codice l'output sarà diverso.
+            code: |-
+                animali {is} cani, gatti, canguri
+                {print} animali {at} {random}
+            notes: Esegui il codice un paio di volte e mostra agli studenti che l'output è ogni volta diverso.
+        4:
+            header: A caso in una frase
+            text: Puoi usare la parola chiave `{at}` `{random}` anche in una frase.
+            code: |-
+                animali {is} cani, gatti, canguri
+                {print} I miei preferiti sono i animali {at} {random}
+            notes: |-
+                Di nuovo, mostra agli studenti che l'output cambia quando il codice viene eseguito un paio di volte.
+                Puoi anche cambiare l'ordine delle parole, per mostrare che anche `{print} animali {at} {random} sono i miei preferiti` è consentito.
+                Ora chiedi ai tuoi studenti di scrivere una riga con print e at random sotto la lista che hanno creato e di scambiare il loro codice con un altro studente.
+                Fai prevedere all'altro studente un possibile output del programma.
+                Discuti brevemente alcune risposte in classe.
+        5:
+            header: Cominciamo!
+            text: Cominciamo con le avventure!
+            notes: Lavoriamo sulle prime avventure!
+        6:
+            header: Aggiungere a
+            text: Puoi aggiungere elementi a una lista con la parola chiave `{add}` `{to_list}`.
+            code: |-
+                animali {is} cane, gatto, canguro
+                {add} pecora {to_list} animali
+                {print} Scelgo animali {at} {random}
+            notes: |-
+                Speriamo che gli studenti notino che non ha molto senso usare la parola chiave add to in questo modo, perché si sarebbe potuto mettere la pecora nella lista fin dall'inizio.
+                La prossima slide mostrerà come usare add to insieme a un ask e a una variabile, per rendere il programma interattivo.
+        7:
+            header: Aggiungere a
+            text: |-
+                Puoi scegliere cosa aggiungere alla lista oppure puoi usare la parola chiave `{add}` `{to}` insieme alla parola chiave `{ask}`.
+                In questo modo puoi lasciar decidere al giocatore cosa aggiungere alla lista, per rendere il programma interattivo.
+            code: |-
+                animali {is} cane, gatto, canguro
+                preferito {is} {ask} Qual è il tuo animale preferito?
+                {add} preferito {to_list} animali
+                {print} Scelgo animali {at} {random}
+            notes: |-
+                Esegui il programma più volte per mostrare che l'animale scelto ora viene aggiunto alla lista.
+                Il riquadro blu che appare nella schermata di output ti mostra le variabili che hai usato e il valore che hanno.
+        8:
+            header: Rimuovere da
+            text: |-
+                L'opposto della parola chiave `{add}` `{to}` è la parola chiave `{remove}` `{from}`.
+                Questa parola chiave rimuove un elemento da una lista.
+            code: |-
+                animali {is} cane, gatto, canguro
+                antipatico {is} {ask} Quale animale non ti piace?
+                {remove} antipatico {from} animali
+                {print} Scelgo animali {at} {random}
+            notes: |-
+                Una volta che gli studenti hanno capito add to, probabilmente impareranno abbastanza facilmente la parola chiave remove from.
+                Fate gli esercizi 4 e 5.
+        9:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                generi_musicali {is} rock, pop, metal, indie, jazz
+                genere_scelto {is} musica {at} {random}
+                {print} Ascoltiamo genere scelto
+                bello {ask} Ti piace questo genere?
+                {remove} genere_scelto {from} genere_scelto
+                seconda_scelta {is} generi_musicali
+                {print} oppure preferisci... seconda_scelta {at} {random}
+                {remove} seconda_scelta {to} generi_musicali
+                {print} Il mio genere preferito è genere_musicale {random}!
+            debug: 'True'
+            notes: Mostra come usare il debugger e l'icona a forma di occhio.
+        10:
+            header: Mettiamoci al lavoro!
+            text: Buon divertimento con le avventure del livello 3!
+        11:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        12:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        13:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        14:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai a usare le virgolette! Un passo più vicino al vero codice Python!
+    4:
+        1:
+            header: Benvenuti al livello 4
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * capire perché nella programmazione servono le virgolette.
+                * mettere le virgolette nei punti giusti.
+                * capire i messaggi di errore sull'uso sbagliato delle virgolette.
+            code: "{print} 'Usa le virgolette!'"
+        2:
+            header: Problema
+            text: 'Nei livelli precedenti potresti aver incontrato questo problema:'
+            code: |-
+                nome {is} Sophie
+                {print} Il mio nome è nome
+            debug: 'True'
+            notes: |-
+                Questo codice non funziona in questo livello!
+                Fai prevedere l'output agli studenti. Il problema è che se usi la variabile nome, non puoi più usare la parola nome nel tuo testo.
+                L'output di questo codice sarà 'Il mio Sophie è Sophie'.
+        3:
+            header: Risolverlo con le virgolette
+            text: |-
+                In questo livello risolveremo questo problema usando le virgolette.
+
+                Così il nostro codice assomiglia anche di più al 'vero' codice Python.
+            code: |-
+                nome {is} Sophie
+                {print} 'Il mio nome è ' nome
+            notes: |-
+                Ora il computer conosce la differenza tra il testo 'nome' e la variabile nome.
+                Mostra agli studenti che ora il computer stampa 'Il mio nome è Sophie'.
+                Uno studente potrebbe dire che si poteva risolvere facilmente il problema dando alla variabile un nome diverso. È vero, ma nella programmazione è un'abilità importante indicare al computer tipi di dati diversi e sapere tu stesso distinguere tra testo normale e variabili.
+                Scrivi le virgolette così ' oppure le virgolette doppie così ", gli apici inversi come questo ` non funzionano!
+        4:
+            header: Le virgolette con print
+            text: Ogni volta che usi la parola chiave `{print}` devi mettere tra virgolette il testo che vuoi far apparire sullo schermo.
+            code: "{print} 'Usa le virgolette!'"
+        5:
+            header: Le virgolette con ask
+            text: Lo stesso vale per la parola chiave `{ask}`.
+            code: nome {is} {ask} 'Come ti chiami?'
+        6:
+            header: Virgolette e variabili
+            text: |-
+                Non vuoi che i nomi delle variabili vengano stampati sullo schermo.
+                Per questo le variabili devono restare fuori dalle virgolette, così:
+            code: |-
+                nome {is} Harry
+                {print} 'Ciao ' nome
+        7:
+            header: Virgolette e variabili
+            text: |-
+                Quando usi i nomi delle variabili in mezzo a una frase, devi lasciare le variabili fuori dalle virgolette.
+                Il resto della frase, però, ha bisogno delle virgolette. Ecco come si fa:
+            code: |-
+                nome {is} Harry
+                {print} 'Ciao ' nome ', come stai?'
+        8:
+            header: Virgolette e apostrofi
+            text: |-
+                Attenzione! Ora che usi le virgolette, non puoi usare l'apostrofo nelle parole.
+
+                Prova a stampare una parola con l'apostrofo, come "c'è" o "l'amico", nella schermata qui sotto e guarda cosa succede...
+            code: "{print} 'Questo non funzionerà, c'è un apostrofo'"
+            debug: 'True'
+        9:
+            header: Correggilo!
+            text: Se devi usare un apostrofo nel tuo testo, usa le virgolette doppie per risolvere il problema.
+            code: |-
+                {print} "Sto usando le virgolette doppie"
+                {print} "Così l'apostrofo funziona!"
+            notes: "È importante iniziare e finire con lo stesso tipo di virgolette: per esempio, non puoi iniziare una riga con ' e finirla con \"."
+        10:
+            header: Pulisci
+            text: |-
+                In questo livello imparerai anche la parola chiave {clear}.
+                Con questa parola chiave puoi cancellare tutto il testo dalla schermata di output.
+
+                Fai attenzione a usare sempre anche una parola chiave sleep. Altrimenti il computer cancellerà tutto il testo prima che tu possa leggerlo!
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'SORPRESA!'
+            notes: Esegui il codice e mostra il programma agli studenti. Noterai che non riesci a leggere il 3, 2, 1. Aggiungi delle parole chiave sleep prima delle parole chiave clear per correggere il programma.
+        11:
+            header: Disegnare con `{color}`
+            text: Infine, puoi usare `{color}` per rendere i tuoi disegni ancora più belli!
+            code: |-
+                {color} blu
+                {forward} 30
+                {color} rosso
+                {forward} 30
+                {color} rosa
+                {forward} 30
+                {color} giallo
+                {forward} 30
+        12:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {clear}
+                {print} Che bella giornata per andare al mare!
+                {ask} 'Vuoi costruire un castello di sabbia o nuotare nel mare?'
+                {print} 'Ti piacerebbe attività '
+                {print} 'Anch'io vorrei farlo'
+                {print} 'Guarda queste bellissime conchiglie!'
+                colori {is} 'arancione, argento, bianco, marrone'
+                {print} 'Mi piace di più quella colori {at} {random}!'
+                scelta {is} {ask} Quale ti piace?
+            debug: 'True'
+            notes: Mostra come usare il debugger e l'icona a forma di occhio.
+        13:
+            header: Pronti, partenza, via!
+            text: Buon divertimento con le avventure del livello 4!
+        14:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        15:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        16:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        17:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai a far reagire il computer in modo diverso a seconda delle risposte!
+    5:
+        1:
+            header: Benvenuti al livello 5
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * far reagire il computer in modo diverso a seconda delle risposte.
+                * usare le parole chiave {if} e {else}
+        2:
+            header: if
+            text: La parola chiave `{if}` ti permette di scegliere tra due opzioni.
+            code: |-
+                nome {is} {ask} 'come ti chiami?'
+                {if} nome {is} Hedy {print} 'fantastico'
+            notes: |-
+                Mostra come in questo esempio il computer stamperà 'fantastico' se la risposta data è Hedy.
+                Se la risposta non è Hedy, il computer non farà nulla.
+        3:
+            header: Non dimenticare print
+            text: |-
+                Quando usi la parola chiave `{if}`, non dimenticare di usare la parola chiave `{print}`.
+                Questo codice non funzionerà!
+            code: "{if} nome {is} Hedy 'fantastico'"
+            debug: 'True'
+            notes: Esegui il codice e correggi il bug come nella prossima slide.
+        4:
+            header: Condizionali
+            text: Il codice che segue una condizione if si chiama condizionale.
+            code: "{if} nome {is} Hedy {print} 'fantastico'"
+            notes: "Chiedi agli studenti quale pensano che sia il condizionale. Eccolo: '{print} 'fantastico'.'"
+        5:
+            header: else
+            text: Quando usi una parola chiave `{if}`, puoi aggiungere anche una parola chiave `{else}`.
+            code: "{if} nome {is} Hedy {print} 'fantastico' {else} {print} 'buuu!'"
+            notes: |-
+                Mostra agli studenti come questo codice darà output diversi per risposte diverse:
+                Se la risposta è Hedy, il computer stamperà 'fantastico'.
+                Ma se la risposta è un'altra, il computer stamperà 'buuu'
+        6:
+            header: Righe lunghe
+            text: |-
+                Forse hai notato che le righe possono diventare molto lunghe quando hai sia una parola chiave `{if}` sia una parola chiave `{else}`.
+                Puoi scegliere di separare le parole chiave e metterle su 2 righe, così:
+            code: |-
+                {if} nome {is} Hedy {print} 'fantastico'
+                {else} {print} 'buuu!'
+            notes: |-
+                Se ai tuoi studenti non dispiace usare due righe, ti consigliamo di iniziare subito a usarne due.
+                Così il programma è meno disordinato e questo tornerà utile nei livelli successivi.
+        7:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} Benvenuti ai controlli di sicurezza di HedyAir!
+                carta_imbarco {is} {ask} 'Hai la tua carta di imbarco?'
+                {if} carta_imbrco sì {print} Ottimo!
+                {else} Per favore, prepara la tua carta di imbarco.
+                passaporto {is} 'Posso vedere il tuo passaporto, per favore?'
+                {if} passaporto {is} sì 'grazie'
+                {else} 'Senza passaporto non c'è volo'
+                dichiarare {is} {ask} Hai qualcosa da dichiarare?
+                {if} dichiarare {is} sì
+                oggetto_da_dichiarare {is} {ask} 'Cosa vorresti dichiarare'
+                {else} Va bene
+                {print} Grazie. Prosegui verso il gate A22.'
+            debug: 'True'
+        8:
+            header: Si parte!
+            text: Buon divertimento con le avventure del livello 5!
+        9:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        10:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        11:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        12:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai cosa fare se vuoi 3 o più opzioni invece di 2 soltanto (if e else).
+    6:
+        1:
+            header: Benvenuti al livello 6
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * usare `{elif}` per aggiungere una terza opzione ai condizionali
+                * usare `{in}` per controllare se un elemento è in una lista oppure no
+        2:
+            header: Ripassiamo if e else
+            text: Ti viene in mente un codice con `{if}` e `{else}`?
+            code: |-
+                pizza {is} {ask} 'Qual è la tua preferita?'
+                {if} pizza {is} salamino
+                {print} 'Sì! La pizza al salamino è la migliore!'
+                {else}
+                {print} 'La pizza al salamino è più buona!'
+            notes: |-
+                Fai lavorare insieme gli studenti per inventare un codice che contenga un if e un else.
+                Quando hanno finito, mostra loro il codice di esempio e chiedi di prevedere quale sarà il risultato.
+                Ricorda loro anche che la parte dopo l'istruzione {if} si chiama condizionale.
+        3:
+            header: Usare più righe
+            text: I condizionali sono la parte dopo {if} o {else}. D'ora in poi i condizionali vanno messi sulla riga successiva.
+            code: |-
+                ordinato {is} {ask} 'Vuoi che il tuo codice sia bello e ordinato?'
+                {if} ordinato {is} 'sì'
+                {print} 'Ottima notizia! Metti sempre il condizionale sulla seconda riga!'
+                {else}
+                {print} 'Peccato! Il condizionale va comunque sulla riga successiva!'
+            notes: |
+                Se i tuoi studenti fanno fatica a capire perché devono mettere i condizionali sulla riga successiva, puoi dire loro che nel prossimo livello impareranno a mettere più righe di codice dopo un {if} o un {else}.
+        4:
+            header: '`{elif}`'
+            text: '`{elif}` è una combinazione delle parole chiave `{else}` e `{if}` e ti serve quando vuoi creare 3 (o più!) opzioni.'
+            code: |-
+                pizza {is} {ask} 'Qual è la tua preferita?'
+                {if} pizza {is} salamino
+                {print} 'Sì! La pizza al salamino è la migliore!'
+                {elif} pizza {is} hawaiana
+                {print} 'Ma scherzi?! La hawaiana è la peggiore!'
+                {else}
+                {print} 'La pizza al salamino è più buona!'
+            notes: Mostra questo codice ai tuoi studenti e chiedi di prevedere i 3 possibili risultati. Poi chiedi loro di pensare a delle idee per un codice con 3 o più opzioni.
+        5:
+            header: '`{in}`'
+            text: Se ti sei esercitato con le parole chiave `{if}`, `{else}` e {elif}, puoi provare anche la parola chiave `{in}`.
+            code: |-
+                colori_belli {is} verde, giallo
+                colore_preferito {is} {ask} 'Qual è il tuo colore preferito?'
+                {if} colore_preferito {in} colori_belli {print} 'bello!'
+                {else} {print} 'mah'
+            notes: |-
+                Con `{in}` puoi far controllare al computer se un elemento è in una lista. Mostra l'esempio.
+                Tieni presente che Hedy distingue tra maiuscole e minuscole. Questo significa che se rispondi "Verde" invece di "verde", Hedy stamperà "mah".
+        6:
+            header: Tenere il codice in ordine
+            text: |-
+                Ora che conosci sempre più comandi, i tuoi programmi diventeranno più lunghi.
+                A volte il tuo codice sarà disordinato e difficile da leggere. Per rendere il codice ordinato e leggibile puoi aggiungere dei commenti, usando un cancelletto all'inizio della riga, così:
+            code: |-
+                # Diamo un nome al personaggio
+                nome {is} {ask} 'Come si chiamerà il tuo personaggio?'
+                {print} 'Si chiama ' nome
+
+                # Lanciamo il dado
+                numeri = 1, 2, 3
+                lancio = numeri {at} {random}
+
+                # Assegniamo l'animale
+                {if} lancio {is} 1
+                    {print} nome ' riceve un cane'
+                {elif} lancio {is} 2
+                    {print} nome ' riceve un gatto'
+                {else}
+                    {print} nome 'riceve un pappagallo'
+        7:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} 'Benvenuti in gelateria.'
+                gusto {is} {ask} 'Quale gusto vorresti?'
+                {if} gusto fragola
+                {print} 'Ottima scelta!'
+                gusto {is} vaniglia
+                {print} 'Non vuoi proprio la fragola?''
+                {else}
+                {print} Mi dispiace, abbiamo solo vaniglia e fragola.
+                palline {is} 'Quante palline vorresti?'
+                {if} palline {is} 1
+                {print} sono 1.50, per favore.
+                {elif} {is} 2
+                {print} 'sono 2.50, per favore.'
+                {else} 'mi dispiace, sono troppe.'
+            debug: 'True'
+        8:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        9:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        10:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        11:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai a usare la matematica in Hedy
+    7:
+        1:
+            header: Benvenuti al livello 7
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * usare la matematica in Hedy
+                * usare i numeri decimali in Hedy
+                * usare le variabili nei calcoli in Hedy
+            notes: |-
+                Chiedi ai tuoi studenti di immaginare quando servirebbe la matematica in un codice (per esempio per calcolare un prezzo, un numero di persone, i punti in un gioco ecc.).
+                Potresti anche chiedere loro di immaginare come sarebbe. Molto probabilmente penseranno da soli a + e -.
+        2:
+            header: Addizione
+            text: Se vuoi calcolare un'addizione, usa semplicemente il segno più.
+            code: "{print} '5 più 5 fa ' 5 + 5"
+            notes: Mostra brevemente il codice di esempio ai tuoi studenti.
+        3:
+            header: Sottrazione
+            text: Se vuoi fare una sottrazione, puoi usare il segno meno.
+            code: "{print} '5 meno 5 fa ' 5 - 5"
+            notes: Mostra brevemente il codice di esempio ai tuoi studenti.
+        4:
+            header: Moltiplicazione
+            text: Se vuoi fare una moltiplicazione, puoi usare l'asterisco.
+            code: "{print} '5 per 5 fa ' 5 * 5"
+            notes: Mostra brevemente il codice di esempio ai tuoi studenti.
+        5:
+            header: Divisione
+            text: Per la divisione puoi usare la barra.
+            code: "{print} '5 diviso 5 fa ' 5 / 5"
+            notes: Mostra brevemente il codice di esempio ai tuoi studenti.
+        6:
+            header: Riepilogo
+            text: Riassumendo, puoi usare +, -, * e / per fare i calcoli.
+            code: |-
+                {print} '5 più 5 fa ' 5 + 5
+                {print} '5 meno 5 fa ' 5 - 5
+                {print} '5 per 5 fa ' 5 * 5
+                {print} '5 diviso 5 fa ' 5 / 5
+            notes: |-
+                Nota che il codice dei calcoli non ha bisogno delle virgolette.
+                Chiedi ai tuoi studenti di prevedere come sarebbe l'output se mettessi il codice dei calcoli dentro le virgolette.
+        7:
+            header: Il simbolo =
+            text: |-
+                D'ora in poi puoi usare anche il simbolo = invece della parola chiave `{is}`.
+                Questo vale sia per i numeri sia per le parole, e vale anche dopo le parole chiave `{if}` o `{else}`.
+            code: |-
+                nome = Hedy
+                risposta = 20 + 4
+            notes: Mostra brevemente il codice di esempio ai tuoi studenti.
+        8:
+            header: Calcoli con le variabili
+            text: 'Puoi fare calcoli con i numeri, ma puoi anche usare le variabili per fare i calcoli, così:'
+            code: |-
+                numero_1 = {ask} 'Inserisci il primo numero:'
+                numero_2 = {ask} 'Inserisci il secondo numero:'
+                risposta_corretta = numero_1 * numero_2
+                {print} numero_1 ' per ' numero_2 ' fa ' risposta_corretta
+            notes: |-
+                Mostra agli studenti il codice di esempio e fai osservare loro la posizione delle virgolette.
+                Se nelle slide precedenti hai chiesto loro di trovare degli esempi di uso della matematica in Hedy, chiedi come pensano che sarebbe questo codice.
+                Per esempio, se uno studente ha risposto 'calcolare i punti di un gioco', ora potrebbe scrivere il codice:
+                ```
+                {if} risposta = risposta_corretta
+                    punti = punti + 1
+                {else}
+                    punti = punti - 1
+                ```
+                Se pensi che sia troppo difficile per i tuoi studenti farlo da soli o in coppia, puoi fare questo esercizio insieme a tutta la classe.
+        9:
+            header: Numeri decimali
+            text: Finora Hedy non permetteva di usare numeri decimali come 1.5, ma ora sì. Nota che i computer usano il . (punto) per i numeri decimali, non la virgola.
+            code: |-
+                {print} 'Due e mezzo più due e mezzo fa...'
+                {print} 2.5 + 2.5
+        10:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} 'Questa è la biglietteria del parco acquatico'
+                {print} 'Listino prezzi: bambini sotto i 12 anni 3 euro, adulti 5 euro'
+                {print} 'Il lunedì sconto del 25%'
+                numero_bambini = 'Quanti biglietti per bambini vorresti?'
+                numero_adulti = 'Quanti biglietti per adulti vorresti?'
+                giorno_della_settimana = {ask} 'Che giorno è oggi?'
+                {clear}
+                prezzo_bambini = numero bambini * 3
+                prezzo_adulti = numero_adulti + 5
+                prezzo_totale = prezzo_adulti * prezzo_bambini
+                {if} giorno {is} lunedì
+                prezzo_totale = prezzo_totale * 0.25
+                {print} 'Il totale è prezzo_totale, per favore'
+            debug: 'True'
+            notes: Fai il debugging di questo codice insieme ai tuoi studenti.
+        11:
+            header: Mettiamoci al lavoro!
+            text: Buon divertimento con le avventure del livello 7!
+            notes: Ora gli studenti possono fare tutte le avventure di questo livello.
+        12:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        13:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        14:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        15:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai a ripetere più volte una riga di codice!
+    8:
+        1:
+            header: Benvenuti al livello 8
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * eseguire più volte una singola riga di codice
+        2:
+            header: ripeti 3 volte
+            text: "Prevedi l'output di questo codice:"
+            code: |-
+                {print} 'Il principe continuava a chiedere aiuto'
+                {repeat} 5 {times} {print} 'Aiuto!'
+                {print} 'Perché nessuno mi aiuta?'
+            notes: |-
+                Chiedi ai tuoi studenti di prevedere come sarà l'output.
+                Spiega che se vuoi ripetere una riga di codice, puoi usare il codice `{repeat}` 3 `{times}`. Se vuoi ripetere la riga più volte, basta cambiare il numero.
+                Per esempio: se stai programmando una storia in cui il tuo personaggio chiede aiuto 5 volte, potrebbe essere come nell'esempio.
+        3:
+            header: Non dimenticare la parola chiave print
+            text: Quando usi la parola chiave repeat, non dimenticare la parola chiave `{print}`.
+            code: "{repeat} 5 {times} 'Aiuto!'"
+            debug: 'True'
+            notes: Fai il debugging di questo codice insieme ai tuoi studenti.
+        4:
+            header: Ripetere una parola chiave ask
+            text: Puoi anche ripetere più volte una parola chiave `{ask}`, `{if}` o `{else}`.
+            code: |-
+                {repeat} 2 {times} risposta = {ask} 'Sapevi che puoi fare una domanda più volte?'
+                {if} risposta {is} sì
+                {repeat} 2 {times} {print} 'Lo sapevi già!'
+                {else}
+                {repeat} 3 {times} {print} 'Hai imparato qualcosa di nuovo!'
+            notes: |
+                Di nuovo, chiedi agli studenti di prevedere l'output.
+        5:
+            header: 'Usa # per un codice ordinato'
+            text: 'Ricordati di mantenere il tuo codice ordinato e leggibile usando righe che iniziano con # per spiegare cosa fa quella parte del codice!'
+            code: |-
+                # stampiamo il consiglio
+                {print} 'Tieni il tuo codice organizzato così!'
+        6:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} Sei naufragato su un'isola deserta.
+                {repeat} 3 'Aiuto!'
+                salvato = {ask} Qualcuno è venuto a salvarti?
+                {if} salvato sì {is}
+                {print} Che fortuna!
+                {else} {repeat} 3 {times} 'AIUTO!'
+                salvato = 'E adesso?'
+                {if} sì
+                {print} 'Evviva!
+                {else} 'Che peccato... Pazienza... è ora di costruire un rifugio e cercare un po' di cibo.'
+            debug: 'True'
+            notes: Fai il debugging di questo codice insieme ai tuoi studenti.
+        7:
+            header: Pronti, partenza, via!
+            text: Buon divertimento con le avventure del livello 8!
+            notes: Ora i tuoi studenti possono fare tutte le avventure di questo livello.
+        8:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        9:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        10:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        11:
+            header: Congratulazioni!
+            text: |-
+                Sei arrivato alla fine di Hedy Base!
+                Ora conosci le basi della programmazione e hai creato i tuoi primi programmi!
+
+                Se vuoi continuare a imparare, puoi passare al livello 9 per Hedy Avanzato!
+        12:
+            header: Un'anteprima del prossimo livello...
+            text: Ora che hai imparato a ripetere una riga di codice, è il momento di ripetere più righe insieme!
+    9:
+        1:
+            header: Benvenuti al livello 9
+            text: |-
+                Benvenuti in Hedy Avanzato!
+
+                Nei livelli precedenti hai imparato le basi dell'informatica! Ora è il momento di andare avanti, scrivere programmi più complessi e imparare alcune parole chiave più difficili.
+
+                Alla fine di questa lezione, saprai:
+                * ripetere più righe di codice
+                * usare correttamente l'indentazione con {repeat}, {if} e {else}
+        2:
+            header: Le parole chiave {repeat} nel livello 8
+            text: Prima la parola chiave repeat si usava così.
+            code: "{repeat} 5 {times} {print} 'Aiuto!'"
+            debug: 'True'
+            notes: |-
+                Ricorda agli studenti che hanno imparato a usare la parola chiave repeat nel livello precedente.
+                Si poteva ripetere solo una riga di codice. In questo livello imparerai a ripetere più righe di codice.
+        3:
+            header: Le parole chiave {repeat} adesso
+            text: Secondo te quale sarà l'output?
+            code: |-
+                {repeat} 5 {times}
+                    {print} 'Ciao a tutti'
+                    {print} 'Questo verrà stampato 5 volte'
+            notes: |-
+                Prima chiedi di nuovo ai tuoi studenti di prevedere l'output. Poi spiega:
+                In questo livello puoi ripetere più righe di codice. Per farlo devi dire al computer quali righe vanno insieme e devono essere ripetute.
+                Lo fai usando l'indentazione. Usa 4 spazi (o una tabulazione) all'inizio di ogni riga che vuoi ripetere.
+        4:
+            header: Le parole chiave {repeat} adesso
+            text: E come sarebbe questo output?
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Ciao!'
+                {print} 'Abbiamo finito di ripetere!'
+            notes: |-
+                Chiedi agli studenti quali righe pensano che verranno ripetute ed esegui il codice.
+                Spiega: se vuoi, puoi continuare dopo la parola chiave `{repeat}` senza indentazione.
+                Le righe che non iniziano con l'indentazione non verranno ripetute.
+        5:
+            header: if e else prima
+            text: Come saranno le parole chiave {if} e {else} con l'indentazione?
+            code: |-
+                {if} nome {is} Hedy
+                {print} 'fantastico'
+                {else}
+                {print} 'buuu!'
+            debug: 'True'
+            notes: Ecco come sono sempre state {if} e {else}. Come saranno ora che possiamo usare l'indentazione?
+        6:
+            header: if e else adesso
+            text: Ecco come sono adesso le parole chiave `{if}` e `{else}`.
+            code: |-
+                nome = {ask} 'Come ti chiami?'
+                {if} nome {is} Hedy
+                    {print} 'Benvenuta Hedy'
+                {else}
+                    {print} 'Benvenuto nel mondo della programmazione!'
+            notes: |-
+                Mostra agli studenti che usare l'indentazione non significa solo il lavoro in più di aggiungere una tabulazione, ma che è molto utile.
+                Dimostra come ora puoi scrivere più righe dopo un {if} o un {else} invece di una sola, aggiungendo qualche riga di codice all'esempio.
+        7:
+            header: Smettere di indentare
+            text: Prevedi l'output
+            code: |-
+                nome = {ask} 'Come ti chiami?'
+                {if} nome {is} Hedy
+                    {print} 'Benvenuta Hedy'
+                {else}
+                    {print} 'Benvenuto nel mondo della programmazione!'
+                {print} '3..2..1.. Inizia a programmare!'
+            notes: |-
+                Chiedi ai tuoi studenti di prevedere l'output del codice e invitali a osservare con attenzione l'indentazione.
+                Proprio come con la parola chiave `{repeat}`, puoi smettere di usare l'indentazione e quelle righe verranno sempre mostrate.
+                Non solo se la condizione è vera. Quindi, le righe senza indentazione non dipendono dall'istruzione {if} o {else}.
+        8:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} 'Biglietteria automatica degli autobus HedyWheels'
+                zona_1 = Municipio, Biblioteca, Campus, Piazza del Mercato
+                zona_2 = Piscina, Skatepark, Centro Commerciale, Aeroporto
+                destinazione = 'Dove vuoi andare?'
+                {if} destinazione {in} zona 1
+                {print} destinazione 'è nella zona 1'
+                prezzo = 3 euro
+                    {if} destinazione {is} zona_2
+                {print} destinazione 'è nella zona 2'
+                prezzo = 6
+                tipi_biglietto = {ask} 'Premi 1 per un biglietto di sola andata.
+                Premi 2 per un biglietto di andata e ritorno:'
+                {if} tipo_biglietto = 1
+                {print} 'Hai scelto un biglietto di sola andata'
+                {else}
+                        {print} Hai scelto un biglietto di andata e ritorno'
+                prezzo * 2
+                {print} 'Il totale è ' prezzo ' euro, per favore'
+            debug: 'True'
+            notes: Fai il debugging di questo codice insieme ai tuoi studenti.
+        9:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 9!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 9.
+        10:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        11:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        12:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        13:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello vedremo cosa succede se mettiamo un {if} dentro un altro {if}...
+            code: |-
+                {if} livello = 9
+                    {if} studente = curioso
+                        {print} 'Ci vediamo al prossimo livello!'
+            debug: 'True'
+    10:
+        1:
+            header: Benvenuti al livello 10
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * annidare le parole chiave {if} e {repeat}
+                * usare correttamente l'indentazione con {repeat}, {if} e {else}
+                * usare le parole chiave {and} e {or}
+            notes: Usare una parola chiave {if} dentro un'altra parola chiave {if} si chiama annidamento.
+        2:
+            header: Annidare con `{repeat}`
+            text: In questo livello puoi combinare `{repeat}` e `{if}`. Questo si chiama annidamento.
+            code: |-
+                {repeat} 3 {times}
+                    cibo = {ask} 'Cosa vuoi mangiare?'
+                    {if} cibo {is} pizza
+                        {print} 'buona!'
+                    {else}
+                        {print} 'la pizza è più buona'
+            notes: Esegui il programma. Rispondi 'pizza' una volta, ma dai anche altre risposte.
+        3:
+            header: L'indentazione è importante!
+            text: L'indentazione è molto importante per dire al computer quali righe devono essere ripetute e quali devono essere eseguite una volta sola.
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Questa riga verrà ripetuta...'
+                    {print} 'Anche questa...'
+                {print} 'ma questa no!'
+            notes: Ripeti ai tuoi studenti quanto è importante usare correttamente l'indentazione. Esegui il programma e chiedi agli studenti cosa succederebbe se anche l'ultima riga iniziasse con l'indentazione.
+        4:
+            header: Annidare con `{if}`
+            text: Puoi anche usare un `{if}` dentro un `{if}`
+            code: |-
+                continuare = {ask} 'Vuoi continuare?'
+                {if} continuare = sì
+                    conferma = {ask} 'Confermi?'
+                    {if} conferma {is} sì
+                        {print} 'Continuiamo'
+                    {else}
+                        {print} 'Non hai confermato'
+                {else}
+                    {print} 'Non vuoi continuare'
+            notes: Esegui questo programma alcune volte con risposte diverse. Chiedi ai tuoi studenti quali risposte bisogna dare per ottenere ciascuno degli output.
+        5:
+            header: L'indentazione è importante
+            text: Ancora una volta, l'indentazione è molto importante e può fare una grande differenza nel codice.
+            code: |-
+                continuare = {ask} 'Vuoi continuare?'
+                {if} continuare = sì
+                    conferma = {ask} 'Confermi?'
+                    {if} conferma {is} sì
+                        {print} 'Continuiamo'
+                {else}
+                    {print} 'Non hai confermato'
+            notes: Prova a cambiare l'indentazione e mostra agli studenti cosa succede se, per esempio, togli l'indentazione della seconda parola chiave {if}.
+        6:
+            header: Codice disordinato
+            text: "L'annidamento può essere molto utile, ma a volte può rendere il codice davvero disordinato. Guarda questo esempio:"
+            code: |-
+                {print} 'Fammi indovinare chi sei'
+                colore_capelli = {ask} 'Di che colore sono i tuoi capelli?'
+                occhiali = {ask} 'Porti gli occhiali?'
+                {if} colore_capelli {is} neri
+                    {if} occhiali {is} sì
+                        {print} 'Tu sei Jade!'
+                    {else}
+                        {print} 'Tu sei Ahmed!'
+                {elif} colore_capelli {is} biondi
+                    {if} occhiali {is} sì
+                        {print} 'Tu sei Patrick!'
+                    {else}
+                        {print} 'Tu sei Miranda!'
+                {else}
+                    {print} 'Tu sei Jackie!'
+            notes: |-
+                Chiedi agli studenti chi ha i capelli biondi e non porta gli occhiali. Ci metteranno un po' a leggere questo codice.
+                Mostra loro che nella prossima slide il codice è molto più facile da leggere usando la parola chiave and.
+        7:
+            header: La parola chiave {and}
+            text: |-
+                In questo caso la parola chiave `{and}` torna utile.
+
+                Così il codice è molto più leggibile e non devi preoccuparti troppo dell'indentazione!
+            code: |-
+                {print} 'Fammi indovinare chi sei'
+                colore_capelli = {ask} 'Di che colore sono i tuoi capelli?'
+                occhiali = {ask} 'Porti gli occhiali?'
+                {if} colore_capelli {is} neri {and} occhiali {is} sì
+                    {print} 'Tu sei Jade!'
+                {elif} colore_capelli {is} neri {and} occhiali {is} no
+                    {print} 'Tu sei Ahmed!'
+                {elif} colore_capelli {is} biondi {and} occhiali {is} sì
+                    {print} 'Tu sei Patrick!'
+                {elif} colore_capelli {is} biondi {and} occhiali {is} no
+                    {print} 'Tu sei Miranda!'
+                {else}
+                    {print} 'Tu sei Jackie!'
+            notes: |-
+                Se ora chiedessi agli studenti chi ha i capelli biondi e non porta gli occhiali, risponderebbero molto più velocemente.
+                Rendere un codice leggibile è un'abilità preziosa da imparare per i tuoi studenti e la parola chiave and sembrerà loro probabilmente molto naturale.
+        8:
+            header: La parola chiave {or}
+            text: Proprio come la parola chiave `{and}`, esiste anche `{or}`!
+            code: |-
+                {print} 'Scegli un numero da 1 a 6'
+                {print} 'Due di questi numeri ti faranno vincere un premio!'
+
+                lista_numeri = 1, 2, 3, 4, 5, 6
+                numero_premio = lista_numeri {at} {random}
+                {remove} numero_premio {from} lista_numeri
+                secondo_numero_premio = lista_numeri {at} {random}
+
+                numero_scelto = {ask} 'Quale numero scegli?'
+                {if} numero_scelto {is} numero_premio {or} numero_scelto {is} secondo_numero_premio
+                    {print} 'Evviva! Hai vinto un premio!'
+                {else}
+                    {print} 'Mi dispiace, niente premio per te...'
+            notes: Mostra questo codice agli studenti. Molto probabilmente sembrerà loro naturale.
+        9:
+            header: Attenzione!
+            text: |-
+                Quando usi `{or}`, non dimenticare di scrivere due condizioni complete.
+                Fai il debugging di questo codice.
+            code: |-
+                colore = {ask} 'Di che colore è il tuo biglietto?'
+                {if} colore {is} blu {or} rosso
+                    {print} "Hai vinto un premio!"
+            debug: 'True'
+        10:
+            header: 'Usa # per un codice ordinato'
+            text: 'Ricordati di mantenere il tuo codice ordinato e leggibile usando righe che iniziano con # per spiegare cosa fa quella parte del codice!'
+            code: |-
+                # stampiamo il consiglio
+                {print} 'Tieni il tuo codice organizzato così!'
+        11:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} 'Benvenuti a HedyJumps, la tua avventura con il paracadute!'
+                persone = {ask} 'Con quante persone ti lanci oggi?
+                {print} 'Per sicurezza faremo a tutti un po' di domande.'
+                persone_istruzioni_extra = a, b
+                {repeat} 3 {times}
+                    nome = {ask} 'Come ti chiami?'
+                gia_lanciato = 'Ti sei mai lanciato con il paracadute, ' nome '?'
+                {if} gia_lanciato  no
+                {print} 'Nessun problema, avrai un'istruzione di sicurezza extra nella stanza 13'
+                {add} nome {to} persone_istruzioni_extra
+                {else}
+                {print} 'Che bello!'
+                {print} 'Grazie a tutti per aver risposto alle domande di sicurezza. Buon lancio!'
+            debug: 'True'
+            notes: Fai il debugging di questo codice insieme ai tuoi studenti.
+        12:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 10!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 10.
+        13:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        14:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        15:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        16:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello impareremo a usare la parola chiave {for}.
+            code: |-
+                animali = cane, gatto, pesce blob
+                {for} animale in animali
+                {print} 'Adoro ' animale
+            debug: 'True'
+    11:
+        1:
+            header: Benvenuti al livello 11
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * usare la parola chiave `{for}`
+        2:
+            header: La parola chiave `{for}`
+            text: Con `{for}` puoi creare una lista e usare tutti gli elementi di quella lista.
+            code: |-
+                animali = cane, gatto, pesce blob
+                {for} animale {in} animali
+                    {print} 'Adoro ' animale
+            notes: |-
+                Mostra agli studenti come la parola chiave {for} crea un blocco che inizia con l'indentazione.
+                Esegui il codice e mostra agli studenti cosa succede.
+                Poi chiedi agli studenti di scrivere una loro versione di un programma con {for}.
+        3:
+            header: La parola chiave `{for}`
+            text: 'Ecco un altro esempio della parola chiave `{for}`:'
+            code: |-
+                giorni = lunedì, martedì, mercoledì, giovedì, venerdì, sabato, domenica
+                nomi = mamma, papà, Emma, Sophie
+                {for} giorno {in} giorni
+                    {print} nomi {at} {random} ' lava i piatti di ' giorno
+            notes: Fai un giro della classe per far condividere agli studenti i programmi che hanno inventato. Poi mostra questo esempio e chiedi agli studenti di prevedere l'output.
+        4:
+            header: Debugging
+            text: Facciamo il debugging di questo codice
+            code: |-
+                {print} 'Signore e signori!'
+                {print} 'Per una sola notte al circo Hedy!'
+                esibizioni = farsi sparare da un cannone, camminare sul filo, chiudersi in una valigia,
+                persone = Iris la Fenomenale Achmed lo Strabiliante Francis il Fantastico
+                    {for} persone {in} esibizioni
+                persona_scelta {is} persone {random}
+                    persona_scelta ' farà ' esibizione
+                {add} persona_scelta {from} persone
+                {print} 'Venite a vedere il nostro spettacolo stasera!'
+                {print} 'I biglietti sono disponibili solo alla cassa
+            debug: 'True'
+            notes: Fate insieme il debugging di questo codice.
+        5:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 11!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 11.
+        6:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        7:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        8:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        9:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello impareremo a usare la parola chiave {for} in un modo diverso.
+            code: |-
+                {for} contatore {in} {range} 1 {to} 10
+                    {print} contatore
+                {print} 'Pronti o no, arrivo!'
+            debug: 'True'
+    12:
+        1:
+            header: Benvenuti al livello 12
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * usare le funzioni
+            notes: |-
+                In questo livello gli studenti conosceranno le funzioni. Può essere un concetto difficile da afferrare per i ragazzi.
+                Più gli studenti si esercitano con le avventure, migliore sarà la loro comprensione.
+                Quindi fai in modo che gli studenti non passino troppo tempo a cercare di capire e ne passino di più a fare da soli: capiranno facendo!
+        2:
+            header: Funzioni!
+            text: |-
+                In questo livello imparerai a usare le funzioni. Una funzione è un blocco di codice che puoi usare facilmente più volte.
+
+                Esercizio:
+                * Scrivi il testo della canzone 'Twinkle twinkle little star' (Brilla brilla la stellina)
+                * Evidenzia le parti del testo che si ripetono
+            notes: |-
+                Per mostrare agli studenti a cosa potrebbe servire una funzione, usiamo Twinkle twinkle little star.
+                Le parti del testo che si ripetono sono: 'Twinkle', 'Twinkle', 'Little star', 'How I wonder what you are?'
+        3:
+            header: Twinkle Twinkle little star!
+            text: |-
+                In questo programma vedi un esempio di funzione.
+                Vediamo cosa succede se completi il resto della canzone!
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
+            notes: |-
+                Aggiungi alla funzione le parti del testo che si ripetono: 'Twinkle', 'Little star', 'How I wonder what you are?'.
+                Spiega agli studenti che questa parte è la funzione e mostra loro che hai chiamato la funzione twinkle.
+                Nella prossima slide chiameremo la funzione due volte per completare la canzone.
+        4:
+            header: Funzioni
+            text: Come hai visto nell'esempio, una funzione è un blocco di codice che può essere chiamato in qualsiasi momento. Usi `{define}` per definire la funzione e `{call}` per usarla.
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
+
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
+        5:
+            header: 'Usa # per un codice ordinato'
+            text: |-
+                Ricordati di mantenere il tuo codice ordinato e leggibile usando righe che iniziano con # per spiegare cosa fa quella parte del codice!
+                Questo è particolarmente utile quando crei delle funzioni!
+            code: |-
+                # Questa funzione ti dà un ottimo consiglio
+                {define} consiglio
+                    {print} 'Tieni il tuo codice organizzato così!'
+                    {print} 'Più avanti ti ringrazierai!'
+        6:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {call} nuovo_membro
+                {print} 'Ciao nuovo membro!'
+                nome_utente = {ask} 'Qual è il tuo nome utente?'
+                password = 'Qual è la tua password?'
+                {print} 'Benvenuto nel nostro club!'
+
+                nome_utente = {ask} 'Inserisci il tuo nome utente. Sei un nuovo membro? Scrivi Nuovo Membro'
+                {if} nome_utente = Nuovo Membro
+                {call} nuovo membro
+                    {else}
+                        password = {ask} 'Inserisci la password'
+            debug: 'True'
+            notes: Questo esercizio di debugging è piuttosto difficile. Ti consigliamo di far lavorare prima gli studenti sulle avventure, prima di far loro fare il debugging di questo codice.
+        7:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 12!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 12.
+        8:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        9:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        10:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        11:
+            header: Congratulazioni!
+            text: |-
+                Sei arrivato alla fine di Hedy Avanzato! Puoi continuare a imparare con Hedy Esperto (livelli 13-16), dove imparerai a scrivere vero codice Python. Oppure, naturalmente, puoi restare in Hedy Avanzato e inventare i tuoi programmi!
+
+                Nel prossimo livello faremo alcune modifiche al linguaggio, così potrai usarlo ovunque si usi Python.
+    13:
+        1:
+            header: Benvenuti al livello 13
+            text: |-
+                Benvenuti in Hedy Esperto (livelli 13-16)!
+
+                Alla fine di questa lezione, saprai:
+                * scrivere codice che è (quasi) vero codice Python
+        2:
+            header: Vero codice Python
+            text: |-
+                Il codice che abbiamo usato finora era semplificato.
+                Ma da ora in poi useremo vero codice Python, che potrai usare anche altrove.
+            notes: |-
+                Spiega ai tuoi studenti che Python è un linguaggio di programmazione molto diffuso.
+                Finora abbiamo usato diverse versioni semplificate di questo linguaggio.
+                Ma ora siamo arrivati al punto in cui tutto il linguaggio che usi in Hedy è vero codice Python e quindi può essere usato anche altrove.
+                Spiega anche che ci sono parecchi cambiamenti, ma che sono cambiamenti relativamente piccoli.
+        3:
+            header: '{print} in Python'
+            text: D'ora in poi per {print} dovrai usare le parentesi
+            code: |-
+                {print} ('Questo codice ora sembra vero linguaggio Python.')
+                {print} ('Ora puoi stampare anche fuori da Hedy.')
+                {print} ('Complimenti, ora programmi come un vero professionista!')
+            notes: |-
+                Chiedi ai tuoi studenti di ricordare come si scriveva prima una parola chiave print.
+                Poi mostra il nuovo codice e assicurati che tutti vedano dove si trovano le parentesi.
+        4:
+            header: '{ask}'
+            text: Sostituiremo anche `{ask}` con la parola chiave `{input}` usata in Python, sempre con le parentesi.
+            code: |-
+                eta = {input} ('Quanti anni hai?')
+                {print} ('Hai', eta, 'anni.')
+        5:
+            header: '{print} con le variabili'
+            text: 'Puoi combinare la stampa di variabili e testo usando le virgole per separarli:'
+            code: |-
+                livello = {input}('A che livello sei?')
+                {print}('Buona fortuna con il livello', livello)
+            notes: |-
+                Chiedi ai tuoi studenti di prevedere quale sarà il risultato di questo codice.
+                Poi esegui il codice e mostra come il codice stampa letteralmente il testo tra le virgolette e, per ciò che è fuori, il valore della variabile.
+                Mostra cosa succede se nell'ultima riga metti anche 'livello' tra virgolette.
+        6:
+            header: '`{if}` e `{else}`'
+            text: "Nell'istruzione if dovrai usare due segni di uguale: ==. È quello che fa anche la maggior parte dei linguaggi di programmazione. Ora ci servono anche i due punti alla fine dell'istruzione if."
+            code: |-
+                uccello_preferito = input('Qual è il tuo uccello preferito?')
+                {if} uccello_preferito == 'pinguino':
+                    {print}('Siii, è anche il mio!')
+                {elif} uccello_preferito == 'pappagallo':
+                    {print}('Ottima scelta!')
+                {else}:
+                    {print}("Mah, non sono d'accordo")
+            notes: 'I tuoi studenti dovranno abituarsi a tutta la nuova sintassi. Può essere un processo complicato e frustrante: dai loro tante occasioni per esercitarsi con la nuova sintassi.'
+        7:
+            header: '{range} nel vero Python'
+            text: Anche per contare con la parola chiave {range} ora servono le parentesi.
+            code: |-
+                {for} i in {range} (1, 10):
+                    {print} (i)
+                {print} ('Abbiamo contato fino a 10.')
+            notes: Chiedi ai tuoi studenti di ricordare come lo usavano prima
+        8:
+            header: Minore e maggiore
+            text: Forse conosci già i simboli < e >. Il < controlla se il primo numero è minore del secondo, per esempio eta < 12 controlla se eta è minore di 12. Il > controlla se il primo numero è maggiore del secondo, per esempio punti > 10 controlla se punti è maggiore di 10.
+            code: |-
+                numero = {input} ('scegli un numero minore di 10')
+                {if} numero < 10:
+                    {print}('Bene, hai scelto un numero!')
+                {if} numero > 10:
+                    {print}('Questo non è un numero minore di 10.')
+            notes: |-
+                Mostra il codice ai tuoi studenti. Chiedi loro di prevedere cosa succede con i diversi numeri.
+                Esegui il codice con numeri diversi.
+                Infine, prova il numero 10 e mostra che ora il codice non dà nessun output.
+                Il numero 10 non è né maggiore né minore di 10 e quindi non dà output, ma risolveremo questo problema nella prossima slide.
+        9:
+            header: Maggiore o uguale
+            text: |-
+                C'è anche un simbolo per maggiore o uguale a.
+                Vedi la differenza con il codice di prima?
+            code: |-
+                numero = {input} ('scegli un numero minore di 10')
+                {if} numero < 10:
+                    print('Bene, hai scelto un numero!')
+                {if} numero >= 10:
+                    print('Questo non è un numero minore di 10.')
+            notes: |-
+                Ora puoi fare la stessa cosa. Esegui il codice con numeri diversi, ma eseguilo anche con 10.
+                Assicurati che i tuoi studenti capiscano da dove viene la differenza.
+        10:
+            header: Minore o uguale
+            text: |-
+                C'è anche un simbolo per minore o uguale a.
+                Funziona allo stesso modo
+            code: |-
+                numero = {input} ('scegli un numero tra 10 e 20')
+                {if} numero <= 10:
+                    print('Scegli un altro numero')
+                {if}
+                    print('Bene, hai scelto un numero!')
+                {if} numero >= 10:
+                    print('Questo non è un numero minore di 10.')
+            notes: |-
+                Ora puoi fare la stessa cosa. Esegui il codice con numeri diversi, ma eseguilo anche con 10.
+                Assicurati che i tuoi studenti capiscano da dove viene la differenza.
+                Mostra loro che puoi fare lo stesso con minore o uguale a, cambiando '>=' in '>' e '<=' in '<'.
+        11:
+            header: Uguale o diverso
+            text: D'ora in poi dovresti usare anche i simboli per uguale e diverso.
+            code: |-
+                risposta = {input} ('Quanto fa 5+5?')
+                {if} risposta = 10:
+                    {print} ('Hai dato la risposta giusta!')
+                {if} risposta != 10:
+                    {print} ('Sbagliato. Riprova!')
+            notes: |-
+                Chiedi ai tuoi studenti cosa pensano che significhi il simbolo '!='.
+                Poi mostra, eseguendo il codice, che significa diverso da.
+        12:
+            header: 'Usa # per un codice ordinato'
+            text: 'Ricordati di mantenere il tuo codice ordinato e leggibile usando righe che iniziano con # per spiegare cosa fa quella parte del codice!'
+            code: |-
+                # stampiamo il consiglio
+                {print}('Tieni il tuo codice organizzato così!')
+        13:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            debug: 'True'
+            notes: Fate insieme il debugging di questo codice.
+        14:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 13!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 13.
+        15:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        16:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        17:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        18:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai a usare le liste come nel vero Python.
+    14:
+        1:
+            header: Benvenuti al livello 14
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * usare le liste come nel vero Python.
+                * usare {for} come nel vero Python.
+        2:
+            header: Creare una lista in Python
+            text: Se vuoi creare una lista, ora ti servono le parentesi quadre.
+            code: numeri = [4, 8, 9]
+        3:
+            header: Liste di parole
+            text: Se la lista contiene parole invece di numeri, dovrai usare anche le virgolette.
+            code: animali_preferiti = ['cani', 'pecore', 'pappagalli', 'canguri']
+        4:
+            header: Prendere un elemento dalla lista
+            text: "Puoi stampare facilmente un elemento della lista mettendo il numero dell'elemento dopo il nome della lista:"
+            code: |-
+                vincitori = ['Amber', 'Bryan', 'Clara']
+
+                {print} (vincitori[1], 'ha vinto il primo premio.')
+                {print} (vincitori[2], 'ha vinto il secondo premio.')
+                {print} (vincitori[3], 'ha vinto il terzo premio.')
+            notes: |-
+                Prima chiedi ai tuoi studenti quale pensano che sarà l'output della prima parte del codice.
+                Poi esegui il codice per vedere se hanno ragione.
+        5:
+            header: Elemento a caso da una lista
+            text: Come prima, vogliamo anche prendere un elemento a caso da una lista.
+            code: |-
+                candidati = ['Amber', 'Bryan', 'Clara']
+                vincitore = candidati[random]
+                {print} ('Complimenti,', vincitore, 'hai vinto un premio.')
+            notes: Esegui il codice più volte per mostrare che dà davvero un nome a caso.
+        6:
+            header: '{for} nel vero Python'
+            text: "D'ora in poi, ogni volta che usi la parola chiave {for} dovrai mettere i due punti alla fine della riga:"
+            code: |-
+                animali = cane, gatto, pesce blob
+                {for} animale in animali:
+                    {print} ('Adoro ' animale)
+            notes: |-
+                Fai notare agli studenti che questo non vale solo per la parola chiave {for}, ma per ogni riga seguita da una riga con l'indentazione.
+                Lo vedrai nelle prossime slide.
+        7:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} ('Benvenuti da Hedyclothes online.')
+                articoli = ['magliette Hedy', 'jeans Hedy', 'calzini Hedy']
+                prezzi = [15 25, 10]
+
+                totale = 0
+
+                {for} i {range} (1,3):
+                    numero = ('Quanti ', articoli[i], ' vorresti comprare?')
+                    totale = totale + prezzi*numero
+
+                {if} totale < 50:
+                totale = + 10
+                {print} (Devi pagare 10 in più per la spedizione.)
+
+                regali = [orecchini, occhiali da sole, tappi per le orecchie ]
+                {else}
+                    {print} 'Hai la spedizione gratuita e un piccolo regalo.'
+                    regalo = regalo {random}
+                    {print} 'Il tuo regalo è un paio di', regalo
+
+                {print} (Grazie per aver comprato da Hedyclothes. Per favore paga, totale,)
+            debug: 'True'
+            notes: Fate insieme il debugging di questo codice.
+        8:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 14!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 14.
+        9:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        10:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        11:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        12:
+            header: Un'anteprima del prossimo livello...
+            text: Nel prossimo livello imparerai a usare le funzioni come nel vero Python.
+    15:
+        1:
+            header: Benvenuti al livello 15!
+            text: |-
+                Alla fine di questa lezione, saprai:
+                * Rendere il tuo codice più corto ed efficiente usando le funzioni.
+                * Usare funzioni con argomenti
+                * Usare `{return} {value}` nelle funzioni
+            notes: Chiedi agli studenti cosa ricordano delle funzioni e a cosa servono.
+        2:
+            header: Ti ricordi le funzioni?
+            text: |-
+                Le funzioni possono rendere il tuo codice più organizzato e ordinato, ripetendo un pezzo di codice in una funzione.
+                Nel vero codice Python, le funzioni si definiscono con `{def}` seguito dal nome della funzione e poi da ():
+                Non devi usare `{call}` per chiamare la funzione, basta scrivere il nome seguito da ().
+            code: |-
+                def quadrato():
+                    {for} i {in} {range} (1,4):
+                        {turn} 90
+                        {forward} 10
+
+                quadrato()
+                {forward} 50
+                quadrato()
+                {forward} 50
+                quadrato()
+                {forward} 50
+            notes: Mostra agli studenti come sono fatte ora le funzioni. Spiega che le parentesi verranno usate più avanti.
+        3:
+            header: Troppo codice?
+            text: Il codice qui sotto contiene molte ripetizioni.
+            code: |-
+                {print} ('Questo codice calcolerà i primi 5 quadrati e stamperà il risultato.')
+
+                quadrato1 = 1*1
+                {print} ('il quadrato di 1 =', quadrato1)
+                quadrato2 = 2*2
+                {print} ('il quadrato di 2 = ', quadrato2)
+                quadrato3 = 3*3
+                {print} ('il quadrato di 3 = ', quadrato3)
+                quadrato4 = 4*4
+                {print} ('il quadrato di 4 = ', quadrato4)
+                quadrato5 = 5*5
+                {print} ('il quadrato di 5 = ', quadrato5)
+            notes: |-
+                Mostra il codice ai tuoi studenti. Vedono tutte le ripetizioni?
+                Chiedi loro se riescono a trovare un modo per scrivere questo codice con meno righe.
+                Probabilmente non ci riusciranno, quindi mostra loro la prossima slide!
+        4:
+            header: Usa una funzione!
+            text: |-
+                Ora proveremo a ottenere lo stesso output con meno righe di codice.
+                Per farlo scriviamo una funzione: un pezzo di codice che possiamo ripetere più volte con input diversi.
+            code: |-
+                {def} calcola_quadrato(numero):
+                    quadrato = numero*numero
+                    {print} ('il quadrato di', numero, '=', quadrato)
+
+                {print} ('Questo codice calcolerà i primi 5 quadrati e stamperà il risultato.')
+
+                calcola_quadrato(1)
+                calcola_quadrato(2)
+                calcola_quadrato(3)
+                calcola_quadrato(4)
+                calcola_quadrato(5)
+            notes: |-
+                Esegui il codice. Assicurati che i tuoi studenti vedano come questo output deriva dal codice.
+                Ora abbiamo solo due righe in meno rispetto alla slide precedente.
+
+                Spiega ai tuoi studenti che più ripetizioni ci sono, più conviene usare le funzioni.
+                Alcuni vantaggi: meno codice, quindi codice più organizzato, e lo si scrive più in fretta.
+                Meno possibilità di fare errori ed è più facile trovarli se li fai.
+
+                Mostra che puoi cambiare qualcosa nella funzione, in modo che cambi tutto l'output.
+        5:
+            header: Funzioni con più argomenti
+            text: |-
+                L'input che si trova tra le parentesi di una funzione si chiama argomento.
+                Puoi usare più argomenti per una sola funzione:
+            code: |-
+                {def} fiaba(principessa, principe, qualcosa_di_velenoso, gesto_di_amore)
+                risposta = {input}('Vuoi che ti racconti una fiaba?')
+                {if} risposta == sì:
+                    {print} ('Tanto tempo fa viveva una ragazza di nome ', principessa)
+                    {print} ('Mangiò ', qualcosa_di_velenoso, ' e per poco non morì...')
+                    {print} ('Ma il principe ', principe, ' andò a trovarla e le diede un ', gesto_di_amore )
+                    {print} ('Questo guarì ', principessa ' che si innamorò di ', principe)
+                    {print} (principessa, ' e ', principe, ' vissero felici e contenti.')
+                {else}:
+                    {print} ('Nessun problema. Magari la prossima volta.')
+
+                fiaba('Biancaneve', 'Casper', 'una mela avvelenata', 'bacio')
+            notes: Esegui il codice e mostra che puoi cambiare tutti e quattro gli argomenti per ottenere una storia diversa.
+        6:
+            header: Valore restituito
+            text: |-
+                A volte vuoi usare fuori da una funzione un numero che è stato calcolato dentro la funzione.
+                Puoi usare il comando `{return}` per usare il valore fuori dalla funzione.
+            code: |-
+                {def} calcola_nuovo_prezzo(importo, percentuale):
+                    percentuale = percentuale / 100
+                    importo_sconto = importo * percentuale
+                    {return} importo - importo_sconto
+
+                vecchio_prezzo = input ('Quanto costa secondo il cartellino?')
+                sconto = input ('Qual è la percentuale di sconto?')
+
+                nuovo_prezzo = _ calcola_nuovo_prezzo(vecchio_prezzo, sconto)
+                print('Il nuovo prezzo è ', nuovo_prezzo, ' euro')
+            notes: Ai tuoi studenti vengono in mente altre situazioni in cui sarebbe utile restituire un valore da una funzione?
+        7:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} ('Questo programma ti aiuterà a esercitarti con le moltiplicazioni.')
+
+                {def} controlla risposta(domanda risposta_corretta)
+                    risposta data = input('Quanto fa ' domanda '?' )
+                    {if} risposta_data == risposta_corretta:
+                    {play} C5
+                    {print} (Ottimo lavoro, hai dato la risposta giusta.)
+
+                    else
+                        {play} C2
+                        {print} 'Sbagliato. Andrà meglio la prossima volta!'
+
+                çontrolla_risposta 5*5, 25
+                controlla risposta(6*7 42)
+            debug: 'True'
+            notes: Fate insieme il debugging di questo codice.
+        8:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 15!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 15.
+        9:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        10:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        11:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        12:
+            header: Un'anteprima del prossimo livello...
+            text: "Nel prossimo livello imparerai l'ultima parola chiave, per creare un ciclo {while}:"
+            code: |-
+                livello = 15
+                {while} livello <= 16:
+                    {print} ('Non usare while')
+                    livello = livello + 1
+    16:
+        1:
+            header: Benvenuti al livello 16!
+            text: |-
+                Alla fine di questa lezione:
+                * saprai creare un ciclo {while}.
+                * avrai completato tutto Hedy!
+        2:
+            header: Un nuovo ciclo
+            text: |-
+                Con la parola chiave {while} puoi creare un nuovo ciclo.
+                Il ciclo verrà eseguito finché la condizione è vera.
+            code: |-
+                temperatura = 15
+                {while} temperatura < 25:
+                    {print} ('Ci sono ', temperatura, ' gradi.')
+                    {print} ('Non puoi uscire senza giacca.')
+                    temperatura = temperatura + 2
+                {print} ('Ci sono ', temperatura, ' gradi. Ora puoi uscire senza giacca.')
+            notes: |-
+                Chiedi ai tuoi studenti di prevedere quale sarà l'output di questo codice. Con quale temperatura stamperà che puoi uscire senza giacca?
+                Mostra se hanno ragione. Poi chiedi ai tuoi studenti cosa succede se togli la riga 'temperatura = temperatura + 2'.
+                Mostra loro che questo crea un ciclo infinito, perché la temperatura resta sempre sotto i 25.
+        3:
+            header: '{while} e {input}'
+            text: Puoi anche combinare la parola chiave {while} con una domanda.
+            code: |-
+                {while} risposta != Hedy:
+                    risposta = {input} ('Come mi chiamo?')
+                {print} ('Giusto. Piacere di conoscerti. Io sono Hedy!')
+            notes: |-
+                Chiedi di nuovo ai tuoi studenti di prevedere il risultato. Quante volte ti verrà fatta la domanda?
+                Mostra loro che la domanda verrà ripetuta finché non darai la risposta giusta, cioè 'Hedy'.
+        4:
+            header: Debugging
+            text: Facciamo il debugging di questo codice!
+            code: |-
+                {print} ('Ora creeremo una versione migliorata del programma per i calcoli. ')
+
+                {def} controlla_risposta domanda, risposta_corretta
+                    {while} risposta_data != risposta corretta
+                    risposta_data = {input} ('Quanto fa ' domanda '?' )
+                        {play} C2
+                        {print} (Sbagliato. Riprova!)
+
+                        {print} (Ottimo lavoro, hai dato la risposta giusta.)
+                    {play} C5
+
+
+                çontrolla_risposta 3+9, 12
+                controlla risposta (7*8, 56)
+            debug: 'True'
+            notes: Fate insieme il debugging di questo codice.
+        6:
+            header: Diamo un'occhiata alle avventure!
+            text: Buon divertimento con le avventure del livello 16!
+            notes: Ora i tuoi studenti possono lavorare su tutte le avventure del livello 16.
+        7:
+            header: Ripassiamo!
+            text: Cosa hai imparato oggi?
+            notes: Chiedi agli studenti di elencare cosa hanno imparato oggi.
+        8:
+            header: Ripassiamo!
+            text: |-
+                Quale avventura ti è piaciuta di più? Perché?
+
+                Quale avventura ti è piaciuta di meno? Perché?
+            notes: Chiedi agli studenti la loro opinione.
+        9:
+            header: Mostra e racconta!
+            text: Qualcuno vuole mostrare alla classe un programma che ha creato?
+            notes: Fai mostrare ad alcuni studenti il loro lavoro alla classe.
+        10:
+            header: Un'anteprima del tuo futuro...
+            text: |-
+                Questo era l'ultimo livello. Ma questo non significa che ora devi smettere di programmare.
+                Hai imparato molto e con quello che sai puoi creare tanti programmi interessanti.
+                Cosa ti piacerebbe programmare da solo?
+            notes: Fai discutere i tuoi studenti su cosa vorrebbero programmare in futuro. Incoraggiali a farlo!
