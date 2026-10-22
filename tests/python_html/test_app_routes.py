@@ -370,6 +370,19 @@ class TestMachineAndMicrobitFiles:
         assert ys[-1] == min(ys) < max(ys)
         assert xs[-1] == max(xs) > min(xs)
 
+    def test_generated_embroidery_has_a_useful_size(self, client, tmp_path):
+        # forward 100, turn right, forward 50
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            zip_file.extract('hedy_drawing.dst', tmp_path)
+
+        # pyembroidery uses units of 0.1 mm: a turtle step is 0.4 mm and a stitch at most 2 mm
+        stitches = [(x, y) for x, y, _ in pyembroidery.read(str(tmp_path / 'hedy_drawing.dst')).stitches]
+        xs = [x for x, _ in stitches]
+        ys = [y for _, y in stitches]
+        assert (max(xs) - min(xs), max(ys) - min(ys)) == (200, 400)
+        assert all(abs(x2 - x1) <= 20 and abs(y2 - y1) <= 20 for (x1, y1), (x2, y2) in zip(stitches, stitches[1:]))
+
     def png_size(self, response):
         with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
             png = zip_file.read('hedy_drawing.png')

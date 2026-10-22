@@ -787,6 +787,9 @@ def parse_by_id(user):
 MACHINE_FILES_NAME = 'hedy_drawing'
 # Has to match the maximum number of points the front-end records, see turtle_recording_prefix in app.ts
 MACHINE_FILES_MAX_POINTS = 20000
+# See prepare_files for how these were chosen
+MACHINE_FILES_EMBROIDERY_SCALE = 4
+MACHINE_FILES_STITCH_LENGTH = 5
 MACHINE_FILES_PNG_SCALE = 5
 MACHINE_FILES_PNG_MAX_SIZE = 2000
 
@@ -817,8 +820,11 @@ def prepare_files():
     if not is_valid_turtle_path(points):
         return make_response({'error': gettext('ajax_error')}, 400)
 
-    t = turtlethread.Turtle()
-    with t.running_stitch(stitch_length=20):
+    # Without scaling, a turtle step is 0.1 mm, which makes most drawings only a few mm big. Each step is
+    # 0.4 mm instead, so the height of the turtle canvas (250 steps) is 10 cm, a common embroidery hoop size.
+    # The stitches are 2 mm long, a typical stitch length for embroidery machines.
+    t = turtlethread.Turtle(scale=MACHINE_FILES_EMBROIDERY_SCALE)
+    with t.running_stitch(stitch_length=MACHINE_FILES_STITCH_LENGTH):
         for x, y in points:
             t.goto(x, y)
 
