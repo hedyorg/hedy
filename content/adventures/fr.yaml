@@ -109,7 +109,7 @@ adventures:
                     animaux {is} lion, zèbre, flamand rose
                     {print} Bonjour les enfants ! Aujourd'hui, nous allons au zoo !
                     animal_prefere {is} {ask} Quel animal souhaites-tu voir aujourd'hui ?
-                    {add} animal_prefere {to} animaux
+                    {add} animal_prefere {to_list} animaux
                     {sleep} 2
                     {print} Dirigeons-nous vers les animaux {at} {random}
                     {sleep}
@@ -503,14 +503,14 @@ adventures:
                     Si tu veux afficher la réponse, tu peux le faire de cette manière :
                 example_code_2: |
                     ```
-                    {print} Bonjour!
-                    {ask} Comment t'appelles-tu ?
-                    {print} Salut, {answer}!
+                    {print} Bonjour !
+                    {ask} Comment t'appelles-tu  ?
+                    {print} Salut, {answer} !
                     ```
                 story_text_3: |
                     ### Exercice
-                    Essaye les commandes `{ask}` et `{answer}`. Commence par remplir les trous pour faire fonctionner le proigramme.
-                    Puis pose encore 2 questions en utilisant la commande `{ask}`. Après chaque `{ask}` , utilise une `{answer}` afin d'afficher la réponse à l'écran.
+                    Essaye les commandes `{ask}` et `{answer}`. Commence par remplir les trous pour faire fonctionner le programme.
+                    Puis pose encore 2 questions en utilisant la commande `{ask}`. Après chaque `{ask}`, utilise une `{answer}` afin d'afficher la réponse à l'écran.
                 example_code_3: |
                     ```
                     _ Comment vas-tu ?
@@ -2041,7 +2041,7 @@ adventures:
                 story_text: |-
                     ## Pour chaque
                     Dans ce niveau, nous apprendrons une nouvelle commande appelée `{for}`. Avec `{for}`, tu peux répéter quelque chose pour tous les éléments d'une liste.
-                    La commande `{for}` crée un bloc, comme `{repeat}` et `{if}`. Il faut donc ajouter 4 espaces avant chaque ligne du bloc.
+                    La commande `{for}` crée un bloc, comme `{repeat}` et `{if}`. Il faut donc ajouter une tabulation ou 4 espaces avant chaque ligne du bloc.
                 example_code: |
                     ```
                     animaux = chiens, chats, méduses
@@ -2170,13 +2170,13 @@ adventures:
                     Retourne au niveau précédent et copie ton code de la voyante. Fais fonctionner le code dans ce niveau en ajoutant les guillemets aux bons endroits.
                 example_code: |
                     ```
-                    _ Ajoute les guillemets à ce code _
+                    # Ajoute les guillemets à ce code
                     {print} Je suis Hedy la voyante !
                     question {is} {ask} Que voudrais-tu savoir ?
                     {print} Voici ta question : question
                     réponses {is} oui, non, peut-être
                     {print} Ma boule de cristal dit…
-                    {sleep} 2
+                    {sleep} _
                     {print} réponses {at} {random}
                     ```
                 answer_code: |
@@ -2659,14 +2659,14 @@ adventures:
                     Reviens au niveau précédent et copie ton code de la maison hantée. Fais fonctionner le code dans ce niveau en ajoutant des guillemets aux bons endroits.
                 example_code: |
                     ```
-                    _ Ajoute les guillemets à ce code _
-                    {print} Echappe toi de la maison hantée !
+                    # Ajoute les guillemets à ce code
+                    {print} Echappe toi de la maison hantée !
                     {print} Il y a 3 portes devant toi…
-                    choix {is} {ask} Quelle porte choisis-tu ?
+                    choix {is} {ask} Quelle porte choisis-tu ?
                     {print} Tu as choisi la porte… choix
                     monstres {is} un zombie, un vampire, RIEN DU TOUT ET TU T'ÉCHAPPES PAR LA SORTIE
                     {print} Tu vois...
-                    {sleep}
+                    {sleep} _
                     {print} monstres {at} {random}
                      ```
                 answer_code: |
@@ -2677,7 +2677,7 @@ adventures:
                     {print} Yu as choisi... choix
                     montres {is} un zombie, un vampire, RIEN QUE TU NE PEUX ECHAPPER
                      {print} Tu vois...
-                    {sleep}
+                    {sleep} 3
                     {print} monstres {at} {random}
                     ```
             5:
@@ -3130,7 +3130,7 @@ adventures:
                     Regarde l'exemple de code.
 
                     ### Exercice
-                    Ajoute une commande `{else}` à l'exemple. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne par 4 espaces.
+                    Ajoute une commande `{else}` à l'exemple. Fait un bloc de lignes en utilisant l'indentation. Tu le fais en commençant chaque ligne par une tabulation ou 4 espaces.
                 example_code: |
                     ```
                     nom = {ask} "Quel est ton nom ?"
@@ -3288,8 +3288,8 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Copie l'exemple de code dans la zone de programmation en cliquant sur le bouton jaune.
-                    Fais poser au perroquet une question différente en écrivant quelque chose dans l'espace vide de l'exemple !
-                    **Bonus** Tu peux aussi faire poser plusieurs questions au perroquet. Écris plusieurs autres lignes de code à la suite de ce que tu as déjà écrit.
+                    Demande au perroquet de poser une question différente. Écris quelque chose dans l'espace vide de l'exemple !
+                    **Bonus** Tu peux aussi faire poser plusieurs questions au perroquet. Ajoute d'autres lignes de code à la suite de ce que tu auras déjà écrit.
                 example_code_2: |
                     ```
                     {print} Je suis Hedy le perroquet
@@ -3393,7 +3393,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## La commande {print}
+                    ## La commande `{print}`
                     Tu peux afficher du texte à l'écran en utilisant la commande `{print}`.
                 example_code: |
                     ```
@@ -3463,12 +3463,16 @@ adventures:
                     L'exemple montre le problème si tu entoures ton texte avec les apostrophes.
                 example_code_2: |
                     ```
-                    _ Voici ce qu'il ne faut pas faire avec les apostrophes : _
+                    # Voici ce qu'il ne faut pas faire avec les apostrophes :
                     {print} 'aujourd'hui je fais du babysitting avec les enfants de ma sœur'
                     {print} 'qu'y a-t-il de plus amusant que ça ?'
-                    _ Voici comment le résoudre _
+
+                    # Voici comment le résoudre
                     {print} "aujourd'hui je fais du babysitting avec les enfants de ma sœur" 
                     {print} "qu'y a-t-il de plus amusant que ça ?"
+
+                    # Essaye ! Crée une ligne de code avec des guillemets ci-dessous
+                    _
                     ```
                 answer_code: |
                     Ma réponse
@@ -3526,8 +3530,8 @@ adventures:
                 story_text: |
                     À ce niveau, tu peux répéter plusieurs lignes de code avec une seule commande `{repeat}`.
                     Tu le fais en faisant un bloc avec les lignes que tu veux répéter.
-                    Pour faire un bloc, tu ajoutes quatre espaces au début de chaque ligne du bloc. C'est ce qu'on appelle une **indentation**.
-                    Tu devras indenter même pour créer un bloc d'une seule ligne.
+                    Les lignes du bloc ont besoin d'une **indentation**
+                    C'est-à-dire ajouter une tabulation ou 4 espaces au début de chaque ligne. Tu devras indenter même pour créer un bloc d'une seule ligne.
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -3669,16 +3673,18 @@ adventures:
                     Retourne au niveau précédent et copie ton code du restaurant. Fais fonctionner ce code dans ce niveau en ajoutant des guillemets aux bons endroits et ajoute des commandes  `{clear}`.
                 example_code: |
                     ```
-                    _ Ajoute les guillemets à ce code _
-                    {print} Bienvenue au Restaurant Chez Hedy !
+                    # Ajoute les guillemets à ce code
+                    {print} Bienvenue au Restaurant Chez Hedy !
                     {print} Aujourd'hui nous servons pizza ou lasagne.
-                    plat {is} {ask} Que voudrais-tu manger ?
-                    {print} Très bon choix !  plat  est ce que je préfère !
-                    garniture {is} {ask} Que veux-tu en garniture ? fromages ou légumes ?
-                    {print} plat  aux  garniture  . C'est parti !
-                    boisson {is} {ask} Que voudrais-tu boire avec ça ?
+                    plat {is} {ask} Que voudrais-tu manger ?
+                    {print} Très bon choix !  plat  est ce que je préfère !
+                    garniture {is} {ask} Que veux-tu en garniture ? fromages ou légumes ?
+                    {print} plat  aux  garniture  . C'est parti !
+                    boisson {is} {ask} Que voudrais-tu boire avec ça ?
                     {print} Merci pour ta commande.
-                    {print} Tes  plat  et  boisson  vont être servis !
+                    {print} Tes  plat  et  boisson  vont être servis !
+                    {sleep} _
+                    {print} Ton repas est prêt ! Le voici !
                     ```
             6:
                 story_text: |
@@ -3838,7 +3844,7 @@ adventures:
 
                     Avec `{ask}` tu peux faire un choix, et avec `{answer}` tu peux afficher ce choix.
 
-                    Note  : ce jeu ne fonctionne pas vraiment pour le moment, mais les prochains niveau te permettront d'apprendre à en faire un véritable jeu  !
+                    Note : ce jeu ne fonctionne pas vraiment pour le moment, mais les prochains niveaux te permettront d'apprendre à en faire un véritable jeu  !
                 example_code: |
                     ```
                     {print} Que choisis-tu ?
