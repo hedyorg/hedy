@@ -3,6 +3,7 @@ import io
 import json
 import uuid
 import zipfile
+import zlib
 from types import SimpleNamespace
 import pyembroidery
 import pytest
@@ -368,6 +369,46 @@ class TestMachineAndMicrobitFiles:
         # pyembroidery has the y-axis pointing down: the turtle first goes up and then to the right
         assert ys[-1] == min(ys) < max(ys)
         assert xs[-1] == max(xs) > min(xs)
+
+    def png_size(self, response):
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            png = zip_file.read('hedy_drawing.png')
+        # The width and height are in the IHDR chunk, right after the png signature
+        return int.from_bytes(png[16:20], 'big'), int.from_bytes(png[20:24], 'big')
+
+    def test_generated_png_is_bigger_than_the_drawing(self, client):
+        # forward 100, turn right, forward 50
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+        width, height = self.png_size(response)
+        # The png writer adds a small border around the drawing
+        assert 50 * hedy_app.MACHINE_FILES_PNG_SCALE <= width < 50 * hedy_app.MACHINE_FILES_PNG_SCALE + 5
+        assert 100 * hedy_app.MACHINE_FILES_PNG_SCALE <= height < 100 * hedy_app.MACHINE_FILES_PNG_SCALE + 5
+
+    def test_generated_png_has_the_same_color_every_time(self, client):
+        def png():
+            response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+            with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+                return zip_file.read('hedy_drawing.png')
+
+        assert png() == png()
+
+    def test_generated_png_has_no_transparent_background(self, client):
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+        width, height = self.png_size(response)
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            png = zip_file.read('hedy_drawing.png')
+        # The pixels are in the IDAT chunk, after its length and type. Every row starts with a filter byte
+        idat_length = int.from_bytes(png[33:37], 'big')
+        pixels = zlib.decompress(png[41:41 + idat_length])
+        row_length = 1 + 4 * width
+        alphas = [row[4::4] for row in (pixels[i:i + row_length] for i in range(0, len(pixels), row_length))]
+        assert len(alphas) == height
+        assert all(alpha > 0 for row in alphas for alpha in row)
+
+    def test_generated_png_of_a_big_drawing_is_not_too_big(self, client):
+        response = self.generate_machine_files(client, {'points': [[0, 10000], [5000, 10000]]})
+        width, height = self.png_size(response)
+        assert width < height <= hedy_app.MACHINE_FILES_PNG_MAX_SIZE + 5
 
     @pytest.mark.parametrize('body', [
         {'code': 'forward 100', 'level': 1, 'lang': 'en'},

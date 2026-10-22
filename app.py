@@ -787,6 +787,18 @@ def parse_by_id(user):
 MACHINE_FILES_NAME = 'hedy_drawing'
 # Has to match the maximum number of points the front-end records, see turtle_recording_prefix in app.ts
 MACHINE_FILES_MAX_POINTS = 20000
+MACHINE_FILES_PNG_SCALE = 5
+MACHINE_FILES_PNG_MAX_SIZE = 2000
+
+
+def scaled_pattern(stitches, scale):
+    pattern = pyembroidery.EmbPattern()
+    # pyembroidery has the y-axis pointing down, like a screen, while the turtle has it pointing up.
+    # Without mirroring, the drawing would be stitched upside down.
+    # The stitches are also rounded, like the dst writer does: the png writer truncates them instead,
+    # so tiny float errors (99.99999999999999 vs 100) would show up as crooked lines in the png.
+    pattern.stitches = [(round(x * scale), -round(y * scale), command) for x, y, command in stitches]
+    return pattern
 
 
 def is_valid_turtle_path(points):
@@ -810,18 +822,28 @@ def prepare_files():
         for x, y in points:
             t.goto(x, y)
 
-    pattern = t.pattern.to_pyembroidery()
-    # pyembroidery has the y-axis pointing down, like a screen, while the turtle has it pointing up.
-    # Without mirroring, the drawing would be stitched upside down.
-    # The stitches are also rounded, like the dst writer does: the png writer truncates them instead,
-    # so tiny float errors (99.99999999999999 vs 100) would show up as crooked lines in the png.
-    pattern.stitches = [(round(x), -round(y), command) for x, y, command in pattern.stitches]
+    dst_pattern = scaled_pattern(t.pattern.to_pyembroidery().stitches, 1)
+
+    # The png is drawn from the lines of the turtle instead of the stitches: every stitch is rounded on its own,
+    # which would put small kinks in the lines. It would also be tiny, with one pixel per step of the turtle,
+    # so it is drawn bigger, but not so big that a large drawing takes too much memory.
+    corners = [(0, 0)] + [(x, y) for x, y in points]
+    xs = [x for x, _ in corners]
+    ys = [y for _, y in corners]
+    size = max(max(xs) - min(xs), max(ys) - min(ys), 1)
+    png_pattern = scaled_pattern([(x, y, pyembroidery.STITCH) for x, y in corners],
+                                 min(MACHINE_FILES_PNG_SCALE, MACHINE_FILES_PNG_MAX_SIZE / size))
+    # Without a thread, the png writer picks a random color every time
+    png_pattern.add_thread('#000000')
 
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-        for extension, write in [('dst', pyembroidery.write_dst), ('png', pyembroidery.write_png)]:
+        # The png gets a white background, otherwise its black lines can't be seen in a dark image viewer
+        for extension, write, pattern, settings in [('dst', pyembroidery.write_dst, dst_pattern, {}),
+                                                    ('png', pyembroidery.write_png, png_pattern,
+                                                     {'background': '#ffffff'})]:
             file_buffer = io.BytesIO()
-            write(pattern, file_buffer)
+            write(pattern, file_buffer, settings)
             zip_file.writestr(f'{MACHINE_FILES_NAME}.{extension}', file_buffer.getvalue())
     zip_buffer.seek(0)
     # The files are sent back in this same response instead of being kept for a separate download
