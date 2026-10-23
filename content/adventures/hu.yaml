@@ -97,26 +97,8 @@ adventures:
                     Azt is engedélyezheted, hogy a számítógép véletlenszerű számításokat végezzen véletlenszámok használatával.
 
                     Így válassz ki pár táblázatot a gyakorláshoz, és ettől mindig más eredményt kapsz
-                example_code: |
-                    ```
-                    jo_valasz = 11 * 27
-                    valasz = {ask} 'Mennyi 11 és 27 szorzata?'
-                    {if} valasz is jo_valasz {print} 'nagyszerű!'
-                    {else} {print} 'Nem jó! Ennyi: ' jo_valasz
-                    ```
                 story_text_2: |
                     You can also let the computer do random calculations on its own using {random}.
-                example_code_2: |
-                    ```
-                    tablazat = 4, 5, 6, 8
-                    szamok = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    tabla = tablazat {at} {random}
-                    szam = szamok {at} {random}
-                    jo_valasz = tabla * szam
-                    valasz = {ask} 'Mennyi ' tabla ' és ' szam ' szorzata?'
-                    {if} valasz {is} jo_valasz {print} 'rendben'
-                    {else} {print} 'hiba! ennyi: ' jo_valasz
-                    ```
                 story_text_3: |
                     You can also let the computer do random calculations on its own using {random}.
                 example_code_3: |-
@@ -206,15 +188,6 @@ adventures:
 
 
                     Sikerült kiszámolni a 8 kocka pontszámát? Ehhez sok vágás és beillesztés kellett, igaz? Ezt megkönnyítjük a 7. szinten!
-                example_code: |
-                    ```
-                    dobasok = 1, 2, 3, 4, 5, giliszta
-                    pontok = 0
-                    dobas = dobasok {at} {random}
-                    {print} 'a dobásod' dobas
-                    {if} dobas {is} giliszta pontok = pontok + 5 {else} pontok = pontok + dobas
-                    {print} 'Pontok:' pontok
-                    ```
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
             8:
@@ -290,15 +263,6 @@ adventures:
 
                     Most sokat kell másolnod és beillesztened, igaz? Ezt a 7. szinten javítjuk.
                     Ezen a szinten a vége a mosogató kalandnak! De még mindig sok kaland van más szinteken, például egy számológéppel, egy interaktív történettel és egy bonyolultabb játékkal.
-                example_code: |
-                    ```
-                    emberek = anya, apa, Edit, Gizi
-                    edit_mosogat = 0
-                    mosogato = emberek {at} {random}
-                    {print} 'A mosogató' mosogato
-                    {if} mosogato {is} Edit edit_mosogat = edit_mosogat + 1
-                    {print} 'Edit ezen a héten' edit_mosogat 'alkalommal mosogatott'
-                    ```
             8:
                 story_text: |
                     Az `repeat` segítségével megismételheted a kódrészleteket. Ennek segítségével
@@ -637,31 +601,6 @@ adventures:
                     A 6. szinten matematikai számításokkal kiszámíthatod az ügyfelek megrendelésének teljes árát, ami reálisabbá teheti a virtuális éttermet.
 
                     Készíthetsz egyszerű éttermi kódot, például.
-                example_code: |
-                    ```
-                    {print} 'Üdvözlünk a Hedy Étteremben'
-                    {print} 'Ez a menünk:'
-                    {print} 'Fő ételeink: pizza, lasagne vagy spagetti'
-                    foetel {is} {ask} 'Melyik főételt szeretnéd?'
-                    ar {is} 0
-                    {if} foetel {is} pizza ar {is} 1000
-                    {if} foetel {is} lasagne ar {is} 1200
-                    {if} foetel {is} spagetti ar {is} 800
-                    {print} 'Ezt rendelted: ' foetel
-                    {print} 'Ez ' ar ' forint lesz, kérem'
-                    {print} 'Köszönöm, jó étvágyat!'
-                    ```
-
-                    De még sok mindent hozzáadhatsz a virtuális éttermedhez, például több tanfolyamot.
-
-                    Ebben a példában három tanfolyam létezik, amelyek több kódot és további kiegészítéseket igényelnek az ár kiszámításakor.
-
-                    Hozzáadhatsz még sok mindent a virtuális éttermedhez, például:
-                    - kérdezd meg, hány ember jön, és szorozd meg az árat ezzel az értékkel
-                    - felveszel egy másik ételt?
-                    - kedvezményt adsz az embereknek, amikor (titkos) kuponkódot adnak meg?
-                    - adsz hozzá gyermekmenüt?
-                    - gondolsz más szórakoztató dolgokra?
             8:
                 story_text: |
                     Az 6. szinten megtanultad, hogyan használhatod az ismétlés parancsot egy kódsor megismétlésére bizonyos számú alkalommal.
@@ -682,28 +621,6 @@ adventures:
                     A 7. szinten több sor kód megismétlésével bonyolultabbá teheted virtuális éttermedet. Mint ez:
 
                     Természetesen ez a kód bővíthető a menü további elemeivel, italokkal és/vagy több fogással, így nyugodtan adj hozzá annyi lehetőséget, amennyit csak akarsz!
-                example_code: |
-                    ```
-                    {print} 'Üdvözlünk a Hedy étteremben!'
-                    emberek {is} {ask} 'Hány ember jön ma??'
-                    {print} 'Nagyszerű!'
-                    {print} 'A mai menü pizza vagy saláta'
-                    ar {is} 0
-                    {repeat} emberek times
-                        etel {is} {ask} 'Mit szeretnél rendelni?'
-                        {print} etel
-                        {if} etel {is} pizza
-                            ar {is} ar + 1000
-                        else
-                            ar {is} ar + 800
-                    {print} 'Köszönjük rendelésedet!'
-                    {print} 'Ez ' ar ' forint lesz'
-                    {print} 'Köszönöm, jó étvágyat!!'
-                            ar {is} ar + 800
-                    {print} 'Köszönjük rendelésedet!'
-                    {print} 'Ez ' ar ' forint lesz'
-                    {print} 'Köszönöm, jó étvágyat!!'
-                    ```
     rock:
         name: Kő, papír, olló
         default_save_name: Kő

@@ -209,21 +209,6 @@ adventures:
 
                     ### Вправи
                     У прикладі коду показано, як використовувати цикл `{while}` в історії. Тепер **подумайте про власний сценарій**, у якому гравець повинен щось знайти, перш ніж продовжити.
-                example_code: |
-                    ```
-                    ключі = 'загублені'
-                    {print} 'Ви стоїте у своєму саду і загубили ключі.'
-                    {print} 'Де ви хочете їх шукати?'
-                    {print} 'Ви можете вибрати: дерево, клумба, камінь, поштова скринька'
-                    {while} ключі == 'загублені'
-                        місце = {input} 'Де ви хочете шукати?'
-                        {if} місце == 'клумба'
-                            {print} 'Ось вони!'
-                            ключі = 'знайдено'
-                        {else}
-                            {print} 'Ні, їх немає в ' місце
-                    {print} 'Тепер ви можете зайти в будинок!'
-                    ```
             13:
                 example_code: |
                     ```
@@ -534,7 +519,6 @@ adventures:
                     {remove} dishwasher {from} people
                     ```
                 story_text: "Як часто всі збираються мити посуд? Це справедливо? Ви можете порахувати це на цьому рівні.\n"
-                example_code: "```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
             8:
                 story_text: |
                     За допомогою `{repeat}` ви можете повторювати частини коду. Ви можете використовувати це, щоб обчислити, хто буде мити посуд протягом кількох днів!

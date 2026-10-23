@@ -56,11 +56,11 @@ adventures:
                 answer_code: |
                     ```
                     {print} Um dia eu fui ao zoológico
-                    primeiro_animal {is}{ask} Qual animal você viu primeiro?
+                    primeiro_animal {is} {ask} Qual animal você viu primeiro?
                     {print} Primeiro eu vi o(a) first_animal
                     {print} Depois, vi um pinguim
                     {print} O pinguim estava almoçando
-                    comida {is}{ask} O que o pinguim estava comendo?
+                    comida {is} {ask} O que o pinguim estava comendo?
                     {print} O pinguim estava comendo...
                     {sleep} 3
                     {print} comida
@@ -134,12 +134,12 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    nome {is}{ask} 'Qual é o seu nome?'
+                    nome {is} {ask} 'Qual é o seu nome?'
                     {print} 'A personagem principal é o(a)' nome
                     {print} nome 'está indo caminhar na floresta'
                     {print} nome 'está um pouco assustado(a)'
                     animais {is} 🦔, 🐿, 🦉, 🦇
-                    {print} ' Ele(a) ouve o som de um(a) animais{at}{random}
+                    {print} 'Ele(a) ouve o som de um(a) ' animais {at} {random}
                     {print} nome ' está com medo dessa floresta ser assombrada'
                     ```
             5:
@@ -169,12 +169,12 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    nome {is}{ask} 'Quem é o herói?'
-                    {print} 'Oh não o avião está caindo, quem vai nos salvar?
-                    {print}"Olha quem está voando pelo ar, é o(a)" nome
-                    fim{is}{ask}'Você vai salvar ou destruir o avião?'
+                    nome {is} {ask} 'Quem é o herói?'
+                    {print} 'Oh não o avião está caindo, quem vai nos salvar?'
+                    {print} "Olha quem está voando pelo ar, é o(a)" nome
+                    fim {is} {ask} 'Você vai salvar ou destruir o avião?'
                     {if} fim {is} salvar {print} nome "pousou o avião, ele nos salvou!"
-                    {else}{print} "Oh não!" nome "está destruindo o avião, ajuda!"
+                    {else} {print} "Oh não!" nome "está destruindo o avião, ajuda!"
                     ```
             8:
                 story_text: |
@@ -827,18 +827,6 @@ adventures:
             7:
                 story_text: |
                     Quantas vezes todo mundo vai lavar a louça? Isso é justo? Você pode contá-lo neste nível.
-                example_code: |
-                    ```
-                    pessoas = mãe, pai, Eva, Sofia
-                    vezes_eva_lava = 0
-                    lavador = pessoas {at} {random}
-                    {print} lavador ' é quem vai lavar a louça'
-                    {if} lavador {is} Eva vezes_eva_lava = vezes_eva_lava + 1
-                    {print} 'Eva vai lavar a louça ' vezes_eva_lava ' vezes essa semana'
-                    ```
-
-                    Agora você pode copiar as linhas 3 a 5 algumas vezes (para uma semana, 7 vezes) e calcular para uma semana inteira novamente.
-                    Você consegue fazer o código funcionar para a semana inteira?
                 story_text_2: |
                     Se você tiver uma extrema falta de sorte, o programa anterior pode escolher você para lavar a louça a semana inteira! Não é justo!
                     Para criar um sistema mais justo, você pode usar o comando `{remove}` para remover a pessoa escolhida da lista. Assim você não precisa lavar a louça de novo até que todos tenham tido sua vez.

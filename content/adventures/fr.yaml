@@ -141,11 +141,11 @@ adventures:
                 answer_code: |
                     ```
                     nom {is} {ask} 'Quel est ton nom ?'
-                    {print}  'Le personnage principal s'appelle' nom
-                    {print} nom  ' s'en va marcher dans la forêt.'
+                    {print}  'Le personnage principal s’appelle' nom
+                    {print} nom  ' s’en va marcher dans la forêt.'
                     {print} nom ' a un peu peur.'
                     animaux {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 'Il entend le bruit d'un ' animaux {at} {random}
+                    {print} 'Il entend le bruit d’un ' animaux {at} {random}
                     {print} nom ' a peur que la forêt soit hantée.'
                     ```
             5:
@@ -175,16 +175,16 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    nom {is} {ask} 'Comment s'appelle le héros ?'
-                    {print} 'Oh non, l'avion va s'écraser. Qui va nous sauver ?'
-                    {print} "Regardez qui vole dans le ciel, c'est " nom
-                    fin {is} {ask} 'Vas-tu sauver l'avion ou le détruire ?'
-                    {if} fin {is} sauver {print} nom "a fait atterrir l'avion, il nous a sauvés !"
-                    {else} {print} "Oh non ! " nom " détruit l'avion, au secours !"
+                    nom {is} {ask} 'Comment s’appelle le héros ?'
+                    {print} 'Oh non, l’avion va s’écraser. Qui va nous sauver ?'
+                    {print} "Regardez qui vole dans le ciel, c’est " nom
+                    fin {is} {ask} 'Vas-tu sauver l’avion ou le détruire ?'
+                    {if} fin {is} sauver {print} nom "a fait atterrir l’avion, il nous a sauvés !"
+                    {else} {print} "Oh non ! " nom " détruit l’avion, au secours !"
                     ```
             6:
                 story_text: "Maintenant que vous pouvez utiliser `{elif}` vous pouvez créer une histoire encore plus interactive ! Vous pourriez créer plusieurs personnages, par exemple, qui auraient tous des attributs différents.\nOu vous pourriez faire choisir à votre joueur quel chemin emprunter, quelle porte ouvrir ou quelle potion magique boire...\n\n### Exercice\nCréez votre propre histoire avec 3 options ou plus en utilisant `{elif}`."
-                example_code: "```\npersonnage {is} {ask} 'Qui va vous aider dans votre quête ?'\n{if} personnage {is} 'Daisy'\n{print} 'Vous avez choisi Daisy ! C'est la plus futée de tous !'\n{elif} personnage {is} 'Jason'\n{print} 'Vous avez choisi Jason ! C'est le plus fort de tous !'\n{elif} personnage {is} 'Sam'\n{print} 'Vous avez choisi Sam ! C'est le plus rapide de tous !'\n```\n"
+                example_code: "```\npersonnage {is} {ask} 'Qui va vous aider dans votre quête ?'\n{if} personnage {is} 'Daisy'\n{print} 'Vous avez choisi Daisy ! C’est la plus futée de tous !'\n{elif} personnage {is} 'Jason'\n{print} 'Vous avez choisi Jason ! C’est le plus fort de tous !'\n{elif} personnage {is} 'Sam'\n{print} 'Vous avez choisi Sam ! C’est le plus rapide de tous !'\n```\n"
                 answer_code: |
                     Ma réponse
             8:
@@ -234,12 +234,12 @@ adventures:
                     fin = {ask} 'Veux-tu une fin heureuse ou malheureuse ?'
                     {if} fin {is} heureuse
                         {print} 'À la dernière minute, Richard saute dans la machine à voyager dans le temps !'
-                        {print} 'Fiou, content qu'on ait réussi'
+                        {print} 'Fiou, content qu’on ait réussi'
                         {print} 'Juste à temps.'
                     {else}
                         {print} 'Oh non ! Richard est trop lent...'
-                        {print} 'Le T-rex rugit d'un énorme GRRRR'
-                        {print} 'Il ouvre la gueule et ne fait qu'une seule bouchée de Richard.'
+                        {print} 'Le T-rex rugit d’un énorme GRRRR'
+                        {print} 'Il ouvre la gueule et ne fait qu’une seule bouchée de Richard.'
                     ```
             10:
                 story_text: |
@@ -300,9 +300,9 @@ adventures:
                             {print} 'Victoire sort du magasin et rentre chez elle.'
                     {else}
                         {print} 'Victoire rentre chez elle.'
-                        glace = {ask} 'S'arrête-t-elle prendre une glace sur le chemin du retour ?'
+                        glace = {ask} 'S’arrête-t-elle prendre une glace sur le chemin du retour ?'
                         {if} glace {is} oui
-                            {print} 'Victoire s'arrête d'abord pour manger une glace.'
+                            {print} 'Victoire s’arrête d’abord pour manger une glace.'
                             {print} 'Elle choisit le sorbet au citron.'
                             {print} 'Il est délicieux.'
                         {else}
@@ -316,13 +316,13 @@ adventures:
                     arme = {ask} 'Quelle arme dégaine-t-elle ?'
 
                     {if} chemin {is} gauche {and} arme {is} épée
-                        {print} 'Aucun montre n'ose approcher notre héroïne.'
+                        {print} 'Aucun montre n’ose approcher notre héroïne.'
 
-                    {if} chemin {is} gauche {and} arme {is} lance-pierre
-                        {print} 'L'héroïne est attaquée par un hibours.'
+                    {if} chemin {is} gauche {and} arme {is} fronde
+                        {print} 'L’héroïne est attaquée par un hibours.'
 
                     {if} chemin {is} droite {or} arme {is} grimoire
-                        {print} 'L'héroïne rencontre un mystérieux magicien.'
+                        {print} 'L’héroïne rencontre un mystérieux magicien.'
                     ```
             11:
                 story_text: |
@@ -336,19 +336,19 @@ adventures:
                     ```
                     animaux = Oiseau Rouge, Canard Jaune, Cheval Bleu, Grenouille Verte, Chat Violet, Chien Blanc, Mouton Noir, Poisson Doré, Professeur
                     {print} 'Ours brun, Ours brun'
-                    {print} 'Que vois-tu' ?'
+                    {print} 'Que vois-tu ?'
                     {for} animal {in} animaux
-                        {print} Je vois un ' animal ' qui me regarde'
+                        {print} 'Je vois un ' animal ' qui me regarde'
                         {print} animal ', ' animal
-                        {print} 'Que vois-tu' ?'
+                        {print} 'Que vois-tu ?'
                     {print} 'Je vois des enfants qui me regardent'
                     {print} 'Enfant, Enfant'
-                    {print} 'Que voyez-vous' ?'
+                    {print} 'Que voyez-vous ?'
                     {print} 'Nou voyons un '
                     {for} animal {in} animaux
                         {print} animal
                     {print} 'qui nous regarde'
-                    {print} 'C'est ce que nous voyons !'
+                    {print} 'C’est ce que nous voyons !'
                     ```
             13:
                 example_code: |
@@ -369,7 +369,7 @@ adventures:
                     {print}('Il était une fois un perroquet appelé ', name '.')
                     {print}(name, ' adorait programmer !')
                     {print}("Malheureusement, les autres perroquests ne savaient pas comment programmer.")
-                    {print}('Un jour ', name, ' décida d'enseigner la programmation aux autres perroquets.')
+                    {print}('Un jour ', name, ' décida d’enseigner la programmation aux autres perroquets.')
                     {print}('Les leçons devinrent un énorme succès auprès des autres perroquets !')
                     ```
             16:
@@ -401,7 +401,7 @@ adventures:
                             {print}('Elles sont bien là ! Tu as trouvé 6 raquettes !')
                             clés = 'trouvées'
                         {else}:
-                            {print}('Non, elles ne sont pas dans ', location)
+                            {print}('Non, elles ne sont pas dans ', lieu)
                     {print}('Maintenant tu peux jouer au tennis avec tous tes amis et amies.')
                     ```
     add_remove_command:
@@ -447,11 +447,11 @@ adventures:
                     ```
                     {print} Milkshake mystérieux
                     saveurs {is} fraise, chocolat, vanille
-                    voeu {is} {ask}Quelle saveur espères-tu avoir ?
-                    {add} voeu {to} saveurs
+                    voeu {is} {ask} Quelle saveur espères-tu avoir ?
+                    {add} voeu {to_list} saveurs
                     allergies {is} {ask} Es-tu allergique à une des saveurs ?
-                    {remove} allergies {from} saveur
-                    {print} Tu as obtenu un milkshake à saveurs {at} {random} 
+                    {remove} allergies {from} saveurs
+                    {print} Tu as obtenu un milkshake à saveurs {at} {random}
                     ```
     and_or_command:
         levels:
@@ -461,14 +461,14 @@ adventures:
                     Si tu utilises `{and}`, alors les deux expressions, à gauche et à droite du `{and}` devront être vraies. Nous pouvons aussi utiliser `{or}`. Dans ce cas, une seule des expression devra être vraie.
                 example_code: |
                     ```
-                    nom = {ask} 'comment t'appelles-tu ?'
+                    nom = {ask} 'comment t’appelles-tu ?'
                     age = {ask} 'quel âge as-tu ?'
                     {if} nom {is} Hedy {and} age {is} 2
                         {print} 'Tu es la vraie Hedy !'
                     {elif} name {is} Hedy {or} age {is} 2
-                        {print} 'Pas loin... mais tu n'es pas Hedy !'
+                        {print} 'Pas loin... mais tu n’es pas Hedy !'
                     {else}
-                        {print} 'Tu n'es pas Hedy !'
+                        {print} 'Tu n’es pas Hedy !'
                     ```
                 answer_code: |
                     Ma réponse
@@ -605,8 +605,8 @@ adventures:
                     Exercice
                     ```
                     réponse_correcte = 11 * 27
-                    réponse = {ask} 'Combien font 11 fois 27 ?
-                    {if} réponse {is} réponse_correcte 
+                    réponse = {ask} 'Combien font 11 fois 27 ?'
+                    {if} réponse {is} réponse_correcte
                     {print} 'bien joué !'
                     {else}
                     {print} 'Faux ! La réponse est ' réponse_correcte
@@ -620,7 +620,7 @@ adventures:
                     réponse_correcte = nombre_1 * nombre_2
                     réponse = {ask} 'Combien font ' nombre_1 ' fois ' nombre_2 '?'
                     {if} réponse {is} réponse_correcte
-                    {print} 'Bien joué !
+                    {print} 'Bien joué !'
                     {else}
                     {print} 'Faux ! La réponse est ' réponse_correcte
                     ```
@@ -695,9 +695,9 @@ adventures:
                     {repeat} 10 {times}
                         nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         nombre_1 = nombres {at} {random}
-                        numbre_2 = nombres {at} {random}
-                        réponse_correcte = nombre_1 * numbre_2
-                        {print} 'Combien font ' number_1 ' fois ' number_2 '?'
+                        nombre_2 = nombres {at} {random}
+                        réponse_correcte = nombre_1 * nombre_2
+                        {print} 'Combien font ' nombre_1 ' fois ' nombre_2 '?'
                         ta_réponse = {ask} 'Tape ta réponse ici...'
                         {print} 'Ta réponse est ' ta_réponse
                         {if} ta_réponse {is} réponse_correcte
@@ -710,15 +710,15 @@ adventures:
                     {repeat} 10 {times}
                         nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         nombre_1 = nombres {at} {random}
-                        numbre_2 = nombres {at} {random}
-                        réponse_correcte = nombre_1 * numbre_2
-                        {print} 'Combien font ' number_1 ' fois ' number_2 '?'
+                        nombre_2 = nombres {at} {random}
+                        réponse_correcte = nombre_1 * nombre_2
+                        {print} 'Combien font ' nombre_1 ' fois ' nombre_2 '?'
                         ta_réponse = {ask} 'Tape ta réponse ici...'
                         {print} 'Ta réponse est ' ta_réponse
                         {if} ta_réponse {is} réponse_correcte
                             score = score + 1
                         {else}
-                            {print} Faux ! La bonne réponse ' réponse_correcte
+                            {print} 'Faux ! La bonne réponse est ' réponse_correcte
                     {print} 'Bien joué ! Ton score est... ' score ' sur 10!'
                     ```
             11:
@@ -756,7 +756,7 @@ adventures:
                     {for} nombre_1 {in} nombres
                         {for} nombre_2 {in} nombres
                             réponse = {ask} 'Combien font ' nombre_2 ' fois ' nombre_1 '?'
-                             réponse_correcte = nombre_1 * nombre_2
+                            réponse_correcte = nombre_1 * nombre_2
                             {if} réponse {is} réponse_correcte
                                 {print} 'Bien joué !'
                             {else}
@@ -784,15 +784,15 @@ adventures:
                     ```
                     #Demande les valeurs aà multiplier:
                     nombre_1 = {input}('quel est le premier nombre que tu veux multiplier ?')
-                    nombre_2 = {input}(''quel est le second nombre que tu veux multiplier ?')
+                    nombre_2 = {input}('quel est le second nombre que tu veux multiplier ?')
 
                     #Demande de la réponse et vérification:
                     réponse = {input}('Combien font ',nombre_1, ' fois ', nombre_2, ' ?' )
                     bonne_réponse = nombre_1 * nombre_2
                     {if} réponse == bonne_réponse:
-                        {print}('Oui, c'est la bonne réponse !')
+                        {print}('Oui, c’est la bonne réponse !')
                     {else}:
-                        {print}('Désolé, mais c'est faux. La bonne réponse est : ', bonne_réponse)
+                        {print}('Désolé, mais c’est faux. La bonne réponse est : ', bonne_réponse)
                     ```
             14:
                 story_text: |
@@ -820,7 +820,7 @@ adventures:
                 answer_code: |
                     ```
                     #Demande la table de multiplication :
-                    nombre = {input}('Sur quelle table de multiplication veux-tu t'entraîner ?')
+                    nombre = {input}('Sur quelle table de multiplication veux-tu t’entraîner ?')
                     score = 0
 
                     #Pose des questions :
@@ -831,7 +831,7 @@ adventures:
                             score = score + 1
                             {print}('Bonne réponse !')
                         {else}:
-                            {print}('Désolé, c'est faux. La bonne réponse était : ', bonne_réponse)
+                            {print}('Désolé, c’est faux. La bonne réponse était : ', bonne_réponse)
 
                     #Affichage du score :
                     {print}('Tu as finis.')
@@ -940,10 +940,10 @@ adventures:
                 answer_code: |
                     Exercice 2
                     ```
-                    {def} calcule_la_note_moyenne()
+                    {def} calcule_la_note_moyenne():
                         total = 0
-                        nombre_de_devoirs = {input}("Combien de devoirs as-tu fait ?"
-                        {for} i {in} {range} (1, nombre_de_devoirs)
+                        nombre_de_devoirs = {input}("Combien de devoirs as-tu fait ?")
+                        {for} i {in} {range} (1, nombre_de_devoirs):
                             note = {input}("Quelle note as-tu eu à ton devoir ", i, " ?")
                             total = total + note
                         {return} total / nombre_de_devoirs
@@ -956,17 +956,17 @@ adventures:
                     ```
                     {def} calcule_la_note_moyenne(matière):
                         total = 0
-                        nombre_de_devoirs = {input}("Combien de devoirs as-tu fait en ", matière, "  ?"
-                        {for} i {in} {range} (1, nombre_de_devoirs)
-                            note = {input}("Quelle note as-tu eu à ton devoir ", i, " ?")
+                        nombre_de_devoirs = {input}("Combien de devoirs as-tu fait en ", matière, "  ?")
+                        {for} i {in} {range} (1, nombre_de_devoirs):
+                            note = {input} ("Quelle note as-tu eu à ton devoir ", i, " ?")
                             total = total + note
                         {return} total / nombre_de_devoirs
 
-                    nombre_de_matières = {input}('Pour combien de matières veux-tu calculer la moyenne ?)
+                    nombre_de_matières = {input}('Pour combien de matières veux-tu calculer la moyenne ?')
                     {repeat} nombre_de_matières {times}
                         matière = {input}('Pour quelle matière veux-tu calculer la moyenne ?')
                         note_moyenne = calcule_la_note_moyenne(matière)
-                        {print} ('Ta moyenne en ', matière ' est ', note_moyenne
+                        {print} ('Ta moyenne en ', matière, ' est ', note_moyenne)
                     ```
         default_save_name: Calculatrice 2
         description: Calculatrice 2
@@ -1676,7 +1676,7 @@ adventures:
                     choix {is} 1, 2, 3, 4, 5, ver
                     lancé {is} choix {at} {random}
                     {print} 'Tu as eu un ' lancé
-                    {if} lancé {is} ver {print} 'Tu peux t'arrêter de lancer le dé.'
+                    {if} lancé {is} ver {print} 'Tu peux t’arrêter de lancer le dé.'
                     {else} {print} 'Relance le dé !'
                     ```
             7:
@@ -1703,7 +1703,7 @@ adventures:
                     As-tu réussi à calculer le score pour 8 dés ? Cela nécessite beaucoup de copier-coller, n'est-ce pas ? Nous allons rendre ça plus facile au niveau 7 !
                 answer_code: |
                     ```
-                    chox = 1, 2, 3, 4, 5, ver de terre
+                    choix = 1, 2, 3, 4, 5, ver de terre
                     points = 0
 
                     lancé = choix {at} {random}
@@ -1844,9 +1844,9 @@ adventures:
                         essais = essais + 1
                         {if} nombre = 6:
                             lancé = 1
-                            {print}('Tu as obtenu un 6 en ', lancés, ' lancés.')
+                            {print}('Tu as obtenu un 6 en ', essais, ' lancés.')
                         {else}:
-                            {print}('Tu n'as pas obtenu de 6, mais un ', nombre)
+                            {print}('Tu n’as pas obtenu de 6, mais un ', nombre)
                         {sleep} 1
                     ```
     dishes:
@@ -1894,7 +1894,7 @@ adventures:
                     personnes {is} maman, papa, Emma, Sophie
                     lave_vaisselle {is} personnes {at} {random}
                     {if} lave_vaisselle {is} Sophie {print} 'Dommage, tu dois faire la vaisselle'
-                    {else} {print} 'ouf, il n'y pas de vaisselle, car ' lave_vaisselle' est en train de la faire'
+                    {else} {print} 'ouf, il n’y pas de vaisselle, car ' lave_vaisselle' est en train de la faire'
                     ```
             7:
                 story_text: |
@@ -1927,39 +1927,6 @@ adventures:
                     personne_désignée = personnes {at} {random}
                     {print} "Mardi la vaiselle sera faite par " personne_désignée
                     {remove} personne_désignée {from} personnes
-                    ```
-                answer_code: |
-                    ```
-                    personnes = maman, papa, Emma, Sophie
-
-                    lave_vaisselle = personnes {at} {random}
-                    {print} 'Lundi, la vaisselle sera faite par : ' lave_vaisselle
-                    {remove} lave_vaisselle {from} personnes
-
-                    lave_vaisselle = personnes {at} {random}
-                    {print} 'Mardi, la vaisselle sera faite par : ' lave_vaisselle
-                    {remove} lave_vaisselle {from} personnes
-
-                    lave_vaisselle = personnes {at} {random}
-                    {print} 'Mercredi, la vaisselle sera faite par : ' lave_vaisselle
-                    {remove} lave_vaisselle {from} personnes
-
-                    lave_vaisselle = personnes {at} {random}
-                    {print} 'Jeudi, la vaisselle sera faite par : ' lave_vaisselle
-                    {remove} lave_vaisselle {from} personnes
-
-                    lave_vaisselle = personnes {at} {random}
-                    {print} 'Vendredi, la vaisselle sera faite par : ' lave_vaisselle
-                    {remove} lave_vaisselle {from} personnes
-
-                    lave_vaisselle = personnes {at} {random}
-                    {print} 'Samedi, la vaisselle sera faite par : ' lave_vaisselle
-                    {remove} lave_vaisselle {from} personnes
-
-                    lave_vaisselle = personnes {at} {random}
-                    {print} 'Dimanche, la vaisselle sera faite par : ' lave_vaisselle
-                    {remove} lave_vaisselle {from} personnes
-
                     ```
             8:
                 story_text: |
@@ -2065,7 +2032,7 @@ adventures:
                 answer_code: |
                     ```
                     actions = frappe des mains, tape du pied, claque la langue
-                    {for} action {in} action
+                    {for} action {in} actions
                         {repeat} 2 {times}
                             {print} 'Si tu as de la joie au cœur, ' action
                             {sleep} 2
@@ -2227,7 +2194,7 @@ adventures:
                     {if} personne {is} {in} amis
                     {print} mauvaise_réponse {at} {random}
                     {else}
-                    {print} good_answer {at} {random}
+                    {print} bonne_réponse {at} {random}
                     ```
             7:
                 story_text: |
@@ -2269,7 +2236,7 @@ adventures:
                     {print} "Si tu cueilles les pétales, la fleur te dira si ton crush t'aime aussi"
                     nombre = {ask} "Combien de pétales veux-tu cueillir ?"
                     options = il ou elle t'aime, il ou elle ne t'aime pas
-                    {repeat} amount {times} {print} options {at} {random}
+                    {repeat} nombre {times} {print} options {at} {random}
                     ```
             9:
                 story_text: |
@@ -2296,10 +2263,10 @@ adventures:
                     {print} "Tu peux me poser 3 questions"
                     réponses = oui, non, peut-être
                     {repeat} 3 {times}
-                        question = {ask} "Que veux tu savoir ?"
-                        {print} question
-                        {sleep}
-                        {print} "Ma boule de cristal dit...' réponses {at} {random}
+                       question = {ask} "Que veux tu savoir ?"
+                       {print} question
+                       {sleep}
+                       {print} "Ma boule de cristal dit..." réponses {at} {random}
                     ```
             11:
                 story_text: |
@@ -2330,7 +2297,7 @@ adventures:
                     {for} nom {in} noms
                         {print} nom ' vit dans ' maisons {at} {random}
                         {print} nom ' va se marier avec ' amours {at} {random}
-                        {print} nom ' aura un ' animaux {at} {random} ' comme animal de compagnie"
+                        {print} nom ' aura un ' animaux {at} {random} ' comme animal de compagnie'
                         {sleep}
                     ```
     functions:
@@ -2387,10 +2354,10 @@ adventures:
                             côté_choisi = côtés {at} {random}
                             membre_choisi = membres {at} {random}
                             couleur_choisi = couleurs {at} {random}
-                            {print} joueur ', mets ' membre_choisi ' ' côté_choisi ' sur le ' couelur_choisie
+                            {print} joueur ', mets ' membre_choisi ' ' côté_choisi ' sur le ' couleur_choisi
                             {sleep} 2
 
-                    {print} "Jouons à Twister !
+                    {print} "Jouons à Twister !"
                     {call} prochain_tour
                     ```
             15:
@@ -2413,8 +2380,8 @@ adventures:
                         {play} C6
 
                     # Pose les questions
-                    réponse = {input}("Combien font 2 + 2 ?)
-                    {if} answer == 4:
+                    réponse = {input}("Combien font 2 + 2 ?")
+                    {if} réponse == 4:
                         {print}("Correct")
                         joue_un_son_joyeux()
                     {else}:
@@ -2432,8 +2399,8 @@ adventures:
                         {play} C5
                         {play} C4
 
-                    réponse = {input}("Combien font 2 + 2 ?)
-                    {if} answer == 4:
+                    réponse = {input}("Combien font 2 + 2 ?")
+                    {if} réponse == 4:
                         {print}("Correct")
                         joue_un_son_joyeux()
                     {else}:
@@ -2643,8 +2610,8 @@ adventures:
                     {print} Il y a 3 portes face à toi...
                     choix {is} {ask} Quelle porte choisi-tu ?
                     {print} Yu as choisi... choix
-                    montres {is} un zombie, un vampire, une sorcière, une maman, RIEN QUE TU NE PEUX ECHAPPER
-                     {print} Tu vois...
+                    monstres {is} un zombie, un vampire, une sorcière, une maman, RIEN QUE TU NE PEUX ECHAPPER
+                    {print} Tu vois...
                     {sleep}
                     {print} monstres {at} {random}
                     ```
@@ -2671,12 +2638,12 @@ adventures:
                      ```
                 answer_code: |
                     ```
-                    {print} Echappe-toi de la maison hantée !
-                    {print} Il y a 3 portes face à toi...
-                    choix {is} {ask} Quelle porte choisi-tu ?
-                    {print} Yu as choisi... choix
-                    montres {is} un zombie, un vampire, RIEN QUE TU NE PEUX ECHAPPER
-                     {print} Tu vois...
+                    {print} 'Echappe-toi de la maison hantée !'
+                    {print} 'Il y a 3 portes face à toi...'
+                    choix {is} {ask} 'Quelle porte choisi-tu ?'
+                    {print} 'Tu as choisi... ' choix
+                    monstres {is} un zombie, un vampire, RIEN QUE TU NE PEUX ECHAPPER
+                    {print} 'Tu vois...'
                     {sleep} 3
                     {print} monstres {at} {random}
                     ```
@@ -2703,15 +2670,15 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} Echappe-toi de la maison hantée !
-                    {print} Il y a 3 portes face à toi...
+                    {print} 'Echappe-toi de la maison hantée !'
+                    {print} 'Il y a 3 portes face à toi...'
                     portes {is} 1, 2, 3
-                    montres {is} un zombie, un vampire, une sorcière, une maman, un loup-garou
-                    porte_choisie {is} {ask} Quelle porte choisi-tu ?
-                    {print} Yu as choisi... porte_choisie
+                    monstres {is} un zombie, un vampire, une sorcière, une maman, un loup-garou
+                    porte_choisie {is} {ask} 'Quelle porte choisi-tu ?'
+                    {print} 'Tu as choisi... ' porte_choisie
                     {sleep}
                     bonne_porte est portes {at} {random}
-                    {if} porte_choisie {is} bonne_porte {print} 'Génial, tu as réussi à t'échapper !'
+                    {if} porte_choisie {is} bonne_porte {print} 'Génial, tu as réussi à t’échapper !'
                     {else} {print} 'Oh non, tu te fais manger par un ... ' monstres {at} {random}
                     ```
             10:
@@ -2746,23 +2713,23 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} Echappe-toi de la maison hantée !
-                    joueur = en vie
+                    {print} 'Echappe-toi de la maison hantée !'
+                    joueur = en_vie
                     portes = 1, 2, 3
                     monstres = un zombie, un vampire, une araignée géante
                     {repeat} 3 {times}
-                        {if} joueur {is} en vie
+                        {if} joueur {is} en_vie
                             mauvaise_porte {is} portes {at} {random}
-                            {print} 'Il y a 3 portes face à toi...
-                            porte_choisie = {ask} Quelle porte choisis-tu ?
+                            {print} 'Il y a 3 portes face à toi...'
+                            porte_choisie = {ask} 'Quelle porte choisis-tu ?'
                             {if} porte_choisie {is} mauvaise_porte
                                 {print} 'Tu te fais manger par ' monstres {at} {random}
                                 joueur = mort
                             {else}
-                                {print} 'il n'y a pas de monstres ici'
+                                {print} 'il n’y a pas de monstres ici'
                         {else}
                             {print} 'PERDU'
-                    {if} joueur {is} en vie
+                    {if} joueur {is} en_vie
                         {print} 'Super, tu as survécu !'
 
                     ```
@@ -3045,10 +3012,10 @@ adventures:
                     aliment {is} {ask} 'Que voulez-vous manger ?'
                     aliments_non_recommandés {is} sushi, crevettes, thon, roquefort, tiramisu, oeuf à la coque, carpaccio, steak saignant, tartare
                     {if} aliment {in} aliments_non_recommandés
-                    {print} "Il n'est pas recommandé de manger " aliment
+                    {print} "Il n’est pas recommandé de manger " aliment
                     {else}
-                    {print} "Il est probablement sûr de manger " aliment 
-                    {print} 'Toujours utiliser votre bon sebs car notre liste n'est pas finie. Evitez les viandes, poissons ou oeufs peu ou pas cuits ainsi que l'alcool. '
+                    {print} "Il est probablement sûr de manger " aliment
+                    {print} 'Toujours utiliser votre bon sebs car notre liste n’est pas finie. Evitez les viandes, poissons ou oeufs peu ou pas cuits ainsi que l’alcool. '
                     ```
             7:
                 story_text: |
@@ -3066,11 +3033,11 @@ adventures:
                     * dire à l'infirmière de vérifier si la balance est positive ou négative afin de décider si le patient a besoin de plus de fluides en intraveineuse.
                 answer_code: |
                     ```
-                    fluide_pris_en_buvant = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle gagné en buvant aujourd'hui ?
-                    fluide_pris_en_mangeant = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle gagné en mangeant aujourd'hui ?
-                    fluide_pris_par_intraveineuse = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle pris par intraveineuse aujourd'hui ?
-                    fluide_uriné = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle perdu en urinant aujourd'hui ?
-                    fluide_vomi = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle perdu en vomissant aujourd'hui ?
+                    fluide_pris_en_buvant = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle gagné en buvant aujourd'hui ?"
+                    fluide_pris_en_mangeant = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle gagné en mangeant aujourd'hui ?"
+                    fluide_pris_par_intraveineuse = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle pris par intraveineuse aujourd'hui ?"
+                    fluide_uriné = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle perdu en urinant aujourd'hui ?"
+                    fluide_vomi = {ask} "Combien de fluide le patient ou la patiente a-t-il ou a-t-elle perdu en vomissant aujourd'hui ?"
                     balance_des_fluides = fluide_pris_en_buvant + fluide_pris_en_mangeant + fluide_pris_par_intraveineuse - fluide_uriné - fluide_vomi
                     {print} "La balance des fluides est de " balance_des_fluides
                     {print} "Vérifiez si la balance est positive ou négative afin de décider si le patient a besoin de plus de fluide par intraveineuse"
@@ -4641,27 +4608,27 @@ adventures:
                     ours_en_peluche = 10
 
                     {print}('Chamboule tout !')
-                    age = {input}('Quel âge as-tu ?')
-                    a_déjà_joué = {input}('As-tu déjà joué ?)
+                    âge = {input}('Quel âge as-tu ?')
+                    a_déjà_joué = {input}('As-tu déjà joué ?')
 
-                    {if} a_déjà_joué != "oui" {or} âge < 18:
+                    {if} a_déjà_joué != "oui" {or} âge < 18:
                         {print}('Tu peux jouer')
-                        points = {input}('Combien de points a tu marqué ?)
+                        points = {input}('Combien de points a tu marqué ?')
                         {print}('Tu peux choisir parmi ces récompenses :')
 
-                        {if} points >= ours_en_peluche :
+                        {if} points >= ours_en_peluche:
                             {print}('ours en peluche')
 
-                        {if} points >= sucette :
+                        {if} points >= sucette:
                             {print}('sucette')
 
-                        {if} âge >= 14 {and} points >= jeu_vidéo :
+                        {if} âge >= 14 {and} points >= jeu_vidéo:
                             {print}('jeu vidéo')
 
                         {if} âge <= 5 {and} points >= ballon:
                             {print}('ballon')
 
-                        récompense = {input}('Quelle récompense souhaiterais-tu ?)
+                        récompense = {input}('Quelle récompense souhaiterais-tu ?')
                         {print}('Bravo pour ton/ta ', récompense)
 
                     {else}:

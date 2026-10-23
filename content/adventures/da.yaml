@@ -197,18 +197,6 @@ adventures:
             7:
                 story_text: |
                     Hvor ofte skal alle tage opvasken? Er det retfærdigt? Du kan tælle det på dette niveau.
-                example_code: |
-                    ```
-                    personer = mor, far, Emma, Sophie
-                    emma_tager_den = 0
-                    opvasker = personer {at} {random}
-                    {print} 'Opvaskeren er ' opvasker
-                    {if} opvasker {is} Emma emma_tager_den = emma_tager_den + 1
-                    {print} 'Emma tager opvasken ' emma_tager_den ' gange denne uge'
-                    ```
-
-                    Du kan nu kopiere linje 3 til 5 nogle gange (e.g. 7 gange for en hel uge) for at beregne en hel uge igen.
-                    Laver du koden for hele ugen?
                 story_text_2: |
                     Hvis du er ekstremt uheldig vil det forrige program måske vælge dig til at tage opvasken hele ugen! Det er ikke retfærdigt!
                     For at lave et mere retfærdigt system can du bruge `{remove}` kommandoen til at fjerne den valgte person fra listen. På den måde skal du ikke tage opvasken igen før alle har taget deres tur.

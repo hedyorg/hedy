@@ -457,7 +457,7 @@ adventures:
                     {print} Mystery milkshake
                     flavors {is} strawberry, chocolate, vanilla
                     hope {is} {ask} What flavor are you hoping for?
-                    {add} hope {to} flavors
+                    {add} hope {to_list} flavors
                     allergies {is} {ask} Are you allergic to any flavors?
                     {remove} allergies {from} flavors
                     {print} You get a flavors {at} {random} milkshake
@@ -3449,7 +3449,7 @@ adventures:
                         amount_patients = amount_patients + amount_new_patients
                         {repeat} amount_new_patients {times}
                             name = {ask} 'What is their name?'
-                            {add} name {to} patients
+                            {add} name {to_list} patients
                     {else}
                         {print} 'No new patients today'
 
@@ -5140,7 +5140,7 @@ adventures:
                     words {is} squawk, Hedy
                     {print} Train your parrot!
                     new_word {is} {ask} Which word do you want to teach them?
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} 🧒 Say new_word, Hedy!
                     {print} 🦜 words {at} {random}
                     ```
@@ -5163,7 +5163,7 @@ adventures:
                     words is squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} ' 🧒 Say ' new_word ', Hedy!'
                     {print} ' 🦜 ' words {at} {random}
                     ```
@@ -5190,7 +5190,7 @@ adventures:
                     words is squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     said_word is words {at} {random}
                     {print} '🧒 Say ' new_word ', Hedy!'
                     {print} '🦜 ' said_word

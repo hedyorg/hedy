@@ -205,21 +205,6 @@ adventures:
                     Tai voit käyttää `{while} sword == 'lost'` jolloin pelaaja ei voi jatkaa peliä ennenkuin hän on löytänyt jotain.
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    avaimet = 'kateissa'
-                    {print} 'Seisot puutarhassasi ja olet hukannut avaimesi.'
-                    {print} 'Mistä haluat etsiä niitä?'
-                    {print} 'Voit valita: puu, kukkapenkki, kivi, postilaatikko'
-                    {while} avaimet == 'kateissa'
-                        sijainti = {ask} 'Mistä haluat etsiä?'
-                        {if} sijainti == 'kukkapenkki'
-                            {print} 'Täällä ne ovat!'
-                            avaimet = 'löydetty'
-                        {else}
-                            {print} sijainti ' - Ne eivät olleet siellä.'
-                    {print} 'Nyt voit mennä taloon!'
-                    ```
     add_remove_command:
         levels: {}
     and_or_command:
@@ -228,8 +213,6 @@ adventures:
         levels:
             2:
                 example_code: "```\nnimi {is} {ask} Mikä on nimesi?  \n{print} Hei nimi  \nikä {is} {ask} Kuinka vanha olet?  \n{print} nimi on ikä vuotta vanha.\n```\n"
-            13:
-                story_text: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```"
     calculator:
         levels: {}
     calculator_2:
