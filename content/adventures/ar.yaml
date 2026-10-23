@@ -149,10 +149,10 @@ adventures:
                     بما أننا قادرون على القيام بالعمليات الحسابية، بامكاننا صنع برنامج للتدرب على العمليات الحسابية. يمكنك وضع العمليات الحسابية بنفسك، على سبيل المثال:
                 example_code: |
                     ```
-                    الاجابة_الصحيحة = ١١ * ٢٧
-                    اجابتك = {ask} "ما ناتج ١١ ضرب ٢٧؟"
-                    {if} اجابتك {is} الاجابة_الصحيحة {print} "أحسنت"
-                    {else} {print} "كان خطأ " الاجابة_الصحيحة
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
                     ```
                 story_text_2: |
                     برنامج الآلة الحاسبة في الأعلى يحسب لك ناتج العملية الحسابية التي تريد، ولكن يمكنك كتابة برنامج لتختبر مهاراتك الحسابية، كما في المثال التالي:
@@ -841,17 +841,23 @@ adventures:
                 example_code: |
                     يمكنك كتابة كود مطعم إلكتروني بسيط، كالمثال التالي:
                     ```
-                    {print} 'أهلاً بكم في مطعم هيدي'
-                    {print} 'هذه هي قائمة الطعام:'
-                    {print} 'أطباقنا الرئيسية هي البيتزا، اللازانيا، الإسباجيتي'
-                    الرئيسي = {ask} 'أيًا من الأطباق الرئيسية تود أن تطلب؟'
-                    المبلغ = ٠
-                    {if} الرئيسي {is} بيتزا المبلغ = ١٠
-                    {if} الرئيسي {is} لازانيا المبلغ = ١٢
-                    {if} الرئيسي {is} إسباجيتي المبلغ = ٨
-                    {print} 'طلبك هو ' الرئيسي
-                    {print} 'سيكون ثمنه ' المبلغ ' دولارات، من فضلك'
-                    {print} 'شكراً لك، إستمتع بوجبتك!'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
     rock:
         name: حجر، ورقة، مقص

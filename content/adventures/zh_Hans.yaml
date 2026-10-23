@@ -175,18 +175,18 @@ adventures:
                     示例代码向您展示了如何在故事中使用`{while}`循环。现在**想想你自己的场景**，在这个场景中，玩家必须在继续之前找到一些东西。
                 example_code: |
                     ```
-                    钥匙 = '丢失'
-                    {print} '你站在你的花园里，你的钥匙丢了。'
-                    {print} '你想去哪里找它们？'
-                    {print} '你可以选择：树、花坛、石头、邮筒'
-                    {while} 钥匙 == '丢失'
-                        位置 = {input} '你想去哪里找？'
-                        {if} 位置 == '花坛'
-                            {print} '它们在这里！'
-                            钥匙 = '找到'
-                        {else}
-                            {print} '没有，他们不在'位置
-                    {print} '现在你可以进入房子了！'
+                    keys = 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
+                            keys = 'found'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
             13:
                 example_code: |
@@ -631,12 +631,13 @@ adventures:
                     每个人洗了多少次碗？是否公平？在这一级你可以进行统计。
                 example_code: |
                     ```
-                    人们 = 妈妈, 爸爸, 艾玛, 索菲
-                    艾玛洗碗 = 0
-                    洗碗的 = 人们 {at} {random}
-                    {print} '洗碗的人是' 洗碗的
-                    {if} 洗碗的 {is} 艾玛 艾玛洗碗 = 艾玛洗碗 + 1
-                    {print} '艾玛这周要洗' 艾玛洗碗 '次碗'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     现在你需要将第3到第5行复制几次（比如，复制7次表示一周）来计算一整周。
@@ -772,12 +773,14 @@ adventures:
                 example_code: |
                     ```
                     friends {is} Jordan, Lucy, Dave
-                    {print} '我能预测你明天买彩票能不能中奖!'
-                    person {is} {ask} '你是谁?'
-                    good_answer {is} 好诶！你赢了，你绝对赢！我们有了一个赢家！
-                    bad_answer {is} 倒霉! 再试一次!,别人会赢, 你输了!
-                    {if} person {in} friends {print} good_answer {at} {random}
-                    {else} {print} bad_answer {at} {random}
+                    {print} 'I can predict if you will win the lottery tomorrow!'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends
+                    {print} bad_answer {at} {random}
+                    {else}
+                    {print} good_answer {at} {random}
                     ```
             7:
                 story_text: |
@@ -1660,9 +1663,11 @@ adventures:
                     在这个示例代码中，您可以看到`{repeat}`也可以与`{ask}`、`{if}`或`{else}`命令一起使用。
                 example_code: |
                     ```
-                    {repeat} 2 {times} answer = {ask} '你知道你可以多次问一个问题吗?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} '你已经知道了!'
-                    {else} {repeat} 3 {times} {print} '你学到了新东西!'
+                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                    {if} answer {is} yes
+                    {repeat} 2 {times} {print} 'You knew that already!'
+                    {else}
+                    {repeat} 3 {times} {print} 'You have learned something new!'
                     ```
                 story_text_2: |
                     使用`{repeat}`命令可以做的另一件有趣的事情是使用变量来设置应该重复的次数。在示例代码中，您可以看到我们首先询问这个人的年龄。
@@ -1791,17 +1796,23 @@ adventures:
                 example_code: |
                     你可以写一段简单的餐厅代码，像这样：
                     ```
-                    {print} '欢迎来到海蒂餐厅'
-                    {print} '这是我们的菜单：'
-                    {print} '我们的主菜有披萨、千层面、意面'
-                    主菜 = {ask} '您想要哪道主菜？'
-                    价格 = 0
-                    {if} 主菜 {is} 披萨 价格 = 10
-                    {if} 主菜 {is} 千层面 价格 = 12
-                    {if} 主菜 {is} 意面 价格 = 8
-                    {print} '您点了' 主菜
-                    {print} '请付' 价格 '元'
-                    {print} '谢谢，祝您用餐愉快！'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |

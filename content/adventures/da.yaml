@@ -199,12 +199,13 @@ adventures:
                     Hvor ofte skal alle tage opvasken? Er det retfærdigt? Du kan tælle det på dette niveau.
                 example_code: |
                     ```
-                    personer = mor, far, Emma, Sophie
-                    emma_tager_den = 0
-                    opvasker = personer {at} {random}
-                    {print} 'Opvaskeren er ' opvasker
-                    {if} opvasker {is} Emma emma_tager_den = emma_tager_den + 1
-                    {print} 'Emma tager opvasken ' emma_tager_den ' gange denne uge'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Du kan nu kopiere linje 3 til 5 nogle gange (e.g. 7 gange for en hel uge) for at beregne en hel uge igen.

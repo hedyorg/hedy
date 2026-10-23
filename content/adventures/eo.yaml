@@ -160,18 +160,18 @@ adventures:
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
-                    ŝlosilo = 'perdita'
-                    {print} 'Vi staras en via ĝardeno, kaj vi perdis vian ŝlosilon.'
-                    {print} 'Kie vi volas serĉi ĝin?'
-                    {print} 'Vi povas elekti unu el: arbo, florbedo, roko, poŝtkesto'
-                    {while} ŝlosilo == 'perdita'
-                        loko = {ask} 'Kie vi volas serĉi ĝin?'
-                        {if} loko == 'florbedo'
-                            {print} 'Jen ĝi troviĝas!'
-                            ŝlosilo = 'trovita'
-                        {else}
-                            {print} 'Ne, ĝi ne estas ĉe la ' loko
-                    {print} 'Nun vi povas eniri la domon!'
+                    keys = 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
+                            keys = 'found'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
     add_remove_command:
         levels: {}
@@ -189,24 +189,20 @@ adventures:
                     Nun, ĉar vi povas kalkuli, vi ankaŭ povas verki programon por ekzerci vin al matematikaj kalkuloj. Vi povas mem fari la kalkulojn, ekzemple:
                 example_code: |
                     ```
-                    ĝusta_respondo = 11 * 27
-                    respondo = {ask} 'Kiom estas 11 multiplikite per 27?'
-                    {if} respondo {is} ĝusta_respondo {print} 'Bone!'
-                    {else} {print} 'Malĝuste! Jen la ĝusta respondo: ' ĝusta_respondo
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
                     ```
                 story_text_2: |
                     Vi ankaŭ povas lasi la komputilon fari hazardajn sumojn memstare uzante hazardajn.
                     Jen kiel vi elektas kelkajn tabelojn por ekzerciĝi, kaj el tio vi ĉiam ricevas malsaman sumon:
                 example_code_2: |
                     ```
-                    tabeloj = 4, 5, 6, 8
-                    nombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    tabelo = tabeloj {at} {random}
-                    nombro = nombroj {at} {random}
-                    ĝusta_respondo = tabelo * nombro
-                    respondo = {ask} 'Kiom estas ' tabelo ' multiplikite per ' nombro '?'
-                    {if} respondo {is} ĝusta_respondo {print} 'Bone!'
-                    {else} {print} 'Malĝuste! La ĝusta respondo estas ' ĝusta_respondo
+                    correct_answer = 11 * 27
+                    answer = {ask} 'How much is 11 times 27?'
+                    {if} answer {is} _ {print} 'good job!'
+                    {else} {print} 'Wrong! It was ' _
                     ```
                 example_code_3: |-
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -349,12 +345,13 @@ adventures:
                     Kiom ofte ĉiuj lavos la telerojn? Ĉu tio estas justa? Vi povas kalkuli tion en ĉi tiu nivelo.
                 example_code: |
                     ```
-                    homoj = panjo, paĉjo, Emilio, Sofio
-                    emilio_lavoj = 0
-                    lavonto = homoj {at} {random}
-                    {print} 'La lavonto estas' lavonto
-                    {if} lavonto {is} Emilio emilio_lavoj = emilio_lavoj + 1
-                    {print} 'Emilio lavos la telerojn ĉi-semajne' emilio_lavoj 'fojojn'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
@@ -794,17 +791,23 @@ adventures:
                 example_code: |
                     Vi povas verki simplan kodon por restoracio, jene:
                     ```
-                    {print} 'Bonvenon al restoracio Hedy'
-                    {print} 'Jen nia menuo:'
-                    {print} 'Jen niaj ĉefpladoj: pico, lasanjoj aŭ spagetoj'
-                    ĉefplado = {ask} 'Kiun ĉefpladon vi deziras?'
-                    prezo = 0
-                    {if} ĉefplado {is} pico prezo = 10
-                    {if} ĉefplado {is} lasanjoj prezo = 12
-                    {if} ĉefplado {is} spagetoj prezo = 8
-                    {print} 'Vi mendis ' ĉefplado 'n'
-                    {print} 'La prezo estas ' prezo ' spesmiloj'
-                    {print} 'Dankon, ĝuu vian manĝon!'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |
@@ -954,20 +957,15 @@ adventures:
                     Ludu ĝis vi gajnos! Sed unue, kompletigu la ekzemplan kodon…
                 example_code: |
                     ```
-                    gajnis = 'ne'
-                    opcioj = 'roko', 'papero', 'tondilo'
-                    {while} gajnis == 'ne'
-                        via_elekto = {ask} 'Kion vi elektas?'
-                        komputila_elekto = opcioj {at} {random}
-                        {print} 'vi elektis ' via_elekto 'n'
-                        {print} 'la komputilo elektis ' komputila_elekto 'n'
-                        {if} komputila_elekto == via_elekto
-                            {print} 'Vana partio!'
-                        {if} komputila_elekto == 'roko' {and} via_elekto == 'tondilo'
-                            {print} 'Vi perdas la partion!'
-                        {if} komputila_elekto == 'roko' {and} via_elekto == 'papero'
-                            {print} 'Vi gajnas la partion!'
-                            gajnis = 'jes'
+                    won = 'no'
+                    options = ['rock', 'paper', 'scissors']
+                    {while} won == 'no':
+                        your_choice = {input}('What do you choose?')
+                        computer_choice = options[{random}]
+                        {print}('you chose ', your_choice)
+                        {print}('the computer chose ', computer_choice)
+                        {if} computer_choice == your_choice:
+                    _
                     ```
     secret:
         name: Superspiono

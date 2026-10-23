@@ -106,16 +106,16 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    dieren {is} leeuw, zebra, flamingo
-                    {print} Hallo kinderen! Vandaag gaan we naar de dierentuin!
-                    lievelingsdier {is} {ask} Welk dier wil je vandaag bezoeken?
-                    {add} lievelingsdier {to} dieren
+                    animals {is} lion, zebra, flamingo
+                    {print} Hello kids! Today we're going to the zoo!
+                    favorite_animal {is} {ask} Which animal do you wanna go to today?
+                    {add} favorite_animal {to_list} animals
                     {sleep} 2
-                    {print} We gaan naar dieren {at} {random}
+                    {print} Let's head to the animals {at} {random}
                     {sleep}
-                    minst_favoriete_dier {is} {ask} Welk dier wil je niet zien?
-                    {remove} minst_favoriete_dier {from} dieren
-                    {print} Laten we nu naar dieren {at} {random} gaan!
+                    least_favorite_animal {is} {ask} Which animal do you not want to see?
+                    {remove} least_favorite_animal {from} animals
+                    {print} Let's go to the animals {at} {random} now!
                     ```
             4:
                 story_text: |
@@ -334,18 +334,18 @@ adventures:
                     De voorbeeldcode laat zien hoe je  `{while}` in een verhaal kunt gebruiken. Bedenk nu je **eigen scenario** waarin de speler iets moet vinden voordat hij/zij door kan spelen.
                 example_code: |
                     ```
-                    sleutels = 'kwijt'
-                    {print} 'Je staat in de voortuin en bent je sleutels kwijt.'
-                    {print} 'Waar ga je zoeken?'
-                    {print} 'kies uit: boom, steen, bloembed, brievenbus'
-                    {while} sleutels == 'kwijt'
-                        locatie = {ask} 'Waar wil je zoeken?'
-                        {if} locatie == 'bloembed'
-                            {print} 'Hier zijn ze!'
-                            sleutels = 'gevonden'
-                        {else}
-                            {print} 'Helaas, ze liggen niet bij de ' locatie
-                    {print} 'Nu kun je het huis in!'
+                    keys = 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
+                            keys = 'found'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
                 answer_code: |
                     ```
@@ -379,7 +379,7 @@ adventures:
                     naam = 'Hedy'
                     {print}('Welkom bij dit verhaal!')
                     {print}('Er was eens een papegaai die ', naam ' heette.')
-                    {print}(name, ' hield van programmeren!')
+                    {print}(naam, ' hield van programmeren!')
                     {print}("Helaas wisten de andere papegaaien niet hoe ze moesten programmeren.")
                     {print}('Op een dag besloot ', naam, ' de andere papegaaien programmeren te leren.')
                     {print}('De lessen bleken een groot succes bij de andere papegaaien!')
@@ -1689,12 +1689,13 @@ adventures:
                     Maak jij de code voor de hele week?
                 example_code: |
                     ```
-                    mensen = mama, papa, Emma, Sophie
-                    emma_wast_af = 0
-                    afwasser = mensen {at} {random}
-                    {print} 'De afwasser is ' afwasser
-                    {if} afwasser {is} Emma emma_wast_af = emma_wast_af + 1
-                    {print} 'Emma gaat deze week ' emma_wast_af ' keer afwassen'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
                 story_text_2: |
                     Als je heel veel pech hebt moet je bij het vorige afwasprogramma misschien wel de hele week afwassen! Dat is niet eerlijk!
@@ -2888,14 +2889,10 @@ adventures:
                     We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
                 example_code: |
                     ```
-                    vrienden = ['Ahmed', 'Ben', 'Cayden']
-                    {print}(vrienden[1], ' is de eerste vriend op mijn lijstje')
-                    {print}(vrienden[2], ' is de tweede vriend op mijn lijstje')
-                    {print}(vrienden[3], ' is de derde vriend op mijn lijstje')
-                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
-                    geluksgetallen = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3:
-                       {print}('het geluksgetal van ', vrienden[i], 'is ', geluksgetallen[i])
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print}(friends[1], ' is the first friend on the list.')
+                    {print}(friends[2], ' is the second friend on the list.')
+                    {print}(friends[3], ' is the third friend on the list.')
                     ```
                 answer_code: |
                     Eigen antwoord
@@ -2932,7 +2929,7 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    Introduceren van de Hedy markt:
+                    #Introduceren van de Hedy markt:
                     {print}('Welkom bij de Hedy markt!')
                     {print}('We verkopen hier brood, appels en kaas')
 
@@ -2940,7 +2937,7 @@ adventures:
                     prijs_brood = 5
                     {print}('Één brood kost ', prijs_brood )
                     brood_aantal = {input}('Hoeveel broden wil je kopen?')
-                    totaal_brood = prijs_bread*brood_aantal
+                    totaal_brood = prijs_brood*brood_aantal
 
                     prijs_appel = 1
                     {print}('Één appel kost', prijs_appel)
@@ -2954,7 +2951,7 @@ adventures:
 
                     #Totale prijs vertellen:
                     totaal = totaal_brood + totaal_appel + totaal_kaas
-                    print('Dat wordt dan samen ', total )
+                    print('Dat wordt dan samen ', totaal)
                     print('Fijne dag verder!')
 
                     ```
@@ -3790,8 +3787,8 @@ adventures:
                 example_code: |
                     ```
                     {print}('Maak je eigen quiz')
-                    points_a = 0
-                    points_b = 0
+                    punten_a = 0
+                    punten_b = 0
 
                     #Stellen van quizvragen:
                     {print}('Vraag')
@@ -3808,7 +3805,7 @@ adventures:
                     {print}('Laten we de uitslag bekijken!')
                     {if} punten_a > punten_b:
                         {print}('Welkom bij de A club!')
-                    {if} points_b > points_a:
+                    {if} punten_b > punten_a:
                         {print}('Welkom bij de B club')
                     ```
                 answer_code: |
@@ -4113,20 +4110,23 @@ adventures:
                 example_code: |
                     Je kunt een simpel restaurant maken:
                     ```
-                    #De klant welkom heten:
-                    {print} 'Welkom bij McHedy'
-                    {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
-                    {print} 'U krijgt frietjes en drinken bij uw bestelling. '
-                    eten = {ask} 'Wat wilt u bestellen?'
-                    #De prijs berekenen:
-                    prijs = 0
-                    {if} eten {is} hamburger prijs = 8
-                    {if} eten {is} kroket prijs = 6
-                    {if} eten {is} kaassoufle prijs = 5
-                    #De prijs vertellen aan de klant:
-                    {print} 'U heeft een ' eten ' besteld'
-                    {print} 'Dat is dan ' prijs ' euro, alstublieft!'
-                    {print} 'Bedankt en eet smakelijk!'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |
@@ -4547,12 +4547,15 @@ adventures:
                 answer_code: |
                     ```
 
-                    {for} i {in} {range}(0, 10) :
-                        eendjes = 10-i
-                        {print}(_, ' kleine visjes, die zwommen naar de zee')
-                        {print}("'Nee',  zei de moeder ik ga niet mee")
-                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+                    #singing the duck song:
+
+                    {for} i {in} {range}(0, 10):
+                        ducks = 10-i
+                        {print}(ducks, ' little ducks went swimming one day')
+                        {print}('Over the hill and far away')
+                        {print}("Mother duck said: 'quack, quack, quack' ")
+                        ducks_minus = ducks-1
+                        {print}('But only ', ducks_minus, ' came back.' )
 
                     ```
         default_save_name: Nummer 2

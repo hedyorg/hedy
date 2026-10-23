@@ -77,7 +77,7 @@ adventures:
                 example_code: |
                     ```
                     zvieratá {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Teraz počujú zvuk zvierat {at} {random}
+                    {print} Teraz počujú zvuk zvieratá {at} {random}
                     ```
                 story_text_2: |
                     Príkaz `{add}` sa vám môže vo vašom príbehu tiež hodiť.
@@ -335,7 +335,7 @@ adventures:
                     {if} path {is} ľavá {and} weapon {is} prak
                         {print} 'hrdinku napadne sova-medveď.'
 
-                    {if} path {is} pravá {or} weapon {is} kniha kúziel
+                    {if} path {is} pravá {or} weapon {is} kniha_kúziel
                         {print} 'k hrdinke sa priblíži tajomný čarodejník.'
                     ```
             11:
@@ -4937,39 +4937,37 @@ adventures:
                         ```
                 answer_code: |
                     ```
-                    {print}("Vitaj v zábavnom parku „Hedy High“")
-                    {print}("V tomto parku sú tri hlavné atrakcie: Strašidelný dom, Horská dráha a Kolotoč." )
+                    {print}("Welcome to our amsument park: 'Hedy High'")
+                    {print}("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
 
-                    #Vyskúšaj jednu z troch atrakcií:
-                    attraction = {input}('Ktorú atrakciu chceš skúsiť?')
+                    #Try one of the three attractions:
+                    attraction = {input}('Which attraction would you like to try?')
 
-                    {if} attraction == 'Strašidelný dom':
-                        age = {input}('Koľko máš rokov?')
+                    {if} attraction == 'Haunted house':
+                        age = {input}('How old are you?')
                         {if} age > 12:
-                            {print}('Vek stačí. Uži si strašenie!')
+                            {print}('You are old enough. Enjoy getting scared!')
                         {else}:
-                            {print}('Škoda, treba počkať, kým vek stačí.')
+                            {print}('Sorry, you have to wait till you are old enough.')
 
-                    {if} attraction == 'Horská dráha':
-                        fear = {input}('Je strach z výšky?')
-                        {if} fear == 'áno':
-                            {print}('Radšej ostaň na zemi.')
-                        {elif} fear == 'nie' :
-                            height = {input}('Aká je výška v centimetroch')
+                    {if} attraction == 'Rollercoaster':
+                        fear = {input}('Are you afraid of heights?')
+                        {if} fear == 'yes':
+                            {print}('Sorry, it is better for you to stay on the ground.')
+                        {elif} fear == 'no' :
+                            height = {input}('What is your length in centimetres')
                             {if} height > 150:
-                                {print}('Uži si jazdu!')
+                                {print}('Enjoy your ride!')
                             {else}:
-                                {print}('Výška nestačí')
+                                {print}('Sorry you are not tall enough')
 
 
-                    {if} attraction == 'Kolotoč':
-                        age = {input}('Koľko máš rokov?')
+                    {if} attraction == 'Carousel':
+                        age = {input}('How old are you?')
                         {if} age < 10:
-                            {print}('Toto sedí. Uži si to!')
+                            {print}('This is a perfect attraction for you. Enjoy!')
                         {else}:
-                            {print}('Vek je na toto priveľký.')
-
-                        ```
+                            {print}('Sorry you are too old.')
     parrot:
         name: papagáj
         default_save_name: Papagáj
@@ -7087,45 +7085,45 @@ adventures:
                 answer_code: |
                     Obdĺžnik
                     ```
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 50
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 100
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 50
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 100
                     ```
 
                     Štvorec
                     ```
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 100
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 100
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 100
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 100
                     ```
 
                     Schody
                     ```
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 20
-                    {turn} vľavo
+                    {turn} {left}
                     {forward} 20
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 20
-                    {turn} vľavo
+                    {turn} {left}
                     {forward} 20
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 20
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 60
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 60
-                    {turn} vpravo
+                    {turn} {right}
                     {forward} 20
                     ```
             2:

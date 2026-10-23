@@ -202,7 +202,7 @@ adventures:
                     ```
             6:
                 story_text: "Od teraz dzięki temu, że możesz używać `{elif}` możesz tworzyć jeszcze bardziej interaktywne historyjki! Możesz na przykład stworzyć wiele postaci, każdą z innymi cechami.\nAlbo możesz pozwolić swojej postaci zdecydować którą drogę wybrać, które drzwi otworzyć albo które magiczne mikstury wypić...\n\n### Ćwiczenie\nStwórz swoją własną historyjkę z przynajmniej 3 wyborami używając {elif}."
-                example_code: "```\npostać= {ask} 'Kto Ci pomoże w Twojej przygodzie?'\n{if} postać {is} 'Daisy'\n    {print} 'Wybrałeś(aś) Daisy! Ona jest najmądrzejsza ze wszystkich!'\n    {print} \"Daisy natychmiast mówi Ci, że nie powinieneś (powinnaś) jeść tych jagód.\"\n{elif} postać {is} 'Jason'\n    {print} 'Wybrałeś(aś) Jasona! On jest najsilniejszy ze wszystkich!'\n    {print} 'Jason podnosi głaz, pokazując ukrytą pod nim sekretną mapę.'\n{elif} postać {is} 'Sam'\n    {print} 'Wybrałeś(aś) Sama! On jest najszybszy ze wszystkich!'\n    {print} 'Sam wspina się na drzewo i widzi, że nieopodal jest wioska.'\n```\n\n            \n"
+                example_code: "```\ncharacter {is} {ask} 'Who will help you on your quest?'\n{if} character {is} 'Daisy'\n{print} 'You have picked Daisy! She is the smartest of them all!'\n{elif} character {is} 'Jason'\n{print} 'You have picked Jason! He is the strongest of them all!'\n{elif} character {is} 'Sam'\n{print} 'You have picked Sam! They are the quickest of them all!'\n```\n\n            \n"
     add_remove_command:
         default_save_name: Dodaj_komendę_remove
         description: wprowadzamy {add} {to_list} i {remove} {from}
@@ -2167,7 +2167,7 @@ adventures:
                 example_code: |
                     ```
                     {def} piosenka(miejsce):
-                        {print}('Moja Bonnie jest nad ', place)
+                        {print}('Moja Bonnie jest nad ', miejsce)
 
                     wybrane_miejsce = {input}('Gdzie chcesz, żeby była Bonnie?')
                     synonim = {input}('Jakie jest inne określenie na to miejsce? ')

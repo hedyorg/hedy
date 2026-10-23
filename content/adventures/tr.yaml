@@ -206,18 +206,18 @@ adventures:
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
-                    anahtarlar = 'kayıp'
-                    {print} 'Bahçenizde duruyorsunuz ve anahtarlarınızı kaybettiniz.'
-                    {print} 'Onları nerede aramak istersiniz?'
-                    {print} 'Seçebilirsiniz: ağaç, çiçeklik, kaya, posta kutusu'
-                    {while} anahtarlar == 'kayıp'
-                        yer = {ask} 'Nereye bakmak istiyorsun?'
-                        {if} yer == 'çiçeklik'
-                            {print} 'İşte buradalar!'
-                            anahtarlar = 'bulundu'
-                        {else}
-                            {print} 'Hayır, burada değiller: ' yer
-                    {print} 'Şimdi eve girebilirsiniz!'
+                    keys = 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
+                            keys = 'found'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
@@ -531,12 +531,13 @@ adventures:
                     Herkes bulaşıkları ne sıklıkla yıkayacak? Bu adil mi? Bunu bu seviyede sayabilirsiniz.
                 example_code: |
                     ```
-                    kişiler = anne, baba, Ali, Ayşe
-                    ali_yıkadı = 0
-                    bulaşıkçı = kişiler {at} {random}
-                    {print} 'Bulaşıkçımız bugün ' bulaşıkçı
-                    {if} bulaşıkçı {is} Ali ali_yıkadı = ali_yıkadı + 1
-                    {print} 'Ali bu hafta bulaşıkları ' ali_yıkadı ' kere yıkadı'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Şimdi 3'ten 5'e kadar olan satırları birkaç kez (örneğin tüm hafta için 7 kez) kopyalayarak tekrar tüm hafta için hesaplama yapabilirsiniz.
@@ -1370,9 +1371,11 @@ adventures:
                     Bu örnek kodda `{repeat}` komutunun bir `{ask}`, `{if}` veya `{else}` komutuyla da kullanılabileceğini görebilirsiniz.
                 example_code: |
                     ```
-                    {repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'
-                    {if} cevap {is} evet {repeat} 2 {times} {print} 'Demek bunu zaten biliyordunuz!'
-                    {else} {repeat} 3 {times} {print} 'Yeni bir şey daha öğrendiniz!'
+                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                    {if} answer {is} yes
+                    {repeat} 2 {times} {print} 'You knew that already!'
+                    {else}
+                    {repeat} 3 {times} {print} 'You have learned something new!'
                     ```
                 story_text_2: |
                     `{repeat}` komutuyla yapabileceğiniz bir başka ilginç şey de, bir şeyin kaç kez tekrarlanacağını ayarlamak için, değişkenler kullanmaktır. Örnek kodda ilk olarak kişiye kaç yaşında olduğunu sorduğumuzu görebilirsiniz.
@@ -1517,17 +1520,23 @@ adventures:
                 example_code: |
                     Bunun gibi basit bir restoran kodu oluşturabilirsiniz:
                     ```
-                    {print} "Restaurant Chez Hedy'ye Hoş Geldiniz"
-                    {print} 'İşte menümüz:'
-                    {print} 'Ana yemeklerimiz pizza, lazanya veya spagetti'
-                    ana = {ask} 'Hangi ana yemeği istersiniz?'
-                    fiyat = 0
-                    {if} ana {is} pizza fiyat = 10
-                    {if} ana {is} lazanya fiyat = 12
-                    {if} ana {is} spagetti fiyat = 8
-                    {print} 'Siparişiniz ' ana
-                    {print} 'Ücret toplamı ' fiyat ' lira, lütfen'
-                    {print} 'Teşekkürler, afiyet olsun!'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |

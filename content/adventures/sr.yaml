@@ -170,18 +170,18 @@ adventures:
                     Пример кода ти показује како да користиш `{while}` петљу у причи. Сада **смисли свој сценарио** у којем играч мора пронаћи нешто пре него што може наставити.
                 example_code: |
                     ```
-                    keys = 'изгубљени'
-                    {print} 'Стојиш у свом врту и изгубио си кључеве.'
-                    {print} 'Где желиш да их тражиш?'
-                    {print} 'Можеш изабрати: дрво, цветна гредица, камен, поштанско сандуче'
-                    {while} keys == 'изгубљени'
-                        location = {ask} 'Где желиш да тражиш?'
-                        {if} location == 'цветна гредица'
-                            {print} 'Ево их!'
-                            keys = 'пронађени'
-                        {else}
-                            {print} 'Не, нису код ' location
-                    {print} 'Сада можеш ући у кућу!'
+                    keys = 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
+                            keys = 'found'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
             13:
                 example_code: |
@@ -679,12 +679,13 @@ adventures:
                     Колико често ће свако радити судове? Да ли је то фер? Можете то пребројати на овом нивоу.
                 example_code: |
                     ```
-                    људи = мама, тата, Ема, Софи
-                    ема_пере = 0
-                    машина_за_судове = људи {at} {random}
-                    {print} 'Машина за судове је' машина_за_судове
-                    {if} машина_за_судове {is} Ема ема_пере = ема_пере + 1
-                    {print} 'Ема ће радити судове ове недеље' ема_пере 'пута'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Сада можете копирати линије 3 до 5 неколико пута (нпр. 7 пута за целу недељу) да бисте поново израчунали за целу недељу.
@@ -1733,9 +1734,11 @@ adventures:
                     У овом пример коду можете видети да се `{repeat}` може користити и са командом `{ask}`, `{if}` или `{else}`.
                 example_code: |
                     ```
-                    {repeat} 2 {times} одговор = {ask} 'Да ли сте знали да можете поставити питање више пута?'
-                    {if} одговор {is} да {repeat} 2 {times} {print} 'Већ сте знали то!'
-                    {else} {repeat} 3 {times} {print} 'Научили сте нешто ново!'
+                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                    {if} answer {is} yes
+                    {repeat} 2 {times} {print} 'You knew that already!'
+                    {else}
+                    {repeat} 3 {times} {print} 'You have learned something new!'
                     ```
                 story_text_2: |
                     Још једна занимљива ствар коју можете урадити са командом `{repeat}` је коришћење променљивих за подешавање броја пута колико нешто треба да се понови. У пример коду можете видети да прво питамо особу колико има година.
@@ -1881,17 +1884,23 @@ adventures:
                 example_code: |
                     Можете направити једноставан код ресторана, као овај:
                     ```
-                    {print} 'Добродошли у Ресторан Ше Хеди'
-                    {print} 'Ево нашег менија:'
-                    {print} 'Наши главни курсеви су пица, лазање или шпагети'
-                    main = {ask} 'Који главни курс бисте желели?'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
                     price = 0
-                    {if} main {is} пица price = 10
-                    {if} main {is} лазање price = 12
-                    {if} main {is} шпагети price = 8
-                    {print} 'Наручили сте ' main
-                    {print} 'То ће бити ' price ' долара, молим'
-                    {print} 'Хвала, уживајте у оброку!'
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |

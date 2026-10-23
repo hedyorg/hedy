@@ -201,17 +201,17 @@ adventures:
                 example_code: |
                     ```
                     keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them ?'
-                    {print} 'You can choose : tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look ?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are !'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
                             keys = 'found'
-                        {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house !'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
     add_remove_command:
         description: Introduction {add} {to_list} et {remove} {from}
@@ -356,20 +356,15 @@ adventures:
                     Tu y arrives ? Génial ! Veux-tu ajouter davantage de fonctions à ta calculatrice ? **Cette aventure se poursuit dans l'onglet suivant !**
                 example_code: |
                     ```
-                    {print} 'Guess which number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
-                    game = 'on'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
-                            {if} guess > number
-                                {print} 'Lower!'
-                            {if} guess < number
-                                {print} 'Higher!'
-                            {if} guess == number
-                                {print} 'You win!'
-                                game = 'over'
+                    {def} calculate_mean_grade():
+                        total = 0
+                        {for} i {in} {range}(1,4):
+                            grade = {input} _
+                            total = total + _
+                            {return} _ / 4
+
+                    mean_grade = _
+                    {print}('Your mean grade is ', mean_grade)
                     ```
     calculator_2:
         name: Calculatrice 2
@@ -624,12 +619,13 @@ adventures:
                     Combien de fois chaque personne va faire la vaisselle ? est-ce équitable ? Tu peux le compter à ce niveau.
                 example_code: |
                     ```
-                    personnes = maman, papa, Emma, Sophie
-                    vaiselles_emma = 0
-                    personne_désignée = personnes {at} {random}
-                    {print} "La personne désignée pour faire la vaisselle est " personne_désignée
-                    {if} personne_désignée {is} Emma vaiselles_emma = vaiselles_emma + 1
-                    {print} "Emma fera " vaiselles_emma " fois la vaiselle cette semaine "
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Maintenant, tu peux copier les lignes 3 à 5 quelques fois (e.g. 7 fois) pour calculer pour la semaine entière.
@@ -1531,9 +1527,11 @@ adventures:
                     L'exemple montre que `{repeat}` peut aussi être utilisée avec une commande `{ask}`, `{if}` ou `{else}`.
                 example_code: |
                     ```
-                    {repeat} 2 {times} réponse = {ask} "Savais-tu que tu pouvais poser une question plusieurs fois ?"
-                    {if} réponse {is} oui {repeat} 2 {times} {print} "Tu le savais déjà !"
-                    {else} {repeat} 3 {times} {print} "Tu as appris quelque chose de nouveau !"
+                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                    {if} answer {is} yes
+                    {repeat} 2 {times} {print} 'You knew that already!'
+                    {else}
+                    {repeat} 3 {times} {print} 'You have learned something new!'
                     ```
                 story_text_2: |
                     Une autre chose intéressante que tu peux faire avec la commande `{repeat}` est d'utiliser une variable pour indiquer le nombre de fois que quelque chose doit être répété. Dans l'exemple, tu peux voir que nous demandons en premier quel âge a la personne.
@@ -1681,17 +1679,23 @@ adventures:
                 example_code: |
                     Tu peux créer un code de restaurant simple, comme celui-ci :
                     ```
-                    {print} "Bienvenue au restaurant Chez Hedy"
-                    {print} "Voici notre menu :"
-                    {print} "Nos plats principaux sont : pizza, lasagnes ou spaghetti"
-                    plat_principal = {ask} "Quel plat principal souhaitez-vous ?"
-                    {print} "Votre commande : " plat_principal
-                    prix = 0
-                    {if} plat_principal {is} pizza prix = 10
-                    {if} plat_principal {is} lasagnes prix = 12
-                    {if} plat_principal {is} spaghetti prix = 8
-                    {print} "Ce sera " prix " euros, s'il vous plaît"
-                    {print} "Merci, bon appétit !"
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |
@@ -1879,19 +1883,14 @@ adventures:
                 example_code: |
                     ```
                     won = 'no'
-                    options = 'rock', 'paper', 'scissors'
-                    {while} won == 'no'
-                        your_choice = {ask} 'What do you choose?'
-                        computer_choice = options {at} {random}
-                        {print} 'you chose ' your_choice
-                        {print} 'the computer chose ' computer_choice
-                        {if} computer_choice == your_choice
-                            {print} 'Tie!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'scissors'
-                            {print} 'You lose!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'paper'
-                            {print} 'You win!'
-                            won = 'yes'
+                    options = ['rock', 'paper', 'scissors']
+                    {while} won == 'no':
+                        your_choice = {input}('What do you choose?')
+                        computer_choice = options[{random}]
+                        {print}('you chose ', your_choice)
+                        {print}('the computer chose ', computer_choice)
+                        {if} computer_choice == your_choice:
+                    _
                     ```
             2:
                 story_text: |

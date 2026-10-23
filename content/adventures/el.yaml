@@ -75,10 +75,10 @@ adventures:
                     Τώρα που μπορείς να κάνεις υπολογισμούς, μπορείς επίσης να δημιουργήσεις ένα πρόγραμμα για να εξασκηθείς σε μαθηματικούς υπολογισμούς. Μπορείς να δημιουργήσεις τους δικούς σου υπολογισμούς, για παράδειγμα:
                 example_code: |
                     ```
-                    correct_answer {is} 11 * 27
-                    answer {is} {ask} 'Πόσο κάνει 11 φορές το 27;'
-                    {if} answer {is} correct_answer {print} 'συγχαρητήρια!'
-                    {else} {print} 'Λάθος! Ήταν ' correct_answer
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
                     ```
                 story_text_2: |
                     Μπορείς επίσης να αφήσεις τον υπολογιστή να κάνει δικές του τυχαίες προσθέσεις χρησιμοποιώντας το randrom.
@@ -86,14 +86,10 @@ adventures:
                     Έτσι, θα επιλέξεις έναν αριθμό από πίνακες για να εξασκηθείς, και από αυτό θα παίρνεις πάντα ένα διαφορετικό άθροισμα:
                 example_code_2: |
                     ```
-                    tables {is} 4, 5, 6, 8
-                    numbers {is} 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table {is} tables {at} {random}
-                    number {is} numbers {at} {random}
-                    correct_answer {is} table * number
-                    answer {is} {ask} 'πόσο είναι ' table ' φορές ' number '?'
-                    {if} answer {is} correct_answer {print} 'οκ'
-                    {else} {print} 'λάθος! ήταν ' correct_answer
+                    correct_answer = 11 * 27
+                    answer = {ask} 'How much is 11 times 27?'
+                    {if} answer {is} _ {print} 'good job!'
+                    {else} {print} 'Wrong! It was ' _
                     ```
     calculator_2:
         levels: {}
@@ -201,12 +197,13 @@ adventures:
                     Αυτό το επίπεδο είναι το τέλος της περιπέτειας του πλυσίματος! Όμως υπάρχουν πολλές ακόμα περιπέτειες να ακολουθήσεις σε άλλα επίπεδα, όπως το κομπιουτεράκι, μια διαδραστική ιστορία και ένα πιο περίπλοκο παιχνίδι.
                 example_code_2: |
                     ```
-                    people {is} μαμά, μπαμπάς, Ελένη, Σοφία
-                    eleni_washes {is} 0
-                    dishwasher {is} people {at} {random}
-                    {print} 'Αυτός που θα πλυνει τα πιάτα' dishwasher
-                    {if} dishwasher {is} Ελένη eleni_washes {is} eleni_washes + 1
-                    {print} 'Η Ελένη θα πλύνει τα πιάτα ' eleni_washes 'φορές αυτήν την εβδομάδα'
+                    people = mom, dad, Emma, Sophie
+                    dishwasher = people {at} {random}
+                    {print} 'Monday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+                    dishwasher = people {at} {random}
+                    {print} 'Tuesday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
                     ```
             8:
                 story_text: |

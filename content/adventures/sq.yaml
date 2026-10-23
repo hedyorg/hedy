@@ -80,7 +80,7 @@ adventures:
                 example_code: |
                     ```
                     kafshët {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Ai/ajo tani dëgjon zhurmën e një kafshe {at} {random}
+                    {print} Ai/ajo tani dëgjon zhurmën e një kafshët {at} {random}
                     ```
                 story_text_2: |
                     Komanda `{add}` mund të ju duhet në tregim.
@@ -139,17 +139,17 @@ adventures:
                     {print} emri 'po ecën nëpër pyll'
                     {print} emri ' përballet me një bishë'
                     përfundimi {is} {ask} 'A do një përfundim të lumtur apo të keq?'
-                    {if} përfundimi {is} i lumtur {print} emri ' merr shpatën dhe bisha vrapon tutje menjëherë'
+                    {if} përfundimi {is} lumtur {print} emri ' merr shpatën dhe bisha vrapon tutje menjëherë'
                     {else} {print} 'Bisha e ha ' emri
                     ```
                 answer_code: |
                     ```
-                    emri {is}{ask} 'Kush është heroi/ina?'
+                    emri {is} {ask} 'Kush është heroi/ina?'
                     {print} 'Oh jo, aeroplani po rrëzohet, kush do të na shpëtoje?'
                     {print} "Shiko kush po fluturon në qiell, është" emri
-                    fundi {is}{ask} 'A do ta shpëtosh aeroplanin, apo do ta shkatërrosh?'
-                    {if}fundi{is} shpëto {print} emri "e uli aeroplanin, ai/ajo na shpëtoi!"
-                    {else}{print} "Oh jo!" emri " do ta shkatërroke aeroplanin, ndihmë!"
+                    fundi {is} {ask} 'A do ta shpëtosh aeroplanin, apo do ta shkatërrosh?'
+                    {if} fundi {is} shpëto {print} emri "e uli aeroplanin, ai/ajo na shpëtoi!"
+                    {else} {print} "Oh jo!" emri " do ta shkatërroke aeroplanin, ndihmë!"
                     ```
             8:
                 story_text: |
@@ -227,18 +227,18 @@ adventures:
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
                 example_code: |
                     ```
-                    çelsat = 'humbur'
-                    {print} 'Ti je duke qëndruar në kopsht dhe i ke humbur çelsat.'
-                    {print} 'Ku doni që të kërkoni për ato?'
-                    {print} 'Ju mund të zgjidhni: dru, lule, gur, kuti'
-                    {while} çelsat == 'humbur'
-                        vendi = {ask} 'Ku doni që të kërkoni?'
-                        {if} vendi == 'lule'
-                            {print} 'Ja ku janë!'
-                            çelsat = 'gjetur'
-                        {else}
-                            {print} 'Jo, nuk janë në' vendi
-                    {print} 'Tani mund të hyni në shtëpi!'
+                    keys = 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
+                            keys = 'found'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
             4:
                 story_text: |
@@ -265,11 +265,11 @@ adventures:
                     ```
                     emri {is} {ask} 'Si quhesh ti?'
                     {print}  'Personazhi kryesor quhet' emri
-                    {print} emri  'tani po shkon të bëjë një xhiro në pyll
+                    {print} emri  'tani po shkon të bëjë një xhiro në pyll'
                     {print} emri ' ka pak frikë'
                     kafshët {is} 🦔, 🐿, 🦉, 🦇
                     {print} 'Ai/Ajo dëgjon zhurmën e një ' kafshët {at} {random}
-                    {print} emri ' ka frikë se ky pyll ka fantazma
+                    {print} emri ' ka frikë se ky pyll ka fantazma'
                     ```
     add_remove_command:
         levels: {}
@@ -452,12 +452,13 @@ adventures:
                     Sa shpesh duhet që secili ti lajë enët? A është e drejtë? Mund të numëroni në këtë nivel.
                 example_code: |
                     ```
-                    njerëzit = nëna, babi, Erza, Sara
-                    erza_lanë = 0
-                    larësi_enëve = njerëzit {at} {random}
-                    {print} 'Larësi i enëve është' larësi_enëve
-                    {if} larësi_enëve {is} Erza erza_lanë = erza_lanë + 1
-                    {print} 'Erza do ti lajë enët këtë javë' erza_lanë 'herë'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Tani kund të kopjoni rreshtat 3 deri 5 disa herë (p.sh. 7 herë për të gjithë javën) për të kalkuluar për të gjithë javën.
@@ -1055,17 +1056,23 @@ adventures:
                 example_code: |
                     Ju mund ta bëni një kod të thjeshtë për restorant, si kështu:
                     ```
-                    {print} 'Mirë se erdhët në Restorant Hedy'
-                    {print} 'Kjo është menu-ja jonë:'
-                    {print} 'Kurset tona kryesore janë pica, lazanja ose spageti'
-                    kryesore = {ask} 'Cilin pjatë kryesore do të dëshironit?'
-                    çmimi = 0
-                    {if} kryesore {is} pica çmimi = 10
-                    {if} kryesore {is} lazanja çmimi = 12
-                    {if} kryesore {is} spageti çmimi = 8
-                    {print} 'Ju keni porositur ' kryesore
-                    {print} 'Kjo do të kushtojë ' çmimi ' lekë.'
-                    {print} 'Faleminderit, shijoni vaktin tuaj!'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |

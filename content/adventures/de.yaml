@@ -221,18 +221,18 @@ adventures:
                     Der Beispiel Code zeigt dir, wie du eine `{while}` Schleife in einer Geschichte verwenden kannst. Denke dir jetzt **ein eigenes Szenario** aus, in dem die Spieler etwas finden müssen, bevor sie weitermachen können.
                 example_code: |
                     ```
-                    Schlüssel = 'verloren'
-                    {print} 'Du stehst in Deinem Garten, hast jedoch Deine Schlüssel verloren.'
-                    {print} 'Wo willst Du nach ihnen suchen?'
-                    {print} 'Wähle zwischen: Baum, Blumenbeet, Stein, Briefkasten'
-                    {while} Schlüssel == 'verloren'
-                        Ort = {input} 'Wo willst Du suchen?'
-                        {if} Ort == 'Blumenbeet'
-                            {print} 'Ah, hier sind sie!'
-                            Schlüssel = 'gefunden'
+                    keys = 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
+                        location = {input}('Where do you want to look?')
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
+                            keys = 'found'
                         {else}:
-                            {print} 'Nö, sie sind nicht beim ' Ort '.'
-                    {print} 'Jetzt kannst Du ins Haus!'
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
             13:
                 example_code: |
@@ -244,13 +244,13 @@ adventures:
                 story_text: "Nun, da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte bauen! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen, oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du `{elif}` einsetzt."
                 example_code: |
                     ```
-                    character = {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
-                    {if} character  {is} 'Daisy'
-                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste aller!'
-                    {elif} character  {is} 'Jason'
-                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen!'
+                    character {is} {ask} 'Who will help you on your quest?'
+                    {if} character {is} 'Daisy'
+                    {print} 'You have picked Daisy! She is the smartest of them all!'
+                    {elif} character {is} 'Jason'
+                    {print} 'You have picked Jason! He is the strongest of them all!'
                     {elif} character {is} 'Sam'
-                    {print} 'Du hast Sam ausgewählt! Sie sind die schnellsten von allen! '
+                    {print} 'You have picked Sam! They are the quickest of them all!'
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
@@ -949,12 +949,13 @@ adventures:
                     Wer ist wie oft mit dem Abwasch dran? Ist es gerecht verteilt? In diesem Level kannst Du mitzählen.
                 example_code: |
                     ```
-                    Familienmitglieder = Mama, Papa, Emma, Sophie
-                    Emmas_Anzahl = 0
-                    Tellerwäscher = Familienmitglieder {at} {random}
-                    {print} 'Den Abwasch macht ' Tellerwäscher
-                    {if} Tellerwäscher {is} Emma Emmas_Anzahl = Emmas_Anzahl + 1
-                    {print} 'Emma ist diese Woche ' Emmas_Anzahl ' Mal mit dem Abwasch dran'
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is ' dishwasher
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Jetzt kannst Du die Zeilen ein paar Mal kopieren (z.B. weitere 6 Mal für die ganze Woche), um einen Plan für die ganze Woche aufzustellen.
@@ -2032,9 +2033,11 @@ adventures:
                     In diesem Beispielprogramm siehst du, dass `{repeat}` auch zusammen mit `{ask}`, `{if}` oder `{else}` verwendet werden kann.
                 example_code: |
                     ```
-                    {repeat} 2 {times} antwort = {ask} 'Wusstest du, dass du eine Frage mehrfach stellen kannst?'
-                    {if} antwort {is} ja {repeat} 2 {times} {print} 'Das wusstest du schon!'
-                    {else} {repeat} 3 {times} {print} 'Du hast was Neues gelernt!'
+                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
+                    {if} answer {is} yes
+                    {repeat} 2 {times} {print} 'You knew that already!'
+                    {else}
+                    {repeat} 3 {times} {print} 'You have learned something new!'
                     ```
                 story_text_2: |
                     Etwas anderes Interessantes, das du mit dem `{repeat}` Befehl machen kannst ist, Variablen zu verwenden um die Anzahl der Wiederholungen zu bestimmen. In dem Beispielprogramm kannst du sehen, dass wir die Person zuerst fragen, wie alt sie ist.
@@ -2194,17 +2197,23 @@ adventures:
                 example_code: |
                     Du kannst einen einfachen Restaurant Code erstellen. Das geht so:
                     ```
-                    {print} 'Willkommen im Restaurant Chez Hedy'
-                    {print} 'Hier ist unsere Karte:'
-                    {print} 'Unsere Hauptgerichte sind Pizza, Lasagne oder Spaghetti'
-                    haupt = {ask} 'Welches Hauptgericht möchten Sie?'
-                    preis = 0
-                    {if} haupt {is} Pizza preis = 10
-                    {if} haupt {is} Lasagne preis = 12
-                    {if} haupt {is} Spaghetti preis = 8
-                    {print} 'Sie bestellten ' haupt
-                    {print} 'Das kostet ' preis ' Euro, bitte'
-                    {print} 'Danke, genießen Sie Ihre Mahlzeit!'
+                    #Welcoming the customer:
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
+                    price = 0
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
+                    #Telling the price to the customer:
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
                     ```
             8:
                 story_text: |
