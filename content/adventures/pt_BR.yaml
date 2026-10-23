@@ -268,6 +268,22 @@ adventures:
                     {if} caminho {is} esquerda {and} arma {is} espada
                         _
                     ```
+                answer_code_2: |
+                    ```
+                    {print} 'Nossa heroína está caminhando pela floresta'
+                    {print} 'O caminho se divide em dois'
+                    caminho = {ask} 'Qual caminho ela deve escolher?'
+                    arma = {ask} 'Que arma ela saca?'
+
+                    {if} caminho {is} esquerda {and} arma {is} espada
+                        {print} 'nenhum monstro ousa se aproximar da heroína.'
+
+                    {if} caminho {is} esquerda {and} arma {is} estilingue
+                        {print} 'a heroína é atacada por um urso-coruja.'
+
+                    {if} caminho {is} direita {or} arma {is} 'livro de feitiços'
+                        {print} 'a heroína é abordada por um mago misterioso.'
+                    ```
             11:
                 story_text: |
                     Neste nível você pode usar o comando {for} em sua história. Desta forma, você poderia facilmente programar o livro infantil 'urso pardo, urso pardo, o que você vê'.
@@ -304,6 +320,12 @@ adventures:
                     nome = _
                     {print}('Bem-vindo(a) a esta história!')
                     ```
+                story_text: |
+                    Vamos imprimir uma história e, agora, é preciso usar parênteses com o `{print}`.
+
+                    ### Exercício
+                    Crie uma história com pelo menos 5 frases. Primeiro, use a variável `nome` na sua história. Em seguida, crie duas outras variáveis e use-as também.
+                    Dica: Lembre-se das vírgulas em um `{print}` entre texto e variáveis!
             6:
                 story_text: "Agora que você pode usar `{elif}`, pode criar uma história ainda mais interativa! Você pode criar vários personagens, por exemplo, com características diferentes.\nOu você pode fazer com que seu jogador escolha qual caminho seguir, qual porta abrir ou qual poção mágica beber...\n\n### Exercício\nCrie sua própria história com 3 ou mais opções usando `{elif}`."
                 example_code: "```\npersonagem {is} {ask} 'Quem vai te ajudar na sua jornada?'\n{if} personagem {is} 'Daisy'\n{print} 'Você escolheu a Daisy! Ela é a mais inteligente de todas!'\n{elif} personagem {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{elif} personagem {is} 'Sam'\n{print} 'Você escolheu Sam! A pessoa mais rápidas de todas!'\n```\n"
@@ -843,6 +865,19 @@ adventures:
                     {print} 'Terça-feira quem lava a louça é: ' lavador
                     {remove} lavador {from} pessoas
                     ```
+                example_code: |
+                    ```
+                    pessoas = mãe, pai, Eva, Sofia
+                    vezes_eva_lava = 0
+                    lavador = pessoas {at} {random}
+                    {print} lavador ' é quem vai lavar a louça'
+                    {if} lavador {is} Eva
+                    vezes_eva_lava = vezes_eva_lava + 1
+                    {print} 'Eva vai lavar a louça ' vezes_eva_lava ' vezes essa semana'
+                    ```
+
+                    Agora você pode copiar as linhas 3 a 5 algumas vezes (para uma semana, 7 vezes) e calcular para uma semana inteira novamente.
+                    Você consegue fazer o código funcionar para a semana inteira?
             8:
                 story_text: |
                     Com o `{repeat}` você pode repetir pedaços de código. Você pode usá-lo para calcular para múltiplos dias quem vai lavar a louça!
