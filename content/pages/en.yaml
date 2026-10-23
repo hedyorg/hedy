@@ -326,7 +326,7 @@ teacher-guide:
             New in this level:
 
             * Making a list with `{is}` and picking from it with `{at} {random}`
-            * Adding an item to a list with `{add} {to}`
+            * Adding an item to a list with `{add} {to_list}`
             * Taking an item out of a list with `{remove} {from}`
         sections:
         -   title: Students try to print whole lists
@@ -409,13 +409,13 @@ teacher-guide:
                 error_code: |-
                     names {is} Jake
                     your_name {is} {ask} Who are you?
-                    {add} your_name {to} names
+                    {add} your_name {to_list} names
                     {print} names {at} {random}
                 solution_text: There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
                 solution_code: |-
                     names {is} Jake, Amy
                     your_name {is} {ask} Who are you?
-                    {add} your_name {to} names
+                    {add} your_name {to_list} names
                     {print} names {at} {random}
         -   title: Students forget to use `{to}`/`{from}` in `{add}`/`{remove}`
             example:

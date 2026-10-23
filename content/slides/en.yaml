@@ -508,7 +508,7 @@ levels:
         7:
             header: Add to
             text: |-
-                You can choose what to add to the list or you can use the `{add}` `{to}` keyword in combination with the `{ask}` keyword.
+                You can choose what to add to the list or you can use the `{add}` `{to_list}` keyword in combination with the `{ask}` keyword.
                 This way you can let the player decide what to add to the list to make the program interactive.
             code: |-
                 animals {is} dog, cat, kangaroo
@@ -521,7 +521,7 @@ levels:
         8:
             header: Remove from
             text: |-
-                The opposite of the `{add}` `{to}` keyword is the  `{remove}` `{from}` keyword.
+                The opposite of the `{add}` `{to_list}` keyword is the  `{remove}` `{from}` keyword.
                 This keyword removes an item from a list.
             code: |-
                 animals {is} dog, cat, kangaroo
@@ -1458,7 +1458,7 @@ levels:
                 jumped_before = 'Have you ever done a parachute jump before, ' name '?'
                 {if} jumped_before  no
                 {print} 'No worries, you'll get an extra safety instruction in room 13'
-                {add} name {to} extra_instructions_people
+                {add} name {to_list} extra_instructions_people
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
