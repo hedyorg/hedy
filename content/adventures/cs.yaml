@@ -1763,7 +1763,7 @@ adventures:
                     slova {is} krá, Hedy
                     {print} Vycvič si papouška!
                     nové_slovo {is} {ask} Jaké slovo ho chceš naučit?
-                    {add} nové_slovo {to} slova
+                    {add} nové_slovo {to_list} slova
                     {print} 🧒 Řekni nové_slovo, Hedy!
                     {print} 🦜 slova {at} {random}
                     ```
@@ -1775,7 +1775,7 @@ adventures:
                     slova is krá, Hedy
                     {print} 'Vycvič si papouška!'
                     nové_slovo {is} {ask} 'Jaké slovo ho chceš naučit?'
-                    {add} nové_slovo {to} slova
+                    {add} nové_slovo {to_list} slova
                     {print} ' 🧒 Řekni ' nové_slovo ', Hedy!'
                     {print} ' 🦜 ' slova {at} {random}
                     ```
@@ -1798,7 +1798,7 @@ adventures:
                     slova is krá, Hedy
                     {print} 'Vycvič si papouška!'
                     nové_slovo {is} {ask} 'Jaké slovo ho chceš naučit?'
-                    {add} nové_slovo {to} slova
+                    {add} nové_slovo {to_list} slova
                     řečené_slovo is slova {at} {random}
                     {print} '🧒 Řekni ' nové_slovo ', Hedy!'
                     {print} '🦜 ' řečené_slovo
@@ -3186,7 +3186,7 @@ adventures:
                     {print} Tajemný mléčný koktejl
                     příchutě {is} jahoda, čokoláda, vanilka
                     přání {is} {ask} Jakou příchuť si přeješ?
-                    {add} přání {to} příchutě
+                    {add} přání {to_list} příchutě
                     alergie {is} {ask} Na jakou příchuť máš alergii?
                     {remove} alergie {from} příchutě
                     {print} Dostaneš mléčný koktejl. Jeho příchuť je příchutě {at} {random}
