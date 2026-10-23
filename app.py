@@ -5,12 +5,13 @@ import collections
 import logging
 import datetime
 import os
+import io
+import math
 import re
 # TEST
 import subprocess
 import sys
 import traceback
-import textwrap
 import unicodedata
 import zipfile
 import jinja_partials
@@ -32,6 +33,8 @@ from flask_compress import Compress
 from urllib.parse import quote_plus
 
 import hedy
+import pyembroidery
+import turtlethread
 import website_content as hedy_content
 from hedy import translation as hedy_translation
 import hedyweb
@@ -781,69 +784,78 @@ def parse_by_id(user):
         return make_response(gettext("request_invalid"), 400)
 
 
+MACHINE_FILES_NAME = 'hedy_drawing'
+# Has to match the maximum number of points the front-end records, see turtle_recording_prefix in app.ts
+MACHINE_FILES_MAX_POINTS = 20000
+# See prepare_files for how these were chosen
+MACHINE_FILES_EMBROIDERY_SCALE = 4
+MACHINE_FILES_STITCH_LENGTH = 5
+MACHINE_FILES_PNG_SCALE = 5
+MACHINE_FILES_PNG_MAX_SIZE = 2000
+
+
+def scaled_pattern(stitches, scale):
+    pattern = pyembroidery.EmbPattern()
+    # pyembroidery has the y-axis pointing down, like a screen, while the turtle has it pointing up.
+    # Without mirroring, the drawing would be stitched upside down.
+    # The stitches are also rounded, like the dst writer does: the png writer truncates them instead,
+    # so tiny float errors (99.99999999999999 vs 100) would show up as crooked lines in the png.
+    pattern.stitches = [(round(x * scale), -round(y * scale), command) for x, y, command in stitches]
+    return pattern
+
+
+def is_valid_turtle_path(points):
+    def is_number(value):
+        return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+    return (isinstance(points, list) and len(points) <= MACHINE_FILES_MAX_POINTS
+            and all(isinstance(p, list) and len(p) == 2 and all(is_number(v) for v in p) for p in points))
+
+
 @app.route("/generate_machine_files", methods=['POST'])
 def prepare_files():
-    body = request.json
-    # Prepare the file -> return the "secret" filename as response
-    initialize_hedylang_feature_flags_for_request()
-    transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
-    filename = utils.random_id_generator(12)
+    # The front-end records the positions of the turtle while the program runs, so we only have to turn
+    # that path into machine files instead of running the program again.
+    points = (request.get_json(silent=True) or {}).get('points')
+    if not is_valid_turtle_path(points):
+        return make_response({'error': gettext('ajax_error')}, 400)
 
-    # We have to turn the turtle 90 degrees to align with the user perspective app.ts#16
-    # This is not a really nice solution, but as we store the prefix on the
-    # front-end it should be good for now
-    threader = textwrap.dedent("""
-        import time
-        from turtlethread import Turtle
-        def int_with_error(value, error_message):
-            try:
-                return int(value)
-            except ValueError:
-                raise ValueError(error_message.format(value))
+    # Without scaling, a turtle step is 0.1 mm, which makes most drawings only a few mm big. Each step is
+    # 0.4 mm instead, so the height of the turtle canvas (250 steps) is 10 cm, a common embroidery hoop size.
+    # The stitches are 2 mm long, a typical stitch length for embroidery machines.
+    t = turtlethread.Turtle(scale=MACHINE_FILES_EMBROIDERY_SCALE)
+    with t.running_stitch(stitch_length=MACHINE_FILES_STITCH_LENGTH):
+        for x, y in points:
+            t.goto(x, y)
 
-        t = Turtle()
-        t.left(90)
-        with t.running_stitch(stitch_length=20):
-        """)
-    lines = transpiled_code.code.split("\n")
+    dst_pattern = scaled_pattern(t.pattern.to_pyembroidery().stitches, 1)
 
-    # remove all sleeps for speeed, and remove all colors for compatibility:
-    lines = [x for x in lines if ("time.sleep" not in x) and ("t.pencolor" not in x)]
+    # The png is drawn from the lines of the turtle instead of the stitches: every stitch is rounded on its own,
+    # which would put small kinks in the lines. It would also be tiny, with one pixel per step of the turtle,
+    # so it is drawn bigger, but not so big that a large drawing takes too much memory.
+    corners = [(0, 0)] + [(x, y) for x, y in points]
+    xs = [x for x, _ in corners]
+    ys = [y for _, y in corners]
+    size = max(max(xs) - min(xs), max(ys) - min(ys), 1)
+    png_pattern = scaled_pattern([(x, y, pyembroidery.STITCH) for x, y in corners],
+                                 min(MACHINE_FILES_PNG_SCALE, MACHINE_FILES_PNG_MAX_SIZE / size))
+    # Without a thread, the png writer picks a random color every time
+    png_pattern.add_thread('#000000')
 
-    threader += "  " + "\n  ".join(lines)
-    threader += "\n" + 't.save("machine_files/' + filename + '.dst")'
-    threader += "\n" + 't.save("machine_files/' + filename + '.png")'
-    if not os.path.isdir('machine_files'):
-        os.makedirs('machine_files')
-    exec(threader)
-
-    # stolen from: https://stackoverflow.com/questions/28568687/send-with-multiple-csvs-using-flask
-
-    zip_file = zipfile.ZipFile(f'machine_files/{filename}.zip', 'w', zipfile.ZIP_DEFLATED)
-    for root, dirs, files in os.walk('machine_files/'):
-        # only zip files for this request, and exclude the zip file itself:
-        for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
-            zip_file.write('machine_files/' + file)
-    zip_file.close()
-    return make_response({'filename': filename}, 200)
-
-
-@app.route("/download_machine_files/<filename>", methods=['GET'])
-def download_machine_file(filename, extension="zip"):
-    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
-
-    # Once the file is downloaded -> remove it
-    @after_this_request
-    def remove_file(response):
-        try:
-            os.remove("machine_files/" + filename + ".zip")
-            os.remove("machine_files/" + filename + ".dst")
-            os.remove("machine_files/" + filename + ".png")
-        except BaseException:
-            print("Error removing one of the generated files!")
-        return response
-
-    return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        # The png gets a white background, otherwise its black lines can't be seen in a dark image viewer
+        for extension, write, pattern, settings in [('dst', pyembroidery.write_dst, dst_pattern, {}),
+                                                    ('png', pyembroidery.write_png, png_pattern,
+                                                     {'background': '#ffffff'})]:
+            file_buffer = io.BytesIO()
+            write(pattern, file_buffer, settings)
+            zip_file.writestr(f'{MACHINE_FILES_NAME}.{extension}', file_buffer.getvalue())
+    zip_buffer.seek(0)
+    # The files are sent back in this same response instead of being kept for a separate download
+    # request, since that request could be served by another dyno that doesn't have the files.
+    return send_file(zip_buffer, mimetype='application/zip', as_attachment=True,
+                     download_name=f'{MACHINE_FILES_NAME}.zip')
 
 
 MICROBIT_FEATURE = False
