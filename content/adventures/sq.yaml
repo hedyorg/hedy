@@ -225,21 +225,6 @@ adventures:
 
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print}('You are standing in your garden and you have lost your keys.')
-                    {print}('Where do you want to look for them?')
-                    {print}('You can choose: tree, flowerbed, rock, postbox')
-                    {while} keys == 'lost':
-                        location = {input}('Where do you want to look?')
-                        {if} location == 'flowerbed':
-                            {print}('Here they are!')
-                            keys = 'found'
-                        {else}:
-                            {print}('Nope they are not at the ', location)
-                    {print}('Now you can enter the house!')
-                    ```
             4:
                 story_text: |
                     ### Ushtrim
@@ -450,19 +435,6 @@ adventures:
             7:
                 story_text: |
                     Sa shpesh duhet që secili ti lajë enët? A është e drejtë? Mund të numëroni në këtë nivel.
-                example_code: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people {at} {random}
-                    {print} 'The dishwasher is ' dishwasher
-                    {if} dishwasher {is} Emma
-                    emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
-                    ```
-
-                    Tani kund të kopjoni rreshtat 3 deri 5 disa herë (p.sh. 7 herë për të gjithë javën) për të kalkuluar për të gjithë javën.
-                    A e bëni kodin për të gjithë javën?
                 story_text_2: |
                     Nëse jeni shumë pafat, programi mund të ju zgjedhë juve ti lani enët për të gjithë javën! Nuk është e drejtë!
                     Për të krijuar një sistem të drejtë, mund ta përdorni komandën `{remove}` për të hequr njeriun e zgjedhur nga lista. Kështu që nuk keni që ti lani enët derisa dikush tjetër ti kishte larë.
@@ -1053,27 +1025,6 @@ adventures:
             7:
                 story_text: |
                     Në këtë nivel mund të përdorni matematikën për të kalkuluar çmimin total të klientit tuaj, e cila do ta bëjë restorantin tuaj më reale.
-                example_code: |
-                    Ju mund ta bëni një kod të thjeshtë për restorant, si kështu:
-                    ```
-                    #Welcoming the customer:
-                    {print} 'Welcome to Restaurant Chez Hedy'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    #Calculating the price:
-                    price = 0
-                    {if} main {is} pizza
-                    price = 10
-                    {if} main {is} lasagne
-                    price = 12
-                    {if} main {is} spaghetti
-                    price = 8
-                    #Telling the price to the customer:
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
             8:
                 story_text: |
                     Në këtë nivel keni mësuar të përdorni komandën `{repeat}` që të përsëritni një rresht kodi disa herë.

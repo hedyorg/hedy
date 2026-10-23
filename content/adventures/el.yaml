@@ -73,24 +73,10 @@ adventures:
             7:
                 story_text: |
                     Τώρα που μπορείς να κάνεις υπολογισμούς, μπορείς επίσης να δημιουργήσεις ένα πρόγραμμα για να εξασκηθείς σε μαθηματικούς υπολογισμούς. Μπορείς να δημιουργήσεις τους δικούς σου υπολογισμούς, για παράδειγμα:
-                example_code: |
-                    ```
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
-                    ```
                 story_text_2: |
                     Μπορείς επίσης να αφήσεις τον υπολογιστή να κάνει δικές του τυχαίες προσθέσεις χρησιμοποιώντας το randrom.
 
                     Έτσι, θα επιλέξεις έναν αριθμό από πίνακες για να εξασκηθείς, και από αυτό θα παίρνεις πάντα ένα διαφορετικό άθροισμα:
-                example_code_2: |
-                    ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} _ {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' _
-                    ```
     calculator_2:
         levels: {}
     clear_command:
@@ -195,16 +181,6 @@ adventures:
 
                     Τώρα θα πρέπει να κάνεις πολλή αντιγραφή και επικόλληση, έτσι; Αυτό θα το διορθώσουμε στο επίπεδο 7.
                     Αυτό το επίπεδο είναι το τέλος της περιπέτειας του πλυσίματος! Όμως υπάρχουν πολλές ακόμα περιπέτειες να ακολουθήσεις σε άλλα επίπεδα, όπως το κομπιουτεράκι, μια διαδραστική ιστορία και ένα πιο περίπλοκο παιχνίδι.
-                example_code_2: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    dishwasher = people {at} {random}
-                    {print} 'Monday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
-                    {print} 'Tuesday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    ```
             8:
                 story_text: |
                     Με την `repeat` μπορείς να επαναλάβεις κομμάτια κώδικα. Μπορείς να το χρησιμοποιήσεις αυτό για να υπολογίσεις ποιος θα πλένει τα πιάτα για όλην την εβδομάδα.

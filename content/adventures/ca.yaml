@@ -179,21 +179,6 @@ adventures:
                     ```
             16:
                 story_text: "Utilitzant el bucle `{while}` pots fer que les teves històries siguin més interessants. Per exemple, pots fer servir `{while} game == 'on'` per a poder jugar el joc fins que s'acabi.\nTambé pots fer servir `{while} sword == 'lost'` i així el jugador no podrà continuar el joc fins que trobi alguna cosa concreta.\n\n### Exercici\nAquest exemple mostra com usar el bucle `{while}` dins una història, Ara **pensa en un escenari propi** en què el jugador ha de trobar alguna cosa abans de poder continuar.\n"
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print}('You are standing in your garden and you have lost your keys.')
-                    {print}('Where do you want to look for them?')
-                    {print}('You can choose: tree, flowerbed, rock, postbox')
-                    {while} keys == 'lost':
-                        location = {input}('Where do you want to look?')
-                        {if} location == 'flowerbed':
-                            {print}('Here they are!')
-                            keys = 'found'
-                        {else}:
-                            {print}('Nope they are not at the ', location)
-                    {print}('Now you can enter the house!')
-                    ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         default_save_name: comanda_afegir_borrar

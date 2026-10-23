@@ -205,21 +205,6 @@ adventures:
                     Tai voit käyttää `{while} sword == 'lost'` jolloin pelaaja ei voi jatkaa peliä ennenkuin hän on löytänyt jotain.
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print}('You are standing in your garden and you have lost your keys.')
-                    {print}('Where do you want to look for them?')
-                    {print}('You can choose: tree, flowerbed, rock, postbox')
-                    {while} keys == 'lost':
-                        location = {input}('Where do you want to look?')
-                        {if} location == 'flowerbed':
-                            {print}('Here they are!')
-                            keys = 'found'
-                        {else}:
-                            {print}('Nope they are not at the ', location)
-                    {print}('Now you can enter the house!')
-                    ```
     add_remove_command:
         levels: {}
     and_or_command:
@@ -228,9 +213,6 @@ adventures:
         levels:
             2:
                 example_code: "```\nnimi {is} {ask} Mikä on nimesi?  \n{print} Hei nimi  \nikä {is} {ask} Kuinka vanha olet?  \n{print} nimi on ikä vuotta vanha.\n```\n"
-            13:
-                story_text: |-
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
     calculator:
         levels: {}
     calculator_2:

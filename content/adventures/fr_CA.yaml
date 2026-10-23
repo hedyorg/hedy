@@ -197,22 +197,6 @@ adventures:
                     naam = _ 
                     {print}('Bienvenue dans cette histoire!')
                     ```
-            16:
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print}('You are standing in your garden and you have lost your keys.')
-                    {print}('Where do you want to look for them?')
-                    {print}('You can choose: tree, flowerbed, rock, postbox')
-                    {while} keys == 'lost':
-                        location = {input}('Where do you want to look?')
-                        {if} location == 'flowerbed':
-                            {print}('Here they are!')
-                            keys = 'found'
-                        {else}:
-                            {print}('Nope they are not at the ', location)
-                    {print}('Now you can enter the house!')
-                    ```
     add_remove_command:
         description: Introduction {add} {to_list} et {remove} {from}
         levels:
@@ -354,18 +338,6 @@ adventures:
                     * Enfin, nous achevons le code en appelant la fonction dans la ligne 8.
 
                     Tu y arrives ? Génial ! Veux-tu ajouter davantage de fonctions à ta calculatrice ? **Cette aventure se poursuit dans l'onglet suivant !**
-                example_code: |
-                    ```
-                    {def} calculate_mean_grade():
-                        total = 0
-                        {for} i {in} {range}(1,4):
-                            grade = {input} _
-                            total = total + _
-                            {return} _ / 4
-
-                    mean_grade = _
-                    {print}('Your mean grade is ', mean_grade)
-                    ```
     calculator_2:
         name: Calculatrice 2
         default_save_name: Calculatrice 2
@@ -617,19 +589,6 @@ adventures:
             7:
                 story_text: |
                     Combien de fois chaque personne va faire la vaisselle ? est-ce équitable ? Tu peux le compter à ce niveau.
-                example_code: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people {at} {random}
-                    {print} 'The dishwasher is ' dishwasher
-                    {if} dishwasher {is} Emma
-                    emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
-                    ```
-
-                    Maintenant, tu peux copier les lignes 3 à 5 quelques fois (e.g. 7 fois) pour calculer pour la semaine entière.
-                    As-tu fait le code pour la semaine entière ?
                 story_text_2: |
                     Si tu as vraiment beaucoup de malchance, le programme précédent pourrait te choisir pour toute la semaine ! Ce n'est pas juste !
                     Pour faire un système équitable, tu peux utiliser la commande `{remove}` pour supprimer la personne choisie de la liste. De cette façon tu ne seras pas obligé de faire la vaisselle une fois de plus tant que tout le monde n'aura pas eu son tour.
@@ -1525,14 +1484,6 @@ adventures:
                     ## Répète avec d'autres commandes et avec des variables
                     Tu t'es entrainé avec la commande `{repeat}` combinée avec la commande `{print}`. Mais, savais-tu que tu pouvais utiliser d'autres commandes avec `{repeat}` ?
                     L'exemple montre que `{repeat}` peut aussi être utilisée avec une commande `{ask}`, `{if}` ou `{else}`.
-                example_code: |
-                    ```
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes
-                    {repeat} 2 {times} {print} 'You knew that already!'
-                    {else}
-                    {repeat} 3 {times} {print} 'You have learned something new!'
-                    ```
                 story_text_2: |
                     Une autre chose intéressante que tu peux faire avec la commande `{repeat}` est d'utiliser une variable pour indiquer le nombre de fois que quelque chose doit être répété. Dans l'exemple, tu peux voir que nous demandons en premier quel âge a la personne.
                     Ensuite, en ligne 3, le message est répété `âge` fois. Ainsi nous avons utilisé la variable `âge` avec la commande `{repeat}`.
@@ -1676,27 +1627,6 @@ adventures:
                     - donner une réduction aux gens quand ils donnent un code de réduction (secret) ?
                     - ajouter un menu enfant ?
                     - penser à d'autres choses amusantes à ajouter ?
-                example_code: |
-                    Tu peux créer un code de restaurant simple, comme celui-ci :
-                    ```
-                    #Welcoming the customer:
-                    {print} 'Welcome to Restaurant Chez Hedy'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    #Calculating the price:
-                    price = 0
-                    {if} main {is} pizza
-                    price = 10
-                    {if} main {is} lasagne
-                    price = 12
-                    {if} main {is} spaghetti
-                    price = 8
-                    #Telling the price to the customer:
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
             8:
                 story_text: |
                     À ce niveau tu as appris comment utiliser la commande `{repeat}` pour répéter une ligne de code un certain nombre de fois.
@@ -1878,19 +1808,6 @@ adventures:
                         {if} ton_choix {is} ciseaux
                             {print} "Tu as perdu !"
                     # termine ce code
-                    ```
-            16:
-                example_code: |
-                    ```
-                    won = 'no'
-                    options = ['rock', 'paper', 'scissors']
-                    {while} won == 'no':
-                        your_choice = {input}('What do you choose?')
-                        computer_choice = options[{random}]
-                        {print}('you chose ', your_choice)
-                        {print}('the computer chose ', computer_choice)
-                        {if} computer_choice == your_choice:
-                    _
                     ```
             2:
                 story_text: |

@@ -1928,39 +1928,6 @@ adventures:
                     {print} "Mardi la vaiselle sera faite par " personne_désignée
                     {remove} personne_désignée {from} personnes
                     ```
-                answer_code: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    dishwasher = people {at} {random}
-                    {print} 'Monday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-
-                    dishwasher = people {at} {random}
-                    {print} 'Tuesday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-
-                    dishwasher = people {at} {random}
-                    {print} 'Wednesday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-
-                    dishwasher = people {at} {random}
-                    {print} 'Thursday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-
-                    people = mom, dad, Emma, Sophie
-                    dishwasher = people {at} {random}
-                    {print} 'Friday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-
-                    dishwasher = people {at} {random}
-                    {print} 'Saturday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-
-                    dishwasher = people {at} {random}
-                    {print} 'Sunday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-
-                    ```
             8:
                 story_text: |
                     Avec le `{repeat}` tu peux répéter des morceaux de code. Tu peux l'utiliser pour calculer qui fera la vaisselle plusieurs jours à l'avance !

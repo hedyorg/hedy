@@ -97,22 +97,8 @@ adventures:
                     Azt is engedélyezheted, hogy a számítógép véletlenszerű számításokat végezzen véletlenszámok használatával.
 
                     Így válassz ki pár táblázatot a gyakorláshoz, és ettől mindig más eredményt kapsz
-                example_code: |
-                    ```
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
-                    ```
                 story_text_2: |
                     You can also let the computer do random calculations on its own using {random}.
-                example_code_2: |
-                    ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} _ {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' _
-                    ```
                 story_text_3: |
                     You can also let the computer do random calculations on its own using {random}.
                 example_code_3: |-
@@ -202,18 +188,6 @@ adventures:
 
 
                     Sikerült kiszámolni a 8 kocka pontszámát? Ehhez sok vágás és beillesztés kellett, igaz? Ezt megkönnyítjük a 7. szinten!
-                example_code: |
-                    ```
-                    choices = 1, 2, 3, 4, 5, earthworm
-                    points = 0
-                    throw = choices {at} {random}
-                    {print} 'you threw ' throw
-                    {if} throw {is} earthworm
-                    points = points + 5
-                    {else}
-                    points = points + throw
-                    {print} 'those are ' points ' points'
-                    ```
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
             8:
@@ -289,16 +263,6 @@ adventures:
 
                     Most sokat kell másolnod és beillesztened, igaz? Ezt a 7. szinten javítjuk.
                     Ezen a szinten a vége a mosogató kalandnak! De még mindig sok kaland van más szinteken, például egy számológéppel, egy interaktív történettel és egy bonyolultabb játékkal.
-                example_code: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people {at} {random}
-                    {print} 'The dishwasher is ' dishwasher
-                    {if} dishwasher {is} Emma
-                    emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
-                    ```
             8:
                 story_text: |
                     Az `repeat` segítségével megismételheted a kódrészleteket. Ennek segítségével
@@ -637,37 +601,6 @@ adventures:
                     A 6. szinten matematikai számításokkal kiszámíthatod az ügyfelek megrendelésének teljes árát, ami reálisabbá teheti a virtuális éttermet.
 
                     Készíthetsz egyszerű éttermi kódot, például.
-                example_code: |
-                    ```
-                    #Welcoming the customer:
-                    {print} 'Welcome to Restaurant Chez Hedy'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    #Calculating the price:
-                    price = 0
-                    {if} main {is} pizza
-                    price = 10
-                    {if} main {is} lasagne
-                    price = 12
-                    {if} main {is} spaghetti
-                    price = 8
-                    #Telling the price to the customer:
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
-
-                    De még sok mindent hozzáadhatsz a virtuális éttermedhez, például több tanfolyamot.
-
-                    Ebben a példában három tanfolyam létezik, amelyek több kódot és további kiegészítéseket igényelnek az ár kiszámításakor.
-
-                    Hozzáadhatsz még sok mindent a virtuális éttermedhez, például:
-                    - kérdezd meg, hány ember jön, és szorozd meg az árat ezzel az értékkel
-                    - felveszel egy másik ételt?
-                    - kedvezményt adsz az embereknek, amikor (titkos) kuponkódot adnak meg?
-                    - adsz hozzá gyermekmenüt?
-                    - gondolsz más szórakoztató dolgokra?
             8:
                 story_text: |
                     Az 6. szinten megtanultad, hogyan használhatod az ismétlés parancsot egy kódsor megismétlésére bizonyos számú alkalommal.
@@ -688,30 +621,6 @@ adventures:
                     A 7. szinten több sor kód megismétlésével bonyolultabbá teheted virtuális éttermedet. Mint ez:
 
                     Természetesen ez a kód bővíthető a menü további elemeivel, italokkal és/vagy több fogással, így nyugodtan adj hozzá annyi lehetőséget, amennyit csak akarsz!
-                example_code: |
-                    ```
-                    #welcoming customers to the restaurant:
-                    {print} 'Welcome to Restaurant Chez Hedy!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    price = 0
-                    #Asking all people what they want to order:
-                    {repeat} people {times}
-                    _ food = {ask} 'What would you like to order?'
-                    _ {print} food
-                    _ {if} food {is} fries
-                    _ price = price + 3
-                    _ sauce = {ask} 'What kind of sauce would you like with your fries?'
-                    _ {if} sauce {is} no
-                    _ {print} 'no sauce'
-                    _ {else}
-                    _ price = price + 1
-                    _ {print} 'with ' sauce
-                    _ {if} food {is} pizza
-                    _ price = price + 4
-                    {print} 'That will be ' price ' dollar'
-                    {print} 'Enjoy your meal!'
-                    ```
     rock:
         name: Kő, papír, olló
         default_save_name: Kő

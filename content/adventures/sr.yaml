@@ -168,21 +168,6 @@ adventures:
 
                     ### Вежба
                     Пример кода ти показује како да користиш `{while}` петљу у причи. Сада **смисли свој сценарио** у којем играч мора пронаћи нешто пре него што може наставити.
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print}('You are standing in your garden and you have lost your keys.')
-                    {print}('Where do you want to look for them?')
-                    {print}('You can choose: tree, flowerbed, rock, postbox')
-                    {while} keys == 'lost':
-                        location = {input}('Where do you want to look?')
-                        {if} location == 'flowerbed':
-                            {print}('Here they are!')
-                            keys = 'found'
-                        {else}:
-                            {print}('Nope they are not at the ', location)
-                    {print}('Now you can enter the house!')
-                    ```
             13:
                 example_code: |
                     ```
@@ -677,19 +662,6 @@ adventures:
             7:
                 story_text: |
                     Колико често ће свако радити судове? Да ли је то фер? Можете то пребројати на овом нивоу.
-                example_code: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people {at} {random}
-                    {print} 'The dishwasher is ' dishwasher
-                    {if} dishwasher {is} Emma
-                    emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
-                    ```
-
-                    Сада можете копирати линије 3 до 5 неколико пута (нпр. 7 пута за целу недељу) да бисте поново израчунали за целу недељу.
-                    Да ли правите код за целу недељу?
                 story_text_2: |
                     Ако сте изузетно несрећни, претходни програм може вас изабрати да радите судове целе недеље! То није фер!
                     Да бисте направили праведнији систем, можете користити команду `{remove}` да уклоните изабрану особу са листе. На тај начин не морате поново радити судове док сви не дођу на ред.
@@ -1732,14 +1704,6 @@ adventures:
                     ## Понављање са другим командама и са променљивама
                     Вежбали сте команду `{repeat}` у комбинацији са командом `{print}`, али да ли сте знали да можете користити и друге команде са `{repeat}`?
                     У овом пример коду можете видети да се `{repeat}` може користити и са командом `{ask}`, `{if}` или `{else}`.
-                example_code: |
-                    ```
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes
-                    {repeat} 2 {times} {print} 'You knew that already!'
-                    {else}
-                    {repeat} 3 {times} {print} 'You have learned something new!'
-                    ```
                 story_text_2: |
                     Још једна занимљива ствар коју можете урадити са командом `{repeat}` је коришћење променљивих за подешавање броја пута колико нешто треба да се понови. У пример коду можете видети да прво питамо особу колико има година.
                     Затим, у трећем реду, питање се понавља 'године' пута. Тако смо користили променљиву 'године' са командом `{repeat}`.
@@ -1881,27 +1845,6 @@ adventures:
                     - дати људима попуст када унесу (тајни) купон код?
                     - додати дечји мени?
                     - смислити друге забавне ствари за додавање?
-                example_code: |
-                    Можете направити једноставан код ресторана, као овај:
-                    ```
-                    #Welcoming the customer:
-                    {print} 'Welcome to Restaurant Chez Hedy'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    #Calculating the price:
-                    price = 0
-                    {if} main {is} pizza
-                    price = 10
-                    {if} main {is} lasagne
-                    price = 12
-                    {if} main {is} spaghetti
-                    price = 8
-                    #Telling the price to the customer:
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
             8:
                 story_text: |
                     На овом нивоу сте научили како да користите `{repeat}` команду да поновите линију кода одређени број пута.

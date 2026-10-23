@@ -181,21 +181,6 @@ adventures:
 
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print}('You are standing in your garden and you have lost your keys.')
-                    {print}('Where do you want to look for them?')
-                    {print}('You can choose: tree, flowerbed, rock, postbox')
-                    {while} keys == 'lost':
-                        location = {input}('Where do you want to look?')
-                        {if} location == 'flowerbed':
-                            {print}('Here they are!')
-                            keys = 'found'
-                        {else}:
-                            {print}('Nope they are not at the ', location)
-                    {print}('Now you can enter the house!')
-                    ```
     add_remove_command:
         levels: {}
     and_or_command:
@@ -210,23 +195,9 @@ adventures:
             7:
                 story_text: |
                     Nå som du kan regne så kan du også lage et program til å øve på regnestykker. Du kan lage regnestykker til deg selv, for eksempel:
-                example_code: |
-                    ```
-                    number_1 = {ask} 'Fill in the first number:'
-                    number_2 = {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
-                    ```
                 story_text_2: |
                     Du kan også la datamaskinen lage tilfeldige regnestykker på egenhånd ved hjelp av `{at} {random}`.
                     Dette er hvordan du velger tall fra en tabell med tall å øve på og fra det vil du få forskjellige summer:
-                example_code_2: |
-                    ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} _ {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' _
-                    ```
             10:
                 story_text: |
                     På de forrige nivåene lærte du hvordan å lage en kalkulator. På dette nivået kan du utvide koden til å lage et lite mattespill. Slik som dette...
@@ -364,19 +335,6 @@ adventures:
             7:
                 story_text: |
                     Hvor ofte må hver ta oppvasken? Er det rettferdig? Du kan telle det på dette nivået.
-                example_code: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people {at} {random}
-                    {print} 'The dishwasher is ' dishwasher
-                    {if} dishwasher {is} Emma
-                    emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
-                    ```
-
-                    Du kan nå kopiere linjene 3 til 5 et par ganger (f.eks. 7 ganger for en hel uke) for å regne ut for hele uken.
-                    Lager du koden for hele uken?
                 story_text_2: |
                     Om du er ekstremt uheldig så kan det forrige programmet velge deg til å gjøre oppvasken hele uken! Det er ikke rettferdig!
                     For å lage et mer rettferdig system så kan du bruke `{remove}`-kommandoen for å fjerne en gitt person fra listen. På denne måten trenger du ikke å ta oppvasken igjen før alle har tatt sin tur.
@@ -601,40 +559,9 @@ adventures:
                 story_text: |
                     På dette nivået lar `{if}`-kommandoen deg å spørre kunder spørsmål og gi forskjellige ting til svar.
                     I eksempelet under kan du se at du kan spørre kunden om de har lyst å høre om dagens rett og Hedy kan svare deretter.
-                example_code: |
-                    ```
-                    drinks_in_stock {is} water, lemonade, cola, orange juice
-                    drink {is} {ask} 'What would you like to drink?'
-                    {if} drink {in} drinks_in_stock
-                    {print} 'One ' drink ' coming up!'
-                    {else}
-                    {print} 'Sorry, we do not sell that'
-                    ```
             7:
                 story_text: |
                     På dette nivået kan du bruke matte til å regne ut totalprisen på kundens bestilling. Dette vil gjøre den virtuelle restauranten mer realistisk.
-                example_code: |
-                    Enkel
-                    Du kan lage koden for en enkel restaurant slik:
-                    ```
-                    #Welcoming the customer:
-                    {print} 'Welcome to Restaurant Chez Hedy'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    #Calculating the price:
-                    price = 0
-                    {if} main {is} pizza
-                    price = 10
-                    {if} main {is} lasagne
-                    price = 12
-                    {if} main {is} spaghetti
-                    price = 8
-                    #Telling the price to the customer:
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
             8:
                 story_text: |
                     På dette nivået har du lært å bruke `{repeat}`-kommandoen til å repeterer en linje med kode et visst antall ganger.
@@ -669,30 +596,6 @@ adventures:
                     På dette nivået kan du putte `{if}` inni `{if}` for å gjøre restauranten din mer realistisk og gøy!
                     Du kan for eksempel spørre om saus om noen bestiller pommes frites, men det passer kanskje ikke om noen bestiller lasagne!
                     Sjekk ut eksempelet og prøv dette på din egne virtuelle restaurant!
-                example_code: |
-                    ```
-                    #welcoming customers to the restaurant:
-                    {print} 'Welcome to Restaurant Chez Hedy!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    price = 0
-                    #Asking all people what they want to order:
-                    {repeat} people {times}
-                    _ food = {ask} 'What would you like to order?'
-                    _ {print} food
-                    _ {if} food {is} fries
-                    _ price = price + 3
-                    _ sauce = {ask} 'What kind of sauce would you like with your fries?'
-                    _ {if} sauce {is} no
-                    _ {print} 'no sauce'
-                    _ {else}
-                    _ price = price + 1
-                    _ {print} 'with ' sauce
-                    _ {if} food {is} pizza
-                    _ price = price + 4
-                    {print} 'That will be ' price ' dollar'
-                    {print} 'Enjoy your meal!'
-                    ```
             11:
                 story_text: |
                     På dette nivået kan du lære hvordan å enkelt spørre om gjestenes ønsker i kort kode.
@@ -817,18 +720,6 @@ adventures:
             16:
                 story_text: |
                     Spill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...
-                example_code: |
-                    ```
-                    won = 'no'
-                    options = ['rock', 'paper', 'scissors']
-                    {while} won == 'no':
-                        your_choice = {input}('What do you choose?')
-                        computer_choice = options[{random}]
-                        {print}('you chose ', your_choice)
-                        {print}('the computer chose ', computer_choice)
-                        {if} computer_choice == your_choice:
-                    _
-                    ```
     secret:
         name: SuperSpion
         default_save_name: språk
