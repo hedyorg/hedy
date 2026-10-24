@@ -12,8 +12,7 @@ function clickVisibleConfirmButton() {
     });
 }
 
-export function createAdventure(name)
-{
+export function createAdventure(name: string) {
     if (name) {
         cy.visit(`/for-teachers/customize-adventure?name=${encodeURIComponent(name)}&level=1`);
         cy.url().should('include', '/for-teachers/customize-adventure/');
@@ -21,7 +20,7 @@ export function createAdventure(name)
         cy.location('pathname').then((pathname) => {
             const adventureIdMatch = pathname.match(/customize-adventure\/([^/]+)/);
             expect(adventureIdMatch, 'adventure redirect pathname').to.not.be.null;
-            const adventureId = adventureIdMatch[1];
+            const adventureId = adventureIdMatch![1];
 
             cy.visit(`/for-teachers/legacy/customize-adventure/${adventureId}?new_adventure=1`);
             cy.intercept({
@@ -48,7 +47,7 @@ export function createAdventure(name)
     });
 }
 
-export function deleteAdventure(name) {
+export function deleteAdventure(name: string) {
     // Delete that adventure
     goToTeachersPage();
     cy.reload();
@@ -77,7 +76,7 @@ export function deleteAdventure(name) {
     });
 }
 
-export function openAdventureView(){
+export function openAdventureView() {
     goToTeachersPage();
 
     cy.get('body').then(($body) => {
@@ -98,4 +97,4 @@ export function openAdventureView(){
     });
 }
 
-export default {createAdventure};
+export default { createAdventure };
