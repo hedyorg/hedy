@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-10-18 10:30+0000\n"
+"PO-Revision-Date: 2026-10-25 10:51+0000\n"
 "Last-Translator: Étienne Charignon <echar@users.noreply.hosted.weblate.org>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Language: fr\n"
@@ -31,9 +31,8 @@ msgstr "Nous avaons détecté que ton code est incomplet. Peux-tu remplir les bl
 msgid "Incomplete Repeat"
 msgstr "Nous avons détecté que la commande `{repeat}` à la ligne {line_number} ne contient pas la commande `{command}`. Peux-tu essayer de l'ajouter ?"
 
-#, fuzzy
 msgid "Invalid"
-msgstr "`{invalid_command}` n’est pas une commande du niveau {level} d’Hedy. Voulais-tu écrire `{guessed_command}` ?"
+msgstr "Nous avons détecté que `{invalid_command}` n’est pas une commande du niveau {level} d’Hedy. Peux-tu essayer d'utiliser `{guessed_command}` ?"
 
 msgid "Invalid Argument"
 msgstr "Nous avons détecté que la commande `{command}` ne peut pas être utilisée avec `{invalid_argument}`. Peux-tu remplacer `{invalid_argument}` par {allowed_types} ?"
@@ -44,9 +43,8 @@ msgstr "Nous avons détecté que la commande `{command}` ne fonctionne pas avec 
 msgid "Invalid At Command"
 msgstr "Nous avons détecté que la commande `{command}` n'est pas utilisable avant le niveau 16. Peux-tu essayer d'utiliser des crochets `[]` pour les listes ?"
 
-#, fuzzy
 msgid "Invalid Space"
-msgstr "Oups ! Tu as commencé une ligne par une espace à la ligne {line_number}. Les espaces en début de ligne rendent les ordinateurs perplexes, peux-tu le supprimer ?"
+msgstr "Nous avons détecté que la ligne {line_number} commence avec une espace. Peux-tu essayer de supprimer cette espace ?"
 
 msgid "Invalid Type Combination"
 msgstr "Nous avons détecté que `{invalid_argument}` et `{invalid_argument_2}` ne peuvent pas être utilisés avec `{command}` car l'un est {invalid_type} et l'autre est {invalid_type_2}. Peux-tu essayer de changer `{invalid_argument}` en {invalid_type_2} ou `{invalid_argument_2}` en {invalid_type} ?"
@@ -54,9 +52,8 @@ msgstr "Nous avons détecté que `{invalid_argument}` et `{invalid_argument_2}` 
 msgid "Lonely Echo"
 msgstr "Nous avons détecté que tu as utilisé la commande `{echo}` avant d'utiliser ou sans utiliser la commande `{ask}`. Peux-tu essayer d'utiliser `{ask}` pour demander, puis `{echo}` ?"
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "Il semble que tu as oublié de mettre une commande avec le texte de la ligne {line_number}"
+msgstr "Nous avons détecté que le code semble ne pas avoir de commande avec le texte à la ligne {line_number}. Essayer d'écrire la commande nécessaire avec ce texte"
 
 msgid "Missing Command"
 msgstr "Nous avons détecté qu'il manque une commande à la ligne {line_number}. Peux-tu essaer de regarder la section d'exercices pour touver la commande à utiliser ?"
@@ -64,9 +61,8 @@ msgstr "Nous avons détecté qu'il manque une commande à la ligne {line_number}
 msgid "Missing Inner Command"
 msgstr "Nous avons détecté q'il manque une commande dans la déclaration `{command}` à la ligne {line_number}. Peux-tu essayer de regarder la section d'exercices pour trouver quelle commande utiliser ?"
 
-#, fuzzy
 msgid "No Indentation"
-msgstr "Tu as utilisé trop peu d’espaces à la ligne {line_number}. Tu as utilisé {leading_spaces} espaces, ce qui n’est pas assez. Commence chaque bloc par {indent_size} espaces de plus qu’à la ligne précédente."
+msgstr "Nous avons détecté qu'il semble y avoir trop peu d'espaces ({leading_spaces}) à la ligne {line_number}. Essayer d'augmenter l'indentation de {indent_size} espaces pour chaque nouveau bloc."
 
 msgid "Parse"
 msgstr "Nous avons détecté que `{character_found}` est utilisé à la ligne {location[0]}, ce qui n'est pas autorisé. Peux+tu essayer de trouver un caractère manquant ou en trop dans ton code ?"
@@ -79,6 +75,12 @@ msgstr "Nous avons détecté que la liste {name} est vide ou qu'elle n'a pas d'i
 
 msgid "Too Big"
 msgstr "Nous avons détecté que le programme a {lines_of_code} lignes, mais nous ne pouvons exécuter que {max_lines} lignes aux maximum. Peux-tu raccourcir ton programme ?"
+
+msgid "Too Few Indents"
+msgstr "Nous avons détecté que la ligne {line_number} a trop peu d'espaces ({leading_spaces}). Peux-tu essayer d'ajouter une espace en plus ?"
+
+msgid "Too Many Indents"
+msgstr "Nous avons détecté que la ligne {line_number} a trop d'espaces ({leading_spaces}). Peux-tu essayer de supprimer l'espace en trop ?"
 
 msgid "Unexpected Indentation"
 msgstr "Nous avons détecté que la ligne {line_number} commence avec trop d'espaces ({leading_spaces}).Peux tu essayer d'ajouter {indent_size} espaces lors ce que tu écris un nouveau bloc ?"
@@ -101,9 +103,8 @@ msgstr "Nous avons détecté que le texte utilise des valeurs qui contiennent `{
 msgid "Var Undefined"
 msgstr "Nous avons détecté que la variable `{name}` est utilisée avant d'avoir été définie. Peux-tu la définir avant de l'utiliser ou alors d'utiliser des guillemets pour `{name}` ?"
 
-#, fuzzy
 msgid "Wrong Level"
-msgstr "C'était un code Hedy correct, mais pas au bon niveau. Vous avez écrit `{offending_keyword}` pour le niveau {working_level}. Conseil : {tip}"
+msgstr "Nous avons détecté que le code écrit est un code Hedy correct, mais `{offending_keyword}` est utilisé au niveau {working_level}. {tip}"
 
 msgid "account_overview"
 msgstr "Aperçu du compte"
@@ -354,9 +355,8 @@ msgstr "Dupliquer"
 msgid "echo_and_ask_mismatch_exception"
 msgstr "Echo et ask ne coïncident pas"
 
-#, fuzzy
 msgid "echo_out"
-msgstr "À partir du niveau 2 `{echo}` n'est plus nécessaire. Tu peux répéter une réponse avec `{ask}` et `{print}` maintenant. Exemple : `nom {is} {ask} Quel est ton nom ? {print} bonjour nom`"
+msgstr "À partir du niveau 2, `{echo}` n'est plus nécessaire. Tu peux répéter une réponse avec `{ask}` et `{print}` maintenant. Exemple : `nom {is} {ask} Quel est ton nom ? {print} bonjour nom`"
 
 msgid "edit_code_button"
 msgstr "Modifier le code"
@@ -478,9 +478,11 @@ msgstr "Plus haut niveau atteint"
 msgid "ill_work_some_more"
 msgstr "Je vais le travailler encore un peu"
 
-#, fuzzy
 msgid "image_invalid"
 msgstr "L’image que vous avez choisie n’est pas valide."
+
+msgid "improve_translation_on_weblate"
+msgstr "Améliore cette traduction dans Weblate"
 
 msgid "input"
 msgstr "saisie de `{ask}`"
@@ -515,9 +517,8 @@ msgstr "Rejoindre la classe"
 msgid "join_prompt"
 msgstr "Tu dois avoir un compte pour rejoindre cette classe. Veux-tu te connecter maintenant ?"
 
-#, fuzzy
 msgid "keybinding_waiting_for_keypress"
-msgstr "En attente d'une touche pressée…"
+msgstr "En attente qu'une touche soit pressée…"
 
 msgid "keyword_language_invalid"
 msgstr "Veuillez sélectionner une langue valide."
@@ -552,7 +553,6 @@ msgstr "Niveau désactivé"
 msgid "level_future"
 msgstr "Ce niveau sera automatiquement accessible dès le "
 
-#, fuzzy
 msgid "level_invalid"
 msgstr "Ce niveau Hedy n'est pas valide."
 
@@ -704,9 +704,8 @@ msgstr "Il n'y a pas de compte à créer."
 msgid "no_more_flat_if"
 msgstr "À partir du niveau 8, le code après `{if}` doit être placé sur une nouvelle ligne commençant avec 4 espaces."
 
-#, fuzzy
 msgid "no_programs"
-msgstr "Vous n'avez pas encore de programme."
+msgstr "Il n'y a pas de programme."
 
 msgid "no_shared_programs"
 msgstr "n'a pas de programmes partagés..."
@@ -813,9 +812,8 @@ msgstr "Tous les mots de passes doivent contenir au moins 6 caractères."
 msgid "pending_invites"
 msgstr "Invitations en attente"
 
-#, fuzzy
 msgid "people_with_a_link"
-msgstr "D'autres personnes peuvent voir ce programme. Il est visible sur la page « Explorer »."
+msgstr "Les autres personnes avec un lien peuvent voir ce programme. Il apparaîtra sur ta page de profile publique, si tu en a une."
 
 msgid "period"
 msgstr "un point"
@@ -1030,9 +1028,8 @@ msgstr "une étoile"
 msgid "start_learning"
 msgstr "C'est parti !"
 
-#, fuzzy
 msgid "start_teaching"
-msgstr "Enseigner"
+msgstr "Créer un compte"
 
 msgid "step_title"
 msgstr "Devoir"
@@ -1064,9 +1061,8 @@ msgstr "Êtes-vous sûr de vouloir soumettre ce programme ?"
 msgid "submitted"
 msgstr "Déposé"
 
-#, fuzzy
 msgid "submitted_header"
-msgstr "Ce programme a été déposé et ne peut être modifié."
+msgstr "Ce programme a été déposé avec succès et ne peut plus être modifié."
 
 msgid "subscribe"
 msgstr "S'abonner"
