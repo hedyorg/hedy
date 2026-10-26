@@ -18,7 +18,7 @@ adventures:
                     {print} Il craint que cette forêt soit hantée
                     ```
                 story_text_2: |
-                    ### Défi
+                    ### Exercise
                     Crée maintenant ta propre histoire à l'aide d'au moins 6 lignes de code.
                     Cette histoire doit être différente de celle proposée dans le code d'exemple.
                     Utilise au moins une commande `{ask}` et `{answer}`.
@@ -36,7 +36,7 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Dans le niveau 2 tu peux créer une histoire plus drôle. Le nom de ton personnage principal peut être à n'importe quel endroit de la phrase
+                    Au niveau 2 tu peux créer une histoire plus amusante. Le nom de ton personnage principal peut maintenant être à n'importe quel endroit de la phrase.
 
                     Tu vas devoir programmer un petit supplément pour ça. Maintenant, tu dois commencer par donner un nom à ton personnage principal.
 
@@ -499,7 +499,7 @@ adventures:
                     {print} {answer} est le sport que tu aimes le moins
                     ```
                 story_text_2: |
-                    ## La `{answer}`
+                    ## La réponse avec `{answer}`
                     Si tu veux afficher la réponse, tu peux le faire de cette manière :
                 example_code_2: |
                     ```
@@ -509,8 +509,8 @@ adventures:
                     ```
                 story_text_3: |
                     ### Exercice
-                    Essaye les commandes `{ask}` et `{answer}`. Commence par remplir les trous pour faire fonctionner le programme.
-                    Puis pose encore 2 questions en utilisant la commande `{ask}`. Après chaque `{ask}`, utilise une `{answer}` afin d'afficher la réponse à l'écran.
+                    Essaye la commande `{ask}` et sa réponse avec `{answer}`. Commence par remplir les trous pour faire fonctionner le programme.
+                    Puis pose encore 2 questions en utilisant la commande `{ask}`. Après chaque `{ask}`, utilise `{answer}` afin d'afficher la réponse à l'écran.
                 example_code_3: |
                     ```
                     _ Comment vas-tu ?
@@ -1980,22 +1980,22 @@ adventures:
                 answer_code: |
                     Ma réponse
                 story_text: |
-                    Dans ce niveau, vous allez utiliser une nouvelle commande : `{elif}`. `{elif}` is a combination of the commands `{else}` and `{if}` et tu en auras besoin lorsque tu auras 3 options ou plus.
-                    NOTE : tu dois maintenant écrire 2 lignes quand tu utilises {if}, {else} ou {elif}. Une ligne pour la commande {if} (par exemple `{if} nom {is} Hedy`), et une ligne pour la conséquence si jamais la condition est remplie (par exemple `{print} Salut`).
-                    A ton tour !
+                    À ce niveau, vous allez utiliser une nouvelle commande : `{elif}`. `{elif}` est une combinaison des commandes `{else}` et `{if}` et tu en auras besoin lorsque tu auras 3 options ou plus.
+                    NOTE : tu dois maintenant écrire 2 lignes quand tu utilises `{if}`, `{else}` ou `{elif}`. Une ligne pour la commande `{if}` (par exemple `{if} nom {is} Hedy`), et une ligne pour ce qui doit se passer si jamais la condition est remplie (par exemple `{print} Salut`).
+                    À ton tour !
                     ### Exercice
-                    Crée ta propre roue de la fortune, où tu peux gagner différentes récompense et avoir des réactions associées
+                    Crée ta propre roue de la fortune, où tu peux gagner différentes récompenses et avoir des réactions associées.
                 example_code: |
                     ```
-                    récompenses {is} 1 million d'euros, une tarte aux pomme, rien
+                    récompenses {is} 1 million d'euros, une tarte aux pommes, rien
                     ta_récompense {is} récompenses {at} {random}
-                    {print} 'Tu as gagné ' ta_récompense
+                    {print} "Tu as gagné " ta_récompense
                     {if} ta_récompense {is} 1 million d'euros
-                    {print} 'Super, tu es riche !'
-                    {elif} ta_récompense {is} une_tarte_aux_pommes
-                    {print} 'Mmmmh, une tarte aux pommes !'
+                    {print} "Super, tu es riche !"
+                    {elif} ta_récompense {is} une tarte aux pommes
+                    {print} "Mmmmh, une tarte aux pommes !"
                     {else}
-                    {print} 'Tu auras plus de chance une prochaine fois...'
+                    {print} "Tu auras plus de chance la prochaine fois…"
                     ```
         name: '{elif}'
         description: '{elif}'
@@ -3205,6 +3205,36 @@ adventures:
             7:
                 answer_code: |
                     Ma réponse
+                story_text: |
+                    À ce niveau, tu apprends quelque chose de nouveau : tu peux maintenant calculer.
+
+                    Le plus est facile, tu écris comme en maths : `5 + 5` par exemple. Le moins fonctionne aussi bien, c'est `5 - 5`.
+
+                    La multiplication est un peu différente car il n'y a pas de symbole pour multiplier sur ton clavier. Tu peux chercher, il n'y est pas !
+                    C'est pour ça que nous multiplions avec l'astérisque au-dessus du 8 : `5 * 5`. Lis-le comme « 5 fois 5 », pour mieux t'aider à t'en rappeler.
+                example_code: |
+                    ```
+                    {print} "5 plus 5 fait " 5 + 5
+                    {print} "5 moins 5 fait " 5 - 5
+                    {print} "5 fois 5 fait " 5 * 5
+                    {print} "5 divisé par 5 fait " 5 / 5
+                    ```
+                story_text_2: |-
+                    **Nombres décimaux**
+                    Jusqu'ici, Hedy ne permettait pas les nombres décimaux comme 1.5, mais maintenant nous l'autorisons. Attention, les ordinateurs utilisent le `.` pour les nombres décimaux.
+                story_text_3: '**Les maths avec les variables**'
+                example_code_2: |
+                    ```
+                    {print} 'Deux et demi plus deux te demi font…'
+                    {print} 2.5 + 2.5
+                    ```
+                example_code_3: |
+                    ```
+                    {print} 'Un ticket vaut 2 €'
+                    tickets = {ask} "Combien de tickets voulez-vous ?'
+                    prix = tickets * 2
+                    {print} "Ça vous fera " prix " €, s'il vous plait"
+                    ```
         default_save_name: maths
         name: maths
     music:
@@ -3214,16 +3244,30 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ### Exercise
-                    Terminez les chansons ! Nous avons commencé les codes pour certaines mélodies.
-                story_text_2: Comme vous pouvez le voir, vous pouvez également utiliser la commande `{sleep}` pour ajouter une petite pause dans la chanson.
+                    ### Exercice
+                    Termine les chansons ! Nous avons commencé les codes pour certaines mélodies.
+                story_text_2: Comme tu peux le voir, tu peux également utiliser la commande `{sleep}` pour ajouter une petite pause dans la chanson.
+                example_code_2: |
+                    ```
+                    {print} Ah ! vous dirai-je, maman
+                    {play} C
+                    {play} C
+                    {play} G
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} G
+                    {sleep} 1
+                    {play} F
+                    {play} F
+                    ```
             3:
                 story_text: |
-                    Créez une mélodie aléatoire !
+                    Crée une mélodie aléatoire !
 
                     ### Exercice
                     L'exemple de code crée une mélodie aléatoire, mais elle est très courte et peu de notes sont utilisées.
-                    Ajoutez plus de notes à la liste et créez une mélodie plus longue en copiant la dernière ligne plusieurs fois.
+                    Ajoute plus de notes à la liste et crée une mélodie plus longue en copiant la dernière ligne plusieurs fois.
             5:
                 example_code: |
                     ```
@@ -3231,12 +3275,74 @@ adventures:
                     {if} réponse {is} Harare {play} C6
                     _
                     ```
+                story_text: |
+                    Tu n'es pas toujours obligé d'utiliser la commande `{play}` pour jouer toute une chanson, parfois tu veux juste jouer une seule note.
+                    Par exemple, si tu veux faire un quiz, tu peux jouer une note haute et joyeuse si la réponse est bonne et une note triste et basse si la réponse est mauvaise.
+
+                    ### Excercice
+                    Termine la première question en ajoutant une ligne de code qui joue une note C3 si la réponse donnée est mauvaise.
+                    Ensuite, pense à 3 autres questions à ajouter à ton quiz.
             7:
                 answer_code: |
                     Ma réponse
             1:
                 answer_code: |
                     Ma réponse
+                story_text: |-
+                    À ce niveau, tu apprendras comment utiliser la commande `{play}` pour jouer un air de musique !
+
+                    Écris `{play}` suivi par la note que tu veux jouer. L'échelle utilise les notes en anglais C-D-E-F-G-A-B qui correspondent à Do-Ré-Mi-Fa-Sol-La-Si.
+                    Comme tu le vois, il y a 7 lettres différentes, mais tu peux jouer plus que 7 notes.
+                    Écris un nombre entre 0 et 9 derrière la lettre pour choisir l'échelle, par exemple après B4 vient C5.
+                    C0 est la note la plus basse que tu peux jouer, B9 est la plus haute.
+
+                    ### Exercice
+                    Essaye le code d'exemple et joue avec ! Peux-tu créer ta propre mélodie ?
+                    Au niveau suivant, tu apprendras comment jouer une chanson existante.
+            4:
+                story_text: |
+                    Utilise la commande `{clear}` pour créer une machine à karaoké !
+
+                    ### Exercice
+                    Termine la version karaoké de « Marie avait un p'tit agneau »
+                    Ensuite, crée une version karaoké d'une chanson que tu aimes !
+                example_code: |
+                    {random}```
+                    {print} "Marie avait un p'tit agneau"
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} "P'tit agneau, p'tit agneau"
+                    {play} D
+                    {play} D
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+                    {print} "Marie avait un p'tit agneau"
+                    {play} E
+                    ```
+            6:
+                story_text: |
+                    Avec `{elif}` tu peux jouer différentes notes pour différentes situations. Par exemple, si une personne se sent heureuse, tu peux jouer une note joyeuse.
+                    ### Exercice
+                    Commence par créer une note triste, ensuite crée au moins 2 autres tonalités pour différentes humeurs.
+                example_code: |
+                    ```
+                    humeur {is} {ask} "Comment te sens-tu aujourd'hui ?"
+                    {if} humeur {is} jouyeuse
+                    {play} C4
+                    {elif} humeur {is} triste
+                    {play} _
+                    {elif} humeur {is} _
+                    {play} _
+                    ```
     parrot:
         name: perroquet
         default_save_name: Perroquet
