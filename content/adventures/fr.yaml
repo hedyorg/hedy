@@ -3170,7 +3170,7 @@ adventures:
                     ```
             7:
                 story_text: |
-                    Nous avons aussi un changement pour l'enregistrement dans une variable ! Tu peux maintenant utiliser `=` à la place de `{is}` quand tu enregistres un mot ou nombre dans une variable, comme ceci :
+                    Nous avons aussi fait un changement pour l'enregistrement dans une variable ! Tu peux maintenant utiliser `=` à la place de `{is}` quand tu enregistres un mot ou un nombre dans une variable, comme ceci :
                 example_code: |
                     ```
                     nom = Hedy
@@ -3285,6 +3285,25 @@ adventures:
             7:
                 answer_code: |
                     Ma réponse
+                story_text: |
+                    Plutôt que de jouer des notes, maintenant tu peux aussi jouer des nombres. Écris juste `{play} 1` pour la note la plus basse et `{play} 70` pour la note la plus haute, ou n'importe quel autre nombre entre les deux.
+
+                    ### Exercice
+                    C'est parti pour les maths musicaux ! Exécute le code d'exemple plusieurs fois avec différents nombres de départ.
+                    Ensuite, regarde si tu peux composer une chanson avec les nombres.
+                example_code: |
+                    ```
+                    nombre = {ask} 'Donne un nombre de départ entre 1 et 67'
+                    # Affiche et joue 3 notes :
+                    {print} nombre
+                    {play} nombre
+                    nombre = nombre + 1
+                    {print} nombre
+                    {play} nombre
+                    nombre = nombre + 1
+                    {print} nombre
+                    {play} nombre
+                    ```
             1:
                 answer_code: |
                     Ma réponse
@@ -3442,10 +3461,10 @@ adventures:
         levels:
             7:
                 story_text: |
-                    Dans cette aventure, tu apprendras comment faire une tirelire numérique.
+                    Dans cette aventure, tu vas apprendre comment faire une tirelire numérique.
 
                     ### Exercice
-                    Termine le code pour calculer combien d'argent, tu as et pendant combien de temps tu dois économiser pour t'acheter ce que tu veux !
+                    Termine le code pour calculer combien d'argent tu as et pendant combien de temps tu dois économiser pour t'acheter ce que tu veux !
                     **Bonus** Peut-être as-tu déjà économisé un peu d'argent ? Déduis-le du montant total que tu devras économiser.
                 example_code: |
                     ```
