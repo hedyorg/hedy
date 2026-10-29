@@ -771,7 +771,7 @@ adventures:
             14:
                 story_text: |
                     In this level you will make a program to practice multiplication tables. 
-                    You choose which multiplication table you want to practice and than get asked all the multiplications until 10.
+                    You choose which multiplication table you want to practice and then get asked all the multiplications from 1 to 10.
                     Finish the code: Print whether the answer is correct or incorrect and print the correct answer if a mistake was made. 
                     Also, give points for every correct answer and show the final score.
 
@@ -1434,7 +1434,7 @@ adventures:
                     {repeat} amount {times}
                     {ask} {is} {ask} 'What kind of bread would you like your sandwich to be?'
                     types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
+                    {if} chosen_bread {in} types_of_bread
                     {print} 'Lovely!'
                     {else}
                     'I'm sorry we don't sell that'

@@ -558,6 +558,81 @@ adventures:
                         _
                     {print}('Você ganhou!')
                     ```
+            13:
+                story_text: |
+                    Neste nível, você vai fazer um programa para praticar multiplicação. 
+                    Você escolhe quais números você quer multiplicar. 
+                    Complete o código: imprima se a resposta está correta ou não e, se estiver incorreta, imprima também o resultado correto.
+                example_code: |
+                    ```
+                    # Pedindo as variáveis da multiplicação:
+                    número_1 = {input}('qual é o primeiro número que você quer multiplicar?')
+                    número_2 = {input}('qual é o segundo número que você quer multiplicar?')
+
+                    # Peça a resposta e verifique-a:
+                    resposta = {input}('Quanto é ', número_1, ' vezes ', número_2, '?' )
+                    resposta_correta = número_1 * número_2
+                    {if} resposta _
+                        {print}('Sim, está certo!')
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    # Pedindo as variáveis da multiplicação:
+                    número_1 = {input}('qual é o primeiro número que você quer multiplicar?')
+                    número_2 = {input}('qual é o segundo número que você quer multiplicar?')
+
+                    # Peça a resposta e verifique-a:
+                    resposta = {input}('Quanto é ', número_1, ' vezes ', número_2, '?' )
+                    resposta_correta = número_1 * número_2
+                    {if} resposta == resposta_correta
+                        {print}('Sim, está certo!')
+                    {else}:
+                        {print}('Não está certo, a resposta correta era: ', resposta_correta)
+                    ```
+            14:
+                story_text: |
+                    Neste nível, você vai fazer um programa para praticar tabuadas. 
+                    Você escolhe qual tabuada você quer praticar e, então, deve responder as multiplicações de 1 a 10.
+                    Complete o código: imprima se a resposta está correta ou não e, se estiver incorreta, imprima também o resultado correto. 
+                    Além disso, dê pontos por toda resposta correta e mostre a pontuação final.
+                example_code: |
+                    ```
+                    # Perguntando qual tabuada praticar:
+                    número = {input}('Você quer praticar a tabuada de que número?')
+                    pontuação = 0
+
+                    # Fazendo as perguntas:
+                    {for} i {in} {range}(1,10):
+                        resposta = {input}('Quanto é ', i, ' vezes ', número, '?' )
+                        resposta_correta = número * i
+                        {if} resposta _
+                            pontuação = 
+                            {print}('Sim, está certo!')
+                        _
+
+                    # Imprimindo a pontuação final:
+                    ```
+                answer_code: |
+                    ```
+                    # Perguntando qual tabuada praticar:
+                    número = {input}('Você quer praticar a tabuada de que número?')
+                    pontuação = 0
+
+                    # Fazendo as perguntas:
+                    {for} i {in} {range}(1,10):
+                        resposta = {input}('Quanto é ', i, ' vezes ', número, '?' )
+                        resposta_correta = número * i
+                        {if} resposta == resposta_correta:
+                            pontuação = pontuação + 1
+                            {print}('Sim, está certo!')
+                        {else}:
+                            {print}('Não está certo, a resposta correta era: ', resposta_correta)
+
+                    # Imprimindo a pontuação final:
+                    {print}('Você terminou.')
+                    {print}('Sua pontuação final é: ', pontuação)
+                    ```
     calculator_2:
         default_save_name: Calculadora 2
         description: Calculadora 2
@@ -592,12 +667,11 @@ adventures:
                     ```
                 story_text: |
                     ### Exercício 1
-                    Vamos tornar o programa de prática um pouco mais difícil. O jogador agora precisa responder corretamente a duas perguntas. Preencha os espaços em branco para completar o programa.
+                    Vamos tornar o programa de prática um pouco mais difícil. Agora, é preciso responder corretamente a duas perguntas. Preencha os espaços em branco para completar o programa.
 
                     ### Exercício 2
                     Às vezes, os cálculos têm várias respostas corretas. Por exemplo, 10 pode ser dividido por 5 e por 2. Portanto, a pergunta 'Qual número divide 10?' pode ser respondida por 2 e por 5.
-                    Peça um cálculo que tenha várias respostas corretas, peça ao jogador para respondê-lo e determine se está correto usando `{ou}`.
-
+                    Peça um cálculo que tenha várias respostas corretas. Em seguida, peça uma resposta e determine se está correta usando `{or}`.
                     Esvazie o campo de programação e crie sua própria solução.
     clear_command:
         default_save_name: comando_limpe
@@ -689,14 +763,63 @@ adventures:
                 answer_code: "```\n{print} 'Bem-vindo(a) à Piscina Hedy!'\ncertificado {is} {ask} 'Você tem um certificado de natação?'\n{if} certificado {is} 'sim' {print} 'Ótimo! Você pode nadar na piscina!\n{else} {print} 'Você pode entrar, mas não pode nadar.'\ndesconto {is} {ask} 'Você tem menos de 12 anos?'\n{if} desconto {is} 'sim' {print} 'Vai custar R$9,90'\n{else} {print} 'Vai custar R$15,50'\n{print} 'Tenha um bom dia!'\n\n```\n"
             6:
                 story_text: "### Exercício\nDepure este código. Boa sorte!\n"
+                example_code: |
+                    **Atenção! Este código precisa ser depurado!**
+                    ```
+                    lanches {in} pipoca, doce, salgadinho
+                    escolha_de_lanche {ask} 'O que você quer comer?'
+                    {if} escolha_de_lanche {is} lanches
+                    {print} 'Temos isso! Vou pegar.'
+                    {else} escolha_de_lanche {is} 'nada' 
+                    {print} 'Sem lanche para você, então.'
+                    {else} escolha_de_lanche {is} "" {print} "Isso a gente não tem.'
+                    ```
             7:
                 story_text: "### Exercício\nDepure este código. Boa sorte!"
+                example_code: |
+                    **Atenção! Este código precisa ser depurado!**
+                    ```
+                    {print} Máquina de venda automática
+                    produto_escolhido = {ask} 'Por favor, selecione um produto'
+                    produtos_de_1_real = coca suco de laranja água
+                    produtos_de_2_reais = chocolate, biscoito, barra de cereal
+                    produtos_de_3_reais = batata frita, carne seca, pão de banana
+                    {if} produto_escolhido {is} {in} produtos_de_1_real
+                    preço = 1
+                    {elif} produto_escolhido {is} produtos_de_2_reais
+                    preço = 2
+                    {elif} produto_escolhido {in} produtos_de_3_reais
+                    preço = 3
+                    {else}
+                    preço
+                    quantidade_de_produtos = '{ask} De quantos ' produto_escolhido você gostaria?'
+                    total {is} preço * quantidade_de_produto
+                    {print} 'Vai custar R$' preço ', por gentileza'
+                    ```
             8:
                 story_text: "### Exercício\nDepure este código. Boa sorte!"
             9:
                 story_text: "### Exercício\nDepure este código. Boa sorte!"
             10:
                 story_text: "### Exercício\nDepure este código. Boa sorte!"
+                example_code: |
+                    **Atenção! Este código precisa ser depurado!**
+                    ```
+                    {print} 'Bem-vindo(a) à nossa sanduicheria'
+                    quantidade 'Quantos sanduíches você gostaria de comprar?'
+                    {repeat} quantidade {times}
+                    {ask} {is} {ask} 'De que tipo de pão você gostaria no seu sanduíche?'
+                    tipos_de_pão {is} branco, integral, francês, alho, sem glúten
+                    {if} pão_escolhido {in} tipos_de_pão
+                    {print} 'Ótima escolha!'
+                    {else}
+                    'Desculpe, não temos esse'
+                    cobertura {is} {ask} 'De que cobertura você gostaria?'
+                    molho {is} {ask} 'De que molho você gostaria?'
+                    {print} Um pão_escolhido com cobertura e molho.
+                    preço = quantidade * 6
+                    {print} 'Vai custar 'preço reais', por gentileza'
+                    ```
             13:
                 story_text: |-
                     ### Exercício
@@ -713,6 +836,14 @@ adventures:
                 story_text: |-
                     ### Exercício
                     Depure este código. Boa sorte!
+                example_code: |
+                    **Atenção! Este código precisa ser depurado!**
+                    ```
+                    nomes = Marcos Helena Samuel Natália
+                    atividades = soltar pipa, nadar, fazer caminhadas, se bronzear
+                    {for} nome {is} nomes
+                    {print} nome adora atividade {at} {random} na praia
+                    ```
             14:
                 story_text: |-
                     ### Exercício
@@ -1129,9 +1260,9 @@ adventures:
             1:
                 story_text: |
                     Nesta aventura você está trabalhando para fazer um jogo no qual você tem que escapar de uma casa mal-assombrada escolhendo a porta correta.
-                    Se você escolher a porta certa, você sobreviverá, mas senão um monstro terrível pode...
+                    Se você escolher a porta certa, você sobrevive. Caso contrário, um monstro terrível pode...
 
-                    No nível 1 começamos nosso jogo de casa mal-assombrada inventando uma história assustadora e perguntando ao jogador que monstro ele verá na casa mal-assombrada.
+                    No nível 1, começamos nosso jogo de casa mal-assombrada inventando uma história assustadora e perguntando ao jogador que porta ele irá escolher na casa mal-assombrada.
                 example_code: |
                     ```
                     {print} Como eu cheguei aqui?
@@ -1151,7 +1282,7 @@ adventures:
                     ### Exercício
                     Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
                     Agora termine a história adicionando pelo menos 5 linhas de código.
-                    Lembre-se de começar cada linha com um comando `{print}`.
+                    Lembre-se de começar cada linha com um comando `{print}` ou `{ask}`.
             2:
                 story_text: |
                     Nesta casa mal-assombrada, você pode escolher seus monstros com emojis. Mas claro, você também poderia usar palavras.
@@ -2236,7 +2367,7 @@ adventures:
         levels:
             10:
                 story_text: "Agora, vamos aprender `{and}` e `{or}`! Se você quer checar duas condições, você não precisa usar dois `{if}`s, você pode usar `{and}` e `{or}`.\nSe você usar `{and}`, significa que ambas as condições, à esquerda e à direita do `{and}`, precisam ser verdadeiras. Também podemos usar `{or}`. Nesse caso, basta que uma das condições seja verdadeira."
-                example_code: "```\nnome = {ask} 'qual é o seu nome?'\nidade = {ask} 'qual é a sua idade?'\n{if} nome {is} 'Hedy' {and} idade {is} 2\n    {print} 'Você é a verdadeira Hedy!'\n{elif} nome {is} 'Hedy' {or} idade {is} 2\n    {print} 'Tão perto... mas você não é a Hedy!'\n{else}\n    {print} 'Você não é a Hedy!'\n```\n"
+                example_code: "```\nnome = {ask} 'qual é o seu nome?'\nidade = {ask} 'qual é a sua idade?'\n{if} nome {is} Hedy {and} idade {is} 2\n    {print} 'Você é a verdadeira Hedy!'\n{elif} nome {is} Hedy {or} idade {is} 2\n    {print} 'Tão perto... mas você não é a Hedy!'\n{else}\n    {print} 'Você não é a Hedy!'\n```\n"
                 answer_code: |
                     Resposta livre
     hospital:
@@ -2265,9 +2396,14 @@ adventures:
             16:
                 answer_code: |
                     Resposta livre
+                story_text: |
+                    Parabéns! Você chegou ao último nível da Hedy! O código que você criou aqui pode ser copiado para ambientes Python reais, como o Replit ou o PyCharm, e você pode continuar aprendendo por lá! Observe, no entanto, que o Python só pode ler comandos em inglês, então, se você estiver usando comandos em outro idioma, precisará mudá-los para o inglês agora.
             12:
                 answer_code: |
                     Resposta livre
+                story_text: |
+                    Parabéns! Você chegou ao final de Hedy Avançada! Você pode continuar aprendendo na Hedy Especialista (níveis 13-16), onde você aprende como escrever códigos reais de Python.
+                    Ou sinta-se livre para continuar na Hedy Avançada e criar seus próprios programas, é claro!
     repeat_command:
         name: '{repeat}'
         description: comando {repeat}
@@ -2355,6 +2491,7 @@ adventures:
     functions_3:
         default_save_name: funções 3
         description: funções 3
+        name: funções com retorno
     turtle_draw_it_2:
         description: Desenhe 2
         default_save_name: Desenhe 2
