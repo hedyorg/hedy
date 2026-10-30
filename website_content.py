@@ -74,7 +74,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     2: [
         'ask_command',
@@ -89,7 +90,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     3: [
         'random_command',
@@ -106,7 +108,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     4: [
         'quotation_marks',
@@ -123,7 +126,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'party_planner',
         'monster',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     5: [
         'if_command',
@@ -138,7 +142,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     6: [
         'elif_command',
@@ -148,7 +153,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     7: [
         'maths',
@@ -164,7 +170,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     8: [
         'repeat_command',
@@ -180,6 +187,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'free_play',
         'congratulations'
     ],
     9: [
@@ -194,7 +202,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     10: [
         'repeat_command',
@@ -211,7 +220,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     11: [
         'for_command',
@@ -228,7 +238,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'restaurant',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     12: [
         'functions',
@@ -239,6 +250,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it_2',
         'debugging',
         'hospital',
+        'free_play',
         'congratulations'
     ],
     13: [
@@ -255,7 +267,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'carnival',
         'for_command',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     14: ['lists',
          'random_command',
@@ -267,7 +280,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
          'turtle_draw_it',
          'language',
          'debugging',
-         'hospital'
+         'hospital',
+         'free_play'
          ],
     15: [
         'functions',
@@ -284,7 +298,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'piggybank',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'free_play'
     ],
     16: [
         'while_command',
@@ -298,6 +313,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'guess_my_number',
         'debugging',
         'hospital',
+        'free_play',
         'congratulations'
     ],
 }
