@@ -12,6 +12,7 @@
  * from 'initialize.ts'.
  */
 import './htmx-integration';
+import './weblate-links';
 export * from './modal';
 export * from './app';
 export * from './auth';

@@ -104,19 +104,6 @@ adventures:
                     weggooien {is} {ask} Welk ding zal onze held weggooien?
                     {remove} weggooien {from} tas
                     ```
-                answer_code: |
-                    ```
-                    dieren {is} leeuw, zebra, flamingo
-                    {print} Hallo kinderen! Vandaag gaan we naar de dierentuin!
-                    lievelingsdier {is} {ask} Welk dier wil je vandaag bezoeken?
-                    {add} lievelingsdier {to} dieren
-                    {sleep} 2
-                    {print} We gaan naar dieren {at} {random}
-                    {sleep}
-                    minst_favoriete_dier {is} {ask} Welk dier wil je niet zien?
-                    {remove} minst_favoriete_dier {from} dieren
-                    {print} Laten we nu naar dieren {at} {random} gaan!
-                    ```
             4:
                 story_text: |
                     ### Opdracht
@@ -332,21 +319,6 @@ adventures:
                     Of je kunt `{while} zwaard == 'kwijt'` gebruiken, zodat de speler niet verder kan totdat hij/zij het zwaard gevonden heeft.
                     ### Opdracht
                     De voorbeeldcode laat zien hoe je  `{while}` in een verhaal kunt gebruiken. Bedenk nu je **eigen scenario** waarin de speler iets moet vinden voordat hij/zij door kan spelen.
-                example_code: |
-                    ```
-                    sleutels = 'kwijt'
-                    {print} 'Je staat in de voortuin en bent je sleutels kwijt.'
-                    {print} 'Waar ga je zoeken?'
-                    {print} 'kies uit: boom, steen, bloembed, brievenbus'
-                    {while} sleutels == 'kwijt'
-                        locatie = {ask} 'Waar wil je zoeken?'
-                        {if} locatie == 'bloembed'
-                            {print} 'Hier zijn ze!'
-                            sleutels = 'gevonden'
-                        {else}
-                            {print} 'Helaas, ze liggen niet bij de ' locatie
-                    {print} 'Nu kun je het huis in!'
-                    ```
                 answer_code: |
                     ```
                     rackets = 'lost'
@@ -379,7 +351,7 @@ adventures:
                     naam = 'Hedy'
                     {print}('Welkom bij dit verhaal!')
                     {print}('Er was eens een papegaai die ', naam ' heette.')
-                    {print}(name, ' hield van programmeren!')
+                    {print}(naam, ' hield van programmeren!')
                     {print}("Helaas wisten de andere papegaaien niet hoe ze moesten programmeren.")
                     {print}('Op een dag besloot ', naam, ' de andere papegaaien programmeren te leren.')
                     {print}('De lessen bleken een groot succes bij de andere papegaaien!')
@@ -1687,15 +1659,6 @@ adventures:
 
                     Nu kun je regels 3 t/m 5 een paar keer (bijv 7 keer voor een hele week) kopiëren om weer voor een hele week vooruit te rekenen.
                     Maak jij de code voor de hele week?
-                example_code: |
-                    ```
-                    mensen = mama, papa, Emma, Sophie
-                    emma_wast_af = 0
-                    afwasser = mensen {at} {random}
-                    {print} 'De afwasser is ' afwasser
-                    {if} afwasser {is} Emma emma_wast_af = emma_wast_af + 1
-                    {print} 'Emma gaat deze week ' emma_wast_af ' keer afwassen'
-                    ```
                 story_text_2: |
                     Als je heel veel pech hebt moet je bij het vorige afwasprogramma misschien wel de hele week afwassen! Dat is niet eerlijk!
                     Daarom kun je ook het `{remove}` commando gebruiken om de gekozen afwasser uit het lijstje te halen. Zo hoeft de afwasser pas weer af te wassen als iedereen geweest is.
@@ -2886,17 +2849,6 @@ adventures:
                     In dit level gaan we leren hoe je lijsten maakt op de Python-manier. Dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: `[` en `]`.
                     Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
                     We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
-                example_code: |
-                    ```
-                    vrienden = ['Ahmed', 'Ben', 'Cayden']
-                    {print}(vrienden[1], ' is de eerste vriend op mijn lijstje')
-                    {print}(vrienden[2], ' is de tweede vriend op mijn lijstje')
-                    {print}(vrienden[3], ' is de derde vriend op mijn lijstje')
-                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
-                    geluksgetallen = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3:
-                       {print}('het geluksgetal van ', vrienden[i], 'is ', geluksgetallen[i])
-                    ```
                 answer_code: |
                     Eigen antwoord
     market:
@@ -2932,7 +2884,7 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    Introduceren van de Hedy markt:
+                    #Introduceren van de Hedy markt:
                     {print}('Welkom bij de Hedy markt!')
                     {print}('We verkopen hier brood, appels en kaas')
 
@@ -2940,7 +2892,7 @@ adventures:
                     prijs_brood = 5
                     {print}('Één brood kost ', prijs_brood )
                     brood_aantal = {input}('Hoeveel broden wil je kopen?')
-                    totaal_brood = prijs_bread*brood_aantal
+                    totaal_brood = prijs_brood*brood_aantal
 
                     prijs_appel = 1
                     {print}('Één appel kost', prijs_appel)
@@ -2954,7 +2906,7 @@ adventures:
 
                     #Totale prijs vertellen:
                     totaal = totaal_brood + totaal_appel + totaal_kaas
-                    print('Dat wordt dan samen ', total )
+                    print('Dat wordt dan samen ', totaal)
                     print('Fijne dag verder!')
 
                     ```
@@ -3790,8 +3742,8 @@ adventures:
                 example_code: |
                     ```
                     {print}('Maak je eigen quiz')
-                    points_a = 0
-                    points_b = 0
+                    punten_a = 0
+                    punten_b = 0
 
                     #Stellen van quizvragen:
                     {print}('Vraag')
@@ -3808,7 +3760,7 @@ adventures:
                     {print}('Laten we de uitslag bekijken!')
                     {if} punten_a > punten_b:
                         {print}('Welkom bij de A club!')
-                    {if} points_b > points_a:
+                    {if} punten_b > punten_a:
                         {print}('Welkom bij de B club')
                     ```
                 answer_code: |
@@ -4110,24 +4062,6 @@ adventures:
                     * geef mensen korting als ze een (geheime) code hebben
                     * voeg een kindermenu toe
                     * bedenk zelf nog meer leuke toevoegingen
-                example_code: |
-                    Je kunt een simpel restaurant maken:
-                    ```
-                    #De klant welkom heten:
-                    {print} 'Welkom bij McHedy'
-                    {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
-                    {print} 'U krijgt frietjes en drinken bij uw bestelling. '
-                    eten = {ask} 'Wat wilt u bestellen?'
-                    #De prijs berekenen:
-                    prijs = 0
-                    {if} eten {is} hamburger prijs = 8
-                    {if} eten {is} kroket prijs = 6
-                    {if} eten {is} kaassoufle prijs = 5
-                    #De prijs vertellen aan de klant:
-                    {print} 'U heeft een ' eten ' besteld'
-                    {print} 'Dat is dan ' prijs ' euro, alstublieft!'
-                    {print} 'Bedankt en eet smakelijk!'
-                    ```
             8:
                 story_text: |
                     In dit level heb je geleerd hoe je `{repeat}` gebruikt om een regel code een aantal keren te herhalen.
@@ -4542,17 +4476,6 @@ adventures:
                         {print}("Ik blijf liever zwemmen in die vieze oude sloot")
                         {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
                         
-
-                    ```
-                answer_code: |
-                    ```
-
-                    {for} i {in} {range}(0, 10) :
-                        eendjes = 10-i
-                        {print}(_, ' kleine visjes, die zwommen naar de zee')
-                        {print}("'Nee',  zei de moeder ik ga niet mee")
-                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
 
                     ```
         default_save_name: Nummer 2

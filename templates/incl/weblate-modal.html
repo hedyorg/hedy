@@ -1,0 +1,30 @@
+{# Shown when a teacher clicks the Weblate link on an adventure snippet. See weblate-links.ts #}
+<div id="weblate_modal"
+     data-cy="weblate_modal"
+     data-weblate-lang="{{ g.lang }}"
+     class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
+  <div class="weblate-modal-close absolute inset-0 bg-black opacity-60"></div>
+  <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl"
+       role="dialog" aria-modal="true" aria-labelledby="weblate_modal_title">
+    <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+      <h3 id="weblate_modal_title" class="m-0 text-2xl font-semibold">{{ _('improve_translation_on_weblate') }}</h3>
+      <button type="button"
+              class="weblate-modal-close -m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+              aria-label="{{ _('cancel') }}">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+    <div class="px-5 py-5 sm:px-6">
+      <p class="m-0 leading-7 text-lg text-gray-700">{{ _('weblate_modal_text')|safe }}</p>
+      <div class="mt-5 flex flex-row items-start gap-2">
+        <input id="weblate_modal_dismiss" type="checkbox" data-cy="weblate_modal_dismiss" class="mt-1.5 shrink-0 cursor-pointer">
+        <label for="weblate_modal_dismiss" class="cursor-pointer leading-7 text-gray-700">{{ _('dont_show_message_again') }}</label>
+      </div>
+    </div>
+    <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+      <button type="button" class="weblate-modal-close blue-btn-new">{{ _('cancel') }}</button>
+      <a id="weblate_continue" data-cy="weblate_continue" href="#" target="_blank" rel="noopener"
+         class="weblate-modal-close green-btn-new">{{ _('continue') }}</a>
+    </div>
+  </div>
+</div>

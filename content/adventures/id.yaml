@@ -281,7 +281,7 @@ adventures:
                         {print} 'Dia masuk ke toko.'
                         {print} 'Robin melihat buku yang tampak menarik'
                         book = {ask} 'Apakah Robin membeli buku itu?'
-                       {if} book {is} yes
+                        {if} book {is} yes
                             {print} 'Robin membeli buku itu dan pulang'
                         {else}
                             {print} 'Robin meninggalkan toko dan pulang'
@@ -290,7 +290,7 @@ adventures:
                         icecream = {ask} 'Apakah dia mampir beli es krim dalam perjalanan pulang?'
                         {if} icecream {is} yes
                             {print} 'Robin mampir beli es krim dulu'
-                      {print} 'Dia memilih sorbet lemon'
+                            {print} 'Dia memilih sorbet lemon'
                             {print} 'Enak sekali'
                         {else}
                             {print} 'Dia langsung pulang'
@@ -330,7 +330,7 @@ adventures:
                     {print} 'Brown bear, Brown bear'
                     {print} 'What do you see?'
                     {for} animal {in} animals
-                       {print} 'I see a ' animal ' looking at me'
+                        {print} 'I see a ' animal ' looking at me'
                         {print} animal ', ' animal
                         {print} 'What do you see?'
                     {print} 'I see children looking at me'
@@ -373,9 +373,9 @@ adventures:
                     {while} rackets == 'lost':
                         location = {input}('Di mana kamu ingin mencari?')
                         {if} location == 'desk':
-                     {print}('Ini dia! Kamu menemukan 6 raket!')
+                            {print}('Ini dia! Kamu menemukan 6 raket!')
                             keys = 'found'
-                      {else}:
+                        {else}:
                             {print}('Bukan di ', location)
                     {print}('Sekarang kamu bisa main tenis dengan semua temanmu.')
                     ```
@@ -673,7 +673,7 @@ adventures:
                         {print} 'Berapa ' number_1 ' dikali ' number_2 '?'
                         answer = {ask} 'Ketik jawabanmu di sini...'
                         {print} 'Jawabanmu adalah ' answer
-                     {if} answer {is} correct_answer
+                        {if} answer {is} correct_answer
                             score = score + 1
                         {else}
                             {print} 'Salah! Jawaban yang benar adalah ' correct_answer
@@ -867,7 +867,7 @@ adventures:
                         number_2 = numbers[{random}]
                         correct = number_1 * number_2
                         answer = 0
-                     {while} answer != correct:
+                        {while} answer != correct:
                             answer = {input}('Berapa ', number_1, ' * ', number_2, '?')
                             {print} ('Kamu bilang bahwa ', number_1, ' * ', number_2, ' adalah ', answer )
                         {print} ('Bagus!')
@@ -1729,7 +1729,7 @@ adventures:
                         number = options[{random}]
                         tries = tries + 1
                         {if} number == 6:
-                          thrown = 1
+                            thrown = 1
                             {print}('Kamu melempar 6 dalam ', tries, ' percobaan!')
                         {else}:
                             {print}('Kamu belum melempar 6, malah kamu melempar ', number)
@@ -2056,7 +2056,7 @@ adventures:
                     {repeat} 3 {times}
                        question = {ask} 'Apa yang ingin kamu ketahui?'
                        {print} question
-                     {sleep}
+                       {sleep}
                        {print} 'Bola kristalku berkata...' answers {at} {random}
                     ```
             4:
@@ -2259,7 +2259,7 @@ adventures:
                             correct_door {is} doors {at} {random}
                             {print} 'There are 3 doors in front of you...'
                             chosen_door = {ask} 'Which door do you choose?'
-                         {if} chosen_door {is} correct_door
+                            {if} chosen_door {is} correct_door
                                 {print} 'No monsters here!'
                             {else}
                                 {print} 'You are eaten by a ' monsters {at} {random}
@@ -2280,7 +2280,7 @@ adventures:
                             wrong_door {is} doors {at} {random}
                             {print} 'There are 3 doors in front of you...'
                             chosen_door = {ask} 'Which door do you choose?'
-                         {if} chosen_door {is} wrong_door
+                            {if} chosen_door {is} wrong_door
                                 {print} 'You are eaten by a ' monsters {at} {random}
                                 player = dead
                             {else}
@@ -2737,16 +2737,18 @@ adventures:
             4:
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
-                    {print} Selamat datang di rumah makan Hedy!
-                    {print} Hari ini kami menyediakan pizza atau lasagna.
-                    makanan {is} {ask} Apa yang ingin kamu makan?
-                    {print} Pilihan baik! Makanan itu juga kesukaanku!
-                    topping {is} {ask} Apakah kamu mau daging atau sayuran diatas makanan itu?
-                    {print} makanan  dengan  topping sedang dipersiapkan!
-                    minuman {is} {ask} Apa minuman yang kamu inginkan?
-                    {print} Terima kasih atas pesanannya.
-                    {print} makanan  dan minuman kamu akan segera tersedia!
+                    # Tambahkan tanda kutip ke kode ini
+                    {print} Selamat datang di Restoran Chez Hedy!
+                    {print} Hari ini kami menyajikan pizza atau lasagna.
+                    food {is} {ask} Kamu mau makan apa?
+                    {print} Pilihan bagus!  food  itu favoritku!
+                    topping {is} {ask} Mau ditambah daging atau sayuran?
+                    {print} food  dengan  topping  sedang disiapkan!
+                    drinks {is} {ask} Kamu mau minum apa sebagai pendampingnya?
+                    {print} Terima kasih atas pesananmu.
+                    {print} Pesanan  food  dan  drinks  kamu akan segera datang!
+                    {sleep} _
+                    {print} Makananmu sudah siap! Silakan!
                     ```
                 story_text: |
                     Di restoran kamu juga harus menggunakan tanda kutip saat menggunakan perintah `{print}` atau `{ask}`.
@@ -2761,13 +2763,15 @@ adventures:
                     ```
                     {print} 'Selamat datang di Restoran Chez Hedy!'
                     {print} 'Hari ini kami menyajikan pizza atau lasagna.'
-                    food {is} {ask} 'Apa yang ingin kamu makan?'
-                    {print} 'Pilihan bagus! food itu favoritku!'
-                    topping {is} {ask} 'Kamu mau daging atau sayuran di atasnya?'
-                    {print} food ' dengan topping sedang dalam perjalanan!'
-                    drinks {is} {ask} 'Apa yang ingin kamu minum dengan itu?'
+                    food {is} {ask} 'Kamu mau makan apa?'
+                    {print} 'Pilihan bagus!  food  itu favoritku!'
+                    topping {is} {ask} 'Mau ditambah daging atau sayuran?'
+                    {print} food ' dengan topping sedang disiapkan!'
+                    drinks {is} {ask} 'Kamu mau minum apa sebagai pendampingnya?'
                     {print} 'Terima kasih atas pesananmu.'
-                    {print} 'food dan drinksmu akan segera datang!'
+                    {print} 'Pesanan  food  dan  drinks  kamu akan segera datang!'
+                    {sleep} 3
+                    {print} 'Makananmu sudah siap! Silakan!'
                     ```
             6:
                 story_text: |
@@ -3218,7 +3222,7 @@ adventures:
                         {if} computer_choice == your_choice:
                             {print} ('Seri!')
                         {if} computer_choice == 'rock' {and} your_choice == 'scissors':
-                          {print} ('Kamu kalah!')
+                            {print} ('Kamu kalah!')
                         {if} computer_choice == 'rock' {and} your_choice == 'paper':
                             {print} ('Kamu menang!')
                             won = 'yes'
@@ -3230,10 +3234,10 @@ adventures:
                         {if} computer_choice == 'scissors' {and} your_choice == 'paper':
                             {print} ('Kamu kalah!')
                         {if} computer_choice == 'scissors' {and} your_choice == 'rock':
-                          {print} ('Kamu menang!')
+                            {print} ('Kamu menang!')
                             won = 'yes'
                         round = round + 1
-                     {sleep} 1
+                        {sleep} 1
                     {print}('Selamat, kamu mengalahkan komputer dalam ', round, ' percobaan.')
                     ```
     songs:
@@ -3399,7 +3403,7 @@ adventures:
                         {if} animal = 'pig'
                             note = A3
                         {if} animal = 'chicken'
-                           note = C7
+                            note = C7
                         {play} note
                         {print} "Old MacDonald punya peternakan"
                         {print} "Ee i ee i o"
@@ -3448,9 +3452,9 @@ adventures:
                     {for} line {in} lines:
                         {for} i {in} {range}(1, 3):
                             {print}(line)
-                      {print}('early in the morning')
+                        {print}('early in the morning')
                         {for} i {in} {range}(1, 3):
-                         {print}('way hay and up she rises')
+                            {print}('way hay and up she rises')
                         {print}('early in the morning')
                     ```
                 answer_code: |
@@ -3783,7 +3787,7 @@ adventures:
                     ```
                     angle = 120
                     {repeat} 3 {times}
-                     {turn} angle
+                        {turn} angle
                         {forward} 50
                     {color} {white}
                     {forward} 100
@@ -3815,7 +3819,7 @@ adventures:
                     {color} {black}
                     {repeat} 3 {times}
                         {repeat} 3 {times}
-                         {forward} 10
+                            {forward} 10
                             {turn} 120
                         {color} {white}
                         {forward} 50
@@ -3826,11 +3830,11 @@ adventures:
                     {color} {pink}
                     {repeat} 4 {times}
                         {repeat} 4 {times}
-                          {forward} 50
+                            {forward} 50
                             {turn} 90
                         {color} {white}
                         {turn} 270
-                     {forward} 50
+                        {forward} 50
                         {color} {pink}
                     ```
             11:
@@ -3934,7 +3938,7 @@ adventures:
                     {repeat} 2 {times}
                         {color} "white"
                         {forward} 50
-                      {color} "black"
+                        {color} "black"
                         {call} square
                     ```
 
@@ -4373,7 +4377,7 @@ adventures:
                         {print}('Benar!')
                         play_happy_tune()
                     {else}:
-                      {print}('Salah!')
+                        {print}('Salah!')
                     ```
                 answer_code: |-
                     ```
@@ -4551,7 +4555,7 @@ adventures:
                         {if} game == 'on':
                             guess = {input}('Menurutmu angka berapa?')
                             {if} guess > number:
-                         {print}('Lebih rendah!')
+                                {print}('Lebih rendah!')
                             {if} guess < number:
                                 {print}('Lebih tinggi!')
                             {if} guess == number:
@@ -4961,25 +4965,25 @@ adventures:
                         {else}
                             ability = {ask} 'Apakah kamu tiba-tiba tidak bisa berbicara, melihat, berjalan, atau bergerak?'
                             {if} ability {is} 'yes'
-                               {print} 'Pergi ke unit gawat darurat SEKARANG JUGA!'
+                                {print} 'Pergi ke unit gawat darurat SEKARANG JUGA!'
                             {else}
-                     poison = {ask} 'Apakah kamu menelan atau menghirup racun?'
-                               {if} poison {is} 'yes'
+                                poison = {ask} 'Apakah kamu menelan atau menghirup racun?'
+                                {if} poison {is} 'yes'
                                     {print} 'Pergi ke unit gawat darurat SEKARANG JUGA!'
                                 {else}
                                     broken_bone = {ask} 'Apakah kamu patah tulang?'
                                     {if} broken_bone {is} 'yes'
                                         {print} 'Pergi ke unit gawat darurat SEKARANG JUGA!'
                                     {else}
-                                    allergy = {ask} 'Apakah kamu mengalami reaksi alergi serius?'
-                            {if} allergy {is} 'yes'
+                                        allergy = {ask} 'Apakah kamu mengalami reaksi alergi serius?'
+                                        {if} allergy {is} 'yes'
                                             {print} 'Pergi ke unit gawat darurat SEKARANG JUGA!'
                                         {else}
-                           wait = {ask} 'Bisakah menunggu sampai besok?'
+                                            wait = {ask} 'Bisakah menunggu sampai besok?'
                                             {if} wait {is} 'yes'
                                                 {print} 'Pergi ke dokter umummu secepatnya.'
                                             {else}
-                               {print} 'Telepon penyedia layanan kesehatanmu untuk mendiskusikan situasi'
+                                                {print} 'Telepon penyedia layanan kesehatanmu untuk mendiskusikan situasi'
                     ```
             11:
                 story_text: |
@@ -5027,14 +5031,14 @@ adventures:
                     ```
                     {define} draw_a_bed_and_bedside_table
                     #menggambar tempat tidur
-                     {color} 'blue'
+                        {color} 'blue'
                         {repeat} 2 {times}
                             {forward} 25
                             {turn} 90
                             {forward} 50
                             {turn} 90
                         {forward} 25
-                     {color} 'black'
+                        {color} 'black'
                         {forward} 10
                     #menggambar meja samping tempat tidur
                         {color} 'orange'
@@ -5241,10 +5245,10 @@ adventures:
                         {while} answer != correct_answer:
                             answer = {input}('Apa nama Inggris untuk ', latin_terms[i], '?')
                             {if} answer != correct_answer:
-                             {print}('Itu salah')
+                                {print}('Itu salah')
                                 {print}('Jawaban yang benar untuk ', latin_terms[i], ' adalah ', english_terms[i])
                                 {sleep} 3
-                     clear
+                                clear
                                 points = points - 1
                         points = points + 1
                         {print}('Benar!')
@@ -5253,7 +5257,7 @@ adventures:
                     {print}('Skormu adalah:', points)
 
                     {if} points == 12:
-                     {print}('Luar biasa!')
+                        {print}('Luar biasa!')
 
                     {if} points <=7:
                         {print}('Kamu harus belajar lebih banyak!')
@@ -5274,7 +5278,7 @@ adventures:
                 example_code: |
                     ```
                     {def} welcome_message(title, last_name, country, room_number):
-                      {print}('Selamat datang di Hotel Hedy, ', title, ' ', last_name)
+                        {print}('Selamat datang di Hotel Hedy, ', title, ' ', last_name)
                         nice_trip = {input}('Apakah perjalananmu dari ', country, ' menyenangkan?')
                         {if} nice_trip == 'yes':
                             {print}('Bagus!')
@@ -5334,12 +5338,12 @@ adventures:
             9:
                 story_text: |
                     ## If... Else...
-                    Kamu sudah belajar mengulang blok baris kode setelah perintah `{repeat}`.
+                    Kamu sudah belajar mengulang satu blok kode setelah perintah `{repeat}`.
                     Sekarang kamu juga bisa menggunakan indentasi untuk membuat blok setelah perintah `{if}` atau `{else}`.
-                    Lihat kode contoh.
+                    Lihat contoh kodenya.
 
                     ### Latihan
-                    Tambahkan perintah `{else}` ke kode contoh. Buat blok baris menggunakan indentasi. Kamu melakukannya dengan memulai setiap baris dengan 4 spasi.
+                    Tambahkan perintah `{else}` ke contoh kode. Buat satu blok kode dengan indentasi. Caranya, awali setiap baris dengan satu tab atau 4 spasi.
                 example_code: |
                     ```
                     name = {ask} 'Siapa namamu?'
@@ -5472,7 +5476,7 @@ adventures:
             2:
                 story_text: |
                     ## Mengatur Variabel
-                    Kamu sudah belajar mengatur variabel dengan menggunakan input dari pemain menggunakan ask, tapi tahukah kamu bahwa kamu juga bisa mengatur variabel sendiri?
+                    Kamu sudah belajar mengatur variabel dari masukan pemain menggunakan `{ask}`, tapi tahukah kamu kalau kamu juga bisa mengatur variabelnya sendiri?
                 example_code: |
                     ```
                     name {is} Hedy
@@ -5571,7 +5575,7 @@ adventures:
                         answer = {input}('Apa arti ', french_words[i], '?')
                         correct = translation[i]
                         {if} answer == correct:
-                          {print}('Benar!')
+                            {print}('Benar!')
                             score = score + 1
                         {else}:
                             {print}('Salah, ', french_words[i], ' artinya ', translation[i])
@@ -6069,7 +6073,7 @@ adventures:
                         {play} C
                         {play} D
                         {play} E
-                      {play} C
+                        {play} C
                     #Memainkan baris kedua dua kali:
                     {repeat} 2 {times}
                         {play} E
@@ -6130,15 +6134,15 @@ adventures:
                     first_time = yes
                     {repeat} 2 {times}
                         {repeat} 2 {times}
-                        {play} C
+                            {play} C
                         {play} D
                         {play} C
                         {if} first_time {is} yes
-                       {play} F
+                            {play} F
                             {play} E
                             first_time = no
                         {else}
-                          {play} G
+                            {play} G
                             {play} F
                     ```
             12:
@@ -6193,15 +6197,15 @@ adventures:
                     first_time = 'yes'
                     {repeat} 2 {times}
                         {repeat} 2 {times}
-                      {play} C
+                            {play} C
                         {play} D
                         {play} C
                         {if} first_time {is} 'yes'
-                     {play} F
+                            {play} F
                             {play} E
                             first_time = 'no'
                         {else}
-                        {play} G
+                            {play} G
                             {play} F
                     ```
             15:
@@ -6384,7 +6388,7 @@ adventures:
                     ```
                     {print}('Yankee Doodle')
                     {def} tune (note_1, note_2, note_3):
-                      {play} C4
+                        {play} C4
                         {play} C4
                         {play} D4
                         {play} E4
@@ -6618,12 +6622,16 @@ adventures:
                     Lihat kode contoh untuk melihat cara yang salah menggunakan apostrof.
                 example_code_2: |
                     ```
-                    _ Ini cara yang salah menggunakan apostrof _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
-                    _ Ini cara menyelesaikannya _
-                    {print} "I'm babysitting my sister's kids"
-                    {print} "What's more fun than that?"
+                    #Ini cara yang salah untuk menggunakan apostrof
+                    {print} 'Aku sedang menjaga anak-anak saudara perempuanku'
+                    {print} 'Apa yang lebih seru dari itu?'
+
+                    #Begini cara mengatasinya
+                    {print} "Aku sedang menjaga anak-anak saudara perempuanku"
+                    {print} "Apa yang lebih seru dari itu?"
+
+                    # Coba sendiri! Buat satu baris kode dengan tanda kutip di bawah ini
+                    _
                     ```
                 answer_code: |
                     Jawaban sendiri
@@ -6713,10 +6721,10 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Di level ini kamu bisa mengulang beberapa baris kode dengan hanya 1 perintah `{repeat}`.
-                    Kamu melakukannya dengan membuat blok baris yang ingin kamu ulangi.
-                    Baris dalam blok ini akan membutuhkan **indentasi**.
-                    Itu berarti meletakkan empat spasi di awal setiap baris. Kamu juga harus melakukan indentasi saat ingin membuat blok hanya satu baris.
+                    Di level ini, kamu bisa mengulang beberapa baris kode hanya dengan 1 perintah `{repeat}`.
+                    Caranya, buat satu blok berisi baris-baris yang ingin kamu ulang.
+                    Baris-baris dalam blok ini perlu **indentasi** .
+                    Artinya, tambahkan satu tab atau 4 spasi di awal setiap baris. Kamu juga harus menggunakan indentasi saat membuat blok yang hanya berisi satu baris.
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -6830,7 +6838,7 @@ adventures:
                     name = {ask} 'Siapa namamu?'
                     password = {ask} 'Apa kata sandimu?'
                     {if} name {is} Agent007 and password {is} TOPSECRET
-                      {print} 'Pergi ke bandara jam 02.00'
+                        {print} 'Pergi ke bandara jam 02.00'
                     {else}
                         {print} 'Pergi ke stasiun kereta jam 10.00'
                     ```
@@ -6974,7 +6982,7 @@ adventures:
                     {for} i {in} {range}(0, 10):
                         ducks = 10-i
                         {print}(ducks, ' bebek kecil berenang suatu hari')
-                     {print}('Melewati bukit dan jauh')
+                        {print}('Melewati bukit dan jauh')
                         {print}("Bebek induk berkata: 'quack, quack, quack' ")
                         ducks_minus = ducks-1
                         {print}('Tapi hanya ', ducks_minus, ' yang kembali.' )
@@ -7673,7 +7681,7 @@ adventures:
                             {turn} 90
                             {forward} 75
                             {turn} -90
-                           {forward} 1
+                            {forward} 1
                             {turn} -90
                     ```
 
@@ -7706,7 +7714,7 @@ adventures:
                         {turn} 60
                         {color} {black}
                         {forward} 120
-                      {turn} -90
+                        {turn} -90
                     ```
             12:
                 story_text: |
@@ -7770,7 +7778,7 @@ adventures:
                         {forward} 100
                         shape = {ask} 'Bentuk apa yang kamu ingin selanjutnya di gelang?'
                         chosen_color = {ask} 'Dalam warna apa?'
-                     {color} chosen_color
+                        {color} chosen_color
                         {if} shape = 'square'
                             {call} draw_a_square
                         {elif} shape = 'triangle'
@@ -7805,7 +7813,7 @@ adventures:
                     {for} amount_of_combs {in} {range} (1,6):
                         {for} walls_of_one_comb {in} {range}(1,6):
                             {forward} 30
-                         {turn} 60
+                            {turn} 60
                         {forward} 30
                         {turn} -60
                     ```
@@ -7852,7 +7860,7 @@ adventures:
 
                     {def} draw_figure(degrees, amount_of_sides)
                         {for} i {in} {range} (1, amount_of_sides)
-                          {forward} 70
+                            {forward} 70
                             {turn} degrees
 
                     amount_of_sides = {input}('Berapa banyak sisi yang kamu ingin bentuk punya?')
@@ -7942,13 +7950,13 @@ adventures:
                         {repeat} 6 {times}
                             {repeat} 3 {times}
                                 {forward} 20
-                            {turn} 45
+                                {turn} 45
                                 {forward} 10
                                 {forward} -10
-                           {turn} -90
+                                {turn} -90
                                 {forward} 10
                                 {forward} -10
-                          {turn} 45
+                                {turn} 45
                             {forward} -60
                             {turn} 60
 
@@ -8050,3 +8058,167 @@ adventures:
                     ```
                 answer_code: |
                     Jawaban sendiri
+    house:
+        name: dekorator rumah
+        default_save_name: home_decorator
+        description: dekorator rumah
+        levels:
+            4:
+                story_text: |-
+                    Dekorasi ruang tamu sesuai keinginanmu!
+
+                    ### Latihan
+                    Ajukan setidaknya 6 pertanyaan lagi kepada pemain tentang ruang tamu impian mereka. Misalnya, kamu bisa menanyakan jenis sofa yang mereka inginkan, seberapa besar meja makannya, karya seni seperti apa yang ingin mereka pajang di dinding, dan sebagainya.
+                    Lalu gunakan informasi itu dalam deskripsi rumahnya. Jadi, kalau kamu sudah bertanya tentang TV mereka, tulis satu baris tentang TV seperti apa yang mereka pilih.
+                example_code: |-
+                    ```
+                    {print} "Ayo dekorasi ulang ruang tamunya!"
+
+                    #Meminta masukan dari pemain
+                    color_walls {is} {ask} 'Kamu ingin dindingnya berwarna apa?'
+                    color_carpet {is} {ask} 'Kamu ingin karpetnya berwarna apa?'
+                    type_couch _
+
+                    #Deskripsi rumah impianmu
+                    {print} 'Rumahmu akan punya dinding berwarna ' color_walls ' dan karpet berwarna ' color_carpet '.'
+                    {print} _
+                    ```
+                answer_code: |-
+                    ```
+                    {print} "Ayo dekorasi ulang ruang tamunya!"
+
+                    #Meminta masukan dari pemain
+                    color_walls {is} {ask} 'Kamu ingin dindingnya berwarna apa?'
+                    color_carpet {is} {ask} 'Kamu ingin karpetnya berwarna apa?'
+                    type_couch {is} {ask} 'Kamu ingin sofa jenis apa?'
+                    color_couch {is} {ask} 'Lalu, sofanya mau warna apa?'
+                    wall_art {is} {ask} 'Karya seni seperti apa yang ingin kamu pajang di dinding?'
+                    brand_tv {is} {ask} 'Kamu ingin TV merek apa?'
+                    color_tv {is} {ask} 'TV-nya mau warna apa?'
+                    size_tv {is} {ask} 'TV-nya mau ukuran berapa?'
+
+                    #Deskripsi rumah impianmu
+                    {print} 'Rumahmu akan punya dinding berwarna ' color_walls ' dan karpet berwarna ' color_carpet '.'
+                    {print} 'Kamu akan punya sofa berwarna ' color_couch ' dengan jenis ' type_couch '.'
+                    {print} 'Kamu akan memajang ' wall_art ' di dinding.'
+                    {print} 'Kamu akan punya TV berukuran ' size_tv ', berwarna ' color_tv ', bermerek ' brand_tv '.'
+                    ```
+    monster:
+        name: monster
+        default_save_name: monster
+        description: generator monster
+        levels:
+            4:
+                story_text: |-
+                    Buat generator monster. Ajukan pertanyaan kepada pemain tentang monster seperti apa yang mereka inginkan, lalu buat cerita untuk mereka.
+
+                    ### Latihan
+                    * Buat setidaknya 5 pertanyaan lagi tentang monster
+                    * Buat layar pemuatan (palsu) yang menampilkan tulisan 'Sedang membuat...' selama 3 detik, lalu bersihkan layar.
+                    * Tulis lanjutan ceritanya menggunakan variabel baru yang sudah kamu buat.
+                example_code: |-
+                    ```
+                    # Sambutan dan pertanyaan
+                    {print} 'Selamat datang di generator monster!'
+                    name_monster {is} {ask} 'Siapa nama monstermu?'
+                    adjective_monster {is} {ask} 'Seperti apa monstermu?'
+                    color_eyes {is} {ask} 'Apa warna mata monstermu?'
+                    amount_of_eyes {is} {ask} 'Berapa jumlah mata monstermu?'
+                    _ Buat pertanyaan lain di sini _
+
+                    # Membuat monster
+                    _ Buat layar pemuatan _
+
+                    # Tulis cerita tentang monster
+                    {print} 'Ini ' name_monster ' si monster ' adjective_monster
+                    {print} name_monster ' punya ' amount_of_eyes ' mata berwarna ' color_eyes
+                    _ Tulis lanjutan ceritanya dengan menyertakan variabel barumu _
+                    ```
+                answer_code: |-
+                    ```
+                    # Sambutan dan pertanyaan
+                    {print} 'Selamat datang di generator monster!'
+                    name_monster {is} {ask} 'Siapa nama monstermu?'
+                    adjective_monster {is} {ask} 'Seperti apa monstermu?'
+                    color_eyes {is} {ask} 'Apa warna mata monstermu?'
+                    amount_of_eyes {is} {ask} 'Berapa jumlah mata monstermu?'
+                    amount_of_teeth {is} {ask} 'Berapa jumlah gigi monster itu?'
+                    shape_nose {is} {ask} 'Seperti apa bentuk hidungnya?'
+                    length_monster {is} {ask} 'Seberapa tinggi monster itu?'
+                    width_monster {is} {ask} 'Seberapa lebar monster itu?'
+                    kind_of_skin {is} {ask} 'Seperti apa kulit monster itu? Bersisik, berbulu halus, berbulu unggas, atau lainnya?'
+
+                    # Membuat monster
+                    {print} 'Sedang membuat...'
+                    {sleep} 3
+                    {clear}
+
+                    # Tulis cerita tentang monster
+                    {print} 'Ini ' name_monster ' si monster ' adjective_monster
+                    {print} name_monster ' punya ' amount_of_eyes ' mata berwarna ' color_eyes
+                    {print} 'Di dalam mulutnya ada ' amount_of_teeth ' gigi.'
+                    {print} 'dan ia mencium bau dengan hidungnya yang berbentuk ' shape_nose '.'
+                    {print} name_monster ' tingginya ' length_monster ' dan lebarnya ' width_monster '.'
+                    {print} 'Seluruh tubuhnya dari kepala sampai kaki tertutup ' kind_of_skin
+                    ```
+    party_planner:
+        name: perencana pesta
+        default_save_name: party_planner
+        description: perencana pesta
+        levels:
+            4:
+                story_text: |-
+                    Buat alat perencanaan pesta yang bisa membuat undangan pestamu!
+
+                    ### Latihan
+                    * Pertama, isi pertanyaan yang tepat untuk diajukan kepada pemain
+                    * Lalu buat undangan pesta menggunakan masukan dari pemain
+                example_code: |-
+                    ```
+                    #meminta masukan
+                    {print} 'PERENCANA PESTA'
+                    name_host {is} {ask} _
+                    name_guest {is} {ask} _
+                    reason_party {is} {ask} _
+                    date_party {is} {ask} _
+                    time_party {is} {ask} _
+                    location_party {is} {ask} _
+                    theme_party {is} {ask} _
+                    dress_code {is} {ask} _
+
+                    #memuat undangan
+                    {print} 'tunggu sebentar... sedang memuat undangan'
+                    {sleep} 2
+                    {clear}
+
+                    #menampilkan undangan
+                    {print} 'Untuk ' name_guest ','
+                    _
+                    ```
+                answer_code: |-
+                    ```
+                    #meminta masukan
+                    {print} 'PERENCANA PESTA'
+                    name_host {is} {ask} 'Siapa namamu?'
+                    name_guest {is} {ask} 'Siapa yang ingin kamu undang?'
+                    reason_party {is} {ask} 'Apa yang kamu rayakan?'
+                    date_party {is} {ask} 'Kapan pestanya?'
+                    time_party {is} {ask} 'Jam berapa pestanya?'
+                    location_party {is} {ask} 'Di mana pestanya?'
+                    theme_party {is} {ask} 'Apa tema pestanya?'
+                    dress_code {is} {ask} 'Apa aturan pakaian untuk pestanya?'
+
+                    #memuat undangan
+                    {print} 'tunggu sebentar... sedang memuat undangan'
+                    {sleep} 2
+                    {clear}
+
+                    #menampilkan undangan
+                    {print} 'Untuk ' name_guest ','
+                    {print} 'Aku ingin mengundangmu untuk merayakan ' reason_party
+                    {print} 'Pestanya diadakan pada ' date_party ' pukul ' time_party
+                    {print} 'Lokasinya di ' location_party
+                    {print} 'Tema pestanya adalah ' theme_party ' dan aturan pakaiannya: ' dress_code
+                    {print} 'Semoga kamu bisa datang!'
+                    {print} 'Salam sayang, ' name_host
+                    ```

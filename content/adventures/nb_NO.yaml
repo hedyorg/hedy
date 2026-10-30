@@ -181,21 +181,6 @@ adventures:
 
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    keys = 'mistet'
-                    {print} 'Du står i hagen din og har mistet nøklene dine.'
-                    {print} 'Hvor vil du lete etter de?'
-                    {print} 'Du kan velge mellom: tre, blomsterbed, stein, postboks'
-                    {while} keys == 'mistet'
-                        location = {ask} 'Hvor vil du lete?'
-                        {if} location == 'blomsterbed'
-                            {print} 'Der var de ja!'
-                            keys = 'funnet'
-                        {else}
-                            {print} 'Nei, de er ikke ved ' location
-                    {print} 'Nå kan du gå inn i huset!'
-                    ```
     add_remove_command:
         levels: {}
     and_or_command:
@@ -210,27 +195,9 @@ adventures:
             7:
                 story_text: |
                     Nå som du kan regne så kan du også lage et program til å øve på regnestykker. Du kan lage regnestykker til deg selv, for eksempel:
-                example_code: |
-                    ```
-                    riktig_svar = 11 * 27
-                    ditt_svar = {ask} 'Hvor mye er 11 ganger 27?'
-                    {if} ditt_svar {is} riktig_svar {print} 'godt jobbet!'
-                    {else} {print} 'Feil! Riktig svar er ' riktig_svar
-                    ```
                 story_text_2: |
                     Du kan også la datamaskinen lage tilfeldige regnestykker på egenhånd ved hjelp av `{at} {random}`.
                     Dette er hvordan du velger tall fra en tabell med tall å øve på og fra det vil du få forskjellige summer:
-                example_code_2: |
-                    ```
-                    tabellene = 4, 5, 6, 8
-                    tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    tabell = tabellene {at} {random}
-                    tall = tallene {at} {random}
-                    riktig_svar = tabell * tall
-                    ditt_svar = {ask} 'hvor mye er ' tabell ' ganget med ' tall '?'
-                    {if} ditt_svar {is} riktig_svar {print} 'riktig'
-                    {else} {print} 'feil! det var ' riktig_svar
-                    ```
             10:
                 story_text: |
                     På de forrige nivåene lærte du hvordan å lage en kalkulator. På dette nivået kan du utvide koden til å lage et lite mattespill. Slik som dette...
@@ -368,18 +335,6 @@ adventures:
             7:
                 story_text: |
                     Hvor ofte må hver ta oppvasken? Er det rettferdig? Du kan telle det på dette nivået.
-                example_code: |
-                    ```
-                    familie = mamma, pappa, Emma, Sofie
-                    emma_vasker = 0
-                    oppvasker = familie {at} {random}
-                    {print} 'Den som tar oppvasken er ' oppvasker
-                    {if} oppvasker {is} Emma emma_vasker = emma_vasker + 1
-                    {print} 'Emma tar oppvasken ' emma_vasker ' ganger denne uken'
-                    ```
-
-                    Du kan nå kopiere linjene 3 til 5 et par ganger (f.eks. 7 ganger for en hel uke) for å regne ut for hele uken.
-                    Lager du koden for hele uken?
                 story_text_2: |
                     Om du er ekstremt uheldig så kan det forrige programmet velge deg til å gjøre oppvasken hele uken! Det er ikke rettferdig!
                     For å lage et mer rettferdig system så kan du bruke `{remove}`-kommandoen for å fjerne en gitt person fra listen. På denne måten trenger du ikke å ta oppvasken igjen før alle har tatt sin tur.
@@ -604,41 +559,9 @@ adventures:
                 story_text: |
                     På dette nivået lar `{if}`-kommandoen deg å spørre kunder spørsmål og gi forskjellige ting til svar.
                     I eksempelet under kan du se at du kan spørre kunden om de har lyst å høre om dagens rett og Hedy kan svare deretter.
-                example_code: |
-                    ```
-                    {print} 'Velkommen til Hedys restaurant!'
-                    vil_høre {is} {ask} 'Vil du høre om dagens rett?'
-                    {if} vil_høre {is} ja {print} 'Dagens rett er kylling piri piri med ris.' {else} {print} 'Ikke noe problem.'
-                    matønske {is} {ask} 'Hva har du lyst å spise?'
-                    {print} 'en ' matønske ' er på vei!'
-                    drikke {is} {ask} 'Hva har du lyst å drikke til?'
-                    {if} drikke {is} cola {print} 'Beklager, vi er tom for cola!' {else} {print} 'Godt valg!'
-                    annet {is} {ask} 'Vil du ha noe annet?'
-                    {print} 'La meg lese opp bestillingen...'
-                    {print} 'En ' matønske
-                    {if} drikke {is} cola {print} 'og...' {else} {print} 'En ' drikke
-                    {if} annet {is} nei {print} 'Det var det!' {else} {print} 'En ' annet
-                    {print} 'Takk for bestillingen og vel bekomme!'
-                    ```
             7:
                 story_text: |
                     På dette nivået kan du bruke matte til å regne ut totalprisen på kundens bestilling. Dette vil gjøre den virtuelle restauranten mer realistisk.
-                example_code: |
-                    Enkel
-                    Du kan lage koden for en enkel restaurant slik:
-                    ```
-                    {print} 'Velkommen til Hedys restaurant'
-                    {print} 'Her er vår meny:'
-                    {print} 'Våre hovedretter er pizza, lasagne og spaghetti'
-                    hovedrett = {ask} 'Hvilken hovedrett vil du ha?'
-                    pris = 0
-                    {if} hovedrett {is} pizza pris = 100
-                    {if} hovedrett {is} lasagne pris = 120
-                    {if} hovedrett {is} spaghetti pris = 80
-                    {print} 'Du har bestilt ' hovedrett
-                    {print} 'Det blir ' pris ' kroner, takk'
-                    {print} 'Takk, vel bekomme!'
-                    ```
             8:
                 story_text: |
                     På dette nivået har du lært å bruke `{repeat}`-kommandoen til å repeterer en linje med kode et visst antall ganger.
@@ -673,28 +596,6 @@ adventures:
                     På dette nivået kan du putte `{if}` inni `{if}` for å gjøre restauranten din mer realistisk og gøy!
                     Du kan for eksempel spørre om saus om noen bestiller pommes frites, men det passer kanskje ikke om noen bestiller lasagne!
                     Sjekk ut eksempelet og prøv dette på din egne virtuelle restaurant!
-                example_code: |
-                    ```
-                    {print} 'Velkommen til Hedys restaurant!'
-                    antall_personer = {ask} 'Hvor mange er dere i dag?'
-                    {print} 'Supert!'
-                    pris = 0
-                    {repeat} antall_personer {times}
-                        ønsket_mat = {ask} 'Hva ønsker dere å bestille?'
-                        {print} ønsket_mat
-                        {if} ønsket_mat {is} pommes frites
-                            pris = pris + 30
-                            dressing = {ask} 'Ønsker dere dressing med det?'
-                            {if} dressing {is} no
-                                {print} 'ingen dressing'
-                            {else}
-                                pris = pris + 10
-                                {print} 'med ' dressing
-                        {if} ønsket_mat {is} pizza
-                            pris = pris + 40
-                    {print} 'Det blir ' pris ' kroner'
-                    {print} 'Vel bekomme!'
-                    ```
             11:
                 story_text: |
                     På dette nivået kan du lære hvordan å enkelt spørre om gjestenes ønsker i kort kode.
@@ -819,23 +720,6 @@ adventures:
             16:
                 story_text: |
                     Spill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...
-                example_code: |
-                    ```
-                    vunnet = 'nei'
-                    valgene = 'stein', 'saks', 'papir'
-                    {while} vunnet == 'nei'
-                        ditt_valg = {ask} 'Hva velger du?'
-                        datamaskinens_valg = valgene {at} {random}
-                        {print} 'du valgte ' ditt_valg
-                        {print} 'datamaskinen valgte ' datamaskinens_valg
-                        {if} datamaskinens_valg == ditt_valg
-                            {print} 'Uavgjort!'
-                        {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'saks'
-                            {print} 'Du tapte!'
-                        {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'papir'
-                            {print} 'Du vant!'
-                            vunnet = 'yes'
-                    ```
     secret:
         name: SuperSpion
         default_save_name: språk

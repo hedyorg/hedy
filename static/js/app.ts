@@ -39,6 +39,32 @@ let askPromptOpen = false;
  * Represents whether there's an open 'sleeping' prompt
  */
 let sleepRunning = false;
+/**
+ * The positions of the turtle after every step of the last program that ran, used to save the drawing
+ */
+let lastTurtlePath: number[][] = [];
+
+// Records the turtle path, so the drawing can be saved without running the program again.
+// It records one point more than the server accepts, so that a path that's too long gets
+// rejected instead of silently cut off. Names with __ are hidden in the variable view.
+const turtle_recording_prefix = `
+__hedy_turtle_path = []
+__hedy_turtle_forward = t.forward
+
+
+def __hedy_recording_forward(distance):
+    __hedy_turtle_forward(distance)
+    if len(__hedy_turtle_path) <= 20000:
+        __hedy_turtle_path.append([t.xcor(), t.ycor()])
+
+
+t.forward = __hedy_recording_forward
+`;
+
+function recordedTurtlePath(): number[][] {
+  const path = Sk.globals['__hedy_turtle_path'];
+  return path ? Sk.ffi.remapToJs(path) : [];
+}
 
 // Many bits of code all over this file need this information globally.
 // Not great but it'll do for now until we refactor this file some more.
@@ -631,16 +657,25 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
 }
 
 export async function saveMachineFiles() {
-  const response = await postJson('/generate_machine_files', {
-    level: theLevel,
-    code: get_active_and_trimmed_code(),
-    lang: theLanguage,
-  });
-
-  if (response.filename) {
-    // Download the file
-    window.location.replace('/download_machine_files/' + response.filename);
+  let response;
+  try {
+    // The server responds with the zip file itself, so it can't be fetched with postJson
+    response = await fetch('/generate_machine_files', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ points: lastTurtlePath }),
+    });
+  } catch {
+    return modal.notifyError(ClientMessages['Connection_error']);
   }
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    return modal.notifyError(body.error ?? ClientMessages['ServerError']);
+  }
+
+  download(await response.blob(), 'hedy_drawing.zip', 'application/zip');
 }
 
 function removeBulb() {
@@ -914,8 +949,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     $('#turtlecanvas').empty();
   }
 
+  lastTurtlePath = [];
   if (hasTurtle) {
-    code_prefix += turtle_prefix;
+    code_prefix += turtle_prefix + turtle_recording_prefix;
     $('#turtlecanvas').show();
   }
 
@@ -1033,8 +1069,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       $('#keybinding_modal').hide();
 
       if (hasTurtle) {
-        // TODO: disabled until we fix it
-        // $('#save_files_container').show();
+        lastTurtlePath = recordedTurtlePath();
+        $('#save_files_container').show();
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
@@ -1115,8 +1151,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#keybinding_modal').hide();
 
         if (hasTurtle) {
-          // $('#save_files_container').show();
-          // TODO: disabled until we fix it
+          lastTurtlePath = recordedTurtlePath();
+          $('#save_files_container').show();
         }
 
         if (cb) cb();
