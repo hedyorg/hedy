@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('getDataCy', (selector, ...args) => {
+Cypress.Commands.add('getDataCy', (selector, options?) => {
   let dataSelector = "";
   const selectors = selector.split(" ");
   for (let s of selectors) {
@@ -36,9 +36,27 @@ Cypress.Commands.add('getDataCy', (selector, ...args) => {
     }
   }
 
-  return cy.get(dataSelector, ...args)
+  return cy.get(dataSelector, options);
 })
 
-Cypress.Commands.add('getDataCyLike', (selector, ...args) => {
-  return cy.get(`*[data-cy="${selector}"]`, ...args)
+Cypress.Commands.add('getDataCyLike', (selector, options?) => {
+  return cy.get(`*[data-cy="${selector}"]`, options);
 })
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Custom command to select DOM element by data-cy attribute.
+       */
+      getDataCy(selector: string, options?: Partial<Loggable & Timeoutable & Withinable & Shadow>): Chainable<JQuery<HTMLElement>>
+
+      /**
+       * Custom command to select DOM element by data-cy attribute.
+       */
+      getDataCyLike(selector: string, options?: Partial<Loggable & Timeoutable & Withinable & Shadow>): Chainable<JQuery<HTMLElement>>
+    }
+  }
+}
+
+export { }

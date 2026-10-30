@@ -1,7 +1,6 @@
 import { goToTeachersPage } from "../navigation/nav";
 
-export function createClass(classname=`test class ${Math.random()}`)
-{
+export function createClass(classname = `test class ${Math.random()}`) {
     cy.request({
         method: 'POST',
         url: '/class',
@@ -29,8 +28,7 @@ export function createClass(classname=`test class ${Math.random()}`)
  *
  * In an `async` function.
  */
-export function ensureClass()
-{
+export function ensureClass() {
     let classname = `test class ${Math.random()}`;
     goToTeachersPage();
 
@@ -45,9 +43,9 @@ export function ensureClass()
     return classname
 }
 
-export function addStudents(classname, count) {
+export function addStudents(classname: string, count: number) {
     const seed = Date.now();
-    const students = Array.from({length:count}, (_, index) => `student_${index}_${seed}`)
+    const students = Array.from({ length: count }, (_, index) => `student_${index}_${seed}`)
     goToTeachersPage();
     cy.wait(500);
 
@@ -59,7 +57,7 @@ export function addStudents(classname, count) {
 
     cy.getDataCy('toggle_circle').click();
     const accounts = students.map(function (s) {
-      return `${s};123456`;
+        return `${s};123456`;
     }).join('\n');
     cy.getDataCy('create_accounts_input').type(accounts);
 
@@ -69,7 +67,7 @@ export function addStudents(classname, count) {
     return students;
 }
 
-export function openClassView(classname=null){
+export function openClassView(classname: string | null = null) {
     cy.visit('/for-teachers/class/all');
     cy.url().should('include', '/for-teachers/class/all');
     cy.getDataCy('view_class_link').should('exist');
@@ -79,32 +77,32 @@ export function openClassView(classname=null){
             .contains(classname)
             .invoke('attr', 'href')
             .then((href) => {
-                const classId = href.split('/').pop();
+                const classId = href!.split('/').pop();
                 cy.visit(`/for-teachers/legacy/class/${classId}`);
             });
     }
 }
 
-export function openClass(classname) {
+export function openClass(classname: string) {
     cy.getDataCy('view_class_link')
         .contains(classname)
         .invoke('attr', 'href')
         .then((href) => {
-            const classId = href.split('/').pop();
+            const classId = href!.split('/').pop();
             cy.visit(`/for-teachers/legacy/class/${classId}`);
         });
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
 }
 
-export function removeCustomizations(){
-    cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
+export function removeCustomizations() {
+    cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');
     cy.getDataCy('customize_class_button').click();
     cy.getDataCy('remove_customizations_button').click();
     cy.getDataCy('modal_yes_button').click();
     cy.wait('@restoreCustomizations');
 }
 
-export function addCustomizations(classname){
+export function addCustomizations(classname: string) {
     cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');
     goToTeachersPage();
 
@@ -122,13 +120,13 @@ export function addCustomizations(classname){
     cy.getDataCy('back_to_class').click();
 }
 
-export function createClassAndAddStudents(){
+export function createClassAndAddStudents() {
     const classname = createClass();
     const students = addStudents(classname, 4);
-    return {classname, students};
+    return { classname, students };
 }
 
-export function navigateToClass(classname=null) {
+export function navigateToClass(classname = null) {
     goToTeachersPage();
     cy.wait(500);
     openClassView(classname);
@@ -137,7 +135,7 @@ export function navigateToClass(classname=null) {
             .first()
             .invoke('attr', 'href')
             .then((href) => {
-                const classId = href.split('/').pop();
+                const classId = href!.split('/').pop();
                 cy.visit(`/for-teachers/legacy/class/${classId}`);
             });
     }
@@ -146,8 +144,8 @@ export function navigateToClass(classname=null) {
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 }
 
-export function selectLevel(level) {
+export function selectLevel(level: number) {
     cy.getDataCy('levels_dropdown').select(level);
-  }
+}
 
-export default {createClassAndAddStudents};
+export default { createClassAndAddStudents };
