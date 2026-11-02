@@ -190,19 +190,19 @@ adventures:
             8:
                 story_text: |
                     Dans une histoire, on se répète parfois. Par exemple, quand une personne appelle à l'aide ou chante une chanson.
-                    Dans ce niveau, tu peux écrire ces répétitions dans ton histoire, avec `{repeat}`.
+                    À ce niveau, tu peux écrire ces répétitions dans ton histoire, avec `{repeat}`.
 
                     ### Exercice
-                    Ajoute une répétition à ta propre histoire. Retourne en arrière dans tes programmes sauvegardés, choisi une histoire que tu as programmée à un niveau précédent,
+                    Ajoute une répétition à ta propre histoire. Retourne en arrière dans tes programmes sauvegardés, choisis une histoire que tu as programmée à un niveau précédent,
                     trouve une ligne contenant `{print}` et répète la !
                 example_code: |
                     ```
                     {print} "Le prince appelait à l'aide sans arrêt"
-                    {repeat} 5 {times} {print} 'Au secours !'
+                    {repeat} 5 {times} {print} "Au secours !"
                     {print} "Pourquoi personne ne vient m'aider ?"
                     ```
                 answer_code: |
-                    {print} 'Tous les enfants voulaient aller au zoo, et n'arrêtaient pas de crier : '
+                    {print} "Tous les enfants voulaient aller au zoo, et n'arrêtaient pas de crier :"
                     {repeat} 3 {times} {print} "On va au zoo !"
             9:
                 story_text: |
@@ -233,7 +233,7 @@ adventures:
                     {print} "OH NON ! Le T-rex se rapproche !"
                     fin = {ask} "Veux-tu une fin heureuse ou malheureuse ?"
                     {if} fin {is} heureuse
-                        {print} |À la dernière minute, Richard saute dans la machine à voyager dans le temps !|
+                        {print} "À la dernière minute, Richard saute dans la machine à voyager dans le temps !"
                         {print} "Fiou, content qu’on ait réussi"
                         {print} "Juste à temps."
                     {else}
