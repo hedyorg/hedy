@@ -284,6 +284,28 @@ adventures:
                     {if} caminho {is} direita {or} arma {is} 'livro de feitiços'
                         {print} 'a heroína é abordada por um mago misterioso.'
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Robin está andando pelo centro'
+                    local = {ask} 'Robin está entrando em uma loja, ou vai para casa?'
+                    {if} local {is} loja
+                        {print} 'Ela entra na loja.'
+                        {print} 'Robin vê um livro com uma aparência interessante'
+                        livro = {ask} 'Robin compra o livro?'
+                        {if} livro {is} sim
+                            {print} 'Robin compra o livro e vai para casa'
+                        {else}
+                            {print} 'Robin sai da loja e vai para casa'
+                    {else}
+                        {print} 'Robin vai para casa'
+                        sorvete = {ask} 'Ela para pra tomar sorvete no caminho para casa?'
+                        {if} sorvete {is} sim
+                            {print} 'Robin para para tomar sorvete primeiro'
+                            {print} 'Ela escolhe um sorvete de limão'
+                            {print} 'É delicioso'
+                        {else}
+                            {print} 'Ela vai direto para casa'
+                    ```
             11:
                 story_text: |
                     Neste nível você pode usar o comando {for} em sua história. Desta forma, você poderia facilmente programar o livro infantil 'urso pardo, urso pardo, o que você vê'.
@@ -292,6 +314,24 @@ adventures:
 
                     Veja <a href="https://fliphtml5.com/jmlya/nquy"> a história</a> se você não a conhece. Verifique se ela está impressa como no livro.
                 example_code: "```\nanimais = _ , _ , _ \n{print} 'Urso marrom, Urso marrom'\n{print} 'O que você vê?'\n```\n"
+                answer_code: |
+                    ```
+                    animais = Pássaro Vermelho, Pato Amarelo, Cavalo Azul, Sapo Verde, Gato Roxo, Cachorro Branco, Ovelha Preta, Peixe Dourado, Professor
+                    {print} 'Urso marrom, Urso marrom'
+                    {print} 'O que você vê?'
+                    {for} animal {in} animais
+                        {print} 'Eu vejo um ' animal ' olhando para mim'
+                        {print} animal ', ' animal
+                        {print} 'O que você vê?'
+                    {print} 'Eu vejo crianças olhando para mim'
+                    {print} 'Crianças, Crianças'
+                    {print} 'O que vocês veem?'
+                    {print} 'Nós vemos um '
+                    {for} animal {in} animais
+                        {print} animal
+                    {print} 'olhando para nós'
+                    {print} 'É o que nós vemos!'
+                    ```
             16:
                 story_text: |
                     Usar o laço de repetição `{while}` pode tornar suas histórias mais interessantes. Por exemplo, você pode usar `{while} game == 'on'` para poder jogar até que o jogo termine.
@@ -314,6 +354,21 @@ adventures:
                             {print}('Não, elas não estão em ', local)
                     {print}('Agora você pode entrar na casa!')
                     ```
+                answer_code: |
+                    ```
+                    raquetes = 'perdidas'
+                    {print}('Você está com seus amigos e quer jogar tênis, mas esqueceu onde colocou as raquetes.')
+                    {print}('Onde você quer procurá-las?')
+                    {print}('Você pode escolher: quarto, galpão, armário, escrivaninha')
+                    {while} raquetes == 'perdidas':
+                        local = {input}('Onde você quer procurar?')
+                        {if} local == 'escrivaninha':
+                            {print}('Aqui estão elas! Você encontrou 6 raquetes!')
+                            chaves = 'encontradas'
+                        {else}:
+                            {print}('Não, elas não estão no/na ', local)
+                    {print}('Agora você pode jogar tênis com todos os seus amigos.')
+                    ```
             13:
                 example_code: |
                     ```
@@ -326,6 +381,16 @@ adventures:
                     ### Exercício
                     Crie uma história com pelo menos 5 frases. Primeiro, use a variável `nome` na sua história. Em seguida, crie duas outras variáveis e use-as também.
                     Dica: Lembre-se das vírgulas em um `{print}` entre texto e variáveis!
+                answer_code: |
+                    ```
+                    nome = 'Hedy'
+                    {print}('Bem-vindo a esta história!')
+                    {print}('Era uma vez um papagaio chamado ', nome, '.')
+                    {print}(nome, ' amava programar!')
+                    {print}("Infelizmente, os outros papagaios não sabiam programar.")
+                    {print}('Um dia ', nome, ' decidiu ensinar programação aos outros papagaios.')
+                    {print}('As aulas acabaram sendo um enorme sucesso com os outros papagaios!')
+                    ```
             6:
                 story_text: "Agora que você pode usar `{elif}`, pode criar uma história ainda mais interativa! Você pode criar vários personagens, por exemplo, com características diferentes.\nOu você pode fazer com que seu jogador escolha qual caminho seguir, qual porta abrir ou qual poção mágica beber...\n\n### Exercício\nCrie sua própria história com 3 ou mais opções usando `{elif}`."
                 example_code: "```\npersonagem {is} {ask} 'Quem vai te ajudar na sua jornada?'\n{if} personagem {is} 'Daisy'\n{print} 'Você escolheu a Daisy! Ela é a mais inteligente de todas!'\n{elif} personagem {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{elif} personagem {is} 'Sam'\n{print} 'Você escolheu Sam! A pessoa mais rápidas de todas!'\n```\n"
@@ -400,6 +465,15 @@ adventures:
                     ```
                     _ Como você está?
                     _ Você está _
+                    ```
+                answer_code: |
+                    ```
+                    {ask} Como vai você?
+                    {print} Você vai resposta
+                    {ask} Qual é o seu esporte favorito?
+                    {print} Você gosta de {resposta}
+                    {ask} Qual é o seu esporte menos favorito?
+                    {print} {resposta} é o seu menos favorito
                     ```
             2:
                 example_code: |
