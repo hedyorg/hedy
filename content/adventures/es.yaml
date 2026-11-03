@@ -138,7 +138,7 @@ adventures:
                     Crea tu propia historia con 3 opciones o más usando {elif}.
                 example_code: |
                     ```
-                    character{is} {ask} '¿Quién te ayudará en tu aventura?'
+                    character {is} {ask} '¿Quién te ayudará en tu aventura?'
                     {if} character {is} 'Daisy'
                     {print} '¡Has elegido a Daisy! ¡Ella es la más inteligente de todos!'
                     {elif} character {is} 'Jason'
@@ -219,21 +219,6 @@ adventures:
 
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    llaves = 'perdidas'
-                    {print} 'Estás en tu jardín y perdiste tus llaves.'
-                    {print} '¿En donde las quieres buscar?'
-                    {print} '¨Puedes escoger: árbol, lecho de flores, roca, buzón'
-                    {while} llaves == 'perdidas'
-                        lugar = {ask} '¿En donde quieres buscar?'
-                        {if} lugar == 'lecho de flores'
-                            {print} '¡Aquí están!'
-                            keys = 'encontradas'
-                        {else}
-                            {print} 'No, no están en ' lugar
-                    {print} '¡Ahora puedes entrar en la casa'
-                    ```
             13:
                 example_code: |
                     ```
@@ -632,7 +617,6 @@ adventures:
             7:
                 story_text: |
                     ¿Todo el mundo lava los platos por igual? ¿Te parece justo? Puedes contarlo en este nivel.
-                example_code: "```\npersonas = mamá, papá, Emma, María\nemma_lava = 0\nlavaplatos = personas {at} {random}\n{print} 'El lavaplatos es ' lavaplatos\n{if} lavaplatos {is} Emma emma_lava = emma_lava + 1\n{print} 'Emma va a hacer los platos hoy ' emma_lava 'veces'\n```\n\nAhora puedes copiar las líneas 3 a 5 unas cuantas veces (por ejemplo, 7 para toda la semana) para calcular para toda la semana otra vez. \n¿Puedes hacer el código para toda la semana?\n"
                 story_text_2: |
                     Si tienes muy mala suerte, puede que el programa anterior te elija para fregar los platos durante toda la semana. ¡Eso no es justo!
                     Para crear un sistema más justo puedes utilizar el comando `{remove}` para eliminar a la persona elegida de la lista. Así no tendrás que volver a fregar los platos hasta que todos hayan tenido su turno.
@@ -1726,12 +1710,6 @@ adventures:
                     ## Repetir con otros comandos y variables
                     Ahora has practicado el comando `{repeat}` en combinación con el comando `{print}`, pero ¿sabías que también puedes usar otros comandos con `{repeat}` ?
                     En este ejemplo puedes ver que `{repeat}` también se puede usar con un comando `{ask}`, `{if}` o `{else}`.
-                example_code: |
-                    ```
-                    {repeat} 2 {times} respuesta = {ask} '¿Sabías que puedes hacer una pregunta varias veces?'
-                    {if} respuesta {is} sí {repeat} 2 {times} {print} '¡Ya lo sabías!'
-                    {else} {repeat} 3 {times} {print} '¡Has aprendido algo nuevo!'
-                    ```
                 story_text_2: |
                     Otra cosa interesante que puedes hacer con el comando `{repeat}` es usar variables para establecer las veces que algo debería repetirse. En el código de ejemplo puedes ver que primero preguntamos a la persona qué edad tiene.
                     Entonces, en la línea 3, la pregunta se repite 'edad' veces. Así que hemos usado la variable 'edad' con el comando `{repeat}`.
@@ -1875,21 +1853,6 @@ adventures:
                     - ¿hacer un descuento cuando introduzcan un cupón de descuento (secreto)?
                     - ¿añadir un menú infantil?
                     - ¿piensa en otras cosas divertidas para añadir?
-                example_code: |
-                    Puedes hacer un código de restaurante simple, como este:
-                    ```
-                    {print} 'Bienvenido al restaurante Casa Hedy'
-                    {print} 'Aquí está nuestro menú:'
-                    {print} 'Nuestros platos principales son pizza, lasaña o espaguetis'
-                    plato_principal = {ask} '¿Qué plato principal te gustaría?'
-                    precio = 0
-                    {if} plato_principal {is} pizza precio = 10
-                    {if} plato_principal {is} lasaña precio = 12
-                    {if} plato_principal {is} espaguetis precio = 8
-                    {print} 'Has pedido ' plato_principal
-                    {print} 'Eso será ' precio ' dólares, por favor'
-                    {print} '¡Gracias, que aproveche!'
-                    ```
             8:
                 story_text: |
                     En este nivel aprendiste a usar el comando `{repeat}` para repetir una línea de código un número de veces

@@ -128,12 +128,12 @@ adventures:
                     Dựng một câu chuyện với ít nhất ba lựa chọn bằng cách dùng {elif}.
                 example_code: |
                     ```
-                    nhân vật {is} {ask} 'Ai sẽ giúp bạn trong cuộc hành trình của bạn?'
-                    {if} nhân vật {is} 'Daisy'
+                    nhân_vật {is} {ask} 'Ai sẽ giúp bạn trong cuộc hành trình của bạn?'
+                    {if} nhân_vật {is} 'Daisy'
                     {print} 'Bạn đã chọn Daisy! Cô ấy là người thông minh nhất!'
-                    {elif} nhân vật {is} 'Jason'
+                    {elif} nhân_vật {is} 'Jason'
                     {print} 'Bạn đã chọn Jason! Anh ấy là người mạnh nhất!'
-                    {elif} nhân vật {is} 'Sam'
+                    {elif} nhân_vật {is} 'Sam'
                     {print} 'Bạn đã chọn Sam! Đây là người nhanh nhất!'
                     ```
             8:
@@ -214,20 +214,20 @@ adventures:
             3:
                 example_code: |
                     ```
-                    những con thú {is} chó, mèo, kangaroo
+                    những_con_thú {is} chó, mèo, kangaroo
                     thích {is} {ask} Con vật yêu thích của bạn là gì?
-                    {add} thích {to_list} những con thú
-                    {print} Tôi chọn những con thú {at} {random}
+                    {add} thích {to_list} những_con_thú
+                    {print} Tôi chọn những_con_thú {at} {random}
                     ```
                 story_text_2: |
                     ## {remove} {from}
                     Nếu bạn có thể thêm một món đồ vào danh sách, đương nhiên bạn cũng có thể xóa nó đi. Bạn có thể làm vậy với mã lệnh `{remove} {from}`.
                 example_code_2: |
                     ```
-                    những con thú {is} chó, mèo, kangaroo
-                    không thích {is} {ask} Bạn không thích con thú nào?
-                    {remove} không thích {from} những con thú
-                    {print} Tôi chọn những con thú {at} {random}
+                    những_con_thú {is} chó, mèo, kangaroo
+                    không_thích {is} {ask} Bạn không_thích con thú nào?
+                    {remove} không_thích {from} những_con_thú
+                    {print} Tôi chọn những_con_thú {at} {random}
                     ```
                 story_text_3: |
                     ### Bài tập

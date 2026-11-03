@@ -40,6 +40,8 @@ def require_kwargs(klass):
 class ExtraStory:
     text: str
     example_code: Optional[str] = None
+    # The suffix of the YAML fields this story comes from (story_text_<number>), used to link to Weblate
+    number: Optional[int] = None
 
     def __getitem__(self, key):
         return getattr(self, key)

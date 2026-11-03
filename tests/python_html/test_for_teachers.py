@@ -86,7 +86,7 @@ class TestPublicPages:
                     assert context['workbooks']
                 else:
                     assert [section['key'] for section in context['sections']] == [
-                        'intro', 'common_mistakes']
+                        'intro', 'common_mistakes', 'manual']
                     assert all(section['title'] for section in context['sections'])
 
     def test_teaching_materials_pages(self, client, template_variables):
@@ -179,7 +179,7 @@ class TestPublicPages:
             context = template_variables[-1]
             # The anchors are built from the English keys in every language.
             assert [section['key'] for section in context['sections']] == [
-                'intro', 'common_mistakes'], language
+                'intro', 'common_mistakes', 'manual'], language
             mistakes = context['sections'][1]
             assert mistakes['levels'], language
             # English content fills the gaps a translation has not caught up with yet.
@@ -683,6 +683,50 @@ class TestCreateAccounts:
             check=False,
         )
         assert response.status_code == 400
+
+    def test_create_accounts_generate_passwords_username_with_space_returns_400(self, client, given):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        response = client.post_json(
+            '/for-teachers/create-accounts',
+            {
+                'class': cls['id'],
+                'generate_passwords': True,
+                'accounts': 'first last',
+            },
+            check=False,
+        )
+        assert response.status_code == 400
+
+    def test_create_accounts_manual_passwords_invalid_symbol_returns_400(self, client, given):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        for username in ['bad@user', 'first last']:
+            response = client.post_json(
+                '/for-teachers/create-accounts',
+                {
+                    'class': cls['id'],
+                    'generate_passwords': False,
+                    'accounts': f'{username};test123',
+                },
+                check=False,
+            )
+            assert response.status_code == 400
+
+    def test_create_accounts_invalid_username_is_escaped_in_error(self, client, given):
+        teacher = given.logged_in_as_new_teacher()
+        cls = given.a_class(teacher['username'])
+        response = client.post_json(
+            '/for-teachers/create-accounts',
+            {
+                'class': cls['id'],
+                'generate_passwords': False,
+                'accounts': '<b>bold</b>;test123',
+            },
+            check=False,
+        )
+        assert response.status_code == 400
+        assert '&lt;b&gt;bold&lt;/b&gt;' in response.get_json()['error']
 
     def test_create_accounts_manual_passwords_missing_separator_returns_400(self, client, given):
         teacher = given.logged_in_as_new_teacher()

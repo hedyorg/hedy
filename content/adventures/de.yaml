@@ -159,8 +159,10 @@ adventures:
                     {print} 'OH NEIN! Der T-Rex kommt immer näher!'
                     Ende = {ask} 'Soll das Ende gut oder schlecht sein?'
                     {if} Ende {is} gut
+                    # Die Geschichte geht gut aus:
                         {print} 'Richard springt gerade noch rechtzeitig zurück in seine Zeitmaschine.'
                         {print} _
+                    # Die Geschichte geht schlecht aus:
                     {else}
                         {print} 'Oh nein! Richard ist zu langsam...'
                         {print} _
@@ -194,29 +196,20 @@ adventures:
                         {print} 'Robin geht nach Hause.'
                     ```
                 story_text_2: |
-                    Durch die Befehle `{and}` und `{or}` können Sie Ihre Geschichten vielseitiger gestalten. Sie können zwei Fragen stellen und auf die Kombination von Antworten reagieren.
+                    Durch die Befehle `{and}` und `{or}` kannst du deine Geschichten vielseitiger gestalten. Du kannst mehrere Fragen stellen und auf mehrere Antworten gleichzeitig reagieren.
 
                     ### Exercise 1
-                    Sehen Sie sich den Beispielcode an und beenden Sie ihn. Dann mindestens 2 weitere `{if}` Codes mit `{and}` oder `{or}` hinzufügen.
+                    Sieh dir den Beispielcode an und schreibe ihn fertig. Füge dann mindestens 2 weitere `{if}` -Befehle mit `{and}` oder `{or}` hinzu.
 
                     ### Exercise 2
-                    Finde eine Geschichte aus einer vorherigen Ebene und füge eine `{and}` oder `{or}` hinzu.
-                    Beispiel_Code: |
-                    `` `
-                    {print} 'Unser Held geht durch den Wald '
-                    {print} 'Der Pfad teilt zwei Wege '
-                    path = {ask} 'Welcher Pfad sollte sie wählen? '
-                    Waffe = {ask} 'Welche Waffe zieht sie? '
-                    {if} Pfad {is} 'link' {and} Waffe {is} Schwert '
-                        _.
-                    `` `
+                    Finde eine Geschichte aus einer vorherigen Ebene und füge ein `{and}` oder ein `{or}` hinzu.
             11:
                 story_text: |
                     In diesem Level kannst du den `{for}` Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, wen siehst denn Du?" programmieren.
 
                     ### Übung
 
-                    Schau dir <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">die Geschichte</a> an, falls du sie nicht kennst und stelle sicher, dass es wie im Buch ausgegeben wird.
+                    Schau dir <a href="https://fliphtml5.com/jmlya/nquy">die Geschichte</a> an, falls du sie nicht kennst und stelle sicher, dass es wie im Buch ausgegeben wird.
                 example_code: "```\ntiere = _ , _ , _ \n{print} 'Brauner Bär'\n{print} 'Was siehst du?'\n```\n"
 
             16:
@@ -226,21 +219,6 @@ adventures:
 
                     ### Übung
                     Der Beispiel Code zeigt dir, wie du eine `{while}` Schleife in einer Geschichte verwenden kannst. Denke dir jetzt **ein eigenes Szenario** aus, in dem die Spieler etwas finden müssen, bevor sie weitermachen können.
-                example_code: |
-                    ```
-                    Schlüssel = 'verloren'
-                    {print} 'Du stehst in Deinem Garten, hast jedoch Deine Schlüssel verloren.'
-                    {print} 'Wo willst Du nach ihnen suchen?'
-                    {print} 'Wähle zwischen: Baum, Blumenbeet, Stein, Briefkasten'
-                    {while} Schlüssel == 'verloren'
-                        Ort = {input} 'Wo willst Du suchen?'
-                        {if} Ort == 'Blumenbeet'
-                            {print} 'Ah, hier sind sie!'
-                            Schlüssel = 'gefunden'
-                        {else}:
-                            {print} 'Nö, sie sind nicht beim ' Ort '.'
-                    {print} 'Jetzt kannst Du ins Haus!'
-                    ```
             13:
                 example_code: |
                     ```
@@ -248,17 +226,7 @@ adventures:
                     {print}('Willkommen in dieser Geschichte!')
                     ```
             6:
-                story_text: "Nun da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte kreieren! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du {elif} einsetzt."
-                example_code: |
-                    ```
-                    character = {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
-                    {if} character  {is} 'Daisy'
-                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste aller!'
-                    {elif} character  {is} 'Jason'
-                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen!'
-                    {elif} character {is} 'Sam'
-                    {print} 'Du hast Sam ausgewählt! Sie sind die schnellsten von allen! '
-                    ```
+                story_text: "Nun, da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte bauen! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen, oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du `{elif}` einsetzt."
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         description: Einführung von {add} {to_list} und {remove} {from}
@@ -379,13 +347,16 @@ adventures:
                     ```
                     Punkte = 0
                     {repeat} 10 {times}
+                    # Eine zufällige Frage auswählen:
                         Nummern = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         Nummer1 = Nummern {at} {random}
                         Nummer2 = Nummern {at} {random}
                         richtige_antwort = Nummer1 * Nummer2
+                    # Frage stellen:
                         {print} 'Was ist ' Nummer1 ' mal ' Nummer2 '?'
                         Antwort = {ask} 'Tippe deine Antwort hier ein...'
                         {print} 'Deine Antwort ist ' Antwort
+                    # Punkte zusammenzählen:
                         {if} _ {is} _
                             Punkte = Punkte + 1
                     {print} 'Großartig gemacht! Dein Punktestand ist... ' Punkte ' von 10!'
@@ -951,18 +922,6 @@ adventures:
             7:
                 story_text: |
                     Wer ist wie oft mit dem Abwasch dran? Ist es gerecht verteilt? In diesem Level kannst Du mitzählen.
-                example_code: |
-                    ```
-                    Familienmitglieder = Mama, Papa, Emma, Sophie
-                    Emmas_Anzahl = 0
-                    Tellerwäscher = Familienmitglieder {at} {random}
-                    {print} 'Den Abwasch macht ' Tellerwäscher
-                    {if} Tellerwäscher {is} Emma Emmas_Anzahl = Emmas_Anzahl + 1
-                    {print} 'Emma ist diese Woche ' Emmas_Anzahl ' Mal mit dem Abwasch dran'
-                    ```
-
-                    Jetzt kannst Du die Zeilen ein paar Mal kopieren (z.B. weitere 6 Mal für die ganze Woche), um einen Plan für die ganze Woche aufzustellen.
-                    Kannst Du den Code für eine ganze Woche schreiben?
                 story_text_2: |
                     Wenn Du ganz großes Pech hast, könnte Dich das vorigen Programm für die ganze Woche als Abwäscher bestimmen. Das ist ungerecht!
                     Um das System gerechter zu gestalten, kannst Du mit dem Befehl `{remove}` die ausgewählt Person von der Liste entfernen. Auf diese Weise musst Du nicht nochmal abwaschen, bis jeder einmal dran war.
@@ -2034,12 +1993,6 @@ adventures:
                     ## Wiederhole mit anderen Befehlen und mit Variablen
                     Das hast den `{repeat}` Befehl zusammen mit dem `{print}` Befehl verwendet. Aber wusstest du, dass du auch andere Befehle mit `{repeat}` verwenden kannst?
                     In diesem Beispielprogramm siehst du, dass `{repeat}` auch zusammen mit `{ask}`, `{if}` oder `{else}` verwendet werden kann.
-                example_code: |
-                    ```
-                    {repeat} 2 {times} antwort = {ask} 'Wusstest du, dass du eine Frage mehrfach stellen kannst?'
-                    {if} antwort {is} ja {repeat} 2 {times} {print} 'Das wusstest du schon!'
-                    {else} {repeat} 3 {times} {print} 'Du hast was Neues gelernt!'
-                    ```
                 story_text_2: |
                     Etwas anderes Interessantes, das du mit dem `{repeat}` Befehl machen kannst ist, Variablen zu verwenden um die Anzahl der Wiederholungen zu bestimmen. In dem Beispielprogramm kannst du sehen, dass wir die Person zuerst fragen, wie alt sie ist.
                     In Zeile 3 wird diese Frage dann 'alter' Male wiederholt. Dazu müssen wir die Variable 'alter' mit dem `{repeat}` Befehl verwenden.
@@ -2195,21 +2148,6 @@ adventures:
                     - Gästen einen Rabatt geben, wenn sie einen (geheimen) Gutscheincode eingeben?
                     - ein Kinderessen hinzufügen?
                     - dir noch weitere lustige Dinge ausdenken und ergänzen?
-                example_code: |
-                    Du kannst einen einfachen Restaurant Code erstellen. Das geht so:
-                    ```
-                    {print} 'Willkommen im Restaurant Chez Hedy'
-                    {print} 'Hier ist unsere Karte:'
-                    {print} 'Unsere Hauptgerichte sind Pizza, Lasagne oder Spaghetti'
-                    haupt = {ask} 'Welches Hauptgericht möchten Sie?'
-                    preis = 0
-                    {if} haupt {is} Pizza preis = 10
-                    {if} haupt {is} Lasagne preis = 12
-                    {if} haupt {is} Spaghetti preis = 8
-                    {print} 'Sie bestellten ' haupt
-                    {print} 'Das kostet ' preis ' Euro, bitte'
-                    {print} 'Danke, genießen Sie Ihre Mahlzeit!'
-                    ```
             8:
                 story_text: |
                     In diesem Level hast du gelernt, wie du den Befehl `{repeat}` verwenden kannst, um eine Codezeile um eine bestimmte Anzahl zu wiederholen.

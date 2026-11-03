@@ -204,21 +204,6 @@ adventures:
 
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    anahtarlar = 'kayıp'
-                    {print} 'Bahçenizde duruyorsunuz ve anahtarlarınızı kaybettiniz.'
-                    {print} 'Onları nerede aramak istersiniz?'
-                    {print} 'Seçebilirsiniz: ağaç, çiçeklik, kaya, posta kutusu'
-                    {while} anahtarlar == 'kayıp'
-                        yer = {ask} 'Nereye bakmak istiyorsun?'
-                        {if} yer == 'çiçeklik'
-                            {print} 'İşte buradalar!'
-                            anahtarlar = 'bulundu'
-                        {else}
-                            {print} 'Hayır, burada değiller: ' yer
-                    {print} 'Şimdi eve girebilirsiniz!'
-                    ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
@@ -529,18 +514,6 @@ adventures:
             7:
                 story_text: |
                     Herkes bulaşıkları ne sıklıkla yıkayacak? Bu adil mi? Bunu bu seviyede sayabilirsiniz.
-                example_code: |
-                    ```
-                    kişiler = anne, baba, Ali, Ayşe
-                    ali_yıkadı = 0
-                    bulaşıkçı = kişiler {at} {random}
-                    {print} 'Bulaşıkçımız bugün ' bulaşıkçı
-                    {if} bulaşıkçı {is} Ali ali_yıkadı = ali_yıkadı + 1
-                    {print} 'Ali bu hafta bulaşıkları ' ali_yıkadı ' kere yıkadı'
-                    ```
-
-                    Şimdi 3'ten 5'e kadar olan satırları birkaç kez (örneğin tüm hafta için 7 kez) kopyalayarak tekrar tüm hafta için hesaplama yapabilirsiniz.
-                    Bütün hafta için kod yazabilir misiniz?
                 story_text_2: |
                     Eğer çok şanssızsanız, bir önceki program sizi tüm hafta boyunca bulaşıkları yıkamanız için seçebilir! Bu hiç adil değil!
                     Daha adil bir sistem oluşturmak için `{remove}` komutunu kullanarak seçilen kişiyi listeden çıkarabilirsiniz. Bu şekilde, herkes sırasını alana kadar bulaşıkları tekrar yıkamak zorunda kalmazsınız.
@@ -1368,12 +1341,6 @@ adventures:
                     ## tekrarla ile diğer komutlar ve değişkenler
                     `{print}` komutu ile birlikte `{repeat}` komutunu yeterince uyguladınız, ancak `{repeat}` ile başka komutlar da kullanabileceğinizi biliyor muydunuz?
                     Bu örnek kodda `{repeat}` komutunun bir `{ask}`, `{if}` veya `{else}` komutuyla da kullanılabileceğini görebilirsiniz.
-                example_code: |
-                    ```
-                    {repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'
-                    {if} cevap {is} evet {repeat} 2 {times} {print} 'Demek bunu zaten biliyordunuz!'
-                    {else} {repeat} 3 {times} {print} 'Yeni bir şey daha öğrendiniz!'
-                    ```
                 story_text_2: |
                     `{repeat}` komutuyla yapabileceğiniz bir başka ilginç şey de, bir şeyin kaç kez tekrarlanacağını ayarlamak için, değişkenler kullanmaktır. Örnek kodda ilk olarak kişiye kaç yaşında olduğunu sorduğumuzu görebilirsiniz.
                     Ardından, 3. satırda, bu soru 'yaş' kez tekrarlanır. Yani `{repeat}` komutu ile 'yaş' değişkenini kullandık.
@@ -1514,21 +1481,6 @@ adventures:
                     - insanlara (gizli) bir kupon kodu girdiklerinde indirim vermek?
                     - bir çocuk menüsü eklemek?
                     - eklemek için başka eğlenceli şeyler aklınıza geliyor mu?
-                example_code: |
-                    Bunun gibi basit bir restoran kodu oluşturabilirsiniz:
-                    ```
-                    {print} "Restaurant Chez Hedy'ye Hoş Geldiniz"
-                    {print} 'İşte menümüz:'
-                    {print} 'Ana yemeklerimiz pizza, lazanya veya spagetti'
-                    ana = {ask} 'Hangi ana yemeği istersiniz?'
-                    fiyat = 0
-                    {if} ana {is} pizza fiyat = 10
-                    {if} ana {is} lazanya fiyat = 12
-                    {if} ana {is} spagetti fiyat = 8
-                    {print} 'Siparişiniz ' ana
-                    {print} 'Ücret toplamı ' fiyat ' lira, lütfen'
-                    {print} 'Teşekkürler, afiyet olsun!'
-                    ```
             8:
                 story_text: |
                     Bu seviyede, bir kod satırını belirli sayıda tekrarlamak için `{repeat}` komutunu nasıl kullanacağınızı öğrendiniz.

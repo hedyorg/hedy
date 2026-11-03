@@ -80,7 +80,7 @@ adventures:
                 example_code: |
                     ```
                     kafshët {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Ai/ajo tani dëgjon zhurmën e një kafshe {at} {random}
+                    {print} Ai/ajo tani dëgjon zhurmën e një kafshët {at} {random}
                     ```
                 story_text_2: |
                     Komanda `{add}` mund të ju duhet në tregim.
@@ -139,17 +139,17 @@ adventures:
                     {print} emri 'po ecën nëpër pyll'
                     {print} emri ' përballet me një bishë'
                     përfundimi {is} {ask} 'A do një përfundim të lumtur apo të keq?'
-                    {if} përfundimi {is} i lumtur {print} emri ' merr shpatën dhe bisha vrapon tutje menjëherë'
+                    {if} përfundimi {is} lumtur {print} emri ' merr shpatën dhe bisha vrapon tutje menjëherë'
                     {else} {print} 'Bisha e ha ' emri
                     ```
                 answer_code: |
                     ```
-                    emri {is}{ask} 'Kush është heroi/ina?'
+                    emri {is} {ask} 'Kush është heroi/ina?'
                     {print} 'Oh jo, aeroplani po rrëzohet, kush do të na shpëtoje?'
                     {print} "Shiko kush po fluturon në qiell, është" emri
-                    fundi {is}{ask} 'A do ta shpëtosh aeroplanin, apo do ta shkatërrosh?'
-                    {if}fundi{is} shpëto {print} emri "e uli aeroplanin, ai/ajo na shpëtoi!"
-                    {else}{print} "Oh jo!" emri " do ta shkatërroke aeroplanin, ndihmë!"
+                    fundi {is} {ask} 'A do ta shpëtosh aeroplanin, apo do ta shkatërrosh?'
+                    {if} fundi {is} shpëto {print} emri "e uli aeroplanin, ai/ajo na shpëtoi!"
+                    {else} {print} "Oh jo!" emri " do ta shkatërroke aeroplanin, ndihmë!"
                     ```
             8:
                 story_text: |
@@ -225,21 +225,6 @@ adventures:
 
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    çelsat = 'humbur'
-                    {print} 'Ti je duke qëndruar në kopsht dhe i ke humbur çelsat.'
-                    {print} 'Ku doni që të kërkoni për ato?'
-                    {print} 'Ju mund të zgjidhni: dru, lule, gur, kuti'
-                    {while} çelsat == 'humbur'
-                        vendi = {ask} 'Ku doni që të kërkoni?'
-                        {if} vendi == 'lule'
-                            {print} 'Ja ku janë!'
-                            çelsat = 'gjetur'
-                        {else}
-                            {print} 'Jo, nuk janë në' vendi
-                    {print} 'Tani mund të hyni në shtëpi!'
-                    ```
             4:
                 story_text: |
                     ### Ushtrim
@@ -265,11 +250,11 @@ adventures:
                     ```
                     emri {is} {ask} 'Si quhesh ti?'
                     {print}  'Personazhi kryesor quhet' emri
-                    {print} emri  'tani po shkon të bëjë një xhiro në pyll
+                    {print} emri  'tani po shkon të bëjë një xhiro në pyll'
                     {print} emri ' ka pak frikë'
                     kafshët {is} 🦔, 🐿, 🦉, 🦇
                     {print} 'Ai/Ajo dëgjon zhurmën e një ' kafshët {at} {random}
-                    {print} emri ' ka frikë se ky pyll ka fantazma
+                    {print} emri ' ka frikë se ky pyll ka fantazma'
                     ```
     add_remove_command:
         levels: {}
@@ -450,18 +435,6 @@ adventures:
             7:
                 story_text: |
                     Sa shpesh duhet që secili ti lajë enët? A është e drejtë? Mund të numëroni në këtë nivel.
-                example_code: |
-                    ```
-                    njerëzit = nëna, babi, Erza, Sara
-                    erza_lanë = 0
-                    larësi_enëve = njerëzit {at} {random}
-                    {print} 'Larësi i enëve është' larësi_enëve
-                    {if} larësi_enëve {is} Erza erza_lanë = erza_lanë + 1
-                    {print} 'Erza do ti lajë enët këtë javë' erza_lanë 'herë'
-                    ```
-
-                    Tani kund të kopjoni rreshtat 3 deri 5 disa herë (p.sh. 7 herë për të gjithë javën) për të kalkuluar për të gjithë javën.
-                    A e bëni kodin për të gjithë javën?
                 story_text_2: |
                     Nëse jeni shumë pafat, programi mund të ju zgjedhë juve ti lani enët për të gjithë javën! Nuk është e drejtë!
                     Për të krijuar një sistem të drejtë, mund ta përdorni komandën `{remove}` për të hequr njeriun e zgjedhur nga lista. Kështu që nuk keni që ti lani enët derisa dikush tjetër ti kishte larë.
@@ -1052,21 +1025,6 @@ adventures:
             7:
                 story_text: |
                     Në këtë nivel mund të përdorni matematikën për të kalkuluar çmimin total të klientit tuaj, e cila do ta bëjë restorantin tuaj më reale.
-                example_code: |
-                    Ju mund ta bëni një kod të thjeshtë për restorant, si kështu:
-                    ```
-                    {print} 'Mirë se erdhët në Restorant Hedy'
-                    {print} 'Kjo është menu-ja jonë:'
-                    {print} 'Kurset tona kryesore janë pica, lazanja ose spageti'
-                    kryesore = {ask} 'Cilin pjatë kryesore do të dëshironit?'
-                    çmimi = 0
-                    {if} kryesore {is} pica çmimi = 10
-                    {if} kryesore {is} lazanja çmimi = 12
-                    {if} kryesore {is} spageti çmimi = 8
-                    {print} 'Ju keni porositur ' kryesore
-                    {print} 'Kjo do të kushtojë ' çmimi ' lekë.'
-                    {print} 'Faleminderit, shijoni vaktin tuaj!'
-                    ```
             8:
                 story_text: |
                     Në këtë nivel keni mësuar të përdorni komandën `{repeat}` që të përsëritni një rresht kodi disa herë.

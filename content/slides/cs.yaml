@@ -1,1 +1,1981 @@
-{}
+levels:
+    0:
+        1:
+            header: Vítej v Hedy!
+            text: |-
+                Vítej v programovacím jazyce Hedy!
+
+                Učitelé, stisknutím klávesy S zobrazíte poznámky pro přednášejícího.
+            notes: Požádejte žáky, aby si napsali několik slov, která si spojují s programováním. V rychlém kolečku si poslechněte jejich odpovědi.
+        2:
+            header: Programování
+            text: |-
+                Programování znamená dávat počítači pokyny v jazyce, kterému rozumí.
+
+                Takovému jazyku se říká „programovací jazyk“.
+            notes: |-
+                Počítače bohužel nerozumějí běžnému lidskému jazyku, například angličtině. Mají vlastní jazyk.
+                Žádný strach, nebudeme muset psát řetězce nul a jedniček. Naučíme se dávat počítači pokyny v programovacím jazyce.
+        3:
+            header: Programovací jazyk
+            text: |-
+                Možná už nějaké programovací jazyky znáš?
+                Patří mezi ně například:
+                * Scratch
+                * Python
+                * HTML
+            notes: Zeptejte se žáků na jejich vlastní zkušenosti s programováním nebo na to, zda znají někoho, kdo pracuje v IT.
+        4:
+            header: Programování
+            text: |-
+                Když umíš programovat, můžeš dělat spoustu skvělých věcí:
+                * Vytvářet interaktivní příběhy
+                * Vytvářet počítačové kresby a přenést je na papír nebo látku
+                * Vytvářet vlastní aplikace pro telefon
+            notes: Možná to zní velmi obtížně, ale programovat se budeme učit postupně.
+        5:
+            header: Programování v Hedy
+            text: V Hedy používáme zvláštní „klíčová slova“, například `{print}`.
+            code: '{print} Vítej v Hedy!'
+            notes: |-
+                Podívejme se na Hedy. V Hedy dáváme počítači pokyny pomocí zvláštních slov, kterým říkáme klíčová slova.
+                Tyto pokyny píšeme do levé části obrazovky. Říkáme jim kód nebo program.
+        6:
+            header: Programování v Hedy
+            text: Klíčová slova budou růžová.
+            code: '{print} Vítej v Hedy!'
+            notes: Jak vidíte, správně použitá klíčová slova se zbarví růžově.
+        7:
+            header: Programování v Hedy
+            text: Kód spustíme tlačítkem Spustit kód pod ním.
+            code: '{print} Vítej v Hedy!'
+            notes: Aby počítač pokyny provedl, musíte kód spustit. Stiskněte tlačítko a ukažte žákům, co se stane.
+        8:
+            header: Programování v Hedy
+            text: Výstup se zobrazí na pravé straně.
+            code: '{print} Vítej v Hedy!'
+            notes: Po spuštění kódu se objeví výstup. Výstup je výsledek běhu našeho programu. Pravé části obrazovky, kde se výstup objevuje, říkáme výstupní část.
+        9:
+            header: Programování v Hedy
+            text: Výstupem může být i kresba.
+            code: |-
+                {forward} 100
+                {turn} {left}
+            notes: V Hedy nemusí být výstupem jen text. Může to být i kresba nebo…
+        10:
+            header: Programování v Hedy
+            text: Výstupem může být i hudba!
+            code: |-
+                {play} C4
+                {play} D4
+                {play} E4
+            notes: Přejděme do první úrovně a začněme!
+        11:
+            header: Pomocí nabídky přejdi na další dobrodružství
+            text: Pomocí nabídky přejdi na další dobrodružství nebo úroveň.
+            editor: /hedy/1
+            notes: Žáci někdy nevědí, jak přejít na další dobrodružství. Ukažte jim to přímo v Hedy.
+        12:
+            header: Programování v Hedy
+            text: V kódu se někdy objeví chyba. Pomocí ladicího nástroje ji můžeš najít a opravit.
+            code: |-
+                {print} Ladění znamená hledání chyby
+                {print} Kód můžeš spouštět řádek po řádku
+                {print} Chybu tak snadno najdeš
+                {print} A opravíš ji!
+                {print} Nebo klikni na ikonu oka a vypni řádek kódu
+            debug: 'True'
+            notes: |-
+                **Jak ladit kód**
+                Podívejte se na toto <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a>, které ukazuje práci s ladicím nástrojem, nebo si přečtěte pokyny.
+                Chyby samozřejmě můžete hledat sami přímo v kódu, ale máme i nástroje, které vám pomohou.
+                Klikněte na tlačítko s beruškou 🐞 pod vstupním polem. Spustíte tím **ladicí nástroj**, který umožňuje provádět program řádek po řádku.
+                Pokud kód obsahuje závažnou chybu, například v dobrodružstvích na ladění, nástroj vás vyzve, abyste ji nejprve opravili. Z chybových hlášení zjistíte, jak postupovat.
+                Po odstranění závažných chyb můžete program procházet po jednotlivých řádcích.
+                Další řádek spustíte tlačítkem ⏭️ vpravo. Dělá řádek to, co má? Výborně! Znovu klikněte a pokračujte, dokud program nefunguje správně.
+                Ladicí nástroj zastavíte tlačítkem 🛑 uprostřed.
+                Tlačítkem 🔁 vlevo spustíte kód znovu od začátku.
+                Zasekli jste se na některém řádku a chcete program vyzkoušet bez něj?
+                Řádek můžete vypnout kliknutím na ikonu oka před jeho číslem. Řádek se přeškrtne.
+                Při spuštění se pak přeskočí. Znovu ho zapnete dalším kliknutím na ikonu oka a program ho opět provede.
+    1:
+        1:
+            header: Vítej v úrovni 1!
+            text: |-
+                Na konci této lekce dokážeš:
+                * Napsat kód, který vypíše text
+                * Vytvořit interaktivní příběh
+        2:
+            header: '{print}'
+            text: |-
+                První příkaz, který můžeš v úrovni 1 použít, je `{print}`.
+
+                `{print}` slouží k zobrazení textu na obrazovce.
+            code: '{print} Zobraz tento text na obrazovce'
+            notes: Nejprve nechte žáky odhadnout, jaký bude výstup. Potom kód spusťte a ukažte, co se stane při spuštění příkazu `print`.
+        3:
+            header: Klíčové slovo {print}
+            text: |-
+                Text za klíčovým slovem print můžeš změnit, jak chceš.
+
+                Nebo vypiš více řádků: přidej další řádek kódu, který také začíná na `{print}`.
+            code: |-
+                {print} Vítej v Hedy!
+                {print} Začni programovat!
+            notes: Spusťte kód a potom ho podle sebe změňte. Ukažte, že můžete vypsat libovolný text.
+        4:
+            header: '{ask}'
+            text: |-
+                Druhý příkaz, který můžeš v úrovni 1 použít, je `{ask}`.
+
+                `{ask}` slouží k položení otázky, na kterou lze odpovědět.
+            code: |-
+                {print} Vítej ve své vlastní hře kámen, nůžky, papír!
+                {ask} Co si vybereš?
+            notes: |-
+                Ukažte, že se vás počítač nyní na něco ptá. Zadejte odpověď a ukažte také, že se po jejím zadání nic nestane.
+                Upozorněte žáky, že počítač provádí jen zadané pokyny a sám od sebe nic neudělá. Pokud tedy chcete odpověď vypsat, musíte mu k tomu dát pokyn.
+        5:
+            header: '{answer}'
+            text: |-
+                Odpověď zobrazíš ve výstupní části pomocí `{answer}`.
+                `{answer}` se nikdy nepoužívá samostatně, vždy spolu s `{ask}`.
+            code: |-
+                {print} Ahoj!
+                {ask} Jak se jmenuješ?
+                {print} ahoj {answer}
+            notes: Aby počítač zadanou odpověď zopakoval, použijete klíčové slovo `answer`.
+        6:
+            header: Programování!
+            text: Tady najdeš seznam dobrodružství.
+            editor: /hedy/1
+            notes: Než začneme, ukažte žákům dobrodružství. Nezapomeňte upozornit na cvičení. V nich si žáci musí přečíst, co přesně mají v dobrodružství dělat.
+        7:
+            header: Programování!
+            text: Žlutými tlačítky se šipkou můžeš zkopírovat příklady.
+            editor: /hedy#print_command
+            notes: Nakonec žákům ukažte, že žlutým tlačítkem mohou zkopírovat ukázkový kód do editoru.
+        8:
+            header: Pusťme se do toho!
+            text: |-
+                Teď je vhodná chvíle vyzkoušet první dobrodružství.
+                Pomocí nabídky přejdi na další dobrodružství. Pokud si chceš znovu přečíst vysvětlení klíčového slova, vrať se k dobrodružství s ikonou žárovky.
+            editor: /hedy/1
+            notes: Pusťme se do toho!
+        9:
+            header: Ladění
+            text: Ladění kódu znamená hledat a odstraňovat chyby. Pojďme tento kód společně odladit. Ladicí nástroj spustíš tlačítkem s beruškou.
+            debug: 'True'
+            notes: |-
+                **Jak ladit kód**
+                Podívejte se na toto <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a>, které ukazuje práci s ladicím nástrojem, nebo si přečtěte pokyny.
+                Chyby samozřejmě můžete hledat sami přímo v kódu, ale máme i nástroje, které vám pomohou.
+                Klikněte na tlačítko s beruškou 🐞 pod vstupním polem. Spustíte tím **ladicí nástroj**, který umožňuje provádět program řádek po řádku.
+                Pokud kód obsahuje závažnou chybu, například v dobrodružstvích na ladění, nástroj vás vyzve, abyste ji nejprve opravili. Z chybových hlášení zjistíte, jak postupovat.
+                Po odstranění závažných chyb můžete program procházet po jednotlivých řádcích.
+                Další řádek spustíte tlačítkem ⏭️ vpravo. Dělá řádek to, co má? Výborně! Znovu klikněte a pokračujte, dokud program nefunguje správně.
+                Ladicí nástroj zastavíte tlačítkem 🛑 uprostřed.
+                Tlačítkem 🔁 vlevo spustíte kód znovu od začátku.
+                Zasekli jste se na některém řádku a chcete program vyzkoušet bez něj?
+                Řádek můžete vypnout kliknutím na ikonu oka před jeho číslem. Řádek se přeškrtne.
+                Při spuštění se pak přeskočí. Znovu ho zapnete dalším kliknutím na ikonu oka a program ho opět provede.
+        10:
+            header: Hraní hudby
+            text: |-
+                Tóny zahraješ pomocí `{play}`.
+                V kódu je zapisujeme: C - D - E - F - G - A - B.
+                Číslem za tónem vybereš stupnici od 1 do 10.
+            code: |
+                {play} C4
+                {play} D4
+                {play} E4
+                {play} F4
+                {play} G4
+                {play} A4
+                {play} B4
+                {play} C5
+            notes: Ukažte žákům, jak v Hedy používat klíčové slovo `{play}`. Je to také vhodná chvíle připomenout třídní pravidla pro používání sluchátek.
+        11:
+            header: 'Kreslení se želvou: {forward}'
+            text: '`{forward}` slouží k pohybu želvy dopředu.'
+            code: '{forward} 50'
+            notes: Po programech s textovým výstupem se podíváme na kreslení. Ukažte žákům, jak používat klíčové slovo forward.
+        12:
+            header: 'Kreslení se želvou: {forward}'
+            text: Jak se dostaneme dozadu?
+            code: '{forward} -50'
+            notes: Zeptejte se žáků, zda je napadá, jak se pohybovat dozadu. Řešením je záporné číslo, například -50.
+        13:
+            header: 'Kreslení se želvou: {turn}'
+            text: '`{turn}` slouží k otočení želvy doleva nebo doprava.'
+            code: |-
+                {forward} 50
+                {turn} {left}
+        14:
+            header: Ladění
+            text: Použití ladicího nástroje při kreslení
+            code: |-
+                {forward} 50
+                {turn} {left}
+                {forward} 100
+                {turn} {left}
+                {forward} 50
+                {turn} {left}
+            debug: 'True'
+            notes: Ladicí nástroj se může hodit i při kreslení.
+        15:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        16:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        17:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě. Můžete to udělat tak, že na stránce třídy kliknete na dobrodružství daných žáků.
+        18:
+            header: Nahlédnutí do další úrovně...
+            text: |-
+                V další úrovni se naučíš používat proměnnou, díky které budou programy ještě interaktivnější!
+                Také se naučíš pomocí `{sleep}` běh kódu pozastavit!
+    2:
+        1:
+            header: Vítej v úrovni 2
+            text: |-
+                Na konci této lekce dokážeš:
+                * Uložit něco do proměnné
+                * Vytvořit příběh nebo kresbu pomocí proměnných
+            notes: Pojem proměnná může být pro žáky obtížný. Osvědčilo se nám ukázat více příkladů proměnných, aby žáci pojem lépe pochopili.
+        2:
+            header: Problém
+            text: V předchozí úrovni se ti možná stalo tohle…
+            code: |-
+                {print} Vítej v restauraci!
+                {ask} Co si dáš k jídlu
+                {print} K jídlu chceš… {answer}
+                {ask} Co si dáš k pití?
+                {print} K pití chceš… {answer}
+                {print} Děkujeme za objednávku!
+                {print} Vychutnej si… {answer}
+            notes: |-
+                Pozor: Tento kód v této úrovni nefunguje. Nespouštějte ho, jen o něm diskutujte.
+                Nechte žáky prohlédnout si program a odhadnout jeho výstup.
+                Snad dojdou k závěru, že poslední řádek vypíše jen „Vychutnej si (objednaný nápoj)“ a že počítač na jídlo zapomene.
+                Pomocí ask si počítač pamatuje jen jednu věc. V této úrovni se žáci naučí tento problém řešit pomocí proměnných.
+        3:
+            header: Co je proměnná?
+            text: |-
+                Proměnná je místo v paměti počítače, kam se uloží odpověď na otázku.
+                Možná to zní složitě, ale podívej se na příklad.
+            code: |-
+                odpověď {is} {ask} Jak se jmenuješ?
+                {print} Ahoj odpověď
+            notes: |-
+                V informatice označuje proměnná místo v paměti počítače, kde se ukládají informace, které se mohou měnit.
+                Proměnná je jako krabička nebo nádoba, ve které je uložená měnící se hodnota. Krabička zůstává stejná, ale její obsah se může měnit.
+                Ukažte žákům, jak proměnné fungují. Upozorněte, že název proměnné `odpověď` na posledním řádku se nahradí její hodnotou.
+                Modrý rámeček ve výstupní části ukazuje použité proměnné a jejich hodnoty.
+        4:
+            header: Příkaz `{is}`
+            text: K vytvoření proměnné nebo nastavení její hodnoty používáme příkaz `{is}`. Název proměnné píšeme před `{is}` a příkaz `{ask}` za něj. Název proměnné si můžeme zvolit, nemusí to být `answer`.
+            code: |-
+                jméno {is} {ask} Jak se jmenuješ?
+                {print} Ahoj jméno
+            notes: Požádejte žáky, aby vymysleli vlastní příklady.
+        5:
+            header: Proměnné
+            text: Proměnné můžeme nastavit hodnotu i bez otázky. Název proměnné píšeme před `{is}` a hodnotu za něj.
+            code: |-
+                jídlo {is} hamburger
+                nápoj {is} voda
+                {print} Dám si toto jídlo: jídlo.
+                {print} Dám si tento nápoj: nápoj.
+            notes: Zeptejte se žáků, zda je napadá další proměnná, například výška, velikost bot nebo barva vlasů. Přidejte do kódu vlastní příklady.
+        6:
+            header: Více proměnných
+            text: Díky proměnným už nejsme omezeni na jednu `answer`. Můžeme používat více proměnných.
+            code: |-
+                jméno {is} Hedy
+                věk {is} 15
+                {print} jméno má věk let
+        7:
+            header: Pozastavení
+            text: Klíčovým slovem `{sleep}` můžeš běh kódu na chvíli pozastavit.
+            code: |-
+                {print} Moje oblíbená barva je…
+                {sleep} 2
+                {print} zelená!
+            notes: |-
+                Ukažte žákům klíčové slovo {sleep}. Zeptejte se, co podle nich znamená číslo 2.
+                Změňte ho na jiné číslo a ukažte, že mohou zvolit, na kolik sekund se program pozastaví.
+        8:
+            header: Pozastavení na 5 sekund
+            text: |-
+                Za `{sleep}` můžeš přidat číslo, pokud chceš delší pauzu.
+
+                Délku pauzy můžeš určit také proměnnou místo čísla.
+            code: |-
+                pauza {is} 10
+                {print} Moje oblíbená barva je…
+                {sleep} pauza
+                {print} zelená!
+            notes: Ukažte kód a případně nahraďte číslo 10 otázkou s klíčovým slovem {ask}.
+        9:
+            header: Kreslení s proměnnými
+            text: |-
+                V úrovni 1 ses naučil*a používat {forward} 100.
+                Teď můžeš použít i proměnnou.
+            code: |-
+                vzdálenost {is} {ask} Jak daleko mám jít?
+                {forward} vzdálenost
+            notes: |-
+                Ukažte žákům, že teď mohou proměnné používat i při kreslení se želvou!
+                Spusťte kód několikrát s různými odpověďmi, abyste předvedli využití proměnných.
+        10:
+            header: Kreslení pomocí stupňů
+            text: Dříve šlo použít {turn} {left} nebo {turn} {right}. Teď můžeme zadat stupně!
+            code: |-
+                {forward} 100
+                {turn} 45
+                {forward} 100
+            notes: Ukažte žákům kód. Na dalším snímku předvedeme různé úhly.
+        11:
+            header: Stupně
+            text: |-
+                Celý kruh má 360 stupňů.
+                Půlkruh má 180 stupňů.
+                Pro otočení doprava zadej 90 stupňů.
+                Pro otočení doleva zadej 270 stupňů.
+
+                Můžeš zadat libovolné číslo.
+            code: |-
+                {turn} 90
+                {forward} 100
+            notes: |-
+                Ujistěte se, že žáci rozumějí měření úhlů ve stupních. Možná už ho znají z matematiky, ale může pro ně být úplně nové.
+                Pokud o stupních ještě neslyšeli, může se hodit ukázat jim kruh s vyznačenými stupni. Můžete jim ho i vytisknout.
+                Pomocí ukázkového kódu na snímcích předveďte různé úhly.
+        12:
+            header: Stupně a proměnné
+            text: Počet stupňů můžeš uložit i do proměnné!
+            code: |-
+                stupně {is} {ask} O kolik stupňů se má želva otočit?
+                {turn} stupně
+                {forward} 100
+            notes: Ukažte žákům, že i počet stupňů může být uložený v proměnné.
+        13:
+            header: Ladění
+            text: Ladění kódu znamená hledat a odstraňovat chyby. Pojďme tento kód společně odladit. Ladicí nástroj spustíš tlačítkem s beruškou.
+            code: |-
+                {print} Vítej v obchodě s koblihami!
+                náplň {is} Jakou náplň si dáš?
+                {print} Tvoje volba… Náplň! Mňam!
+                poleva {ask} Jakou polevu si dáš?
+                poleva je výborná!
+                {print} Dojdu pro tvoji koblihu. {sleep}
+                {print} Tady je! Kobliha s náplň a s polva!
+                {ask} Hezký den!
+            debug: 'True'
+            notes: Předveďte práci s ladicím nástrojem a ikonou oka.
+        14:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        15:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        16:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        17:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš vytvořit seznam a nechat počítač, aby z něj náhodně vybral položku!
+    3:
+        1:
+            header: Vítej v úrovni 3
+            text: |-
+                Na konci této lekce dokážeš:
+                * Uložit do proměnné více položek. Tomu se říká seznam.
+                * Vytvořit příběh, ve kterém se něco děje náhodně.
+                * Vytvořit kresbu, ve které se něco kreslí náhodně.
+        2:
+            header: Vytvoření seznamu
+            text: |-
+                Seznam vytvoříš pomocí `{is}`.
+
+                Jednotlivé položky odděluj čárkou.
+            code: zvířata {is} psi, kočky, klokani
+            notes: Požádejte žáky, aby si napsali vlastní příklad seznamu.
+        3:
+            header: Náhodný výběr
+            text: |-
+                Seznam můžeš použít se spojením `{at}` `{random}`.
+                Počítač ze seznamu náhodně vybere jednu položku.
+                Při každém spuštění bude výstup jiný.
+            code: |-
+                zvířata {is} psi, kočky, klokani
+                {print} zvířata {at} {random}
+            notes: Spusťte kód několikrát a ukažte žákům, že výstup je pokaždé jiný.
+        4:
+            header: Náhodný výběr ve větě
+            text: Spojení `{at}` `{random}` můžeš použít také ve větě.
+            code: |-
+                zvířata {is} psi, kočky, klokani
+                {print} Moje oblíbená zvířata jsou zvířata {at} {random}
+            notes: |-
+                Znovu několikrát spusťte kód a ukažte, že se výstup mění.
+                Můžete také změnit pořadí slov a předvést, že funguje i `{print} zvířata {at} {random} jsou moje oblíbená zvířata`.
+                Požádejte žáky, aby pod svůj seznam napsali příkaz print s at random a potom si program vyměnili se spolužákem či spolužačkou.
+                Druhý žák má odhadnout jeden možný výstup programu.
+                Několik odpovědí krátce proberte se třídou.
+        5:
+            header: Pusťme se do toho!
+            text: Pojďme se pustit do dobrodružství!
+            notes: Pusťme se do prvních dobrodružství!
+        6:
+            header: Přidat do
+            text: Položky přidáš do seznamu pomocí `{add}` `{to_list}`.
+            code: |-
+                zvířata {is} pes, kočka, klokan
+                {add} ovce {to_list} zvířata
+                {print} Vybírám: zvířata {at} {random}
+            notes: |-
+                Žáci si snad všimnou, že používat add to tímto způsobem nemá příliš smysl: ovci mohli dát do seznamu rovnou.
+                Další snímek ukáže, jak pomocí add to, otázky ask a proměnné vytvořit interaktivní program.
+        7:
+            header: Přidat do
+            text: |-
+                Co do seznamu přidáš, můžeš vybrat přímo. Nebo spoj `{add}` `{to}` s `{ask}`.
+                Hráč tak může rozhodnout, co se do seznamu přidá, a program bude interaktivní.
+            code: |-
+                zvířata {is} pes, kočka, klokan
+                oblíbené {is} {ask} Jaké je tvoje oblíbené zvíře?
+                {add} oblíbené {to_list} zvířata
+                {print} Vybírám: zvířata {at} {random}
+            notes: |-
+                Spusťte program několikrát a ukažte, že vybrané zvíře přibylo do seznamu.
+                Modrý rámeček ve výstupní části ukazuje použité proměnné a jejich hodnoty.
+        8:
+            header: Odebrání ze seznamu
+            text: |-
+                Opakem `{add}` `{to}` je `{remove}` `{from}`.
+                Tento příkaz odebere položku ze seznamu.
+            code: |-
+                zvířata {is} pes, kočka, klokan
+                neoblíbené {is} {ask} Jaké zvíře nemáš rád*a?
+                {remove} neoblíbené {from} zvířata
+                {print} Vybírám: zvířata {at} {random}
+            notes: |-
+                Jakmile žáci pochopí add to, klíčová slova remove from jim nejspíš půjdou snadno.
+                Udělejte cvičení 4 a 5.
+        9:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                hudební_žánry {is} rock, pop, metal, indie, jazz
+                vybraný_žánr {is} hudba {at} {random}
+                {print} Pusťme si vybraný žánr
+                fajn {ask} Líbí se ti ten žánr?
+                {remove} vybraný_žánr {from} vybraný_žánr
+                druhá_volba {is} hudební_žánry
+                {print} Nebo raději… druhá_volba {at} {random}
+                {remove} druhá_volba {to} hudební_žánry
+                {print} Nejraději mám hudební_žánr {random}!
+            debug: 'True'
+            notes: Předveďte práci s ladicím nástrojem a ikonou oka.
+        10:
+            header: Pusťme se do práce!
+            text: Užij si dobrodružství v úrovni 3!
+        11:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        12:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        13:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        14:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš používat uvozovky! O krok blíž ke skutečnému kódu v Pythonu!
+    4:
+        1:
+            header: Vítej v úrovni 4
+            text: |-
+                Na konci této lekce dokážeš:
+                * Pochopit, proč jsou v programování potřeba uvozovky.
+                * Napsat uvozovky na správná místa.
+                * Porozumět chybovým zprávám o nesprávném použití uvozovek.
+            code: "{print} 'Používej uvozovky!'"
+        2:
+            header: Problém
+            text: 'V předchozích úrovních se ti možná stalo tohle:'
+            code: |-
+                jméno {is} Sofie
+                {print} Moje jméno je jméno
+            debug: 'True'
+            notes: |-
+                Tento kód v této úrovni nefunguje!
+                Nechte žáky odhadnout výstup. Problém je v tom, že když použijete proměnnou jméno, nemůžete už v textu použít slovo jméno.
+                Výstup tohoto kódu bude „Moje Sofie je Sofie“.
+        3:
+            header: Řešení pomocí uvozovek
+            text: |-
+                V této úrovni problém vyřešíme pomocí uvozovek.
+
+                Náš kód tak bude také víc připomínat „skutečný“ kód v Pythonu.
+            code: |-
+                jméno {is} Sofie
+                {print} 'Moje jméno je ' jméno
+            notes: |-
+                Počítač nyní rozezná text „jméno“ od proměnné jméno.
+                Ukažte žákům, že teď vypíše „Moje jméno je Sofie“.
+                Někoho může napadnout, že by stačilo proměnnou přejmenovat. To je pravda, ale v programování je důležité umět počítači určit různé typy dat a rozlišovat běžný text od proměnných.
+                Pište jednoduché uvozovky jako ' nebo dvojité jako ". Zpětné apostrofy jako ` nefungují!
+        4:
+            header: Uvozovky s příkazem print
+            text: Když použiješ klíčové slovo `{print}`, musíš text, který se má zobrazit na obrazovce, napsat do uvozovek.
+            code: "{print} 'Používej uvozovky!'"
+        5:
+            header: Uvozovky s příkazem ask
+            text: Totéž platí pro klíčové slovo `{ask}`.
+            code: jméno {is} {ask} 'Jak se jmenuješ?'
+        6:
+            header: Uvozovky a proměnné
+            text: |-
+                Nechceš, aby se na obrazovce vypsaly názvy proměnných.
+                Proto proměnné nepíšeme do uvozovek, například takto:
+            code: |-
+                jméno {is} Harry
+                {print} 'Ahoj ' jméno
+        7:
+            header: Uvozovky a proměnné
+            text: |-
+                Když používáš proměnné uprostřed věty, musí zůstat mimo uvozovky.
+                Zbytek věty ale uvozovky potřebuje. Vypadá to takto:
+            code: |-
+                jméno {is} Harry
+                {print} 'Ahoj ' jméno ', jak se máš?'
+        8:
+            header: Uvozovky a zkrácené tvary
+            text: |-
+                Pozor! Teď, když používáš uvozovky, nemůžeš používat apostrofy v anglických zkrácených tvarech.
+
+                Zkus níže vypsat třeba „you're“ nebo „I'm“ a sleduj, co se stane…
+            code: "{print} 'S apostrofem ' tohle nefunguje'"
+            debug: 'True'
+        9:
+            header: Oprav to!
+            text: Pokud v textu potřebuješ apostrof, problém vyřeší dvojité uvozovky.
+            code: |-
+                {print} "Používám apostrof ' ve dvojitých uvozovkách"
+                {print} "S apostrofem ' je to snadné!"
+            notes: Je důležité začít i skončit stejným typem uvozovek. Například nelze začít jednoduchou uvozovkou ' a skončit dvojitou ".
+        10:
+            header: Vymazání obrazovky
+            text: |-
+                V této úrovni se také naučíš klíčové slovo {clear}.
+                Vymaže všechen text z výstupní části.
+
+                Nezapomeň použít i příkaz sleep. Jinak počítač text vymaže dřív, než si ho stihneš přečíst!
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'PŘEKVAPENÍ!'
+            notes: Spusťte kód a ukažte žákům program. Všimnete si, že čísla 3, 2, 1 nestihnete přečíst. Opravte program přidáním příkazů sleep před příkazy clear.
+        11:
+            header: Kreslení s `{color}`
+            text: Nakonec můžeš své kresby vylepšit pomocí `{color}`!
+            code: |-
+                {color} blue
+                {forward} 30
+                {color} red
+                {forward} 30
+                {color} pink
+                {forward} 30
+                {color} yellow
+                {forward} 30
+        12:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {clear}
+                {print} To je ale krásný den na výlet na pláž!
+                {ask} 'Chceš stavět hrad z písku nebo plavat v moři?'
+                {print} 'Chceš činnost '
+                {print} 'Taky to chci dělat'
+                {print} 'Podívej na ty krásné mušle!'
+                barvy {is} 'oranžová, stříbrná, bílá, hnědá'
+                {print} 'Líbí se mi mušle s barvou barvy {at} {random}!'
+                volba {is} {ask} Která se ti líbí?
+            debug: 'True'
+            notes: Předveďte práci s ladicím nástrojem a ikonou oka.
+        13:
+            header: Připravit, pozor, teď!
+            text: Užij si dobrodružství v úrovni 4!
+        14:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        15:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        16:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        17:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš, jak nechat počítač různě reagovat na různé vstupy!
+    5:
+        1:
+            header: Vítej v úrovni 5
+            text: |-
+                Na konci této lekce dokážeš:
+                * Nechat počítač reagovat na různé vstupy.
+                * Používat klíčová slova {if} a {else}
+        2:
+            header: if
+            text: Klíčové slovo `{if}` ti umožní volit mezi dvěma možnostmi.
+            code: |-
+                jméno {is} {ask} 'Jak se jmenuješ?'
+                {if} jméno {is} Hedy {print} 'super'
+            notes: |-
+                Ukažte, že v tomto příkladu počítač vypíše „super“, pokud je odpověď Hedy.
+                Pokud odpověď není Hedy, počítač neudělá nic.
+        3:
+            header: Nezapomeň na print
+            text: |-
+                S klíčovým slovem `{if}` nezapomeň použít také `{print}`.
+                Tento kód nebude fungovat!
+            code: "{if} jméno {is} Hedy 'super'"
+            debug: 'True'
+            notes: Spusťte kód a opravte chybu podle následujícího snímku.
+        4:
+            header: Podmíněný kód
+            text: Kód, který se provede při splnění podmínky if, je podmíněný kód.
+            code: "{if} jméno {is} Hedy {print} 'super'"
+            notes: "Zeptejte se žáků, co je podle nich podmíněný kód. Zde je to: `{print} 'super'`."
+        5:
+            header: else
+            text: Ke klíčovému slovu `{if}` můžeš přidat také `{else}`.
+            code: "{if} jméno {is} Hedy {print} 'super' {else} {print} 'fuj!'"
+            notes: |-
+                Ukažte žákům, že program dává různé výstupy pro různé odpovědi:
+                Pokud je odpověď Hedy, počítač vypíše „super“.
+                Pokud je odpověď jiná, vypíše „fuj“.
+        6:
+            header: Dlouhé řádky
+            text: |-
+                Možná už víš, že řádky s `{if}` i `{else}` mohou být velmi dlouhé.
+                Příkazy můžeš rozdělit na dva řádky, například takto:
+            code: |-
+                {if} jméno {is} Hedy {print} 'super'
+                {else} {print} 'fuj!'
+            notes: |-
+                Pokud žákům nevadí používat dva řádky, doporučujeme s tím začít hned.
+                Program je pak přehlednější a v dalších úrovních se to bude hodit.
+        7:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} Vítej na bezpečnostní kontrole HedyAir!
+                palubní_vstupenka {is} {ask} 'Máš palubní vstupenku?'
+                {if} palubní_vstupnka ano {print} Výborně!
+                {else} Připrav si prosím palubní vstupenku.
+                pas {is} 'Můžu vidět tvůj pas?'
+                {if} pas {is} ano 'děkuji'
+                {else} 'Bez pasu nemůžeš letět'
+                přiznání {is} {ask} Máš něco k proclení?
+                {if} přiznání {is} ano
+                předmět_k_proclení {is} {ask} 'Co chceš proclít'
+                {else} V pořádku
+                {print} Děkuji. Přejdi prosím k bráně A22.'
+            debug: 'True'
+        8:
+            header: Jdeme na to!
+            text: Užij si dobrodružství v úrovni 5!
+        9:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        10:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        11:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        12:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš, co dělat, když chceš místo dvou možností (if a else) tři nebo více.
+    6:
+        1:
+            header: Vítej v úrovni 6
+            text: |-
+                Na konci této lekce dokážeš:
+                * Pomocí `{elif}` přidat k podmíněnému kódu třetí možnost
+                * Pomocí `{in}` ověřit, zda je položka v seznamu
+        2:
+            header: Zopakujme si if a else
+            text: Napadne tě kód s `{if}` a `{else}`?
+            code: |-
+                pizza {is} {ask} 'Jaká pizza ti chutná nejvíc?'
+                {if} pizza {is} pepperoni
+                {print} 'Jo! Pepperoni je nejlepší!'
+                {else}
+                {print} 'Pepperoni je lepší!'
+            notes: |-
+                Nechte žáky společně vymyslet program s if a else.
+                Až budou hotoví, ukažte jim příklad a nechte je odhadnout výstup.
+                Také jim připomeňte, že části za příkazem {if} říkáme podmíněný kód.
+        3:
+            header: Použití více řádků
+            text: Podmíněný kód je část za {if} nebo {else}. Odteď se píše na další řádek.
+            code: |-
+                přehlednost {is} {ask} 'Chceš mít kód pěkný a přehledný?'
+                {if} přehlednost {is} 'ano'
+                {print} 'Skvělá zpráva! Podmíněný kód vždy piš na další řádek!'
+                {else}
+                {print} 'Škoda! Podmíněný kód stejně piš na další řádek!'
+            notes: |
+                Pokud žáci nechápou, proč by měli podmíněný kód psát na další řádek, můžete jim říct, že se v další úrovni naučí psát za {if} nebo {else} více řádků kódu.
+        4:
+            header: '`{elif}`'
+            text: '`{elif}` je spojení klíčových slov `{else}` a `{if}`. Potřebuješ ho, když chceš mít tři nebo i více možností.'
+            code: |-
+                pizza {is} {ask} 'Jaká pizza ti chutná nejvíc?'
+                {if} pizza {is} pepperoni
+                {print} 'Jo! Pepperoni je nejlepší!'
+                {elif} pizza {is} hawaii
+                {print} 'To snad ne?! Hawaii je nejhorší!'
+                {else}
+                {print} 'Pepperoni je lepší!'
+            notes: Ukažte žákům tento kód a nechte je odhadnout tři možné výsledky. Potom je nechte vymyslet vlastní náměty na program se třemi nebo více možnostmi.
+        5:
+            header: '`{in}`'
+            text: Až si procvičíš klíčová slova `{if}`, `{else}` a {elif}, můžeš vyzkoušet také `{in}`.
+            code: |-
+                hezké_barvy {is} zelená, žlutá
+                oblíbená_barva {is} {ask} 'Jaká je tvoje oblíbená barva?'
+                {if} oblíbená_barva {in} hezké_barvy {print} 'hezká!'
+                {else} {print} 'nic moc'
+            notes: |-
+                Pomocí `{in}` může počítač ověřit, zda je položka v seznamu. Ukažte příklad.
+                Pozor, Hedy rozlišuje velká a malá písmena. Pokud tedy odpovíte „Zelená“ místo „zelená“, vypíše „nic moc“.
+        6:
+            header: Přehledný kód
+            text: |-
+                Jak poznáváš další příkazy, tvoje programy budou delší.
+                Někdy může být kód nepřehledný a špatně se číst. Pomůžou komentáře: začni řádek znakem # a napiš poznámku, například takto:
+            code: |-
+                # Pojmenování postavy
+                jméno {is} {ask} 'Jak se bude tvoje postava jmenovat?'
+                {print} 'Jmenuje se ' jméno
+
+                # Hod kostkou
+                čísla = 1, 2, 3
+                hod = čísla {at} {random}
+
+                # Výběr mazlíčka
+                {if} hod {is} 1
+                    {print} jméno ' dostane psa'
+                {elif} hod {is} 2
+                    {print} jméno ' dostane kočku'
+                {else}
+                    {print} jméno 'dostane papouška'
+        7:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} 'Vítej v naší zmrzlinárně.'
+                příchuť {is} {ask} 'Jakou příchuť si dáš?'
+                {if} příchuť jahodová
+                {print} 'Dobrá volba!'
+                příchuť {is} vanilková
+                {print} 'Opravdu nechceš jahodovou?''
+                {else}
+                {print} Bohužel máme jen vanilkovou a jahodovou.
+                kopečky {is} 'Kolik kopečků si dáš?'
+                {if} kopečky {is} 1
+                {print} Bude to 1.50, prosím.
+                {elif} {is} 2
+                {print} 'Bude to 2.50, prosím.'
+                {else} 'Bohužel to je příliš.'
+            debug: 'True'
+        8:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        9:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        10:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        11:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš počítat v Hedy
+    7:
+        1:
+            header: Vítej v úrovni 7
+            text: |-
+                Na konci této lekce dokážeš:
+                * Počítat v Hedy
+                * Používat v Hedy desetinná čísla
+                * Používat proměnné při výpočtech v Hedy
+            notes: |-
+                Zeptejte se žáků, kdy podle nich budou v programu potřebovat počítání, například při výpočtu ceny, počtu lidí nebo bodů ve hře.
+                Můžete se také zeptat, jak by takový zápis mohl vypadat. Nejspíš sami navrhnou + a -.
+        2:
+            header: Sčítání
+            text: Pro sčítání jednoduše použij znaménko plus.
+            code: "{print} '5 plus 5 je ' 5 + 5"
+            notes: Krátce ukažte žákům příklad kódu.
+        3:
+            header: Odčítání
+            text: Pro odčítání použij znaménko minus.
+            code: "{print} '5 minus 5 je ' 5 - 5"
+            notes: Krátce ukažte žákům příklad kódu.
+        4:
+            header: Násobení
+            text: Pro násobení použij hvězdičku.
+            code: "{print} '5 krát 5 je ' 5 * 5"
+            notes: Krátce ukažte žákům příklad kódu.
+        5:
+            header: Dělení
+            text: Pro dělení použij lomítko.
+            code: "{print} '5 děleno 5 je ' 5 / 5"
+            notes: Krátce ukažte žákům příklad kódu.
+        6:
+            header: Shrnutí
+            text: K počítání tedy můžeš používat +, -, * a /.
+            code: |-
+                {print} '5 plus 5 je ' 5 + 5
+                {print} '5 minus 5 je ' 5 - 5
+                {print} '5 krát 5 je ' 5 * 5
+                {print} '5 děleno 5 je ' 5 / 5
+            notes: |-
+                Upozorněte, že matematický výraz nepatří do uvozovek.
+                Nechte žáky odhadnout, jak by vypadal výstup, kdyby byl výraz v uvozovkách.
+        7:
+            header: Znak =
+            text: |-
+                Odteď můžeš místo `{is}` používat také znak =.
+                Platí to pro čísla i slova, také za příkazy `{if}` nebo `{else}`.
+            code: |-
+                jméno = Hedy
+                odpověď = 20 + 4
+            notes: Krátce ukažte žákům příklad kódu.
+        8:
+            header: Výpočty s proměnnými
+            text: 'Při výpočtech můžeš používat čísla i proměnné, například takto:'
+            code: |-
+                číslo_1 = {ask} 'Zadej první číslo:'
+                číslo_2 = {ask} 'Zadej druhé číslo:'
+                správná_odpověď = číslo_1 * číslo_2
+                {print} číslo_1 ' krát ' číslo_2 ' je ' správná_odpověď
+            notes: |-
+                Ukažte žákům příklad a nechte je prohlédnout si umístění uvozovek.
+                Pokud na předchozích snímcích navrhovali vlastní využití počítání v Hedy, zeptejte se, jak by takový kód mohl vypadat.
+                Pokud například někdo navrhl počítání bodů ve hře, může nyní navrhnout tento kód:
+                ```
+                {if} odpověď = správná_odpověď
+                    body = body + 1
+                {else}
+                    body = body - 1
+                ```
+                Pokud je to pro žáky příliš obtížné samostatně nebo ve dvojicích, udělejte cvičení společně s celou třídou.
+        9:
+            header: Desetinná čísla
+            text: Zatím Hedy neumožňovala používat desetinná čísla jako 1.5, ale odteď to jde. Pozor, počítače oddělují desetinná místa tečkou.
+            code: |-
+                {print} 'Dva a půl plus dva a půl je…'
+                {print} 2.5 + 2.5
+        10:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} 'Toto je automat na vstupenky do aquaparku'
+                {print} 'Ceník: Děti do 12 let 3 $, dospělí 5 $'
+                {print} 'V pondělí je sleva 25 %'
+                počet_dětí = 'Kolik dětských vstupenek chceš?'
+                počet_dospělých = 'Kolik vstupenek pro dospělé chceš?'
+                den_v_týdnu = {ask} 'Jaký je den v týdnu?'
+                {clear}
+                cena_děti = počet dětí * 3
+                cena_dospělí = počet_dospělých + 5
+                celková_cena = cena_dospělí * cena_děti
+                {if} den {is} pondělí
+                celková_cena = celková_cena * 0.25
+                {print} 'Bude to celková_cena, prosím'
+            debug: 'True'
+            notes: Odlaďte tento kód společně se žáky.
+        11:
+            header: Pusťme se do práce!
+            text: Užij si dobrodružství v úrovni 7!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v této úrovni.
+        12:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        13:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        14:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        15:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš několikrát zopakovat řádek kódu!
+    8:
+        1:
+            header: Vítej v úrovni 8
+            text: |-
+                Na konci této lekce dokážeš:
+                * Spustit jeden řádek kódu několikrát
+        2:
+            header: repeat 3 times
+            text: 'Předpověz výstup tohoto kódu:'
+            code: |-
+                {print} 'Princ pořád volal o pomoc'
+                {repeat} 5 {times} {print} 'Pomoc!'
+                {print} 'Proč mi nikdo nepomáhá?'
+            notes: |-
+                Nechte žáky odhadnout výstup.
+                Vysvětlete, že k opakování řádku kódu mohou použít zápis `{repeat}` 3 `{times}`. Pokud chtějí řádek zopakovat víckrát, stačí změnit číslo.
+                Pokud například programují příběh, ve kterém postava pětkrát volá o pomoc, může kód vypadat jako v ukázce.
+        3:
+            header: Nezapomeň na klíčové slovo print
+            text: S klíčovým slovem repeat nezapomeň použít také `{print}`.
+            code: "{repeat} 5 {times} 'Pomoc!'"
+            debug: 'True'
+            notes: Vylaďte tento kód se svými žáky.
+        4:
+            header: Opakování příkazu ask
+            text: Několikrát můžeš opakovat také příkaz `{ask}`, `{if}` nebo `{else}`.
+            code: |-
+                {repeat} 2 {times} odpověď = {ask} 'Víš, že se můžeš zeptat několikrát?'
+                {if} odpověď {is} ano
+                {repeat} 2 {times} {print} 'To už víš!'
+                {else}
+                {repeat} 3 {times} {print} 'Teď víš něco nového!'
+            notes: |
+                Znovu nechte žáky odhadnout výstup.
+        5:
+            header: 'Použij # pro přehledný kód'
+            text: 'Udržuj kód přehledný. Přidej řádky začínající znakem # a vysvětli v nich, co daná část kódu dělá!'
+            code: |-
+                # Výpis rady
+                {print} 'Udržuj kód takto přehledný!'
+        6:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} Uvízneš na pustém ostrově.
+                {repeat} 3 'Pomoc!'
+                záchrana = {ask} Přišla už nějaká pomoc?
+                {if} záchrana ano {is}
+                {print} To je štěstí!
+                {else} {repeat} 3 {times} 'POMOC!'
+                záchrana = 'A co teď?'
+                {if} ano
+                {print} 'Hurá!
+                {else} 'Škoda… Tak nic… Je čas postavit přístřešek a najít jídlo.'
+            debug: 'True'
+            notes: Vylaďte tento kód se svými žáky.
+        7:
+            header: Připravit, pozor, teď!
+            text: Užij si dobrodružství v úrovni 8!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v této úrovni.
+        8:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        9:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        10:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        11:
+            header: Gratulujeme!
+            text: |-
+                Jsi na konci Hedy Basic!
+                Teď rozumíš základům programování a máš za sebou své první programy!
+
+                Pokud se chceš učit dál, přejdi do úrovně 9 a pokračuj v Hedy Advanced!
+        12:
+            header: Nahlédnutí do další úrovně...
+            text: Teď už umíš opakovat jeden řádek kódu. Je čas opakovat více řádků najednou!
+    9:
+        1:
+            header: Vítej v úrovni 9
+            text: |-
+                Vítej v Hedy Advanced!
+
+                V předchozích úrovních ses naučil*a základy programování! Teď je čas psát složitější programy a poznat náročnější klíčová slova.
+
+                Na konci této lekce dokážeš:
+                * Opakovat více řádků kódu
+                * Správně používat odsazení s {repeat}, {if} a {else}
+        2:
+            header: Příkaz {repeat} v úrovni 8
+            text: Takto vypadal příkaz repeat dříve.
+            code: "{repeat} 5 {times} {print} 'Pomoc!'"
+            debug: 'True'
+            notes: |-
+                Připomeňte žákům, že se v předchozí úrovni naučili používat klíčové slovo repeat.
+                Mohli opakovat jen jeden řádek kódu. V této úrovni se naučí opakovat více řádků.
+        3:
+            header: Teď klíčová slova {repeat}
+            text: Jaký bude podle tebe výstup?
+            code: |-
+                {repeat} 5 {times}
+                    {print} 'Ahoj všichni'
+                    {print} 'Tohle se vypíše 5krát'
+            notes: |-
+                Nejprve nechte žáky znovu odhadnout výstup. Potom vysvětlete:
+                V této úrovni můžete opakovat více řádků kódu. Musíte ale počítači určit, které řádky patří k sobě a mají se opakovat.
+                K tomu slouží odsazení. Na začátek každého opakovaného řádku napište 4 mezery nebo stiskněte jednou tabulátor.
+        4:
+            header: Teď klíčová slova {repeat}
+            text: A jak by vypadal tento výstup?
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Ahoj!'
+                {print} 'Opakování skončilo!'
+            notes: |-
+                Zeptejte se žáků, které řádky se podle nich budou opakovat, a kód spusťte.
+                Vysvětlete: Po bloku s klíčovým slovem `{repeat}` můžete pokračovat bez odsazení.
+                Řádky, které nezačínají odsazením, se opakovat nebudou.
+        5:
+            header: if a else dříve
+            text: Jak budou vypadat příkazy {if} a {else} s odsazením?
+            code: |-
+                {if} jméno {is} Hedy
+                {print} 'super'
+                {else}
+                {print} 'fuj!'
+            debug: 'True'
+            notes: Takto dosud vypadaly příkazy {if} a {else}. Jak budou vypadat teď, když můžeme používat odsazení?
+        6:
+            header: if a else nyní
+            text: Takto teď vypadají příkazy `{if}` a `{else}`.
+            code: |-
+                jméno = {ask} 'Jak se jmenuješ?'
+                {if} jméno {is} Hedy
+                    {print} 'Vítej, Hedy'
+                {else}
+                    {print} 'Vítej, programátore či programátorko!'
+            notes: |-
+                Ukažte žákům, že odsazení není jen práce navíc s přidáváním tabulátoru, ale že je užitečné.
+                Přidejte do příkladu několik řádků a předveďte, že za {if} nebo {else} lze nyní psát více řádků místo jediného.
+        7:
+            header: Konec odsazení
+            text: Předpověz výstup
+            code: |-
+                jméno = {ask} 'Jak se jmenuješ?'
+                {if} jméno {is} Hedy
+                    {print} 'Vítej, Hedy'
+                {else}
+                    {print} 'Vítej, programátore či programátorko!' 
+                {print} '3…2…1… Začni programovat!'
+            notes: |-
+                Nechte žáky odhadnout výstup kódu a upozorněte je, aby si pečlivě všímali odsazení.
+                Stejně jako u klíčového slova `{repeat}` můžete odsazení ukončit. Následující řádky se pak provedou vždy,
+                nejen při splnění podmínky. Neodsazené řádky tedy nezávisí na příkazu {if} nebo {else}.
+        8:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} 'Automat na jízdenky HedyWheels'
+                zóna_1 = Radnice, Knihovna, Univerzitní areál, Tržiště
+                zóna_2 = Plavecký bazén, Skatepark, Obchodní centrum, Letiště
+                cíl = 'Kam chceš jet?'
+                {if} cíl {in} zóna 1
+                {print} cíl 'je v zóně 1'
+                cena = 3 eura
+                    {if} cíl {is} zóna_2
+                {print} cíl 'je v zóně 2'
+                cena = 6
+                typy_jízdenek = {ask} 'Stiskni 1 pro jednosměrnou jízdenku.
+                Stiskni 2 pro zpáteční jízdenku:'
+                {if} typ_jízdenky = 1
+                {print} 'Volba: jednosměrná jízdenka'
+                {else}
+                        {print} Volba: zpáteční jízdenka'
+                cena * 2
+                {print} 'Bude to ' cena ' eur, prosím'
+            debug: 'True'
+            notes: Vylaďte tento kód se svými žáky.
+        9:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 9!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 9.
+        10:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        11:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        12:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        13:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni uvidíme, co se stane, když vložíme {if} do dalšího {if}…
+            code: |-
+                {if} úroveň = 9
+                    {if} žák = zvědavý
+                        {print} 'Uvidíme se v další úrovni!'
+            debug: 'True'
+    10:
+        1:
+            header: Vítej v úrovni 10
+            text: |-
+                Na konci této lekce dokážeš:
+                * Vnořovat příkazy {if} a {repeat}
+                * Správně používat odsazení s {repeat}, {if} a {else}
+                * Používat klíčová slova {and} a {or}
+            notes: Použití příkazu {if} uvnitř jiného příkazu {if} se říká vnořování.
+        2:
+            header: Vnoření s `{repeat}`
+            text: V této úrovni můžeš kombinovat `{repeat}` a `{if}`. Tomu se říká vnoření.
+            code: |-
+                {repeat} 3 {times}
+                    jídlo = {ask} 'Co si dáš?'
+                    {if} jídlo {is} pizza
+                        {print} 'super!'
+                    {else}
+                        {print} 'pizza je lepší'
+            notes: Spusťte program. Jednou odpovězte „pizza“ a potom vyzkoušejte i jiné odpovědi.
+        3:
+            header: Na odsazení záleží!
+            text: Odsazení je velmi důležité. Počítači říká, které řádky se mají opakovat a které spustit jen jednou.
+            code: |-
+                {repeat} 3 {times}
+                    {print} 'Tento řádek se zopakuje…'
+                    {print} 'Tenhle také…'
+                {print} 'ale tenhle ne!'
+            notes: Znovu žákům připomeňte, proč je důležité správné odsazení. Spusťte program a zeptejte se, co by se stalo, kdyby byl odsazený i poslední řádek.
+        4:
+            header: Vnoření s `{if}`
+            text: Můžeš také použít `{if}` uvnitř dalšího `{if}`
+            code: |-
+                pokračování = {ask} 'Chceš pokračovat?'
+                {if} pokračování = ano
+                    jistota = {ask} 'Opravdu?'
+                    {if} jistota {is} ano
+                        {print} 'Budeme pokračovat'
+                    {else}
+                        {print} 'Nemáš jistotu'
+                {else}
+                    {print} 'Nechceš pokračovat'
+            notes: Spusťte program několikrát s různými odpověďmi. Zeptejte se žáků, jaké odpovědi máte zadat, abyste získali jednotlivé výstupy.
+        5:
+            header: Na odsazení záleží
+            text: Odsazení je stále velmi důležité a může výrazně změnit chování kódu.
+            code: |-
+                pokračování = {ask} 'Chceš pokračovat?'
+                {if} pokračování = ano
+                    jistota = {ask} 'Opravdu?'
+                    {if} jistota {is} ano
+                        {print} 'Budeme pokračovat'
+                {else}
+                    {print} 'Nemáš jistotu'
+            notes: Vyzkoušejte různé odsazení a ukažte žákům, co se stane například po odstranění odsazení druhého příkazu {if}.
+        6:
+            header: Nepřehledný kód
+            text: 'Vnoření může být velmi užitečné, ale někdy kvůli němu bývá kód hodně nepřehledný. Podívej se na tento příklad:'
+            code: |-
+                {print} 'Zkusím uhodnout, kdo jsi'
+                barva_vlasů = {ask} 'Jakou máš barvu vlasů?'
+                brýle = {ask} 'Nosíš brýle?'
+                {if} barva_vlasů {is} černá
+                    {if} brýle {is} ano
+                        {print} 'Musíš být Jade!'
+                    {else}
+                        {print} 'Musíš být Ahmed!'
+                {elif} barva_vlasů {is} blond
+                    {if} brýle {is} ano
+                        {print} 'Musíš být Patrick!'
+                    {else}
+                        {print} 'Musíš být Miranda!'
+                {else}
+                    {print} 'Musíš být Jackie!'
+            notes: |-
+                Zeptejte se žáků, kdo má blond vlasy a nenosí brýle. Čtení tohoto kódu jim chvíli potrvá.
+                Na dalším snímku ukažte, že s klíčovým slovem and je kód mnohem přehlednější.
+        7:
+            header: Klíčové slovo {and}
+            text: |-
+                Tady se hodí klíčové slovo `{and}`.
+
+                Kód je tak mnohem přehlednější a nemusíš tolik hlídat odsazení!
+            code: |-
+                {print} 'Zkusím uhodnout, kdo jsi'
+                barva_vlasů = {ask} 'Jakou máš barvu vlasů?'
+                brýle = {ask} 'Nosíš brýle?'
+                {if} barva_vlasů {is} černá {and} brýle {is} ano
+                    {print} 'Musíš být Jade!'
+                {elif} barva_vlasů {is} černá {and} brýle {is} ne
+                    {print} 'Musíš být Ahmed!'
+                {elif} barva_vlasů {is} blond {and} brýle {is} ano
+                    {print} 'Musíš být Patrick!'
+                {elif} barva_vlasů {is} blond {and} brýle {is} ne
+                    {print} 'Musíš být Miranda!'
+                {else}
+                    {print} 'Musíš být Jackie!'
+            notes: |-
+                Kdybyste se teď žáků zeptali, kdo má blond vlasy a nenosí brýle, odpověděli by mnohem rychleji.
+                Psát přehledný kód je důležitá dovednost a klíčové slovo and bude žákům nejspíš připadat přirozené.
+        8:
+            header: Klíčové slovo {or}
+            text: Podobně jako `{and}` existuje také `{or}`!
+            code: |-
+                {print} 'Vyber číslo od 1 do 6'
+                {print} 'Dvě z těchto čísel ti přinesou cenu!'
+
+                seznam_čísel = 1, 2, 3, 4, 5, 6
+                výherní_číslo = seznam_čísel {at} {random}
+                {remove} výherní_číslo {from} seznam_čísel
+                druhé_výherní_číslo = seznam_čísel {at} {random}
+
+                vybrané_číslo = {ask} 'Jaké číslo si vybereš?'
+                {if} vybrané_číslo {is} výherní_číslo {or} vybrané_číslo {is} druhé_výherní_číslo
+                    {print} 'Hurá! Získáváš cenu!'
+                {else}
+                    {print} 'Bohužel na tebe cena nevyšla…'
+            notes: Ukažte žákům tento kód. Nejspíš jim bude připadat přirozený.
+        9:
+            header: Pozor!
+            text: |-
+                S `{or}` nezapomeň napsat dvě úplné podmínky.
+                Odlaď tento kód.
+            code: |-
+                barva = {ask} 'Jakou barvu má tvoje vstupenka?'
+                {if} barva {is} modrá {or} červená
+                    {print} "Získáváš cenu!"
+            debug: 'True'
+        10:
+            header: 'Použij # pro přehledný kód'
+            text: 'Udržuj kód přehledný. Přidej řádky začínající znakem # a vysvětli v nich, co daná část kódu dělá!'
+            code: |-
+                # Výpis rady
+                {print} 'Udržuj kód takto přehledný!'
+        11:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} 'Vítej v HedyJumps, tvém parašutistickém dobrodružství!'
+                lidé = {ask} 'S kolika lidmi dnes skáčeš?
+                {print} 'Z bezpečnostních důvodů vám všem položíme několik otázek.'
+                lidé_pro_další_poučení = a, b
+                {repeat} 3 {times}
+                    jméno = {ask} 'Jak se jmenuješ?'
+                předchozí_skok = 'Už máš za sebou seskok padákem, ' jméno '?'
+                {if} předchozí_skok  ne
+                {print} 'Žádné obavy, dostaneš další bezpečnostní pokyny v místnosti 13'
+                {add} jméno {to} lidé_pro_další_poučení
+                {else}
+                {print} 'To je zábava!'
+                {print} 'Děkujeme všem za vyplnění bezpečnostních otázek. Užijte si seskok!'
+            debug: 'True'
+            notes: Vylaďte tento kód se svými žáky.
+        12:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 10!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 10.
+        13:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        14:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        15:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        16:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíme používat klíčové slovo {for}.
+            code: |-
+                zvířata = pes, kočka, sliznatá ryba
+                {for} zvíře in zvířata
+                {print} 'Miluju tohle zvíře. Je to ' zvíře
+            debug: 'True'
+    11:
+        1:
+            header: Vítej v úrovni 11
+            text: |-
+                Na konci této lekce dokážeš:
+                * Používat klíčové slovo `{for}`
+        2:
+            header: Klíčové slovo `{for}`
+            text: Pomocí `{for}` můžeš vytvořit seznam a použít všechny jeho položky.
+            code: |-
+                zvířata = pes, kočka, sliznatá ryba
+                {for} zvíře {in} zvířata
+                    {print} 'Miluju tohle zvíře. Je to ' zvíře
+            notes: |-
+                Ukažte žákům, že klíčové slovo {for} vytváří blok, který začíná odsazením.
+                Spusťte kód a ukažte, co se stane.
+                Potom požádejte žáky, aby napsali vlastní verzi programu s {for}.
+        3:
+            header: Klíčové slovo `{for}`
+            text: 'Tady je další příklad klíčového slova `{for}`:'
+            code: |-
+                dny = pondělí, úterý, středa, čtvrtek, pátek, sobota, neděle
+                jména = máma, táta, Ema, Sofie
+                {for} den {in} dny
+                    {print} jména {at} {random} ' myje nádobí v tento den: ' den
+            notes: Nechte postupně žáky sdílet své programy. Potom ukažte další příklad a nechte je odhadnout výstup.
+        4:
+            header: Ladění
+            text: Pojďme tento kód odladit
+            code: |-
+                {print} 'Dámy a pánové!'
+                {print} 'Jediný večer v cirkusu Hedy!'
+                čísla = vystřelí se z děla, přejde po laně, složí se do kufru,
+                lidé = Neuvěřitelná Iris Úžasný Achmed Fantastický Francis
+                    {for} lidé {in} čísla
+                vybraný_člověk {is} lidé {random}
+                    vybraný_člověk ' předvede: ' číslo
+                {add} vybraný_člověk {from} lidé
+                {print} 'Přijďte se dnes večer podívat na naše představení!'
+                {print} 'Vstupenky jsou k dostání jen u pokladny
+            debug: 'True'
+            notes: Společně vylaďte tento kód.
+        5:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 11!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 11.
+        6:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        7:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        8:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        9:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíme používat klíčové slovo {for} jiným způsobem.
+            code: |-
+                {for} počítadlo {in} {range} 1 {to} 10
+                    {print} počítadlo
+                {print} 'Připravení, nepřipravení, už jdu!'
+            debug: 'True'
+    12:
+        1:
+            header: Vítej v úrovni 12
+            text: |-
+                Na konci této lekce dokážeš:
+                * Používat funkce
+            notes: |-
+                V této úrovni se žáci seznámí s funkcemi. Tento pojem pro ně může být obtížný.
+                Čím více si funkce procvičí v dobrodružstvích, tím lépe jim porozumějí.
+                Dbejte tedy na to, aby netrávili příliš mnoho času snahou pochopit teorii a měli více času sami programovat. Pochopení přijde při práci!
+        2:
+            header: Funkce!
+        4:
+            header: Funkce
+            text: Jak je vidět v příkladu, funkce je blok kódu, který můžeme kdykoli zavolat. Definuješ ji pomocí `{define}` a použiješ pomocí `{call}`.
+        5:
+            header: 'Použij # pro přehledný kód'
+            text: |-
+                Udržuj kód přehledný. Přidej řádky začínající znakem # a vysvětli v nich, co daná část kódu dělá!
+                Při vytváření funkcí se to obzvlášť hodí!
+            code: |-
+                # Tato funkce ti dobře poradí
+                {define} rada
+                    {print} 'Udržuj kód takto přehledný!'
+                    {print} 'Později za to budeš vděčný či vděčná!'
+        6:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {call} nový_člen
+                {print} 'Ahoj, nový člene!'
+                uživatelské_jméno = {ask} 'Jaké je tvoje uživatelské jméno?'
+                heslo = 'Jaké je tvoje heslo?'
+                {print} 'Vítej v našem klubu!'
+
+                uživatelské_jméno = {ask} 'Zadej své uživatelské jméno. Pokud je tvé členství nové, napiš Nový člen'
+                {if} uživatelské_jméno = Nový člen
+                {call} nový člen
+                    {else}
+                        heslo = {ask} 'Zadej heslo'
+            debug: 'True'
+            notes: Toto cvičení na ladění je poměrně obtížné. Doporučujeme nechat žáky nejprve pracovat na dobrodružstvích a teprve potom ladit tento kód.
+        7:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 12!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 12.
+        8:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        9:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        10:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        11:
+            header: Gratulujeme!
+            text: |-
+                Jsi na konci Hedy Advanced! Můžeš pokračovat v Hedy Expert (úrovně 13–16), kde se naučíš psát skutečný kód v Pythonu. Nebo samozřejmě zůstaň v Hedy Advanced a vymýšlej vlastní programy!
+
+                V další úrovni v jazyce provedeme několik změn, aby se dal použít všude tam, kde se používá Python.
+    13:
+        1:
+            header: Vítej v úrovni 13
+            text: |-
+                Vítej v Hedy Expert (úrovně 13–16)!
+
+                Na konci této lekce dokážeš:
+                * Psát kód, který je téměř jako skutečný kód v Pythonu
+        2:
+            header: Skutečný kód v Pythonu
+            text: |-
+                Kód, který jsme dosud používali, byl zjednodušený.
+                Odteď budeme používat skutečný kód v Pythonu, který můžeš využít i jinde.
+            notes: |-
+                Vysvětlete žákům, že Python je široce používaný programovací jazyk.
+                Dosud jsme používali jeho různé zjednodušené podoby.
+                Teď jsme ale došli do bodu, kdy je veškerý kód používaný v Hedy skutečným kódem Pythonu, a lze ho tedy použít i jinde.
+                Řekněte také, že změn je sice dost, ale jednotlivě jsou poměrně malé.
+        3:
+            header: '{print} v Pythonu'
+            text: Odteď budeš u {print} používat kulaté závorky
+            code: |-
+                {print} ('Tento kód už vypadá jako skutečný kód v Pythonu.')
+                {print} ('Teď můžeš vypisovat text i mimo Hedy.')
+                {print} ('Gratulujeme! Programování už skvěle ovládáš!')
+            notes: |-
+                Požádejte žáky, aby si vzpomněli, jak se dříve zapisoval příkaz print.
+                Potom ukažte nový kód a ujistěte se, že všichni vidí umístění kulatých závorek.
+        4:
+            header: '{ask}'
+            text: Klíčové slovo `{ask}` také nahradíme slovem `{input}` z Pythonu, opět s kulatými závorkami.
+            code: |-
+                věk = {input} ('Kolik je ti let?')
+                {print} ('Je ti ', věk, ' let.')
+        5:
+            header: '{print} s proměnnými'
+            text: 'Při výpisu můžeš kombinovat proměnné a text. Jednotlivé části odděl čárkami:'
+            code: |-
+                úroveň = {input}('Ve které jsi úrovni?')
+                {print}('Hodně štěstí v úrovni ', úroveň)
+            notes: |-
+                Nechte žáky odhadnout výstup kódu.
+                Potom kód spusťte a ukažte, že text v uvozovkách se vypíše doslova, zatímco mimo uvozovky se vypíše hodnota proměnné.
+                Ukažte, co se stane, když na posledním řádku dáte do uvozovek i úroveň.
+        6:
+            header: '`{if}` a `{else}`'
+            text: 'V podmínce if odteď používáme dvě rovnítka: ==. Stejně to dělá většina programovacích jazyků. Na konci řádku s if teď také potřebujeme dvojtečku.'
+            code: |-
+                oblíbený_pták = input('Jaký je tvůj oblíbený pták?')
+                {if} oblíbený_pták == 'tučňák':
+                    {print}('Jo, můj taky!')
+                {elif} oblíbený_pták == 'papoušek':
+                    {print}('Skvělá volba!')
+                {else}:
+                    {print}("Nic moc, nesouhlasím")
+            notes: Na novou syntaxi si žáci budou muset zvyknout. Může to být obtížné a frustrující, proto jim dejte dost příležitostí k procvičování.
+        7:
+            header: '{range} v Pythonu'
+            text: Pro počítání pomocí {range} teď také potřebuješ kulaté závorky.
+            code: |-
+                {for} i in {range} (1, 10):
+                    {print} (i)
+                {print} ('Počítání do 10 skončilo.')
+            notes: Požádejte žáky, aby si vzpomněli, jak tento zápis používali dříve.
+        8:
+            header: Menší a větší
+            text: Znaménka < a > už možná znáš. Znaménko < ověří, zda je první číslo menší než druhé. Například věk < 12 ověří, zda je věk menší než 12. Znaménko > ověří, zda je první číslo větší než druhé. Například body > 10 ověří, zda jsou body větší než 10.
+            code: |-
+                číslo = {input} ('Vyber číslo menší než 10')
+                {if} číslo < 10:
+                    {print}('Super, číslo je vybrané!')
+                {if} číslo > 10:
+                    {print}('To není číslo menší než 10.')
+            notes: |-
+                Ukažte žákům kód. Nechte je odhadnout, co se stane pro různá čísla.
+                Spusťte kód s několika různými čísly.
+                Nakonec zkuste číslo 10 a ukažte, že program nic nevypíše.
+                Číslo 10 není větší ani menší než 10, proto se nic nevypíše. Na dalším snímku to vyřešíme.
+        9:
+            header: Větší nebo rovno
+            text: |-
+                Existuje také zápis pro větší než nebo rovno.
+                Vidíš rozdíl oproti předchozímu kódu?
+            code: |-
+                číslo = {input} ('Vyber číslo menší než 10')
+                {if} číslo < 10:
+                    print('Super, číslo je vybrané!')
+                {if} číslo >= 10:
+                    print('To není číslo menší než 10.')
+            notes: |-
+                Postupujte stejně: spusťte kód s různými čísly, ale vyzkoušejte také 10.
+                Ujistěte se, že žáci chápou, v čem je rozdíl.
+        10:
+            header: Menší nebo rovno
+            text: |-
+                Existuje také zápis pro menší než nebo rovno.
+                Funguje stejně
+            code: |-
+                číslo = {input} ('Vyber číslo mezi 10 a 20')
+                {if} číslo <= 10:
+                    print('Vyber jiné číslo')
+                {if}
+                    print('Super, vybral*a sis číslo!')
+                {if} číslo >= 10:
+                    print('To není číslo menší než 10.')
+            notes: |-
+                Teď můžete postupovat stejně. Spusťte kód s různými čísly a také s 10.
+                Ujistěte se, že žáci chápou, odkud rozdíl pochází.
+                Ukažte, že totéž můžete udělat pro menší nebo rovno, když změníte '>=' na '>' a '<=' na '<'.
+        11:
+            header: Rovná se, nebo nerovná se
+            text: Odteď používej také znaménka pro rovná se a nerovná se.
+            code: |-
+                odpověď = {input} ('Kolik je 5+5?')
+                {if} odpověď = 10:
+                    {print} ('Správná odpověď!')
+                {if} odpověď != 10:
+                    {print} ('Špatně. Zkus to znovu!')
+            notes: |-
+                Zeptejte se žáků, co podle nich znamená znak !=.
+                Potom spuštěním kódu ukažte, že znamená nerovná se.
+        12:
+            header: 'Použij # pro přehledný kód'
+            text: 'Udržuj kód přehledný. Přidej řádky začínající znakem # a vysvětli v nich, co daná část kódu dělá!'
+            code: |-
+                # Výpis rady
+                {print}('Udržuj kód takto přehledný!')
+        13:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            debug: 'True'
+            notes: Společně vylaďte tento kód.
+        14:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 13!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 13.
+        15:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        16:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        17:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        18:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš používat seznamy způsobem Pythonu.
+    14:
+        1:
+            header: Vítej v úrovni 14
+            text: |-
+                Na konci této lekce dokážeš:
+                * Používat seznamy způsobem Pythonu.
+                * Používat {for} způsobem Pythonu.
+        2:
+            header: Vytvoření seznamu v Pythonu
+            text: K vytvoření seznamu teď potřebuješ hranaté závorky.
+            code: čísla = [4, 8, 9]
+        3:
+            header: Seznamy se slovy
+            text: Když seznam obsahuje slova místo čísel, budeš potřebovat také uvozovky.
+            code: oblíbená_zvířata = ['psi', 'ovce', 'papoušci', 'klokani']
+        4:
+            header: Získání položky seznamu.
+            text: 'Položku seznamu snadno vypíšeš tak, že za název seznamu uvedeš číslo položky:'
+            code: |-
+                výherci = ['Amber', 'Bryan', 'Clara']
+
+                {print} (výherci[1], ' získává první cenu.')
+                {print} (výherci[2], ' získává druhou cenu.')
+                {print} (výherci[3], ' získává třetí cenu.')
+            notes: |-
+                Nejprve se zeptejte žáků, jaký bude podle nich výstup první části kódu.
+                Potom kód spusťte a ověřte jejich odpovědi.
+        5:
+            header: Náhodná položka seznamu
+            text: Stejně jako dříve chceme ze seznamu vybrat také náhodnou položku.
+            code: |-
+                kandidáti = ['Amber', 'Bryan', 'Clara']
+                výherce = kandidáti[random]
+                {print} ('Gratulujeme, ', výherce, '! Získáváš cenu.')
+            notes: Spusťte kód několikrát a ukažte, že opravdu vybírá náhodné jméno.
+        6:
+            header: '{for} v Pythonu'
+            text: 'Odteď musí být na konci každého řádku s {for} dvojtečka:'
+            code: |-
+                zvířata = pes, kočka, sliznatá ryba
+                {for} zvíře in zvířata:
+                    {print} ('Miluju tohle zvíře. Je to ' zvíře)
+            notes: |-
+                Upozorněte žáky, že to platí nejen pro klíčové slovo {for}, ale pro každý řádek, po kterém následuje odsazený blok.
+                Uvidíte to na dalších snímcích.
+        7:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} ('Vítej v internetovém obchodě Hedyclothes.')
+                zboží = ['trička Hedy', 'džíny Hedy', 'ponožky Hedy']
+                ceny = [15 25, 10]
+
+                celkem = 0
+
+                {for} i {range} (1,3):
+                    počet = ('Kolik kusů zboží ', zboží[i], ' si chceš koupit?')
+                    celkem = celkem + ceny*počet
+
+                {if} celkem < 50:
+                celkem = + 10
+                {print} (Za dopravu musíš připlatit 10.)
+
+                dárky = [náušnice, sluneční brýle, špunty do uší ]
+                {else}
+                    {print} 'Dostáváš dopravu zdarma a malý dárek.'
+                    dárek = dárek {random}
+                    {print} 'Tvůj dárek je pár: ', dárek
+
+                {print} (Děkujeme za nákup v Hedyclothes. Zaplať prosím, celkem,)
+            debug: 'True'
+            notes: Společně vylaďte tento kód.
+        8:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 14!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 14.
+        9:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        10:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        11:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        12:
+            header: Nahlédnutí do další úrovně...
+            text: V další úrovni se naučíš používat funkce způsobem Pythonu.
+    15:
+        1:
+            header: Vítej v úrovni 15!
+            text: |-
+                Na konci této lekce dokážeš:
+                * Zkrátit a zefektivnit kód pomocí funkcí.
+                * Používat funkce s argumenty
+                * Používat ve funkcích `{return} {value}`
+            notes: Nechte žáky říct, co si pamatují o funkcích a k čemu slouží.
+        2:
+            header: Vzpomínáš si na funkce?
+            text: |-
+                Funkce ti pomůžou udělat kód přehlednější: část kódu, kterou používáš opakovaně, zapíšeš do funkce.
+                V Pythonu se funkce definuje pomocí `{def}`, následuje název funkce a ():
+                K zavolání funkce nepotřebuješ `{call}`, stačí napsat její název s ().
+            code: |-
+                def čtverec():
+                    {for} i {in} {range} (1,4):
+                        {turn} 90
+                        {forward} 10
+
+                čtverec()
+                {forward} 50
+                čtverec()
+                {forward} 50
+                čtverec()
+                {forward} 50
+            notes: Ukažte žákům, jak funkce vypadají nyní. Řekněte jim, že kulaté závorky využijeme později.
+        3:
+            header: Příliš mnoho kódu?
+            text: V následujícím kódu se toho hodně opakuje.
+            code: |-
+                {print} ('Tento program vypočítá druhé mocniny prvních 5 kladných celých čísel a vypíše výsledky.')
+
+                mocnina1 = 1*1
+                {print} ('Druhá mocnina čísla 1 =', mocnina1)
+                mocnina2 = 2*2
+                {print} ('Druhá mocnina čísla 2 = ', mocnina2)
+                mocnina3 = 3*3
+                {print} ('Druhá mocnina čísla 3 = ', mocnina3)
+                mocnina4 = 4*4
+                {print} ('Druhá mocnina čísla 4 = ', mocnina4)
+                mocnina5 = 5*5
+                {print} ('Druhá mocnina čísla 5 = ', mocnina5)
+            notes: |-
+                Ukažte žákům kód. Vidí, kolik částí se opakuje?
+                Zeptejte se, zda je napadá, jak ho zapsat s menším počtem řádků.
+                Nejspíš na řešení nepřijdou, proto jim ukažte další snímek!
+        4:
+            header: Použij funkci!
+            text: |-
+                Teď zkusíme získat stejný výstup s menším počtem řádků kódu.
+                Napíšeme funkci: část kódu, kterou můžeme opakovaně použít s různými argumenty.
+            code: |-
+                {def} vypočti_mocninu(číslo):
+                    mocnina = číslo*číslo
+                    {print} ('Druhá mocnina čísla', číslo, '=', mocnina)
+
+                {print} ('Tento program vypočítá druhé mocniny prvních 5 kladných celých čísel a vypíše výsledky.')
+
+                vypočti_mocninu(1)
+                vypočti_mocninu(2)
+                vypočti_mocninu(3)
+                vypočti_mocninu(4)
+                vypočti_mocninu(5)
+            notes: |-
+                Spusťte kód. Ujistěte se, že žáci chápou, jak z něj vzniká daný výstup.
+                Oproti předchozímu snímku teď máme jen o dva řádky kódu méně.
+
+                Vysvětlete, že čím více částí se opakuje, tím více se vyplatí použít funkce.
+                Výhody: Méně kódu znamená větší přehlednost a rychlejší psaní.
+                Také vzniká méně chyb a případné chyby se snáze hledají.
+
+                Ukažte, že změnou ve funkci se změní všechny příslušné výstupy.
+        5:
+            header: Funkce s více argumenty
+            text: |-
+                Vstupům v závorkách funkce říkáme argumenty.
+                Jedna funkce může mít více argumentů:
+            code: |-
+                {def} pohádka(princezna, princ, něco_jedovatého, projev_lásky)
+                odpověď = {input}('Chceš vyprávět pohádku?')
+                {if} odpověď == ano:
+                    {print} ('Kdysi žila dívka jménem ', princezna)
+                    {print} ('Snědla něco jedovatého: ', něco_jedovatého, '. Málem zemřela…')
+                    {print} ('Princ ', princ, ' ji ale přišel navštívit a dal jí: ', projev_lásky)
+                    {print} ('Dívka jménem ', princezna ' se tak uzdravila a zamilovala se do prince jménem ', princ)
+                    {print} (princezna, ' a ', princ, ' pak žili šťastně až do smrti.')
+                {else}:
+                    {print} ('Nevadí. Třeba příště.')
+
+                pohádka('Sněhurka', 'Casper', 'jed', 'polibek')
+            notes: Spusťte kód a ukažte, že změnou všech čtyř argumentů můžete získat jiný příběh.
+        6:
+            header: Návratová hodnota
+            text: |-
+                Někdy chceš číslo vypočítané uvnitř funkce použít i mimo ni.
+                Pomocí `{return}` vrátíš hodnotu z funkce, aby šla použít i mimo její tělo.
+            code: |-
+                {def} vypočti_novou_cenu(částka, procenta):
+                    procenta = procenta / 100
+                    výše_slevy = částka * procenta
+                    {return} částka - výše_slevy
+
+                stará_cena = input ('Jaká cena je na cenovce?')
+                sleva = input ('Kolik procent je sleva?')
+
+                nová_cena = _ vypočti_novou_cenu(stará_cena, sleva)
+                print('Nová cena: ', nová_cena, ' v dolarech')
+            notes: Napadají žáky další situace, kdy by se hodilo vrátit z funkce hodnotu?
+        7:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} ('Tento program ti pomůže procvičit násobení.')
+
+                {def} ověř odpověď(otázka správná_odpověď)
+                    zadaná odpověď = input('Kolik je ' otázka '?' )
+                    {if} zadaná_odpověď == správná_odpověď:
+                    {play} C5
+                    {print} (Výborně, správná odpověď.)
+
+                    else
+                        {play} C2
+                        {print} 'Špatně. Příště to bude lepší!'
+
+                óvěř_odpověď 5*5, 25
+                ověř odpověď(6*7 42)
+            debug: 'True'
+            notes: Společně vylaďte tento kód.
+        8:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 15!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 15.
+        9:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        10:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        11:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        12:
+            header: Nahlédnutí do další úrovně...
+            text: 'V další úrovni se naučíš poslední klíčové slovo, kterým vytvoříš cyklus {while}:'
+            code: |-
+                úroveň = 15
+                {while} úroveň <= 16:
+                    {print} ('Nepoužívej while')
+                    úroveň = úroveň + 1
+    16:
+        1:
+            header: Vítej v úrovni 16!
+            text: |-
+                Na konci této lekce:
+                * Dokážeš vytvořit cyklus {while}.
+                * Budeš mít za sebou všechny úrovně Hedy!
+        2:
+            header: Nový cyklus
+            text: |-
+                Pomocí {while} můžeš vytvořit nový cyklus.
+                Ten se opakuje, dokud podmínka platí.
+            code: |-
+                teplota = 15
+                {while} teplota < 25:
+                    {print} ('Je ', teplota, ' stupňů.')
+                    {print} ('Bez bundy nemůžeš jít ven.')
+                    teplota = teplota + 2
+                {print} ('Je ', teplota, ' stupňů. Teď můžeš jít ven bez bundy.')
+            notes: |-
+                Nechte žáky odhadnout výstup kódu. Při jaké teplotě vypíše, že mohou jít ven bez bundy?
+                Spuštěním ověřte jejich odpovědi. Potom se zeptejte, co se stane po odstranění řádku teplota = teplota + 2.
+                Ukažte, že tím vznikne nekonečný cyklus, protože teplota zůstane stále nižší než 25.
+        3:
+            header: '{while} a {input}'
+            text: Klíčové slovo {while} můžeš kombinovat také s otázkou.
+            code: |-
+                {while} odpověď != Hedy:
+                    odpověď = {input} ('Jak se jmenuji?')
+                {print} ('Správně. Těší mě. Jmenuji se Hedy!')
+            notes: |-
+                Znovu nechte žáky odhadnout výsledek. Kolikrát program položí otázku?
+                Ukažte, že se bude ptát, dokud nedostane správnou odpověď, tedy „Hedy“.
+        4:
+            header: Ladění
+            text: Pojďme vyladit tento kód!
+            code: |-
+                {print} ('Nyní vytvoříme vylepšenou verzi početního nástroje. ')
+
+                {def} ověř_odpověď otázka, správná_odpověď
+                    {while} zadaná_odpověď != správná odpověď
+                    zadaná_odpověď = {input} ('Kolik je ' otázka '?' )
+                        {play} C2
+                        {print} (Špatně. Zkus to znovu!)
+
+                        {print} (Výborně, správná odpověď.)
+                    {play} C5
+
+
+                óvěř_odpověď 3+9, 12
+                ověř odpověď (7*8, 56)
+            debug: 'True'
+            notes: Společně vylaďte tento kód.
+        6:
+            header: Prohlédněme si dobrodružství!
+            text: Užij si dobrodružství v úrovni 16!
+            notes: Žáci se teď mohou pustit do všech dobrodružství v úrovni 16.
+        7:
+            header: Zopakujme si to!
+            text: Co ses dnes naučil*a?
+            notes: Požádejte žáky, aby vyjmenovali, co se dnes naučili.
+        8:
+            header: Zopakujme si to!
+            text: |-
+                Které dobrodružství se ti líbilo nejvíc? Proč?
+
+                Které dobrodružství se ti líbilo nejméně? Proč?
+            notes: Zeptejte se žáků na jejich názor.
+        9:
+            header: Ukaž a povídej!
+            text: Chce někdo třídě ukázat svůj program?
+            notes: Nechte několik žáků ukázat práci třídě.
+        10:
+            header: Malá ochutnávka budoucnosti…
+            text: |-
+                Tohle byla poslední úroveň. Ale programování tím končit nemusí.
+                Umíš toho hodně a můžeš vytvořit spoustu zajímavých programů.
+                Co bys chtěl*a naprogramovat?
+            notes: Nechte žáky diskutovat o tom, co by chtěli v budoucnu naprogramovat. Povzbuďte je, aby to zkusili!

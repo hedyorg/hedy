@@ -1,7 +1,11 @@
 """Tests for main app.py routes and functions."""
+import io
 import json
 import uuid
+import zipfile
+import zlib
 from types import SimpleNamespace
+import pyembroidery
 import pytest
 import app as hedy_app
 from tests.python_html.fixtures.flask import Client
@@ -332,17 +336,105 @@ class TestParseEndpoint:
 class TestMachineAndMicrobitFiles:
     """Test machine and microbit file generation routes."""
 
-    def test_generate_machine_files(self, client):
-        """Test generating machine files."""
-        # Test with minimal valid request
-        response = client.post(
+    def generate_machine_files(self, client, body):
+        return client.post(
             '/generate_machine_files',
-            data=json.dumps({'code': 'print "hello"', 'level': 1, 'lang': 'en'}),
+            data=json.dumps(body),
             content_type='application/json',
             check=False
         )
+
+    def test_generate_machine_files(self, client):
+        """Test generating machine files."""
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50.5, 100], [50.5, 130]]})
         assert response.status_code == 200
-        assert 'filename' in response.get_json()
+        assert response.mimetype == 'application/zip'
+        assert 'attachment' in response.headers['Content-Disposition']
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            assert sorted(zip_file.namelist()) == ['hedy_drawing.dst', 'hedy_drawing.png']
+
+    def test_generate_machine_files_without_points(self, client):
+        response = self.generate_machine_files(client, {'points': []})
+        assert response.status_code == 200
+
+    def test_generated_machine_files_have_the_same_orientation_as_the_screen(self, client, tmp_path):
+        # forward 100, turn right, forward 50
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            zip_file.extract('hedy_drawing.dst', tmp_path)
+
+        stitches = pyembroidery.read(str(tmp_path / 'hedy_drawing.dst')).stitches
+        xs = [x for x, _, _ in stitches]
+        ys = [y for _, y, _ in stitches]
+        # pyembroidery has the y-axis pointing down: the turtle first goes up and then to the right
+        assert ys[-1] == min(ys) < max(ys)
+        assert xs[-1] == max(xs) > min(xs)
+
+    def test_generated_embroidery_has_a_useful_size(self, client, tmp_path):
+        # forward 100, turn right, forward 50
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            zip_file.extract('hedy_drawing.dst', tmp_path)
+
+        # pyembroidery uses units of 0.1 mm: a turtle step is 0.4 mm and a stitch at most 2 mm
+        stitches = [(x, y) for x, y, _ in pyembroidery.read(str(tmp_path / 'hedy_drawing.dst')).stitches]
+        xs = [x for x, _ in stitches]
+        ys = [y for _, y in stitches]
+        assert (max(xs) - min(xs), max(ys) - min(ys)) == (200, 400)
+        assert all(abs(x2 - x1) <= 20 and abs(y2 - y1) <= 20 for (x1, y1), (x2, y2) in zip(stitches, stitches[1:]))
+
+    def png_size(self, response):
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            png = zip_file.read('hedy_drawing.png')
+        # The width and height are in the IHDR chunk, right after the png signature
+        return int.from_bytes(png[16:20], 'big'), int.from_bytes(png[20:24], 'big')
+
+    def test_generated_png_is_bigger_than_the_drawing(self, client):
+        # forward 100, turn right, forward 50
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+        width, height = self.png_size(response)
+        # The png writer adds a small border around the drawing
+        assert 50 * hedy_app.MACHINE_FILES_PNG_SCALE <= width < 50 * hedy_app.MACHINE_FILES_PNG_SCALE + 5
+        assert 100 * hedy_app.MACHINE_FILES_PNG_SCALE <= height < 100 * hedy_app.MACHINE_FILES_PNG_SCALE + 5
+
+    def test_generated_png_has_the_same_color_every_time(self, client):
+        def png():
+            response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+            with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+                return zip_file.read('hedy_drawing.png')
+
+        assert png() == png()
+
+    def test_generated_png_has_no_transparent_background(self, client):
+        response = self.generate_machine_files(client, {'points': [[0, 100], [50, 100]]})
+        width, height = self.png_size(response)
+        with zipfile.ZipFile(io.BytesIO(response.data)) as zip_file:
+            png = zip_file.read('hedy_drawing.png')
+        # The pixels are in the IDAT chunk, after its length and type. Every row starts with a filter byte
+        idat_length = int.from_bytes(png[33:37], 'big')
+        pixels = zlib.decompress(png[41:41 + idat_length])
+        row_length = 1 + 4 * width
+        alphas = [row[4::4] for row in (pixels[i:i + row_length] for i in range(0, len(pixels), row_length))]
+        assert len(alphas) == height
+        assert all(alpha > 0 for row in alphas for alpha in row)
+
+    def test_generated_png_of_a_big_drawing_is_not_too_big(self, client):
+        response = self.generate_machine_files(client, {'points': [[0, 10000], [5000, 10000]]})
+        width, height = self.png_size(response)
+        assert width < height <= hedy_app.MACHINE_FILES_PNG_MAX_SIZE + 5
+
+    @pytest.mark.parametrize('body', [
+        {'code': 'forward 100', 'level': 1, 'lang': 'en'},
+        {'points': 'forward 100'},
+        {'points': [[0, 100, 5]]},
+        {'points': [['0', 100]]},
+        {'points': [[True, 100]]},
+        {'points': [[0, 100]] * (hedy_app.MACHINE_FILES_MAX_POINTS + 1)},
+    ])
+    def test_generate_machine_files_with_invalid_points_returns_error(self, client, body):
+        response = self.generate_machine_files(client, body)
+        assert response.status_code == 400
+        assert response.get_json()['error']
 
     def test_generate_microbit_files(self, client):
         """Test generating microbit files."""

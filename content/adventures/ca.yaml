@@ -122,7 +122,7 @@ adventures:
                     ```
             6:
                 story_text: "Ara que pots utilitzar `{elif}` podràs crear una història encara més interactiva! Podràs crear diversos personatges, per exemple, que tinguin tots trets diferents.  \nSi vols podràs fer que el teu jugador triï per quin camí anar, quina porta vol obrir o quina poció màgica vol beure...\n\n### Exercici\nCrea la teva pròpia història amb 3 o més opcions utilitzant el {elif}."
-                example_code: "```\npersonatge = {is} {ask} \"Qui t’ajudarà en la teva missió?\"\n{if} personatge {is} \"Dàlia\"\n{print} \"Has triat la Dàlia! És la més intel·ligent de totes!\"\n{elif} personatge {is} \"Jaume\"\n{print} \"Has triat en Jaume! És el més fort de tots!\"\n{elif} personatge {is} \"Francesc\"\n{print} \"Has triat en Francesc! És el més ràpid de tots!\"\n```\n"
+                example_code: "```\npersonatge {is} {ask} \"Qui t’ajudarà en la teva missió?\"\n{if} personatge {is} \"Dàlia\"\n{print} \"Has triat la Dàlia! És la més intel·ligent de totes!\"\n{elif} personatge {is} \"Jaume\"\n{print} \"Has triat en Jaume! És el més fort de tots!\"\n{elif} personatge {is} \"Francesc\"\n{print} \"Has triat en Francesc! És el més ràpid de tots!\"\n```\n"
             8:
                 story_text: |
                     En una història, sovint es repeteixen paraules diverses vegades. Per exemple, quan algú demana ajuda o canta una cançó.
@@ -179,21 +179,6 @@ adventures:
                     ```
             16:
                 story_text: "Utilitzant el bucle `{while}` pots fer que les teves històries siguin més interessants. Per exemple, pots fer servir `{while} game == 'on'` per a poder jugar el joc fins que s'acabi.\nTambé pots fer servir `{while} sword == 'lost'` i així el jugador no podrà continuar el joc fins que trobi alguna cosa concreta.\n\n### Exercici\nAquest exemple mostra com usar el bucle `{while}` dins una història, Ara **pensa en un escenari propi** en què el jugador ha de trobar alguna cosa abans de poder continuar.\n"
-                example_code: |
-                    ```
-                    claus = "perdudes"
-                    {print}("Ets al jardí i no pots entrar! has perdut les claus.")
-                    {print}("On les vols buscar?")
-                    {print}("Pots escollir entre: l'arbre, les flors, la roca, la bústia")
-                    {while} claus == "perdudes"
-                        lloc = {input} ("On vols buscar-les?)"
-                        {if} lloc == "les flors"
-                            {print}("Aquí estan!")
-                            claus = "trobades"
-                        {else}
-                            {print}(" No, no són a ", lloc)
-                    {print}("Ja pots entrar a casa!")
-                    ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         default_save_name: comanda_afegir_borrar
@@ -935,7 +920,7 @@ adventures:
                     Utilitza la teva imaginació!
 
                     El teu programa ha de tenir almenys 10 línies de codi i ha de contenir com a mínim una comanda `{if}` i  una de `{else}`.
-                example_code: "```\namics {is} Jordi, Laura, David\n{print} \"Puc predir la loteria de demà! i dir-te si et tocarà o no!\"\npersona {is} {ask} \"Qui ets tu?\"\nresposta_bona {is} Visca! La guanyaràs!, Segur que la guanyes demà!, tenim un guanyador!\nresposta_dolenta {is} Mala sort! Torna-ho a provar!, Serà una altra persona qui la guanyi, ets un perdedor!\n{if} persona {in} amics\n {print} resposta_bona {at} {random}\n{else}\n {print} resposta_dolenta {at} {random}\n```\n"
+                example_code: "```\namics {is} Jordi, Laura, David\n{print} \"Puc predir la loteria de demà! i dir-te si et tocarà o no!\"\npersona {is} {ask} \"Qui ets tu?\"\nresposta_bona {is} Visca! La guanyaràs!, Segur que la guanyes demà!, tenim un guanyador!\nresposta_dolenta {is} Mala sort! Torna-ho a provar!, Serà una altra persona qui la guanyi, ets un perdedor!\n{if} persona {in} amics\n{print} resposta_bona {at} {random}\n{else}\n{print} resposta_dolenta {at} {random}\n```\n"
             7:
                 story_text: "En aquest nivell pots utilitzar matemàtiques en les teves prediccions com a endeví. Això et permet crear (totes les) fórmules divertides per calcular el futur.\nPer exemple, podries calcular quants diners tindràs o quants fills tindràs quan siguis gran.\n\n\n\n### Exercici\nPots inventar la teva pròpia màquina de prediccions (divertides)?\n"
                 example_code: |
@@ -1070,7 +1055,7 @@ adventures:
                             {print}("Afortunadament podrà descançar a la seva habitació.")
                         {print}("La seva habitació és la ", num_habitacio)
 
-                    {print}("Hola, si us plau omple les dades per al check-in')
+                    {print}("Hola, si us plau omple les dades per al check-in")
                     tractament= {input}("Quin tractament prefereix (sr, sra, dr, etc.)?")
                     cognom = {input}("Com es diu de cognom?")
                     pais_origen= {input}("A quin país resideix?")

@@ -23,6 +23,7 @@ declare const Sk: {
 
   ffi: {
     remapToPy(x: any): any;
+    remapToJs(x: any): any;
   };
 
   python3: any;

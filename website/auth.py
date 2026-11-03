@@ -1,5 +1,6 @@
 import logging
 import os
+import unicodedata
 import urllib
 from functools import wraps
 
@@ -284,13 +285,22 @@ def login_user_from_token_cookie():
         remember_current_user(user)
 
 
+def has_invalid_username_characters(username):
+    """Usernames may only contain letters (from any alphabet), digits and the symbols _ - .
+
+    This keeps out spaces and e-mail addresses, and anything that would break the URLs usernames
+    appear in. Existing accounts are not checked, many of them were created before this rule.
+    """
+    return any(unicodedata.category(c)[0] not in 'LMN' and c not in '_-.' for c in username)
+
+
 def validate_signup_data(account):
     if not isinstance(account.get("username"), str):
         return gettext("username_invalid")
-    if "@" in account.get("username") or ":" in account.get("username"):
-        return gettext("username_special")
     if len(account.get("username").strip()) < 3:
         return gettext("username_three")
+    if has_invalid_username_characters(account.get("username").strip()):
+        return gettext("username_invalid_characters")
     if not isinstance(account.get("email"), str) or not utils.valid_email(account.get("email")):
         return gettext("email_invalid")
     if not isinstance(account.get("password"), str):
