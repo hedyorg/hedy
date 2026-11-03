@@ -3121,7 +3121,7 @@ adventures:
             14:
                 story_text: |
                     V této úrovni vytvoříš program na procvičování násobilky.
-                    Vybereš si, kterého čísla násobky chceš procvičit, a dostaneš všechny příklady až do desetinásobku.
+                    Vybereš si, kterou násobilku chceš procvičit, a pak dostaneš všechny příklady na násobení čísly od 1 do 10.
                     Dokonči kód: vypiš, jestli je odpověď správná. Při chybné odpovědi vypiš i správný výsledek.
                     Za každou správnou odpověď přidej bod a na konci vypiš celkové skóre.
                 example_code: |
@@ -3226,7 +3226,7 @@ adventures:
         levels:
             12:
                 example_code: "```\n#Možnosti pro Twister:\nstrany = 'levou', 'pravou'\nkončetiny = 'ruku', 'nohu'\nbarvy = 'červenou', 'modrou', 'zelenou', 'žlutou'\n\n#Definice jednoho tahu Twisteru:\n{define} další_tah\n    vybraná_strana = strany {at} {random}\n    vybraná_končetina = končetiny _\n    vybraná_barva = barvy _\n    {print} 'Polož ' vybraná_strana ' ' vybraná_končetina ' na ' vybraná_barva '.'\n\n#Hra Twister:\n{print} 'Pojďme si zahrát Twister!'\n{repeat} _ _\n    call další_tah\n    {sleep} 2\n```\n"
-                story_text: "V této úrovni se naučíš používat **funkce**. Funkce je blok kódu, který můžeš snadno použít víckrát. Pomáhá nám uspořádat kód, který potřebujeme znovu a znovu.\nFunkci vytvoříš příkazem `{define}` a pojmenuješ ji. Všechny řádky, které do ní patří, pak napiš do odsazeného bloku pod řádek s `{define}`.\nPro přehlednost nech v kódu jeden prázdný řádek. Skvělá práce! Tvoje funkce je hotová!\n\nKdykoli tento blok potřebuješ, použij k zavolání funkce její název. Nemusíš celý blok znovu opisovat.\n\nProhlédni si ukázku hry Twister. Funkce otoč vybere, kterou ruku nebo nohu máš položit na kterou barvu.\n\n### Cvičení\nDokonči kód přiřazením hodnot do 2 proměnných `vybraná_končetina` a `vybraná_barva`.\nPak zvol, kolikrát chceš funkci zavolat, aby roztočila šipku Twisteru.\n\n### Cvičení 2\nVylepši kód přidáním proměnné lidé. Pomocí ní dej každému hráči vlastní pokyn.\nNapříklad: „Ahmede, polož pravou ruku na zelenou.“ nebo „Jessico, polož levou nohu na žlutou.“\n"
+                story_text: "V této úrovni se naučíš používat **funkce**. Funkce je blok kódu, který můžeš snadno použít víckrát. Pomáhá nám uspořádat kód, který potřebujeme znovu a znovu.\nFunkci vytvoříš příkazem `{define}` a pojmenuješ ji. Všechny řádky, které do ní patří, pak napiš do odsazeného bloku pod řádek s `{define}`.\nPro přehlednost nech v kódu jeden prázdný řádek. Skvělá práce! Tvoje funkce je hotová!\n\nKdykoli tento blok potřebuješ, použij k zavolání funkce její název. Nemusíš celý blok znovu opisovat.\n\nProhlédni si ukázku hry Twister. Funkce `otoč` vybere, kterou ruku nebo nohu máš položit na kterou barvu.\n\n### Cvičení\nDokonči kód přiřazením hodnot do 2 proměnných `vybraná_končetina` a `vybraná_barva`.\nPak zvol, kolikrát chceš funkci zavolat, aby roztočila šipku Twisteru.\n\n### Cvičení 2\nVylepši kód přidáním proměnné lidé. Pomocí ní dej každému hráči vlastní pokyn.\nNapříklad: „Ahmede, polož pravou ruku na zelenou.“ nebo „Jessico, polož levou nohu na žlutou.“\n"
                 answer_code: |
                     ```
                     strany = 'levou', 'pravou'
@@ -3590,13 +3590,13 @@ adventures:
                     {repeat} počet {times}
                     {ask} {is} {ask} 'Z jakého pečiva chceš sendvič?'
                     druhy_pečiva {is} bílé, pšeničné, žitné, česnekové, bezlepkové
-                    {if} vybrané_pečivo in druhy_pečiva
+                    {if} vybrané_pečivo {in} druhy_pečiva
                     {print} 'Prima!'
                     {else}
-                    'Promiň, to nenabízíme. Znak ' je apostrof.'
+                    'Promi'ň, to nepro'dáváme'
                     náplň {is} {ask} 'Jakou chceš náplň?'
                     omáčka {is} {ask} 'Jakou chceš omáčku?'
-                    {print} Objednávka: vybrané_pečivo; náplň: náplň; omáčka: omáčka.
+                    {print} Jeden sendvič. Pečivo: vybrané_pečivo; náplň: náplň; omáčka: omáčka.
                     cena = počet * 6
                     {print} 'Cena: 'cena dolarů' prosím'
                     ```
@@ -3610,10 +3610,10 @@ adventures:
                         {if} vybrané_pečivo {in} druhy_pečiva
                             {print} 'Prima!'
                         {else}
-                            {print} "Promiň, to nenabízíme. Znak ' je apostrof."
+                            {print} "Promiň, to neprodáváme"
                         náplň = {ask} 'Jakou chceš náplň?'
                         omáčka = {ask} 'Jakou chceš omáčku?'
-                        {print} 'Objednávka: ' vybrané_pečivo '; náplň: ' náplň '; omáčka: ' omáčka '.'
+                        {print} 'Jeden sendvič. Pečivo: ' vybrané_pečivo '; náplň: ' náplň '; omáčka: ' omáčka '.'
                     cena = počet * 6
                     {print} 'Cena: ' cena ' dolarů prosím.'
                     ```
