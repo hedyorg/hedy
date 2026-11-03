@@ -5,13 +5,13 @@ import { goToAdminUsersPage } from '../../tools/navigation/nav.js';
 describe('Test for users page within admins UI', () => {
   it('should view all users', () => {
     goToAdminUsersPage();
-  
+
     cy.getDataCy('view_all_button').should('be.not.disabled').should('be.visible').click();
-  
+
     cy.location().should((loc) => {
-        console.log(loc);
-        expect(loc.pathname).equal(Cypress.env('admin_users_page'));
-        expect(loc.search).equal('?filter=all');
+      console.log(loc);
+      expect(loc.pathname).equal(Cypress.expose('admin_users_page'));
+      expect(loc.search).equal('?filter=all');
     })
   })
 
