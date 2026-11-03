@@ -2516,7 +2516,7 @@ adventures:
 
                     Now, whenever we need that block of code, we just use the function's name to call it up! We don't have to type that block of code again.
 
-                    Check out this example code of a game of Twister. The function `turn` contains a block of code that chooses which limb should go where.
+                    Check out this example code of a game of Twister. The function `next_turn` contains a block of code that chooses which limb should go where.
 
                     ### Exercise
                     Finish this code by setting the 2 variables `chosen_limb` and `chosen_color`.
@@ -2542,7 +2542,7 @@ adventures:
                     #Playing a Twister game:
                     {print} 'Lets play a game of Twister!'
                     {repeat} _ _
-                        call next_turn
+                        {call} next_turn
                         {sleep} 2
                     ```
                 answer_code: |
