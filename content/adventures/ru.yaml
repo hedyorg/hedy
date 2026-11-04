@@ -96,7 +96,14 @@ adventures:
                     Скопируйте вашу историю с прошлого уровня в этот уровень.
                     В этом уровне вы изучили 3 новые команды: `{at} {random}`, `{add} {to_list}` и `{remove} {from}`.
                     Добавьте новые строки кода в вашу историю, так чтобы эти команды встречались хотя бы 1 раз в вашей истории.
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
+                example_code_3: |
+                    ```
+                    {print} Его рюкзак стал слишком тяжёлым.
+                    {print} Внутри лежали бутылка воды, фонарик и кирпич.
+                    рюкзак {is} вода, фонарик, кирпич
+                    лишнее {is} {ask} Какой предмет ему выложить?
+                    {remove} лишнее {from} рюкзак
+                    ```
                 answer_code: |
                     ```
                     animals {is} lion, zebra, flamingo
@@ -458,7 +465,7 @@ adventures:
                     ### Упражнение
                     Попробуйте новые команды в этом виртуальном ресторане. Добавьте в список вкус, на который надеется игрок, и удалите вкусы, на которые у него аллергия.
         name: '{add} {to_list} и {remove} {from}'
-        default_save_name: add_remove_command
+        default_save_name: Добавление_и_удаление
         description: знакомство с {add} {to_list} и {remove} {from}
     and_or_command:
         levels:
@@ -480,8 +487,8 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{and} и {or}'
-        default_save_name: and_or_command
-        description: and, or
+        default_save_name: Логические операторы
+        description: И, или
     ask_command:
         levels:
             1:
@@ -568,7 +575,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{ask}'
-        default_save_name: ask_command
+        default_save_name: Вопросы
         description: Знакомство с командой {ask}
     calculator:
         name: Калькулятор
@@ -976,7 +983,7 @@ adventures:
                         {print} ('Ваша средняя оценка по ', предмет, ' : ', средняя_оценка)
                     ```
         name: Калькулятор 2
-        default_save_name: Calculator 2
+        default_save_name: Калькулятор 2
         description: Калькулятор 2
     clear_command:
         levels:
@@ -1014,7 +1021,7 @@ adventures:
                     {print} 'СЮРПРИЗ!'
                     ```
         name: '{clear}'
-        default_save_name: clear_command
+        default_save_name: Очистка экрана
         description: Команда {clear}
     congratulations:
         levels:
@@ -1036,7 +1043,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: Поздравляем
-        default_save_name: now_what
+        default_save_name: Что_дальше
         description: конец Хеди
     debugging:
         levels:
@@ -1630,7 +1637,7 @@ adventures:
                     {print}('Спасибо за заказ!')
                     ```
         name: Отладка
-        default_save_name: debugging
+        default_save_name: Отладка
         description: приключение по отладке
     dice:
         name: Кубики
@@ -2087,7 +2094,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{for}'
-        default_save_name: for
+        default_save_name: Цикл
         description: Команда {for}
     fortune:
         name: Гадалка
@@ -2104,11 +2111,11 @@ adventures:
                     Вот так:
                 example_code: |
                     ```
-                    _ Hello, I'm Hedy the fortune teller!
-                    _ Who are you?
-                    _ Let me take a look in my crystal ball
-                    _ I see... I see...
-                    _ Your name is _
+                    _ Привет, я гадалка Hedy!
+                    _ Кто ты?
+                    _ Дай заглянуть в мой хрустальный шар
+                    _ Я вижу... Я вижу...
+                    _ Тебя зовут _
                     ```
                 story_text_2: |
                     ### Упражнение
@@ -2429,7 +2436,7 @@ adventures:
                         сыграть_грустную_мелодию()
                     ```
         name: Функции
-        default_save_name: functions
+        default_save_name: Функции
         description: функции
     guess_my_number:
         levels:
@@ -2477,7 +2484,7 @@ adventures:
                                 игра = 'окончена'
                     ```
         name: Угадай моё число
-        default_save_name: guess my number
+        default_save_name: Угадай число
         description: угадай моё число
     harry_potter:
         levels:
@@ -2511,7 +2518,7 @@ adventures:
                         {print} имя ' больше всего боится ' страхи {at} {random}
                     ```
         name: Гарри Поттер
-        default_save_name: Harry Potter
+        default_save_name: Гарри Поттер
         description: Приключения Гарри Поттера
     haunted:
         name: Дом с привидениями
@@ -3472,7 +3479,7 @@ adventures:
                         {print}('Молодец, продолжай практиковаться!')
                     ```
         name: Больница
-        default_save_name: hospital
+        default_save_name: Больница
         description: Больница
     hotel:
         levels:
@@ -3504,7 +3511,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: Отель
-        default_save_name: hotel
+        default_save_name: Отель
         description: отель
     if_command:
         levels:
@@ -3635,7 +3642,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{if} и {else}'
-        default_save_name: if_command
+        default_save_name: Условия
         description: Знакомство с командой {if}
     in_command:
         levels:
@@ -3676,7 +3683,7 @@ adventures:
                     {print} 'Мои любимые животные — собаки, коровы и овцы'
                     ```
         name: '{in}'
-        default_save_name: in_command
+        default_save_name: Проверка вхождения
         description: Знакомство с командой {in}
     is_command:
         levels:
@@ -3725,7 +3732,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{is}'
-        default_save_name: is_command
+        default_save_name: Команда присваивания
         description: знакомство с командой {is}
     language:
         name: Язык
@@ -3842,7 +3849,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: математика
-        default_save_name: maths
+        default_save_name: Вычисления
         description: Знакомство с математикой
     music:
         levels:
@@ -4389,7 +4396,7 @@ adventures:
                     {play} ноты {at} {random}
                     ```
         name: Музыка
-        default_save_name: music
+        default_save_name: Музыка
         description: Сыграйте мелодию!
     parrot:
         name: Попугай
@@ -4664,7 +4671,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{print}'
-        default_save_name: print
+        default_save_name: Вывод текста
         description: Знакомство с командой «печать»
     quizmaster:
         name: Викторина
@@ -4738,7 +4745,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: «кавычки»
-        default_save_name: quotation_marks
+        default_save_name: Кавычки
         description: Знакомство с кавычками
     random_command:
         levels:
@@ -4801,7 +4808,7 @@ adventures:
                     {print}('Победитель:' имена[random] )
                     ```
         name: '{random}'
-        default_save_name: random_command
+        default_save_name: Случайный выбор
         description: знакомство с командой {at} {random}
     repeat_command:
         levels:
@@ -4859,7 +4866,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{repeat}'
-        default_save_name: repeat_command
+        default_save_name: Повторение
         description: команда {repeat}
     repeat_command_2:
         levels:
@@ -4912,7 +4919,7 @@ adventures:
                     {print} 'Знаешь ли ты человека с маффинами, что живёт на Друри-лейн?'
                     ```
         name: '{repeat} 2'
-        default_save_name: repeat_command_2
+        default_save_name: Повторение_2
         description: команда {repeat} 2
     restaurant:
         name: Ресторан
@@ -5331,7 +5338,7 @@ adventures:
                     ```
     rock:
         name: Камень, ножницы, бумага
-        default_save_name: rock
+        default_save_name: Камень
         description: Создайте свою собственную игру "камень, ножницы, бумага"
         levels:
             1:
@@ -5619,7 +5626,7 @@ adventures:
                     {print} поездку во Францию!
                     ```
         name: '{sleep}'
-        default_save_name: sleep_command
+        default_save_name: Команда паузы
         description: знакомство с командой {sleep}
     songs:
         name: Спойте песню!
@@ -6022,7 +6029,7 @@ adventures:
 
                     ```
         name: спойте песню! 2
-        default_save_name: Song 2
+        default_save_name: Песня 2
         description: Спойте песню 2
     turtle:
         name: Черепаха
@@ -6055,25 +6062,25 @@ adventures:
                 answer_code: |
                     ```
                     {forward} 20
-                    {turn} right
+                    {turn} направо
                     {forward} 20
-                    {turn} left
+                    {turn} налево
                     {forward} 20
-                    {turn} right
+                    {turn} направо
                     {forward} 20
-                    {turn} left
+                    {turn} налево
                     {forward} 20
-                    {turn} right
+                    {turn} направо
                     {forward} 20
-                    {turn} left
+                    {turn} налево
                     {forward} 20
-                    {turn} right
+                    {turn} направо
                     {forward} 20
-                    {turn} left
+                    {turn} налево
                     {forward} 20
-                    {turn} right
+                    {turn} направо
                     {forward} 20
-                    {turn} left
+                    {turn} налево
                     ```
             2:
                 story_text: |
@@ -6333,7 +6340,7 @@ adventures:
                 answer_code: |
                     ```
                     {color} {pink}
-                    {repeat} 4 {times}
+                    {repeat} 5 {times}
                         {repeat} 4 {times}
                             {forward} 50
                             {turn} 90
@@ -7402,7 +7409,7 @@ adventures:
                         {turn} 143
                     ```
         name: нарисуй!
-        default_save_name: Draw it
+        default_save_name: Нарисуй
         description: Нарисуйте эту картинку черепашкой
     while_command:
         levels:
@@ -7423,7 +7430,7 @@ adventures:
                 answer_code: |
                     Свой ответ
         name: '{while}'
-        default_save_name: while_command
+        default_save_name: Цикл_пока
         description: '{while}'
     years:
         name: Новый год
@@ -7456,7 +7463,7 @@ adventures:
                     ```
     music_2:
         name: музыка 2
-        default_save_name: music 2
+        default_save_name: Музыка 2
         description: музыка 2
         levels:
             15:
@@ -7531,7 +7538,7 @@ adventures:
                     ```
     music_3:
         name: музыка 3
-        default_save_name: music 3
+        default_save_name: Музыка 3
         description: музыка 3
         levels:
             15:
@@ -7592,7 +7599,7 @@ adventures:
                     ```
     operators:
         name: операторы
-        default_save_name: operators
+        default_save_name: Операторы
         description: операторы
         levels:
             13:
@@ -7620,7 +7627,7 @@ adventures:
                     Свой ответ
     park:
         name: парк аттракционов
-        default_save_name: amusement park
+        default_save_name: Парк аттракционов
         description: парк аттракционов
         levels:
             13:
@@ -7691,7 +7698,7 @@ adventures:
                     ```
     party_planner:
         name: планировщик вечеринки
-        default_save_name: party_planner
+        default_save_name: Организатор праздника
         description: планировщик вечеринки
         levels:
             4:
@@ -7752,7 +7759,7 @@ adventures:
                     ```
     turtle_draw_it_2:
         name: нарисуй ещё!
-        default_save_name: Draw it 2
+        default_save_name: Рисование 2
         description: Нарисуй это 2
         levels:
             12:
@@ -7859,7 +7866,7 @@ adventures:
                     ```
     carnival:
         name: Карнавал
-        default_save_name: carnival
+        default_save_name: Ярмарка
         description: карнавал
         levels:
             13:
@@ -7947,7 +7954,7 @@ adventures:
                     ```
     functions_2:
         name: Функции с аргументами
-        default_save_name: functions 2
+        default_save_name: Функции 2
         description: функции 2
         levels:
             15:
@@ -7995,7 +8002,7 @@ adventures:
                     ```
     functions_3:
         name: Функции с возвращаемым значением
-        default_save_name: functions 3
+        default_save_name: Функции 3
         description: функции 3
         levels:
             15:
@@ -8037,7 +8044,7 @@ adventures:
                     ```
     greater_than_command:
         name: Больше и меньше
-        default_save_name: greater than and less than
+        default_save_name: Больше и меньше
         description: команда «больше» и «меньше»
         levels:
             13:
@@ -8063,7 +8070,7 @@ adventures:
                     Свой ответ
     house:
         name: Дизайнер интерьера
-        default_save_name: home_decorator
+        default_save_name: Дизайнер интерьера
         description: дизайнер интерьера
         levels:
             4:
@@ -8108,7 +8115,7 @@ adventures:
                     ```
     lists:
         name: списки
-        default_save_name: lists
+        default_save_name: Списки
         description: списки
         levels:
             14:
@@ -8140,7 +8147,7 @@ adventures:
                     Свой ответ
     market:
         name: Рынок
-        default_save_name: market
+        default_save_name: Рынок
         description: рынок
         levels:
             13:
@@ -8199,7 +8206,7 @@ adventures:
                     ```
     monster:
         name: монстр
-        default_save_name: monster
+        default_save_name: Монстр
         description: генератор монстров
         levels:
             4:
