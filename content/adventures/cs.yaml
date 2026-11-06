@@ -5161,25 +5161,25 @@ adventures:
                             {forward} 30
 
                     # Začátek na levé straně obrazovky
-                    {color} 'white'
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     # Kreslení náramku
                     {repeat} 5 {times}
-                        {color} 'gray'
+                        {color} gray
                         {forward} 100
                         tvar = {ask} 'Jaký tvar chceš mít na náramku jako další?'
                         vybraná_barva = {ask} 'Jakou barvou?'
                         {color} vybraná_barva
-                        {if} tvar = 'čtverec'
+                        {if} tvar = čtverec
                             {call} nakresli_čtverec
-                        {elif} tvar = 'trojúhelník'
+                        {elif} tvar = trojúhelník
                             {call} nakresli_trojúhelník
-                        {elif} tvar = "hvězda"
+                        {elif} tvar = hvězda
                             {call} nakresli_hvězdu
-                    {color} 'gray'
+                    {color} gray
                     {forward} 100
                     ```
             15:
