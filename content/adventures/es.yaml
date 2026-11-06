@@ -848,9 +848,9 @@ adventures:
                     Por ejemplo: 'Amed, derecha en verde' o 'Jessica, pie izquierdo en amarillo'.
                 example_code: |
                     ```
-                    lados = 'derecha', 'izquierda'
-                    miembros = 'mano', 'pie'
-                    colores = 'rojo', 'azul', 'verde', 'amarillo'
+                    lados = derecha, izquierda
+                    miembros = mano, pie
+                    colores = rojo, azul, verde, amarillo
 
                     {define} turno
                         lado_escogido = lados {at} {random}
@@ -2601,7 +2601,7 @@ adventures:
                     	forma= {ask} '¿Qué tipo de forma le gustaría a continuación en el brazalete?'
                     	color_elegido = {ask} '¿En qué color?'
                     	{color} color_elegido 
-                    	{if} forma = 'cuadrado'
+                    	{if} forma = cuadrado
                     		{call} dibujar_un_cuadrado
                     ```
             15:
