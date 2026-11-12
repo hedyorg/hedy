@@ -255,16 +255,16 @@ teacher-guide:
             example:
                 error_text: Переменная `{answer}` по-прежнему работает, но хранит только один ответ за раз. Иногда ученики пытаются сохранить несколько ответов в одной переменной.
                 error_code: |-
-                    answer {is} {ask} What is your name?
-                    answer {is} {ask} How old are you?
-                    {print} Hi {answer}.
-                    {print} You are {answer} years old.
+                    answer {is} {ask} Как тебя зовут?
+                    answer {is} {ask} Сколько тебе лет?
+                    {print} Привет, {answer}.
+                    {print} Тебе {answer} лет.
                 solution_text: Объясните ученикам важность точного именования переменных.
                 solution_code: |-
-                    name {is} {ask} What is your name?
-                    age {is} {ask} How old are you?
-                    {print} Hi {name}.
-                    {print} You are {age} years old.
+                    name {is} {ask} Как тебя зовут?
+                    age {is} {ask} Сколько тебе лет?
+                    {print} Привет, {name}.
+                    {print} Тебе {age} лет.
         -   title: Учащиеся используют имя переменной или обычное слово
             example:
                 error_text: В приведенном ниже примере слово 'имя' iиспользуется как переменная, а также как обычный текст. Результатом выполнения этого кода будет 'Привет, моя Hedy — это Hedy'.
@@ -436,8 +436,8 @@ teacher-guide:
             example:
                 error_text: Важно начать урок с проверки того, умеют ли учащиеся правильно печатать кавычки. В Hedy учащиеся могут использовать одинарные (") и двойные кавычки (""). С другой стороны, обратные кавычки не считаются действительными кавычками (``).
                 error_code: |-
-                    {print} `Welcome to the restaurant`
-                    food {is} {ask} ,What would you like to order?,
+                    {print} `Добро пожаловать в ресторан`
+                    food {is} {ask} ,Что бы ты хотел заказать?,
                 solution_text: "Это правильные кавычки:"
                 solution_code: |-
                     {печатать} 'Добро пожаловать в ресторан'
@@ -445,10 +445,10 @@ teacher-guide:
         -   title: Ученики используют апостроф в своём тексте и используют одинарные кавычки
             example:
                 error_text: Апострофы можно использовать только внутри двойных кавычек. Они часто используются в английском языке при наборе сокращений, таких как you're, don't или what's.
-                error_code: "{print} 'You're getting an error'"
+                error_code: "{print} 'Я хочу посетить Кот-д'Ивуар'"
                 solution_text: Чтобы решить проблему, используйте двойные кавычки.
                 solution_code: |-
-                    {print} "You're not getting an error now!"
+                    {print} "Я хочу посетить Кот-д'Ивуар"
         concepts_and_changes: |-
             На уровне 4 ученики впервые знакомятся с важностью синтаксиса в программировании. На этом уровне вводятся кавычки вокруг текста в `{print}` и `{ask}`. Это, возможно, не самый увлекательный уровень, но очень важный навык, который нужно освоить, прежде чем переходить к следующим уровням. Ученикам этот уровень может показаться сложным, особенно когда в тексте появляются переменные. Мы рекомендуем давать чёткие объяснения и практиковаться вместе с учениками.
 
@@ -506,9 +506,9 @@ teacher-guide:
         -   title: Учащиеся используют длинные имена переменных, содержащие два или более слов
             example:
                 error_text: Переменные в Hedy не могут содержать пробелы, поэтому, чтобы использовать вместе несколько слов, учащимся необходимо соединить их с помощью подчеркивания (_)
-                error_code: chosen door {is} {ask}  'Which door do you pick?'
+                error_code: chosen door {is} {ask}  'Какую дверь ты выбираешь?'
                 solution_text: Добавьте знак подчеркивания.
-                solution_code: chosen_door {is} {ask} 'Which door do you pick?'
+                solution_code: chosen_door {is} {ask} 'Какую дверь ты выбираешь?'
         -   title: Студенты хотят, чтобы несколько ответов были правильными
             example:
                 error_text: Например, этот ученик хочет, чтобы Hedy сказала всем его друзьям, что они смешные, а другим одноклассникам нужно сказать, что они не смешные.
@@ -550,7 +550,11 @@ teacher-guide:
         -   title: Ученики используют 1 строку для оператора {if}
             example:
                 error_text: Иногда ученики пытаются поместить всё в одну строку. Это больше не разрешено.
-                error_code: "animal {is} {ask} 'What is your favorite animal?'\n{if} animal {is} dog {print} 'I love dogs too!'\n{elif} animal {is} cat {print} 'Cats are okay'\n{else} {print} 'Cool animal'"
+                error_code: |-
+                    animal {is} {ask} 'Какое твоё любимое животное?'
+                    {if} animal {is} собака {print} 'Я тоже люблю собак!'
+                    {elif} animal {is} кошка {print} 'Кошки неплохие'
+                    {else} {print} 'Классное животное'
                 solution_text: 'Начиная с этого уровня, нужно не только размещать {if} и {else} на отдельных строках. Также нужно разделять условие и команду на отдельные строки. Вот так: '
                 solution_code: |-
                     животное {is} {ask} 'Какое твоё любимое животное?' {if} животное {is} собака {print} 'Я тоже люблю собак!' {elif} животное {is} кошка {print} 'Кошки — неплохо' {else} {print} 'Классное животное'
@@ -604,8 +608,8 @@ teacher-guide:
             example:
                 error_text: 'Некоторым ученикам будет трудно выполнять математические действия с переменными. Попробуйте показать им очень простые примеры, например:'
                 error_code: |-
-                    age = {ask} 'How old are you?'
-                    {print} 'Next year you will be ' age + 1
+                    age = {ask} 'Сколько тебе лет?'
+                    {print} 'В следующем году тебе будет ' age + 1
                 solution_text: Или сделайте шаг дальше вот так.
                 solution_code: |-
                     цена = 0
@@ -643,36 +647,34 @@ teacher-guide:
             example:
                 error_text: Убедитесь, что ученики умеют использовать как полную команду repeat, так и команду print.
                 error_code: |-
-                    {repeat} 3 {times}  "For he's a jolly good fellow"
-                    {repeat} 3 {print} 'Which nobody can deny!'
+                    {repeat} 3 {times}  "Ведь он отличный парень"
+                    {repeat} 3 {print} 'И никто не станет спорить!'
                 solution_text: "Это правильный код:"
                 solution_code: |-
-                    {repeat} 3 {times} {print} "For he's a jolly good fellow"
-                    {repeat} 3 {times} {print} 'Which nobody can deny!'
+                    {repeat} 3 {times} {print} "Ведь он отличный парень"
+                    {repeat} 3 {times} {print} 'И никто не станет спорить!'
         -   title: Ученики пытаются повторить несколько строк
             example:
                 error_text: На этом уровне можно повторять только одну строку кода несколько раз. В этом коде ученик хотел вывести 3 разных напитка, но это не сработает. Программа задаст вопрос 3 раза и выведет только последний ответ.
                 error_code: |-
-                    {repeat} 3 {times} drink = {ask} 'What would you like to drink?'
+                    {repeat} 3 {times} drink = {ask} 'Что бы ты хотел выпить?'
                     {print} drink
                 solution_text: |-
                     Чтобы иметь возможность повторять несколько строк, нужно перейти на следующий уровень. Поэтому на этом уровне придётся выводить всё отдельно.
                 solution_code: |-
-                    drink = {ask} 'What would you like to drink?'
+                    drink = {ask} 'Что бы ты хотел выпить?'
                     {print} drink
-                    drink = {ask} 'What would you like to drink?'
+                    drink = {ask} 'Что бы ты хотел выпить?'
                     {print} drink
-                    drink = {ask} 'What would you like to drink?'
+                    drink = {ask} 'Что бы ты хотел выпить?'
                     {print} drink
         -   title: Ученики создают программы, выполнение которых занимает слишком много времени
             example:
                 error_text: |-
                     На этом уровне очень легко создать программы, выполнение которых занимает много времени. Если программа выполняется слишком долго, она останавливается, чтобы не перегружать компьютер ученика.
-                error_code: |-
-                    {repeat} 100 {times} {print} 'How many times can I repeat this?'
+                error_code: "{repeat} 100 {times} {print} 'Сколько раз я могу это повторить?'"
                 solution_text: 'Убедитесь, что выполнение кода не занимает слишком много времени'
-                solution_code: |-
-                    {repeat} 20 {times} {print} 'This is enough'
+                solution_code: "{repeat} 20 {times} {print} 'Этого достаточно'"
         concepts_and_changes: |-
             На этом последнем уровне Hedy Basic ваши ученики научатся использовать повторение в своих программах! Они смогут повторять только одну строку несколько раз. Повторение нескольких строк будет изучено на следующих уровнях.
 
@@ -686,24 +688,24 @@ teacher-guide:
                 error_text: Отступы — новая концепция на этом уровне, и некоторым ученикам может быть сложно её освоить. Убедитесь, что они попрактиковались на нескольких простых примерах, прежде чем создавать целую программу с отступами.
                 error_code: |-
                     {repeat} 3 {times}
-                    {print} 'hello'
+                    {print} 'привет'
                 solution_text: 'Это правильный код:'
                 solution_code: |-
                     {repeat} 3 {times}
-                        {print} 'hello'
+                        {print} 'привет'
         -   title: Ученики повторяют только 1 строку, когда хотели повторить несколько строк
             example:
                 error_text: Например, в приведённом ниже коде ученик хотел принять заказ на напитки для трёх человек. Но вместо этого программа сделала три запроса, но записала только один заказ.
                 error_code: |-
                     {repeat} 3 {times}
-                        drink = {ask} 'What would you like to drink?'
+                        drink = {ask} 'Что бы ты хотел выпить?'
                     {print} drink
                 solution_text: |-
                     В правильном коде третья строка тоже начинается с отступа. Таким образом, она относится к блоку repeat и поэтому будет повторена 3 раза.
                     Демонстрация этих различий может помочь вашим ученикам понять, почему нам нужны отступы, чтобы наши программы работали.
                 solution_code: |-
                     {repeat} 3 {times}
-                        drink = {ask} 'What would you like to drink?'
+                        drink = {ask} 'Что бы ты хотел выпить?'
                         {print} drink
         -   title: Ученики хотят вкладывать операторы `{if}` или помещать операторы `{if}` внутрь цикла
             example:
@@ -711,27 +713,27 @@ teacher-guide:
                     На этом уровне ученикам пока не разрешается помещать операторы `{if}` внутрь других операторов `{if}` или внутрь циклов repeat.
                     На следующем уровне это разрешено.
                 error_code: |-
-                    birthday = {ask} 'Is it you birthday?'
-                    {if} birthday = yes
+                    birthday = {ask} 'У тебя день рождения?'
+                    {if} birthday = да
                         {repeat} 3 {times}
-                            {print} 'Hip Hip Hooray!'
+                            {print} 'Гип-гип, ура!'
                 solution_text: 'Это правильный код для этого уровня:'
                 solution_code: |-
-                    birthday = {ask} 'Is it you birthday?'
-                    {if} birthday = yes
-                        {print} 'Hip Hip Hooray!'
-                        {print} 'Hip Hip Hooray!'
-                        {print} 'Hip Hip Hooray!'
+                    birthday = {ask} 'У тебя день рождения?'
+                    {if} birthday = да
+                        {print} 'Гип-гип, ура!'
+                        {print} 'Гип-гип, ура!'
+                        {print} 'Гип-гип, ура!'
         -   title: Ученики создают программы, выполнение которых занимает слишком много времени
             example:
                 error_text: На этом уровне очень легко создать программы, выполнение которых занимает много времени. Если программа выполняется слишком долго, она останавливается, чтобы не перегружать компьютер ученика.
                 error_code: |-
                     {repeat} 100 {times}
-                        {print} 'How many times can I repeat this?'
+                        {print} 'Сколько раз я могу это повторить?'
                 solution_text: Убедитесь, что выполнение кода не занимает слишком много времени
                 solution_code: |-
                     {repeat} 20 {times}
-                        {print} 'This is enough'
+                        {print} 'Этого достаточно'
         concepts_and_changes: |-
             На этом первом уровне Hedy Advanced ученики учатся использовать отступы. Это позволяет им использовать несколько строк в операторе if или повторять несколько строк. Ученикам этот уровень часто очень нравится, потому что он позволяет создавать более сложные программы.
             С другой стороны, некоторым ученикам будет трудно понять, когда использовать отступы и как это делать.
@@ -745,58 +747,58 @@ teacher-guide:
             example:
                 error_text: Самое сложное на этом уровне — правильно расставить отступы. Ученики обожают вкладывать операторы `{if}`, иногда даже внутрь других вложенных операторов `{if}`. Следить за отступами может быть довольно сложно.
                 error_code: |-
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                            {if} book {is} yes
-                    {print} 'Robin buys the book and goes home'
+                    {print} 'Робин идёт по центру города'
+                    location = {ask} 'Робин зайдёт в магазин или пойдёт домой?'
+                    {if} location {is} магазин
+                        {print} 'Она заходит в магазин.'
+                        {print} 'Робин видит интересную книгу'
+                        book = {ask} 'Робин покупает книгу?'
+                            {if} book {is} да
+                    {print} 'Робин покупает книгу и идёт домой'
                     {else}
-                        {print} 'Robin leaves the shop and goes home'
+                        {print} 'Робин выходит из магазина и идёт домой'
                     {else}
-                        {print} 'Robin goes home'
+                        {print} 'Робин идёт домой'
                 solution_text: Это правильный код. Постарайтесь учитывать все различные конструкции при размещении операторов `{if}` внутри других операторов `{if}`.
                 solution_code: |-
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
+                    {print} 'Робин идёт по центру города'
+                    location = {ask} 'Робин зайдёт в магазин или пойдёт домой?'
+                    {if} location {is} магазин
+                        {print} 'Она заходит в магазин.'
+                        {print} 'Робин видит интересную книгу'
+                        book = {ask} 'Робин покупает книгу?'
+                        {if} book {is} да
+                            {print} 'Робин покупает книгу и идёт домой'
                         {else}
-                            {print} 'Robin leaves the shop and goes home'
+                            {print} 'Робин выходит из магазина и идёт домой'
                     {else}
-                        {print} 'Robin goes home'
+                        {print} 'Робин идёт домой'
         -   title: Ученики путают `{and}` с `{or}`
             example:
                 error_text: Обе команды могут показаться похожими, но их функции сильно различаются.
                 error_code: |-
-                    game = {ask} 'Do you want to play a game?'
-                    time = {ask} 'Do you have time to play?'
-                    {if} game {is} 'yes' {or} time {is} 'yes'
-                        {print} 'Lets play!'
+                    game = {ask} 'Хочешь поиграть в игру?'
+                    time = {ask} 'У тебя есть время поиграть?'
+                    {if} game {is} 'да' {or} time {is} 'да'
+                        {print} 'Давай поиграем!'
                 solution_text: В этом случае человек должен ответить «да» на оба вопроса, поэтому следует использовать `and`.
                 solution_code: |-
-                    game = {ask} 'Do you want to play a game?'
-                    time = {ask} 'Do you have time to play?'
-                    {if} game {is} 'yes' {and} time {is} 'yes'
-                        {print} 'Lets play!'
+                    game = {ask} 'Хочешь поиграть в игру?'
+                    time = {ask} 'У тебя есть время поиграть?'
+                    {if} game {is} 'да' {and} time {is} 'да'
+                        {print} 'Давай поиграем!'
         -   title: Ученики составляют неполные строки с `{or}`
             example:
                 error_text: После {or} условие должно быть полным.
                 error_code: |-
-                    color = {ask} 'What color do you like?'
-                    {if} color {is} blue {or} green
-                        {print} 'Beautiful!'
+                    color = {ask} 'Какой цвет тебе нравится?'
+                    {if} color {is} синий {or} зелёный
+                        {print} 'Красиво!'
                 solution_text: 'Дополните строку так:'
                 solution_code: |-
-                    color = {ask} 'What color do you like?'
-                    {if} color {is} blue {or} color {is} green
-                        {print} 'Beautiful!'
+                    color = {ask} 'Какой цвет тебе нравится?'
+                    {if} color {is} синий {or} color {is} зелёный
+                        {print} 'Красиво!'
         concepts_and_changes: |-
             На этом уровне мы снова расширяем возможности {if} и {repeat}. На предыдущем уровне ученики научились использовать несколько строк после {repeat}, {if}, {elif} или {else}.
             Теперь ученики также узнают о *вложенности* — помещении {if} или {repeat} внутрь {if} или {repeat}. Они также изучат две новые команды: {and} и {or}.
@@ -811,27 +813,27 @@ teacher-guide:
             example:
                 error_text: Мы часто видим, что ученики пытаются напечатать список (в примере animals) вместо элементов списка.
                 error_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals {is} собака, кошка, рыба-капля
                     {for} animal {in} animals
-                      {print} 'I love ' animals
+                      {print} 'Я люблю ' animals
                 solution_text: "Слово animals в последней строке следует заменить на animal."
                 solution_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals {is} собака, кошка, рыба-капля
                     {for} animal {in} animals
-                      {print} 'I love ' animal
+                      {print} 'Я люблю ' animal
         -   title: Ученики забывают об отступах
             example:
                 error_text: |-
                     Ученики склонны забывать использовать отступы после команды for.
                 error_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals {is} собака, кошка, рыба-капля
                     {for} animal {in} animals
-                    {print} 'I love ' animals
+                    {print} 'Я люблю ' animals
                 solution_text: После команды for следует использовать отступы.
                 solution_code: |-
-                    animals {is} dog, cat, blobfish
+                    animals {is} собака, кошка, рыба-капля
                     {for} animal {in} animals
-                      {print} 'I love ' animal
+                      {print} 'Я люблю ' animal
         concepts_and_changes: |-
             На этом уровне ученики познакомятся с циклами с помощью {for}.
 
@@ -844,13 +846,13 @@ teacher-guide:
                 error_text: Функция работает только тогда, когда вы её вызываете.
                 error_code: |-
                     {define} greet_costumer
-                        {print} 'Hello'
-                        {print} 'How are you doing?'
+                        {print} 'Привет'
+                        {print} 'Как у тебя дела?'
                 solution_text: "Вызовите функцию"
                 solution_code: |-
                     {define} greet_costumer
-                        {print} 'Hello'
-                        {print} 'How are you doing?'
+                        {print} 'Привет'
+                        {print} 'Как у тебя дела?'
 
                     {call} greet_costumer
         -   title: У учеников проблемы с отступами.
@@ -859,21 +861,29 @@ teacher-guide:
                     Отступы останутся сложной темой для многих учеников
                 error_code: |-
                     {define} function
-                    {print} 'Use indentation in a function.'
-                    {if} use_if_statement {is} 'yes'
-                    {print} 'And don't forget to use indentation for the loops as well'
+                    {print} 'Используй отступы в функции.'
+                    {if} use_if_statement {is} 'да'
+                    {print} 'И не забудь об отступах в циклах'
                 solution_text: "Используйте правильные отступы при работе с функцией"
                 solution_code: |-
                     {define} function
-                        {print} 'Use indentation in a function.'
-                        {if} use_if_statement_too {is} 'yes'
-                            {print} 'And don't forget to use indentation for the loops as well'
+                        {print} 'Используй отступы в функции.'
+                        {if} use_if_statement_too {is} 'да'
+                            {print} 'И не забудь об отступах в циклах'
         -   title: Ученики забывают кавычки
             example:
                 error_text: Сейчас ученикам нужно больше кавычек, чем на предыдущих уровнях. В этом примере кавычки были забыты в списке и в команде `{if}`.
-                error_code: "superheroes = Spiderman, Batman, Iron Man\nsuperhero = superheroes {at} {random}\n{if} superhero = Batman\n    {print} 'IM BATMAN!'"
+                error_code: |-
+                    superheroes = Spiderman, Batman, Iron Man
+                    superhero = superheroes {at} {random}
+                    {if} superhero = Batman
+                        {print} 'Я БЭТМЕН!'
                 solution_text: "Это правильный код:"
-                solution_code: "superheroes = 'Spiderman', 'Batman', 'Iron Man'\nsuperhero = superheroes {at} {random}\n{if} superhero {is} 'Batman'\n    {print} 'IM BATMAN!'"
+                solution_code: |-
+                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
+                    superhero = superheroes {at} {random}
+                    {if} superhero {is} 'Batman'
+                        {print} 'Я БЭТМЕН!'
         concepts_and_changes: |-
             На этом последнем уровне Hedy Advanced ученики научатся использовать базовые функции.
 
@@ -885,62 +895,63 @@ teacher-guide:
             example:
                 error_text: Этот уровень содержит много новых правил синтаксиса.
                 error_code: |-
-                    mood {is} {ask} 'How are you doing ' name '?'
-                    {if} mood {is} good
-                        {print} 'Great!'
+                    mood {is} {ask} 'Как у тебя дела, ' name '?'
+                    {if} mood {is} хорошо
+                        {print} 'Отлично!'
                 solution_text: Используйте правильный синтаксис.
                 solution_code: |-
-                    mood = input('How are you doing?', name, '?')
-                    {if} mood == 'good':
-                        {print}('Great!')
+                    mood = input('Как у тебя дела?', name, '?')
+                    {if} mood == 'хорошо':
+                        {print}('Отлично!')
         -   title: Ученики путают знаки < и >
             example:
                 error_text: Часто ученики уже знакомы с этими знаками с уроков математики. Но если ваши ученики ещё не знают этих знаков, у них могут возникнуть с этим трудности.
                 error_code: |-
-                    age = {ask} 'How old are you?'
+                    age = {ask} 'Сколько тебе лет?'
                     {if} age < 12
-                        {print} 'You are older than I am!'
+                        {print} 'Ты старше меня!'
                 solution_text: 'Это правильный код:'
                 solution_code: |-
-                    age = {ask} 'How old are you?'
+                    age = {ask} 'Сколько тебе лет?'
                     {if} age > 12
-                        {print} 'You are older than I am!'
+                        {print} 'Ты старше меня!'
         -   title: Ученики используют неправильные знаки для `!=` `<=` и `>=`
             example:
                 error_text: Эти знаки, вероятно, являются новыми для большинства учеников. Обязательно объясните эти знаки своим ученикам.
                 error_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Как тебя зовут?'
                     {if} name =  'Hedy'
-                        {print} 'You are not Hedy'
+                        {print} 'Ты не Hedy'
                 solution_text: 'Это правильный код:'
                 solution_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Как тебя зовут?'
                     {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
+                        {print} 'Ты не Hedy'
         -   title: Ученики забывают использовать знак ==
             example:
                 error_text: На этом уровне ученикам всё ещё разрешено использовать = или is. Но на других уровнях или в Python у них могут возникнуть из-за этого проблемы. Поэтому лучше всего научить их использовать ==.
                 error_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Как тебя зовут?'
                     {if} name = 'Hedy'
-                        {print} 'You are cool!'
+                        {print} 'Ты классный!'
                 solution_text: 'Это правильный код:'
                 solution_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Как тебя зовут?'
                     {if} name == 'Hedy'
-                        {print} 'You are cool!'
+                        {print} 'Ты классный!'
         -   title: Ученики будут пробовать функции, которые они изучили на предыдущих уровнях и которых нет в синтаксисе Python.
             example:
                 error_text: Ученики будут пытаться использовать, например, повторение, функции или списки.
                 error_code: |-
                     {define} pick_an_animal
-                        animals = dog, cat, hamster
+                        animals = собака, кошка, хомяк
                         {repeat} 3 {times}
                         {print} animals {at} {random}
 
                     {call} pick_an_animal
                 solution_text: Они узнают, как это делать, на следующих уровнях.
-                solution_code: "#When you're ready for it, take a look in the upcoming levels. Or keep practising the basics first in this level."
+                solution_code: |-
+                    #Когда будешь готов, загляни на следующие уровни. Или сначала продолжи отрабатывать основы на этом уровне.
         concepts_and_changes: |-
             На этом первом уровне Hedy Expert ученики всё глубже погружаются в концепции и синтаксис настоящих языков программирования.
             Мы рекомендуем работать с уровнями Hedy Expert только в том случае, если ваша цель — подготовить учеников к работе с другими «настоящими» языками программирования (например, Python) в дальнейшем.
@@ -964,42 +975,42 @@ teacher-guide:
             example:
                 error_text: Начиная с этого уровня списки должны быть в скобках.
                 error_code: |-
-                    icecream = 'strawberry', 'chocolate'
-                    {print} 'I love ' icecream[{random}] ' icecream'
+                    icecream = 'клубника', 'шоколад'
+                    {print} 'Я люблю ' icecream[{random}] ' мороженое'
                 solution_text: "Это правильный код:"
                 solution_code: |-
-                    icecream = ['strawberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
+                    icecream = ['клубника', 'шоколад']
+                    {print} 'Я люблю ' icecream[{random}] ' мороженое'
         -   title: Ученики используют неправильные скобки
             example:
                 error_text: Начиная с этого уровня списки должны быть в квадратных скобках.
                 error_code: |-
-                    icecream = ('strawberry', 'chocolate')
-                    {print} 'I love ' icecream[{random}] ' icecream'
+                    icecream = ('клубника', 'шоколад')
+                    {print} 'Я люблю ' icecream[{random}] ' мороженое'
                 solution_text: "Это правильный код:"
                 solution_code: |-
-                    icecream = ['strawberry', 'chocolate']
-                    {print} ('I love ' icecream[{random}] ' icecream')
+                    icecream = ['клубника', 'шоколад']
+                    {print} ('Я люблю ' icecream[{random}] ' мороженое')
         -   title: Ученики забывают кавычки, сосредоточившись на скобках
             example:
                 error_text: Иногда ученики настолько сосредоточены на новом аспекте синтаксиса, что забывают кавычки.
                 error_code: |-
-                    icecream = [strawberry, chocolate]
-                    {print} 'I love ' icecream[{random}] ' icecream'
+                    icecream = [клубника, шоколад]
+                    {print} 'Я люблю ' icecream[{random}] ' мороженое'
                 solution_text: "Это правильный код:"
                 solution_code: |-
-                    icecream = ['strawberry', 'chocolate']
-                    {print}('I love ' icecream[{random}] ' icecream')
+                    icecream = ['клубника', 'шоколад']
+                    {print}('Я люблю ' icecream[{random}] ' мороженое')
         -   title: Ученики всё ещё используют старую команду at random
             example:
                 error_text: '{random} изменилась на этом уровне'
                 error_code: |-
-                    icecream = [strawberry, chocolate]
-                    {print} 'I love ' icecream at random ' icecream'
+                    icecream = [клубника, шоколад]
+                    {print} 'Я люблю ' icecream at random ' мороженое'
                 solution_text: 'Это правильный код:'
                 solution_code: |-
-                    icecream = ['strawberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
+                    icecream = ['клубника', 'шоколад']
+                    {print} 'Я люблю ' icecream[{random}] ' мороженое'
         concepts_and_changes: |-
             Этот уровень посвящён работе со списками. Ученики также научатся использовать повторение по-питоновски.
 
@@ -1014,14 +1025,14 @@ teacher-guide:
                 error_text: У учеников проблемы с правильным синтаксисом и отступами в функции
                 error_code: |-
                     {def} greet_the_costumer(name
-                    {print}('Hello ', name, '!')
+                    {print}('Привет, ', name, '!')
 
                     customer = 'Hedy
                     greet_the_costumer()customer
                 solution_text: "Внимательно посмотрите на синтаксис и отступы."
                 solution_code: |-
                     {def} greet_the_costumer(name):
-                        {print}('Hello ', name, '!')
+                        {print}('Привет, ', name, '!')
 
                     customer = 'Hedy'
                     greet_the_costumer(customer)
@@ -1034,7 +1045,7 @@ teacher-guide:
 
                     favorite_number = 7
                     room_number = {return} get_a_room(favorite_number)
-                    print('Your room number is ', room_number)
+                    print('Номер твоей комнаты — ', room_number)
                 solution_text: 'Это правильный код:'
                 solution_code: |-
                     def get_a_room(number):
@@ -1043,7 +1054,7 @@ teacher-guide:
 
                     favorite_number = 7
                     room_number = get_a_room(favorite_number)
-                    print('Your room number is ', room_number)
+                    print('Номер твоей комнаты — ', room_number)
         concepts_and_changes: |-
             Этот уровень посвящён функциям. В Hedy Advanced ученики научились использовать базовую функцию. На этом уровне они не только изучат питоновский синтаксис использования функции, но и научатся использовать аргументы в функциях и {return} {value}.
 
@@ -1059,14 +1070,14 @@ teacher-guide:
                 error_code: |-
                     answer = 0
                     {while} answer != 25
-                    answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    answer = {ask} 'Сколько будет 5 умножить на 5?'
+                    {print} 'Получен правильный ответ'
                 solution_text: "Это правильный код:"
                 solution_code: |-
                     answer = 0
                     {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                        answer = {ask} 'Сколько будет 5 умножить на 5?'
+                    {print} 'Получен правильный ответ'
         -   title: Ученики (случайно) создают бесконечный цикл
             example:
                 error_text: Ученики создают цикл {while}, но без способа остановить цикл.
