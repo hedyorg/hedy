@@ -142,7 +142,7 @@ adventures:
                 answer_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    {print}  'The main character is called' name
+                    {print}  'The main character is called ' name
                     {print} name  ' is now going to walk in the woods'
                     {print} name ' is a bit scared'
                     animals {is} 🦔, 🐿, 🦉, 🦇
@@ -408,7 +408,7 @@ adventures:
                         location = {input}('Where do you want to look?')
                         {if} location == 'desk':
                             {print}('Here they are! You found 6 rackets!')
-                            keys = 'found'
+                            rackets = 'found'
                         {else}:
                             {print}('Nope they are not at the ', location)
                     {print}('Now you can play tennis with all your friends.')
@@ -1939,15 +1939,15 @@ adventures:
                     {print}('Throw 6 as fast as you can!')
                     thrown = 0
                     tries = 0
-                    {while} thrown == 0:
-                        number = options[{random}]
+                    {while} thrown != 6:
+                        thrown = options[{random}]
                         tries = tries + 1
-                        {if} number = 6:
-                            thrown = 1
-                            {print}('You have thrown 6 in ', tries, ' tries!')
+                        {if} thrown == 6:
+                            {print}('You thrown 6'
                         {else}:
-                            {print}('You have not thrown 6, instead you threw ', number)
+                            {print}('You have not thrown 6, instead you threw ', thrown)
                         {sleep} 1
+                    {print}('You have thrown 6 in ', tries, ' tries!')
                     ```
     dishes:
         name: dishes?
@@ -5229,7 +5229,7 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    words is squawk, Hedy
+                    words {is} squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
                     {add} new_word {to_list} words

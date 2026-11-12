@@ -207,6 +207,18 @@ teacher-guide:
                 solution_code: |-
                     nom est demande Quel est le nom de votre cheval
                     affiche Votre cheval s'appelle nom
+        concepts_and_changes: |-
+            Au niveau 1, les élèves ont appris comment utiliser la variable `{answer}`. À ce niveau, ils apprendront à utiliser de multiples variables.
+            C'est le premier concept abstrait de la programmation qu'ils vont rencontrer : un nom prend la place d'une valeur qui peut changer.
+            Parce que les élèves peuvent utiliser de multiples variables, ils ont aussi besoin d'apprendre comment les définir.
+            Cela signifie que la commande `{ask}` à changé et a besoin d'être précédée par la variable dans laquelle ils veulent enregister la réponse.
+
+            Nouveautés de ce niveau :
+
+            * Enregistrer une valeur dans une variable avec `{is}`
+            * Sauvegarder la réponse à une question dans une variable à soi : `{is} {ask} Quel est ton nom ?`
+            * Mettre en pause le programme avec `{sleep}`
+            * Faire tourner la tortue à dessin d'un certain nombre de degrés : `{turn} 90`
     -   level: "3"
         sections:
         -   title: Les élèves essaient d'imprimer des listes en entier
@@ -313,6 +325,17 @@ teacher-guide:
                     {add} choix {to} aventures
                     {remove} dé {from} aventures
                     {print} J'aime aventures {at} {random}
+        concepts_and_changes: |-
+            Le niveau 3 ajoute les listes et l'aléatoire. C'est le premier niveau où exécuter le même
+            programme deux fois peut donner un résultat différent, ce qui surprend les élèves qui assument qu'un
+            programme est une recette figée. C'est le bon moment pour leur faire exécuter le code plusieurs 
+            fois avant de conclure qu'il fonctionne.
+
+            Nouveauté de ce niveau :
+
+            * Faire une liste avec `{is}` et piocher dedans avec `{at} {random}`
+            * Ajoute un élément dans une liste avec `{add} {to_list}`
+            * Retirer un élément d'une liste avec `{remove} {from}`
     -   level: "4"
         sections:
         -   title: Les élèves oublient d'utiliser les guillemets des deux côtés du texte
@@ -375,6 +398,14 @@ teacher-guide:
     -   sections:
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            À ce niveau, nous étendons le `{if}` et le `{repeat}` à nouveau. Au niveau précédent, les élèves ont appris comment utiliser plusieurs lignes après `{repeat}`, `{elif}` ou `{else}`.
+            Les élèves vont maintenant aussi découvrir l’*imbrication*, c’est-à-dire le fait de placer un `{if}` ou un `{repeat}` à l’intérieur d’un autre `{if}` ou `{repeat}`. Ils vont aussi apprendre deux nouvelles commandes : `{and}` et `{or}`.
+            Cela offrira aux élèves beaucoup plus de possibilités pour créer des programmes plus polyvalents.
+
+            Nouveautés à ce niveau :
+            * imbriquer `{if}` et `{repeat}`
+            * utiliser `{and}` et `{or}` après un `{if}`
     -   sections:
         -   example: {}
         -   example: {}
@@ -390,6 +421,13 @@ teacher-guide:
         -   example: {}
     -   sections:
         -   example: {}
+        concepts_and_changes: |-
+            Ce niveau focalise sur les fonctions. Dans Hedy avancé, les élèves ont appris comment utiliser une fonction basique. À ce niveau, ils vont non seulement apprendre la syntaxe Python d'une fonction, mais ils vont aussi apprendre comment utiliser des arguments dans les fonctions et comment `{return} {value}`.
+
+            Nouveautés de ce niveau :
+            * Utiliser une fonction comme on le fait en Python
+            * Utiliser les arguments dans une fonction
+            * Utiliser `{return} {value}`
     -   sections:
         -   example: {}
         -   example: {}

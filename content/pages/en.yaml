@@ -190,7 +190,7 @@ teacher-guide:
             If the above is not sufficient for your context, we can sign a processing agreement for the processing of your personal data.
     -   title: Donate to Hedy
         text: |-
-             We could use your help to keep Hedy running. We use the money to keep the server running, maintain and improve the Hedy website. We appreciate any donations coming Hedy's way! <a href="https://donate.stripe.com/28EcMZ1xJ5O747V8gR1Jm00" target="_blank">Click here to donate in euros </a> or <a href="https://donate.stripe.com/00w7sF2BNgsLawjfJj1Jm02" target="_blank">click here to donate in US dollars</a>. Thank you!
+            We could use your help to keep Hedy running. We use the money to keep the server running, maintain and improve the Hedy website. We appreciate any donations coming Hedy's way! <a href="https://donate.stripe.com/28EcMZ1xJ5O747V8gR1Jm00" target="_blank">Click here to donate in euros </a> or <a href="https://donate.stripe.com/00w7sF2BNgsLawjfJj1Jm02" target="_blank">click here to donate in US dollars</a>. Thank you!
 -   title: Common mistakes
     key: common_mistakes
     intro: |-
@@ -577,14 +577,7 @@ teacher-guide:
                     {elif} animal {is} cat {print} 'Cats are okay'
                     {else} {print} 'Cool animal'
                 solution_text: "From this level on, you not only need to put {if} and {else} on seperate lines. You also need to seperate the conditional and the comamnd on seperate lines. Like this: "
-                solution_code:
-                    animal {is} {ask} 'What is your favorite animal?'
-                    {if} animal {is} dog
-                    {print} 'I love dogs too!'
-                    {elif} animal {is} cat
-                    {print} 'Cats are okay'
-                    {else}
-                    {print} 'Cool animal'
+                solution_code: animal {is} {ask} 'What is your favorite animal?' {if} animal {is} dog {print} 'I love dogs too!' {elif} animal {is} cat {print} 'Cats are okay' {else} {print} 'Cool animal'
         -   title: Students use `{elif}` like `{else}`, so without a conditional
             example:
                 error_text: Students forget that they need a conditional
@@ -650,11 +643,9 @@ teacher-guide:
         -   title: Students forget the = symbol
             example:
                 error_text: Forgetting to use = instead of {is} will always be allowed in Hedy, so no problem. If your goal is your students to work towards actual Python or other programming laguages, it is advised to teach your students to use =. If your goal is just to give your students a taste of programming, don't worry about them using = or {is}.
-                error_code:
-                    name {is} Hedy
+                error_code: name {is} Hedy
                 solution_text: the = symbol
-                solution_code:
-                    name = Hedy
+                solution_code: name = Hedy
         -   title: Students use a comma instead of a point in decimal numbers
             example:
                 error_text: In some languages it's custom to use the comma for decimal numbers. In programming languages a point is used, so in Hedy as well.
@@ -764,13 +755,13 @@ teacher-guide:
                         {print} 'This is enough'
     -   level: '10'
         concepts_and_changes: |-
-            In this level we are expanding on the {if} and {repeat} again. In the previous level the students have learned how to use multiple lines after {repeat, {if}, {elif} or {else}.
-            Now the students will also learn about *nesting*, putting an {if} or {repeat} inside an {if} or {repeat}. They will also learn two new commands: {and} and {or}.
-            This will bring the students a lot more possibilities to make more versitile programs.
+            In this level we are expanding on the `{if}` and `{repeat}` again. In the previous level the students have learned how to use multiple lines after `{repeat}`, `{if}`, `{elif}` or `{else}`.
+            Now the students will also learn about *nesting*, putting an `{if}` or `{repeat}` inside an `{if}` or `{repeat}`. They will also learn two new commands: `{and}` and `{or}`.
+            This will bring the students a lot more possibilities to make more versatile programs.
 
             New in this level:
-            * Nesting {if} and {repeat}
-            * Using {and} and {or} after an {if}
+            * Nesting `{if}` and `{repeat}`
+            * Using `{and}` and `{or}` after an `{if}`
         sections:
         -   title: Students make mistakes with indentation
             example:
@@ -1041,12 +1032,12 @@ teacher-guide:
                     {print} 'I love ' icecream[{random}] ' icecream'
     -   level: '15'
         concepts_and_changes: |-
-            This level focusses on functions. In Hedy advanced the students have learned how to use a basic function. In this level they'll not only learn the Python syntax of using a fucntion, but they will also learn how to use arguments in functions and {return} {value}.
+            This level focuses on functions. In Hedy advanced, the students have learned how to use a basic function. In this level they'll not only learn the Python syntax of using a function, but they will also learn how to use arguments in functions and `{return} {value}`.
 
             New in this level:
             * Using a function the Python way
             * Using arguments in a function
-            * Using {return} {value}
+            * Using `{return} {value}`
         sections:
         -   title: 'Students have trouble with the correct syntax and indentation of a function'
             example:
@@ -1085,11 +1076,11 @@ teacher-guide:
                     print('Your room number is ', room_number)
     -   level: '16'
         concepts_and_changes: |-
-                In this last level of Hedy the students will learn how to use a {while} loop and practise more with the new syntax.
-                After this level, students are ready to continue programming in 'real' Python compilers.
+            In this last level of Hedy the students will learn how to use a {while} loop and practise more with the new syntax.
+            After this level, students are ready to continue programming in 'real' Python compilers.
 
-                New in this level:
-                * The {while} loop
+            New in this level:
+            * The {while} loop
         sections:
         -   title: Students forget indentation in the while loop
             example:
