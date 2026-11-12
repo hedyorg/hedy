@@ -6,9 +6,9 @@ adventures:
         levels:
             1:
                 story_text: |
-                    No nível 1 , você pode criar uma história com um personagem principal diferente, que você mesmo insere.
+                    No nível 1, você pode criar uma história com um personagem principal diferente, com um nome que você insere na hora.
 
-                    Na primeira linha, use `{ask}` e pergunte quem será o personagem principal da história. Depois, use `{answer}` quando você quiser usar o nome do personagem
+                    Na primeira linha, use `{ask}` e pergunte quem será o personagem principal da história. Depois, use `{answer}` quando você quiser usar o nome do personagem.
                 example_code: |
                     ```
                     {ask} O(a) personagem principal desta história é
@@ -469,11 +469,11 @@ adventures:
                 answer_code: |
                     ```
                     {ask} Como vai você?
-                    {print} Você vai resposta
+                    {print} Você vai {answer}
                     {ask} Qual é o seu esporte favorito?
-                    {print} Você gosta de {resposta}
+                    {print} Você gosta de {answer}
                     {ask} Qual é o seu esporte menos favorito?
-                    {print} {resposta} é o seu menos favorito
+                    {print} {answer} é o seu menos favorito
                     ```
             2:
                 example_code: |
@@ -776,6 +776,14 @@ adventures:
                     {answer}
                     {print} Quais são os seus hobbies?
                     {print} Seus hobbies são
+                    ```
+                answer_code: |
+                    ```
+                    {print} Eu amo programar
+                    {print} Você também ama programar?
+                    {print} {answer}
+                    {print} Quais são os seus hobbies?
+                    {print} Seus hobbies são {answer}
                     ```
             2:
                 story_text: |-
@@ -1147,12 +1155,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Você já foi a um parque de diversões e teve seu futuro previsto por uma cartomante? Ou você já jogou com uma bola oito mágica?
-                    Então você provavelmente sabe que eles não podem prever seu futuro, mas ainda é divertido de jogar!
+                    Você já foi a um parque de diversões e teve seu futuro previsto por uma vidente? Ou você já brincou com uma bola oito mágica?
+                    Então você provavelmente sabe que não podem realmente prever o seu futuro, mas ainda é divertido de jogar!
 
                     Nos próximos níveis, você pode aprender a criar sua própria máquina de adivinhação!
-                    No nível 1 você pode começar de leve, deixando a Hedy se apresentar como uma cartomante e deixá-la repetir com `{answer}` as respostas dos jogadores.
-                    Dessa forma:
+                    No nível 1 você pode começar de leve, deixando a Hedy se apresentar como uma vidente que repete as respostas dadas.
+                    Desse jeito:
                 example_code: |
                     ```
                     _ Olá, sou Hedy, a vidente!
@@ -1329,6 +1337,36 @@ adventures:
         description: Aventuras de Harry Potter
         default_save_name: Harry Potter
         name: harry potter
+        levels:
+            11:
+                example_code: |
+                    ```
+                    # Definindo as diferentes opções:
+                    casas = Grifinória, Sonserina, Lufa-Lufa, Corvinal
+                    disciplinas = poções, defesa contra as artes das trevas, encantamentos, transfiguração
+                    medos = Voldemort, aranhas, reprovar no teste NOM
+                    nomes = Harry, Ron, Hermione
+                    # Prevendo o futuro de todos: 
+                    _
+                    _ {print} nome ' vai para ' casas {at} {random}
+                    _ {print} nome ' é excelente em ' disciplinas {at} {random}
+                    _ {print} 'o maior medo de ' nome ' é ' medos {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    casas = Grifinória, Sonserina, Lufa-Lufa, Corvinal
+                    disciplinas = poções, defesa contra as artes das trevas, encantamentos, transfiguração
+                    medos = Voldemort, aranhas, reprovar no teste NOM
+                    nomes = Harry, Ron, Hermione
+                    {for} nome {in} nomes
+                        {print} nome ' vai para ' casas {at} {random}
+                        {print} nome ' é excelente em ' disciplinas {at} {random}
+                        {print} 'o maior medo de ' nome ' é ' medos {at} {random}
+                    ```
+                story_text: |
+                    ### Exercício
+                    Também podemos criar um programa de vidente com o tema de Harry Potter. Preencha as lacunas de modo que 9 linhas sejam impressas.
+                    **Extra** Mude o tema do programa de vidente para outra coisa, como um livro, filme ou série que você mais goste.
     haunted:
         name: casa mal-assombrada
         default_save_name: Casa mal-assombrada
@@ -1413,16 +1451,27 @@ adventures:
                     Can you make your Haunted House level 4 proof?
                 example_code: |
                     ```
-                    _ Adicione aspas a este código _
+                    # Adicione aspas a este código
                     {print} Escape da casa mal-assombrada!
                     {print} Há 3 portas na sua frente...
                     escolha {is} {ask} Qual delas você escolhe?
                     {print} Você escolheu a porta... escolha
                     monstros {is} um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
                     {print} Você vê...
-                    {sleep}
+                    {sleep} _
                     {print} monstros {at} {random}
                      ```
+                answer_code: |
+                    ```
+                    {print} 'Escape da casa mal-assombrada!'
+                    {print} 'Há 3 portas na sua frente...'
+                    escolha {is} {ask} 'Qual delas você escolhe?'
+                    {print} 'Você escolheu a porta...' escolha
+                    monstros {is} um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
+                    {print} 'Você vê...'
+                    {sleep} 3
+                    {print} monstros {at} {random}
+                    ```
             5:
                 story_text: |
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
@@ -2562,6 +2611,27 @@ adventures:
             13:
                 answer_code: |
                     Resposta livre
+                story_text: |
+                    Na matemática, você já deve conhecer os símbolos `<` e `>`.
+                    O `<` checa se o primeiro número é menor que o segundo, por exemplo idade `<` 12 checa se idade é menor que 12.
+                    O `>` checa se o primeiro número é maior que o segundo, por exemplo pontos `>` 10 checa se pontos é maior que 10.
+                    Experimente!
+                example_code: |
+                    ```
+                    idade = {input}('Quantos anos você tem?')
+                    {if} idade > 12:
+                        {print}('Sou mais nova que você!')
+                    ```
+                    ```
+                    idade = {input}('Quantos anos você tem?')
+                    {if} idade < 12:
+                        {print}('Sou mais velha que você!')
+                    {else}:
+                        {print}('Sou mais nova que você!')
+                    ```
+        name: maior que e menor que
+        default_save_name: maior que e menor que
+        description: comando maior que e menor que
     functions_2:
         default_save_name: funções 2
         description: funções 2
