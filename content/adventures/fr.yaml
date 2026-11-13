@@ -2023,10 +2023,10 @@ adventures:
                     actions = frappe des mains, tape du pied, crie Hourra !
                     _
                         {repeat} 2 {times}
-                            {print} 'Si tu as de la joie au cœur, ' action
+                            {print} "Si tu as de la joie au cœur, " action
                             {sleep} 2
-                        {print} 'Si tu as de la joie au cœur, si tu as de la joie au cœur'
-                        {print} 'Si tu as de la joie au cœur, ' action
+                        {print} "Si tu as de la joie au cœur, si tu as de la joie au cœur"
+                        {print} "Si tu as de la joie au cœur, " action
                         {sleep} 3
                     ```
                 answer_code: |
@@ -3495,6 +3495,133 @@ adventures:
                         {else}
                             {play} G
                             {play} F
+                    ```
+            12:
+                story_text: |
+                    Utilise des fonctions dans tes chansons ! Comme tu peux le voir dans le code d'exemple, tu peux faire une fonction pour chaque ligne de « Ah ! vous dirais-je, maman ». Une fois que tu auras programmé les trois premières lignes, tout ce qu'il te restera à faire est d'appeler les fonctions dans l'ordre dans lequel tu veux les jouer.
+
+                    ### Exercice
+                    Termine la chanson de « Ah ! vous dirais-je, maman ».
+                    Ensuite, retourne voir toutes les chansons que tu as programmées aux niveaux précédents. Peux-tu rendre ces codes meilleurs et plus courts en utilisant aussi les fontions ?
+                example_code: |
+                    ```
+                    # Définit la première ligne de la chanson :
+                    {define} première_ligne
+                        {play} C
+                        {play} C
+                        {play} G
+                        {play} G
+                        {play} A
+                        {play} A
+                        {play} G
+                        {sleep}
+
+                    # Définit la seconde ligne de la chanson :
+                    {define} seconde_ligne
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {play} D
+                        {play} C
+                        {sleep}
+
+                    # Définit la troisième ligne de la chanson :
+                    {define} troisième_ligne
+                        {play} G
+                        {play} G
+                        {play} F
+                        {play} F
+                        {play} E
+                        {play} E
+                        {play} D
+                        {sleep}
+
+                    # Joue les lignes de la chanson :
+                    {call} première_ligne
+                    _
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    première_fois = "oui"
+                    {repeat} 2 {times}
+                        {repeat} 2 {times}
+                            {play} C
+                        {play} D
+                        {play} C
+                        {if} première_fois {is} "oui"
+                            {play} F
+                            {play} E
+                            première_fois = "non"
+                        {else}
+                            {play} G
+                            {play} F
+                    ```
+            15:
+                story_text: |
+                    Tu peux programmer de la musique pour le plaisir, mais tu peux aussi utiliser les notes de musique pour faire quelque chose d'utile, comme une alarme incendie !
+
+                    ### Exercice
+                    Assure-toi que l'alarme incendie sonne quand il y a le feu !
+                example_code: |
+                    ```
+                    {def} alarme_incendie():
+                        {print}('AU FEU !')
+                        {for} i {in} {range} _
+                            {play} 45
+                            {play} 50
+
+                    feu = {input}("Y-a-t-il le feu ?")
+                    {if} feu _
+                        _
+                    ```
+                answer_code: |
+                    ```
+                    {def} alarme_incendie():
+                        {print}('AU FEU !')
+                        {for} i {in} {range}(1,20)
+                            {play} 45
+                            {play} 50
+
+                    feu = {input}("Y-a-t-il le feu ?")
+                    {if} feu == "oui":
+                        alarme_incendie()
+                    ```
+            16:
+                story_text: |
+                    **Attention** cette aventure peut devenir très ennuyante !
+                    Nous pouvons utiliser la commande `{while}` pour répéter la chanson pour toujours.
+
+                    ### Exercise
+                    Termine la chanson qui n'en finit pas.
+                example_code: |
+                    ```
+                    {def} chanson():
+                        {play} _
+
+                    oui_ou_non = {input}("Voulez-vous entendre la chanson qui n'en fini pas ?")
+                    {while} oui_ou_non = "oui":
+                        chanson()
+                        {print}('🥳')
+                    ```
+                answer_code: |
+                    ```
+                    {def} chanson():
+                        {play} C3
+                        {play} D3
+                        {play} E3
+                        {play} F3
+                        {play} E3
+                        {play} D3
+                        {play} C3
+                        {sleep} 1
+
+                    oui_ou_non = {input}("Voulez-vous entendre la chanson qui n'en fini pas ?")
+                    {while} oui_ou_non = "oui":
+                        chanson()
+                        {print}('🥳')
                     ```
     parrot:
         name: perroquet
@@ -5185,3 +5312,72 @@ adventures:
                     {else}:
                         {print}('Tu es plus vieux que moi')
                     ```
+    free_play:
+        levels:
+            11:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            1:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            2:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            3:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            4:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            5:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            6:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            7:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            8:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            9:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            10:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            12:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            13:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            14:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            15:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+            16:
+                story_text: |
+                    ### Exercice
+                    Ici tu peux jouer librement. Utilise cette aventure comme un carnet, essaie du code ou crée ta propre aventure !
+        name: Jeu libre
+        default_save_name: Jeu libre
+        description: Jeu libre
