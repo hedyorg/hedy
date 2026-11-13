@@ -839,6 +839,30 @@ teacher-guide:
             Novità di questo livello:
             * Cicli con {for}
     -   sections:
+          - example:
+              error_text: Vediamo spesso che gli studenti provano a stampare la lista (nell'esempio animali) invece degli elementi della lista.
+              error_code: |-
+                animali {is} cane, gatto, pesce blob
+                {for} animale {in} animali
+                  {print} 'Adoro ' animali
+              solution_text: La parola animali nell'ultima riga va cambiata in animale.
+              solution_code: |-
+                animali {is} cane, gatto, pesce blob
+                {for} animale {in} animali
+                  {print} 'Adoro ' animale
+            title: Gli studenti non usano correttamente il comando `{for}`
+          - example:
+              error_text: Gli studenti tendono a dimenticare l'indentazione dopo un comando for.
+              error_code: |-
+                animali {is} cane, gatto, pesce blob
+                {for} animale {in} animali
+                {print} 'Adoro ' animali
+              solution_text: Dopo un comando for devi usare l'indentazione.
+              solution_code: |-
+                animali {is} cane, gatto, pesce blob
+                {for} animale {in} animali
+                  {print} 'Adoro ' animale
+            title: Gli studenti dimenticano l'indentazione
         level: '12'
         concepts_and_changes: |-
             In quest'ultimo livello di Hedy Avanzato gli studenti impareranno a usare le funzioni di base.
