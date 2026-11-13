@@ -631,20 +631,6 @@ teacher-guide:
                         {print} banane
     -   level: "12"
         sections:
-        -   title: Schülerinnen und Schüler vergessen Anführungszeichen
-            example:
-                error_text: Schülerinnen und Schüler brauchen nun mehr Anführungszeichen als in vorigen Leveln. In diesem Beispiel wurden Anführungszeichen in der Liste und im `{if}`-Befehl vergessen.
-                error_code: |-
-                    superhelden = Spiderman, Batman, Iron Man
-                    superheld = superhelden {at} {random}
-                    {if} superheld = Batman
-                        {print} 'IM BATMAN!'
-                solution_text: "Dies ist der korrekte Code:"
-                solution_code: |-
-                    superhelden = 'Spiderman', 'Batman', 'Iron Man'
-                    superheld = superhelden {at} {random}
-                    {if} superheld {is} 'Batman'
-                        {print} 'IM BATMAN!'
         -   title: Schülerinnen und Schüler nutzen Anführungszeichen bei Zahlen, die sie für Berechnungen verwenden wollen
             example:
                 error_text: |-

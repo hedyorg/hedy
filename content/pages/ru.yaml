@@ -868,12 +868,6 @@ teacher-guide:
                         {print} 'Use indentation in a function.'
                         {if} use_if_statement_too {is} 'yes'
                             {print} 'And don't forget to use indentation for the loops as well'
-        -   title: Ученики забывают кавычки
-            example:
-                error_text: Сейчас ученикам нужно больше кавычек, чем на предыдущих уровнях. В этом примере кавычки были забыты в списке и в команде `{if}`.
-                error_code: "superheroes = Spiderman, Batman, Iron Man\nsuperhero = superheroes {at} {random}\n{if} superhero = Batman\n    {print} 'IM BATMAN!'"
-                solution_text: "Это правильный код:"
-                solution_code: "superheroes = 'Spiderman', 'Batman', 'Iron Man'\nsuperhero = superheroes {at} {random}\n{if} superhero {is} 'Batman'\n    {print} 'IM BATMAN!'"
         concepts_and_changes: |-
             На этом последнем уровне Hedy Advanced ученики научатся использовать базовые функции.
 

@@ -839,48 +839,6 @@ teacher-guide:
             Novità di questo livello:
             * Cicli con {for}
     -   sections:
-        -   example:
-                error_text: Una funzione funziona solo quando la chiami.
-                error_code: |-
-                    {define} saluta_cliente
-                        {print} 'Ciao'
-                        {print} 'Come stai?'
-                solution_text: Chiama la funzione
-                solution_code: |-
-                    {define} saluta_cliente
-                        {print} 'Ciao'
-                        {print} 'Come stai?'
-
-                    {call} saluta_cliente
-            title: Gli studenti creano una funzione ma dimenticano di chiamarla.
-        -   example:
-                error_text: Per molti studenti l'indentazione resterà complicata
-                error_code: |-
-                    {define} funzione
-                    {print} 'In una funzione si usa l indentazione.'
-                    {if} usa_if {is} 'sì'
-                    {print} 'E non dimenticare di indentare anche i cicli'
-                solution_text: Usa l'indentazione corretta quando usi una funzione
-                solution_code: |-
-                    {define} funzione
-                        {print} 'In una funzione si usa l indentazione.'
-                        {if} usa_if_anche {is} 'sì'
-                            {print} 'E non dimenticare di indentare anche i cicli'
-            title: Gli studenti hanno difficoltà con l'indentazione.
-        -   example:
-                error_text: Ora gli studenti hanno bisogno di più virgolette rispetto ai livelli precedenti. In questo esempio sono state dimenticate le virgolette nella lista e nel comando `{if}`.
-                error_code: |-
-                    supereroi = Spiderman, Batman, Iron Man
-                    supereroe = supereroi {at} {random}
-                    {if} supereroe = Batman
-                        {print} 'IO SONO BATMAN!'
-                solution_text: 'Questo è il codice corretto:'
-                solution_code: |-
-                    supereroi = 'Spiderman', 'Batman', 'Iron Man'
-                    supereroe = supereroi {at} {random}
-                    {if} supereroe {is} 'Batman'
-                        {print} 'IO SONO BATMAN!'
-            title: Gli studenti dimenticano le virgolette
         level: '12'
         concepts_and_changes: |-
             In quest'ultimo livello di Hedy Avanzato gli studenti impareranno a usare le funzioni di base.
