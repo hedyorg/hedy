@@ -45,6 +45,9 @@
                     <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white w-full flex flex-row gap-2 px-2 justify-between rounded-b-lg items-center">
                         <div class="profile-nametag__stats">{{ user_program_count }} {{_('programs')|lower}}</div>
                         <div class="h-8 w-px border-r border-white relative"></div>
+                        {% if public_adventures %}
+                            <div class="profile-nametag__stats">{{ public_adventures|length }} {{_('adventures')|lower}}</div>
+                        {% endif %}
                     </div>
                 </div>                
             </div>
@@ -105,7 +108,7 @@
             </div>            
         {% endif %}
             <div class="flex flex-col w-full">
-                <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="public_page_programs">
+                <div class="flex flex-wrap gap-6 px-4 turn-pre-into-ace" id="public_page_programs">
                     {% if programs|length == 0 %}
                         {{_('no_programs')}}
                     {% else %}
@@ -125,5 +128,13 @@
         </div>
     {% else %}
         <div class="ml-4">{{ user_info.username }} {{_('no_shared_programs')}}</div>
+    {% endif %}
+    {% if public_adventures %}
+        <h2 class="ml-4 mt-8 text-3xl">{{_('adventures')}}</h2>
+        <div class="flex flex-wrap gap-6 px-4 mb-8" id="public_page_adventures" data-cy="public_page_adventures">
+            {% for adventure in public_adventures %}
+                {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, is_super_teacher=is_super_teacher) }}
+            {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}

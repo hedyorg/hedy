@@ -2576,6 +2576,17 @@ def public_user_page(username):
         has_certificate = (achievements and 'achieved' in achievements
                            and 'hedy_certificate' in achievements['achieved'])\
             or user_from_db.get('certificate', False)
+
+        # Public adventures are teacher material (they can contain solutions), so only show them to teachers
+        public_adventures = []
+        if is_teacher(current_user()):
+            public_adventures = sorted(
+                (adv for adv in g_db().get_teacher_adventures(username) if adv.get('public')),
+                key=lambda adv: adv.get('date', 0), reverse=True)
+            for adv in public_adventures:
+                # Older adventures have no author, the card would show an empty 'creator' line
+                adv.setdefault('author', adv.get('creator'))
+
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2588,6 +2599,7 @@ def public_user_page(username):
             sorted_adventure_programs=sorted_adventure_programs,
             user_program_count=user_program_count,
             has_certificate=has_certificate,
+            public_adventures=public_adventures,
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
