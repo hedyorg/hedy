@@ -4,60 +4,31 @@
     demo_code: '{print} Olá bem-vindo(a) à Hedy!'
 -   name: '{ask}'
     explanation: Pergunte algo com `{ask}`.
-    demo_code: '{ask} Qual a sua cor favorita?'
--   name: '{answer}'
-    explanation: Repita algo usando `{answer}`.
-    demo_code: |-
-        {ask} Qual a sua cor favorita?
-        {print} então a sua cor favorita é {answer}
--   name: '{forward}'
-    explanation: Desenhe uma linha com `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Gire a tartaruga que desenha com `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Dê um nome para uma palavra ser usada no programa com `{is}`.
     demo_code: |-
         nome {is} Hedy
         {print} bem-vindo(a) nome
--   name: '{sleep}'
-    explanation: Com `{sleep}`, você pode deixar o Hedy fazer uma pausa por alguns segundos.
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Escolhe aleatório
     explanation: Escolha uma palavra aleatória de um grupo com `{at}` e `{random}`.
-    demo_code: |-
-        animais {is} cachorro, gato, canguru
-        {print} animais {at} {random}
 -   name: '{add}'
     explanation: '`{add}` um item `{to_list}` uma lista.'
-    demo_code: |-
-        animais {is} vaca, gato
-        {add} cachorro {to_list} animais
 -   name: '{remove}'
     explanation: '`{remove}` um item `{from}` uma lista.'
-    demo_code: |-
-        animais {is} gato, cachorro, vaca
-        {remove} cachorro {from} animais
 4:
 -   name: '{print}'
-    explanation: Imprima exatamente usando aspas simples.
     demo_code: '{print} ''Olá bem-vindo(a) à Hedy.'''
 -   name: '{is}'
-    explanation: Dê um nome para um texto qualquer e use `{print}` sem aspas.
     demo_code: |-
         nome {is} Hedy
         {print} 'meu nome é ' nome
+-   name: '{ask}'
+    explanation: Pergunte algo com `{ask}`.
 9:
 -   name: '{if} com múltiplas linhas'
-    explanation: Peça pela resposta de uma soma com `{ask}` e verifique se está correta. Agora imprima duas linhas.
     demo_code: |-
         resposta = {ask} 'Quanto é 10 mais 10?'
         {if} resposta {is} 20
@@ -66,87 +37,5 @@
         {else}
             {print} 'Errado'
             {print} 'A resposta é 20'
--   name: '{repeat} com múltiplas linhas'
-    explanation: Repita múltiplas linhas.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: Depois de `{print}` você precisa usar parênteses.
-    demo_code: '{print}(''olá!'')'
--   name: '{print} com variável'
-    explanation: Com `{print}` você precisa usar parênteses e vírgulas para imprimir mais itens.
-    demo_code: |-
-        nome = 'Hedy'
-        {print}('meu nome é ', nome)
--   name: pergunte alguma coisa com {input}
-    explanation: Use `{input}` ao invés de `{ask}` para perguntar alguma coisa.
-    demo_code: |-
-        nome = {input}('Qual é o seu nome?')
-        {print}('Então o seu nome é ', nome)
-
--   name: '{if} {elif} {else}'
--   name: Menor
-    explanation: Nós usamos o `<` para verificar se o primeiro número é menor que o segundo número.
-    demo_code: |-
-        idade = {input}('Quantos anos você tem?')
-        {if} idade < 13:
-            {print}('Você é mais novo do que eu!')
--   name: Maior
-    explanation: Nós usamos `>` para verificar se o primeiro número é maior que o segundo número.
-    demo_code: |-
-        idade = {input}('Quantos anos você tem?')
-        {if} idade > 13:
-            {print}('Você é mais velho do que eu!')
--   name: Igual
-    explanation: Nós usamos o `==` para verificar se duas coisas são idênticas.
-    demo_code: |-
-        resposta = {input}('Quanto é 5 * 5?')
-        {if} resposta == 25:
-            {print}('Está correto!')
--   name: Diferente
-    explanation: Nós usamos o `!=` para verificar se duas coisas são diferentes.
-    demo_code: |-
-        resposta = {input}('Quanto é 5 * 5?')
-        {if} resposta != 25:
-            {print}('Não está correto!')
--   name: Menor ou igual
-    explanation: Nós usamos o `<=` para verificar se o primeiro número é menor ou igual ao segundo número.
-    demo_code: |-
-        idade = {input}('Quantos anos você tem?')
-        {if} idade <= 12:
-            {print}('Você é mais novo do que eu!')
--   name: Maior ou igual
-    explanation: Nós podemos usar o `>=` para verificar se o primeiro número é maior ou igual ao segundo número.
-    demo_code: |-
-        idade = {input}('Quantos anos você tem?')
-        {if} idade >= 14:
-            {print}('Você é mais velho do que eu!')
-14:
--   name: 'creating a list'
-    explanation: Listas com colchetes.
-    demo_code: |-
-        fruta = ['maçã', 'banana', 'cereja']
-- {}
--   name: '{range}'
-    explanation: Depois de `{range}` você precisa usar parênteses.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Olá, ', i, ' vezes')
-16:
--   name: '{while}'
-    explanation: Nós podemos usar o laço `{while}` com o diferente.
-    demo_code: |-
-        resposta = 0
-        {while} resposta != 25:
-            resposta = {input}('Quanto é 5 vezes 5?')
-        {print}('Foi dada uma boa resposta')
--   name: '{while} with > and <'
-    explanation: Nós também podemos usar o laço `{while}` com `<` e `>`.
-    demo_code: |-
-        contagem = 1
-        {while} contagem < 3:
-            {print}('Fazemos isto mais ', 3 - contagem, ' vezes.')
-            contagem = contagem + 1
-        {print}('Acabamos')

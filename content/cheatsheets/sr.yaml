@@ -4,60 +4,31 @@
     demo_code: '{print} Здраво, добродошли у Хеди!'
 -   name: '{ask}'
     explanation: Питај нешто са `{ask}`.
-    demo_code: '{ask} Која је твоја омиљена боја?'
--   name: '{answer}'
-    explanation: Понови нешто користећи `{answer}`.
-    demo_code: |-
-        {ask} Која је твоја омиљена боја?
-        {print} дакле твоја омиљена боја је {answer}
--   name: '{forward}'
-    explanation: Нацртај линију са `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Окрени цртајућу корњачу са `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Дај речи име за коришћење у програму користећи `{is}`. Можеш сам изабрати име.
     demo_code: |-
         name {is} Hedy
         {print} добродошао name
--   name: '{sleep}'
-    explanation: 'Са `{sleep}`, можеш дозволити Хеди да паузира на (неколико) секунди.'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Изабери насумично
     explanation: Изабери насумичну реч из групе са `{at}` и `{random}`.
-    demo_code: |-
-        animals {is} пас, мачка, кенгур
-        {print} animals {at} {random}
 -   name: '{add}'
     explanation: '`{add}` ставку `{to_list}` листи.'
-    demo_code: |-
-        animals {is} крава, мачка
-        {add} пас {to_list} animals
 -   name: '{remove}'
     explanation: '`{remove}` ставку `{from}` листе.'
-    demo_code: |-
-        animals {is} мачка, пас, крава
-        {remove} пас {from} animals
 4:
 -   name: '{print}'
-    explanation: Испиши тачно користећи наводнике.
     demo_code: '{print} ''Здраво, добродошли у Хеди.'''
 -   name: '{is}'
-    explanation: Дај име неком тексту и `{print}` без наводника.
     demo_code: |-
         name {is} Hedy
         {print} 'моје име је ' name
+-   name: '{ask}'
+    explanation: Питај нешто са `{ask}`.
 9:
 -   name: '{if} са више линија'
-    explanation: Одговор на збир питања са `{ask}` и види да ли је тачан. Сада исписујемо две линије.
     demo_code: |-
         answer = {ask} 'Колико је 10 плус 10?'
         {if} answer {is} 20
@@ -66,87 +37,5 @@
         {else}
             {print} 'Погрешно'
             {print} 'Одговор је 20'
--   name: '{repeat} са више линија'
-    explanation: Понови више линија.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: После `{print}` мораш користити заграде.
-    demo_code: '{print}(''здраво!'')'
--   name: '{print} са променљивом'
-    explanation: Са `{print}` мораш користити заграде и зарезе ако штампаш више ставки.
-    demo_code: |-
-        име = 'Hedy'
-        {print}('моје име је ', име)
--   name: питај нешто са {input}
-    explanation: Користи `{input}` уместо `{ask}` да питаш нешто.
-    demo_code: |-
-        име = {input}('Како се зовеш?')
-        {print}('Дакле, твоје име је ', име)
-
--   name: '{if} {elif} {else}'
--   name: Мање
-    explanation: Користимо `<` да проверимо да ли је први број мањи од другог броја.
-    demo_code: |-
-        године = {input}('Колико имаш година?')
-        {if} године < 13:
-            {print}('Млађи си од мене!')
--   name: Веће
-    explanation: Користимо `>` да проверимо да ли је први број већи од другог броја.
-    demo_code: |-
-        године = {input}('Колико имаш година?')
-        {if} године > 13:
-            {print}('Старији си од мене!')
--   name: Једнако
-    explanation: Користимо `==` да проверимо да ли су две ствари исте.
-    demo_code: |-
-        одговор = {input}('Колико је 5 * 5?')
-        {if} одговор == 25:
-            {print}('То је тачно!')
--   name: Није једнако
-    explanation: Користимо `!=` да проверимо да ли две ствари нису исте.
-    demo_code: |-
-        одговор = {input}('Колико је 5 * 5?')
-        {if} одговор != 25:
-            {print}('То није тачно!')
--   name: Мање или једнако
-    explanation: Користимо `<=` да проверимо да ли је први број мањи или једнак другом броју.
-    demo_code: |-
-        године = {input}('Колико имаш година?')
-        {if} године <= 12:
-            {print}('Млађи си од мене!')
--   name: Веће или једнако
-    explanation: Користимо `>=` да проверимо да ли је први број већи или једнак другом броју.
-    demo_code: |-
-        године = {input}('Колико имаш година?')
-        {if} године >= 14:
-            {print}('Старији си од мене!')
-14:
--   name: 'creating a list'
-    explanation: Листе са угластим заградама.
-    demo_code: |-
-        воће = ['јабука', 'банана', 'трешња']
-- {}
--   name: '{range}'
-    explanation: После `{range}` мораш користити заграде.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Здраво, пута ', i)
-16:
--   name: '{while}'
-    explanation: Можемо користити `{while}` петљу са није једнако.
-    demo_code: |-
-        одговор = 0
-        {while} одговор != 25:
-            одговор = {input}('Колико је 5 пута 5?')
-        {print}('Дат је тачан одговор')
--   name: '{while} with > and <'
-    explanation: Такође можемо користити `{while}` петљу са `<` и `>`.
-    demo_code: |-
-        бројач = 1
-        {while} бројач < 3:
-            {print}('Ово радимо још ', 3 - бројач, ' пута')
-            бројач = бројач + 1
-        {print}('Завршили смо')

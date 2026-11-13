@@ -4,83 +4,33 @@
     demo_code: '{print} Hallo welkom bij Hedy!'
 -   name: '{ask}'
     explanation: Iets vragen met `{ask}`.
-    demo_code: '{ask} Wat is je lievelingskleur?'
--   name: '{answer}'
-    explanation: Iets herhalen dat is ingetypt met `{answer}`.
-    demo_code: |-
-        {ask} Wat is je lievelingskleur?
-        {print} dus je lievelingskleur is {answer}
--   name: '{forward}'
-    explanation: Een lijn tekenen met `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: De teken-schildpad draaien met `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Een woord een naam geven met `{is}`. Je mag de naam zelf kiezen.
     demo_code: |-
         voornaam {is} Hedy
         {print} ik heet voornaam
 -   name: '{ask}'
-    explanation: Stel een vraag met `{ask}`. Denk eraan dat je het antwoord een naam moet geven met `{is}`.
-    demo_code: |-
-        sport {is} {ask} Wat is je lievelingssport?
-        {print} sport is je lievelingssport!
 -   name: '{sleep}'
     explanation: '`{sleep}` laat Hedy voor een (paar) seconde(n) pauzeren.'
-    demo_code: |-
-        {sleep} 3
 3:
+-   {}
 -   name: Kies willekeurig
     explanation: Iets willekeurigs uit een groep woorden kiezen met `{at}` en `{random}`.
-    demo_code: |-
-        dieren {is} hond, kat, kangoeroe
-        {print} dieren {at} {random}
 -   name: '{add}'
     explanation: '`{add}` iets `{to_list}` een lijst.'
-    demo_code: |-
-        dieren {is} kat, koe
-        {add} hond {to_list} dieren
 -   name: '{remove}'
     explanation: '`{remove}` iets `{from}` een lijst.'
-    demo_code: |-
-        dieren {is} hond, kat, koe
-        {remove} hond {from} dieren
 4:
 -   name: '{print}'
-    explanation: Iets letterlijk printen met aanhalingstekens.
     demo_code: '{print} ''Hallo welkom bij Hedy'''
 -   name: '{is}'
-    explanation: Een stukje tekst een naam geven en `{print}`en zonder aanhalingstekens.
     demo_code: |-
         naam {is} Hedy
         {print} 'ik heet ' naam
 -   name: '{ask}'
     explanation: Iets vragen met `{ask}`.
-    demo_code: |-
-        sport {is} {ask} 'Wat is je lievelingssport?'
-        {print} 'Jouw favoriet is dus ' sport
-5:
--   name: '{if}'
-    explanation: Maak een keuze met `{if}`.
-    demo_code: |-
-        lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
-        {if} lievelingskleur {is} groen {print} 'mooi!' 
-        {else} {print} 'bah'
--   name: '{else}'
-    explanation: Maak een keuze met `{if}`.
-    demo_code: |-
-        lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
-        {if} lievelingskleur {is} groen {print} 'mooi!' 
-        {else} {print} 'bah'
 9:
 -   name: '`{if}` met meerdere regels'
-    explanation: Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit.
     demo_code: |-
         antwoord = {ask} 'Hoeveel is 10 plus 10?'
         {if} antwoord {is} 20
@@ -89,87 +39,5 @@
         {else}
             {print} 'Foutje'
             {print} 'Het antwoord moest zijn 20'
--   name: '`{repeat}` met meerdere regels'
-    explanation: Meerdere regels samen herhalen.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hallo!'
 13:
 -   name: '{print}'
-    explanation: Bij `{print}` moet je haakjes gebruiken.
-    demo_code: '{print}(''hallo!'')'
--   name: '{print} met var'
-    explanation: Bij `{print}` moet je haakjes en komma's gebruiken als je meerdere dingen print.
-    demo_code: |-
-        naam = 'Hedy'
-        {print}('ik heet', naam)
--   name: iets vragen met {input}
-    explanation: Gebruik `{input}` in plaats van `{ask}` om iets te vragen.
-    demo_code: |-
-        naam = {input}('Hoe heet jij?')
-        {print}('Dus jij heet ', naam)
-
--   name: '{if} {elif} {else}'
--   name: Kleiner
-    explanation: De `<` kijkt of het eerste getal kleiner is dan het tweede getal.
-    demo_code: |-
-        leeftijd = {input}('Hoe oud ben jij?')
-        {if} leeftijd < 13:
-            {print}('Dan ben je jonger dan ik!')
--   name: Groter
-    explanation: De `>` kijkt of het eerste getal groter is dan het tweede getal.
-    demo_code: |-
-        leeftijd = {input}('Hoe oud ben jij?')
-        {if} leeftijd > 13:
-            {print}( 'Dan ben je ouder dan ik!')
--   name: Gelijk
-    explanation: We gebruiken `==` om te kijken of twee dingen hetzelfde zijn.
-    demo_code: |-
-        antwoord = {input}('Wat is 5 * 5?')
-        {if} antwoord == 25:
-            {print}('Klopt!')
--   name: Ongelijk
-    explanation: We gebruiken `!=` om te kijken of twee dingen niet hetzelfde zijn.
-    demo_code: |-
-        antwoord = {input}('Wat is 5 * 5?')
-        {if} antwoord != 25:
-            {print}('Foutje!')
--   name: Kleiner of gelijk
-    explanation: We gebruiken `<=` om te kijken of het eerste getal kleiner dan of even klein is als het tweede getal.
-    demo_code: |-
-        leeftijd = {input}('Hoe oud ben jij?')
-        {if} leeftijd <= 12:
-            {print}('Dan ben je jonger dan ik!')
--   name: Groter of gelijk
-    explanation: We gebruiken `>=` om te kijken of het eerste getal groter dan of even groot is als het tweede getal.
-    demo_code: |-
-        leeftijd = {input}('Hoe oud ben jij?')
-        {if} leeftijd >= 14:
-            {print}('Dan ben je ouder dan ik!')
-14:
--   name: 'Maak een lijst'
-    explanation: Lijstjes met vierkante haken.
-    demo_code: |-
-        fruit = ['appel', 'banaan', 'kers']
--   {}
--   name: '{range}'
-    explanation: Bij `{range}` moet je haakjes gebruiken.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hallo nummero ', i)
-16:
--   name: '{while}'
-    explanation: We kunnen dus een `{while}` loop gebruiken met `!=`.
-    demo_code: |-
-        antwoord = 0
-        {while} antwoord != 25:
-            antwoord = {input}('Wat is 5 keer 5?')
-        {print}('Goed gedaan!')
--   name: Kleiner {while}
-    explanation: We kunnen een `{while}` lus ook gebruiken met `<` en `>`.
-    demo_code: |-
-        tel = 1
-        {while} tel < 3:
-            {print}('Dit is de ', tel, 'e keer')
-            tel = tel + 1
-        {print}('We zijn klaar')

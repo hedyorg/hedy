@@ -4,30 +4,16 @@
     demo_code: '{print} Hello welcome to Hedy!'
 -   name: '{ask}'
     explanation: Ask something with `{ask}`.
-    demo_code: '{ask} What is your favorite color?'
--   name: '{answer}'
-    explanation: Repeat something using `{answer}`.
-    demo_code: |-
-        {ask} What is your favorite color?
-        {print} so your favorite color is {answer}
--   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Turn the drawing turtle with `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
     demo_code: |-
         Numele {is} Hedy
         {print} salutare nume
--   name: '{sleep}'
-    explanation: '`{sleep}` let Hedy pause for a (couple of) second(s).'
-    demo_code: |-
-        {sleep} 3
-
+-   name: '{ask}'
+4:
+-   name: '{print}'
+-   name: '{is}'
+-   name: '{ask}'
+    explanation: Ask something with `{ask}`.
+13:
+-   name: '{print}'

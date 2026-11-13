@@ -4,54 +4,28 @@
     demo_code: '{print} Hola, benvingut a Hedy!'
 -   name: '{ask}'
     explanation: Pregunta alguna cosa amb `{ask}`.
-    demo_code: '{ask} Quin és el teu color preferit?'
--   name: '{answer}'
-    explanation: Repeteix el que vulguis usant `{answer}`.
-    demo_code: |-
-        {ask} Quin és el teu color preferit?
-        {print} així que el teu color preferit és el {answer}
--   name: '{forward}'
-    explanation: Dibuixa una línia amb `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Gira la tortuga que dibuixa amb `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Assigna un nom a una paraula per usar en el programa amb `{is}`. Pots elegir el nom tu mateix.
     demo_code: |-
         nom {is} Hedy
         {print} hola nom
--   name: '{sleep}'
-    explanation: 'Amb `{sleep}`, pots deixar que Hedy faci una pausa d''un (parell de) segon(s).'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Tria l'atzar
     explanation: Tria una paraula aleatòriament d'un grup usant `{at}` i `{random}`.
-    demo_code: |-
-        animals {is} dog, cat, kangaroo
-        {print} animals {at} {random}
 -   name: '{add}'
     explanation: '`{add}` an item `{to_list}` a list.'
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
 -   name: '{remove}'
     explanation: '`{remove}` an item `{from}` a list.'
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
     demo_code: '{print} ''Hola benvingut a Hedy.'''
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
+-   name: '{ask}'
+    explanation: Pregunta alguna cosa amb `{ask}`.
+13:
+-   name: '{print}'

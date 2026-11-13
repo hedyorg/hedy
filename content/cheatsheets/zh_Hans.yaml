@@ -4,60 +4,31 @@
     demo_code: '{print} 你好欢迎来到海蒂!'
 -   name: '{ask}'
     explanation: 用`{ask}`提出问题。
-    demo_code: '{ask} 你最喜欢的颜色是什么？'
--   name: '{answer}'
-    explanation: 用`{answer}`重复执行某一任务。
-    demo_code: |-
-        {ask} 你最喜欢的颜色是什么？
-        {print} 所以你最喜欢的颜色是 {answer}
--   name: '{forward}'
-    explanation: 用 `{forward}`画一条线。
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: 用`{turn}`旋转乌龟绘图。
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: 用`{is}`来给一个词命名以便在程序中使用这个词。你可以自己选择这个名字。
     demo_code: |-
         名字 {is} 海蒂
         {print} 欢迎名字
--   name: '{sleep}'
-    explanation: 通过`{sleep}` 你可以让海蒂暂停几秒钟。
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: 选择随机
     explanation: 用`{at}` and `{random}`可以从一组词汇中随机选择一个词。
-    demo_code: |-
-        动物 {is} 狗，猫，袋鼠
-        {print} 动物 {at} {random}
 -   name: '{add}'
     explanation: 将一样东西`{add}`到`{to_list}`列表中。
-    demo_code: |-
-        动物 {is} 奶牛，猫
-        {add} 狗 {to_list} 动物
 -   name: '{remove}'
     explanation: '`{remove}` 一个项目 `{from}` 一个列表。'
-    demo_code: |-
-        动物 {is} 猫，狗，奶牛
-        {remove} 狗 {from} 动物
 4:
 -   name: '{print}'
-    explanation: 打印的内容要用单引号标注清楚。
     demo_code: '{print} ''你好欢迎来到海蒂。'''
 -   name: '{is}'
-    explanation: 给一段文本命名，并不带引号`{print}`出这段文本。
     demo_code: |-
         名字 {is} 海蒂
         {print} '我的名字是 ' 名字
+-   name: '{ask}'
+    explanation: 用`{ask}`提出问题。
 9:
 -   name: '{if} 条件语句和多行'
-    explanation: 使用`{ask}`提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。
     demo_code: |-
         回答 = {ask} '10加10等于几？'
         {if} 回答 {is} 20
@@ -66,87 +37,5 @@
         {else}
             {print} '错'
             {print} '答案是20'
--   name: '{repeat}'
-    explanation: 重复多行。
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: 你需要在`{print}`后面加上括号。
-    demo_code: '{print}(''hi!'')'
--   name: '{print} 与变量'
-    explanation: 使用 `{print}`，如果打印更多项目，则需要使用小括号和逗号。
-    demo_code: |-
-        名字 ='Hedy'
-        {print}('我的名字是'，名字)
--   name: 用 {input} 提问
-    explanation: 用`{input}`代替`{ask}`来提问。
-    demo_code: |-
-        名字 = {input}('你叫什么名字？')
-        {print}('所以你的名字是'，名字)
-
--   name: '{if} {elif} {else}'
--   name: Smaller 小于
-    explanation: 我们用小于号 `<` 用来判断第一个数字是否小于第二个数字.
-    demo_code: |-
-        age = {input}('你今年几岁了？')
-        {if} age < 13:
-            {print}( '你比我年纪小！')
--   name: Bigger 大于
-    explanation: 我们用大于号`>` 用来判断第一个数字是否大于第二个数字.
-    demo_code: |-
-        age = {input}('你今年几岁了？')
-        {if} age > 13:
-            {print}( '你比我年纪大！')
--   name: 等于
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        回答 = {input}('5 * 5 等于几？')
-        {if} 回答 == 25:
-            {print}( '回答正确！')
--   name: 不等于
-    explanation: 我们用`!=`来检查两样东西是否不同。
-    demo_code: |-
-        答案 = {input}('什么是 5 * 5？')
-        {if} 答案 != 25:
-            {print}( '这不对！')
--   name: 小于等于
-    explanation: 我们使用 `<=` 来检查第一个数字是否小于或等于第二个数字。
-    demo_code: |-
-        年龄 = {input}('你几岁了？')
-        {if} 年龄 <= 12:
-            {print}('你比我小！')
--   name: 大于或等于
-    explanation: 我们使用 `>=` 来检查第一个数字是否大于或等于第二个数字。
-    demo_code: |-
-        年龄 = {input}('你几岁了？')
-        {if} 年龄 >= 14:
-            {print}('你比我大！')
-14:
--   name: 'creating a list'
-    explanation: 把列表的内容用中括号括起来。
-    demo_code: |-
-        水果 = ['苹果', '香蕉', '樱桃']
-- {}
--   name: '{range}'
-    explanation: 你需要在`{range}`后面加上括号。
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('你好，次数', i)
-16:
--   name: '{while}循环语句'
-    explanation: 我们可以在 `{while}` 循环中使用不等于。
-    demo_code: |-
-        答案 = 0
-        {while} 答案 != 25:
-            答案 = {input}('5乘以5等于几?')
-        {print}('已经给出了正确答案')
--   name: '{while} with > and <'
-    explanation: 我们也可以将`{while}` 循环语句和小于号 `<` 及大于号 `>`一起使用。
-    demo_code: |-
-        计数 = 1
-        {while} 计数 < 3:
-            {print}('我们计算 ', 3 - 计数, ' 的次数更多了')
-            计数 = 计数 + 1
-        {print}('我们完成啦')

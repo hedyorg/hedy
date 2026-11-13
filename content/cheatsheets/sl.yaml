@@ -4,48 +4,29 @@
     demo_code: '{print} Dobrodošli v Hedy!'
 -   name: '{ask}'
     explanation: Vprašajte kaj z `{ask}`.
-    demo_code: '{ask} Katero barvo imate najrajši?'
--   name: '{answer}'
-    explanation: Ponovite nekaj z `{answer}`.
-    demo_code: |-
-        {ask} Katero barvo imate najrajši?
-        {print} torej je vaša najljubša barva {answer}
--   name: '{forward}'
-    explanation: Naredite črto z `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Obrnite želvo za risanje z `{turn}`.
-    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: '{is}'
-    explanation: Poimenujte besedo, ki jo boste uporabili v programu z uporabo `{is}`. Ime si lahko izberete sami.
     demo_code: |-
         ime {is} Hedy
         {print} dobrodošli ime
--   name: '{sleep}'
-    explanation: S `{sleep}`, lahko Hedy zaustavite za sekundo (ali več).
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Izberite naključno
     explanation: Izberite naključno besedo iz skupine z `{at}` in `{random}`.
-    demo_code: "živali {is} pes, mačka, kenguru\n{print} živali {at} {random}"
 -   name: '{add}'
     explanation: '`{add}` element `{to_list}` v seznam.'
-    demo_code: "živali {is} krava, mačka\n{add} pes {to_list} živali"
 -   name: '{remove}'
     explanation: '`{remove}` element `{from}` seznama.'
-    demo_code: "živali {is} mačka, pes, krava\n{remove} pes {from} živali"
 4:
 -   name: '{print}'
-    explanation: Izpišite natančno z uporabno navednic.
     demo_code: "{print} 'Pozdravljeni in dobrodošli v Hedy.'"
 -   name: '{is}'
-    explanation: Dajte nekemu besedilu ime in uporabite ukaz `{print}` brez narekovajev.
     demo_code: "ime {is} Hedy\n{print} 'moje ime je ' ime"
+-   name: '{ask}'
+    explanation: Vprašajte kaj z `{ask}`.
 9:
 -   name: '{if} z več vrsticami'
-    explanation: Odgovor na vsoto vprašanj z `{ask}` in preverite, ali je pravilen. Zdaj izpišemo dve vrstici.
     demo_code: |-
         answer = {ask} 'What is 10 plus 10?'
         {if} answer {is} 20
@@ -54,80 +35,5 @@
         {else}
             {print} 'Wrong'
             {print} 'The answer is 20'
--   name: '{repeat} z več vrsticami'
-    explanation: Ponovite več vrstic.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: Za ukazom `{print}` morate uporabiti oklepaje.
-    demo_code: "{print}('hi!')"
--   name: '{print} s spremenljivko'
-    explanation: Pri ukazu `{print}` morate uporabiti oklepaje in vejice, če natisnete več elementov.
-    demo_code: "ime = 'Hedy'\n{print}('Moje ime je ', ime)"
--   name: vprašajte nekaj z ukazom {input}
-    explanation: Uporabi `{input}` namesto `{ask}` da nekaj vprašate.
-    demo_code: "ime = {input}('Kako vam je ime?')\n{print}('Torej, ime vam je ', ime)"
--   name: '{if} {elif} {else}'
--   name: Manjši
-    explanation: Za preverjanje, ali je prvo število manjše od drugega, uporabimo `<`.
-    demo_code: |-
-        starost = {input}('Koliko ste stari?')
-        {if} starost < 13:
-            {print}('Mlajši ste od mene!')
--   name: Večje
-    explanation: Za preverjanje, ali je prvo število večje od drugega, uporabimo `>`.
-    demo_code: |-
-        starost = {input}('Koliko ste stari?')
-        {if} starost > 13:
-            {print}('Starejši ste od mene!')
--   name: Je enako
-    explanation: Za preverjanje, ali sta dve vrednosti enaki, uporabljamo `==`.
-    demo_code: |-
-        odgovor = {input}('Koliko je 5 * 5?')
-        {if} odgovor == 25:
-            {print}('Pravilno!')
--   name: Ni enako
-    explanation: Za preverjanje, ali dve vrednosti nista enaki, uporabljamo `!=`.
-    demo_code: |-
-        odgovor = {input}('Koliko je 5 * 5?')
-        {if} odgovor != 25:
-            {print}('To ni pravilno!')
--   name: Manj ali enako
-    explanation: Ali je prva vrednost manjša ali enaka drugi preverimo z izrazom `<=`.
-    demo_code: |-
-        starost = {input}('Koliko ste stari?')
-        {if} starost <= 12:
-            {print}('Mlajši ste od mene!')
--   name: Enako ali več
-    explanation: Ali je prva vrednost večja ali enaka drugi preverimo z izrazom `>=`.
-    demo_code: |-
-        starost = {input}('Koliko ste stari?')
-        {if} starost >= 14:
-            {print}('Starejši ste od mene!')
-14:
--   name: 'creating a list'
-    explanation: Seznami z oglatimi oklepaji.
-    demo_code: |-
-        sadje = ['jabolko', 'banana', 'češnja']
--   {}
--   name: '{range}'
-    explanation: Za ukazom `{range}` morate uporabiti oklepaje.
-    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Živijo, krat ', i)"
-16:
--   name: '{while}'
-    explanation: Zanko `{while}` lahko uporabimo skupaj z ni enako.
-    demo_code: |-
-        odgovor = 0
-        {while} odgovor != 25:
-            odgovor = {input}('Koliko je 5 x 5?')
-        {print}('Podan je bil nepravilen odgovor')
--   name: '{while} with > and <'
-    explanation: Zanko `{while}` lahko uporabimo tudi z `<` ali `>`.
-    demo_code: |-
-        števec = 1
-        {while} števec < 3:
-            {print}('Ponovimo to še ', 3 - števec, '-krat')
-            števec = števec + 1
-        {print}('Pa smo opravili')

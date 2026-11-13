@@ -4,54 +4,21 @@
     demo_code: '{print} Привет, добре дошли при Хеди!'
 -   name: '{ask}'
     explanation: Задай въпрос с `{ask}`.
-    demo_code: '{ask} Кой е любимият ти цвят?'
--   name: '{answer}'
-    explanation: Повтори това, което си написал(а) с `{answer}`.
-    demo_code: |-
-        {ask} Кой е любимият ти цвят?
-        {print} значи любимият ти цвят е{answer}
--   name: '{forward}'
-    explanation: Начертайте линия с `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Завъртете рисуващата костенурка с `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: С командата `{is}` можеш да запишеш име в програмата. Избери си едно име, може и твоето.
     demo_code: |-
         име {is} Галя
         {print} добре дошъл име.
--   name: '{sleep}'
-    explanation: '`{sleep}` приспива Хеди за (няколко) секунда (и).'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
--   name: избери_произволно
-    explanation: Избери произволна дума от списък с думи като ползваш командите `at` и `random`.
-    demo_code: |-
-        животни is куче, котка, кенгуру
-        print животни at random
+-   {}
+-   {}
 -   name: '{add}'
-    explanation: add an item to a list
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
 -   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
 4:
--   name: print
-    explanation: Принтирай точно думите в кавички
-    demo_code: print 'Баба жаба живее в блатото.'
--   name: is
-    explanation: назови цял текст с едно име с командата `print` без кавичките.
-    demo_code: |-
-        име is Иван Димитров Коларов
-        print 'Казвам се ' име '.'
+-   name: '{print}'
+-   name: '{is}'
+-   name: '{ask}'
+    explanation: Задай въпрос с `{ask}`.
+13:
+-   name: '{print}'

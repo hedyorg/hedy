@@ -1,111 +1,22 @@
 1:
 -   name: '{print}'
-    explanation: Tampilkan sesuatu dengan `print`.
-    demo_code: print Halo selamat datang di Hedy!
--   name: '{ask}'
-    explanation: Tanyakan sesuatu dengan `ask`
-    demo_code: ask Apa warna favoritmu?
--   name: '{answer}'
-    explanation: Ulangi sesuatu dengan `{answer}`
-    demo_code: |-
-        {ask} Apa warna favoritmu?
-        {print} maka warna favoritmu adalah {answer}
--   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} left
-        {forward} 25
-        {turn} right
 2:
 -   name: '{is}'
-    explanation: Berikan sebuah kata nama untuk digunakan di program dengan menggunakan `is`
-    demo_code: |-
-        nama is Hedy
-        print selamat datang nama
--   name: '{sleep}'
-    explanation: Dengan `{sleep}`, kamu dapat membuat Hedy istirahat untuk sesaat.
-    demo_code: |-
-        {sleep} 3
 3:
+-   {}
 -   name: choose_random
     explanation: Pilih satu kata acak dari kumpulan kata dengan `{at}` dan `{random}`
-    demo_code: |-
-        hewan {is} anjing, kucing, kangguru
-        {print} hewan {at} {random}
 -   name: '{add}'
-    explanation: add an item to a list
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
 -   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
 4:
 -   name: '{print}'
-    explanation: Tampilkan sama persis dengan menggunakan tanda kutip
     demo_code: |-
         {print} 'Halo selamat datang di Hedy'
 -   name: '{is}'
-    explanation: Berikan sebuah nama ke sebuah teks dan `{print}` tanpa tanda kutip
     demo_code: |-
         nama {is} Hedy
         {print} 'nama saya adalah ' nama
 9:
 -   name: '`{if}` dengan beberapa baris'
-    explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `{ask}` benar. Sekarang kita menampilkan dua baris.
-    demo_code: |-
-        jawaban = {ask} 'Apa hasil dari 20 tambah 20?'
-        {if} jawaban {is} 20
-            {print} 'Bagus!!'
-            {print} 'Jawabannya betul' jawaban
-        {else}
-            {print} 'Salah'
-            {print} 'Jawabannya adalah 20'
--   name: '`{repeat}` dengan beberapa baris'
-    explanation: Ulangi beberapa kali
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
--   name: '{if} {elif} {else}'
--   name: Lebih kecil
-    explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
-    demo_code: |-
-        umur = {input}('Berapa umur mu?')
-        {if} umur < 13:
-            {print}('Kamu lebih muda daripada aku!')
--   name: Lebih besar
-    explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
-    demo_code: |-
-        umur = {input}('Berapa umur mu?')
-        {if} umur > 13:
-            {print}('Kamu lebih tua daripada aku!')
-14:
--   name: 'creating a list'
-    explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-    demo_code: |-
-        buah = ['apel', 'pisang', 'ceri']
-16:
--   name: '{while}'
-    demo_code: |-
-        jawaban = 0
-        {while} jawaban != 25:
-            jawaban = input('Apa hasil 5 kali 5?')
-        {print}('Sebuah jawaban benar telah diberikan')
--   name: Pengulangan {while} dengan cakupan lebih kecil
-    explanation: Kita dapat juga menggunakan pengulangan `{while}` dengan `<` dan `>`.
-    demo_code: |-
-        pembilang = 1
-        {while} pembilang < 3:
-            {print}('Kita lakukan ini ', 3 - pembilang, ' kali lagi')
-            pembilang = pembilang + 1
-        {print}('Kita selesai')

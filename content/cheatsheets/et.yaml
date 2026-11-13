@@ -4,70 +4,30 @@
     demo_code: '{print} Tere tulemast Hedy juurde!'
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: '{ask} Mis on sinu lemmikvärv?'
--   name: '{answer}'
-    explanation: Korda midagi kasutades `{answer}` käsku.
-    demo_code: |-
-        {ask} Mis on su lemmikvärv?
-        {print} nii et su lemmikvärv on {answer}
--   name: '{forward}'
-    explanation: Tõmba joon kasutades `{forward}` käsku.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Pööra joonistuskilpkonna `{turn}` abil.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Anna ühele sõnale nimi kasutades `{is}` käsku. Sa võid nime ise valida.
     demo_code: |-
         nimi {is} Hedy
         {print} tere nimi
--   name: '{sleep}'
-    explanation: '`{sleep}` Lase Hedy''l mõni sekund oodata.'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Vali juhuslikult
     explanation: Vali juhuslik sõna rühmast `{at}` ja `{random}` käske kasutades.
-    demo_code: |-
-        loomad {is} koer, kass, känguru
-        {print} loomad {at} {random}
 -   name: '{add}'
     explanation: '`{add}` midagi `{to_list}`.'
-    demo_code: |-
-        loomad {is} lehm, kass
-        {add} koer {to_list} loomad
 -   name: '{remove}'
     explanation: '`{remove}` `{from}`.'
-    demo_code: |-
-        loomad {is} kass, koer, lehm
-        {remove} koer {from} loomad
 4:
 -   name: '{print}'
-    explanation: Täpselt printimiseks kasuta jutumärke.
     demo_code: '{print} ''Teretulemast Hedy juurde.'''
 -   name: '{is}'
-    explanation: Anna tekstile nimi ja `{print}` ilma jutumärkideta.
     demo_code: |-
         nimi {is} Hedy
         {print} 'minu nimi on ' nimi
+-   name: '{ask}'
+    explanation: Küsi midagi kasutades `{ask}` käsku.
 9:
 -   name: '{if} mitme reaga'
-    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
-    demo_code: |-
-        vastus = {ask} 'Mis on 20 pluss 20?'
-        {if} vastus {is} 20
-            {print} 'Tubli!!'
-            {print} 'Vastus on tõepoolest' vastus
-        {else}
-            {print} 'Vale'
-            {print} 'Õige vastus on 20'
--   name: '{repeat} mitme reaga'
-    explanation: Korda mitut rida.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
+13:
+-   name: '{print}'

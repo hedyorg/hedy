@@ -4,54 +4,28 @@
     demo_code: '{print} 你好，歡迎來到 Hedy！'
 -   name: '{ask}'
     explanation: 使用 `{ask}` 詢問一些事情。
-    demo_code: '{ask} 你最喜歡甚麼顏色？'
--   name: '{answer}'
-    explanation: 使用`{answer}`重複某些內容。
-    demo_code: |-
-        {ask} 你最喜歡甚麼顏色？
-        {print} 所以你最喜歡的顏色是 {answer}
--   name: '{forward}'
-    explanation: 使用 `{forward}` 畫一條線。
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: 使用 `{turn}` 轉動繪圖烏龜。
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: 使用 `{is}` 為一個詞命名以便在程式中使用這個詞。你可以自己選擇名稱。
     demo_code: |-
         name {is} Hedy
         {print} 歡迎 name
--   name: '{sleep}'
-    explanation: '使用 `{sleep}`，你可以讓 Hedy 暫停數秒。'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: 選擇隨機
     explanation: Choose a random word from a group with `{at}` and `{random}`.
-    demo_code: |-
-        animals {is} dog, cat, kangaroo
-        {print} animals {at} {random}
 -   name: '{add}'
     explanation: '`{add}` an item `{to_list}` a list.'
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
 -   name: '{remove}'
     explanation: '`{remove}` an item `{from}` a list.'
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
 4:
 -   name: '{print}'
-    explanation: 使用引號以準確列印。
     demo_code: '{print} ''你好歡迎來到 Hedy。'''
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
+-   name: '{ask}'
+    explanation: 使用 `{ask}` 詢問一些事情。
+13:
+-   name: '{print}'

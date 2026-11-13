@@ -4,60 +4,29 @@
     demo_code: '{print} Saluton bonvenon al Hedy!'
 -   name: '{ask}'
     explanation: Demandu ion per `{ask}`.
-    demo_code: '{ask} Kio estas via plej ŝatata koloro?'
--   name: '{answer}'
-    explanation: Ripetu ion per `{answer}`.
-    demo_code: |-
-        {ask} Kio estas via plej ŝatata koloro?
-        {print} do via plej ŝatata koloro estas {answer}
--   name: '{forward}'
-    explanation: Desegnu linion per `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Turnu la desegnantan testudon per `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Donu per `{is}` al vorto nomon uzeblan en la programo. Vi povas mem elekti la nomon.
     demo_code: |-
         nomo {is} Hedy
         {print} bonvenon nomo
--   name: '{sleep}'
-    explanation: Per `{sleep}`, vi povas paŭzigi Hedy dum kelkaj sekundoj.
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Elekti laŭ hazardo
     explanation: Elektu hazardan vorton el grupo per `{at}` kaj `{random}`.
-    demo_code: |-
-        bestoj {is} hundo, kato, kanguruo
-        {print} bestoj {at} {random}
 -   name: '{add}'
-    explanation: Aldoni eron al listo.
-    demo_code: |-
-        bestoj {is} bovo, kato
-        {add} hundo {to_list} bestoj
 -   name: '{remove}'
-    explanation: Forigi eron el listo.
-    demo_code: |-
-        bestoj {is} kato, hundo, bovo
-        {remove} hundo {from} bestoj
 4:
 -   name: '{print}'
-    explanation: Presi ekzakte per citiloj.
     demo_code: '{print} ''Saluton, bonvenon al Hedy.'''
 -   name: '{is}'
-    explanation: Donu nomon al teksto kaj `{print}` sen citiloj.
     demo_code: |-
         nomo {is} Hedy
         {print} 'mia nomo estas ' nomo
+-   name: '{ask}'
+    explanation: Demandu ion per `{ask}`.
 9:
 -   name: '{if} kun pluraj linioj'
-    explanation: La respondo al demando pri sumo per `{ask}`; kontrolu, ĉu ĝi estas ĝusta. Nun ni presu du liniojn.
     demo_code: |-
         respondo = {ask} 'Kio estas 10 plus 10?'
         {if} respondo {is} 20
@@ -66,87 +35,5 @@
         {else}
             {print} 'Vi malpravas.'
             {print} 'La ĝusta respondo estas 20'
--   name: '`{repeat}` kun pluraj linioj'
-    explanation: Ripeti plurajn liniojn.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: Post `{print}` vi devas uzu rondajn krampojn.
-    demo_code: '{print}(''saluton!'')'
--   name: '`{print}` kun variablo'
-    explanation: Pri `{print}`, oni devas uzi rondajn krampojn kaj komojn, se oni volas presi plurajn aĵojn.
-    demo_code: |-
-        nomo = 'Hedy'
-        {print}('mia nomo estas ', nomo)
--   name: demandi pri io per `{input}`
-    explanation: Uzi `{input}` anstataŭ `{ask}` por demandi pri io.
-    demo_code: |-
-        nomo = {input}('Kio estas via nomo?')
-        {print}('Do via nomo estas ', nomo)
-
--   name: '{if} {elif} {else}'
--   name: Pli malgranda
-    explanation: Oni uzas la signon `<` por kontroli, ĉu la unua nombro estas pli malgranda ol la dua nombro.
-    demo_code: |-
-        aĝo = {input}('Kian aĝon vi havas?')
-        {if} aĝo < 13:
-            {print}('Vi estas pli juna ol mi!')
--   name: Pli granda
-    explanation: Oni uzas la signon `>` por kontroli, ĉu la unua nombro estas pli granda ol la dua nombro.
-    demo_code: |-
-        aĝo = {input}('Kian aĝon vi havas?')
-        {if} aĝo > 13:
-            {print}('Vi estas pli aĝa ol mi!')
--   name: Egala
-    explanation: Oni uzas la signon `==` por kontroli, ĉu la unua egalas la duan.
-    demo_code: |-
-        respondo = {input}('Kio estas 5 * 5?')
-        {if} respondo == 25:
-            {print}('Vi pravas!')
--   name: Ne egala
-    explanation: Oni uzas la signon `!=` por kontroli, ĉu la unua diferencas de la duan.
-    demo_code: |-
-        respondo = {input}('Kio estas 5 * 5?')
-        {if} respondo != 25:
-            {print}('Tio ne pravas!')
--   name: Pli malgranda aŭ egala
-    explanation: Oni uzas la signon `<=` por kontroli, ĉu la unua nombro estas pli malgranda ol aŭ egala al la dua nombro.
-    demo_code: |-
-        aĝo = {input}('Kian aĝon vi havas?')
-        {if} aĝo <= 12:
-            {print}('Vi estas pli juna ol mi!')
--   name: Pli granda aŭ egala
-    explanation: Oni uzas la signon `>=` por kontroli, ĉu la unua nombro estas pli granda ol aŭ egala al la dua nombro.
-    demo_code: |-
-        aĝo = {input}('Kian aĝon vi havas?')
-        {if} aĝo >= 14:
-            {print}('Vi estas pli aĝa ol mi!')
-14:
--   name: 'creating a list'
-    explanation: Listoj per rektaj krampoj.
-    demo_code: |-
-        fruktoj = ['pomo', 'banano', 'ĉerizo']
-- {}
--   name: '{range}'
-    explanation: Post `{range}` vi devas uzi rondajn krampojn.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Saluton, numero ', i)
-16:
--   name: '{while}'
-    explanation: Oni povas uzi `{while}`-iteracion kun `!=`.
-    demo_code: |-
-        respondo = 0
-        {while} respondo != 25:
-            respondo = {input}('Kio estas 5 * 5?')
-        {print}('Vi respondis prave')
--   name: '`{while}` kun plimalgrandeco'
-    explanation: Oni povas ankaŭ uzi `{while}`-iteracion kune kun `<` aŭ `>`.
-    demo_code: |-
-        nombro = 1
-        {while} nombro < 3:
-            {print}('Ni faros tion ', 3 - nombro, ' fojojn plu')
-            nombro = nombro + 1
-        {print}('Ni finiĝis')

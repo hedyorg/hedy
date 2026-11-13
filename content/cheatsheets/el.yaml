@@ -1,112 +1,17 @@
 1:
--   name: {print}
-    explanation: Εμφάνισε κάτι με την `{print}`.
+-   explanation: Εμφάνισε κάτι με την `{print}`.
     demo_code: |-
         {print} Γεια, καλωσήλθες στη Hedy!
--   name: {ask}
-    explanation: Ρώτησε κάτι με την `{ask}`.
-    demo_code: |-
-        {ask} Ποιο είναι το αγαπημένο σου χρώμα;
--   name: {answer}
-    explanation: Eπανάλαβε κάτι χρησιμοποιώντας την `{answer}`.
-    demo_code: |-
-        {ask} Ποιο είναι το αγαπημένο σου χρώμα;
-        {print} ώστε το αγαπημένο σου χρώμα είναι το {answer}
--   name: '{forward}'
-    explanation: Σχεδίασε μια γραμμή με `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: στρίψε την χελώνα που σχεδιάζει με `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} left
-        {forward} 25
-        {turn} right
-2:
--   name: '{is}'
-    explanation: Δώσε ένα όνομα σε μια λέξη για να τη χρησιμοποιήσεις στο πρόγραμμα χρησιμοποιώντας την `is`. Μπορείς να επιλέξεις ένα  δικό σου όνομα.
-    demo_code: |-
-        name is Hedy
-        print καλωσήλθες name
--   name: '{sleep}'
-    explanation: Ας κάνουμε τη Hedy να σταματήσει για (λίγα) δευτερόλεπτα.
-    demo_code: |-
-        {sleep} 3
+-   explanation: Ρώτησε κάτι με την `{ask}`.
 3:
--   name: choose_random
-    explanation: Επίλεξε μια τυχαία λέξη από μια ομάδα με τις `{at}` και `{random}`
-    demo_code: |-
-        animals is σκύλος, γάτα, καγκουρό
-        print animals at random
+-   {}
+-   {}
 -   name: '{add}'
-    explanation: προσθήκη στοιχείου σε μια λίστα
-    demo_code: |-
-        animals {is} αγελάδα, γάτα
-        {add} σκύλος {to_list} animals
 -   name: '{remove}'
-    explanation: αφαίρεση ενός στοιχείου από τη λίστα
-    demo_code: |-
-        animals {is} γάτα, σκύλος, αγελάδα
-        {remove} σκύλος {from} animals
 4:
--   name: {print}
-    explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
-    demo_code: |-
+-   demo_code: |-
         {print} 'Γειά, καλωσήλθες στη Hedy.'
--   name: {is}
-    explanation: Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `{print}` χωρίς εισαγωγικά
-    demo_code: |-
+-   demo_code: |-
         name {is} Hedy
         {print} 'Το όνομά μου είναι ' name
-13:
--   name: '{print}'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
--   name: '{if} {elif} {else}'
--   name: Μικρότερο
-    explanation: Χρησιμοποιούμε το `<` για να ελέγξουμε αν ο πρώτος αριθμός είναι μικρότερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μικρότερη από 15, χρησιμοποιούμε `variable < 15`
-    demo_code: |-
-        age = {input}('Πόσο χρονών είσαι;')
-        {if} age < 13:
-            {print}('Είσαι νεότερη από εμένα!')
--   name: Μεγαλύτερο
-    explanation: Χρησιμοποιούμε το `>` για να ελέγξουμε αν ο πρώτος αριθμός είναι μεγαλύτερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μεγαλύτερη από 15, χρησιμοποιούμε `variable > 15`
-    demo_code: |-
-        age = {input}('Πόσο χρονών είσαι;')
-        {if} age > 13:
-            {print}('Είσαι μεγαλύτερη από εμένα!')
--   name: Ισότητα
-    explanation: Χρησιμοποιούμε το σύμβολο  `==` για να ελέγξουμε αν 2 πράματα είναι ίδια.
-    demo_code: |-
-        answer = {input}('Πόσο κάνει 5 x 5;')
-        {if} answer == 25:
-            {print}('Πολύ σωστά!')
--   name: Ανισότητα
-    explanation: Χρησιμοποιούμε το σύμβολο  `!=` για να ελέγξουμε αν δυο πράγματα δεν είναι ίδια.
-    demo_code: |-
-        answer = {input}('Πόσο κάνει 5 x 5;')
-        {if} answer != 25:
-            {print}('Δεν είναι σωστό!')
--   name: Μικρότερο ή ίσο
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
--   name: Bigger or equal
-14:
--   name: 'creating a list'
-    explanation: Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες.
-    demo_code: |-
-        fruit = ['μήλο', 'μπανάνα', 'κεράσι']
-16:
--   name: '{while}'
-    demo_code: |-
-        answer = 0
-        {while} answer != 25:
-            answer = {input}('Πόσο κάνει 5 φορές το 5;')
-        {print}('Δόθηκε η σωστή απάντηση')
--   name: Μικρότερο {while}
-    explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `{while}` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count = count + 1.
-    demo_code: |-
-        count = 1
-        {while} count < 3:
-            {print} ('Το κάνουμε αυτό ', 3 - count, ' ακόμα φορές')
-            count = count + 1
-        {print}('Τελειώσαμε')
+-   explanation: Ρώτησε κάτι με την `{ask}`.

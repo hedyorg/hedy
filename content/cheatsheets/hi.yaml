@@ -4,60 +4,31 @@
     demo_code: '{print} हैलो हेडी में आपका स्वागत है!'
 -   name: '{ask}'
     explanation: '`{ask}` के साथ कुछ पूछो।'
-    demo_code: '{ask} आपका पसंदीदा रंग क्या है?'
--   name: '{answer}'
-    explanation: '`{answer}` का उपयोग करके कुछ दोहराएं।'
-    demo_code: |-
-        {ask} आपका पसंदीदा रंग क्या है?
-        {print} तो आपका पसंदीदा रंग है {answer}
--   name: '{forward}'
-    explanation: '`{forward}` के साथ एक रेखा बनाएं।'
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: ड्राइंग टर्टल को `{turn}` से घुमाएं।
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: प्रोग्राम में उपयोग करने के लिए `{is}` का उपयोग करके एक शब्द को एक नाम दें। नाम आप खुद चुन सकते हैं।
     demo_code: |-
         name {is} हेडी
         {print} स्वागत है name
--   name: '{sleep}'
-    explanation: '`{sleep}` के साथ, आप हेडी को कुछ सेकंड के लिए रुकने दे सकते हैं।'
-    demo_code: |-
-        {sleep} ३
+-   name: '{ask}'
 3:
+-   {}
 -   name: चुनें_यादृच्छिक
     explanation: '`{at}` और `{random}` वाले समूह से एक यादृच्छिक शब्द चुनें।'
-    demo_code: |-
-        जानवर {is} कुत्ता, बिल्ली, कंगारू
-        {print} जानवर {at} {random}
 -   name: '{add}'
     explanation: '`{add}` एक आइटम `{to_list}` एक सूची।'
-    demo_code: |-
-        जानवर {is} गाय, बिल्ली
-        {add} कुत्ता {to_list} जानवर
 -   name: '{remove}'
     explanation: '`{remove}` एक आइटम `{from}` एक सूची।'
-    demo_code: |-
-        जानवर {is} बिल्ली, कुत्ता, गाय
-        {remove} बिल्ली {from} जानवर
 4:
 -   name: '{print}'
-    explanation: उद्धरण चिह्नों का उपयोग करके हूबहू प्रिंट करें।
     demo_code: '{print} ''हैलो हेडी में आपका स्वागत है।'''
 -   name: '{is}'
-    explanation: कुछ पाठ को एक नाम दें और उद्धरण चिह्नों के बिना `{print}` करें दें।
     demo_code: |-
         name {is} हेडी
         {print} 'मेरा नाम है ' name
+-   name: '{ask}'
+    explanation: '`{ask}` के साथ कुछ पूछो।'
 9:
 -   name: '{if} एकाधिक पंक्तियों के साथ'
-    explanation: '`{ask}` के साथ प्रश्नों के योग का उत्तर दें और देखें कि क्या यह सही है। अब हम दो पंक्तियाँ प्रिंट करते हैं।'
     demo_code: |-
         उत्तर = {ask} '10 प्लस 10 क्या है?'
         {if} उत्तर {is} 20
@@ -66,87 +37,5 @@
         {else}
             {print} 'गलत'
             {print} 'उत्तर 20 है'
--   name: '{repeat}'
-    explanation: एकाधिक पंक्तियाँ दोहराएँ।
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: '`{print}` के बाद आपको कोष्ठक का उपयोग करना होगा।'
-    demo_code: '{print}(''hi!'')'
--   name: '{print} with var'
-    explanation: यदि आप अधिक आइटम प्रिंट करते हैं तो `{print}` के साथ आपको कोष्ठक और अल्पविराम का उपयोग करना होगा।
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: कुछ पूछने के लिए `{ask}` के बजाय `{input}` का उपयोग करें।
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
-
--   name: '{if} {elif} {else}'
--   name: छोटा
-    explanation: हम `<` का उपयोग यह जांचने के लिए करते हैं कि पहली संख्या दूसरी संख्या से छोटी है या नहीं।
-    demo_code: |-
-        उम्र = {input}('आप कितने साल के हैं?')
-        {if} उम्र <13:
-            {print}('तुम मुझसे छोटे हो!')
--   name: बड़ा
-    explanation: हम `>` का उपयोग यह जांचने के लिए करते हैं कि पहली संख्या दूसरी संख्या से बड़ी है या नहीं।
-    demo_code: |-
-        उम्र = {input}('आप कितने साल के हैं?')
-        {if} उम्र> 13:
-            {print}('आप मुझसे बड़े हो!')
--   name: बराबरी का
-    explanation: हम `==` का उपयोग यह जांचने के लिए करते हैं कि क्या दो चीजें समान हैं।
-    demo_code: |-
-        उत्तर = {input}('5*5 क्या है?')
-        {if} उत्तर == 25:
-             {print}('यह सही है!')
--   name: सम नही
-    explanation: हम `!=` का उपयोग यह जांचने के लिए करते हैं कि क्या दो चीजें समान नहीं हैं।
-    demo_code: |-
-        उत्तर = {input}('5 * 5 क्या है?')
-        {if} उत्तर != 25:
-            {print}('वह सही नहीं है!')
--   name: छोटा या बराबर
-    explanation: हम `<=` का उपयोग यह जांचने के लिए करते हैं कि पहली संख्या दूसरी संख्या से छोटी है या उसके बराबर है।
-    demo_code: |-
-        उम्र = {input}('आप कितने साल के हैं?')
-        {if} उम्र <= 12:
-            {print}('तुम मुझसे छोटे हो!')
--   name: बड़ा या बराबर
-    explanation: हम `>=` का उपयोग यह जांचने के लिए करते हैं कि पहली संख्या दूसरी संख्या से बड़ी है या उसके बराबर है।
-    demo_code: |-
-        उम्र = {input}('आप कितने साल के हैं?')
-        {if} उम्र>= 14:
-            {print}('आप मुझसे बड़े हो!')
-14:
--   name: 'creating a list'
-    explanation: वर्गाकार कोष्ठकों वाली सूचियाँ।
-    demo_code: |-
-        फल = ['सेब', 'केला', 'चेरी']
-- {}
--   name: '{range}'
-    explanation: '`{range}` के बाद आपको कोष्ठक का उपयोग करना होगा।'
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-             {print}('हैलो, टाइम्स', i)
-16:
--   name: '{while}'
-    explanation: हम `{while}` लूप का उपयोग न के बराबर के साथ कर सकते हैं।
-    demo_code: |-
-        उत्तर = 0
-        {while} उत्तर!= 25:
-            उत्तर = {input}('5 गुना 5 क्या है?')
-        {print}('एक सही उत्तर दिया गया है')
--   name: छोटा {while}
-    explanation: हम `{while}` लूप का उपयोग `<` और `>` के साथ भी कर सकते हैं।
-    demo_code: |-
-        गिनती = 1
-        {while} गिनती < 3:
-            {print}('हम ऐसा करते हैं', 3 - गिनती, 'अधिक बार')
-            गिनती = गिनती + 1
-        {print}('हम कर चुके हैं')

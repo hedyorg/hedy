@@ -1,56 +1,17 @@
-1:
--   name: {print}
-    explanation: কিছু `{print}` করার থাকলে `{print}` ব্যবহার করুন
-    demo_code: |-
-        {print} হেডিতে আপনার স্বাগত!
--   name: {ask}
-    explanation: কিছু `{ask}` করার থাকলে `{ask}` ব্যবহার করুন
-    demo_code: |-
-        {ask} আপনার প্রিয় রং কি ?
--   name: {answer}
-    explanation: কিছু পুনরাবৃত্তি করার থাকলে `{answer}` ব্যবহার করুন
-    demo_code: |-
-        {ask} আপনার প্রিয় রং কি ?
-        {print} তো আপনার প্রিয় রং হচ্ছে {answer}
--   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} left
-        {forward} 25
-        {turn} right
 2:
 -   name: '{is}'
-    explanation: প্রোগ্রামে ব্যবহার করার জন্যে যে কোন শব্দকে নাম দাও `{is}` ব্যবহার  করে
     demo_code: |-
         নাম {is}  হেডি 
         {print} স্বাগত হেডি"
 3:
+-   {}
 -   name: লক্ষ্যহীন ভাবে পছন্দ কর
     explanation: Choose a random word from a group with `{at}` and `{random}`
-    demo_code: |-
-        প্রাণী {is} হল, কুকুর, বিড়াল, ক্যাঙ্গারু
-        {print} প্রাণী {at} {random}
 -   name: '{add}'
-    explanation: add an item to a list
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
 -   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
 4:
--   name: {print}
-    explanation: হুবহু {print} করুন কোটেশন চিহ্ন ব্যবহার  করে
-    demo_code: |- 
-        {print} 'হ্যালো হেডিতে আপনার স্বাগত'
--   name: {is}
-    explanation: কিছু পাঠকে নাম দিন এবং কোটেশন চিহ্ন ছাড়া {print} করুন
+-   {}
+-   name: '{is}'
     demo_code: |-
         নাম {is}  হেডি 
         {print} 'আমার নাম is ' নাম

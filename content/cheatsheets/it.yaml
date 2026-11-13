@@ -1,60 +1,22 @@
 1:
--   name: {print}
-    explanation: Scrivi qualcosa con `{print}`.
+-   explanation: Scrivi qualcosa con `{print}`.
     demo_code: |-
         {print} Ciao benvenuta/o su Hedy!
--   name: {ask}
-    explanation: Chiedi qualcosa con `{ask}`.
-    demo_code: |-
-        {ask} Qual è il tuo colore preferito?
--   name: {answer}
-    explanation: Ripeti qualcosa usando `{answer}`.
-    demo_code: |-
-        {ask} Qual è il tuo colore preferito?
-        {print} Quindi il tuo colore preferito è {answer}
--   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} left
-        {forward} 25
-        {turn} right
+-   explanation: Chiedi qualcosa con `{ask}`.
 2:
--   name: {is}
-    explanation: Dà un nomignolo da usare nel programma ad una parola con `{is}`.
-    demo_code: |-
+-   demo_code: |-
         nome {is} Hedy
         {print} benvenuta nome
--   name: '{sleep}'
-    explanation: Con `{sleep}` è possibile mettere Hedy in pausa per qualche secondo.
-    demo_code: |-
-        {sleep} 3
 3:
+-   {}
 -   name: scegli_acaso
     explanation: Scegli una parola a caso da un gruppo con `{at}` e `{random}`
-    demo_code: |-
-        animali {is} cane, gatto, canguro
-        {print} animali {at} {random}
 -   name: '{add}'
-    explanation: add an item to a list
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
 -   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
 4:
--   name: {print}
-    explanation: Scrivi esattamente quello che metti tra virgolette
-    demo_code: |-
+-   demo_code: |-
         {print} 'Ciao benvenuta/o su Hedy.'
--   name: {is}
-    explanation: Dai un nomignolo ad un testo e scrivilo con `{print}` senza usare le virgolette
-    demo_code: |-
+-   demo_code: |-
         nome {is} Hedy
         {print} 'Il mio nome è ' nome
+-   explanation: Chiedi qualcosa con `{ask}`.

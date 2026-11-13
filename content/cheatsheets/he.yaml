@@ -4,60 +4,31 @@
     demo_code: '{print} שלום וברוכים הבאים להֶדִי!'
 -   name: '{ask}'
     explanation: שאלו משהו עם `{ask}`.
-    demo_code: '{ask} מה הצבע האהוב עליך?'
--   name: '{answer}'
-    explanation: חזרו על משהו באמצעות `{answer}`.
-    demo_code: |-
-        {ask} מה הצבע האהוב עליך?
-        {print} אז הצבע האהוב עליך הוא {answer}
--   name: '{forward}'
-    explanation: ציירו קו עם `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: הורו לצב לפנות עם `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: תנו למילה שם לשימוש בתוכנה באמצעות `{is}`. בחרו איזה שם שתרצו.
     demo_code: |-
         שם {is} הֶדִי
         {print} ברוכה הבאה שם
--   name: '{sleep}'
-    explanation: '`{sleep}` נותן להֶדִי לעצור למספר שניות.'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: בחר באקראי
     explanation: בחרו באקראי מילה מתוך קבוצה באמצעות `{at}` ו `{random}`.
-    demo_code: |-
-        חיות {is} כלב, חתול, קנגורו
-        {print} חיות {at} {random}
 -   name: '{add}'
     explanation: '`{add}` פריט `{to_list}` רשימה.'
-    demo_code: |-
-        חיות {is} פרה, חתול
-        {add} כלב {to_list} חיות
 -   name: '{remove}'
     explanation: '`{remove}` פריט `{from}` רשימה.'
-    demo_code: |-
-        חיות {is} חתול, כלב, פרה
-        {remove} כלב {from} חיות
 4:
 -   name: '{print}'
-    explanation: הדפיסו את הטקסט המדויק על ידי שימוש במירכאות.
     demo_code: '{print} ''ברוכים.ות הבאים.ות להֶדִי.'''
 -   name: '{is}'
-    explanation: תנו שם לטקסט ו`{print}` בלי מירכאות.
     demo_code: |-
         שמי {is} הֶדִי
         {print} 'שמי הוא ' שמי
+-   name: '{ask}'
+    explanation: שאלו משהו עם `{ask}`.
 9:
 -   name: '{if} עם מספר שורות'
-    explanation: קבלו את התשובה למספר שאלות עם `{ask}` ובדקו שהיא נכונה. עכשיו ביכולתנו להדפיס מספר שורות.
     demo_code: |-
         תשובה = {ask} 'כמה זה 10 ועוד 10?'
         {if} תשובה {is} 20
@@ -66,21 +37,5 @@
         {else}
             {print} 'טעות.'
             {print} 'התשובה היא 20'
--   name: '{repeat} עם מספר שורות'
-    explanation: חזרו על מספר שורות.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
--   name: '{if} {elif} {else}'
--   name: קטן יותר
-    explanation: אנחנו משתמשים ב-`<` כדי לבדוק אם המספר הראשון קטן מהמספר השני.
-    demo_code: |-
-        גיל = {input}('בת כמה את?')
-        {if} גיל < 13:
-            {print}('את יותר קטנה ממני!')
--   name: גדול יותר
-    explanation: אנחנו משתמשים ב-`>` כדי לבדוק אם המספר הראשון גדול מהמספר השני.

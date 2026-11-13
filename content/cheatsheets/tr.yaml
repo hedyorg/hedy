@@ -4,60 +4,31 @@
     demo_code: '{print} Merhaba, Hedy''ye hoş geldiniz!'
 -   name: '{ask}'
     explanation: '`{ask}` ile bir şey sor.'
-    demo_code: '{ask} En sevdiğin renk nedir?'
--   name: '{answer}'
-    explanation: '`{answer}` kullanarak bir şeyi tekrar edin.'
-    demo_code: |-
-        {ask} En sevdiğin renk nedir?
-        {answer} demek en sevdiğin renk
--   name: '{forward}'
-    explanation: '`{forward}`ile bir çizgi çizin.'
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: '`{turn}` ile çizim kaplumbağasını döndürün.'
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: '`{is}` kullanarak, programda kullanılacak bir kelimeye bir isim verin. İsmi kendiniz seçebilirsiniz.'
     demo_code: |-
         isim {is} Hedy
         {print} merhaba isim
--   name: '{sleep}'
-    explanation: '`{sleep}` ile Hedy''nin bir(kaç) saniye duraklamasını sağlayın.'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Rastgele seçin
     explanation: '`{at}` ve `{random}` ile bir gruptan rastgele bir kelime seçin.'
-    demo_code: |-
-        hayvanlar {is} köpek, kedi, kanguru
-        {print} hayvanlar {at} {random}
 -   name: '{add}'
     explanation: '`{add}` bir öğe `{to_list}` bir liste.'
-    demo_code: |-
-        hayvanlar {is} inek, kedi
-        {add} köpek {to_list} hayvanlar
 -   name: '{remove}'
     explanation: '`{remove}` bir öğe `{from}` bir liste.'
-    demo_code: |-
-        hayvanlar {is} kedi, köpek, inek
-        {remove} köpek {from} hayvanlar
 4:
 -   name: '{print}'
-    explanation: Tırnak işaretlerini kullanarak tam olarak yazdırın.
     demo_code: '{print} "Merhaba, Hedy''ye hoş geldiniz."'
 -   name: '{is}'
-    explanation: Bir metne bir isim verin ve `{print}` ile tırnak işaretleri olmadan yazdırın.
     demo_code: |-
         isim {is} Hedy
         {print} 'benim adım ' isim
+-   name: '{ask}'
+    explanation: '`{ask}` ile bir şey sor.'
 9:
 -   name: '{if} ile çoklu satırlar'
-    explanation: '`{ask}` ile bir toplama sorusunun cevabını alın ve doğru olup olmadığına bakın. Şimdi iki satır yazdırıyoruz.'
     demo_code: |-
         cevap = {ask} '10 artı 10 kaç eder?'
         {if} cevap {is} 20
@@ -66,87 +37,5 @@
         {else}
             {print} 'Yanlış'
             {print} 'Cevap 20 olacaktı'
--   name: '{repeat} ile çoklu satırlar'
-    explanation: Birden fazla satırı tekrarlayın.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: '`{print}` ifadesinden sonra parantez kullanmanız gerekir.'
-    demo_code: '{print}(''Merhaba!'')'
--   name: '{print} ile değişken'
-    explanation: '`{print}` ile daha fazla öğe yazdırıyorsanız, parantezler ve virgüller kullanmanız gerekir.'
-    demo_code: |-
-        isim = 'Hedy'
-        {print}('Benim adım ', isim)
--   name: '{input} ile bir şey sorun'
-    explanation: Bir şey sormak için `{ask}` yerine `{input}` kullanın.
-    demo_code: |-
-        isim = {input}('Adın ne senin?')
-        {print}('Demek senin adın ', isim)
-
--   name: '{if} {elif} {else}'
--   name: Daha küçük
-    explanation: İlk sayının ikinci sayıdan küçük olup olmadığını kontrol etmek için `<` kullanırız.
-    demo_code: |-
-        yaş = {input}('Kaç yaşındasın?')
-        {if} yaş < 13:
-            {print}('Sen benden daha gençsin!')
--   name: Daha büyük
-    explanation: İlk sayının ikinci sayıdan büyük olup olmadığını kontrol etmek için `>` kullanırız.
-    demo_code: |-
-        yaş = {input}('Kaç yaşındasın?')
-        {if} yaş > 13:
-            {print}('Sen benden daha yaşlısın!')
--   name: Eşit
-    explanation: İki şeyin aynı olduklarını kontrol etmek için `==` kullanırız.
-    demo_code: |-
-        cevap = {input}('5 * 5 kaç eder?')
-        {if} cevap == 25:
-            {print}('Bu doğru!')
--   name: Eşit değil
-    explanation: İki şeyin aynı olmadıklarını kontrol etmek için `!=` kullanırız.
-    demo_code: |-
-        cevap = {input}('5 * 5 kaç eder?')
-        {if} cevap != 25:
-            {print}('Bu doğru değil!')
--   name: Küçük veya eşit
-    explanation: İlk sayının ikinci sayıdan küçük veya ona eşit olduğunu kontrol etmek için `<=` kullanırız.
-    demo_code: |-
-        yaş = {input}('Kaç yaşındasın?')
-        {if} yaş <= 12:
-            {print}('Sen benden daha gençsin!')
--   name: Büyük veya eşit
-    explanation: İlk sayının ikinci sayıdan büyük veya ona eşit olduğunu kontrol etmek için `>=` kullanırız.
-    demo_code: |-
-        yaş = {input}('Kaç yaşındasın?')
-        {if} yaş >= 14:
-            {print}('Sen benden daha yaşlısın!')
-14:
--   name: 'creating a list'
-    explanation: Köşeli parantezler ile listeler.
-    demo_code: |-
-        meyve = ['elma', 'muz', 'kiraz']
-- {}
--   name: '{range}'
-    explanation: '`{range}` tan sonra parantez kullanmanız gerekir.'
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Merhaba, çarpı ', i)
-16:
--   name: '{while}'
-    explanation: Eşit değil ile `{while}` döngüsünü kullanabiliriz.
-    demo_code: |-
-        cevap = 0
-        {while} cevap != 25:
-            cevap = {input}('5 kere 5 kaç eder?')
-        {print}('Doğru bir cevap verilmiştir')
--   name: '{while} with > and <'
-    explanation: Ayrıca `{while}` döngüsünü `<` ve `>` ile de kullanabiliriz.
-    demo_code: |-
-        sayaç = 1
-        {while} sayaç < 3:
-            {print}('Bunu ', 3 - sayaç, ' kere daha yapıyoruz')
-            sayaç = sayaç + 1
-        {print}('İşimizi bitirdik')

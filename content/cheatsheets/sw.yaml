@@ -5,69 +5,22 @@
         {print} Salamu, karibu Hedy!
 -   name: '{ask}'
     explanation: Kuliza mtumiaji achapishe kitu, tumia neno `{ask}`.
-    demo_code: |-
-        {ask} Unaitwa nani?
--   name: '{answer}'
-    explanation: Rudia kuchapisha kitu kwa kutumia neno `{answer}`.
-    demo_code: |-
-        {ask} Unaitwa nani?
-        {print} Sawa, Kumbe unaitwa {answer}
--   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} left
-        {forward} 25
-        {turn} right
 2:
 -   name: '{is}'
-    explanation: Tumia neno `{is}` kuvipa vitu majina yao
     demo_code: |-
         nchi {is} Tanzania
         {print} karibu nchi
+-   name: '{ask}'
 3:
+-   {}
 -   name: choose_random
     explanation: Chagua neno nasibu(random) kutoka kikundi kwa kutumia maneno `{at}` na `{random}`
-    demo_code: |-
-        majina {is} Ayubu, Nasra, Novatus
-        {print} majina {at} {random}
 -   name: '{add}'
-    explanation: add an item to a list
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
 -   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
 4:
 -   name: '{print}'
-    explanation: Tumia fungua semi na funga semi ya aina '' ukitumia `print`
-    demo_code: print 'Jambo!!, karibu Hedy.'
 -   name: '{is}'
-    explanation: Vipa jina sentensi au neno na zichapishe bila kutumia fungua semi na funga semi.
-    demo_code: |-
-        jina is Juma
-        print 'Naitwa ' jina
-16:
--   name: square brackets
-    explanation: Tutatumia mabano ya aina [ ] na pia tutatumia fungua semi na funga semi tukiandika majina vilivyo kwenye orodha.
-    demo_code: |-
-        matunda = ['embe', 'machungwa', 'ndizi']
-        print matunda
--   name: Chagua kitu kutoka kwenye orodha.
-    explanation: 'Kuchagua kitu kutoka kwenye orodha yetu, tutatumia mfumo ifuatoyo: [nambari] kwa mfano matunda[1] ikamaanisha, utachagua kitu cha kwanza iliyopo katika orodha.'
-    demo_code: |-
-        matunda = ['embe', 'machungwa', 'ndizi']
-        matundayaywanya = matunda[1]
-        print matundayaywanya
--   name: Kuchagua matunda nasibu kutoka kwa orodha
-    explanation: Kuchagua matunda nasibu kutoka kwa orodha, tumia mfumo ufuatavyo, [random], mfano matunda[random] kupata matunda nasibu kutoka kwenye orodha.
-    demo_code: |-
-        matunda = ['embe', 'machungwa', 'ndizi']
-        matunda_nasibu = matunda[random]
-        print matunda_nasibu
+-   name: '{ask}'
+    explanation: Kuliza mtumiaji achapishe kitu, tumia neno `{ask}`.
+13:
+-   name: '{print}'

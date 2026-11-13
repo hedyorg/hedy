@@ -4,128 +4,30 @@
     demo_code: '{print} Hei! Tervetuloa Hedyn pariin!'
 -   name: '{ask}'
     explanation: Kysy jotain komennolla `{ask}`.
-    demo_code: '{ask} Mikä on lempivärisi?'
--   name: '{answer}'
-    explanation: Toista jotain komennolla `{answer}`.
-    demo_code: |-
-        {ask} Mikä on lempivärisi?
-        {print} lempivärisi on siis {answer}
--   name: '{forward}'
-    explanation: Piirrä viiva komennolla `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: Käännä piirtävä kilpikonna komennolla `{turn}`.
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Anna sanalle nimi jota voit käyttää myöhemmin ohjelmassa komennolla `{is}`. Voit valita nimen itse.
     demo_code: |-
         nimi {is} Hedy
         {print} Tervetuloa nimi
--   name: '{sleep}'
-    explanation: '`{sleep}`:lla voit antaa Hedyn pysähtyä pariksi sekunniksi.'
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: Valitse satunnainen
     explanation: Valitse satunnainen sana listasta komennoilla `{at}` ja `{random}`.
-    demo_code: |-
-        eläimet {is} koira, kissa, kenguru
-        {print} eläimet {at} {random}
 -   name: '{add}'
     explanation: '`{add}` asia `{to_list}`.'
-    demo_code: |-
-        eläimet {is} lehmä, kissa
-        {add} koira {to_list} eläimet
 -   name: '{remove}'
     explanation: '`{remove}` asia `{from}`.'
-    demo_code: |-
-        eläimet {is} kissa, koira, lehmä
-        {remove} koira {from} eläimet
 4:
 -   name: '{print}'
-    explanation: Tulosta tarkasti käyttäen lainausmerkkejä.
     demo_code: '{print} ''Hei! Tervetuloa Hedyn pariin.'''
 -   name: '{is}'
-    explanation: Anna tekstinpätkälle nimi ja käytä komentoa `{print}` ilman lainausmerkkejä.
     demo_code: |-
         nimi {is} Hedy
         {print} 'minun nimeni on' nimi
+-   name: '{ask}'
+    explanation: Kysy jotain komennolla `{ask}`.
 9:
 -   name: '{if} monelle riville'
-    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
-    demo_code: |-
-        vastaus = {ask} 'Paljonko on 10 plus 10?'
-        {if} vastaus {is} 20
-            {print} 'Hienoa!!'
-            {print} 'Vastaus on tosiaan' vastaus
-        {else}
-            {print} 'Väärin'
-            {print} 'Vastaus on 10'
--   name: '{repeat} monelle riville'
-    explanation: Toista monta riviä.
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
--   name: '{if} {elif} {else}'
--   name: Pienempi
-    explanation: Käytämme merkkiä `<` tarkistaaksemme onko ensimmäinen numero toista numeroa pienempi.
-    demo_code: |-
-        ikä = {input}('Kuinka vanha olet?')
-        {if} ikä < 13:
-            {print}('Olet minua nuorempi!')
--   name: Suurempi
-    explanation: Käytämme merkkiä `>` tarkistaaksemme onko ensimmäinen numero toista numeroa suurempi.
-    demo_code: |-
-        ikä = {input}('Kuinka vanha olet?')
-        {if} ikä > 13:
-            {print}('Olet minua vanhempi!')
--   name: Yhtä suuri
-    explanation: Käytämme merkkejä `==` tarkistaaksemme ovatko kaksi asiaa samoja.
-    demo_code: |-
-        vastaus = {input}('Paljonko on 5 * 5?')
-        {if} vastaus == 25:
-            {print}('Oikein!')
--   name: Eivät yhtä suuret
-    explanation: Käytämme merkkejä `!=` tarkistaaksemme ettei kaksi asiaa ole samoja.
-    demo_code: |-
-        vastaus = {input}('Paljonko on 5 * 5?')
-        {if} vastaus != 25:
-            {print}('Väärin!')
--   name: Pienempi tai yhtäsuuri
-    explanation: Käytämme merkkejä `<=` tarkistaaksemme onko ensimmäinen numero pienempi tai yhtäsuuri kuin jälkimmäinen numero.
-    demo_code: |-
-        ikä = {input}('Kuinka vanha olet?')
-        {if} ikä <= 12:
-            {print}('Olet minua nuorempi!')
--   name: Suurempi tai yhtäsuuri
-    explanation: Käytämme merkkejä `>=` tarkistaaksemme onko ensimmäinen numero suurempi tai yhtäsuuri kuin jälkimmäinen numero.
-    demo_code: |-
-        ikä = {input}('Kuinka vanha olet?')
-        {if} ikä >= 14:
-            {print}('Olet minua vanhempi!')
-16:
--   name: '{while}'
-    explanation: Voimme käyttää `{while}` silmukkaa erisuuruuden kanssa.
-    demo_code: |-
-        vastaus = 0
-        {while} vastaus != 25:
-            vastaus = {input}('Paljonko on 5 kertaa 5?')
-        {print} 'Oikea vastaus on annettu'
--   name: Pienempi {while}
-    explanation: We can also use the `{while}` loop with `<` and `>`.
-    demo_code: |-
-        count = 1
-        {while} count < 3:
-            {print}('We do this ', 3 - count, ' more times')
-            count = count + 1
-        {print}('We are done')
-

@@ -4,54 +4,26 @@
     demo_code: '{print} خوش آمدید!'
 -   name: '{ask}'
     explanation: با دستور `{ask}` یک سوالی رو بپرسید.
-    demo_code: '{ask} رنگ مورد علاقه ات چیه?'
--   name: '{answer}'
-    explanation: با دستور `{answer}` یک چیز را تکرار کنید.
-    demo_code: |-
-        {ask} رنگ مورد علاقه ات چیه؟?
-        {print} پس رنگ مورد علاقه ات: {answer}
--   name: '{forward}'
-    explanation: با دستور `{forward}` یک خط بکش.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: با دستور `{turn}` لاکپشت رو بچرخون
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: با دستور `{is}` به یک کلمه، یک اسم بدید. اسم می‌تونه به انتخاب خودت باشه.
     demo_code: |-
         name {is} Hedy
         {print} welcome name
--   name: '{sleep}'
-    explanation: بذار هِدی برای یک یا چند ثانیه توقف کنه.
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: یه چیز تصادفی انتخاب کن
     explanation: یک حرف را به صورت تصادفی انتخاب کن `{at}` و`{random}`
-    demo_code: |-
-        حیوانات {is} سگ, گربه, کانگورو
-        {print} حیوانات {at} {random}
 -   name: '{add}'
-    explanation: یک آیتم به لیست اضافه کن
-    demo_code: |-
-        حیوانات {is} گاو, گربه
-        {add} سگ {to_list} حیوانات
 -   name: '{remove}'
-    explanation: یک آیتم را از لیست حذف کن
-    demo_code: |-
-        حیوانات {is} گربه, سگ, گاو
-        {remove} سگ {from} حیوانات
 4:
 -   name: '{print}'
-    explanation: print exactly using quotation marks
     demo_code: '{print} ''سلام به هدی خوش اومدی.'''
 -   name: '{is}'
-    explanation: به متن یک نام بده و `{print}` بدون گیومه
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
+-   name: '{ask}'
+    explanation: با دستور `{ask}` یک سوالی رو بپرسید.
+13:
+-   name: '{print}'

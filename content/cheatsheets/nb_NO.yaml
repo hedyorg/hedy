@@ -1,141 +1,30 @@
 1:
 -   name: '{print}'
-    explanation: '{print} noe med `{print}`.'
     demo_code: '{print} Hallo velkommen til Hedy!'
 -   name: '{ask}'
     explanation: Still et spørsmål med `{ask}`.
-    demo_code: '{ask} Hva er favorittfargen din?'
--   name: '{answer}'
-    explanation: gjenta noe med å bruke `{answer}`.
-    demo_code: |-
-        {ask} Hva er favorittfargen din?
-        {print} så favorittfargen din er {answer}
--   name: '{forward}'
-    explanation: Tegn en linje med `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: snu tegneskilpadden med `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Gi et ord et navn som kan brukes andre steder i programmet med kommandoen `{is}`. Du kan velge navnet helt selv.
     demo_code: |-
         navn {is} Hedy
         {print} Velkommen navn
--   name: '{sleep}'
-    explanation: La Hedy få seg en pause i et sekund eller fler.
-    demo_code: |-
-        {sleep} 3
+-   name: '{ask}'
 3:
+-   {}
 -   name: velg_tilfeldig
     explanation: Velg et tilfeldig ord fra en liste med `{at}` og `{random}`
-    demo_code: |-
-        dyr {is} hund, katt, hest
-        {print} dyr {at} {random}
 -   name: '{add}'
-    explanation: legg til en ting i listen
-    demo_code: |-
-        dyr {is} ku, katt
-        {add} hund {to_list} dyr
 -   name: '{remove}'
-    explanation: fjern en ting fra en liste
-    demo_code: |-
-        dyr {is} katt, hund, ku
-        {remove} hund {from} dyr
 4:
 -   name: '{print}'
-    explanation: skriv ut nøyaktig det du vil med fnutter
     demo_code: '{print} ''Hallo, velkommen til Hedy.'''
 -   name: '{is}'
-    explanation: Gi et navn til noe tekst og `{print}` ut uten fnutter
     demo_code: |-
         navn {is} Hedy
         {print} 'Mitt navn er ' navn
+-   name: '{ask}'
+    explanation: Still et spørsmål med `{ask}`.
 9:
 -   name: '`{if}` med flere linjer'
-    explanation: '''{ask}'' om svaret på et regnestykke og se om det er korrekt. Nå skriver vi ut to linjer.'
-    demo_code: |-
-        svaret = {ask} 'Hva er 20 pluss 20?'
-        {if} svaret {is} 40
-            {print} 'Bra jobbet!'
-            {print} 'Svaret er ' svaret
-        else
-            {print} 'Feil'
-            {print} 'Svaret er 40'
--   name: '`{repeat}` med flere linjer'
-    explanation: '{repeat} flere linjer'
-    demo_code: |-
-        {repeat} 4 {times}
-            {print} 'Hello!'
 13:
 -   name: '{print}'
-    explanation: Med`{print}` må du bruke paranteser
-    demo_code: '{print}(''hei!'')'
--   name: '{print} med var'
-    explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
-    demo_code: |-
-        navn = 'Hedy'
-        {print}('Mitt navn er ', navn)
--   name: 'ask something with {input}'
--   name: '{if} {elif} {else}'
--   name: Mindre
-    explanation: Vi bruker `<` for å sjekke om det første tallet er mindre enn det andre tallet.
-    demo_code: |-
-        alder = {input}('Hvor gammel er du?')
-        {if} alder < 13:
-            {print}('Du er yngre enn meg!')
--   name: Større
-    explanation: Vi bruker `>` for å sjekke om det første tallet er større enn det andre.
-    demo_code: |-
-        alder = {input}('Hvor gammel er du?')
-        {if} alder > 13:
-            {print}('Du er eldre enn meg!')
--   name: Er lik
-    explanation: Vi bruker `==` for å sjekke om to ting er like.
-    demo_code: |-
-        svar = {input}('Hva er  5 * 5?')
-        {if} svar == 25:
-            {print}('Det er ikke korrekt!')
--   name: Ikke lik
-    explanation: Vi bruker`!=` å sjekke om ting er 'ikke lik'.
-    demo_code: |-
-        svar = {input}('Hva er 5 * 5?')
-        {if} svar != 25:
-            {print}('Det er ikke korrekt!')
--   name: Mindre {or} lik
-    explanation: Vi bruker `<=` for å sjekke om det første tallet er mindre enn det andre tallet.
-    demo_code: |-
-        alder = {input}('Hvor gammel er du?')
-        {if} alder <= 12:
-            {print}('Du er yngre enn meg!')
--   name: Større eller lik
-    explanation: Vi bruker `>=` til å sjekke om det første tallet er større eller lik det andre tallet.
-    demo_code: |-
-        alder = {input}('Hvor gammel er du?')
-        {if} alder >= 14:
-            {print}('Du er eldre enn meg!')
-14:
--   name: firkantparantes
-    explanation: Liste med firkantparanteser
-    demo_code: |-
-        frukt = ['eple', 'banan', 'kirsebær']
-16:
--   name: '{while}'
-    explanation: Vi kan bruke `{while}`løkken med ikke-lik
-    demo_code: |-
-        svar = 0
-        {while} svar != 25:
-            svar = {input}('Hva er 5 ganger 5?')
-        {print}('Svaret er korrekt!')
--   name: Mindre {while}
-    explanation: Vi kan også bruke `{while}` løkken med `<` og `>`.
-    demo_code: |-
-        telling = 1
-        {while} telling < 3:
-            {print}('Vi gjør dette ' 3 - telling ' flere ganger')
-            telling = telling + 1
-        {print}('Vi er ferdig å telle')
