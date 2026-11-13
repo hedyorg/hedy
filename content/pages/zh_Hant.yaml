@@ -601,22 +601,6 @@ teacher-guide:
                 solution_text: 以下是正確的程式碼：
                 solution_code: '{print} 2.5 + 2.5'
             title: 學生在小數中使用逗號，而不是句點
-        level: '12'
-    -   sections:
-        -   example:
-                error_text: 這兩個指令看起來可能很相似，但功能大不相同。
-                error_code: |-
-                    遊戲 {is} {ask} '你想玩遊戲嗎？'
-                    時間 {is} {ask} '你有時間玩嗎？'
-                    {if} 遊戲 {is} '是' {or} 時間 {is} '是'
-                        {print} '一起玩吧！'
-                solution_text: 在這個例子中，對方必須在兩個問題都回答「是」，所以應該使用 `and`。
-                solution_code: |-
-                    遊戲 {is} {ask} '你想玩遊戲嗎？'
-                    時間 {is} {ask} '你有時間玩嗎？'
-                    {if} 遊戲 {is} '是' {and} 時間 {is} '是'
-                        {print} '一起玩吧！'
-            title: 學生混淆 `{and}` 和 `{or}`
         level: '13'
     -   sections:
         -   example:
