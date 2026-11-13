@@ -468,8 +468,8 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {ask} Como vai você?
-                    {print} Você vai {answer}
+                    {ask} Como você está?
+                    {print} Você está {answer}
                     {ask} Qual é o seu esporte favorito?
                     {print} Você gosta de {answer}
                     {ask} Qual é o seu esporte menos favorito?
@@ -1173,6 +1173,21 @@ adventures:
                     ### Exercício
                     Copie o código exemplo à sua tela de entrada e preencha as lacunas para fazer o código funcionar.
                     **Extra** Altere o código e deixe que a vidente preveja não apenas seu nome, mas também sua idade, seu time favorito ou algo mais sobre você.
+                answer_code: |
+                    ```
+                    {print} Olá, sou Hedy, a vidente!
+                    {ask} Quem é você?
+                    {print} Deixe-me dar uma olhada na minha bola de cristal
+                    {print} Eu vejo... eu vejo...
+                    {print} Seu nome é {answer}
+                    {ask} Por quantos anos você já viveu?
+                    {print} Interessante
+                    {print} Minha bola de cristal me diz que você tem {answer} anos de idade
+                    {ask} Que esporte você joga?
+                    {print} A bola... a bola...
+                    {print} Ela me diz o seu esporte favorito...
+                    {print} Ela me diz que você joga {answer}
+                    ```
             3:
                 story_text: |
                     Nos níveis anteriores você criou sua primeira máquina de adivinhação, mas Hedy não conseguia prever nada.
@@ -1398,6 +1413,25 @@ adventures:
                     Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
                     Agora termine a história adicionando pelo menos 5 linhas de código.
                     Lembre-se de começar cada linha com um comando `{print}` ou `{ask}`.
+                answer_code: |
+                    ```
+                    {print} Como eu cheguei aqui?
+                    {print} Lembro-me de meu amigo me dizendo para entrar na antiga mansão...
+                    {print} e de repente tudo ficou preto.
+                    {print} Mas como eu acabei no chão...?
+                    {print} Minha cabeça dói como se eu tivesse sido atingido por um taco de beisebol!
+                    {print} Que som é esse?
+                    {print} Oh não! Eu sinto que não estou sozinho nesta casa!
+                    {print} Eu preciso sair daqui!
+                    {print} Há 3 portas na minha frente..
+                    {ask} Qual porta devo escolher?
+                    {print} eu escolho a porta {answer}
+                    {print} Eu abro a porta com cuidado
+                    {print} Eu dou uma espiada
+                    {print} Ah não!
+                    {print} Tem uma matilha de lobos esfomeados olhando para mim
+                    {print} Eu rapidamente fecho a porta.
+                    ```
             2:
                 story_text: |
                     Nesta casa mal-assombrada, você pode escolher seus monstros com emojis. Mas claro, você também poderia usar palavras.
@@ -2212,6 +2246,29 @@ adventures:
                     Este é o início de uma pequena escada. Você pode fazê-la ter 5 degraus?
                 example_code_2: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 example_code: "```\n{forward} 100\n{turn} {left}\n```\n"
+                answer_code: |
+                    ```
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    ```
             2:
                 story_text: |
                     No nível 1, a tartaruga só podia virar para a esquerda ou para a direita. Isso é meio chato!
@@ -2411,6 +2468,50 @@ adventures:
                         Quadrado <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                         Escada <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
+                answer_code: |
+                    Retângulo
+                    ```
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Quadrado
+                    ```
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Escada
+                    ```
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 20
+                    ```
             2:
                 story_text: |
                     ### Exercício
