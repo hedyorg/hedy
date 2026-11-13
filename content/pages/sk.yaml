@@ -877,20 +877,6 @@ teacher-guide:
                         {print} 'Vo zábavakcii použi odsadenie.'
                         {if} use_if_statement_too {is} 'áno'
                             {print} 'A nezabudni odsadiť aj cykly'
-        -   title: Žiaci zabudnú úvodzovky
-            example:
-                error_text: Žiaci teraz potrebujú viac úvodzoviek ako na predchádzajúcich úrovniach. V tomto príklade úvodzovky chýbali v zozname aj v príkaze `{if}`.
-                error_code: |-
-                    superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes {at} {random}
-                    {if} superhero = Batman
-                        {print} 'SOM BATMAN!'
-                solution_text: 'Toto je správny kód:'
-                solution_code: |-
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes {at} {random}
-                    {if} superhero {is} 'Batman'
-                        {print} 'SOM BATMAN!'
     -   level: '13'
         concepts_and_changes: |-
             Na tejto prvej úrovni Hedy Experti sa žiaci čoraz viac dostávajú k pojmom a syntaxi skutočných programovacích jazykov.
