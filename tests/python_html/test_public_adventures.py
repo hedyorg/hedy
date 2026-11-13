@@ -34,3 +34,39 @@ def test_preview_public_adventure_without_solution_example(client: Client, given
     # THEN
     assert response.status_code == 200
     assert 'An adventure' in response.get_data(as_text=True)
+
+
+def a_teacher_with_public_profile_and_adventures(given: Given):
+    creator = given.a_teacher_account()
+    given.db.update_public_profile(creator['username'], {
+        'image': '1', 'personal_text': 'Hi', 'agree_terms': 'yes', 'tags': []})
+    given.some_saved_adventure(creator['username'], name='Shared adventure', public=1)
+    given.some_saved_adventure(creator['username'], name='Draft adventure', public=0)
+    return creator
+
+
+def test_public_profile_shows_public_adventures_to_teachers(client: Client, given: Given):
+    # GIVEN
+    creator = a_teacher_with_public_profile_and_adventures(given)
+    given.logged_in_as_new_teacher()
+
+    # WHEN
+    html = client.get(f'/user/{creator["username"]}').get_data(as_text=True)
+
+    # THEN - only the public adventure is listed
+    assert 'public_page_adventures' in html
+    assert 'Shared adventure' in html
+    assert 'Draft adventure' not in html
+
+
+def test_public_profile_hides_public_adventures_from_students(client: Client, given: Given):
+    # GIVEN
+    creator = a_teacher_with_public_profile_and_adventures(given)
+    given.logged_in_as_new_student()
+
+    # WHEN
+    html = client.get(f'/user/{creator["username"]}').get_data(as_text=True)
+
+    # THEN
+    assert 'public_page_adventures' not in html
+    assert 'Shared adventure' not in html
