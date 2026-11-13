@@ -2292,9 +2292,9 @@ adventures:
                 example_code: |
                     ```
                     #Zadavanje Twister opcija:
-                    strane = 'lijeva', 'desna'
-                    udovi = 'ruka', 'noga'
-                    boje = 'crvena', 'plava', 'zelena', 'žuta'
+                    strane = lijeva, desna
+                    udovi = ruka, noga
+                    boje = crvena, plava, zelena, žuta
 
                     #Definiranje jednog Twister poteza:
                     {define} sljedeci_potez
@@ -7206,7 +7206,7 @@ adventures:
                         oblik = {ask} 'Koji oblik želiš sljedeći na narukvici?'
                         odabrana_boja = {ask} 'U kojoj boji?'
                         {color} odabrana_boja
-                        {if} oblik = 'kvadrat'
+                        {if} oblik = kvadrat
                             {call} nacrtaj_kvadrat
                     ```
                 answer_code: |
@@ -7229,25 +7229,25 @@ adventures:
                             {forward} 30
 
                     #počinjemo na lijevoj strani ekrana
-                    {color} 'white'
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     #pravljenje narukvice
                     {repeat} 5 {times}
-                        {color} 'gray'
+                        {color} gray
                         {forward} 100
                         oblik = {ask} 'Koji oblik želiš sljedeći na narukvici?'
                         odabrana_boja = {ask} 'U kojoj boji?'
                         {color} odabrana_boja
-                        {if} oblik = 'kvadrat'
+                        {if} oblik = kvadrat
                             {call} nacrtaj_kvadrat
-                        {elif} oblik = 'trokut'
+                        {elif} oblik = trokut
                             {call} nacrtaj_trokut
-                        {elif} oblik = "zvijezda"
+                        {elif} oblik = zvijezda
                             {call} nacrtaj_zvijezdu
-                    {color} 'gray'
+                    {color} gray
                     {forward} 100
                     ```
             14:

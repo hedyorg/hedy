@@ -2325,9 +2325,9 @@ adventures:
                 example_code: |
                     ```
                     #Entrer les options de Twister
-                    cotés = "gauche", "droit(e)"
-                    membres = "main", "pied"
-                    couleurs = "rouge", "bleu", "vert", "jaune"
+                    cotés = gauche, droit(e)
+                    membres = main, pied
+                    couleurs = rouge, bleu, vert, jaune
 
                     #Définir un tour de Twister
                     {define} tour_suivant
@@ -5007,7 +5007,7 @@ adventures:
                         forme = {ask} "Quelle forme veux-tu ensuite dans ton bracelet ?"
                         couleur = {ask} "Dans quelle couleur ?"
                         {color} couleur
-                        {if} forme = "carré"
+                        {if} forme = carré
                             {call} dessine_un_carré
                     ```
             16:
