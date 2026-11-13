@@ -26,7 +26,28 @@
             </div>
         {% endif %}
 
-        {% if adventure.get("language") %}
+        {% if is_super_teacher %}
+            {# Super teachers can correct a wrong language; the change is saved right away #}
+            <div class="flex items-center gap-3 my-2">
+                <label for="adventure_language_select" class="inline-block text-gray-600 font-bold" style="{{ labelstyle }}">{{ _('language') }}:</label>
+                <select id="adventure_language_select"
+                    name="language"
+                    class="flex-1 min-w-0 border border-gray-300 rounded-md bg-white text-gray-800 text-base px-3 py-1.5 shadow-sm cursor-pointer focus:outline-none focus:border-blue-500"
+                    data-cy="change_adventure_language"
+                    data-success-message="{{ _('adventure_updated') }}"
+                    hx-post="/public-adventures/change-language/{{ adventure.id }}"
+                    hx-trigger="change"
+                    hx-swap="none"
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then call hedyApp.modal.notifySuccess(@data-success-message) end">
+                    {% if not adventure.get("language") %}
+                        <option value="" selected disabled>-</option>
+                    {% endif %}
+                    {% for lang in available_languages %}
+                        <option value="{{ lang }}" {% if lang == adventure.get("language") %}selected{% endif %}>{{ lang_to_sym(lang) }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% elif adventure.get("language") %}
             <div>
                 <span class="{{ labelclass }}" style="{{ labelstyle }}">{{ _('language') }}:</span>
                 {{ lang_to_sym(adventure.language) }}
