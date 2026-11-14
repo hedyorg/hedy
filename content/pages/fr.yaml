@@ -365,6 +365,16 @@ teacher-guide:
                 solution_text: Utilise les guillemets doubles pour résoudre le problème.
                 solution_code: |-
                     {print} "Tu n'as plus d'erreur maintenant !"
+        concepts_and_changes: |-
+            Au niveau 4, les élèves découvrent pour la première fois l’importance de la syntaxe en programmation. Les guillemets sont introduits à ce niveau, autour du texte dans `{print}` et `{ask}`. Ce n’est peut-être pas le niveau le plus passionnant, mais c’est une compétence essentielle à maîtriser avant de passer aux niveaux suivants. Les élèves peuvent trouver ce niveau difficile, en particulier lorsque des variables apparaissent dans le texte. Nous recommandons de proposer un enseignement explicite et de s’exercer ensemble avec les élèves.
+
+            Nouveautés de ce niveau :
+
+            * Utilisation de guillemets autour de toutes les chaînes de caractères qui suivent `{print}` et `{ask}`
+            * Les variables restent en dehors des guillemets
+            * Explication sur la possibilité de délimitation avec des apostrophes (utilisées en anglais), mais la préférence pour l'usage des guillemets en français
+            * Effacement de l’écran avec `{clear}`
+            * Utilisation des couleurs avec la tortue à dessins avec `{color}`
     -   level: "5"
         sections:
         -   title: Les élèves oublient d'utiliser `{print}` dans une commande `{if}`
@@ -382,19 +392,52 @@ teacher-guide:
             example: {}
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            Le `{if}` et le `{else}` sont introduits à ce niveau.
+
+            Nouveautés de ce niveau :
+            * Faites un choix avec `{if}` et `{else}`
     -   sections:
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            Ce niveau fait un pas de plus pour les commandes `{if}` et `{else}` découvertes au niveau précédent. Avec `{if}` et `{else}`, on ajoutait deux choix à son code. À ce niveau, les élèves apprennent à ajouter d’autres options avec `{elif}`. Il est important que les élèves apprennent à placer `{if}`, `{elif}` et `{else}` sur des lignes séparées. De plus, les élèves apprennent à utiliser `{in}` pour vérifier si une réponse se trouve dans une liste.
+
+            Nouveautés de ce niveau :
+
+            * Ajout de plusieurs choix avec `{elif}`
+            * Vérification de la présence d’un élément dans une liste avec `{in}`
     -   sections:
         -   example: {}
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            À ce niveau, les élèves apprennent à utiliser les mathématiques dans leurs programmes. Ils pourront désormais faire des calculs avec des variables et des nombres décimaux.
+
+            Nouveautés de ce niveau :
+            * Utilisation des symboles mathématiques : + - * et /
+            * Utilisation des nombres décimaux avec un point et pas une virgule
+            * Utilisation des variables dans les calculs
+            * Utilisation du symbole = à la place de `{is}`
     -   sections:
         -   example: {}
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            À ce dernier niveau de Hedy Basic, vos élèves apprendront à utiliser la répétition dans leurs programmes ! Ils peuvent seulement répéter une seule ligne plusieurs fois. La répétition de plusieurs lignes sera enseignée dans les niveaux suivants.
+
+            Nouveautés de ce niveau :
+            * Répétition d'une ligne avec `{repeat} 3 {times}`
+            * Répétition d'une ligne un nombre de fois défini par une variable
     -   sections:
         -   example: {}
+        concepts_and_changes: |-
+            À ce premier niveau de Hedy Avancé, les élèves apprennent à utiliser l'indentation. Elle leur permet d'écrire plusieurs lignes dans une instruction `{if}` ou de répéter plusieurs lignes. Les élèves apprécient souvent beaucoup ce niveau, car il leur permet de créer des programmes plus élaborés.
+            En revanche, certains élèves auront du mal à comprendre quand utiliser l'indentation et comment l'appliquer.
+
+            Nouveautés de ce niveau :
+            * Plusieurs lignes après un `{if}`, un `{elif}` ou un `{else}` grâce à l'indentation
+            * Plusieurs lignes après un `{repeat}` grâce à l'indentation
     -   sections:
         -   example: {}
         -   example: {}
@@ -409,16 +452,50 @@ teacher-guide:
     -   sections:
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            À ce niveau, les élèves découvriront les boucles avec `{for}`
+
+            Nouveautés à ce niveau :
+            * les boucles avec `{for}`
     -   sections:
         -   example: {}
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            À ce dernier niveau de Hedy Avancé, les élèves apprendront à utiliser des fonctions basiques.
+
+            Nouveautés de ce niveau :
+            * Utilisation de fonctions basiques avec `{define}` et `{call}`
     -   sections:
         -   example: {}
+        concepts_and_changes: |-
+            À ce premier niveau de Hedy Expert, les élèves vont s'approcher de plus en plus des concepts et de la syntaxe des vrais langages de programmation.
+            Nous recommandons de ne travailler les niveaux Hedy Expert avec vos élèves que si votre objectif est de les amener à utiliser plus tard d'autres « vrais » langages de programmation (comme Python).
+            Si cet objectif d'apprentissage ne correspond pas à vos élèves, nous recommandons de ne travailler que les niveaux Hedy Basic et Hedy Avancé, où les élèves apprennent les principes de base de la programmation sans être gênés par les règles de syntaxe spécifiques.
+
+            **Attention** : à partir de ce niveau, la syntaxe de Hedy est (presque) la syntaxe de Python. Cela signifie que la syntaxe Hedy apprise précédemment peut ne plus fonctionner ici. Nous expliquerons toute la syntaxe Pythonic, mais pour ne pas submerger les élèves, nous l'avons répartie sur plusieurs niveaux.
+            Il en résulte que certaines fonctionnalités, comme les fonctions et les listes, ne fonctionneront pas à la manière de Hedy, mais n'auront pas encore été expliquées à la manière de Python. Les élèves devront donc faire preuve d'un peu de patience : nous faisons un pas en arrière par rapport aux niveaux précédents pour établir la bonne syntaxe, puis nous apprendrons toutes les fonctionnalités à la manière de Python.
+
+            À ce niveau, les élèves apprennent aussi à utiliser des opérateurs, ce qui leur donne davantage d'occasions d'utiliser les mathématiques dans leurs programmes.
+
+
+            Nouveautés de ce niveau :
+            * Affichage avec la syntaxe Python : `{print}("Bonjour le monde !")`
+            * Affichage de variables et de texte ensemble de cette façon : `{print}("Bonjour, ", name, " !")`
+            * Poser des questions avec `{input}`
+            * Utilisation des deux-points après les instructions `{if}`
+            * Utilisation de ces opérateurs : < > == != <= >=
     -   sections:
         -   example: {}
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            Ce niveau est consacré au travail avec les listes. Les élèves apprendront aussi à utiliser la répétition à la manière de Python.
+
+            Nouveautés de ce niveau :
+            * Travailler avec des listes
+            * Combiner des listes avec `{for}`, `{if}` et `{random}`
+            * Répétition avec `{for} i {in} {range}(1,10)`
     -   sections:
         -   example: {}
         concepts_and_changes: |-
@@ -431,6 +508,12 @@ teacher-guide:
     -   sections:
         -   example: {}
         -   example: {}
+        concepts_and_changes: |-
+            À ce dernier niveau de Hedy, les élèves apprendront à utiliser une boucle `{while}` et s'entraîneront davantage avec la nouvelle syntaxe.
+            Après ce niveau, les élèves sont prêts à continuer à programmer dans le « vrais » interpréteur Python.
+
+            Nouveautés de ce niveau :
+            * La boucle `{while}`
 learn-more-sections:
 -   {}
 -   title: Entrons dans le vif du sujet !
