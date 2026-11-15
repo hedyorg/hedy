@@ -2800,29 +2800,29 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Boenvenue dans l'aventure de l'hôpital. Dans cette aventure, tu aideras une directrice d'hôpital à corriger certains problèmes qui arrivent dans son hôpital. Voici ta première mission :
+                    Bienvenue dans l'aventure de l'hôpital. Dans cette aventure, tu aideras une directrice d'hôpital à corriger certains problèmes qui arrivent dans son hôpital. Voici ta première mission :
 
-                    Il y a une file interminable de patients et patientes à l'accueil, et l'hôtesse d'accueil est très occuppée. Peux-tu aider cette empoyée en programmant un bureau d'auto-enregistrement ?
+                    Il y a une file interminable de patients et patientes à l'accueil, et l'hôtesse d'accueil est très occupée. Peux-tu aider cette employée en programmant un bureau d'auto-enregistrement ?
                     ### Exercice
-                    Le bureau d'auto-enregistrment doit, pour chaque patient ou patiente :
+                    Le bureau d'auto-enregistrement doit pour chaque patient ou patiente :
                     * l'accueillir avec un message de bienvenue
                     * lui demander son nom et afficher la réponse
                     * lui demander sa date de naissance et afficher la réponse
                     * lui demander dans quel service est son rendez-vous
                     * lui demander le nom du médecin avec qui se passera le rendez-vous
-                    * le ou la remercier pour avec réussi à s'auto-enregistrer
+                    * le ou la remercier d'avoir réussi à s'auto-enregistrer
                     * lui indiquer d'aller dans la salle d'attente
                 answer_code: |
                     ```
                     {print} Bonjour et bienvenue à l'hôpital
                     {ask} Quel est votre nom ?
-                    {print} Votre nom est réponse
+                    {print} Votre nom est {answer}
                     {ask} Quelle est votre date de naissance ?
-                    {print} Votre date de naissance est le réponse
+                    {print} Votre date de naissance est le {answer}
                     {ask} Dans quel service avez-vous votre rendez-vous ?
-                    {print} Vous avez rendez-vous dans le service de réponse
+                    {print} Vous avez rendez-vous dans le service de {answer}
                     {ask} Quel est le nom du docteur avec qui vous avez rendez-vous ?
-                    {print} Vous avez rendez-vous avec docteur réponse
+                    {print} Vous avez rendez-vous avec docteur {answer}
                     {print} Merci. Vous vous êtes correctement enregistré.
                     {print} Veuillez vous asseoir dans la salle d'attente.
                     ```
