@@ -39,7 +39,7 @@
                     hx-post="/public-adventures/change-language/{{ adventure.id }}"
                     hx-trigger="change"
                     hx-swap="none"
-                    _="on htmx:afterRequest if detail.xhr.status == 200 then set @data-current-language to my.value then call hedyApp.modal.notifySuccess(@data-success-message) else set my.value to @data-current-language end on htmx:sendError set my.value to @data-current-language end">
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then set @data-current-language to my.value then call hedyApp.modal.notifySuccess(@data-success-message) then if #filterform is not null call (#filterform).requestSubmit() end else set my.value to @data-current-language end on htmx:sendError set my.value to @data-current-language end">
                     {% if adventure.get("language") not in available_languages %}
                         <option value="" selected disabled>-</option>
                     {% endif %}

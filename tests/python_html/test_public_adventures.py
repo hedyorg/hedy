@@ -47,8 +47,8 @@ def test_super_teacher_can_change_public_adventure_language(client: Client, give
     # GIVEN
     owner = given.a_teacher_account()
     a_logged_in_super_teacher(given)
-    public_adv = given.some_saved_adventure(owner['username'], public=1, language='en', tags=[
-                                            'language-tag', 'empty-tag'])
+    public_adv = given.some_saved_adventure(
+        owner['username'], public=1, language='en', tags=['language-tag', 'empty-tag'])
     given.db.create_tag({
         'id': 'language-tag-id',
         'name': 'language-tag',
@@ -121,7 +121,8 @@ def test_language_dropdown_only_shown_to_super_teachers(client: Client, given: G
 
 
 @pytest.mark.parametrize('language', ['', 'unknown-lang'])
-def test_language_dropdown_shows_placeholder_for_unrecognized_or_missing_language(client: Client, given: Given, language):
+def test_language_dropdown_shows_placeholder_for_unrecognized_or_missing_language(
+        client: Client, given: Given, language):
     # GIVEN
     owner = given.a_teacher_account()
     public_adv = given.some_saved_adventure(owner['username'], public=1, language=language)
@@ -133,3 +134,30 @@ def test_language_dropdown_shows_placeholder_for_unrecognized_or_missing_languag
 
     # THEN
     assert '<option value="" selected disabled>-</option>' in html
+
+
+def test_super_teacher_cannot_change_private_adventure_language(client: Client, given: Given):
+    # GIVEN
+    owner = given.a_teacher_account()
+    a_logged_in_super_teacher(given)
+    private_adv = given.some_saved_adventure(owner['username'], public=0, language='en')
+
+    # WHEN
+    response = client.post(f'/public-adventures/change-language/{private_adv["id"]}',
+                           data={'language': 'nl'}, check=False)
+
+    # THEN
+    assert response.status_code == 404
+    assert given.db.get_adventure(private_adv['id'])['language'] == 'en'
+
+
+def test_change_nonexistent_adventure_language_returns_404(client: Client, given: Given):
+    # GIVEN
+    a_logged_in_super_teacher(given)
+
+    # WHEN
+    response = client.post('/public-adventures/change-language/nonexistent-id',
+                           data={'language': 'nl'}, check=False)
+
+    # THEN
+    assert response.status_code == 404

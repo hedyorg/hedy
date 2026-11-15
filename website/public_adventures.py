@@ -238,7 +238,7 @@ class PublicAdventuresModule(WebsiteModule):
     def change_adventure_language(self, user, adventure_id):
         """Moderation for super teachers: correct the language of a public adventure."""
         adventure = self.db.get_adventure(adventure_id)
-        if not adventure:
+        if not adventure or not adventure.get("public"):
             return utils.error_page(error=404, ui_message=_("no_such_adventure"))
 
         language = request.form.get("language", "")
