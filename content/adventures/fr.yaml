@@ -492,7 +492,7 @@ adventures:
                 answer_code: |
                     ```
                     {ask} Comment vas-tu ?
-                    {print} Tu vas réponse
+                    {print} Tu vas {answer}
                     {ask} Quel est ton sport favori ?
                     {print} Tu aimes {answer}
                     {ask} Quel est le sport que tu aimes le moins ?
@@ -1056,9 +1056,9 @@ adventures:
                 answer_code: |
                     ```
                     {print} J'adore programmer
-                    {print} Et toi, aimes-tu programmer aussi ?
+                    {ask} Et toi, aimes-tu programmer aussi ?
                     {print} {answer}
-                    {print} Quelles sont tes passions ?
+                    {ask} Quelles sont tes passions ?
                     {print} Tes passions sont {answer}
                     ```
             2:
@@ -3649,6 +3649,16 @@ adventures:
                     {ask} _
                     {print} {answer}
                     {print} {answer}
+                answer_code: |
+                    ```
+                    {print} Je suis Hedy le perroquet
+                    {ask} Quel est ton mot préféré ?
+                    {print} {answer}
+                    {print} {answer}
+                    {ask} Est-ce que ce perroquet répond à encore plus de questions ?
+                    {print} {answer}
+                    {print} {answer}
+                    ```
             2:
                 story_text: |
                     Au niveau précédent, tu as fait un perroquet qui te répétait. À ce niveau, nous allons faire un perroquet interactif, en utilisant une variable et la commande `{ask}`.
@@ -3990,7 +4000,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Au niveau 1 tu peux faire ton propre restaurant virtuel et prendre les commandes de tes clients.
+                    Au niveau 1, tu peux faire ton propre restaurant virtuel et prendre les commandes de tes clients.
                 story_text_2: |
                     ### Exercice
                     Copie l'exemple de code dans la zone de programmation en cliquant sur le bouton jaune.
@@ -4000,11 +4010,24 @@ adventures:
                     Enfin, dis au revoir à ton client de manière sympathique.
                 example_code_2: |
                     ```
-                    {print} Bienvenu au restaurant Chez Hedy 🍟
-                    _ Que voulez-vous commander ?
+                    {print} Bienvenue au restaurant Chez Hedy 🍟
+                    _ Que voulez-vous commander ?
                     {print} Ainsi vous voulez commander {answer}
-                    {print} Merci pour votre commande !
-                    {print} C'est bientôt prêt !
+                    {print} Merci pour votre commande !
+                    {print} C'est bientôt prêt !
+                    ```
+                answer_code: |
+                    ```
+                    {print} Bienvenue au restaurant Chez Hedy 🍟
+                    {ask} Que voulez-vous commander ?
+                    {print} Donc vous voulez commander {answer}
+                    {ask} Que voulez-vous boire ?
+                    {print} Donc vous voulez boire {answer}
+                    {ask} Voulez-vous payer en espèces ou avec la carte ?
+                    {print} Vous souhaitez payer {answer}
+                    {print} Merci pour votre commande !
+                    {print} C'est bientôt prêt !
+                    {print} Au revoir !
                     ```
             2:
                 story_text: |
@@ -4293,9 +4316,15 @@ adventures:
                     Peux-tu écrire un code utilisant des emojis ?
                 example_code_2: |
                     ```
-                    {print} Que choisis-tu ?
+                    {print} Que choisis-tu ?
                     {ask} Choisis parmi _
-                    {print} ainsi, tu as choisi : {answer}
+                    {print} Ainsi, tu as choisi : {answer}
+                    ```
+                answer_code: |
+                    ```
+                    {print} Que choisis-tu ?
+                    {ask} Choisis parmi ✊✋✌️
+                    {print} Ainsi, tu as choisi : {answer}
                     ```
             3:
                 story_text: |
@@ -4841,6 +4870,50 @@ adventures:
                         Carré <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                         Escaliers <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
+                answer_code: |
+                    Rectangle
+                    ```
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Carré
+                    ```
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Escaliers
+                    ```
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 20
+                    ```
             2:
                 story_text: |
                     ### Exercice
