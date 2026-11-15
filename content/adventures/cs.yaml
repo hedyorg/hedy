@@ -3229,10 +3229,10 @@ adventures:
                 story_text: "V této úrovni se naučíš používat **funkce**. Funkce je blok kódu, který můžeš snadno použít víckrát. Pomáhá nám uspořádat kód, který potřebujeme znovu a znovu.\nFunkci vytvoříš příkazem `{define}` a pojmenuješ ji. Všechny řádky, které do ní patří, pak napiš do odsazeného bloku pod řádek s `{define}`.\nPro přehlednost nech v kódu jeden prázdný řádek. Skvělá práce! Tvoje funkce je hotová!\n\nKdykoli tento blok potřebuješ, použij k zavolání funkce její název. Nemusíš celý blok znovu opisovat.\n\nProhlédni si ukázku hry Twister. Funkce `další_tah` vybere, kterou ruku nebo nohu máš položit na kterou barvu.\n\n### Cvičení\nDokonči kód přiřazením hodnot do 2 proměnných `vybraná_končetina` a `vybraná_barva`.\nPak zvol, kolikrát chceš funkci zavolat, aby roztočila šipku Twisteru.\n\n### Cvičení 2\nVylepši kód přidáním proměnné lidé. Pomocí ní dej každému hráči vlastní pokyn.\nNapříklad: „Ahmede, polož pravou ruku na zelenou.“ nebo „Jessico, polož levou nohu na žlutou.“\n"
                 answer_code: |
                     ```
-                    strany = 'levou', 'pravou'
-                    končetiny = 'ruku', 'nohu'
-                    barvy = 'červenou', 'modrou', 'zelenou', 'žlutou'
-                    hráči = 'Ahmed', 'Jessica'
+                    strany = levou, pravou
+                    končetiny = ruku, nohu
+                    barvy = červenou, modrou, zelenou, žlutou
+                    hráči = Ahmed, Jessica
 
                     {define} další_tah
                         {for} hráč {in} hráči
@@ -5161,25 +5161,25 @@ adventures:
                             {forward} 30
 
                     # Začátek na levé straně obrazovky
-                    {color} 'white'
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     # Kreslení náramku
                     {repeat} 5 {times}
-                        {color} 'gray'
+                        {color} gray
                         {forward} 100
                         tvar = {ask} 'Jaký tvar chceš mít na náramku jako další?'
                         vybraná_barva = {ask} 'Jakou barvou?'
                         {color} vybraná_barva
-                        {if} tvar = 'čtverec'
+                        {if} tvar = čtverec
                             {call} nakresli_čtverec
-                        {elif} tvar = 'trojúhelník'
+                        {elif} tvar = trojúhelník
                             {call} nakresli_trojúhelník
-                        {elif} tvar = "hvězda"
+                        {elif} tvar = hvězda
                             {call} nakresli_hvězdu
-                    {color} 'gray'
+                    {color} gray
                     {forward} 100
                     ```
             15:

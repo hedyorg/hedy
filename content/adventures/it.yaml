@@ -4515,9 +4515,9 @@ adventures:
                 example_code: |
                     ```
                     #Le opzioni di Twister:
-                    lati = 'di sinistra', 'di destra'
-                    parti_del_corpo = 'mano', 'piede'
-                    colori = 'rosso', 'blu', 'verde', 'giallo'
+                    lati = di sinistra, di destra
+                    parti_del_corpo = mano, piede
+                    colori = rosso, blu, verde, giallo
 
                     #Definiamo un turno di Twister:
                     {define} prossimo_turno
@@ -7965,19 +7965,19 @@ adventures:
                     _
 
                     #Disegniamo l'inizio del braccialetto:
-                    {color} 'bianco'
+                    {color} bianco
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     #Disegniamo le forme sul braccialetto:
                     {repeat} 5 {times}
-                        {color} 'grigio'
+                        {color} grigio
                         {forward} 100
                         forma = {ask} 'Quale forma vuoi aggiungere al braccialetto?'
                         colore_scelto = {ask} 'Di che colore?'
                         {color} colore_scelto
-                        {if} forma = 'quadrato'
+                        {if} forma = quadrato
                             {call} disegna_un_quadrato
                     ```
                 answer_code: |
@@ -8000,25 +8000,25 @@ adventures:
                             {forward} 30
 
                     #iniziamo dal lato sinistro dello schermo
-                    {color} 'bianco'
+                    {color} bianco
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     #creiamo il braccialetto
                     {repeat} 5 {times}
-                        {color} 'grigio'
+                        {color} grigio
                         {forward} 100
                         forma = {ask} 'Quale forma vuoi aggiungere al braccialetto?'
                         colore_scelto = {ask} 'Di che colore?'
                         {color} colore_scelto
-                        {if} forma = 'quadrato'
+                        {if} forma = quadrato
                             {call} disegna_un_quadrato
-                        {elif} forma = 'triangolo'
+                        {elif} forma = triangolo
                             {call} disegna_un_triangolo
-                        {elif} forma = "stella"
+                        {elif} forma = stella
                             {call} disegna_una_stella
-                    {color} 'grigio'
+                    {color} grigio
                     {forward} 100
                     ```
             14:
