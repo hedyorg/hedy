@@ -65,6 +65,16 @@ describe("Able to browse all public adventures and use filters", () => {
         cy.getDataCy('search-results').should("not.contain.text", "adventure1")
     })
 
+    it("should be able to filter by teacher username", () => {
+        cy.getDataCy('search-results').should("contain.text", "adventure1")
+        cy.getDataCy('search-results').should("contain.text", "adventure4")
+
+        cy.getDataCy('search_teacher').type("teacher2")
+
+        cy.getDataCy('search-results').should("contain.text", "adventure4")
+        cy.getDataCy('search-results').should("not.contain.text", "adventure1")
+    })
+
     it("should be able to clone another teacher's adventure", () => {
         cy.getDataCy('search-results').should("contain.text", "adventure1")
         cy.getDataCy('search-results').should("contain.text", "adventure4")

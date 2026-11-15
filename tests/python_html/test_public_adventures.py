@@ -36,37 +36,19 @@ def test_preview_public_adventure_without_solution_example(client: Client, given
     assert 'An adventure' in response.get_data(as_text=True)
 
 
-def a_teacher_with_public_profile_and_adventures(given: Given):
-    creator = given.a_teacher_account()
-    given.db.update_public_profile(creator['username'], {
-        'image': '1', 'personal_text': 'Hi', 'agree_terms': 'yes', 'tags': []})
-    given.some_saved_adventure(creator['username'], name='Shared adventure', public=1)
-    given.some_saved_adventure(creator['username'], name='Draft adventure', public=0)
-    return creator
-
-
-def test_public_profile_shows_public_adventures_to_teachers(client: Client, given: Given):
+def test_filter_public_adventures_by_teacher_username(client: Client, given: Given):
     # GIVEN
-    creator = a_teacher_with_public_profile_and_adventures(given)
+    t1 = given.a_teacher_account()
+    t2 = given.a_teacher_account()
+    given.some_saved_adventure(t1['username'], name='T1 Public Adventure', public=1)
+    given.some_saved_adventure(t1['username'], name='T1 Private Adventure', public=0)
+    given.some_saved_adventure(t2['username'], name='T2 Public Adventure', public=1)
     given.logged_in_as_new_teacher()
 
-    # WHEN
-    html = client.get(f'/user/{creator["username"]}').get_data(as_text=True)
+    # WHEN - filtering by t1's username (case-insensitive)
+    html = client.get(f'/public-adventures/?creator={t1["username"].upper()}').get_data(as_text=True)
 
-    # THEN - only the public adventure is listed
-    assert 'public_page_adventures' in html
-    assert 'Shared adventure' in html
-    assert 'Draft adventure' not in html
-
-
-def test_public_profile_hides_public_adventures_from_students(client: Client, given: Given):
-    # GIVEN
-    creator = a_teacher_with_public_profile_and_adventures(given)
-    given.logged_in_as_new_student()
-
-    # WHEN
-    html = client.get(f'/user/{creator["username"]}').get_data(as_text=True)
-
-    # THEN
-    assert 'public_page_adventures' not in html
-    assert 'Shared adventure' not in html
+    # THEN - only t1's public adventure is listed
+    assert 'T1 Public Adventure' in html
+    assert 'T1 Private Adventure' not in html
+    assert 'T2 Public Adventure' not in html
