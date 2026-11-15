@@ -39,7 +39,7 @@
                     hx-trigger="change"
                     hx-swap="none"
                     _="on htmx:afterRequest if detail.xhr.status == 200 then call hedyApp.modal.notifySuccess(@data-success-message) end">
-                    {% if not adventure.get("language") %}
+                    {% if adventure.get("language") not in available_languages %}
                         <option value="" selected disabled>-</option>
                     {% endif %}
                     {% for lang in available_languages %}

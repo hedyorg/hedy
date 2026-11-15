@@ -249,11 +249,14 @@ class PublicAdventuresModule(WebsiteModule):
 
         # Tags keep their own copy of the language, keep it in sync
         for tag in self.db.read_tags(adventure.get("tags", [])):
-            tagged_in = tag["tagged_in"]
+            tagged_in = tag.get("tagged_in", [])
+            updated = False
             for tag_adventure in tagged_in:
-                if tag_adventure["id"] == adventure_id:
+                if tag_adventure["id"] == adventure_id and tag_adventure.get("language") != language:
                     tag_adventure["language"] = language
-            self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
+                    updated = True
+            if updated:
+                self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
 
         return make_response("", 200)
 

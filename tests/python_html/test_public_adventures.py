@@ -47,21 +47,27 @@ def test_super_teacher_can_change_public_adventure_language(client: Client, give
     # GIVEN
     owner = given.a_teacher_account()
     a_logged_in_super_teacher(given)
-    public_adv = given.some_saved_adventure(owner['username'], public=1, language='en', tags=['language-tag'])
+    public_adv = given.some_saved_adventure(owner['username'], public=1, language='en', tags=['language-tag', 'empty-tag'])
     given.db.create_tag({
         'id': 'language-tag-id',
         'name': 'language-tag',
         'tagged_in': [{'id': public_adv['id'], 'public': 1, 'language': 'en'}],
         'popularity': 1,
     })
+    given.db.create_tag({
+        'id': 'empty-tag-id',
+        'name': 'empty-tag',
+        'popularity': 0,
+    })
 
     # WHEN
     response = client.post(f'/public-adventures/change-language/{public_adv["id"]}', data={'language': 'nl'})
 
-    # THEN - the adventure and the tag copy now have the new language
+    # THEN - the adventure and the tag copy now have the new language, and the tag without tagged_in is untouched
     assert response.status_code == 200
     assert given.db.get_adventure(public_adv['id'])['language'] == 'nl'
     assert given.db.read_tag('language-tag')['tagged_in'][0]['language'] == 'nl'
+    assert 'tagged_in' not in given.db.read_tag('empty-tag')
 
 
 def test_change_public_adventure_language_rejects_unknown_language(client: Client, given: Given):
@@ -110,3 +116,18 @@ def test_language_dropdown_only_shown_to_super_teachers(client: Client, given: G
     given.logged_in_as_new_teacher()
     html = client.get(preview_url, headers={'Hx-Request': 'true'}).get_data(as_text=True)
     assert 'change_adventure_language' not in html
+
+
+@pytest.mark.parametrize('language', ['', 'unknown-lang'])
+def test_language_dropdown_shows_placeholder_for_unrecognized_or_missing_language(client: Client, given: Given, language):
+    # GIVEN
+    owner = given.a_teacher_account()
+    public_adv = given.some_saved_adventure(owner['username'], public=1, language=language)
+    a_logged_in_super_teacher(given)
+
+    # WHEN
+    html = client.get(f'/public-adventures/preview/{public_adv["id"]}', headers={'Hx-Request': 'true'}).get_data(as_text=True)
+
+    # THEN
+    assert '<option value="" selected disabled>-</option>' in html
+
