@@ -47,7 +47,8 @@ def test_super_teacher_can_change_public_adventure_language(client: Client, give
     # GIVEN
     owner = given.a_teacher_account()
     a_logged_in_super_teacher(given)
-    public_adv = given.some_saved_adventure(owner['username'], public=1, language='en', tags=['language-tag', 'empty-tag'])
+    public_adv = given.some_saved_adventure(owner['username'], public=1, language='en', tags=[
+                                            'language-tag', 'empty-tag'])
     given.db.create_tag({
         'id': 'language-tag-id',
         'name': 'language-tag',
@@ -127,8 +128,8 @@ def test_language_dropdown_shows_placeholder_for_unrecognized_or_missing_languag
     a_logged_in_super_teacher(given)
 
     # WHEN
-    html = client.get(f'/public-adventures/preview/{public_adv["id"]}', headers={'Hx-Request': 'true'}).get_data(as_text=True)
+    html = client.get(f'/public-adventures/preview/{public_adv["id"]}',
+                      headers={'Hx-Request': 'true'}).get_data(as_text=True)
 
     # THEN
     assert '<option value="" selected disabled>-</option>' in html
-
