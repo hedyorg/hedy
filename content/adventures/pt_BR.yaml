@@ -6,9 +6,9 @@ adventures:
         levels:
             1:
                 story_text: |
-                    No nível 1 , você pode criar uma história com um personagem principal diferente, que você mesmo insere.
+                    No nível 1, você pode criar uma história com um personagem principal diferente, com um nome que você insere na hora.
 
-                    Na primeira linha, use `{ask}` e pergunte quem será o personagem principal da história. Depois, use `{answer}` quando você quiser usar o nome do personagem
+                    Na primeira linha, use `{ask}` e pergunte quem será o personagem principal da história. Depois, use `{answer}` quando você quiser usar o nome do personagem.
                 example_code: |
                     ```
                     {ask} O(a) personagem principal desta história é
@@ -468,12 +468,12 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {ask} Como vai você?
-                    {print} Você vai resposta
+                    {ask} Como você está?
+                    {print} Você está {answer}
                     {ask} Qual é o seu esporte favorito?
-                    {print} Você gosta de {resposta}
+                    {print} Você gosta de {answer}
                     {ask} Qual é o seu esporte menos favorito?
-                    {print} {resposta} é o seu menos favorito
+                    {print} {answer} é o seu menos favorito
                     ```
             2:
                 example_code: |
@@ -776,6 +776,14 @@ adventures:
                     {answer}
                     {print} Quais são os seus hobbies?
                     {print} Seus hobbies são
+                    ```
+                answer_code: |
+                    ```
+                    {print} Eu amo programar
+                    {print} Você também ama programar?
+                    {print} {answer}
+                    {print} Quais são os seus hobbies?
+                    {print} Seus hobbies são {answer}
                     ```
             2:
                 story_text: |-
@@ -1147,12 +1155,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Você já foi a um parque de diversões e teve seu futuro previsto por uma cartomante? Ou você já jogou com uma bola oito mágica?
-                    Então você provavelmente sabe que eles não podem prever seu futuro, mas ainda é divertido de jogar!
+                    Você já foi a um parque de diversões e teve seu futuro previsto por uma vidente? Ou você já brincou com uma bola oito mágica?
+                    Então você provavelmente sabe que não podem realmente prever o seu futuro, mas ainda é divertido de jogar!
 
                     Nos próximos níveis, você pode aprender a criar sua própria máquina de adivinhação!
-                    No nível 1 você pode começar de leve, deixando a Hedy se apresentar como uma cartomante e deixá-la repetir com `{answer}` as respostas dos jogadores.
-                    Dessa forma:
+                    No nível 1 você pode começar de leve, deixando a Hedy se apresentar como uma vidente que repete as respostas dadas.
+                    Desse jeito:
                 example_code: |
                     ```
                     _ Olá, sou Hedy, a vidente!
@@ -1165,6 +1173,21 @@ adventures:
                     ### Exercício
                     Copie o código exemplo à sua tela de entrada e preencha as lacunas para fazer o código funcionar.
                     **Extra** Altere o código e deixe que a vidente preveja não apenas seu nome, mas também sua idade, seu time favorito ou algo mais sobre você.
+                answer_code: |
+                    ```
+                    {print} Olá, sou Hedy, a vidente!
+                    {ask} Quem é você?
+                    {print} Deixe-me dar uma olhada na minha bola de cristal
+                    {print} Eu vejo... eu vejo...
+                    {print} Seu nome é {answer}
+                    {ask} Por quantos anos você já viveu?
+                    {print} Interessante
+                    {print} Minha bola de cristal me diz que você tem {answer} anos de idade
+                    {ask} Que esporte você joga?
+                    {print} A bola... a bola...
+                    {print} Ela me diz o seu esporte favorito...
+                    {print} Ela me diz que você joga {answer}
+                    ```
             3:
                 story_text: |
                     Nos níveis anteriores você criou sua primeira máquina de adivinhação, mas Hedy não conseguia prever nada.
@@ -1329,6 +1352,36 @@ adventures:
         description: Aventuras de Harry Potter
         default_save_name: Harry Potter
         name: harry potter
+        levels:
+            11:
+                example_code: |
+                    ```
+                    # Definindo as diferentes opções:
+                    casas = Grifinória, Sonserina, Lufa-Lufa, Corvinal
+                    disciplinas = poções, defesa contra as artes das trevas, encantamentos, transfiguração
+                    medos = Voldemort, aranhas, reprovar no teste NOM
+                    nomes = Harry, Ron, Hermione
+                    # Prevendo o futuro de todos: 
+                    _
+                    _ {print} nome ' vai para ' casas {at} {random}
+                    _ {print} nome ' é excelente em ' disciplinas {at} {random}
+                    _ {print} 'o maior medo de ' nome ' é ' medos {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    casas = Grifinória, Sonserina, Lufa-Lufa, Corvinal
+                    disciplinas = poções, defesa contra as artes das trevas, encantamentos, transfiguração
+                    medos = Voldemort, aranhas, reprovar no teste NOM
+                    nomes = Harry, Ron, Hermione
+                    {for} nome {in} nomes
+                        {print} nome ' vai para ' casas {at} {random}
+                        {print} nome ' é excelente em ' disciplinas {at} {random}
+                        {print} 'o maior medo de ' nome ' é ' medos {at} {random}
+                    ```
+                story_text: |
+                    ### Exercício
+                    Também podemos criar um programa de vidente com o tema de Harry Potter. Preencha as lacunas de modo que 9 linhas sejam impressas.
+                    **Extra** Mude o tema do programa de vidente para outra coisa, como um livro, filme ou série que você mais goste.
     haunted:
         name: casa mal-assombrada
         default_save_name: Casa mal-assombrada
@@ -1360,6 +1413,25 @@ adventures:
                     Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
                     Agora termine a história adicionando pelo menos 5 linhas de código.
                     Lembre-se de começar cada linha com um comando `{print}` ou `{ask}`.
+                answer_code: |
+                    ```
+                    {print} Como eu cheguei aqui?
+                    {print} Lembro-me de meu amigo me dizendo para entrar na antiga mansão...
+                    {print} e de repente tudo ficou preto.
+                    {print} Mas como eu acabei no chão...?
+                    {print} Minha cabeça dói como se eu tivesse sido atingido por um taco de beisebol!
+                    {print} Que som é esse?
+                    {print} Oh não! Eu sinto que não estou sozinho nesta casa!
+                    {print} Eu preciso sair daqui!
+                    {print} Há 3 portas na minha frente..
+                    {ask} Qual porta devo escolher?
+                    {print} eu escolho a porta {answer}
+                    {print} Eu abro a porta com cuidado
+                    {print} Eu dou uma espiada
+                    {print} Ah não!
+                    {print} Tem uma matilha de lobos esfomeados olhando para mim
+                    {print} Eu rapidamente fecho a porta.
+                    ```
             2:
                 story_text: |
                     Nesta casa mal-assombrada, você pode escolher seus monstros com emojis. Mas claro, você também poderia usar palavras.
@@ -1413,16 +1485,27 @@ adventures:
                     Can you make your Haunted House level 4 proof?
                 example_code: |
                     ```
-                    _ Adicione aspas a este código _
+                    # Adicione aspas a este código
                     {print} Escape da casa mal-assombrada!
                     {print} Há 3 portas na sua frente...
                     escolha {is} {ask} Qual delas você escolhe?
                     {print} Você escolheu a porta... escolha
                     monstros {is} um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
                     {print} Você vê...
-                    {sleep}
+                    {sleep} _
                     {print} monstros {at} {random}
                      ```
+                answer_code: |
+                    ```
+                    {print} 'Escape da casa mal-assombrada!'
+                    {print} 'Há 3 portas na sua frente...'
+                    escolha {is} {ask} 'Qual delas você escolhe?'
+                    {print} 'Você escolheu a porta...' escolha
+                    monstros {is} um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
+                    {print} 'Você vê...'
+                    {sleep} 3
+                    {print} monstros {at} {random}
+                    ```
             5:
                 story_text: |
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
@@ -1810,6 +1893,15 @@ adventures:
                     ```
                     _ Olá!
                     ```
+                answer_code: |
+                    ```
+                    {print} Olá!
+                    {print} Eu estou programando
+                    {print} Isso é muito fácil
+                    {print} E bem legal!
+                    {print} Isso é só o nível 1
+                    {print} Espero aprender bem mais disso!
+                    ```
             13:
                 story_text: |-
                     Chegamos ao código real de Python! Isso significa que teremos de usar parênteses com `{print}` e `{range}` de agora em diante.
@@ -2163,6 +2255,29 @@ adventures:
                     Este é o início de uma pequena escada. Você pode fazê-la ter 5 degraus?
                 example_code_2: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
                 example_code: "```\n{forward} 100\n{turn} {left}\n```\n"
+                answer_code: |
+                    ```
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    ```
             2:
                 story_text: |
                     No nível 1, a tartaruga só podia virar para a esquerda ou para a direita. Isso é meio chato!
@@ -2362,6 +2477,50 @@ adventures:
                         Quadrado <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                         Escada <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
+                answer_code: |
+                    Retângulo
+                    ```
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Quadrado
+                    ```
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Escada
+                    ```
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 20
+                    ```
             2:
                 story_text: |
                     ### Exercício
@@ -2451,6 +2610,35 @@ adventures:
         name: hospital
         default_save_name: hospital
         description: Hospital
+        levels:
+            1:
+                story_text: |
+                    Bem-vindo(a) à Aventura no Hospital. Nesta aventura, você irá ajudar a diretora do hospital a resolver alguns problemas que ocorrem nele. Esta é a sua primeira tarefa:
+
+                    Há uma fila gigantesca na recepção e o recepcionista está bem ocupado. Você consegue ajudá-lo programando um totem de autoatendimento?
+                    ### Exercício
+                    O totem de autoatendimento deve:
+                    * Cumprimentar o paciente
+                    * Perguntar seu nome e imprimir a resposta
+                    * Perguntar sua data de nascimento e imprimir a resposta
+                    * Perguntar em que departamento é a consulta
+                    * Perguntar com que doutor(a) é a consulta
+                    * Agradecer ao paciente por se registrar com sucesso
+                    * Dizer ao paciente que aguarde na sala de espera
+                answer_code: |
+                    ```
+                    {print} Olá, seja bem-vindo(a) ao hospital
+                    {ask} Qual é o seu nome?
+                    {print} Seu nome é {answer}
+                    {ask} Qual é a sua data de nascimento?
+                    {print} Sua data de nascimento é {answer}
+                    {ask} Em que departamento será sua consulta?
+                    {print} Você tem uma consulta marcada aqui: {answer}
+                    {ask} Com que doutor(a) será a sua consulta?
+                    {print} com doutor(a) {answer}
+                    {print} Obrigado. Você se registrou com sucesso!
+                    {print} Por favor, aguarde na sala de espera.
+                    ```
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2562,6 +2750,27 @@ adventures:
             13:
                 answer_code: |
                     Resposta livre
+                story_text: |
+                    Na matemática, você já deve conhecer os símbolos `<` e `>`.
+                    O `<` checa se o primeiro número é menor que o segundo, por exemplo idade `<` 12 checa se idade é menor que 12.
+                    O `>` checa se o primeiro número é maior que o segundo, por exemplo pontos `>` 10 checa se pontos é maior que 10.
+                    Experimente!
+                example_code: |
+                    ```
+                    idade = {input}('Quantos anos você tem?')
+                    {if} idade > 12:
+                        {print}('Sou mais nova que você!')
+                    ```
+                    ```
+                    idade = {input}('Quantos anos você tem?')
+                    {if} idade < 12:
+                        {print}('Sou mais velha que você!')
+                    {else}:
+                        {print}('Sou mais nova que você!')
+                    ```
+        name: maior que e menor que
+        default_save_name: maior que e menor que
+        description: comando maior que e menor que
     functions_2:
         default_save_name: funções 2
         description: funções 2

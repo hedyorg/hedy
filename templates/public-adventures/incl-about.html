@@ -89,6 +89,19 @@
             <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 rounded-full text-white"></span>
         </a>
         {% if is_super_teacher %}
+            <a data-confirm-modal="redesign"
+                data-confirm-button-class="green-btn-new"
+                data-confirm-button-label="{{ _('make_adventure_private') }}"
+                data-confirm-title="{{ _('make_adventure_private') }}"
+                data-confirm-title-name="{{ adventure.name|upper|e }}"
+                hx-confirm="{{_('make_adventure_private_prompt')}}"
+                hx-post="/public-adventures/make-private/{{adventure.id}}"
+                hx-swap="none"
+                _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"
+                data-cy="make_private_{{adventure.name}}"
+                title="{{_('make_adventure_private')}}">
+                <span class="fa fa-eye-slash p-2 bg-orange-500 hover:bg-orange-700 text-white rounded-full cursor-pointer"></span>
+            </a>
             <a hx-confirm="{{_('delete_adventure_prompt')}}"
                 hx-delete="/for-teachers/customize-adventure/{{adventure.id}}/{{adventure.creator}}"
                 hx-swap="none"

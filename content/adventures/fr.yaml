@@ -135,18 +135,18 @@ adventures:
                     {print} nom _ va se promener dans les bois _
                     {print} nom _ a un peu peur _
                     animaux {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Il entend des bruits de _ animaux {at} {random}
+                    {print} _ On entend des bruits de _ animaux {at} {random}
                     {print} nom _ craint que la forêt ne soit hantée _
                     ```
                 answer_code: |
                     ```
-                    nom {is} {ask} 'Quel est ton nom ?'
-                    {print}  'Le personnage principal s’appelle' nom
-                    {print} nom  ' s’en va marcher dans la forêt.'
-                    {print} nom ' a un peu peur.'
+                    nom {is} {ask} "Quel est ton nom ?"
+                    {print} "Le personnage principal s’appelle " nom
+                    {print} nom " s’en va marcher dans la forêt."
+                    {print} nom " a un peu peur."
                     animaux {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 'Il entend le bruit d’un ' animaux {at} {random}
-                    {print} nom ' a peur que la forêt soit hantée.'
+                    {print} "On entend le bruit d’un " animaux {at} {random}
+                    {print} nom " a peur que la forêt soit hantée."
                     ```
             5:
                 story_text: |
@@ -373,36 +373,36 @@ adventures:
                     {print}('Les leçons devinrent un énorme succès auprès des autres perroquets !')
                     ```
             16:
-                story_text: "Utiliser une boucle `{while}` peut rendre vos histoires plus intéressantes. Par exemple, utiliser `{while} game == 'on'` pourrait faire durer une partie jusqu'à ce que le jeu soit fermé.\nVous pourriez également utiliser `{while} sword == 'lost'` pour que le joueur ne puisse continuer tant que l'épée n'est pas retrouvée.\n\n### Exercice\nLe code en exemple vous montre comment utiliser la boucle `{while}` dans le contexte d'une histoire. Essayez à votre tour de **trouver votre propre scénario** dans lequel le joueur doit trouver quelque chose avant de pouvoir continuer.\n"
+                story_text: "Utiliser une boucle `{while}` peut rendre vos histoires plus intéressantes. Par exemple, utiliser `{while} jeu == \"démarré\"` pourrait faire durer une partie jusqu'à ce que le jeu soit terminé.\nVous pourriez également utiliser `{while} sword == \"perdu\"` pour que le joueur ne puisse continuer tant que l'épée n'est pas retrouvée.\n\n### Exercice\nLe code en exemple vous montre comment utiliser la boucle `{while}` dans le contexte d'une histoire. Essayez à votre tour de **trouver votre propre scénario** dans lequel le joueur doit trouver quelque chose avant de pouvoir continuer.\n"
                 example_code: |
                     ```
-                    clés= 'perdues'
-                    {print}('Tu es dans ton jardin et tu as perdu tes clés.')
-                    {print}( 'Où veux-tu les chercher ?')
-                    {print}('Tu peux regarder sous : la branche, la jardinière, le caillou, la boîte aux lettres.')
-                    {while} clés== 'perdues'
-                        emplacement = {input}('Où veux-tu regarder ?')
-                        {if} emplacement == 'la jardinière'
-                            {print}( 'Elles sont là !')
-                            clés = 'trouvées'
+                    clés= "perdues"
+                    {print}("Tu te tiens debout dans ton jardin et tu as perdu tes clés.")
+                    {print}( "Où veux-tu les chercher ?")
+                    {print}("Tu peux regarder sous : la branche, la jardinière, le caillou, la boîte aux lettres")
+                    {while} clés== "perdues":
+                        emplacement = {input}("Où veux-tu regarder ?")
+                        {if} emplacement == "la jardinière":
+                            {print}( "Elles sont là !")
+                            clés = "trouvées"
                         {else}
-                            {print}('Non, elles ne sont pas sous ', emplacement)
-                    {print}('Maintenant tu peux entrer dans la maison !')
+                            {print}("Non, elles ne sont pas sous ", emplacement)
+                    {print}("Maintenant tu peux entrer dans la maison !")
                     ```
                 answer_code: |
                     ```
-                    raquettes= 'perdues'
-                    {print}('Tu es avec tes amis et amies et vous voulez jouer au tennis, mais ta as oublié où tu as mis les raquettes.')
-                    {print}('Où va tu les chercher ?')
-                    {print}('Tu peux choisir : chambre, cagibi, placard, bureau')
-                    {while} raquettes == 'perdues':
-                        lieu = {input}('Où veux-tu chercher ?')
-                        {if} lieu == 'bureau':
-                            {print}('Elles sont bien là ! Tu as trouvé 6 raquettes !')
-                            clés = 'trouvées'
+                    raquettes = "perdues"
+                    {print}("Tu es avec tes copains et copines et vous voulez jouer au tennis, mais ta as oublié où tu as mis les raquettes.")
+                    {print}("Où va tu les chercher ?")
+                    {print}("Tu peux choisir : chambre, cagibi, placard, bureau")
+                    {while} raquettes == "perdues":
+                        lieu = {input}("Où veux-tu chercher ?")
+                        {if} lieu == "bureau":
+                            {print}("Elles sont bien là ! Tu as trouvé 6 raquettes !")
+                            raquettes = "trouvées"
                         {else}:
-                            {print}('Non, elles ne sont pas dans ', lieu)
-                    {print}('Maintenant tu peux jouer au tennis avec tous tes amis et amies.')
+                            {print}("Non, elles ne sont pas dans ", lieu)
+                    {print}("Maintenant tu peux jouer au tennis avec tous tes copains et copines.")
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
@@ -1812,42 +1812,42 @@ adventures:
             16:
                 story_text: |
                     ### Exercice
-                    Dans ce niveau, tu vas créer un petit jeu dans lequel tu devras faire un 6 aux dés en un minimum de lancés.
-                    Nous avons commencé à écrire le code, à toi de la faire marcher !
+                    À ce niveau, tu vas créer un petit jeu dans lequel tu devras faire un 6 le plus vite possible.
+                    Nous avons commencé le code, c'est à toi de le faire marcher !
 
-                    Tout d'abord, ajoute une boucle `{while}`qui vérifiera si tu as obtenu un 6.
+                    Pour commencer, ajoute une boucle `{while}`qui vérifiera si tu as obtenu un 6.
                     Tant que tu n'as pas obtenu de 6, lance un dé pour obtenir un chiffre aléatoire.
                     {print} ce que le joueur ou la joueuse a obtenu.
-                    Ajoute un au nombre d'essais.
-                    Attends une seconde avant de relancer le dé, ou, si tu as eu un 6, avant la fin du jeu.
+                    Ajoute un essai au nombre d'essais.
+                    Attends une seconde avant de relancer le dé, ou, si tu as eu un 6, avant de terminer le jeu.
                 example_code: |
                     ```
-                    options = [1, 2, 3, 4, 5, 6]
-                    {print}('Obtiens un 6 aussi vite que possible !')
-                    lancé = 0
+                    faces = [1, 2, 3, 4, 5, 6]
+                    {print}("Obtiens un 6 aussi vite que possible !")
+                    lancé_obtenu = 0
                     essais = 0
                     _
                     _
                     _
                     _
                     _
-                    {print}('Super ! Yu as obtenu un 6 en ', lancés, ' lancés.')
+                    {print}("Super ! Tu as obtenu un 6 en ", essais, " essais.")
                     ```
                 answer_code: |
                     ```
                     options = [1, 2, 3, 4, 5, 6]
-                    {print}('Obtiens un 6 aussi vite que possible !')
-                    lancé = 0
+                    {print}("Obtiens un 6 aussi vite que possible !")
+                    lancé_obtenu = 0
                     essais = 0
-                    {while} lancé == 0:
-                        nombre = options[{random}]
+                    {while} lancé_obtenu != 6:
+                        lancé_obtenu = options[{random}]
                         essais = essais + 1
-                        {if} nombre = 6:
-                            lancé = 1
-                            {print}('Tu as obtenu un 6 en ', essais, ' lancés.')
+                        {if} lancé_obtenu == 6:
+                            {print}("Tu as obtenu un 6")
                         {else}:
-                            {print}('Tu n’as pas obtenu de 6, mais un ', nombre)
+                            {print}("Tu n’as pas obtenu un 6, mais un ", nombre)
                         {sleep} 1
+                    {print}("Tu as obtenu un 6 en ", essais, " essais.")
                     ```
     dishes:
         name: vaisselle ?
@@ -2131,7 +2131,7 @@ adventures:
             4:
                 story_text: |
                     ### Exercice
-                    Nous avons retiré toutes les guillemets de cet exemple, peux-tu les remettre partout où c'est nécessaire ?
+                    Nous avons retiré tous les guillemets de cet exemple, peux-tu les remettre partout où c'est nécessaire ?
 
                     ### Exercice 2
                     Retourne au niveau précédent et copie ton code de la voyante. Fais fonctionner le code dans ce niveau en ajoutant les guillemets aux bons endroits.
@@ -2148,11 +2148,11 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} 'Je qui Hedy la voyante !'
-                    question {is} {ask} 'Que veux-tu savoir ?'
-                    {print} 'Voici ce que tu veux savoir :' question
+                    {print} "Je qui Hedy la voyante !"
+                    question {is} {ask} "Que veux-tu savoir ?"
+                    {print} "Voici ce que tu veux savoir :" question
                     réponses {is} oui, non, peut-être
-                    {print} 'Ma boule de cristal dit...'
+                    {print} "Ma boule de cristal dit…"
                     {sleep} 2
                     {print} réponses {at} {random}
                     ```
@@ -2617,10 +2617,10 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Dans ce niveau, tu vas apprendre comment utiliser les guillemets dans tes jeux.
+                    À ce niveau, tu vas apprendre comment utiliser les guillemets dans tes jeux.
 
                     ### Exercice
-                    Peux-tu écrire ta maison hantée pour le niveau 4 ?
+                    Peux-tu écrire ta maison hantée pour le niveau 4 ?
 
                     ### Exercice 2
                     Reviens au niveau précédent et copie ton code de la maison hantée. Fais fonctionner le code dans ce niveau en ajoutant des guillemets aux bons endroits.
@@ -2638,12 +2638,12 @@ adventures:
                      ```
                 answer_code: |
                     ```
-                    {print} 'Echappe-toi de la maison hantée !'
-                    {print} 'Il y a 3 portes face à toi...'
-                    choix {is} {ask} 'Quelle porte choisi-tu ?'
-                    {print} 'Tu as choisi... ' choix
+                    {print} "Echappe-toi de la maison hantée !"
+                    {print} "Il y a 3 portes face à toi…"
+                    choix {is} {ask} "Quelle porte choisi-tu ?"
+                    {print} "Tu as choisi… " choix
                     monstres {is} un zombie, un vampire, RIEN QUE TU NE PEUX ECHAPPER
-                    {print} 'Tu vois...'
+                    {print} "Tu vois…"
                     {sleep} 3
                     {print} monstres {at} {random}
                     ```
@@ -3697,6 +3697,15 @@ adventures:
                     {print} _ 🧒 Dis _ nouveau_mot _ , Hedy !_ 
                     {print} _ 🦜 _ mots {at} {random}
                     ```
+                answer_code: |
+                    ```
+                    mots {is} coco, Hedy
+                    {print} "Entraîne ton perroquet !"
+                    nouveau_mot {is} {ask} "Quel mot souhaites-tu apprendre au perroquet ?"
+                    {add} nouveau_mot {to_list} mots
+                    {print} "🧒 Dis " nouveau_mot ", Hedy !"
+                    {print} "🦜 " mots {at} {random}
+                    ```
             5:
                 story_text: |
                     Récompense ton perroquet s'il dit le bon mot !
@@ -3811,9 +3820,9 @@ adventures:
                     ```
                 story_text_2: |
                     ## Apostrophes
-                    Important ! Hedy accepte que tu utilises les guillemets ou les apostrophes pour entourer tes textes. En anglais, on utilise généralement les apostrophes car cela ne pose pas trop de problème, mais en français, cela pose un problème avec, par exemple, « aujourd'hui » ou « s'il vous plait »
-                    Astuce : Nous te recommandons d'utiliser les guillemets « " » qui fonctionnent bien dans la plupart des cas, même si la chaîne de caractères contient des apostrophes.
-                    L'exemple montre le problème si tu entoures ton texte avec les apostrophes.
+                    Important ! Hedy accepte que tu utilises des guillemets ou des apostrophes pour entourer tes textes. En anglais, on utilise généralement les apostrophes car cela ne pose pas trop souvent de problème, mais en français, cela pose très souvent des problèmes, comme avec, par exemple, « aujourd'hui » ou « s'il vous plait »
+                    Astuce : nous te recommandons d'utiliser les guillemets « " » qui fonctionnent bien dans la plupart des cas, même quand le texte contient des apostrophes.
+                    L'exemple montre le problème si tu entoures ton texte avec des apostrophes.
                 example_code_2: |
                     ```
                     # Voici ce qu'il ne faut pas faire avec les apostrophes :
@@ -4052,6 +4061,20 @@ adventures:
                     {print} Tes  plat  et  boisson  vont être servis !
                     {sleep} _
                     {print} Ton repas est prêt ! Le voici !
+                    ```
+                answer_code: |
+                    ```
+                    {print} "Bienvenue au Restaurant Chez Hedy !"
+                    {print} "Aujourd'hui nous servons pizza ou lasagne."
+                    plat {is} {ask} "Que voudrais-tu manger ?"
+                    {print} "Très bon choix ! " plat " est ce que je préfère !"
+                    garniture {is} {ask} "Que veux-tu en garniture ? fromages ou légumes ?"
+                    {print} "plat aux " garniture ". C'est parti !
+                    boisson {is} {ask} "Que voudrais-tu boire avec ça ?"
+                    {print} "Merci pour ta commande."
+                    {print} "Tes " plat " et " boisson " vont être servis !"
+                    {sleep} 3
+                    {print} "Ton repas est prêt ! Le voici !"
                     ```
             6:
                 story_text: |

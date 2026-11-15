@@ -659,20 +659,6 @@ teacher-guide:
                         {print} muzlu_süt
     -   level: "12"
         sections:
-        -   title: Öğrenciler tırnak işaretlerini unutmuş olabilirler
-            example:
-                error_text: Öğrenciler artık önceki seviyelere göre daha fazla tırnak işaretine ihtiyaç duymaktadır. Bu örnekte tırnak işaretleri listede ve `{if}` komutunda unutulmuştur.
-                error_code: |-
-                    süper_kahramanlar = Spiderman, Batman, Iron Man
-                    süper_kahraman = süper_kahramanlar {at} {random}
-                    {if} süper_kahraman = Batman
-                        {print} 'BEN... BATMAN!'
-                solution_text: "Doğru olan kod:"
-                solution_code: |-
-                    süper_kahramanlar = 'Spiderman', 'Batman', 'Iron Man'
-                    süper_kahraman = süper_kahramanlar {at} {random}
-                    {if} süper_kahraman = 'Batman'
-                        {print} 'BEN... BATMAN!'
         -   title: Öğrenciler hesaplamalarda kullanmak istedikleri sayılar için tırnak işareti kullanmış olabilirler
             example:
                 error_text: |-
