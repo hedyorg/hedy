@@ -590,12 +590,6 @@ teacher-guide:
                 error_code: "{define} funkce\n{print} 'Uvnitř funkce použij odsazení.'\n{if} použij_if {is} 'ano'\n{print} 'Nezapomeň na odsazení ani u cyklů'"
                 solution_text: 'Uvnitř funkce použijte správné odsazení'
                 solution_code: "{define} funkce\n    {print} 'Uvnitř funkce použij odsazení.'\n    {if} použij_také_if {is} 'ano'\n        {print} 'Nezapomeň na odsazení ani u cyklů'"
-        -   title: Žáci zapomínají na uvozovky
-            example:
-                error_text: V této úrovni je potřeba více uvozovek než v předchozích. V příkladu chybí uvozovky v seznamu a v příkazu `{if}`.
-                error_code: "superhrdinové = Spiderman, Batman, Iron Man\nsuperhrdina = superhrdinové {at} {random}\n{if} superhrdina = Batman\n    {print} 'JSEM BATMAN!'"
-                solution_text: 'Toto je správný kód:'
-                solution_code: "superhrdinové = 'Spiderman', 'Batman', 'Iron Man'\nsuperhrdina = superhrdinové {at} {random}\n{if} superhrdina {is} 'Batman'\n    {print} 'JSEM BATMAN!'"
         concepts_and_changes: |-
             V této poslední úrovni Hedy Advanced se žáci naučí používat základní funkce.
 
