@@ -8,7 +8,7 @@ adventures:
                 story_text: |
                     На уровне 1 вы можете создать историю с другим главным героем, которого вы вводите сами.
 
-                    В первой строке используйте `{ask}` и спросите, кто будет главным героем истории. Затем используйте {answer}, если хотите использовать имя героя.
+                    В первой строке используйте `{ask}` и спросите, кто будет главным героем истории. Затем используйте `{answer}`, если хотите использовать имя героя.
                 example_code: |
                     ```
                     {ask} Главный герой этой истории —
@@ -134,7 +134,7 @@ adventures:
                 answer_code: |
                     ```
                     имя {is} {ask} 'Как тебя зовут?'
-                    {print}  'Главного героя зовут' имя
+                    {print}  'Главного героя зовут ' имя
                     {print} имя  ' теперь идёт по лесу'
                     {print} имя ' немного боится'
                     животные {is} 🦔, 🐿, 🦉, 🦇
@@ -406,7 +406,7 @@ adventures:
                         место = {input}('Где ты хочешь поискать?')
                         {if} место == 'стол':
                             {print}('Вот они! Ты нашёл 6 ракеток!')
-                            ключи = 'найдены'
+                            ракетки = 'найдены'
                         {else}:
                             {print}('Нет, их там нет: ', место)
                     {print}('Теперь можно поиграть в теннис со всеми друзьями.')
@@ -504,7 +504,7 @@ adventures:
                 answer_code: |
                     ```
                     {ask} Как дела?
-                    {print} У тебя всё answer
+                    {print} У тебя всё {answer}
                     {ask} Какой твой любимый вид спорта?
                     {print} Тебе нравится {answer}
                     {ask} Какой твой самый нелюбимый вид спорта?
@@ -1844,15 +1844,15 @@ adventures:
                     {print}('Брось 6 как можно быстрее!')
                     выброшено = 0
                     попытки = 0
-                    {while} выброшено == 0:
-                        число = варианты[{random}]
+                    {while} выброшено != 6:
+                        выброшено = варианты[{random}]
                         попытки = попытки + 1
-                        {if} число = 6:
-                            выброшено = 1
-                            {print}('Ты выбросил 6 за ', попытки, ' попыток!')
+                        {if} выброшено == 6:
+                            {print}('Ты выбросил 6')
                         {else}:
-                            {print}('Ты не выбросил 6, вместо этого выбросил ', число)
+                            {print}('Ты не выбросил 6, вместо этого выбросил ', выброшено)
                         {sleep} 1
+                    {print}('Ты выбросил 6 за ', попытки, ' попыток!')
                     ```
     dishes:
         name: Блюда?
@@ -4497,7 +4497,7 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    слова is кар-кар, Хеди
+                    слова {is} кар-кар, Хеди
                     {print} 'Дрессируйте своего попугая!'
                     новое_слово {is} {ask} 'Какому слову вы хотите их научить?'
                     {add} новое_слово {to_list} слова
@@ -5282,9 +5282,10 @@ adventures:
                         _
                     ```
                 story_text_2: |
+                    ### Упражнение
                     Конечно, вы также можете сделать заказ для нескольких человек!
                     Можете ли вы добавить нужное количество отступов перед каждой строкой, чтобы код работал правильно?
-                    СОВЕТ: некоторые строки вообще не нуждаются в отступах.
+                    Совет: некоторые строки вообще не нуждаются в отступах.
                 example_code_2: |
                     ```
                     _ блюда = закуска, основное блюдо, десерт
@@ -6055,25 +6056,25 @@ adventures:
                 answer_code: |
                     ```
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     ```
             2:
                 story_text: |
@@ -6476,45 +6477,45 @@ adventures:
                 answer_code: |
                     Прямоугольник
                     ```
-                    {turn} right
+                    {turn} {right}
                     {forward} 50
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 50
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
                     ```
 
                     Квадрат
                     ```
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
                     ```
 
                     Лестница
                     ```
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 60
-                    {turn} right
+                    {turn} {right}
                     {forward} 60
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
                     ```
             2:

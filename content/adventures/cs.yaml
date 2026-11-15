@@ -296,7 +296,7 @@ adventures:
                         místo = {input}('Kde chceš hledat?')
                         {if} místo == 'stůl':
                             {print}('Tady jsou! Počet nalezených raket: 6!')
-                            klíče = 'nalezené'
+                            rakety = 'nalezené'
                         {else}:
                             {print}('Ne, na tomto místě nejsou: ', místo)
                     {print}('Teď si můžeš zahrát tenis se všemi kamarády.')
@@ -659,17 +659,17 @@ adventures:
                     ```
                     možnosti = [1, 2, 3, 4, 5, 6]
                     {print}('Hoď šestku co nejrychleji!')
-                    padla_šestka = 0
+                    hod = 0
                     pokusy = 0
-                    {while} padla_šestka == 0:
-                        číslo = možnosti[{random}]
+                    {while} hod != 6:
+                        hod = možnosti[{random}]
                         pokusy = pokusy + 1
-                        {if} číslo = 6:
-                            padla_šestka = 1
-                            {print}('Šestka padla! Počet pokusů: ', pokusy, '!')
+                        {if} hod == 6:
+                            {print}('Padla šestka'
                         {else}:
-                            {print}('Šestka nepadla. Výsledek hodu: ', číslo)
+                            {print}('Šestka nepadla. Výsledek hodu: ', hod)
                         {sleep} 1
+                    {print}('Šestka padla! Počet pokusů: ', pokusy, '!')
                     ```
     elif_command:
         levels:
