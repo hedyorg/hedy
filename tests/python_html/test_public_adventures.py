@@ -82,6 +82,7 @@ def test_change_public_adventure_language_rejects_unknown_language(client: Clien
 
     # THEN
     assert response.status_code == 400
+    assert 'message' in response.get_json()
     assert given.db.get_adventure(public_adv['id'])['language'] == 'en'
 
 

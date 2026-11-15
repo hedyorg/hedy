@@ -34,11 +34,12 @@
                     name="language"
                     class="flex-1 min-w-0 border border-gray-300 rounded-md bg-white text-gray-800 text-base px-3 py-1.5 shadow-sm cursor-pointer focus:outline-none focus:border-blue-500"
                     data-cy="change_adventure_language"
+                    data-current-language="{{ adventure.get('language') if adventure.get('language') in available_languages else '' }}"
                     data-success-message="{{ _('adventure_updated') }}"
                     hx-post="/public-adventures/change-language/{{ adventure.id }}"
                     hx-trigger="change"
                     hx-swap="none"
-                    _="on htmx:afterRequest if detail.xhr.status == 200 then call hedyApp.modal.notifySuccess(@data-success-message) end">
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then set @data-current-language to my.value then call hedyApp.modal.notifySuccess(@data-success-message) else set my.value to @data-current-language end on htmx:sendError set my.value to @data-current-language end">
                     {% if adventure.get("language") not in available_languages %}
                         <option value="" selected disabled>-</option>
                     {% endif %}

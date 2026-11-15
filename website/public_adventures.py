@@ -243,7 +243,7 @@ class PublicAdventuresModule(WebsiteModule):
 
         language = request.form.get("language", "")
         if language not in hedy_content.ALL_LANGUAGES:
-            return make_response(_("language_invalid"), 400)
+            return make_response({"message": _("language_invalid")}, 400)
 
         self.db.update_adventure(adventure_id, {"language": language})
 
