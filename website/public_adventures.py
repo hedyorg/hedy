@@ -260,6 +260,29 @@ class PublicAdventuresModule(WebsiteModule):
 
         return make_response("", 200)
 
+    @route("/make-private/<adventure_id>", methods=["POST"])
+    @requires_super_teacher
+    def make_adventure_private(self, user, adventure_id):
+        """Moderation for super teachers: take a public adventure out of the public list.
+
+        The adventure stays with its creator, who can choose to share it again later.
+        """
+        adventure = self.db.get_adventure(adventure_id)
+        if not adventure:
+            return utils.error_page(error=404, ui_message=_("no_such_adventure"))
+
+        self.db.update_adventure(adventure_id, {"public": 0})
+
+        # Tags keep their own copy of the public flag, keep it in sync
+        for tag in self.db.read_tags(adventure.get("tags", [])):
+            tagged_in = tag["tagged_in"]
+            for tag_adventure in tagged_in:
+                if tag_adventure["id"] == adventure_id:
+                    tag_adventure["public"] = 0
+            self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
+
+        return make_response("", 200)
+
 
 def is_hx_request():
     return bool(request.headers.get('Hx-Request'))

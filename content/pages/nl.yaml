@@ -868,7 +868,7 @@ teacher-guide:
             Nieuw in dit level:
             * Functies maken met {define} en {call}
         sections:
-        -   title: Leelringen maken een functie, maar vergeten die op te roepen met {call}.
+        -   title: Leerlingen maken een functie, maar vergeten die op te roepen met {call}.
             example:
                 error_text: Een functie doet niets zonder die aan te roepen.
                 error_code: |-
@@ -896,20 +896,6 @@ teacher-guide:
                         {print} 'Sping in bij een functie.'
                         {if} gebruik_if_statement {is} 'ja'
                             {print} 'en vergeet niet in te springen bij loops'
-        -   title: Leerlingen vergeten aanhalingstekens
-            example:
-                error_text: In dit level zijn meer aanhalingstekens nodig dan in de vorige levels.
-                error_code: |-
-                    superhelden = Spiderman, Batman, Iron Man
-                    superheld = superhelden {at} {random}
-                    {if} superheld = Batman
-                        {print} 'IK BEN BATMAN!'
-                solution_text: 'Zo klopt het:'
-                solution_code: |-
-                    superhelden = 'Spiderman', 'Batman', 'Iron Man'
-                    superheld = superhelden {at} {random}
-                    {if} superheld {is} 'Batman'
-                        {print} 'IK BEN BATMAN!'
     -   level: '13'
         concepts_and_changes: |-
             In dit eerste level van Hedy Expert gaan de leerlingen zich steeds meer verdiepen in de concepten en syntax van echte programmeertalen.

@@ -867,20 +867,6 @@ teacher-guide:
                         {if} usa_if_anche {is} 'sì'
                             {print} 'E non dimenticare di indentare anche i cicli'
             title: Gli studenti hanno difficoltà con l'indentazione.
-        -   example:
-                error_text: Ora gli studenti hanno bisogno di più virgolette rispetto ai livelli precedenti. In questo esempio sono state dimenticate le virgolette nella lista e nel comando `{if}`.
-                error_code: |-
-                    supereroi = Spiderman, Batman, Iron Man
-                    supereroe = supereroi {at} {random}
-                    {if} supereroe = Batman
-                        {print} 'IO SONO BATMAN!'
-                solution_text: 'Questo è il codice corretto:'
-                solution_code: |-
-                    supereroi = 'Spiderman', 'Batman', 'Iron Man'
-                    supereroe = supereroi {at} {random}
-                    {if} supereroe {is} 'Batman'
-                        {print} 'IO SONO BATMAN!'
-            title: Gli studenti dimenticano le virgolette
         level: '12'
         concepts_and_changes: |-
             In quest'ultimo livello di Hedy Avanzato gli studenti impareranno a usare le funzioni di base.

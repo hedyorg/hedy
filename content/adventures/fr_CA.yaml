@@ -825,9 +825,9 @@ adventures:
                     Par exemple : « Ahmed, main droit`{define}`e sur vert » ou « Jessica, pied gauche sur jaune ».
                 example_code: |
                     ```
-                    cotés = "gauche", "droit(e)"
-                    membres = "main", "pied"
-                    couleurs = "rouge", "bleu", "vert", "jaune"
+                    cotés = gauche, droit(e)
+                    membres = main, pied
+                    couleurs = rouge, bleu, vert, jaune
 
                     {define} joue_un_tour
                         coté_choisi = cotés {at} {random}
@@ -2348,7 +2348,7 @@ adventures:
                         forme = {ask} "Quelle forme veux-tu ensuite dans ton bracelet ?"
                         couleur = {ask} "Dans quelle couleur ?"
                         {color} couleur
-                        {if} forme {is} "carré"
+                        {if} forme {is} carré
                             {call} dessine_un_carré
                     ```
             16:
