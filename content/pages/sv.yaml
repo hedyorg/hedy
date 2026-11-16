@@ -614,20 +614,6 @@ teacher-guide:
                         {print} banan
     -   level: "12"
         sections:
-        -   title: Eleverna glömmer citattecken
-            example:
-                error_text: Eleverna behöver fler citattecken nu än på de tidigare nivåerna. I det här exemplet glömdes citattecken i listan och i kommandot `{if}`.
-                error_code: |-
-                    superhjältar = Spiderman, Batman, Iron Man
-                    superhjälte = superhjältar {at} {random}
-                    {if} superhjälte = Batman
-                        {print} 'JAG ÄR BATMAN!'
-                solution_text: "Detta är rätt kod:"
-                solution_code: |-
-                    superhjältar = 'Spiderman', 'Batman', 'Iron Man'
-                    superhjälte = superhjältar {at} {random}
-                    {if} superhjälte {is} 'Batman'
-                        {print} 'JAG ÄR BATMAN!'
         -   title: Eleverna använder citattecken runt tal som de vill använda för beräkningar
             example:
                 error_text: |-

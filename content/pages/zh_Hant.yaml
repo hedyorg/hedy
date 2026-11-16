@@ -564,20 +564,6 @@ teacher-guide:
         level: '11'
     -   sections:
         -   example:
-                error_text: 這個等級比前面的等級需要更多引號。在這個範例中，清單和 `{if}` 指令都漏了引號。
-                error_code: |-
-                    超級英雄 = 蜘蛛人, 蝙蝠俠, 鋼鐵人
-                    超級英雄角色 = 超級英雄 {at} {random}
-                    {if} 超級英雄角色 = 蝙蝠俠
-                        {print} '我是蝙蝠俠！'
-                solution_text: 以下是正確的程式碼：
-                solution_code: |-
-                    超級英雄 = '蜘蛛人', '蝙蝠俠', '鋼鐵人'
-                    超級英雄角色 = 超級英雄 {at} {random}
-                    {if} 超級英雄角色 {is} '蝙蝠俠'
-                        {print} '我是蝙蝠俠！'
-            title: 學生忘記加上引號
-        -   example:
                 error_text: |-
                     數字可以放在引號中，但這樣電腦會把它當成文字，也就不能拿來計算。
                     在下方範例中，數字 25 放在引號裡，因此不能用來進行數學運算。
