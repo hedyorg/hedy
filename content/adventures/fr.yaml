@@ -8,7 +8,7 @@ adventures:
                 story_text: |
                     Au niveau 1 tu peux faire une histoire avec un personnage principal dont tu auras choisi le nom toi-même.
 
-                    À la première ligne, utilise `{ask}` pour demander le nom du personnage de ton histoire. Ensuite, utilise {answer} pour utiliser le nom du personnage qui a été donné.
+                    À la première ligne, utilise `{ask}` pour demander le nom du personnage de ton histoire. Ensuite, utilise `{answer}` pour utiliser le nom du personnage qui a été donné.
                 example_code: |
                     ```
                     {ask} Le nom du personnage principal de cette histoire est
@@ -796,10 +796,10 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Dans ce niveau, tu vas faire un programme pour t'aider à pratiquer les tables de multiplication.
-                    Tu choisis quelle table de multiplication tu veux pratiquer et ensuite le programme te posera toutes les multiplications de la table jusqu'à 10.
-                    Finis le code : affiche si la réponse est correcte ou non et affiche la bonne réponse s'il y avait une erreur.
-                    Marque aussi des points pour chaque bonne réponse et affiche le score final.
+                    À ce niveau, tu vas faire un programme pour t'aider à apprendre les tables de multiplication.
+                    Tu choisis quelle table de multiplication tu veux pratiquer et ensuite le programme te posera toutes les multiplications de 1 à 10.
+                    Termine le code : affiche si la réponse est correcte ou non et affiche la bonne réponse s'il y avait une erreur.
+                    De plus, donne des points pour chaque bonne réponse et affiche le score final.
                 example_code: |
                     ```
                     #Demande la table de multiplication :
@@ -1013,8 +1013,8 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Félicitations ! Tu as atteint la fin de Hedy Basique ! Tu peux continuer à apprendre avec Hedy Avancé (niveaux 9-12), où tu apprendras des concepts de programmation plus complexes.
-                    Sinon, n'hésite pas à continuer avec Hedy Basique et à créer tes propres programmes.
+                    Félicitations ! Tu as atteint la fin de Hedy Basique ! Tu peux continuer d'apprendre avec Hedy Avancé (niveaux 9-12), où tu apprendras des concepts de programmation plus complexes.
+                    Ou bien n'hésite pas à continuer avec Hedy Basic et à imaginer tes propres programmes, bien sûr !
                 answer_code: |
                     Ma réponse
             12:
@@ -1252,20 +1252,20 @@ adventures:
                 example_code: |
                     **Attention ! Ce code a besoin d'être débogué !**
                     ```
-                    {print} Bienvenue dans la sandwicherie !'
-                    nombre_de_sandwiches 'Combien de sandwiches veux-tu acheter ?'
+                    {print} "Bienvenue dans la sandwicherie !"
+                    nombre_de_sandwiches "Combien de sandwiches veux-tu acheter ?"
                     {repeat} nombre_de_sandwiches {times}
-                    {ask} {is} {ask} 'Quel type de pain veux-tu dans ton sandwich ?'
+                    {ask} {is} {ask} '"Quel type de pain veux-tu dans ton sandwich ?"
                     types_de_pains {is} blanc, blé, seigle, à l'ail, sans gluten
-                    {if} pain_choisi in types_de_pains
-                    {print} 'Super !'
+                    {if} pain_choisi {in} types_de_pains
+                    {print} "Parfait !"
                     {else}
-                    'Malheureusement, nous ne vendons pas ça'
-                    topping {is} {ask} 'Quel topping veux-tu ajouter à ton sandwich ?'
-                    sauce {is} {ask} 'Quelle sauce veux-tu mettre dans ton sandwich ?'
+                    "Malheureusement, nous ne vendons pas ça"
+                    topping {is} {ask} "Quel topping veux-tu ajouter à ton sandwich ?"
+                    sauce {is} {ask} "Quelle sauce veux-tu mettre dans ton sandwich ?"
                     {print} Un pain_choisi avec topping et sauce.
                     prix = nombre_de_sandwiches * 6
-                    {print} 'Ca fera un total de 'prix euros' s'il-vous-plaît'
+                    {print} "Ca fera un total de "prix euros" s'il-vous-plaît"
                     ```
                 answer_code: |
                     ```
@@ -2316,7 +2316,7 @@ adventures:
                     Regarde cet exemple de code du jeu Twister. La fonction `tour_suivant` contient un bloc de code qui choisit quel membre doit aller où.
 
                     ### Exercice
-                    Termine ce code en complétant les lignes des deux variables `chosen_limb` et `chosen_color`.
+                    Termine ce code en complétant les lignes des deux variables `membre_choisi` et `coté_choisi`.
                     Ensuite, choisis combien de fois tu veux appeler la fonction pour faire des tours de Twister.
 
                     ### Exercice 2
@@ -2324,22 +2324,22 @@ adventures:
                     Par exemple : « Ahmed, main droite sur vert » ou « Jessica, pied gauche sur jaune ».
                 example_code: |
                     ```
-                    #Entrer les options de Twister
+                    # Entrer les options de Twister
                     cotés = "gauche", "droit(e)"
                     membres = "main", "pied"
                     couleurs = "rouge", "bleu", "vert", "jaune"
 
-                    #Définir un tour de Twister
+                    # Définir un tour de Twister
                     {define} tour_suivant
                         coté_choisi = cotés {at} {random}
                         membre_choisi = membres _
                         couleur_choisie = couleurs _
                         {print} membre_choisi " " coté_choisi " sur " couleur_choisie
 
-                    #Jouer une partie de Twister
+                    # Jouer une partie de Twister
                     {print} "Jouons au Twister !"
                     {repeat} _ _
-                        appelle tour_suivant
+                        {call} tour_suivant
                         {sleep} 2
                     ```
                 answer_code: |
