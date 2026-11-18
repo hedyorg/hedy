@@ -8,9 +8,9 @@ adventures:
                 story_text: |
                     No nível 1 podes criar uma história com um personagem principal diferente, saído da tua imaginação.
 
-                    Na primeira linha, usa `{ask}` e pergunta à personagem principal como será a história.
+                    Na primeira linha, usa `{ask}` e pergunta à personagem principal como será a história. Depois usa `{answer}` se quiseres usar o nome do personagem.
 
-                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) {answer} vai caminhar agora na floresta\n{print} Estão um pouco assustados, {answer}\n{print} Ouvem barulhos estranhos por toda a parte\n{print} Receiam que esta floresta seja assombrada\n```\n"
+                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) {answer} vai caminhar agora na floresta\n{print} Um pouco(a) assustado(a), o(a) {answer} continua a caminhar\n{print} O(A) {answer} ouve barulhos estranhos por toda a parte\n{print} tem medo que esta floresta seja assombrada\n```\n"
                 story_text_2: |
                     ### Exercício
                     Agora, cria a tua própria história com pelo menos 6 linhas de código.
@@ -18,6 +18,16 @@ adventures:
                     Usa pelo meno um comando `{ask}` e um `{answer}`.
                     Podes escolher o tema que preferires.
                     Se não conseguires lembrar-te de um tema, escolhe uma das nossas opções: ir ao cinema, um evento desportivo ou um dia no zoo.
+                answer_code: |
+                    ```
+                    {print} Certo dia fui ao jardim zoológico
+                    {ask} Que animal vi primeiro?
+                    {print} Primeiro vi um(a) {answer}
+                    {print} Depois vim um pinguim
+                    {print} Estava a almoçar
+                    {ask} O que estava o pinguim a comer?
+                    {print} O pinguim estava a almoçar {answer}
+                    ```
             2:
                 story_text: |
                     No nível 2 podes tornar a tua história ainda mais divertida. O nome da tua personagem principal pode agora aparecer em qualquer parte da frase.
@@ -34,6 +44,15 @@ adventures:
                     {sleep}
                     {print} nome receia que esta floresta seja assombrada
                     ```
+                story_text_2: |
+                    ### Exercício
+                    Agora é hora de adicionar variáveis à história que criaste no nível anterior.
+                    Vai à tua aventura do nível anterior e copia o código. Cola o código no ecrã deste nível.
+
+                    O código não vai funcionar neste nível, porque ainda não utilizaste variáveis.
+                    Corrige o código utilizando variáveis e `{is}` com o comando `{ask}`, tal como aprendeste neste nível.
+
+                    **Extra** Adiciona um comando `{sleep}` ao teu código para criar tensão na tua história.
             3:
                 story_text: |
                     No nível 3 podes tornar a tua história mais divertida. Podes usar a aleatoriedade para qualquer monstro, animal ou outro obstáculo, da seguinte forma:
@@ -266,6 +285,16 @@ adventures:
                     {print} Olá, programador!
                     {print} Bem-vindo à Hedy!
                     ```
+                story_text: |
+                    ## O comando {print}
+                    Podes imprimir texto usando o comando `{print}`.
+                story_text_2: |
+                    ### Exercício
+                    Na Hedy vais encontrar exercícios em cada aventura. Um exercício serve para praticares novos comandos e conceitos, e deixa-te criar as tuas próprias variações sobre os exemplos.
+                    Neste exercício vais ver um espaço cor-de-rosa em branco. Tens de preencher esse espaço em branco com alguma coisa para poderes correr o código.
+
+                    Preenche o espaço com o comando `{print}` e depois adiciona mais cinco linhas de código. Cada linha tem de começar com o comando `{print}`.
+                    Diverte-te!
     quizmaster:
         levels: {}
     quotation_marks:
