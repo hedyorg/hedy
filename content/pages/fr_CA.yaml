@@ -328,13 +328,13 @@ teacher-guide:
                 error_code: |-
                     noms {is} Jacques
                     ton_nom {is} {ask} Qui es-tu ?
-                    {add} ton_nom {to} noms
+                    {add} ton_nom {to_list} noms
                     {print} noms {at} {random}
                 solution_text: Il faut d'abord qu'il y ait une liste, donc vous devez ajouter un deuxième nom pour transformer les noms en liste, par exemple Amy. Si vous ne voulez pas d'Amy dans votre liste, vous pouvez utiliser remove pour la supprimer ensuite.
                 solution_code: |-
                     noms {is} Jacques, Amy
                     ton_nom {is} {ask} Qui es-tu ?
-                    {add} ton_nom {to} noms
+                    {add} ton_nom {to_list} noms
                     {print} noms {at} {random}
         -   title: Les élèves oublient d'utiliser `{to}`/`{from}` dans `{add}`/`{remove}`
             example:
@@ -349,7 +349,7 @@ teacher-guide:
                 solution_code: |-
                     aventures {is} histoire, perroquet, dé
                     choix {is} Quelle aventure préférez-vous ?
-                    {add} choix {to} aventures
+                    {add} choix {to_list} aventures
                     {remove} dé {from} aventures
                     {print} J'aime aventures {at} {random}
     -   level: "4"

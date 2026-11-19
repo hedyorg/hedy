@@ -245,13 +245,13 @@ teacher-guide:
                 error_code: |-
                     names {is} Jake
                     your_name {is} {ask} 你是誰？
-                    {add} your_name {to} names
+                    {add} your_name {to_list} names
                     {print} names {at} {random}
                 solution_text: 程式中必須先有清單，所以要加入第二個名字（例如 Amy），把 `names` 變成清單。如果不想讓 Amy 留在清單中，之後可以使用 `{remove}` 將她移除。
                 solution_code: |-
                     names {is} Jake, Amy
                     your_name {is} {ask} 你是誰？
-                    {add} your_name {to} names
+                    {add} your_name {to_list} names
                     {print} names {at} {random}
             title: 學生在沒有清單時嘗試使用 add/remove
         -   example:

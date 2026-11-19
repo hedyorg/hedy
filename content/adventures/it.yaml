@@ -6012,7 +6012,7 @@ adventures:
                         numero_pazienti = numero_pazienti + numero_nuovi_pazienti
                         {repeat} numero_nuovi_pazienti {times}
                             nome = {ask} 'Come si chiama?'
-                            {add} nome {to} pazienti
+                            {add} nome {to_list} pazienti
                     {else}
                         {print} 'Oggi nessun nuovo paziente'
 

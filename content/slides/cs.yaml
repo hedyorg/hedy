@@ -1326,7 +1326,7 @@ levels:
                 předchozí_skok = 'Už máš za sebou seskok padákem, ' jméno '?'
                 {if} předchozí_skok  ne
                 {print} 'Žádné obavy, dostaneš další bezpečnostní pokyny v místnosti 13'
-                {add} jméno {to} lidé_pro_další_poučení
+                {add} jméno {to_list} lidé_pro_další_poučení
                 {else}
                 {print} 'To je zábava!'
                 {print} 'Děkujeme všem za vyplnění bezpečnostních otázek. Užijte si seskok!'

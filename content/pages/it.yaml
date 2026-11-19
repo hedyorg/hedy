@@ -382,13 +382,13 @@ teacher-guide:
                 error_code: |-
                     nomi {is} Jake
                     tuo_nome {is} {ask} Chi sei?
-                    {add} tuo_nome {to} nomi
+                    {add} tuo_nome {to_list} nomi
                     {print} nomi {at} {random}
                 solution_text: Prima ci deve essere una lista, quindi devi aggiungere un secondo nome, per esempio Amy, per trasformare nomi in una lista. Se non vuoi Amy nella lista, puoi toglierla dopo con remove.
                 solution_code: |-
                     nomi {is} Jake, Amy
                     tuo_nome {is} {ask} Chi sei?
-                    {add} tuo_nome {to} nomi
+                    {add} tuo_nome {to_list} nomi
                     {print} nomi {at} {random}
             title: Gli studenti provano a usare add/remove senza una lista
         -   example:

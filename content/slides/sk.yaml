@@ -1331,7 +1331,7 @@ levels:
                 jumped_before = 'Už bol niekedy zoskok padákom, ' name '?'
                 {if} jumped_before  nie
                 {print} 'Nič sa nedeje, v miestnosti 13 bude ešte bezpečnostná inštruktáž'
-                {add} name {to} extra_instructions_people
+                {add} name {to_list} extra_instructions_people
                 {else}
                 {print} 'Zábava!'
                 {print} 'Ďakujeme, že sú bezpečnostné otázky vyplnené. Uži si zoskok!'

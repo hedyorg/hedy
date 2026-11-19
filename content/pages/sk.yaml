@@ -406,13 +406,13 @@ teacher-guide:
                 error_code: |-
                     names {is} Jake
                     your_name {is} {ask} Kto si?
-                    {add} your_name {to} names
+                    {add} your_name {to_list} names
                     {print} names {at} {random}
                 solution_text: Najprv musí byť zoznam, takže treba pridať druhé meno, aby sa z names stal zoznam, napríklad Amy. Ak Amy v zozname nechceš, môžeš ju potom odobrať príkazom remove.
                 solution_code: |-
                     names {is} Jake, Amy
                     your_name {is} {ask} Kto si?
-                    {add} your_name {to} names
+                    {add} your_name {to_list} names
                     {print} names {at} {random}
         -   title: Žiaci zabudnú použiť `{to}`/`{from}` pri `{add}`/`{remove}`
             example:

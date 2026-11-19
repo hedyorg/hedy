@@ -276,9 +276,9 @@ teacher-guide:
         -   title: Žáci se snaží použít add/remove bez seznamu
             example:
                 error_text: V příkladu níže není „jména“ seznam, ale proměnná. Nelze do ní nic přidat.
-                error_code: "jména {is} Jake\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to} jména\n{print} jména {at} {random}"
+                error_code: "jména {is} Jake\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to_list} jména\n{print} jména {at} {random}"
                 solution_text: Nejprve musí existovat seznam. Přidejte proto druhé jméno, například Amy, aby se z proměnné jména stal seznam. Pokud Amy v seznamu nechcete, můžete ji pak odstranit pomocí remove.
-                solution_code: "jména {is} Jake, Amy\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to} jména\n{print} jména {at} {random}"
+                solution_code: "jména {is} Jake, Amy\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to_list} jména\n{print} jména {at} {random}"
         -   title: Žáci zapomínají používat `{to}`/`{from}` v `{add}`/`{remove}`
             example:
                 error_text: Bez to/from příkaz add/remove nefunguje.

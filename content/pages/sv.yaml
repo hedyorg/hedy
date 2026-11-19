@@ -297,13 +297,13 @@ teacher-guide:
                 error_code: |-
                     namn {is} Jake
                     ditt_namn {is} {ask} Vem är du?
-                    {add} ditt_namn {to} namn
+                    {add} ditt_namn {to_list} namn
                     {print} namn {at} {random}
                 solution_text: Det måste först finnas en lista, så du måste lägga till ett andra namn för att förvandla namn till en lista, till exempel Amy. Om du inte vill ha Amy på din lista, kan du använda kommandot ta bort.
                 solution_code: |-
                     namn {is} Jake, Amy
                     ditt_namn {is} {ask} Vem är du?
-                    {add} ditt_namn {to} namn
+                    {add} ditt_namn {to_list} namn
                     {print} namn {at} {random}
         -   title: Elever glömmer att använda till/bort i lägg till/ta bort
             example:
@@ -318,7 +318,7 @@ teacher-guide:
                 solution_code: |-
                     äventyr {is} berättelse, papegoja, tärningar
                     val {is} Vilket äventyr gillar du bäst?
-                    {add} val {to} äventyr
+                    {add} val {to_list} äventyr
                     {remove} tärningar {from} äventyr
                     {print} Jag älskar äventyr på slump
     -   level: "4"

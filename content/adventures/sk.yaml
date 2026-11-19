@@ -109,7 +109,7 @@ adventures:
                     animals {is} lev, zebra, plameniak
                     {print} Ahoj deti! Dnes ideme do zoo!
                     favorite_animal {is} {ask} Ku ktorému zvieraťu chceš ísť dnes?
-                    {add} favorite_animal {to} animals
+                    {add} favorite_animal {to_list} animals
                     {sleep} 2
                     {print} Poďme k animals {at} {random}
                     {sleep}
@@ -472,7 +472,7 @@ adventures:
                     {print} Tajomný milkshake
                     flavors {is} jahoda, čokoláda, vanilka
                     hope {is} {ask} Akú príchuť chceš?
-                    {add} hope {to} flavors
+                    {add} hope {to_list} flavors
                     allergies {is} {ask} Máš na niektorú príchuť alergiu?
                     {remove} allergies {from} flavors
                     {print} Dostaneš flavors {at} {random} milkshake
@@ -3467,7 +3467,7 @@ adventures:
                         amount_patients = amount_patients + amount_new_patients
                         {repeat} amount_new_patients {times}
                             name = {ask} 'Ako sa volajú?'
-                            {add} name {to} patients
+                            {add} name {to_list} patients
                     {else}
                         {print} 'Dnes žiadni noví pacienti'
 
@@ -5020,7 +5020,7 @@ adventures:
                     words {is} kvá, Hedy
                     {print} Trénuj papagája!
                     new_word {is} {ask} Ktoré slovo sa má naučiť?
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} 🧒 Povedz new_word, Hedy!
                     {print} 🦜 words {at} {random}
                     ```
@@ -5043,7 +5043,7 @@ adventures:
                     words is kvá, Hedy
                     {print} 'Trénuj papagája!'
                     new_word {is} {ask} 'Ktoré slovo sa má naučiť?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} ' 🧒 Povedz ' new_word ', Hedy!'
                     {print} ' 🦜 ' words {at} {random}
                     ```
@@ -5070,7 +5070,7 @@ adventures:
                     words is kvá, Hedy
                     {print} 'Trénuj papagája!'
                     new_word {is} {ask} 'Ktoré slovo sa má naučiť?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     said_word is words {at} {random}
                     {print} '🧒 Povedz ' new_word ', Hedy!'
                     {print} '🦜 ' said_word

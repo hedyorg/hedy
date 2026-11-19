@@ -348,13 +348,13 @@ teacher-guide:
                 error_code: |-
                     nombres {is} Jake
                     tu_nombre {is} {ask} ¿Quién eres tú?
-                    {add} tu_nombre {to} nombres
+                    {add} tu_nombre {to_list} nombres
                     {print} nombres {at} {random}
                 solution_text: Primero tiene que haber una lista, así que tienes que añadir un segundo nombre para convertir nombres en una lista, por ejemplo Amy. Si no quieres Amy en tu lista, puedes usar borrar para borrarlo después.
                 solution_code: |-
                     nombres {is} Jake, Amy
                     tu_nombre {is} {ask} ¿Quién eres tú?
-                    {add} tu_nombre {to} nombres
+                    {add} tu_nombre {to_list} nombres
                     {print} nombres {at} {random}
         -   title: Los alumnos olvidan utilizar `{to}`/`{from}` en `{add}`/`{remove}`
             example:

@@ -349,13 +349,13 @@ teacher-guide:
                 error_code: |-
                     이름들 {is} Jake
                     너의_이름 {is} {ask} 너는 누구니?
-                    {add} 너의_이름 {to} 이름들
+                    {add} 너의_이름 {to_list} 이름들
                     {print} 이름들 {at} {random}
                 solution_text: 먼저 목록이 있어야 하기 때문에 에이미처럼 이름을 목록으로 바꾸기 위해 두 번째 이름을 추가해야 합니다. 에이미를 목록에 넣지 않으려면 그 다음에 제거를 사용하여 제거할 수 있습니다.
                 solution_code: |-
                     이름들 {is} Jake, Amy
                     너의_이름 {is} {ask} 너는 누구니?
-                    {add} 너의_이름 {to} 이름들
+                    {add} 너의_이름 {to_list} 이름들
                     {print} 이름들 {at} {random}
         -   title: 학생들이 추가/제거할 때 사용하는 것을 잊어버림
             example:

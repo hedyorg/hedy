@@ -54,7 +54,7 @@ adventures:
                     zivotinje {is} lav, zebra, plamenac
                     {print} Pozdrav djeco! Danas idemo u zoološki vrt!
                     najdraza_zivotinja {is} {ask} Kojoj životinji želiš ići danas?
-                    {add} najdraza_zivotinja {to} zivotinje
+                    {add} najdraza_zivotinja {to_list} zivotinje
                     {sleep} 2
                     {print} Idemo do — zivotinje {at} {random}
                     {sleep}
@@ -382,7 +382,7 @@ adventures:
                     {print} Tajni frape
                     okusi {is} jagoda, čokolada, vanilija
                     zelja {is} {ask} Koji okus priželjkuješ?
-                    {add} zelja {to} okusi
+                    {add} zelja {to_list} okusi
                     alergije {is} {ask} Jesi li alergičan na neki okus?
                     {remove} alergije {from} okusi
                     {print} Dobiješ frape okusi {at} {random}
@@ -3173,7 +3173,7 @@ adventures:
                         broj_pacijenata = broj_pacijenata + broj_novih_pacijenata
                         {repeat} broj_novih_pacijenata {times}
                             ime = {ask} 'Kako se zove?'
-                            {add} ime {to} pacijenti
+                            {add} ime {to_list} pacijenti
                     {else}
                         {print} 'Danas nema novih pacijenata'
 
@@ -4435,7 +4435,7 @@ adventures:
                     rijeci {is} squawk, Hedy
                     {print} Uvježbaj svoju papigu!
                     nova_rijec {is} {ask} Koju riječ ih želiš naučiti?
-                    {add} nova_rijec {to} rijeci
+                    {add} nova_rijec {to_list} rijeci
                     {print} 🧒 Reci nova_rijec, Hedy!
                     {print} 🦜 rijeci {at} {random}
                     ```
@@ -4458,7 +4458,7 @@ adventures:
                     rijeci is squawk, Hedy
                     {print} 'Uvježbaj svoju papigu!'
                     nova_rijec {is} {ask} 'Koju riječ ih želiš naučiti?'
-                    {add} nova_rijec {to} rijeci
+                    {add} nova_rijec {to_list} rijeci
                     {print} ' 🧒 Reci ' nova_rijec ', Hedy!'
                     {print} ' 🦜 ' rijeci {at} {random}
                     ```
@@ -4485,7 +4485,7 @@ adventures:
                     rijeci is squawk, Hedy
                     {print} 'Uvježbaj svoju papigu!'
                     nova_rijec {is} {ask} 'Koju riječ ih želiš naučiti?'
-                    {add} nova_rijec {to} rijeci
+                    {add} nova_rijec {to_list} rijeci
                     izgovorena_rijec is rijeci {at} {random}
                     {print} '🧒 Reci ' nova_rijec ', Hedy!'
                     {print} '🦜 ' izgovorena_rijec

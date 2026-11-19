@@ -1490,7 +1490,7 @@ levels:
                 sprong_ervaring = 'Heb je al eens eerder parachute gesprongen, naam ?'
                 {if} ervaring  nee
                 {print} 'Geen probleem! Ga zo naar kamer 13 voor extra instructies.'
-                {add} naam {to} extra_instructies_mensen
+                {add} naam {to_list} extra_instructies_mensen
                 {else}
                 {print} 'Gaaf!'
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'

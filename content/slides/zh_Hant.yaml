@@ -1330,7 +1330,7 @@ levels:
                 jumped_before = '你以前跳過傘嗎，' name '？'
                 {if} jumped_before  沒有
                 {print} '別擔心，你會在 13 號房接受額外的安全說明'
-                {add} name {to} extra_instructions_people
+                {add} name {to_list} extra_instructions_people
                 {else}
                 {print} '真有趣！'
                 {print} '謝謝大家填寫安全問題。祝你跳傘愉快！'

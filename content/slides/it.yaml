@@ -1331,7 +1331,7 @@ levels:
                 gia_lanciato = 'Ti sei mai lanciato con il paracadute, ' nome '?'
                 {if} gia_lanciato  no
                 {print} 'Nessun problema, avrai un'istruzione di sicurezza extra nella stanza 13'
-                {add} nome {to} persone_istruzioni_extra
+                {add} nome {to_list} persone_istruzioni_extra
                 {else}
                 {print} 'Che bello!'
                 {print} 'Grazie a tutti per aver risposto alle domande di sicurezza. Buon lancio!'

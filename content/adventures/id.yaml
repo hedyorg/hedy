@@ -99,7 +99,7 @@ adventures:
                     animals {is} lion, zebra, flamingo
                     {print} Halo anak-anak! Hari ini kita akan ke kebun binatang!
                     favorite_animal {is} {ask} Hewan mana yang ingin kamu kunjungi hari ini?
-                    {add} favorite_animal {to} animals
+                    {add} favorite_animal {to_list} animals
                     {sleep} 2
                     {print} Ayo menuju animals {at} {random}
                     {sleep}
@@ -464,7 +464,7 @@ adventures:
                     {print} Mystery milkshake
                     flavors {is} strawberry, chocolate, vanilla
                     hope {is} {ask} Rasa apa yang kamu harapkan?
-                    {add} hope {to} flavors
+                    {add} hope {to_list} flavors
                     allergies {is} {ask} Kamu alergi rasa apa?
                     {remove} allergies {from} flavors
                     {print} Kamu dapat milkshake flavors {at} {random}
@@ -2421,7 +2421,7 @@ adventures:
                     words is squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     said_word is words {at} {random}
                     {print} '🧒 Say ' new_word ', Hedy!'
                     {print} '🦜 ' said_word
@@ -2509,7 +2509,7 @@ adventures:
                     words {is} squawk, Hedy
                     {print} Latih burung beomu!
                     new_word {is} {ask} Kata apa yang ingin kamu ajarkan padanya?
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} 🧒 Katakan new_word, Hedy!
                     {print} 🦜 words {at} {random}
                     ```
@@ -2532,7 +2532,7 @@ adventures:
                     words is squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} ' 🧒 Say ' new_word ', Hedy!'
                     {print} ' 🦜 ' words {at} {random}
                     ```
@@ -5006,7 +5006,7 @@ adventures:
                         amount_patients = amount_patients + amount_new_patients
                         {repeat} amount_new_patients {times}
                             name = {ask} 'Siapa nama mereka?'
-                            {add} name {to} patients
+                            {add} name {to_list} patients
                     {else}
                         {print} 'Tidak ada pasien baru hari ini'
 
