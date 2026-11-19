@@ -55,6 +55,21 @@
             >
         </div>
         <div class="flex-initial">
+          <label for="creator">{{_('creator')}}</label>
+        </div>
+        <div class="flex-initial">
+          <input
+            type="search"
+            id="creator"
+            name="creator"
+            class="border text-black border-gray-500 rounded p-2 w-full"
+            data-cy="search_creator"
+            value="{{creator}}"
+            placeholder="{{_('username')}}"
+            _="on keyup debounced at 1s call (closest <form/>).requestSubmit()"
+            >
+        </div>
+        <div class="flex-initial">
           <label for="tag_select">{{_('tags')}}</label>
         </div>
         <div class="flex-initial">

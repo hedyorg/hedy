@@ -774,17 +774,26 @@ class Database:
                                        level: int = None,
                                        tag: str = None,
                                        q: str = None,
+                                       creator: str = None,
                                        pagination_token: str = None):
-        """Return a page of the public adventures, filtered by language, level and tag, and with a search string.
+        """Return a page of the public adventures, filtered by language, level, tag, creator, and a search string.
 
         Also returns the languages and tags that match the current filter.
 
         FIXME: This is right now very poorly optimized, and needs more work to be fast.
         """
 
-        server_side_filter = {
-            'language': language,
-        }
+        if creator:
+            key = {'creator': creator.strip().lower()}
+            server_side_filter = {
+                'public': 1,
+                'language': language,
+            }
+        else:
+            key = {'public': 1}
+            server_side_filter = {
+                'language': language,
+            }
 
         def client_side_filter(adventure):
             # levels are stored as strings T_T
@@ -803,7 +812,7 @@ class Database:
                     return False
             return True
 
-        return self.adventures.get_page({"public": 1},
+        return self.adventures.get_page(key,
                                         pagination_token=pagination_token,
                                         limit=20,
                                         server_side_filter=server_side_filter,

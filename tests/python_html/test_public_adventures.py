@@ -201,3 +201,22 @@ def test_regular_teacher_cannot_make_public_adventure_private(client: Client, gi
     # THEN
     assert response.status_code == 401
     assert given.db.get_adventure(public_adv['id'])['public'] == 1
+
+
+def test_filter_public_adventures_by_creator_username(client: Client, given: Given):
+    # GIVEN
+    t1 = given.a_teacher_account()
+    t2 = given.a_teacher_account()
+    given.some_saved_adventure(t1['username'], name='T1 Public Adventure', public=1)
+    given.some_saved_adventure(t1['username'], name='T1 Private Adventure', public=0)
+    given.some_saved_adventure(t2['username'], name='T2 Public Adventure', public=1)
+    given.logged_in_as_new_teacher()
+
+    # WHEN - filtering by t1's username (case-insensitive)
+    html = client.get(f'/public-adventures/?creator={t1["username"].upper()}').get_data(as_text=True)
+
+    # THEN - filter is labeled Creator and only t1's public adventure is listed
+    assert '<label for="creator">Creator</label>' in html
+    assert 'T1 Public Adventure' in html
+    assert 'T1 Private Adventure' not in html
+    assert 'T2 Public Adventure' not in html
