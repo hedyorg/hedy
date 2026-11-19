@@ -28,7 +28,7 @@
             </div>
             <div class="grow-0 grid sliding-content-closed ease-in transition-all duration-300 min-h-0 max-h-80 w-full" id="program_{{ program.program_id }}">
                 <div class="turn-pre-into-ace  overflow-auto rounded-md">
-                    <pre level="{{ program.level }}" class="view-program min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
+                    <pre level="{{ program.level }}" class="view-program defer-editor min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
                     <div class="flex flex-row gap-5 items-center">
                         <a href="/hedy/{{ program.program_id }}/view/redesign" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
                         {% if not program.is_modified %}
@@ -47,10 +47,49 @@
                         level=program.level,
                         student=program.student,
                         adventure_name=program.adventure_name,
+                        program_id=program.program_id,
                         is_ticked=program.ticked,
                     )
                 }}
         </td>
     </tr>
 {% endfor %}
+
+{#
+  The pager. It lives inside the table body because that is what htmx swaps, so paging,
+  filtering and sorting all replace the same thing.
+
+  Both addresses carry the filter and the sort the server rendered this table with, rather
+  than collecting them from the inputs on the page, so that a page opened straight from the
+  browser's history pages on with the same ones. The filter form itself sends no page, so
+  filtering starts again at the first page.
+#}
+{% if pagination and pagination.pages > 1 %}
+<tr>
+    <td colspan="5" class="py-3">
+        <div class="flex flex-row flex-wrap items-center justify-center gap-2">
+            {% for link in pagination.numbers %}
+                {% if link %}
+                <button type="button"
+                        class="{% if link.current %}green-btn-new{% else %}blue-btn-new{% endif %} px-3"
+                        {% if link.current %}aria-current="page"{% endif %}
+                        data-cy="grade_page_{{ link.page }}"
+                        hx-get="{{ link.rows_url }}"
+                        hx-target="#grade-class-table-body"
+                        hx-swap="innerHTML"
+                        hx-push-url="{{ link.url }}">
+                    {{ link.page }}
+                </button>
+                {% else %}
+                <span class="px-1 text-blue-800" aria-hidden="true">&hellip;</span>
+                {% endif %}
+            {% endfor %}
+            {# Numbers only: they read the same in every language. #}
+            <span class="ms-2 text-blue-800" data-cy="grade_page_count">
+                {{ pagination.first }}&ndash;{{ pagination.last }} / {{ pagination.total }}
+            </span>
+        </div>
+    </td>
+</tr>
+{% endif %}
 {% endif %}

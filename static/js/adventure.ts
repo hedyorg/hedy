@@ -24,6 +24,10 @@ let draftUploadInterval: ReturnType<typeof setInterval> | undefined;
 let lastPersistedDraftFingerprint = '';
 let lastUploadedDraftFingerprint = '';
 let isUploadingAdventureDraft = false;
+// Set when a change comes in while an upload is still in flight, so that change is uploaded
+// after it instead of being thrown away.
+let adventureDraftUploadPending = false;
+let adventureDraftUploadPendingForce = false;
 const previewEditorCreator = new HedyCodeMirrorEditorCreator();
 
 const ADVENTURE_DRAFT_STORAGE_PREFIX = 'hedy.customize_adventure_draft.';
@@ -141,6 +145,11 @@ function loadAdventureDraftIntoEditors() {
 
 function uploadAdventureDraftIfChanged(force = false) {
     if (isUploadingAdventureDraft) {
+        // Dropping this upload would lose the change for good: nothing asks for it again,
+        // so a teacher who flips two settings in quick succession would silently keep only
+        // the first. Remember it and send it once the current upload is done.
+        adventureDraftUploadPending = true;
+        adventureDraftUploadPendingForce = adventureDraftUploadPendingForce || force;
         return;
     }
 
@@ -174,6 +183,12 @@ function uploadAdventureDraftIfChanged(force = false) {
         })
         .always(() => {
             isUploadingAdventureDraft = false;
+            if (adventureDraftUploadPending) {
+                const pendingForce = adventureDraftUploadPendingForce;
+                adventureDraftUploadPending = false;
+                adventureDraftUploadPendingForce = false;
+                uploadAdventureDraftIfChanged(pendingForce);
+            }
         });
 }
 
@@ -483,6 +498,11 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
         });
     }
 
+    languagesDropdown?.addEventListener('change', () => {
+        persistAdventureDraftIfChanged(true);
+        uploadAdventureDraftIfChanged(true);
+    });
+
     const previewTab = document.getElementById('preview-tab');
     previewTab?.addEventListener('click', () => {
         persistAdventureDraftIfChanged(true);
@@ -634,9 +654,15 @@ export function update_adventure_redesign(formElement: HTMLFormElement, draftOve
     }
 
     const classes = parseJsonStringArray(formElement.dataset['adventureClasses']);
-    const language = theKeywordLanguage
+    const keywordLanguage = theKeywordLanguage
         || formElement.dataset['adventureLanguage']
         || 'en';
+    // The adventure's language is the one the teacher picked in the public adventure options.
+    // It is not the keyword language, which is only used to format the code snippets.
+    const languagesDropdown = document.querySelector('#languages_dropdown') as HedySelect | null;
+    const language = languagesDropdown?.selected?.[0]
+        || formElement.dataset['adventureLanguage']
+        || keywordLanguage;
     const fallbackName = formElement.dataset['adventureName'] || '';
     const adventureName = getAdventureNameFromPage(fallbackName);
     const isPublic = getAdventurePublicValue(formElement);
@@ -644,8 +670,8 @@ export function update_adventure_redesign(formElement: HTMLFormElement, draftOve
     const content = draftOverride?.content ?? DOMPurify.sanitize(window.ckEditor?.getData() || '');
     const solutionExample = draftOverride?.solutionExample ?? DOMPurify.sanitize(window.ckSolutionEditor?.getData() || '');
 
-    const formattedContent = getFormattedAdventureContent(content, levels, language);
-    const formattedSolution = getFormattedAdventureContent(solutionExample, levels, language);
+    const formattedContent = getFormattedAdventureContent(content, levels, keywordLanguage);
+    const formattedSolution = getFormattedAdventureContent(solutionExample, levels, keywordLanguage);
 
     return $.ajax({
         type: 'POST',

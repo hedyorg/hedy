@@ -542,6 +542,18 @@ class Database:
         # Fetch a student adventure with id formatted as studentID-adventureName-level
         return self.STUDENT_ADVENTURES.get({"id": id})
 
+    def student_adventures_by_ids(self, ids):
+        """Fetch many student adventures at once, by ids formatted as studentID-adventureName-level.
+
+        Returns: { id -> student adventure }, leaving out the ids that have no record yet.
+        The grading page needs one of these per row it shows, and fetching them one by one
+        is a round trip per row.
+        """
+        if not ids:
+            return {}
+        found = self.STUDENT_ADVENTURES.batch_get({id: {"id": id} for id in ids})
+        return {id: adventure for id, adventure in found.items() if adventure}
+
     def update_student_adventure(self, id, ticked):
         # Swap the ticked value when a request is sent
         return self.STUDENT_ADVENTURES.update({"id": id}, {"ticked": not ticked})
@@ -762,17 +774,26 @@ class Database:
                                        level: int = None,
                                        tag: str = None,
                                        q: str = None,
+                                       creator: str = None,
                                        pagination_token: str = None):
-        """Return a page of the public adventures, filtered by language, level and tag, and with a search string.
+        """Return a page of the public adventures, filtered by language, level, tag, creator, and a search string.
 
         Also returns the languages and tags that match the current filter.
 
         FIXME: This is right now very poorly optimized, and needs more work to be fast.
         """
 
-        server_side_filter = {
-            'language': language,
-        }
+        if creator:
+            key = {'creator': creator.strip().lower()}
+            server_side_filter = {
+                'public': 1,
+                'language': language,
+            }
+        else:
+            key = {'public': 1}
+            server_side_filter = {
+                'language': language,
+            }
 
         def client_side_filter(adventure):
             # levels are stored as strings T_T
@@ -791,7 +812,7 @@ class Database:
                     return False
             return True
 
-        return self.adventures.get_page({"public": 1},
+        return self.adventures.get_page(key,
                                         pagination_token=pagination_token,
                                         limit=20,
                                         server_side_filter=server_side_filter,

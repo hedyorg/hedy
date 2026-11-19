@@ -122,7 +122,7 @@ adventures:
                     ```
             6:
                 story_text: "Ara que pots utilitzar `{elif}` podràs crear una història encara més interactiva! Podràs crear diversos personatges, per exemple, que tinguin tots trets diferents.  \nSi vols podràs fer que el teu jugador triï per quin camí anar, quina porta vol obrir o quina poció màgica vol beure...\n\n### Exercici\nCrea la teva pròpia història amb 3 o més opcions utilitzant el {elif}."
-                example_code: "```\npersonatge = {is} {ask} \"Qui t’ajudarà en la teva missió?\"\n{if} personatge {is} \"Dàlia\"\n{print} \"Has triat la Dàlia! És la més intel·ligent de totes!\"\n{elif} personatge {is} \"Jaume\"\n{print} \"Has triat en Jaume! És el més fort de tots!\"\n{elif} personatge {is} \"Francesc\"\n{print} \"Has triat en Francesc! És el més ràpid de tots!\"\n```\n"
+                example_code: "```\npersonatge {is} {ask} \"Qui t’ajudarà en la teva missió?\"\n{if} personatge {is} \"Dàlia\"\n{print} \"Has triat la Dàlia! És la més intel·ligent de totes!\"\n{elif} personatge {is} \"Jaume\"\n{print} \"Has triat en Jaume! És el més fort de tots!\"\n{elif} personatge {is} \"Francesc\"\n{print} \"Has triat en Francesc! És el més ràpid de tots!\"\n```\n"
             8:
                 story_text: |
                     En una història, sovint es repeteixen paraules diverses vegades. Per exemple, quan algú demana ajuda o canta una cançó.
@@ -179,21 +179,6 @@ adventures:
                     ```
             16:
                 story_text: "Utilitzant el bucle `{while}` pots fer que les teves històries siguin més interessants. Per exemple, pots fer servir `{while} game == 'on'` per a poder jugar el joc fins que s'acabi.\nTambé pots fer servir `{while} sword == 'lost'` i així el jugador no podrà continuar el joc fins que trobi alguna cosa concreta.\n\n### Exercici\nAquest exemple mostra com usar el bucle `{while}` dins una història, Ara **pensa en un escenari propi** en què el jugador ha de trobar alguna cosa abans de poder continuar.\n"
-                example_code: |
-                    ```
-                    claus = "perdudes"
-                    {print}("Ets al jardí i no pots entrar! has perdut les claus.")
-                    {print}("On les vols buscar?")
-                    {print}("Pots escollir entre: l'arbre, les flors, la roca, la bústia")
-                    {while} claus == "perdudes"
-                        lloc = {input} ("On vols buscar-les?)"
-                        {if} lloc == "les flors"
-                            {print}("Aquí estan!")
-                            claus = "trobades"
-                        {else}
-                            {print}(" No, no són a ", lloc)
-                    {print}("Ja pots entrar a casa!")
-                    ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         default_save_name: comanda_afegir_borrar
@@ -741,8 +726,6 @@ adventures:
                     ```
                     opcions {is} _
                     ```
-            4:
-                story_text: "En aquest nivell també pots crear daus. Però aquesta vegada ho has de fer tu sol, sense codi d'exemple!\n\n### Exercici\nCrea els teus propis daus en aquest nivell.  \nAjuda: Si no tens ni idea de com fer daus, dona una ullada als daus del nivell anterior, sobretot no oblidis afegir-hi cometes.\n"
             5:
                 story_text: |
                     Afegirem les comandes `{if}` i `{else}` als nostres daus!
@@ -820,15 +803,6 @@ adventures:
                     {print} gent {at} {random} li toca rentar plats
                     ```
                 story_text_2: "### Exercici\nCrea la teva pròpia versió del programa del rentaplats. Primer, fes una llista amb els membres de la teva família.\nDesprés, pensa en una tasca que cal fer i deixa que l'ordinador decideixi qui ha de fer la tasca amb la comanda `{at} {random}`.\n\n**Extra** No tens ganes que et toqui a tu? Hackeja el programa eliminant el teu nom de la llista amb la comanda `{remove}` `{from}`.\n"
-            4:
-                story_text: "Amb les cometes pots millorar encara més el teu programa de rentaplats.\n\n### Exercici\nPrimer, omple els símbols o comandes correctes als buits perquè aquest programa d'exemple funcioni.\nHo has aconseguit? Genial! Ara copia el teu propi codi del nivell anterior i fes-lo funcionar en aquest nivell afegint cometes als llocs adequats.\n"
-                example_code: |
-                    ```
-                    gent {is} mama, papa, Emma, Sofia
-                    {print} _ els plats son rentats per _
-                    {sleep}
-                    {print} gent {at} _
-                    ```
             5:
                 story_text: "Amb la comanda `{if}` ara pots divertir-te més amb les eleccions al programa. Pots fer que el teu programa respongui a l'elecció que ha fet l'ordinador.\n### Exercici\nPots completar el codi perquè imprimeixi 'mala sort' quan sigui el teu torn i, altrament, 'sí!'?  \nNo oblidis les cometes!\n"
                 example_code: "```\ngent {is} mama, papa, Emma, Sofia\nnetejador {is} gent {at} {random}\n_ netejador {is} Sofia {print} _ Pffff... em toca rentar plats _\n_ {print} \"per sort no hi ha plats perquè \" _ \" ja els està rentant\"\n```\n"
@@ -946,7 +920,7 @@ adventures:
                     Utilitza la teva imaginació!
 
                     El teu programa ha de tenir almenys 10 línies de codi i ha de contenir com a mínim una comanda `{if}` i  una de `{else}`.
-                example_code: "```\namics {is} Jordi, Laura, David\n{print} \"Puc predir la loteria de demà! i dir-te si et tocarà o no!\"\npersona {is} {ask} \"Qui ets tu?\"\nresposta_bona {is} Visca! La guanyaràs!, Segur que la guanyes demà!, tenim un guanyador!\nresposta_dolenta {is} Mala sort! Torna-ho a provar!, Serà una altra persona qui la guanyi, ets un perdedor!\n{if} persona {in} amics\n {print} resposta_bona {at} {random}\n{else}\n {print} resposta_dolenta {at} {random}\n```\n"
+                example_code: "```\namics {is} Jordi, Laura, David\n{print} \"Puc predir la loteria de demà! i dir-te si et tocarà o no!\"\npersona {is} {ask} \"Qui ets tu?\"\nresposta_bona {is} Visca! La guanyaràs!, Segur que la guanyes demà!, tenim un guanyador!\nresposta_dolenta {is} Mala sort! Torna-ho a provar!, Serà una altra persona qui la guanyi, ets un perdedor!\n{if} persona {in} amics\n{print} resposta_bona {at} {random}\n{else}\n{print} resposta_dolenta {at} {random}\n```\n"
             7:
                 story_text: "En aquest nivell pots utilitzar matemàtiques en les teves prediccions com a endeví. Això et permet crear (totes les) fórmules divertides per calcular el futur.\nPer exemple, podries calcular quants diners tindràs o quants fills tindràs quan siguis gran.\n\n\n\n### Exercici\nPots inventar la teva pròpia màquina de prediccions (divertides)?\n"
                 example_code: |
@@ -1018,9 +992,9 @@ adventures:
                 story_text: "En aquest nivell aprendràs a utilitzar **funcions**. Una funció és un bloc de codi que pots fer servir fàcilment diverses vegades. Usar funcions ens ajuda a organitzar fragments de codi que podem usar una vegada i una altra.\nPer crear una funció, usa `{define}` i dona-li un nom a la funció. Després, posa totes les línies que vols dins de la funció en un bloc indentat sota la línia `{define}`.\nDeixa una línia buida al teu codi per fer-lo més net i organitzat. Bona feina! Ja has creat una funció!\n\nAra, sempre que necessitem aquest fragment de codi, només hem d'utilitzar el nom de la funció per cridar-la! No cal tornar-ho a escriure i repetir el codi.\n\nMira aquest exemple de codi d'un joc de Twister. La funció 'torn' conté un bloc de codi que tria quina part del cos ha d'anar a cada color.\n\n### Exercici\nAcaba aquest codi establint les dues variables `extremitat_escollida` i `color_escollit`.\nDesprés, tria quantes vegades vols cridar la funció per fer girar la roda de Twister.\n\n### Exercici 2\nMillora el teu codi afegint una variable anomenada 'persones'. Utilitza la variable per donar a tots els jugadors el seu propi comandament en el joc.\nPer exemple: 'Ahmed, mà dreta al verd' o 'Jèssica, peu esquerre al groc'.\n"
                 example_code: |
                     ```
-                    costats = "dreta", "esquerra"
-                    extremitats = "mà", "cama"
-                    colors = "vermell", "blau", "verd", "groc"
+                    costats = dreta, esquerra
+                    extremitats = mà, cama
+                    colors = vermell, blau, verd, groc
 
                     {define} següent_torn
                         costat_escollit = costats {at} {random}
@@ -1081,7 +1055,7 @@ adventures:
                             {print}("Afortunadament podrà descançar a la seva habitació.")
                         {print}("La seva habitació és la ", num_habitacio)
 
-                    {print}("Hola, si us plau omple les dades per al check-in')
+                    {print}("Hola, si us plau omple les dades per al check-in")
                     tractament= {input}("Quin tractament prefereix (sr, sra, dr, etc.)?")
                     cognom = {input}("Com es diu de cognom?")
                     pais_origen= {input}("A quin país resideix?")
@@ -1567,9 +1541,6 @@ adventures:
             11:
                 story_text: "### Exercici\nEn els nivells anteriors has fet sovint el teu propi joc de pedra, paper, tisores. Pots acabar el codi i utilitzar correctament la comanda `{for}` i fer que el joc funcioni?\n"
                 example_code: "```\nopcions = _\njugadors = _\n{for} _\n```\n"
-            4:
-                story_text: "En aquest nivell podem programar encara més el joc de pedra, paper, tisores. Però si vols afegir text recorda que hauràs d'utilitzar cometes.\n### Exercici\nOmple les cometes en els buits. Recorda que la variable `opcions` ha d'estar fora de les cometes.\n"
-                example_code: "```\nopcions {is} pedra, paper, tisores\n{print} _ L'ordinador ha escollit ... _ opcions {at} {random}\n```\n"
             5:
                 example_code: "```\nopcions {is} pedra, paper, tisores\neleccio_ordinador {is} _\neleccio {is} _\n{print} \"Has escollit \" _\n{print} \"L'ordinador ha escollit \" _\n{if} _ {is} _ {print} \"empat!\" {else} {print} \"no hi ha empat\"\n```\n\nOmple els buits amb codi correcte per veure si és un empat.\n"
                 story_text: "En aquest nivell podem determinar si hi ha empat o no. Per això necessites la nova comanda `{if}`.\n\n### Exercici\nAcaba el codi omplint els buits:\n* Fes que l'ordinador triï una opció aleatòria\n* Pregunta al jugador què vol triar\n* Omple les variables correctes a la línia 4 i 5\n* Acaba la línia 6 perquè Hedy pugui comprovar si hi ha empat o no.\n"

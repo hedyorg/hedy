@@ -202,7 +202,6 @@ adventures:
                     ```
             6:
                 story_text: "Od teraz dzięki temu, że możesz używać `{elif}` możesz tworzyć jeszcze bardziej interaktywne historyjki! Możesz na przykład stworzyć wiele postaci, każdą z innymi cechami.\nAlbo możesz pozwolić swojej postaci zdecydować którą drogę wybrać, które drzwi otworzyć albo które magiczne mikstury wypić...\n\n### Ćwiczenie\nStwórz swoją własną historyjkę z przynajmniej 3 wyborami używając {elif}."
-                example_code: "```\npostać= {ask} 'Kto Ci pomoże w Twojej przygodzie?'\n{if} postać {is} 'Daisy'\n    {print} 'Wybrałeś(aś) Daisy! Ona jest najmądrzejsza ze wszystkich!'\n    {print} \"Daisy natychmiast mówi Ci, że nie powinieneś (powinnaś) jeść tych jagód.\"\n{elif} postać {is} 'Jason'\n    {print} 'Wybrałeś(aś) Jasona! On jest najsilniejszy ze wszystkich!'\n    {print} 'Jason podnosi głaz, pokazując ukrytą pod nim sekretną mapę.'\n{elif} postać {is} 'Sam'\n    {print} 'Wybrałeś(aś) Sama! On jest najszybszy ze wszystkich!'\n    {print} 'Sam wspina się na drzewo i widzi, że nieopodal jest wioska.'\n```\n\n            \n"
     add_remove_command:
         default_save_name: Dodaj_komendę_remove
         description: wprowadzamy {add} {to_list} i {remove} {from}
@@ -447,13 +446,6 @@ adventures:
                     ```
                     wybór {is} _
                     ```
-            4:
-                story_text: |
-                    W tym poziomie możesz stworzyć kostki do gry. Ale tym razem spróbuj zrobić to samodzielnie, bez przykładowego kodu!
-
-                    ### Ćwiczenie
-                    Stwórz własne kostki do gry.
-                    Wskazówka: Jeśli nie masz pojęcia jak stworzyć kostki do gry, spójrz na te z poprzedniego poziomu, ale nie zapomnij dodać cudzysłowów.
             5:
                 story_text: |
                     Teraz dodamy polecenia `{if}` oraz `{else}` do naszych kości!
@@ -559,20 +551,6 @@ adventures:
                     Następnie pomyśl o zadaniu do wykonania i pozwól komputerowi zdecydować, kto ma wykonać zadanie za pomocą polecenia `{at} {random}`.
 
                     **Dodatkowo** Nie masz ochoty samodzielnie zmywać naczyń? Zhakuj program, usuwając swoje imię z listy za pomocą polecenia `{remove}` `{from}`.
-            4:
-                story_text: |
-                    Korzystając z cudzysłowów możesz sprawić, że twój program o zmywaniu naczyń będzie jeszcze lepszy.
-
-                    ### Ćwiczenie
-                    Najpierw uzupełnij puste miejsca symbolami lub poleceniami, tak by przykładowy program zaczął działać.
-                    Udało Ci się? Super! Teraz skopiuj swój własny kod z poprzedniego poziomu i spraw by zaczął działać w tym poziomie dodając cudzysłowy w odpowiednich miejscach.
-                example_code: |
-                    ```
-                    ludzie {is} mama, tata, Emma, Sophie
-                    {print} _ naczynia są myte przez _
-                    {sleep}
-                    {print} ludzie {at} _
-                    ```
             5:
                 story_text: |
                     Dzięki poleceniu `{if}` możesz mieć teraz trochę więcej zabawy z wyborami w twoich programach. Możesz teraz sprawić, by twój program reagował na wybory podjęte przez komputer.
@@ -837,9 +815,9 @@ adventures:
                     Na przykład: „Ahmed, prawa ręka na zielonym” lub „Jessica, lewa stopa na żółtym”'.
                 example_code: |
                     ```
-                    strony = 'lewo', 'prawo'
-                    kończyny = 'ręka', 'stopa'
-                    kolory = 'czerwony', 'niebieski', 'zielony', 'żółty'
+                    strony = lewo, prawo
+                    kończyny = ręka, stopa
+                    kolory = czerwony, niebieski, zielony, żółty
 
                     {define} kolej
                         wybrana_strona = strony {at} {random}
@@ -2034,16 +2012,6 @@ adventures:
                     gracz 1 {is}{ask} imię gracza 1
                     _
                     ```
-            4:
-                story_text: |
-                    Na tym poziomie możemy dalej programować kamień, papier, nożyczki. Ale jeśli chcesz dodać tekst, musisz tutaj również użyć cudzysłowu.
-                    ### Ćwiczenie
-                    Wypełnij cudzysłowy w pustych polach. Pamiętaj, że zmienna `choices` powinna znajdować się poza cudzysłowami.
-                example_code: |
-                    ```
-                    możliwości {is} kamień, papier, nożyce
-                    {print} _Komputer wybiera..._ możliwości {at} {random}
-                    ```
             5:
                 story_text: |
                     Na tym poziomie możemy ustalić, czy jest remis, czy nie. Do tego potrzebny jest nowy kod `{if}`.
@@ -2198,7 +2166,7 @@ adventures:
                 example_code: |
                     ```
                     {def} piosenka(miejsce):
-                        {print}('Moja Bonnie jest nad ', place)
+                        {print}('Moja Bonnie jest nad ', miejsce)
 
                     wybrane_miejsce = {input}('Gdzie chcesz, żeby była Bonnie?')
                     synonim = {input}('Jakie jest inne określenie na to miejsce? ')

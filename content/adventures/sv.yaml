@@ -204,21 +204,6 @@ adventures:
 
                     ### Exercise
                     The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
-                example_code: |
-                    ```
-                    nycklar = 'förlorade'
-                    {print} 'Du står i din trädgård och du har tappat dina nycklar.'
-                    {print} 'Var vill du leta efter dem?'
-                    {print} 'Du kan välja: träd, rabatt, sten, postlåda'
-                    {while} nycklar == 'förlorade'
-                        plats = {ask} 'Var vill du titta?'
-                        {if} plats == 'rabatt'
-                            {print} 'Här är de!'
-                            nycklar = 'hittade'
-                        {else}
-                            {print} 'Nej, de är inte här: ' plats
-                    {print} 'Nu kan du gå in i huset!'
-                    ```
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: kommandot_lägg_till_ta_bort
@@ -417,13 +402,6 @@ adventures:
                     ```
                     val {is} _
                     ```
-            4:
-                story_text: |
-                    På den här nivån kan du också skapa tärningar. Men den här gången kan du prova det själv, utan exempelkod!
-
-                    ### Övning
-                    Gör dina egna tärningar i den här nivån.
-                    Tips: Om du inte har någon aning om hur man gör tärningar. Ta en titt på dina tärningar från föregående nivå, men glöm inte att lägga till citattecken.
             5:
                 story_text: |
                     Vi ska lägga till kommandona `{if}` och `{else}` till vår tärning!
@@ -449,13 +427,13 @@ adventures:
                     Kan du göra koden så att du får fram den totala poängen för åtta tärningar? För att göra det måste du klippa och klistra in några rader i koden.
                 example_code: |
                     ```
-                    val = 1, 2, 3, 4, 5, daggmask
+                    val = 1, 2, 3, 4, 5, 🪱
                     poäng = 0
                     kast = val {at} {random}
                     {print} 'du kastade ' kast
-                    {if} kast {is} daggmask 
-                    poäng = poäng + 5 
-                    {else} 
+                    {if} kast {is} 🪱
+                    poäng = poäng + 5
+                    {else}
                     poäng = poäng + kast
                     {print} 'det är ' poäng ' poäng'
                     ```
@@ -505,20 +483,6 @@ adventures:
                     Tänk sedan ut en uppgift som måste göras och låt datorn bestämma vem som ska göra uppgiften med kommandot `{at} {random}`.
 
                     **Extra** Känner du inte för att diska själv? Hacka programmet genom att ta bort ditt namn från listan med kommandot `{remove}` `{from}`.
-            4:
-                story_text: |
-                    Med citattecken kan du göra ditt diskprogram ännu bättre.
-
-                    ### Övning
-                    Fyll först i rätt symboler eller kommandon i tomrummen för att få detta exempelprogram att fungera.
-                    Fick du rätt på det? Bra! Kopiera nu din egen kod från föregående nivå och få den att fungera på den här nivån genom att lägga till citattecken på rätt ställen.
-                example_code: |
-                    ```
-                    personer {is} mamma, pappa, Emma, Sophie
-                    {print} _ ansvarig för att diska är _
-                    {sleep}
-                    {print} personer {at} _
-                    ```
             5:
                 story_text: |
                     Med `{if}` kan du nu ha roligare valmöjligheter i programmet. Du kan låta programmet reagera på datorns val.
@@ -535,18 +499,6 @@ adventures:
             7:
                 story_text: |
                     Hur ofta ska var och en diska? Är det rättvist? Du kan räkna ut det på den här nivån.
-                example_code: |
-                    ```
-                    personer = mamma, pappa, Emma, Sophie
-                    emma_diskar = 0
-                    diskare = personer {at} {random}
-                    {print} 'Disken sköts av ' diskare
-                    {if} diskare {is} Emma emma_diskar = emma_diskar + 1
-                    {print} 'Den här veckan kommer Emma att diska' emma_diskar 'gånger'
-                    ```
-
-                    Nu kan du kopiera raderna 3 till 5 några gånger (t.ex. sju gånger för en hel vecka) för att beräkna för en hel vecka igen.
-                    Har du gjort koden för hela veckan?
                 story_text_2: |
                     Om du har extrem otur kan det tidigare programmet bestämma att du ska diska hela veckan! Det är inte rättvist!
                     För att skapa ett mer rättvist system kan du använda kommandot `{remove}` för att ta bort den valda personen från listan. På så sätt behöver du inte diska igen förrän alla andra har gjort det.
@@ -1347,12 +1299,6 @@ adventures:
                     ## Upprepa med andra kommandon och med variabler
                     Du har övat på kommandot `{repeat}` i kombination med kommandot `{print}` nu, men visste du att du också kan använda andra kommandon med `{repeat}`?
                     I exempelkoden kan du se att `{repeat}` även kan användas med ett `{ask}`-, `{if}`- eller `{else}`-kommando.
-                example_code: |
-                    ```
-                    {repeat} 2 {times} svar = {ask} 'Visste du att du kan ställa en fråga flera gånger?'
-                    {if} svar {is} ja {repeat} 2 {times} {print} 'Det visste du redan!'
-                    {else} {repeat} 3 {times} {print} 'Du har lärt dig något nytt!'
-                    ```
                 story_text_2: |
                     En annan intressant sak du kan göra med kommandot `{repeat}` är att använda variabler för att ställa in hur många gånger något ska upprepas. I exempelkoden kan du se att vi först frågar personen hur gammal den är.
                     Sedan, på rad 3, upprepas frågan 'ålder' gånger. Så vi använder variabeln 'ålder' med kommandot `{repeat}`.
@@ -1497,21 +1443,6 @@ adventures:
                     - ge folk rabatt när de anger en (hemlig) kupongkod?
                     - lägga till en barnmeny?
                     - komma på andra roliga saker att lägga till?
-                example_code: |
-                    Du kan skapa en enkel restaurangkod, så här:
-                    ```
-                    {print} 'Välkommen till restaurang Chez Hedy'
-                    {print} 'Här är vår meny:'
-                    {print} 'Våra huvudrätter är pizza, lasagne eller spagetti'
-                    huvudrätt = {ask} 'Vilken huvudrätt vill du ha?'
-                    pris = 0
-                    {if} huvudrätt {is} pizza pris = 10
-                    {if} huvudrätt {is} lasagne pris = 12
-                    {if} huvudrätt {is} spagetti pris = 8
-                    {print} 'Du har beställt ' huvudrätt
-                    {print} 'Det blir ' pris ' dollar, tack'
-                    {print} 'Tack, smaklig måltid!'
-                    ```
             8:
                 story_text: |
                     På den här nivån har du lärt dig hur du använder kommandot `{repeat}` för att upprepa en kodrad ett visst antal gånger.
@@ -1655,11 +1586,6 @@ adventures:
                     spelare_1 {is} {ask} Namn på spelare 1:
                     _
                     ```
-            4:
-                story_text: |
-                    På den här nivån kan vi också programmera sten, sax, påse. Men om du vill lägga till text måste du använda citattecken även här.
-                    ### Övning
-                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
             5:
                 story_text: |
                     På den här nivån kan vi avgöra om det är oavgjort eller inte. För det behöver du det nya nyckelordet `{if}`.

@@ -157,10 +157,6 @@ adventures:
                     ```
                     muligheder {is} _
                     ```
-            4:
-                story_text: |
-                    På dette niveau kan vi lave sætninger med terningeværdien i en sætning, med anførselstegn selvfølgelig.
-                    Denne gang er kodeeksemplet ikke helt færdigt. Kan du færdiggøre den?
             5:
                 story_text: |
                     Du kan også lave en terning igen på dette niveau ved at bruge `{if}`.
@@ -191,21 +187,6 @@ adventures:
                     ```
                 story_text_2: |
                     Har du ikke lyst til at tage opvasken? Hack programmet ved at fjerne dit navn fra listen med `{remove}` `{from}` kommandoen.
-            4:
-                story_text: |
-                    Med anførselstegn kan du lave din opvaskeplan pænere.
-                    Denne gang er eksemplet ikke helt færdig.
-
-                    Kan du færdiggøre koden ved at udfylde de tomme felter? Hvert af de tomme felter skal erstattes med et ord eller symbol.
-
-                    Tip: Glem ikke anførselstegn!
-                example_code: |
-                    ```
-                    personer {is} mor, far, Emma, Sophie
-                    {print} _ opvasken tages af _
-                    {sleep}
-                    {print} personer {at} _
-                    ```
             5:
                 story_text: |
                     Med `{if}` kan du nu have endnu mere sjov med valg i dit program. Du kan få dit program til at reagere på et valg lavet af computeren.
@@ -216,18 +197,6 @@ adventures:
             7:
                 story_text: |
                     Hvor ofte skal alle tage opvasken? Er det retfærdigt? Du kan tælle det på dette niveau.
-                example_code: |
-                    ```
-                    personer = mor, far, Emma, Sophie
-                    emma_tager_den = 0
-                    opvasker = personer {at} {random}
-                    {print} 'Opvaskeren er ' opvasker
-                    {if} opvasker {is} Emma emma_tager_den = emma_tager_den + 1
-                    {print} 'Emma tager opvasken ' emma_tager_den ' gange denne uge'
-                    ```
-
-                    Du kan nu kopiere linje 3 til 5 nogle gange (e.g. 7 gange for en hel uge) for at beregne en hel uge igen.
-                    Laver du koden for hele ugen?
                 story_text_2: |
                     Hvis du er ekstremt uheldig vil det forrige program måske vælge dig til at tage opvasken hele ugen! Det er ikke retfærdigt!
                     For at lave et mere retfærdigt system can du bruge `{remove}` kommandoen til at fjerne den valgte person fra listen. På den måde skal du ikke tage opvasken igen før alle har taget deres tur.
@@ -310,7 +279,6 @@ adventures:
         levels: {}
     piggybank:
         levels: {}
-
     print_command:
         default_save_name: skriv
         levels: {}

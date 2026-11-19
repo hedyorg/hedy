@@ -1667,18 +1667,6 @@ adventures:
                     choices {is} 1, 2, 3, 4, 5, 6
                     {print} 你擲出了…… choices {at} {random}
                     ```
-            4:
-                story_text: |
-                    這個級別也能製作骰子。不過這次沒有範例程式碼，請自己試試看！
-
-                    ### 練習
-                    在這個級別製作自己的骰子。
-                    提示：如果完全想不到做法，可以看看上一個級別的骰子，但別忘了加上引號。
-                answer_code: |
-                    ```
-                    choices is 1, 2, 3, 4, 5, 6
-                    {print} '我擲出了 ' choices {at} {random}
-                    ```
             5:
                 story_text: |
                     我們要把 `{if}` 和 `{else}` 指令加進骰子遊戲！
@@ -1898,27 +1886,6 @@ adventures:
                     name {is} {ask} 你叫什麼名字？
                     {remove} name {from} people
                     {print} people {at} {random} 要負責洗碗
-                    ```
-            4:
-                story_text: |
-                    使用引號，可以讓洗碗程式變得更好。
-
-                    ### 練習
-                    首先，在空格中填入正確的符號或指令，讓範例程式正常運作。
-                    完成了嗎？太棒了！現在請複製自己在上一個級別編寫的程式碼，在正確位置加入引號，讓它在這個級別也能運作。
-                example_code: |
-                    ```
-                    people {is} 媽媽, 爸爸, Emma, Sophie
-                    {print} _ 負責洗碗的人是 _
-                    {sleep}
-                    {print} people {at} _
-                    ```
-                answer_code: |
-                    ```
-                    people is 媽媽, 爸爸, Emma, Sophie
-                    {print} '負責洗碗的人是……'
-                    {sleep}
-                    {print} people {at} {random}
                     ```
             5:
                 story_text: |
@@ -4682,7 +4649,6 @@ adventures:
         name: 撲滿
         default_save_name: 撲滿
         description: 算算你的零用錢！
-
     print_command:
         levels:
             1:
@@ -5492,24 +5458,6 @@ adventures:
                     player_2 {is} {ask} 玩家 2 的名字：
                     {print} player_1 選擇了 choices {at} {random}
                     {print} player_2 選擇了 choices {at} {random}
-                    ```
-            4:
-                story_text: |
-                    在這一關，我們可以繼續編寫剪刀石頭布。不過想加入文字時，也必須使用引號。
-                    ### 練習
-                    在空格處填入引號。請注意，變數 `choices` 應該放在引號外。
-                example_code: |
-                    ```
-                    choices {is} 石頭, 布, 剪刀
-                    {print} _ 電腦選擇了……_ choices {at} {random}
-                    ```
-                answer_code: |
-                    ```
-                    choices is 石頭, 布, 剪刀
-                    player_1 {is} {ask} '玩家 1 的名字：'
-                    player_2 {is} {ask} '玩家 2 的名字：'
-                    {print} player_1 ' 選擇了 ' choices {at} {random}
-                    {print} player_2 ' 選擇了 ' choices {at} {random}
                     ```
             5:
                 story_text: |

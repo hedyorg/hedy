@@ -10,9 +10,9 @@ snippets = snippet_tester.collect_cheatsheet_snippets()
 HedyTester.translate_keywords_in_snippets(snippets)
 
 # lang = 'zh_hans' #useful if you want to test just 1 language
-lang = None
+lang = 'en'
 level = None
-snippets = []  # snippet_tester.filter_snippets(snippets, lang=lang, level=level)
+snippets = snippet_tester.filter_snippets(snippets, lang=lang, level=level)
 
 
 class TestsCheatsheetPrograms(snippet_tester.HedySnippetTester):

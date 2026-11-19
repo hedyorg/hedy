@@ -8,7 +8,7 @@ adventures:
                 story_text: |
                     In level 1 you can make a story with a different main character that you enter yourself.
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be. Then use {answer} if you want to use the character's name.
+                    In the first line, use `{ask}` and ask who the main character of the story will be. Then use `{answer}` if you want to use the character's name.
 
                 example_code: |
                     ```
@@ -110,7 +110,7 @@ adventures:
                     animals {is} lion, zebra, flamingo
                     {print} Hello kids! Today we're going to the zoo!
                     favorite_animal {is} {ask} Which animal do you wanna go to today?
-                    {add} favorite_animal {to} animals
+                    {add} favorite_animal {to_list} animals
                     {sleep} 2
                     {print} Let's head to the animals {at} {random}
                     {sleep}
@@ -142,7 +142,7 @@ adventures:
                 answer_code: |
                     ```
                     name {is} {ask} 'What is your name?'
-                    {print}  'The main character is called' name
+                    {print}  'The main character is called ' name
                     {print} name  ' is now going to walk in the woods'
                     {print} name ' is a bit scared'
                     animals {is} 🦔, 🐿, 🦉, 🦇
@@ -274,7 +274,7 @@ adventures:
                         {print} 'Robin goes home'
                     ```
                 story_text_2: |
-                    By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.
+                    By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask multiple questions and respond to the combination of answers.
 
                     ### Exercise 1
                     Look at the example code and finish it. Then add at least 2 more `{if}` codes with `{and}` or `{or}`.
@@ -359,7 +359,7 @@ adventures:
                     We are going to print a story, and we have to use brackets with `{print}`.
 
                     ### Exercise
-                    Create a story of at least 5 sentences. First, use the `name` variable in your story. Then create two other variabele and use them as well.
+                    Create a story of at least 5 sentences. First, use the `name` variable in your story. Then create two other variables and use them as well.
                     Tip: Remember the commas in a `{print}` between text and variables!
                 example_code: |
                     ```
@@ -408,7 +408,7 @@ adventures:
                         location = {input}('Where do you want to look?')
                         {if} location == 'desk':
                             {print}('Here they are! You found 6 rackets!')
-                            keys = 'found'
+                            rackets = 'found'
                         {else}:
                             {print}('Nope they are not at the ', location)
                     {print}('Now you can play tennis with all your friends.')
@@ -457,7 +457,7 @@ adventures:
                     {print} Mystery milkshake
                     flavors {is} strawberry, chocolate, vanilla
                     hope {is} {ask} What flavor are you hoping for?
-                    {add} hope {to} flavors
+                    {add} hope {to_list} flavors
                     allergies {is} {ask} Are you allergic to any flavors?
                     {remove} allergies {from} flavors
                     {print} You get a flavors {at} {random} milkshake
@@ -519,7 +519,7 @@ adventures:
                 answer_code: |
                     ```
                     {ask} How are you doing?
-                    {print} You're doing answer
+                    {print} You're doing {answer}
                     {ask} What is your favorite sport?
                     {print} You like {answer}
                     {ask} What is your least favorite sport?
@@ -735,7 +735,7 @@ adventures:
                             {else}
                                 {print} 'That is wrong. The right answer is ' correct
                     ```
-            13: 
+            13:
                 story_text: |
                     In this level you will make a program to practice multiplication. 
                     You choose which numbers you want to multiply. 
@@ -746,7 +746,7 @@ adventures:
                     #Asking for the multiplication variables:
                     number_1 = {input}('what is the first number you want to multiply?')
                     number_2 = {input}('what is the second number you want to multiply?')
-                    
+
                     #Ask for the answer and check it:
                     answer = {input}('How much is ',number_1, ' times ', number_2, '?' )
                     correct_answer = number_1 * number_2
@@ -759,7 +759,7 @@ adventures:
                     #Asking for the multiplication variables:
                     number_1 = {input}('what is the first number you want to multiply?')
                     number_2 = {input}('what is the second number you want to multiply?')
-                    
+
                     #Ask for the answer and check it:
                     answer = {input}('How much is ',number_1, ' times ', number_2, '?' )
                     correct_answer = number_1 * number_2
@@ -771,7 +771,7 @@ adventures:
             14:
                 story_text: |
                     In this level you will make a program to practice multiplication tables. 
-                    You choose which multiplication table you want to practice and than get asked all the multiplications until 10.
+                    You choose which multiplication table you want to practice and then get asked all the multiplications from 1 to 10.
                     Finish the code: Print whether the answer is correct or incorrect and print the correct answer if a mistake was made. 
                     Also, give points for every correct answer and show the final score.
 
@@ -1434,7 +1434,7 @@ adventures:
                     {repeat} amount {times}
                     {ask} {is} {ask} 'What kind of bread would you like your sandwich to be?'
                     types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
+                    {if} chosen_bread {in} types_of_bread
                     {print} 'Lovely!'
                     {else}
                     'I'm sorry we don't sell that'
@@ -1756,18 +1756,6 @@ adventures:
                     choices {is} 1, 2, 3, 4, 5, 6
                     {print} You throw... choices {at} {random}
                     ```
-            4:
-                story_text: |
-                    In this level you can also create dice. But this time you can try it yourself, without an example code!
-
-                    ### Exercise
-                    Make your own dice in this level.
-                    Tip: If you have no idea how to make dice. Take a peek at your dice from the previous level, but don't forget to add quotation marks.
-                answer_code: |
-                    ```
-                    choices is 1, 2, 3, 4, 5, 6
-                    {print} 'I throw ' choices {at} {random}
-                    ```
             5:
                 story_text: |
                     We are going to add the `{if}` and `{else}` commands to our dice!
@@ -1951,15 +1939,15 @@ adventures:
                     {print}('Throw 6 as fast as you can!')
                     thrown = 0
                     tries = 0
-                    {while} thrown == 0:
-                        number = options[{random}]
+                    {while} thrown != 6:
+                        thrown = options[{random}]
                         tries = tries + 1
-                        {if} number = 6:
-                            thrown = 1
-                            {print}('You have thrown 6 in ', tries, ' tries!')
+                        {if} thrown == 6:
+                            {print}('You thrown 6'
                         {else}:
-                            {print}('You have not thrown 6, instead you threw ', number)
+                            {print}('You have not thrown 6, instead you threw ', thrown)
                         {sleep} 1
+                    {print}('You have thrown 6 in ', tries, ' tries!')
                     ```
     dishes:
         name: dishes?
@@ -1987,27 +1975,6 @@ adventures:
                     name {is} {ask} what is your name?
                     {remove} name {from} people
                     {print} people {at} {random} has to do the dishes
-                    ```
-            4:
-                story_text: |
-                    With quotation marks you can make your dishwashing program even better.
-
-                    ### Exercise
-                    First, fill in right symbols or commands on the blanks to make this example program work.
-                    Did you get it? Great! Now copy your own code from the previous level and make it work in this level by adding quotation marks in the right spots.
-                example_code: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} _ the dishes are done by _
-                    {sleep}
-                    {print} people {at} _
-                    ```
-                answer_code: |
-                    ```
-                    people is mom, dad, Emma, Sophie
-                    {print} 'the dishes are done by...'
-                    {sleep}
-                    {print} people {at} {random}
                     ```
             5:
                 story_text: |
@@ -2175,7 +2142,7 @@ adventures:
                 story_text: |-
                     ## For
                     In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
+                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with a tab or 4 spaces.
                 example_code: |
                     ```
                     animals = dog, cat, blobfish
@@ -2304,13 +2271,13 @@ adventures:
                     Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
+                    # Add the quotation marks to this code
                     {print} I'm Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
                     {print} This is your question:  question
                     answers {is} yes, no, maybe
                     {print} My crystal ball says...
-                    {sleep} 2
+                    {sleep} _
                     {print} answers {at} {random}
                     ```
                 answer_code: |
@@ -2467,6 +2434,75 @@ adventures:
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
+    free_play:
+        name: free play
+        default_save_name: free play
+        description: free play
+        levels:
+            1:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            2:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            3:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            4:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            5:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            6:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            7:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            8:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            9:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            10:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            11:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            12:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            13:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            14:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            15:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
+            16:
+                story_text: |
+                    ### Exercise
+                    This is a free play adventure. Use this adventure as a notepad, try out some code or make up your own adventure!
     functions:
         name: functions
         default_save_name: functions
@@ -2480,7 +2516,7 @@ adventures:
 
                     Now, whenever we need that block of code, we just use the function's name to call it up! We don't have to type that block of code again.
 
-                    Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
+                    Check out this example code of a game of Twister. The function `next_turn` contains a block of code that chooses which limb should go where.
 
                     ### Exercise
                     Finish this code by setting the 2 variables `chosen_limb` and `chosen_color`.
@@ -2492,9 +2528,9 @@ adventures:
                 example_code: |
                     ```
                     #Giving the Twister options:
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
+                    sides = left, right
+                    limbs = hand, foot
+                    colors = red, blue, green, yellow
 
                     #Defining one Twister turn:
                     {define} next_turn
@@ -2506,7 +2542,7 @@ adventures:
                     #Playing a Twister game:
                     {print} 'Lets play a game of Twister!'
                     {repeat} _ _
-                        call next_turn
+                        {call} next_turn
                         {sleep} 2
                     ```
                 answer_code: |
@@ -2909,14 +2945,14 @@ adventures:
                     Go back to the previous level and copy your haunted house code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    _ Add quotation marks to this code _
+                    # Add quotation marks to this code
                     {print} Escape from the haunted house!
                     {print} There are 3 doors in front of you...
                     choice {is} {ask} Which door do you choose?
                     {print} You picked door ... choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
                     {print} You see...
-                    {sleep}
+                    {sleep} _
                     {print} monsters {at} {random}
                      ```
                 answer_code: |
@@ -2927,7 +2963,7 @@ adventures:
                     {print} 'You picked door ...' choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
                     {print} 'You see...'
-                    {sleep}
+                    {sleep} 3
                     {print} monsters {at} {random}
                     ```
             5:
@@ -3095,13 +3131,13 @@ adventures:
                     ```
                     {print} Hello, welcome to the hospital
                     {ask} What is you name?
-                    {print} Your name is answer
+                    {print} Your name is {answer}
                     {ask} What is your date of birth?
-                    {print} Your DOB is answer
+                    {print} Your DOB is {answer}
                     {ask} On which department do you have an appointment?
-                    {print} You have an appointment here: answer
+                    {print} You have an appointment here: {answer}
                     {ask} Which doctor is your appointment with?
-                    {print} with doctor answer
+                    {print} with doctor {answer}
                     {print} Thank you. You've registrated succesfully!
                     {print} Please take a seat in the waiting room.
                     ```
@@ -3424,7 +3460,7 @@ adventures:
                     * Did you break a bone?
                     * Do you have a serious allergic reaction?
                     * Are you in severe pain?
-                    
+
                     If the patient answers 'yes' to any of these questions, the program will tell them to go to the emergency room a.s.a.p.. It will not ask any other questions, because time is of the essence.
                     If the patient answers 'no' to all the questions the program will ask:
                     * Can it wait till tomorrow?
@@ -3482,7 +3518,7 @@ adventures:
                         amount_patients = amount_patients + amount_new_patients
                         {repeat} amount_new_patients {times}
                             name = {ask} 'What is their name?'
-                            {add} name {to} patients
+                            {add} name {to_list} patients
                     {else}
                         {print} 'No new patients today'
 
@@ -3772,6 +3808,51 @@ adventures:
                     ```
                 answer_code: |
                     Own Answer
+    house:
+        name: home decorator
+        default_save_name: home_decorator
+        description: home decorator
+        levels:
+            4:
+                story_text: |-
+                    Decorate the living room the way you want it to be!
+
+                    ### Exercise
+                    Ask the player at least 6 more questions about their dream living room. You could, for example, ask them what type of couch they would like, how big the dining table should be, what kind of art they want on their walls etc.
+                    Then use that information in the describtion of the house. So if you've asked about their tv, write a line about what kind of tv they have chosen.
+                example_code: |-
+                    ```
+                    {print} "Let's redecorate the living room!"
+
+                    #Asking the player for input
+                    color_walls {is} {ask} 'What color would you like the walls to be?'
+                    color_carpet {is} {ask} 'What color would you like the carpet to be?'
+                    type_couch _
+
+                    #Describtion of your dream house
+                    {print} 'Your house will have ' color_walls ' walls and a ' color_carpet ' carpet.'
+                    {print} _
+                    ```
+                answer_code: |-
+                    ```
+                    {print} "Let's redecorate the living room!"
+
+                    #Asking the player for input
+                    color_walls {is} {ask} 'What color would you like the walls to be?'
+                    color_carpet {is} {ask} 'What color would you like the carpet to be?'
+                    type_couch {is} {ask} 'What kind of couch would you like?'
+                    color_couch {is} {ask} 'And what color should that couch be?'
+                    wall_art {is} {ask} 'What kind of art would you like to put on your wall?'
+                    brand_tv {is} {ask} 'What brand of tv would you like?'
+                    color_tv {is} {ask} 'What color should the tv be?'
+                    size_tv {is} {ask} 'What size should the tv be?'
+
+                    #Describtion of your dream house
+                    {print} 'Your house will have ' color_walls ' walls and a ' color_carpet ' carpet.'
+                    {print} 'You will have a ' color_couch ' ' type_couch ' couch.'
+                    {print} 'You will have ' wall_art ' on your wall.'
+                    {print} 'You will have a ' size_tv ', ' color_tv ', ' brand_tv ' tv.'
+                    ```
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
@@ -3819,7 +3900,7 @@ adventures:
                     Check out the example code.
 
                     ### Exercise
-                    Add an `{else}` command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
+                    Add an `{else}` command to the example code. Make a block of line using indentation. You do this by starting each line with a tab or 4 spaces.
                 example_code: |
                     ```
                     name = {ask} 'What is your name?'
@@ -3952,7 +4033,7 @@ adventures:
             2:
                 story_text: |
                     ## Setting Variables
-                    You have learned to set variables by using input from the player by using ask, but did you know you could also set the variables yourself?
+                    You have learned to set variables by using input from the player by using `{ask}`, but did you know you could also set the variables yourself?
                 example_code: |
                     ```
                     name {is} Hedy
@@ -4055,7 +4136,7 @@ adventures:
                             score = score + 1
                         {else}:
                             {print}('Wrong, ', french_words[i], ' means ', translation[i])
-                    
+
                     #Printing the score:
                     {print}('You gave ', score, ' correct answers.')
                     ```
@@ -4113,7 +4194,7 @@ adventures:
         description: market
         levels:
             13:
-                story_text: | 
+                story_text: |
                     In this adventure you can write a code for a market. Take a look at the example code. 
                     In this market they sell apples, bread and cheese. Can you tell customers how much each product costs and ask them how much they want to buy?
                     Maybe you can even add extra products to this market. Make sure you also tell the customer how much he has to pay.
@@ -4122,7 +4203,7 @@ adventures:
                     #Introducing to the Hedy market:
                     {print}('Welcome to the Hedy market!')
                     {print}('Here, we sell bread, apples and cheese')
-                    
+
                     #Asking how much you want to buy:
                     price_bread = 5
                     {print}('One bread costs ', _ )
@@ -4143,7 +4224,7 @@ adventures:
                     #Introducing to the Hedy market:
                     {print}('Welcome to the Hedy market!')
                     {print}('Here, we sell bread, apples and cheese')
-                    
+
                     #Asking how much you want to buy:
                     price_bread = 5
                     {print}('One bread costs ', price_bread)
@@ -4205,6 +4286,64 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
+    monster:
+        name: monster
+        default_save_name: monster
+        description: monster generator
+        levels:
+            4:
+                story_text: |-
+                    Make a monster generator. Ask the player questions about what they want their monster to be like and then generate a story for them.
+
+                    ### Exercise
+                    * Create at least 5 more questions about the monster
+                    * Create a (fake) loading screen, that shows the word 'Generating...' for 3 seconds and then clears the screen.
+                    * Write the rest of the story using the new variables you've made.
+                example_code: |-
+                    ```
+                    # Welcome and questions
+                    {print} 'Welcome to the monster generator!'
+                    name_monster {is} {ask} 'What is your monster called?'
+                    adjective_monster {is} {ask} 'How would you describe your monster?'
+                    color_eyes {is} {ask} 'What color eyes does your monster have?'
+                    amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
+                    _ Create more questions here _
+
+                    # Generating
+                    _ Create a loading screen _
+
+                    # Write a story about the monster
+                    {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
+                    {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
+                    _ Write the rest of the story including your new variables _
+                    ```
+                answer_code: |-
+                    ```
+                    # Welcome and questions
+                    {print} 'Welcome to the monster generator!'
+                    name_monster {is} {ask} 'What is your monster called?'
+                    adjective_monster {is} {ask} 'How would you describe your monster?'
+                    color_eyes {is} {ask} 'What color eyes does your monster have?'
+                    amount_of_eyes {is} {ask} 'How many eyes does your monster have?'
+                    amount_of_teeth {is} {ask} 'How many teeth does the monster have?'
+                    shape_nose {is} {ask} 'What is the shape of its neus?'
+                    length_monster {is} {ask} 'How tall is the monster?'
+                    width_monster {is} {ask} 'How wide is the monster?'
+                    kind_of_skin {is} {ask} 'What kind of skin does the monster have? Scales, fur, feathers etc?'
+
+                    # Generating
+                    {print} 'Generating...'
+                    {sleep} 3
+                    {clear}
+
+                    # Write a story about the monster
+                    {print} 'This is ' name_monster ' the ' adjective_monster ' monster'
+                    {print} name_monster ' has ' amount_of_eyes ' ' color_eyes ' eyes'
+                    {print} 'In its mouth there are ' amount_of_teeth ' teeth.'
+                    {print} 'and it smells with its ' shape_nose ' nose.'
+                    {print} name_monster ' is ' length_monster ' tall and ' width_monster ' wide.'
+                    {print} 'Its covered from head to toe in ' kind_of_skin
+                    ```
     music:
         name: music
         default_save_name: music
@@ -4920,7 +5059,7 @@ adventures:
         description: amusement park
         levels:
             13:
-                story_text: | 
+                story_text: |
                     This adventure is about an amusment park with some attractions. However, to attend the attractions you need to meet certain requirements concerning height and age for example.
                     Finish the example code. For the haunted house there is a minimum age. The rollercoaster you cannot ride if you have fear of heights of course. Add a minimum length to the rollercoaster.
                     The carousel is the attraction for the little kids. So, add a maximum age for it. Feel free to add more attractions!
@@ -4938,7 +5077,7 @@ adventures:
                             {print}('You are old enough. Enjoy getting scared!')
                         _ :
                             {print}('Sorry, you have to wait till you are old enough.')
-                    
+
                     {if} attraction == 'Rollercoaster':
                         fear = {input}('Are you afraid of heights?')
                         {if} fear == 'yes':
@@ -4951,40 +5090,40 @@ adventures:
 
                         ```
                 answer_code: |
-                        ```
-                        {print}("Welcome to our amsument park: 'Hedy High'")
-                        {print}("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
+                    ```
+                    {print}("Welcome to our amsument park: 'Hedy High'")
+                    {print}("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
 
-                        #Try one of the three attractions:
-                        attraction = {input}('Which attraction would you like to try?')
+                    #Try one of the three attractions:
+                    attraction = {input}('Which attraction would you like to try?')
 
-                        {if} attraction == 'Haunted house':
-                            age = {input}('How old are you?')
-                            {if} age > 12:
-                                {print}('You are old enough. Enjoy getting scared!')
+                    {if} attraction == 'Haunted house':
+                        age = {input}('How old are you?')
+                        {if} age > 12:
+                            {print}('You are old enough. Enjoy getting scared!')
+                        {else}:
+                            {print}('Sorry, you have to wait till you are old enough.')
+
+                    {if} attraction == 'Rollercoaster':
+                        fear = {input}('Are you afraid of heights?')
+                        {if} fear == 'yes':
+                            {print}('Sorry, it is better for you to stay on the ground.')
+                        {elif} fear == 'no' :
+                            height = {input}('What is your length in centimetres')
+                            {if} height > 150:
+                                {print}('Enjoy your ride!')
                             {else}:
-                                {print}('Sorry, you have to wait till you are old enough.')
-                        
-                        {if} attraction == 'Rollercoaster':
-                            fear = {input}('Are you afraid of heights?')
-                            {if} fear == 'yes':
-                                {print}('Sorry, it is better for you to stay on the ground.')
-                            {elif} fear == 'no' :
-                                height = {input}('What is your length in centimetres')
-                                {if} height > 150:
-                                    {print}('Enjoy your ride!')
-                                {else}:
-                                    {print}('Sorry you are not tall enough')
+                                {print}('Sorry you are not tall enough')
 
 
-                        {if} attraction == 'Carousel':
-                            age = {input}('How old are you?')
-                            {if} age < 10:
-                                {print}('This is a perfect attraction for you. Enjoy!')
-                            {else}:
-                                {print}('Sorry you are too old.')
+                    {if} attraction == 'Carousel':
+                        age = {input}('How old are you?')
+                        {if} age < 10:
+                            {print}('This is a perfect attraction for you. Enjoy!')
+                        {else}:
+                            {print}('Sorry you are too old.')
 
-                        ```
+                    ```
     parrot:
         name: parrot
         default_save_name: Parrot
@@ -5070,7 +5209,7 @@ adventures:
                     words {is} squawk, Hedy
                     {print} Train your parrot!
                     new_word {is} {ask} Which word do you want to teach them?
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} 🧒 Say new_word, Hedy!
                     {print} 🦜 words {at} {random}
                     ```
@@ -5090,10 +5229,10 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    words is squawk, Hedy
+                    words {is} squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} ' 🧒 Say ' new_word ', Hedy!'
                     {print} ' 🦜 ' words {at} {random}
                     ```
@@ -5120,12 +5259,74 @@ adventures:
                     words is squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     said_word is words {at} {random}
                     {print} '🧒 Say ' new_word ', Hedy!'
                     {print} '🦜 ' said_word
                     {if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'
                     {else} {print} '🧒 No, Hedy! Say ' new_word
+                    ```
+    party_planner:
+        name: party planner
+        default_save_name: party_planner
+        description: party planner
+        levels:
+            4:
+                story_text: |-
+                    Create a party planning tool that creates an invite to your party!
+
+                    ### Execrise
+                    * First fill in the right questions to ask the player
+                    * Then create a party invitation using the input the player gave you
+
+                example_code: |-
+                    ```
+                    #asking for input
+                    {print} 'PARTY PLANNER'
+                    name_host {is} {ask} _
+                    name_guest {is} {ask} _
+                    reason_party {is} {ask} _
+                    date_party {is} {ask} _
+                    time_party {is} {ask} _
+                    location_party {is} {ask} _
+                    theme_party {is} {ask} _
+                    dress_code {is} {ask} _
+
+                    #loading the invite
+                    {print} 'please wait... loading invite'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Dear ' name_guest ','
+                    _
+                    ```
+                answer_code: |-
+                    ```
+                    #asking for input
+                    {print} 'PARTY PLANNER'
+                    name_host {is} {ask} 'What is your name?'
+                    name_guest {is} {ask} 'Who would you like to invite?'
+                    reason_party {is} {ask} 'What are you celebrating?'
+                    date_party {is} {ask} 'When is the party?'
+                    time_party {is} {ask} 'What time is the party?'
+                    location_party {is} {ask} 'Where is the party?'
+                    theme_party {is} {ask} 'What is the party theme?'
+                    dress_code {is} {ask} 'What is the party dresscode?'
+
+                    #loading the invite
+                    {print} 'please wait... loading invite'
+                    {sleep} 2
+                    {clear}
+
+                    #printing the invite
+                    {print} 'Dear ' name_guest ','
+                    {print} 'I would like to invite you to celebrate ' reason_party
+                    {print} 'The party is on ' date_party ' at ' time_party
+                    {print} 'The location is ' location_party
+                    {print} 'The theme of the party is ' theme_party ' and the dresscode is: ' dress_code
+                    {print} 'Hope to see you there!'
+                    {print} 'Love, ' name_host
                     ```
     piggybank:
         name: piggy bank
@@ -5322,12 +5523,16 @@ adventures:
                     Check out the example code to see the wrong way of using apostrophes.
                 example_code_2: |
                     ```
-                    _ This is the wrong way of using apostrophes _
+                    #This is the wrong way of using apostrophes
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
-                    _ This is how you solve it _
+
+                    #This is how you solve it
                     {print} "I'm babysitting my sister's kids"
                     {print} "What's more fun than that?"
+
+                    # Try it out! Create a line of code with quotationmarks below
+                    _
                     ```
                 answer_code: |
                     Own answer
@@ -5420,7 +5625,7 @@ adventures:
                     In this level you can repeat multiple lines of code with only 1 `{repeat}` command.
                     You do this by making a block of lines that you want to repeat.
                     The lines in this block will need **indentation** .
-                    That means putting four spaces at the beginning of each line. You will also have to indent when you want to create a block of just one line.
+                    That means putting a tab or 4 spaces at the beginning of each line. You will also have to indent when you want to create a block of just one line.
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -5430,7 +5635,7 @@ adventures:
                 answer_code: |
                     ```
                     {print} 'Do you know the muffin man?'
-                    {repeat} 2 times
+                    {repeat} 2 {times}
                         {print} 'The muffin man'
                     {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
@@ -5634,7 +5839,7 @@ adventures:
                     Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
+                    # Add the quotation marks to this code
                     {print} Welcome to Restaurant Chez Hedy!
                     {print} Today we are serving pizza or lasagna.
                     food {is} {ask} What would you like to eat?
@@ -5644,6 +5849,8 @@ adventures:
                     drinks {is} {ask} What would you like to drink with that?
                     {print} Thank you for your order.
                     {print} Your  food  and  drinks  will be right there!
+                    {sleep} _
+                    {print} Your food is ready! Here you go!
                     ```
                 answer_code: |
                     ```
@@ -5656,6 +5863,8 @@ adventures:
                     drinks {is} {ask} 'What would you like to drink with that?'
                     {print} 'Thank you for your order.'
                     {print} 'Your  food  and  drinks  will be right there!'
+                    {sleep} 3
+                    {print} 'Your food is ready! Here you go!'
                     ```
             6:
                 story_text: |
@@ -6000,24 +6209,6 @@ adventures:
                     player_2 {is} {ask} Name of player 2:
                     {print} player_1 chooses choices {at} {random}
                     {print} player_2 chooses choices {at} {random}
-                    ```
-            4:
-                story_text: |
-                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
-                    ### Exercise
-                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _ The computer chooses... _ choices {at} {random}
-                    ```
-                answer_code: |
-                    ```
-                    choices is rock, paper, scissors
-                    player_1 {is} {ask} 'Name of player 1:'
-                    player_2 {is} {ask} 'Name of player 2:'
-                    {print} player_1 ' chooses ' choices {at} {random}
-                    {print} player_2 ' chooses ' choices {at} {random}
                     ```
             5:
                 story_text: |
@@ -6604,7 +6795,7 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} twinkle
                     ```
-            14: 
+            14:
                 story_text: |
                     We start with singing the song about ducks, starting with a ten ducks but one by one they get lost. 
                     Finish the code. Write a for-loop with the ten verses you want to sing. At the end of every verse, make sure that one duck less comes back.
@@ -6667,25 +6858,25 @@ adventures:
                 answer_code: |
                     ```
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     ```
             2:
                 story_text: |
@@ -7015,7 +7206,7 @@ adventures:
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
-                    
+
                     #Drawing three squares:
                     {call} square
                     {forward} 50
@@ -7089,45 +7280,45 @@ adventures:
                 answer_code: |
                     Rectangle
                     ```
-                    {turn} right
+                    {turn} {right}
                     {forward} 50
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 50
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
                     ```
 
                     Square
                     ```
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
-                    {turn} right
+                    {turn} {right}
                     {forward} 100
                     ```
 
                     Stairs
                     ```
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} left
+                    {turn} {left}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
-                    {turn} right
+                    {turn} {right}
                     {forward} 60
-                    {turn} right
+                    {turn} {right}
                     {forward} 60
-                    {turn} right
+                    {turn} {right}
                     {forward} 20
                     ```
             2:
@@ -7828,7 +8019,7 @@ adventures:
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
                         chosen_color = {ask} 'In which color?'
                         {color} chosen_color
-                        {if} shape = 'square'
+                        {if} shape = square
                             {call} draw_a_square
                     ```
                 answer_code: |
@@ -7851,25 +8042,25 @@ adventures:
                             {forward} 30
 
                     #starting at the leftside of the screen
-                    {color} 'white'
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     #making the bracelet
                     {repeat} 5 {times}
-                        {color} 'gray'
+                        {color} gray
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
                         chosen_color = {ask} 'In which color?'
                         {color} chosen_color
-                        {if} shape = 'square'
+                        {if} shape = square
                             {call} draw_a_square
-                        {elif} shape = 'triangle'
+                        {elif} shape = triangle
                             {call} draw_a_triangle
                         {elif} shape = "star"
                             {call} draw_a_star
-                    {color} 'gray'
+                    {color} gray
                     {forward} 100
                     ```
             14:

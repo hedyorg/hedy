@@ -119,6 +119,9 @@ describe('Redesigned class overview navigation', () => {
         cy.getDataCy('redesign_confirm_yes_button').click();
         cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
         cy.getDataCy('redesign_confirm_modal').should('not.be.visible');
+        // The response arrives before htmx swaps the table in, and a click before the swap
+        // opens a menu that is then replaced by a closed one.
+        cy.get(`#menu-active-${firstClassId}`).should('not.exist');
 
         // Regression assertion: context menu should still open for another class
         openClassesContextMenuForClass(secondClassId);
@@ -142,6 +145,8 @@ describe('Redesigned class overview navigation', () => {
       cy.get('@targetRow').find('button[data-cy="archive_class"]').should('be.visible').click();
       cy.getDataCy('redesign_confirm_yes_button').click();
       cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
+      // Wait for htmx to swap the tables in, or the row found below is the old one.
+      cy.get(`#menu-active-${classId}`).should('not.exist');
 
       cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('archivedRow');
       cy.get('@archivedRow').find('button.blue-btn-new').first().click();
@@ -149,6 +154,7 @@ describe('Redesigned class overview navigation', () => {
       cy.get('@archivedRow').find('button[data-cy="unarchive_class"]').should('be.visible').click();
       cy.getDataCy('redesign_confirm_yes_button').click();
       cy.wait('@unarchiveClass').its('response.statusCode').should('eq', 200);
+      cy.get(`#menu-archived-${classId}`).should('not.exist');
 
       cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('activeRow');
       cy.get('@activeRow').find('button.blue-btn-new').first().click();

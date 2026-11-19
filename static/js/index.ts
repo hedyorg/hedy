@@ -12,6 +12,7 @@
  * from 'initialize.ts'.
  */
 import './htmx-integration';
+import './weblate-links';
 export * from './modal';
 export * from './app';
 export * from './auth';
@@ -30,3 +31,4 @@ export * from './microbit';
 export * from './autosave';
 export * from './custom-elements';
 export * from './admin';
+export * from './manual-index';

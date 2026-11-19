@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { modal } from './modal';
-import { theKeywordLanguage } from "./app";
+import { initializeHighlightedCodeBlocks, theKeywordLanguage } from "./app";
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
@@ -1397,6 +1397,31 @@ export interface InitializeGradePageOptions {
 }
 
 export function initializeGradePage(_options: InitializeGradePageOptions) {
+  // A class of twenty students can easily have hundreds of submitted programs, and every
+  // row holds the source of one. Building an editor for each of them costs seconds and
+  // nobody is looking at them: the rows arrive folded shut. Build the one in a row the
+  // first time that row is opened instead.
+  //
+  // The listener sits on the document because the table body is swapped in over htmx
+  // whenever the teacher filters or sorts, which would take any handler bound to a row
+  // with it.
+  document.addEventListener('click', (event) => {
+    const row = (event.target as HTMLElement)?.closest?.('tr');
+    if (!row) {
+      return;
+    }
+    const deferred = Array.from(row.querySelectorAll('pre.defer-editor'));
+    if (!deferred.length) {
+      return;
+    }
+    for (const preview of deferred) {
+      preview.classList.remove('defer-editor');
+    }
+    // The row, not the container the <pre> sits in: this looks for `.turn-pre-into-ace`
+    // among the descendants of what it is given.
+    initializeHighlightedCodeBlocks(row, true);
+  });
+
   // Only close dropdowns if click is outside ALL dropdowns and their buttons
   document.addEventListener('click', function (event) {
     const dropdowns = [

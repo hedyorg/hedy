@@ -18,6 +18,34 @@ def test_login(client: Client, given: Given):
     # THEN - it succeeds
 
 
+def test_login_with_at_sign_in_username(client: Client, given: Given):
+    """Older accounts can have an @-sign in their username, they must still be able to log in."""
+    # GIVEN
+    given.a_student_account('old@student', 'pass1')
+
+    # WHEN
+    response = client.post_json('/auth/login', {
+        'username': 'old@student',
+        'password': 'pass1',
+    })
+
+    # THEN - it succeeds
+
+
+def test_login_with_space_in_username(client: Client, given: Given):
+    """Older accounts can have a space in their username, they must still be able to log in."""
+    # GIVEN
+    given.a_student_account('old student', 'pass1')
+
+    # WHEN
+    response = client.post_json('/auth/login', {
+        'username': 'old student',
+        'password': 'pass1',
+    })
+
+    # THEN - it succeeds
+
+
 STUDENT_PROTECTED_ENDPOINTS = ['/programs']
 
 
