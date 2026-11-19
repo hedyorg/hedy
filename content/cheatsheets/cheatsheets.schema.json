@@ -7,8 +7,8 @@
   },
   "definitions": {
     "Cheatsheets": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/Cheatsheet" }
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/Cheatsheet" }
     },
     "Cheatsheet": {
       "type": "object",

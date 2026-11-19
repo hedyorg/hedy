@@ -665,20 +665,6 @@ teacher-guide:
                         {print} plátano
     -   level: '12'
         sections:
-        -   title: Los alumnos olvidan las comillas
-            example:
-                error_text: Los alumnos necesitan mas comillas ahora que en los niveles anteriores. En este ejemplo se olvidaron las comillas en la lista y en el comando `{if}`.
-                error_code: |-
-                    superhéroes = Spiderman, Batman, Iron Man
-                    superhéroe = superhéroes {at} {random}
-                    {if} superhéroe = Batman
-                        {print} '¡SOY BATMAN!'
-                solution_text: 'Este es el código correcto:'
-                solution_code: |-
-                    superhéroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhéroe = superhéroes {at} {random}
-                    {if} superhéroe {is} 'Batman'
-                        {print} '¡SOY BATMAN!'
         -   title: Los alumnos usan las comillas en los números que quieren usar para cálculos
             example:
                 error_text: |-

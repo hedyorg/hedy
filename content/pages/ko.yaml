@@ -666,20 +666,6 @@ teacher-guide:
                         {print} 바나나
     -   level: "12"
         sections:
-        -   title: 학생들은 따옴표'를 잊어버린다
-            example:
-                error_text: 학생들은 이전 레벨보다 지금 더 많은 따옴표를 필요로 한다. 이 예제에서 따옴표는 목록과 `{if}` 명령에서 잊혀졌다.
-                error_code: |-
-                    슈퍼히어로모임 = 스파이더맨, 배트맨, 아이언맨
-                    슈퍼히어로 = 슈퍼히어로모임 {at} {random}
-                    {if} 슈퍼히어로 = 배트맨
-                        {print} '나는 배트맨이다!'
-                solution_text: "이것이 정확한 코드입니다:"
-                solution_code: |-
-                    슈퍼히어로모임 = '스파이더맨', '배트맨', '아이언맨'
-                    슈퍼히어로 = 슈퍼히어로모임 {at} {random}
-                    {if} 슈퍼히어로 {is} '배트맨'
-                        {print} '나는 배트맨이다!'
         -   title: 학생들은 계산에 사용하기를 원하는 숫자에 따옴표'를 사용한다
             example:
                 error_text: |-

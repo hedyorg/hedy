@@ -12,6 +12,7 @@ from venv import logger
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
+from markupsafe import escape
 from website import hedy_website_utils
 from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
@@ -27,6 +28,7 @@ from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
 from website.newsletter import add_class_customized_to_subscription
 from website.auth import (
+    has_invalid_username_characters,
     is_admin,
     is_teacher,
     is_super_teacher,
@@ -2984,14 +2986,6 @@ class ForTeachersModule(WebsiteModule):
                 err = safe_format(gettext('username_contains_separator'), usernames=', '.join(usernames_with_separator))
                 return make_response({"error": err}, 400)
 
-            # Currently usernames cannot contain '@' and ':'
-            invalid_symbols_in_username = ['@', ':']
-            invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
-            if invalid_usernames:
-                err = safe_format(gettext('username_contains_invalid_symbol'),
-                                  usernames=', '.join(invalid_usernames))
-                return make_response({"error": err}, 400)
-
             accounts = [(user.lower(), utils.random_password_generator()) for user in lines]
         else:
 
@@ -3016,6 +3010,12 @@ class ForTeachersModule(WebsiteModule):
         invalid_usernames = [usr for (usr, _) in accounts if len(usr) < 3]
         if invalid_usernames:
             err = safe_format(gettext('usernames_too_short'), usernames=', '.join(invalid_usernames))
+            return make_response({"error": err}, 400)
+
+        # Validate the characters in the usernames, for both ways of entering accounts
+        invalid_usernames = [usr for (usr, _) in accounts if has_invalid_username_characters(usr)]
+        if invalid_usernames:
+            err = safe_format(gettext('usernames_invalid_characters'), usernames=escape(', '.join(invalid_usernames)))
             return make_response({"error": err}, 400)
 
         # Validate that the user supplied no duplicate usernames

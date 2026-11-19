@@ -498,6 +498,11 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
         });
     }
 
+    languagesDropdown?.addEventListener('change', () => {
+        persistAdventureDraftIfChanged(true);
+        uploadAdventureDraftIfChanged(true);
+    });
+
     const previewTab = document.getElementById('preview-tab');
     previewTab?.addEventListener('click', () => {
         persistAdventureDraftIfChanged(true);
@@ -649,9 +654,15 @@ export function update_adventure_redesign(formElement: HTMLFormElement, draftOve
     }
 
     const classes = parseJsonStringArray(formElement.dataset['adventureClasses']);
-    const language = theKeywordLanguage
+    const keywordLanguage = theKeywordLanguage
         || formElement.dataset['adventureLanguage']
         || 'en';
+    // The adventure's language is the one the teacher picked in the public adventure options.
+    // It is not the keyword language, which is only used to format the code snippets.
+    const languagesDropdown = document.querySelector('#languages_dropdown') as HedySelect | null;
+    const language = languagesDropdown?.selected?.[0]
+        || formElement.dataset['adventureLanguage']
+        || keywordLanguage;
     const fallbackName = formElement.dataset['adventureName'] || '';
     const adventureName = getAdventureNameFromPage(fallbackName);
     const isPublic = getAdventurePublicValue(formElement);
@@ -659,8 +670,8 @@ export function update_adventure_redesign(formElement: HTMLFormElement, draftOve
     const content = draftOverride?.content ?? DOMPurify.sanitize(window.ckEditor?.getData() || '');
     const solutionExample = draftOverride?.solutionExample ?? DOMPurify.sanitize(window.ckSolutionEditor?.getData() || '');
 
-    const formattedContent = getFormattedAdventureContent(content, levels, language);
-    const formattedSolution = getFormattedAdventureContent(solutionExample, levels, language);
+    const formattedContent = getFormattedAdventureContent(content, levels, keywordLanguage);
+    const formattedSolution = getFormattedAdventureContent(solutionExample, levels, keywordLanguage);
 
     return $.ajax({
         type: 'POST',

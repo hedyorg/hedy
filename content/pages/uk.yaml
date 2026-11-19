@@ -565,20 +565,6 @@ teacher-guide:
                         {print} banana
     -   level: "12"
         sections:
-        -   title: Students forget quotation marks
-            example:
-                error_text: Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
-                error_code: |-
-                    superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes {at} {random}
-                    {if} superhero = Batman
-                        {print} 'IM BATMAN!'
-                solution_text: "Ось правильний код:"
-                solution_code: |-
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes {at} {random}
-                    {if} superhero {is} 'Batman'
-                        {print} 'IM BATMAN!'
         -   title: Students use quotation marks on numbers they want to use for calculations
             example:
                 error_text: |-

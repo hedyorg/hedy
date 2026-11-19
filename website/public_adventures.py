@@ -8,7 +8,7 @@ import bs4
 
 import website_content as hedy_content
 import utils
-from website.auth import requires_teacher
+from website.auth import requires_super_teacher, requires_teacher
 from website.flask_helpers import render_template
 
 from . import dynamo
@@ -44,6 +44,7 @@ class PublicAdventuresModule(WebsiteModule):
         selected_level = request.args.get("selected_level", '')
         selected_lang = request.args.get("selected_lang", g.lang)
         q = request.args.get("q", "")
+        creator = request.args.get("creator", "").strip()
         selected_tag = request.args.get("selected_tag", '')
         page = request.args.get("page", '')
 
@@ -57,6 +58,7 @@ class PublicAdventuresModule(WebsiteModule):
                                                             int(selected_level) if selected_level else None,
                                                             selected_tag or None,
                                                             q or None,
+                                                            creator=creator.lower() or None,
                                                             pagination_token=page if page else None)
         next_page_token = adventures.next_page_token
 
@@ -68,6 +70,7 @@ class PublicAdventuresModule(WebsiteModule):
             selected_lang=selected_lang,
             selected_tag=selected_tag,
             q=q,
+            creator=creator,
             next_page_token=next_page_token
         )
 
@@ -140,6 +143,9 @@ class PublicAdventuresModule(WebsiteModule):
                             adventure=adventure,
                             user=user,
                             current_page="public-adventures",
+
+                            # Super teachers can correct the language of the adventure
+                            available_languages=hedy_content.ALL_LANGUAGES.keys(),
 
                             # The next bits are to make the editor work
                             level=level
@@ -229,6 +235,56 @@ class PublicAdventuresModule(WebsiteModule):
     def flag_adventure(self, user, adventure_id, flagged=None):
         self.db.update_adventure(adventure_id, {"flagged": 0 if int(flagged) else 1})
         return render_template("public-adventures/htmx-after-flag.html")
+
+    @route("/change-language/<adventure_id>", methods=["POST"])
+    @requires_super_teacher
+    def change_adventure_language(self, user, adventure_id):
+        """Moderation for super teachers: correct the language of a public adventure."""
+        adventure = self.db.get_adventure(adventure_id)
+        if not adventure or not adventure.get("public"):
+            return utils.error_page(error=404, ui_message=_("no_such_adventure"))
+
+        language = request.form.get("language", "")
+        if language not in hedy_content.ALL_LANGUAGES:
+            return make_response({"message": _("language_invalid")}, 400)
+
+        self.db.update_adventure(adventure_id, {"language": language})
+
+        # Tags keep their own copy of the language, keep it in sync
+        for tag in self.db.read_tags(adventure.get("tags", [])):
+            tagged_in = tag.get("tagged_in", [])
+            updated = False
+            for tag_adventure in tagged_in:
+                if tag_adventure["id"] == adventure_id and tag_adventure.get("language") != language:
+                    tag_adventure["language"] = language
+                    updated = True
+            if updated:
+                self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
+
+        return make_response("", 200)
+
+    @route("/make-private/<adventure_id>", methods=["POST"])
+    @requires_super_teacher
+    def make_adventure_private(self, user, adventure_id):
+        """Moderation for super teachers: take a public adventure out of the public list.
+
+        The adventure stays with its creator, who can choose to share it again later.
+        """
+        adventure = self.db.get_adventure(adventure_id)
+        if not adventure:
+            return utils.error_page(error=404, ui_message=_("no_such_adventure"))
+
+        self.db.update_adventure(adventure_id, {"public": 0})
+
+        # Tags keep their own copy of the public flag, keep it in sync
+        for tag in self.db.read_tags(adventure.get("tags", [])):
+            tagged_in = tag["tagged_in"]
+            for tag_adventure in tagged_in:
+                if tag_adventure["id"] == adventure_id:
+                    tag_adventure["public"] = 0
+            self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
+
+        return make_response("", 200)
 
 
 def is_hx_request():

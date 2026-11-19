@@ -203,6 +203,27 @@ describe('Customize adventure redesign autosave', () => {
     cy.get('#public_adventure_options').should('have.class', 'hidden');
   });
 
+  it('uploads the selected public adventure language and keeps it after reloading', () => {
+    loginForTeacher('teacher1');
+    openNewAdventureInRedesign(uniqueName('language-flow'));
+
+    cy.getDataCy('solution_example').click();
+
+    cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
+
+    cy.get('input[name="adventure_public"]').click({ force: true });
+    waitForSingleUpload('@uploadAdventureDraft');
+
+    cy.getDataCy('language_select').click();
+    cy.get('#languages_dropdown').find('[data-cy="nl"]').click();
+    waitForSingleUpload('@uploadAdventureDraft', (body) => {
+      expect(body.language).to.eq('nl');
+    });
+
+    cy.reload();
+    cy.get('#languages_dropdown .option.selected').should('have.attr', 'data-value', 'nl');
+  });
+
   it('adds tags in redesigned customize adventure usage tab', () => {
     loginForTeacher('teacher1');
     openNewAdventureInRedesign(uniqueName('tags-flow'));
