@@ -389,13 +389,13 @@
         pretty_colors = green, yellow
         favorite_color = orange
         # if in
-        {if} favorite_color {in} pretty_colors 
+        {if} favorite_color {in} pretty_colors
             {print} 'pretty!'
         # elif
         {elif} favorite_color {is} pink
             {print} 'not bad!'
         # else
-        {else} 
+        {else}
             {print} 'meh'
 
         # is
@@ -478,13 +478,13 @@
         pretty_colors = green, yellow
         favorite_color = orange
         # if in
-        {if} favorite_color {in} pretty_colors 
+        {if} favorite_color {in} pretty_colors
             {print} 'pretty!'
         # elif
         {elif} favorite_color {is} pink
             {print} 'not bad!'
         # else
-        {else} 
+        {else}
             {print} 'meh'
 
         # is
@@ -532,20 +532,20 @@
     explanation: '`{repeat}`, `{if}`, `{elif}`, `{else}`, `{in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{play}`, `{turn}`, `{forward}`, `{color}`, `{sleep}`, `{clear}`'
     demo_code: |-
         # repeat
-        {repeat} 3 {times} 
+        {repeat} 3 {times}
             {print} 'Hello!'
         
         # is
         pretty_colors = green, yellow
         favorite_color = orange
         # if in
-        {if} favorite_color {in} pretty_colors 
+        {if} favorite_color {in} pretty_colors
             {print} 'pretty!'
         # elif
         {elif} favorite_color {is} pink
             {print} 'not bad!'
         # else
-        {else} 
+        {else}
             {print} 'meh'
 
         # is
@@ -602,23 +602,23 @@
         animals = duck, dog, rhino
         # for
         {for} animal {in} animals
-          {print} 'I love ' animal
+            {print} 'I love ' animal
         
         # repeat
-        {repeat} 3 {times} 
+        {repeat} 3 {times}
             {print} 'Hello!'
         
         # is
         pretty_colors = green, yellow
         favorite_color = 'orange'
         # if in
-        {if} favorite_color {in} pretty_colors 
+        {if} favorite_color {in} pretty_colors
             {print} 'pretty!'
         # elif
         {elif} favorite_color {is} pink
             {print} 'not bad!'
         # else
-        {else} 
+        {else}
             {print} 'meh'
 
         # is
@@ -731,10 +731,10 @@
         {clear}
         
         # math
-        {print}('5 plus 5 is ' 5 + 5)
-        {print}('5 minus 5 is ' 5 - 5)
-        {print}('5 times 5 is ' 5 * 5)
-        {print}('5 divided by 5 is ' 5 / 5)
+        {print}(5 + 5)
+        {print}(5 - 5)
+        {print}(5 * 5)
+        {print}(5 / 5)
 14:
 -   name: 'creating a list'
     explanation: Use square brachets to create a list, and use quotation marks around each item.
@@ -756,7 +756,7 @@
 -   name: 'choosing a specific item of a list'
     explanation: To get an item from a list we use [number] so fruits[1] means, get the first fruit from the list!
     demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
+        fruits = ['apple', 'banana', 'cherry']
         {print}(fruits[1], ' is the first thing on my list')
 -   name: 'choosing a random item of a list'
     explanation: choose a random item of a list.
@@ -783,28 +783,34 @@
         {if} favorite_color {in} pretty_colors:
             {print}('pretty!')
         # elif
-        {elif} favorite_color {is} 'pink':
+        {elif} favorite_color == 'pink':
             {print}('not bad!')
         # else
-        {else} 
+        {else}:
             {print}('meh')
         
         # =, input, print
         age = {input}('How old are you?')
         {print}('So your ', age, 'years old')
         
-        # smaller than 
+        # smaller than
         {if} age < 12:
+            {print}('You are younger than 12')
         # bigger than
         {if} age > 12:
+            {print}('You are older than 12')
         # equal to ==
         {if} age == 12:
+            {print}('You are 12')
         # not equal to
         {if} age != 12:
+            {print}('You are not 12')
         # smaller or equal to
         {if} age <= 12:
+            {print}('You are 12 or younger')
         # bigger or equal to
         {if} age >= 12:
+            {print}('You are 12 or older')
 
 
         # play
@@ -821,10 +827,10 @@
         {clear}
         
         # math
-        {print} '5 plus 5 is ' 5 + 5
-        {print} '5 minus 5 is ' 5 - 5
-        {print} '5 times 5 is ' 5 * 5
-        {print} '5 divided by 5 is ' 5 / 5
+        {print}(5 + 5)
+        {print}(5 - 5)
+        {print}(5 * 5)
+        {print}(5 / 5)
 15:
 -   name: 'using a function'
     explanation: You can use a function like this. Take a close look at the correct syntax.
@@ -858,6 +864,7 @@
         fruits = ['apple', 'banana', 'cherry']
         # for in
         {for} fruit {in} fruits:
+            {print}('I love ', fruit)
         # for i in range
         {for} i {in} {range} (1,3):
             {print}(fruits[i], ' is item number ', i, ' on the list.')
@@ -868,28 +875,34 @@
         {if} favorite_color {in} pretty_colors:
             {print}('pretty!')
         # elif
-        {elif} favorite_color {is} 'pink':
+        {elif} favorite_color == 'pink':
             {print}('not bad!')
         # else
-        {else} 
+        {else}:
             {print}('meh')
         
         # =, input, print
         age = {input}('How old are you?')
         {print}('So your ', age, 'years old')
         
-        # smaller than 
+        # smaller than
         {if} age < 12:
+            {print}('You are younger than 12')
         # bigger than
         {if} age > 12:
+            {print}('You are older than 12')
         # equal to ==
         {if} age == 12:
+            {print}('You are 12')
         # not equal to
         {if} age != 12:
+            {print}('You are not 12')
         # smaller or equal to
         {if} age <= 12:
+            {print}('You are 12 or younger')
         # bigger or equal to
         {if} age >= 12:
+            {print}('You are 12 or older')
 
 
         # play
@@ -906,10 +919,10 @@
         {clear}
         
         # math
-        {print} '5 plus 5 is ' 5 + 5
-        {print} '5 minus 5 is ' 5 - 5
-        {print} '5 times 5 is ' 5 * 5
-        {print} '5 divided by 5 is ' 5 / 5
+        {print}(5 + 5)
+        {print}(5 - 5)
+        {print}(5 * 5)
+        {print}(5 / 5)
 16:
 -   name: '{while}'
     explanation: We can use the `{while}` loop with not equal.
@@ -941,6 +954,7 @@
         fruits = ['apple', 'banana', 'cherry']
         # for in
         {for} fruit {in} fruits:
+            {print}('I love ', fruit)
         # for i in range
         {for} i {in} {range} (1,3):
             {print}(fruits[i], ' is item number ', i, ' on the list.')
@@ -951,28 +965,34 @@
         {if} favorite_color {in} pretty_colors:
             {print}('pretty!')
         # elif
-        {elif} favorite_color {is} 'pink':
+        {elif} favorite_color == 'pink':
             {print}('not bad!')
         # else
-        {else} 
+        {else}:
             {print}('meh')
         
         # =, input, print
         age = {input}('How old are you?')
         {print}('So your ', age, 'years old')
         
-        # smaller than 
+        # smaller than
         {if} age < 12:
+            {print}('You are younger than 12')
         # bigger than
         {if} age > 12:
+            {print}('You are older than 12')
         # equal to ==
         {if} age == 12:
+            {print}('You are 12')
         # not equal to
         {if} age != 12:
+            {print}('You are not 12')
         # smaller or equal to
         {if} age <= 12:
+            {print}('You are 12 or younger')
         # bigger or equal to
         {if} age >= 12:
+            {print}('You are 12 or older')
 
 
         # play
@@ -989,7 +1009,7 @@
         {clear}
         
         # math
-        {print} '5 plus 5 is ' 5 + 5
-        {print} '5 minus 5 is ' 5 - 5
-        {print} '5 times 5 is ' 5 * 5
-        {print} '5 divided by 5 is ' 5 / 5
+        {print}(5 + 5)
+        {print}(5 - 5)
+        {print}(5 * 5)
+        {print}(5 / 5)
