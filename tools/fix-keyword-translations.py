@@ -1,5 +1,6 @@
 from pathlib import Path
 from collections.abc import Collection
+import re
 
 COLORS = [
     "black",
@@ -81,6 +82,10 @@ COMMON_PAIR_ERRORS = {
     "print hello": "{print} hello",
 } | ({f"color {x}": f"{{color}} {{{x}}}" for x in COLORS})
 
+REGEX_ERRORS = {
+    r"(\{add\} \w+) \{to\}": r"\1 {to_list}",
+}
+
 YAML_TRANSLATIONS_DIR = Path("/workspace/content")
 
 INTENDED_ENGLISH = {Path("/workspace/content/pages"): ["for", "repeat"]}
@@ -140,6 +145,13 @@ def replace_keywords_in_file(path: Path, keywordsToFix: Collection[str]):
         if f"`{pair}`" in contents:
             changed = True
             contents = contents.replace(f"`{pair}`", f"`{replacement}`")
+
+    # Ensure we're using the correct `to`. Do this last so we can ensure we
+    # fixed all of the keywords already.
+    for pair, replacement in REGEX_ERRORS.items():
+        contents, cnt = re.subn(pair, replacement, contents)
+        if cnt > 0:
+            changed = True
 
     if changed:
         with path.open(mode="w") as file:
