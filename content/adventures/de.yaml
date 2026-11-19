@@ -1175,9 +1175,9 @@ adventures:
                     Zum Beispiel: 'Ahmed, rechte Hand auf grün' oder 'Jessica, linker Fuß auf gelb'.
                 example_code: |
                     ```
-                    seiten = 'links', 'rechts'
-                    körperteile = 'hand', 'fuß'
-                    farben = 'rot', 'blau', 'grün', 'gelb'
+                    seiten = links, rechts
+                    körperteile = hand, fuß
+                    farben = rot, blau, grün, gelb
 
                     {define} zum
                         gewählte_seite = seiten {at} {random}
@@ -2872,7 +2872,7 @@ adventures:
                         form = {ask} 'Welche Form möchtest du als nächstes mit deinem Armband haben?'
                         gewählte_farbe = {ask} 'In welcher Farbe?'
                         {color} gewählte_farbe
-                        {if} form = 'quadrat'
+                        {if} form = quadrat
                             {call} zeichne_ein_quadrat
                     ```
             15:

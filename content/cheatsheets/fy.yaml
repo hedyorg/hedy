@@ -1,98 +1,122 @@
 1:
--   name: '{print}'
-    explanation: Eat printe mei `{print}`.
-    demo_code: '{print} Hoi wolkom by Hedy!'
--   name: '{ask}'
-    explanation: Eat freegje mei `{ask}`.
-    demo_code: '{ask} Wat is dyn favorite kleur?'
--   name: {answer}
-    explanation: Eat werhelje mei `{answer}`.
-    demo_code: |-
-        {ask} Wat is dyn favorite kleur?
-        {print} Dus dyn favorite kleur is... {answer}
--   name: '{forward}'
-    explanation: Een line tekenje mei `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: De teken-skyldpod draaie mei `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
+    1:
+        name: '{print}'
+        explanation: Eat printe mei `{print}`.
+        demo_code: '{print} Hoi wolkom by Hedy!'
+    2:
+        name: '{ask}'
+        explanation: Eat freegje mei `{ask}`.
+        demo_code: '{ask} Wat is dyn favorite kleur?'
+    3:
+        name: '{answer}'
+        explanation: Eat werhelje mei `{answer}`.
+        demo_code: |-
+            {ask} Wat is dyn favorite kleur?
+            {print} Dus dyn favorite kleur is... {answer}
+    5:
+        name: '{forward}'
+        explanation: Een line tekenje mei `{forward}`.
+        demo_code: '{forward} 100'
+    6:
+        name: '{turn}'
+        explanation: De teken-skyldpod draaie mei `{turn}`
+        demo_code: |-
+            {forward} 25
+            {turn} {left}
+            {forward} 25
+            {turn} {right}
 2:
--   name: {is}
-    explanation: In wurd in namme jaan mei `{is}`. Meist de namme sels kieze.
-    demo_code: |-
-        foarnamme {is} Hedy
-        {print} ik bin foarnamme
+    1:
+        name: '{is}'
+        explanation: In wurd in namme jaan mei `{is}`. Meist de namme sels kieze.
+        demo_code: |-
+            foarnamme {is} Hedy
+            {print} ik bin foarnamme
 3:
--   name: kies_random
-    explanation: Eat willekeurichs út in groepke wurden kieze mei `{at}` en `{random}`.
-    demo_code: |-
-        bisten {is} hûn, kat, kangeroe
-        {print} bisten {at} {random}
--   name: '{add}'
-    explanation: add an item to a list
-    demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
--   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
+    2:
+        name: kies_random
+        explanation: Eat willekeurichs út in groepke wurden kieze mei `{at}` en `{random}`.
+        demo_code: |-
+            bisten {is} hûn, kat, kangeroe
+            {print} bisten {at} {random}
+    3:
+        name: '{add}'
+        explanation: add an item to a list
+        demo_code: |-
+            animals {is} cow, cat
+            {add} dog {to_list} animals
+    4:
+        name: '{remove}'
+        explanation: remove an item from a list
+        demo_code: |-
+            animals {is} cat, dog, cow
+            {remove} dog {from} animals
 4:
--   name: '{print}'
-    explanation: Eat letterlik printe mei `{print}`.
-    demo_code: |-
-        {print} 'Hoi wolkom by Hedy'
--   name: '{is}'
-    explanation: In stikje tekst in namme jaan mei `{is}` en printe sûnder oanhellingstekens
-    demo_code: |-
-        namme {is} Hedy
-        {print} 'ik bin ' namme
+    1:
+        name: '{print}'
+        explanation: Eat letterlik printe mei `{print}`.
+        demo_code: |-
+            {print} 'Hoi wolkom by Hedy'
+    2:
+        name: '{is}'
+        explanation: In stikje tekst in namme jaan mei `{is}` en printe sûnder oanhellingstekens
+        demo_code: |-
+            namme {is} Hedy
+            {print} 'ik bin ' namme
 13:
--   name: '{print}'
-    explanation: Bij `{print}` moet je haakjes gebruiken
-    demo_code: '{print}(''hallo!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
--   name: '{if} {elif} {else}'
--   name: Lytser
-    explanation: De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`
-    demo_code: |-
-        leeftyd = {input}('Hoe âld bisto?')
-        {if} leeftyd < 13:
-            {print}('Dan bist jonger as ik!')
--   name: Grutter
-    explanation: De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`
-    demo_code: |-
-        leeftyd = {input}('Hoe âld bisto?')
-        {if} leeftyd < 13:
-            {print}('Dan bist âlder as ik!')
--   name: Equal
--   name: Not equal
--   name: Smaller {or} equal
--   name: Bigger or equal
+    1:
+        name: '{print}'
+        explanation: Bij `{print}` moet je haakjes gebruiken
+        demo_code: '{print}(''hallo!'')'
+    2:
+        name: '{print} with a variable'
+    3:
+        name: 'ask something with {input}'
+    4:
+        name: '{if} {elif} {else}'
+    5:
+        name: Lytser
+        explanation: De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`
+        demo_code: |-
+            leeftyd = {input}('Hoe âld bisto?')
+            {if} leeftyd < 13:
+                {print}('Dan bist jonger as ik!')
+    6:
+        name: Grutter
+        explanation: De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`
+        demo_code: |-
+            leeftyd = {input}('Hoe âld bisto?')
+            {if} leeftyd < 13:
+                {print}('Dan bist âlder as ik!')
+    7:
+        name: Equal
+    8:
+        name: Not equal
+    9:
+        name: Smaller {or} equal
+    10:
+        name: Bigger or equal
 14:
--   name: 'creating a list'
-    explanation: We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!
-    demo_code: |-
-        fruit = ['apel', 'banaan', 'kjers']
+    1:
+        name: 'creating a list'
+        explanation: We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!
+        demo_code: |-
+            fruit = ['apel', 'banaan', 'kjers']
 16:
--   name: {while}
-    explanation: We kinne dus in `{while}`-lus brûke mei de `True` en `False`
-    demo_code: |-
-        antwoord = 0
-        {while} antwoord != 25:
-            antwurd = {input}('Wat is 5 kear 5?')
-        {print}('Dat wie it goede antwurd!')
--   name: Smaller {while}
-    explanation: We kinne in `{while}`-lus ek brûke mei `<` en `>`.
-    demo_code: |-
-        tel = 1
-        {while} tel < 3
-            {print}('Dit is de ', tel, 'e kear')
-            tel = tel + 1
-        {print}('We zijn klaar')
+    1:
+        name: '{while}'
+        explanation: We kinne dus in `{while}`-lus brûke mei de `True` en `False`
+        demo_code: |-
+            antwoord = 0
+            {while} antwoord != 25:
+                antwurd = {input}('Wat is 5 kear 5?')
+            {print}('Dat wie it goede antwurd!')
+    2:
+        name: Smaller {while}
+        explanation: We kinne in `{while}`-lus ek brûke mei `<` en `>`.
+        demo_code: |-
+            tel = 1
+            {while} tel < 3
+                {print}('Dit is de ', tel, 'e kear')
+                tel = tel + 1
+            {print}('We zijn klaar')
