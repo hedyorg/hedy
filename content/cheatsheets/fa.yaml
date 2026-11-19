@@ -1,57 +1,69 @@
 1:
--   name: '{print}'
-    explanation: یک چیزی رو با دستور `{print}` چاپ کن.
-    demo_code: '{print} خوش آمدید!'
--   name: '{ask}'
-    explanation: با دستور `{ask}` یک سوالی رو بپرسید.
-    demo_code: '{ask} رنگ مورد علاقه ات چیه?'
--   name: '{answer}'
-    explanation: با دستور `{answer}` یک چیز را تکرار کنید.
-    demo_code: |-
-        {ask} رنگ مورد علاقه ات چیه؟?
-        {print} پس رنگ مورد علاقه ات: {answer}
--   name: '{forward}'
-    explanation: با دستور `{forward}` یک خط بکش.
-    demo_code: '{forward} 100'
--   name: '{turn}'
-    explanation: با دستور `{turn}` لاکپشت رو بچرخون
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
+    1:
+        name: '{print}'
+        explanation: یک چیزی رو با دستور `{print}` چاپ کن.
+        demo_code: '{print} خوش آمدید!'
+    2:
+        name: '{ask}'
+        explanation: با دستور `{ask}` یک سوالی رو بپرسید.
+        demo_code: '{ask} رنگ مورد علاقه ات چیه?'
+    3:
+        name: '{answer}'
+        explanation: با دستور `{answer}` یک چیز را تکرار کنید.
+        demo_code: |-
+            {ask} رنگ مورد علاقه ات چیه؟?
+            {print} پس رنگ مورد علاقه ات: {answer}
+    5:
+        name: '{forward}'
+        explanation: با دستور `{forward}` یک خط بکش.
+        demo_code: '{forward} 100'
+    6:
+        name: '{turn}'
+        explanation: با دستور `{turn}` لاکپشت رو بچرخون
+        demo_code: |-
+            {forward} 25
+            {turn} {left}
+            {forward} 25
+            {turn} {right}
 2:
--   name: '{is}'
-    explanation: با دستور `{is}` به یک کلمه، یک اسم بدید. اسم می‌تونه به انتخاب خودت باشه.
-    demo_code: |-
-        name {is} Hedy
-        {print} welcome name
--   name: '{sleep}'
-    explanation: بذار هِدی برای یک یا چند ثانیه توقف کنه.
-    demo_code: |-
-        {sleep} 3
+    1:
+        name: '{is}'
+        explanation: با دستور `{is}` به یک کلمه، یک اسم بدید. اسم می‌تونه به انتخاب خودت باشه.
+        demo_code: |-
+            name {is} Hedy
+            {print} welcome name
+    3:
+        name: '{sleep}'
+        explanation: بذار هِدی برای یک یا چند ثانیه توقف کنه.
+        demo_code: |-
+            {sleep} 3
 3:
--   name: یه چیز تصادفی انتخاب کن
-    explanation: یک حرف را به صورت تصادفی انتخاب کن `{at}` و`{random}`
-    demo_code: |-
-        حیوانات {is} سگ, گربه, کانگورو
-        {print} حیوانات {at} {random}
--   name: '{add}'
-    explanation: یک آیتم به لیست اضافه کن
-    demo_code: |-
-        حیوانات {is} گاو, گربه
-        {add} سگ {to_list} حیوانات
--   name: '{remove}'
-    explanation: یک آیتم را از لیست حذف کن
-    demo_code: |-
-        حیوانات {is} گربه, سگ, گاو
-        {remove} سگ {from} حیوانات
+    2:
+        name: یه چیز تصادفی انتخاب کن
+        explanation: یک حرف را به صورت تصادفی انتخاب کن `{at}` و`{random}`
+        demo_code: |-
+            حیوانات {is} سگ, گربه, کانگورو
+            {print} حیوانات {at} {random}
+    3:
+        name: '{add}'
+        explanation: یک آیتم به لیست اضافه کن
+        demo_code: |-
+            حیوانات {is} گاو, گربه
+            {add} سگ {to_list} حیوانات
+    4:
+        name: '{remove}'
+        explanation: یک آیتم را از لیست حذف کن
+        demo_code: |-
+            حیوانات {is} گربه, سگ, گاو
+            {remove} سگ {from} حیوانات
 4:
--   name: '{print}'
-    explanation: print exactly using quotation marks
-    demo_code: '{print} ''سلام به هدی خوش اومدی.'''
--   name: '{is}'
-    explanation: به متن یک نام بده و `{print}` بدون گیومه
-    demo_code: |-
-        name {is} Hedy
-        {print} 'my name is ' name
+    1:
+        name: '{print}'
+        explanation: print exactly using quotation marks
+        demo_code: '{print} ''سلام به هدی خوش اومدی.'''
+    2:
+        name: '{is}'
+        explanation: به متن یک نام بده و `{print}` بدون گیومه
+        demo_code: |-
+            name {is} Hedy
+            {print} 'my name is ' name
