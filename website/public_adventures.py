@@ -44,6 +44,7 @@ class PublicAdventuresModule(WebsiteModule):
         selected_level = request.args.get("selected_level", '')
         selected_lang = request.args.get("selected_lang", g.lang)
         q = request.args.get("q", "")
+        creator = request.args.get("creator", "").strip()
         selected_tag = request.args.get("selected_tag", '')
         page = request.args.get("page", '')
 
@@ -57,6 +58,7 @@ class PublicAdventuresModule(WebsiteModule):
                                                             int(selected_level) if selected_level else None,
                                                             selected_tag or None,
                                                             q or None,
+                                                            creator=creator.lower() or None,
                                                             pagination_token=page if page else None)
         next_page_token = adventures.next_page_token
 
@@ -68,6 +70,7 @@ class PublicAdventuresModule(WebsiteModule):
             selected_lang=selected_lang,
             selected_tag=selected_tag,
             q=q,
+            creator=creator,
             next_page_token=next_page_token
         )
 
