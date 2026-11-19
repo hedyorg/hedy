@@ -499,7 +499,10 @@ class Commands(StructuredDataFile):
         super().__init__(f'{content_dir}/cheatsheets/{self.language}.yaml')
 
     def get_commands_for_level(self, level, keyword_lang):
-        return deep_translate_keywords(self.file.get(int(level), {}), keyword_lang)
+        commands = self.file.get(int(level), {})
+        if isinstance(commands, dict):
+            commands = [v for _, v in sorted(commands.items())]
+        return deep_translate_keywords(commands, keyword_lang)
 
 
 def deep_translate_keywords(yaml, keyword_language):
