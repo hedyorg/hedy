@@ -57,7 +57,7 @@
         {forward} 100
 3:
 -   name: Make a list with {is}
-    explanation: Make a list with is.
+    explanation: 'Make a list with `{is}`.'
     demo_code: |-
         animals {is} duck, dog, rhino
 -   name: Choose random
@@ -107,7 +107,7 @@
     explanation: Ask something with `{ask}`.
     demo_code: |-
         sport {is} {ask} 'What is your favorite sport?'
-        {print} 'I like ' sport 'too!'
+        {print} 'I like ' sport ' too!'
 -   name: '{print} with double quotation marks'
     explanation: Sometimes you need to use an apostrophe in the text that you want to print. In that case you can use double quotation marks.
     demo_code: |-
@@ -117,7 +117,7 @@
     demo_code: |-
         {clear}
 -   name: '{color} red'
-    explanation: 'Use {color} make the turtle draw in a different color.'
+    explanation: 'Use `{color}` to make the turtle draw in a different color.'
     demo_code: |-
         {color} red
         {forward} 100
@@ -187,34 +187,33 @@
         {clear}
 6:
 -   name: '{elif}'
-    explanation: 'Add a thrid option to `{if}` and `{else}` with `{elif}`.'
+    explanation: 'Add a third option to `{if}` and `{else}` with `{elif}`.'
     demo_code: |-
         favorite_color {is} orange
-        {if} favorite_color {is} green 
+        {if} favorite_color {is} green
         {print} 'pretty!'
         {elif} favorite_color {is} pink
         {print} 'not bad!'
-        {else} 
+        {else}
         {print} 'meh'
 -   name: '{in}'
     explanation: Check if elements are in a list.
     demo_code: |-
         pretty_colors {is} green, yellow
         favorite_color {is} orange
-        {if} favorite_color {in} pretty_colors 
+        {if} favorite_color {in} pretty_colors
         {print} 'pretty!'
-        {else} 
+        {else}
         {print} 'meh'
 -   name: 'Keywords you have learned before this level'
     explanation: '`{if}`, `{else}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{play}`, `{turn}`, `{forward}`, `{color}`, `{sleep}`, `{clear}`'
-    
     demo_code: |-
         # if
         favorite_color {is} orange
-        {if} favorite_color {is} green 
+        {if} favorite_color {is} green
         {print} 'pretty!'
         # else
-        {else} 
+        {else}
         {print} 'meh'
 
         # is
@@ -257,7 +256,7 @@
     explanation: 'Instead of {is} you can use the = symbol, when setting a variable or making a list. Note: We do not use the =-symbol in if-statements.'
     demo_code: |-
         color = orange
-        {if} color {is} green 
+        {if} color {is} green
         {print} 'pretty!'
 -   name: 'Decimal numbers'
     explanation: 'Use a point in your decimal numbers'
@@ -269,13 +268,13 @@
         pretty_colors = green, yellow
         favorite_color = orange
         # if & in
-        {if} favorite_color {in} pretty_colors 
+        {if} favorite_color {in} pretty_colors
         {print} 'pretty!'
         # elif
         {elif} favorite_color {is} pink
         {print} 'not bad!'
         # else
-        {else} 
+        {else}
         {print} 'meh'
 
         # is
@@ -323,13 +322,13 @@
         pretty_colors = green, yellow
         favorite_color = orange
         # if in
-        {if} favorite_color {in} pretty_colors 
+        {if} favorite_color {in} pretty_colors
         {print} 'pretty!'
         # elif
         {elif} favorite_color {is} pink
         {print} 'not bad!'
         # else
-        {else} 
+        {else}
         {print} 'meh'
 
         # is
@@ -380,7 +379,7 @@
 -   name: '{repeat} with multiple lines'
     explanation: Use indentations with repeat.
     demo_code: |-
-        {repeat} 3 {times} 
+        {repeat} 3 {times}
             {print} 'Hello!'
 -   name: 'Keywords you have learned before this level'
     explanation: '`{if}`, `{elif}`, `{else}`, `{in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{play}`, `{turn}`, `{forward}`, `{color}`, `{sleep}`, `{clear}`'
@@ -437,8 +436,8 @@
     explanation: 'Putting an `{if}` inside another `{if}`, is called nesting. Mind the indentation!'
     demo_code: |-
         continue = {ask} 'Do you want to continue?'
-        {if} continue = yes
-            sure = ask 'Are you sure?'
+        {if} continue {is} yes
+            sure = {ask} 'Are you sure?'
             {if} sure {is} yes
                 {print} 'We will continue'
             {else}
@@ -468,7 +467,7 @@
         age = {ask} 'Are you 14 years old or older?'
         adult = {ask} 'Is there a supervising adult with you?'
         {if} age {is} yes {or} adult {is} yes
-            {print} 'Have hun in this haunted house!'
+            {print} 'Have fun in this haunted house!'
         {else}
             {print} 'Sorry, this haunted house is not suited for you.'
 -   name: 'Keywords you have learned before this level'
@@ -586,15 +585,15 @@
 -   name: Creating a function
     explanation: "To create a function, use `{define}` and give the function a name. Then put all the lines you want in a indented block under the define line."
     demo_code: |-
-        {define} greet_the_costumer
+        {define} greet_the_customer
             {print} 'Hello!'
 -   name: Calling a function
     explanation: "Just use `{call}` with the function's name to call it up!"
     demo_code: |-
-        {define} greet_the_costumer
+        {define} greet_the_customer
             {print} 'Hello!'
 
-        {call} greet_the_costumer
+        {call} greet_the_customer
 -   name: 'Keywords you have learned before this level'
     explanation: '`{for}`, `{repeat}`, `{if}`, `{elif}`, `{else}`, `{in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{play}`, `{turn}`, `{forward}`, `{color}`, `{sleep}`, `{clear}`'
     demo_code: |-
@@ -737,7 +736,7 @@
         {print}(5 / 5)
 14:
 -   name: 'creating a list'
-    explanation: Use square brachets to create a list, and use quotation marks around each item.
+    explanation: Use square brackets to create a list, and use quotation marks around each item.
     demo_code: |-
         fruits = ['apple', 'banana', 'cherry']
 -   name: '{for} with a list'
@@ -752,7 +751,7 @@
         fruits = ['apple', 'banana', 'cherry']
         fruit = 'kiwi'
         {if} fruit {in} fruits:
-          {print}('I love ', fruit, 'to!')
+          {print}('I love ', fruit, ' too!')
 -   name: 'choosing a specific item of a list'
     explanation: To get an item from a list we use [number] so fruits[1] means, get the first fruit from the list!
     demo_code: |-
@@ -762,7 +761,7 @@
     explanation: choose a random item of a list.
     demo_code: |-
         fruits = ['apple', 'banana', 'cherry']
-        {print}(fruits[random], ' is my favorite')
+        {print}(fruits[{random}], ' is my favorite')
 -   name: '{range}'
     explanation: Repeating something is done with `{range}` and variable i.
     demo_code: |-
@@ -775,7 +774,7 @@
         {for} i {in} {range} (1,3):
             {print}(fruits[i], ' is item number ', i, ' on the list.')
 -   name: 'Keywords you have learned before this level'
-    explanation: 'Warning! From this level on the syntax resembles Python syntax. This means that the keywords you have learned in the previous levels might not work! Check out the upcoming levels to learn how to do them the Python way!`{if}`, `{elif}`, `{else}`, `{print}`, `{input}`, `{play}`, `{turn}`, `{forward}`, `{color}`, `{sleep}`, `{clear}`'
+    explanation: 'Warning! From this level on the syntax resembles Python syntax. This means that the keywords you have learned in the previous levels might not work! Check out the upcoming levels to learn how to do them the Python way! `{if}`, `{elif}`, `{else}`, `{print}`, `{input}`, `{play}`, `{turn}`, `{forward}`, `{color}`, `{sleep}`, `{clear}`'
     demo_code: |-       
         pretty_colors = ['green', 'yellow']
         favorite_color = 'orange'
@@ -791,7 +790,7 @@
         
         # =, input, print
         age = {input}('How old are you?')
-        {print}('So your ', age, 'years old')
+        {print}("So you're ", age, ' years old')
         
         # smaller than
         {if} age < 12:
@@ -835,28 +834,28 @@
 -   name: 'using a function'
     explanation: You can use a function like this. Take a close look at the correct syntax.
     demo_code: |-
-        {def} greet_the_costumer():
+        {def} greet_the_customer():
             {print}('Hello!')
 
-        greet_the_costumer()
+        greet_the_customer()
 -   name: 'using a function with arguments'
     explanation: Place the arguments you want to use in your function between the parentheses.
     demo_code: |-
-        {def} greet_the_costumer(name):
+        {def} greet_the_customer(name):
             {print}('Hello ', name, '!')
 
         customer = 'Hedy'
-        greet_the_costumer(customer)
+        greet_the_customer(customer)
 -   name: 'using a function with a return value'
     explanation: Use `{return}` to use the return value outside of the function.
     demo_code: |-
         {def} get_a_room(number):
             room_number = 1000 + number
-            return room_number
+            {return} room_number
 
         favorite_number = 7
         room_number = get_a_room(favorite_number)
-        print('Your room number is ', room_number)
+        {print}('Your room number is ', room_number)
 -   name: 'Keywords you have learned before this level'
     explanation: '`{for}`, `{in}`, `{range}`, `{if}`, `{elif}`, `{else}`, `{print}`, `{input}`, `{play}`, `{turn}`, `{forward}`, `{color}`, `{sleep}`, `{clear}`'
     demo_code: |-       
@@ -883,7 +882,7 @@
         
         # =, input, print
         age = {input}('How old are you?')
-        {print}('So your ', age, 'years old')
+        {print}("So you're ", age, ' years old')
         
         # smaller than
         {if} age < 12:
@@ -945,7 +944,7 @@
         # def
         {def} get_a_room(number):
             room_number = 1000 + number
-            return room_number
+            {return} room_number
 
         favorite_number = 7
         room_number = get_a_room(favorite_number)
@@ -973,7 +972,7 @@
         
         # =, input, print
         age = {input}('How old are you?')
-        {print}('So your ', age, 'years old')
+        {print}("So you're ", age, ' years old')
         
         # smaller than
         {if} age < 12:
