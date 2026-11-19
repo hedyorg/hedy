@@ -779,7 +779,7 @@ teacher-guide:
                     tempo = {ask} 'Hai tempo per giocare?'
                     {if} gioco {is} 'sì' {or} tempo {is} 'sì'
                         {print} 'Giochiamo!'
-                solution_text: In questo caso la persona deve rispondere sì a entrambe le domande, quindi devi usare `and`.
+                solution_text: In questo caso la persona deve rispondere sì a entrambe le domande, quindi devi usare `{and}`.
                 solution_code: |-
                     gioco = {ask} 'Vuoi fare un gioco?'
                     tempo = {ask} 'Hai tempo per giocare?'

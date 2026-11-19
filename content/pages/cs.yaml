@@ -535,7 +535,7 @@ teacher-guide:
             example:
                 error_text: Oba příkazy mohou vypadat podobně, ale mají velmi odlišnou funkci.
                 error_code: "hra = {ask} 'Chceš si zahrát hru?'\nčas = {ask} 'Máš čas si hrát?'\n{if} hra {is} 'ano' {or} čas {is} 'ano'\n    {print} 'Pojďme si zahrát!'"
-                solution_text: V tomto případě má člověk odpovědět ano na obě otázky, proto použijte `and`.
+                solution_text: V tomto případě má člověk odpovědět ano na obě otázky, proto použijte `{and}`.
                 solution_code: "hra = {ask} 'Chceš si zahrát hru?'\nčas = {ask} 'Máš čas si hrát?'\n{if} hra {is} 'ano' {and} čas {is} 'ano'\n    {print} 'Pojďme si zahrát!'"
         -   title: Žáci píšou neúplné řádky s `{or}`
             example:
