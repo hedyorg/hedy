@@ -53,6 +53,18 @@ adventures:
                     Corrige o código utilizando variáveis e `{is}` com o comando `{ask}`, tal como aprendeste neste nível.
 
                     **Extra** Adiciona um comando `{sleep}` ao teu código para criar tensão na tua história.
+                answer_code: |
+                    ```
+                    {print} Certo dia fui ao jardim zoológico
+                    primeiro_animal {is} {ask} Que animal viste primeiro?
+                    {print} Primeiro vi um(a) primeiro_animal
+                    {print} Depois vi um pinguim
+                    {print} Estava a almoçar
+                    comida {is} {ask} O que estava o pinguim a comer?
+                    {print} O pinguim estava a comer...
+                    {sleep} 3
+                    {print} comida
+                    ```
             3:
                 story_text: |
                     No nível 3 podes tornar a tua história mais divertida. Podes usar a aleatoriedade para qualquer monstro, animal ou outro obstáculo, da seguinte forma:
@@ -85,6 +97,19 @@ adventures:
                     mochila {is} água, lanterna, tijolo
                     despeja {is} {ask} Que objeto ele devia despejar?
                     {remove} despeja {from} mochila
+                    ```
+                answer_code: |
+                    ```
+                    animais {is} lion, zebra, flamingo
+                    {print} Hello kids! Today we're going to the zoo!
+                    favorite_animal {is} {ask} Which animal do you wanna go to today?
+                    {add} favorite_animal {to_list} animals
+                    {sleep} 2
+                    {print} Let's head to the animals {at} {random}
+                    {sleep}
+                    least_favorite_animal {is} {ask} Which animal do you not want to see?
+                    {remove} least_favorite_animal {from} animals
+                    {print} Let's go to the animals {at} {random} now!
                     ```
             4:
                 story_text: |
