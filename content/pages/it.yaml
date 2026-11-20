@@ -382,13 +382,13 @@ teacher-guide:
                 error_code: |-
                     nomi {is} Jake
                     tuo_nome {is} {ask} Chi sei?
-                    {add} tuo_nome {to} nomi
+                    {add} tuo_nome {to_list} nomi
                     {print} nomi {at} {random}
                 solution_text: Prima ci deve essere una lista, quindi devi aggiungere un secondo nome, per esempio Amy, per trasformare nomi in una lista. Se non vuoi Amy nella lista, puoi toglierla dopo con remove.
                 solution_code: |-
                     nomi {is} Jake, Amy
                     tuo_nome {is} {ask} Chi sei?
-                    {add} tuo_nome {to} nomi
+                    {add} tuo_nome {to_list} nomi
                     {print} nomi {at} {random}
             title: Gli studenti provano a usare add/remove senza una lista
         -   example:
@@ -417,7 +417,7 @@ teacher-guide:
             Novità di questo livello:
 
             * Creare una lista con `{is}` e sceglierne un elemento con `{at} {random}`
-            * Aggiungere un elemento a una lista con `{add} {to}`
+            * Aggiungere un elemento a una lista con `{add} {to_list}`
             * Togliere un elemento da una lista con `{remove} {from}`
     -   sections:
         -   example:
@@ -800,13 +800,13 @@ teacher-guide:
                         {print} 'Bellissimo!'
         level: '10'
         concepts_and_changes: |-
-            In questo livello amplieremo di nuovo {if} e {repeat}. Nel livello precedente gli studenti hanno imparato a usare più righe dopo {repeat}, {if}, {elif} o {else}.
-            Ora gli studenti impareranno anche l'*annidamento*, cioè mettere un {if} o un {repeat} dentro un {if} o un {repeat}. Impareranno anche due nuovi comandi: {and} e {or}.
+            In questo livello amplieremo di nuovo `{if}` e `{repeat}`. Nel livello precedente gli studenti hanno imparato a usare più righe dopo `{repeat}`, `{if}`, `{elif}` o `{else}`.
+            Ora gli studenti impareranno anche l'*annidamento*, cioè mettere un `{if}` o un `{repeat}` dentro un `{if}` o un `{repeat}`. Impareranno anche due nuovi comandi: `{and}` e `{or}`.
             Questo darà agli studenti molte più possibilità per creare programmi più versatili.
 
             Novità di questo livello:
-            * Annidare {if} e {repeat}
-            * Usare {and} e {or} dopo un {if}
+            * Annidare `{if}` e `{repeat}`
+            * Usare `{and}` e `{or}` dopo un `{if}`
     -   sections:
         -   example:
                 error_text: Vediamo spesso che gli studenti provano a stampare la lista (nell'esempio animali) invece degli elementi della lista.
@@ -1039,12 +1039,12 @@ teacher-guide:
                     print('Il numero della tua stanza è ', numero_stanza)
         level: '15'
         concepts_and_changes: |-
-            Questo livello si concentra sulle funzioni. In Hedy Avanzato gli studenti hanno imparato a usare una funzione di base. In questo livello non impareranno solo la sintassi di Python per usare una funzione, ma anche a usare gli argomenti nelle funzioni e {return} {value}.
+            Questo livello si concentra sulle funzioni. In Hedy Avanzato gli studenti hanno imparato a usare una funzione di base. In questo livello non impareranno solo la sintassi di Python per usare una funzione, ma anche a usare gli argomenti nelle funzioni e `{return} {value}`.
 
             Novità di questo livello:
             * Usare una funzione nel modo di Python
             * Usare gli argomenti in una funzione
-            * Usare {return} {value}
+            * Usare `{return} {value}`
     -   sections:
         -   example:
                 error_text: L'indentazione è spesso difficile per gli studenti.
