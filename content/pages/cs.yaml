@@ -276,9 +276,9 @@ teacher-guide:
         -   title: Žáci se snaží použít add/remove bez seznamu
             example:
                 error_text: V příkladu níže není „jména“ seznam, ale proměnná. Nelze do ní nic přidat.
-                error_code: "jména {is} Jake\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to} jména\n{print} jména {at} {random}"
+                error_code: "jména {is} Jake\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to_list} jména\n{print} jména {at} {random}"
                 solution_text: Nejprve musí existovat seznam. Přidejte proto druhé jméno, například Amy, aby se z proměnné jména stal seznam. Pokud Amy v seznamu nechcete, můžete ji pak odstranit pomocí remove.
-                solution_code: "jména {is} Jake, Amy\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to} jména\n{print} jména {at} {random}"
+                solution_code: "jména {is} Jake, Amy\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to_list} jména\n{print} jména {at} {random}"
         -   title: Žáci zapomínají používat `{to}`/`{from}` v `{add}`/`{remove}`
             example:
                 error_text: Bez to/from příkaz add/remove nefunguje.
@@ -344,7 +344,7 @@ teacher-guide:
             example:
                 error_text: S příkazem `{if}` mohou být řádky kódu velmi dlouhé a žáci pak často zapomínají na uvozovky.
                 error_code: "{if} jméno {is} Hedy {print} zábava\n{else} {print} 'nic moc!"
-                solution_text: V příkazu print vždy použijte dvě uvozovky.
+                solution_text: V příkazu {print} vždy použijte dvě uvozovky.
                 solution_code: "{if} jméno {is} Hedy {print} 'zábava'\n{else} {print} 'nic moc!'"
         -   title: Žáci píšou uvozovky kolem názvů proměnných
             example:
@@ -535,7 +535,7 @@ teacher-guide:
             example:
                 error_text: Oba příkazy mohou vypadat podobně, ale mají velmi odlišnou funkci.
                 error_code: "hra = {ask} 'Chceš si zahrát hru?'\nčas = {ask} 'Máš čas si hrát?'\n{if} hra {is} 'ano' {or} čas {is} 'ano'\n    {print} 'Pojďme si zahrát!'"
-                solution_text: V tomto případě má člověk odpovědět ano na obě otázky, proto použijte `and`.
+                solution_text: V tomto případě má člověk odpovědět ano na obě otázky, proto použijte `{and}`.
                 solution_code: "hra = {ask} 'Chceš si zahrát hru?'\nčas = {ask} 'Máš čas si hrát?'\n{if} hra {is} 'ano' {and} čas {is} 'ano'\n    {print} 'Pojďme si zahrát!'"
         -   title: Žáci píšou neúplné řádky s `{or}`
             example:

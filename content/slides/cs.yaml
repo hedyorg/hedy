@@ -112,7 +112,7 @@ levels:
 
                 `{print}` slouží k zobrazení textu na obrazovce.
             code: '{print} Zobraz tento text na obrazovce'
-            notes: Nejprve nechte žáky odhadnout, jaký bude výstup. Potom kód spusťte a ukažte, co se stane při spuštění příkazu `print`.
+            notes: Nejprve nechte žáky odhadnout, jaký bude výstup. Potom kód spusťte a ukažte, co se stane při spuštění příkazu `{print}`.
         3:
             header: Klíčové slovo {print}
             text: |-
@@ -144,7 +144,7 @@ levels:
                 {print} Ahoj!
                 {ask} Jak se jmenuješ?
                 {print} ahoj {answer}
-            notes: Aby počítač zadanou odpověď zopakoval, použijete klíčové slovo `answer`.
+            notes: Aby počítač zadanou odpověď zopakoval, použijete klíčové slovo `{answer}`.
         6:
             header: Programování!
             text: Tady najdeš seznam dobrodružství.
@@ -282,7 +282,7 @@ levels:
                 Modrý rámeček ve výstupní části ukazuje použité proměnné a jejich hodnoty.
         4:
             header: Příkaz `{is}`
-            text: K vytvoření proměnné nebo nastavení její hodnoty používáme příkaz `{is}`. Název proměnné píšeme před `{is}` a příkaz `{ask}` za něj. Název proměnné si můžeme zvolit, nemusí to být `answer`.
+            text: K vytvoření proměnné nebo nastavení její hodnoty používáme příkaz `{is}`. Název proměnné píšeme před `{is}` a příkaz `{ask}` za něj. Název proměnné si můžeme zvolit, nemusí to být `{answer}`.
             code: |-
                 jméno {is} {ask} Jak se jmenuješ?
                 {print} Ahoj jméno
@@ -298,7 +298,7 @@ levels:
             notes: Zeptejte se žáků, zda je napadá další proměnná, například výška, velikost bot nebo barva vlasů. Přidejte do kódu vlastní příklady.
         6:
             header: Více proměnných
-            text: Díky proměnným už nejsme omezeni na jednu `answer`. Můžeme používat více proměnných.
+            text: Díky proměnným už nejsme omezeni na jednu `{answer}`. Můžeme používat více proměnných.
             code: |-
                 jméno {is} Hedy
                 věk {is} 15
@@ -1326,7 +1326,7 @@ levels:
                 předchozí_skok = 'Už máš za sebou seskok padákem, ' jméno '?'
                 {if} předchozí_skok  ne
                 {print} 'Žádné obavy, dostaneš další bezpečnostní pokyny v místnosti 13'
-                {add} jméno {to} lidé_pro_další_poučení
+                {add} jméno {to_list} lidé_pro_další_poučení
                 {else}
                 {print} 'To je zábava!'
                 {print} 'Děkujeme všem za vyplnění bezpečnostních otázek. Užijte si seskok!'

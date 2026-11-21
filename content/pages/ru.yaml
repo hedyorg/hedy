@@ -779,7 +779,7 @@ teacher-guide:
                     time = {ask} 'Do you have time to play?'
                     {if} game {is} 'yes' {or} time {is} 'yes'
                         {print} 'Lets play!'
-                solution_text: В этом случае человек должен ответить «да» на оба вопроса, поэтому следует использовать `and`.
+                solution_text: В этом случае человек должен ответить «да» на оба вопроса, поэтому следует использовать `{and}`.
                 solution_code: |-
                     game = {ask} 'Do you want to play a game?'
                     time = {ask} 'Do you have time to play?'

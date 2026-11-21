@@ -8,11 +8,11 @@ levels:
         exercises:
         -   contents: |-
                 ### Exercises
-                A computer does not just do something by itself. You must always give a computer a task. Such a task is called a command. To print out code, we use the command `print`.
+                A computer does not just do something by itself. You must always give a computer a task. Such a task is called a command. To print out code, we use the command `{print}`.
 
                 ### Printing text
-                On the screen you've just seen the `print` command.
-                A `print` command prints a word, when it's between quotation marks. For example `print hello`.
+                On the screen you've just seen the `{print}` command.
+                A `{print}` command prints a word, when it's between quotation marks. For example `{print} hello`.
                 #### Exercise 1: Predict the output
             type: text
         -   code: "print Hello everybody"
@@ -51,7 +51,7 @@ levels:
 
                 ### Showing input
 
-                The ask command saves the answer, but it doesn't show it yet. For that you'll need the `echo` command. `echo` will show the answer at the end of the sentence.
+                The ask command saves the answer, but it doesn't show it yet. For that you'll need the `{echo}` command. `{echo}` will show the answer at the end of the sentence.
                 Like this:
 
                 ```hedy
@@ -103,20 +103,20 @@ levels:
         -   contents: |-
                 #### Exercise 5: Commands
 
-                We have learned 3 commands so far: `print`, `ask` and `echo`. What so they do? Explain in your own words.
+                We have learned 3 commands so far: `{print}`, `{ask}` and `{echo}`. What so they do? Explain in your own words.
             type: text
         -   answer: "Shows text on the screen."
             lines: 1
             type: define
-            word: the `print` command
+            word: the `{print}` command
         -   answer: "Asks the user for input."
             lines: 1
             type: define
-            word: the `ask` command
+            word: the `{ask}` command
         -   answer: "Repeats the user's input."
             lines: 1
             type: define
-            word: the `echo` command
+            word: the `{echo}` command
     2:
         intro: |-
             ### Variables
@@ -130,8 +130,8 @@ levels:
             contents: |-
                 ### Using variables
 
-                You've just seen the `is` command on the screen.
-                An `is` command saves something in the computer memory and gives it a name. We call this a variable.
+                You've just seen the `{is}` command on the screen.
+                An `{is}` command saves something in the computer memory and gives it a name. We call this a variable.
                 What is saved in the variable is called the value of the variable.
             type: text
         -   contents: |-
@@ -168,7 +168,7 @@ levels:
                 1. Mark the place where a variable is being set
                 2. Mark the place where a variable is being used
                 3. Draw a line between these two places
-                4. Write the value (what comes after `is`) in the place where the variable is being used.
+                4. Write the value (what comes after `{is}`) in the place where the variable is being used.
             type: text
         -   code: |-
                 name is Mo
@@ -216,16 +216,16 @@ levels:
             contents: |-
                 ### Asking for input
 
-                Just saving text isn't very useful. In level 1 we've seen the code `ask`.
+                Just saving text isn't very useful. In level 1 we've seen the code `{ask}`.
 
-                From now on you are allowed to combine `ask` with `is`, like this:
+                From now on you are allowed to combine `{ask}` with `{is}`, like this:
             type: text
         -   code: |-
                 name is ask What is your name?
                 print so you are called: name
             contents: |-
                 ### Showing input
-                With variables, we do not need `echo` anymore. Just use `print` to show the answer.
+                With variables, we do not need `{echo}` anymore. Just use `{print}` to show the answer.
             type: text
         -   contents: |-
                 If someone called Olivia would use this code, the output would be: `so you are called: Olivia`
@@ -256,7 +256,7 @@ levels:
             lines: 1
             type: define
             word: value
-        -   answer: "You can set a variable with an `is` command"
+        -   answer: "You can set a variable with an `{is}` command"
             lines: 1
             type: define
             word: setting
@@ -266,16 +266,16 @@ levels:
             word: interactive
         -   contents: |-
                 #### Exercise 6: Commands
-                We have learned new commands: `is` and `is ask` together. What to they do? Explain in your own words.
+                We have learned new commands: `{is}` and `{is} {ask}` together. What to they do? Explain in your own words.
             type: text
-        -   answer: "Saving a value (after the `is`) in a variable (before the `is`)"
+        -   answer: "Saving a value (after the `{is}`) in a variable (before the `{is}`)"
             lines: 1
             type: define
-            word: the `is` command
+            word: the `{is}` command
         -   answer: "Asking the user for input and saving it in a variable."
             lines: 1
             type: define
-            word: the `is ask` command
+            word: the `{is} {ask}` command
     3:
         intro: |-
             ### Lists and randomness
@@ -289,8 +289,8 @@ levels:
                 print Today I will visit friends at random
             contents: |-
                 ### Variables
-                You have just seen the `is` command being used with a list.
-                Just like with a regular variable, we use `is` to save something.
+                You have just seen the `{is}` command being used with a list.
+                Just like with a regular variable, we use `{is}` to save something.
             type: text
         -   contents: |-
                 #### Exercise 1: Mark the correct piece of the code
@@ -314,7 +314,7 @@ levels:
                 1. Mark the place where a variable is being set
                 2. Mark the place where a variable is being used
                 3. Draw a line between these two places
-                4. Pick a random item of the list when `at` `random` is used.
+                4. Pick a random item of the list when `{at}` `{random}` is used.
             type: text
         -   code: |-
                 teachers is Hermans, Merbis, Bagci, Senkal
@@ -448,13 +448,13 @@ levels:
             word: add
         -   contents: |-
                 #### Exercise 7: Commands
-                The `is` command has changed in this level and we have learned some new commands.
+                The `{is}` command has changed in this level and we have learned some new commands.
                 What do they do? Explain in your own words.
             type: text
         -   answer: "Saving the value (before the is) in a variable or list (after the is)"
             lines: 1
             type: define
-            word: "The `is` command (Mind: `is` can now do multiple things!)"
+            word: "The `{is}` command (Mind: `{is}` can now do multiple things!)"
         -   answer: "Adds an item to a list. It looks like this: add item to list"
             lines: 1
             type: define
@@ -466,7 +466,7 @@ levels:
         -   answer: "Picks a random item from a list."
             lines: 1
             type: define
-            word: "The `at random` command "
+            word: "The `{at} {random}` command "
         -   contents: |-
                 #### What's your opinion?
             type: text
@@ -497,7 +497,7 @@ levels:
                 ### Quotation marks
 
                 We have learned to use quotation marks, when a text needs to appear literally that way on the screen.
-                We use quotation marks with `print` and `ask`.
+                We use quotation marks with `{print}` and `{ask}`.
             type: text
         -   contents: |-
                 #### Exercise 1: Finish the code.
@@ -566,7 +566,7 @@ levels:
             type: MC-code
         -   contents: |-
                 #### Ask
-                Remember to use quotation marks after `ask` as well!
+                Remember to use quotation marks after `{ask}` as well!
 
                 #### Exercise 3: Error?
                 Read the programs carefully! Which ones are correct?
@@ -627,11 +627,11 @@ levels:
         -   answer: "Empties the screen"
             lines: 1
             type: define
-            word: the `clear` command
+            word: the `{clear}` command
         -   answer: "changes the color of the turtle"
             lines: 1
             type: define
-            word: the `color` command
+            word: the `{color}` command
         -   contents: "#### What do you think?"
             type: text
         -   text: "Which exercise did you like best this level?"
@@ -657,8 +657,8 @@ levels:
                 if friend is Yasmine print "Hi Yasmine!" else print "No, I didn't mean you!"
             contents: |-
                 ### Making choices
-                Up until now Hedy would always run each and every line of code. From now on you can let it only run certain lines in certain cases, with an `if`.
-                The code that follows behind the `if` is called a conditional.
+                Up until now Hedy would always run each and every line of code. From now on you can let it only run certain lines in certain cases, with an `{if}`.
+                The code that follows behind the `{if}` is called a conditional.
                 In this example the conditional is `friend is Yasmine`.
             type: text
         -   contents: |-
@@ -717,13 +717,13 @@ levels:
         -   code: |-
                 age is ask 'How old are you?'
                 if age is 16 print 'Right on!' else 'You are too young!'
-            answer: "Incorrect. There is no `print` after `else`"
+            answer: "Incorrect. There is no `{print}` after `{else}`"
             options: ["Correct", "Incorrect"]
             type: MC-code
         -   code: |-
                 animal is ask 'What kind of animal is that?'
                 if animal is llama print 'Bahhhhh'
-            answer: "Correct! You don't always need an `else`"
+            answer: "Correct! You don't always need an `{else}`"
             options: ["Correct", "Incorrect"]
             type: MC-code
         -   code: "print \"I'm so happy!\""
@@ -733,7 +733,7 @@ levels:
         -   code: |-
                 if name Hedy
                 print 'Programming is fun!'
-            answer: "Incorrect. There needs to be an `is` in the first line."
+            answer: "Incorrect. There needs to be an `{is}` in the first line."
             options: ["Correct", "Incorrect"]
             type: MC-code
         -   code: |-
@@ -751,7 +751,7 @@ levels:
         -   contents: |-
                 #### Exercise 4: Predict the output
                 What will the output of these programs be?
-                Please note! Sometimes `random` is used in a program. You can choose a random item yourself.
+                Please note! Sometimes `{random}` is used in a program. You can choose a random item yourself.
                 This means multiple answers could be correct!
             type: text
         -   code: |-
@@ -788,7 +788,7 @@ levels:
                 #### Exercise 5: Programming words
                 We have learned some new programming words this lesson! Explain them in your own words.
             type: text
-        -   answer: "Something that is true or false. It follows behind the `if`."
+        -   answer: "Something that is true or false. It follows behind the `{if}`."
             lines: 1
             type: define
             word: conditional
@@ -799,11 +799,11 @@ levels:
         -   answer: "Decides which code will be run. If the conditional is true, the code behind it will be run."
             lines: 1
             type: define
-            word: the `if` command
+            word: the `{if}` command
         -   answer: "Decides which code will be run. If the conditional is false, the code behind it will be run."
             lines: 1
             type: define
-            word: the `else` command
+            word: the `{else}` command
         -   contents: |-
                 #### What do you think?
             type: text
@@ -872,10 +872,10 @@ levels:
             type: output
         -   contents: |-
                 ### Exercise 2: Maths with ask and variables
-                You can also save a sum in a variable, compare it with an `ask` and run it with an `if`.
+                You can also save a sum in a variable, compare it with an `{ask}` and run it with an `{if}`.
                 We'll practice that now.
                 Predict the output of these programs.
-                When `ask` and `random` are used, you can make up your own answers.
+                When `{ask}` and `{random}` are used, you can make up your own answers.
             type: text
         -   code: |-
                 sum = 2 * 5
@@ -1148,7 +1148,7 @@ levels:
             type: output
         -   contents: |
                 ## If and else
-                When using `if` and `else` you also need indentation. This way you can execute multiple lines when a condition is true or false.
+                When using `{if}` and `{else}` you also need indentation. This way you can execute multiple lines when a condition is true or false.
 
                 ### Exercise 3: Predict the output
 
@@ -1225,7 +1225,7 @@ levels:
             type: MC-code
         -   contents: |-
                 #### Exercise 5: Write the code
-                Take a good look at the output and write a matching code for it. Use `repeat` if possible.
+                Take a good look at the output and write a matching code for it. Use `{repeat}` if possible.
 
                 Mind the amount of lines your code needs!
             type: text
