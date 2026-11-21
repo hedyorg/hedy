@@ -5,6 +5,6 @@ it('Is able to click on forgot password', () => {
   cy.getDataCy('forgot_password_button').click();
 
   cy.location().should((loc) => {
-    expect(loc.pathname).equal(Cypress.env('recover_page'));
+    expect(loc.pathname).equal(Cypress.expose('recover_page'));
   })
 })
