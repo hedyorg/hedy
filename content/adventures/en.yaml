@@ -6133,6 +6133,27 @@ adventures:
                         more = {input}('Would you like to order anything else?')
                     {print}('Thank you!')
                     ```
+    recreate_program:
+        name: recreate it!
+        default_save_name: Recreate
+        description: Run a hidden program and recreate it
+        levels:
+            6:
+                story_text: |
+                    ### Exercise
+                    Click the run button to try out this program. You can't see its code, so it is up to you: find out what the program does and recreate it in your own editor!
+
+                    **Tip** Run the program twice: once answering `yes` and once answering `no`. What changes in the output?
+                example_code: |
+                    ```
+                    name {is} {ask} 'What is your name?'
+                    answer {is} {ask} 'Do you like ice cream? yes or no'
+                    {if} answer {is} yes
+                    {print} name ' likes ice cream!'
+                    {else}
+                    {print} name ' does not like ice cream.'
+                    ```
+                show_output: 'True'
     rock:
         name: rock, paper, scissors
         default_save_name: rock
