@@ -397,11 +397,16 @@ export interface InitializeViewProgramPageOptions {
   readonly level: number;
   readonly lang: string;
   readonly code: string;
+  readonly ignore_debug_line?: boolean;
 }
+
+/** Whether get_active_and_trimmed_code() ignores the debug line in local storage. */
+let ignoreDebugLine = false;
 
 export function initializeViewProgramPage(options: InitializeViewProgramPageOptions) {
   theLevel = options.level;
   theLanguage = options.lang;
+  ignoreDebugLine = !!options.ignore_debug_line;
 
   // We need to enable the main editor for the program page as well
   const dir = $('body').attr('dir');
@@ -1231,8 +1236,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
     var storage = window.localStorage;
-    var debug = storage.getItem("debugLine")
-    if (storage.getItem("prompt-" + prompt) == null) {
+    var debug = ignoreDebugLine ? null : storage.getItem("debugLine")
+    if (ignoreDebugLine || storage.getItem("prompt-" + prompt) == null) {
       Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
       document.onkeydown = null;
       $('#keybinding_modal').hide();
@@ -1398,7 +1403,7 @@ function initializeSpeech() {
 export function get_active_and_trimmed_code() {
   theGlobalEditor.trimTrailingSpace();
   const storage = window.localStorage;
-  const debugLine = storage.getItem("debugLine");
+  const debugLine = ignoreDebugLine ? null : storage.getItem("debugLine");
   return theGlobalEditor.getActiveContents(debugLine);
 }
 

@@ -17,6 +17,9 @@ export interface Adventure {
   /** Example code for the introductory paragraph */
   example_code?: string;
 
+  /** The example program is hidden; it can only be run (in an iframe) to see its output */
+  output_only?: boolean;
+
   /** Image to go along with the tab (unused) */
   image?: string | null;
 

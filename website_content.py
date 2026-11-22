@@ -151,6 +151,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'music',
         'in_command',
         'restaurant',
+        'recreate_program',
         'fortune',
         'debugging',
         'hospital',

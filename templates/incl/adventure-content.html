@@ -8,7 +8,7 @@
 
  <div class="turn-pre-into-ace show-copy-button text-adventure-copy" {% if adventure.level %}data-level="{{adventure.level}}"{% endif %}>
               <div class="
-                  {% if adventure.example_code or adventure_content_topright_include %}lg:grid lg:grid-cols-2 gap-4{%endif%}
+                  {% if adventure.example_code or adventure.output_only or adventure_content_topright_include %}lg:grid lg:grid-cols-2 gap-4{%endif%}
                   {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}
                   ">
                   {% if adventure_content_topright_include %}
@@ -25,7 +25,11 @@
                           {{ adventure.text|commonmark }}
                         {% endif %}
                     </div>
-                  {% if adventure.example_code %}
+                  {% if adventure.output_only %}
+                      <div class="p-2 ltr:ml-2 rtl:mr-2">
+                        {% include "incl/adventure-output-runner.html" %}
+                      </div>
+                  {% elif adventure.example_code %}
                       <div class="p-2 ltr:ml-2 rtl:mr-2">
                         {% if content_is_already_html %}
                           {{ adventure.example_code|safe }}
