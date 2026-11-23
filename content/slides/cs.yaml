@@ -455,7 +455,7 @@ levels:
         7:
             header: Přidat do
             text: |-
-                Co do seznamu přidáš, můžeš vybrat přímo. Nebo spoj `{add}` `{to}` s `{ask}`.
+                Co do seznamu přidáš, můžeš vybrat přímo. Nebo spoj `{add}` `{to_list}` s `{ask}`.
                 Hráč tak může rozhodnout, co se do seznamu přidá, a program bude interaktivní.
             code: |-
                 zvířata {is} pes, kočka, klokan
@@ -468,7 +468,7 @@ levels:
         8:
             header: Odebrání ze seznamu
             text: |-
-                Opakem `{add}` `{to}` je `{remove}` `{from}`.
+                Opakem `{add}` `{to_list}` je `{remove}` `{from}`.
                 Tento příkaz odebere položku ze seznamu.
             code: |-
                 zvířata {is} pes, kočka, klokan
@@ -1326,7 +1326,7 @@ levels:
                 předchozí_skok = 'Už máš za sebou seskok padákem, ' jméno '?'
                 {if} předchozí_skok  ne
                 {print} 'Žádné obavy, dostaneš další bezpečnostní pokyny v místnosti 13'
-                {add} jméno {to} lidé_pro_další_poučení
+                {add} jméno {to_list} lidé_pro_další_poučení
                 {else}
                 {print} 'To je zábava!'
                 {print} 'Děkujeme všem za vyplnění bezpečnostních otázek. Užijte si seskok!'

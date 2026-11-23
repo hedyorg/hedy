@@ -276,9 +276,9 @@ teacher-guide:
         -   title: Žáci se snaží použít add/remove bez seznamu
             example:
                 error_text: V příkladu níže není „jména“ seznam, ale proměnná. Nelze do ní nic přidat.
-                error_code: "jména {is} Jake\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to} jména\n{print} jména {at} {random}"
+                error_code: "jména {is} Jake\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to_list} jména\n{print} jména {at} {random}"
                 solution_text: Nejprve musí existovat seznam. Přidejte proto druhé jméno, například Amy, aby se z proměnné jména stal seznam. Pokud Amy v seznamu nechcete, můžete ji pak odstranit pomocí remove.
-                solution_code: "jména {is} Jake, Amy\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to} jména\n{print} jména {at} {random}"
+                solution_code: "jména {is} Jake, Amy\ntvoje_jméno {is} {ask} Kdo jsi?\n{add} tvoje_jméno {to_list} jména\n{print} jména {at} {random}"
         -   title: Žáci zapomínají používat `{to}`/`{from}` v `{add}`/`{remove}`
             example:
                 error_text: Bez to/from příkaz add/remove nefunguje.
@@ -294,7 +294,7 @@ teacher-guide:
             Novinky v této úrovni:
 
             * Vytvoření seznamu pomocí `{is}` a náhodný výběr položky pomocí `{at} {random}`
-            * Přidání položky do seznamu pomocí `{add} {to}`
+            * Přidání položky do seznamu pomocí `{add} {to_list}`
             * Odebrání položky ze seznamu pomocí `{remove} {from}`
     -   level: '4'
         sections:
@@ -550,13 +550,13 @@ teacher-guide:
                     {if} barva {is} modrá {or} barva {is} zelená
                         {print} 'Krásná!'
         concepts_and_changes: |-
-            V této úrovni znovu rozšiřujeme možnosti {if} a {repeat}. V předchozí úrovni se žáci naučili používat více řádků za {repeat, {if}, {elif} nebo {else}.
-            Teď se naučí také *vnoření*: vložit {if} nebo {repeat} dovnitř jiného {if} nebo {repeat}. Naučí se i dva nové příkazy: {and} a {or}.
+            V této úrovni znovu rozšiřujeme možnosti `{if}` a `{repeat}`. V předchozí úrovni se žáci naučili používat více řádků za `{repeat}`, `{if}`, `{elif}` nebo `{else}`.
+            Teď se naučí také *vnoření*: vložit `{if}` nebo `{repeat}` dovnitř jiného `{if}` nebo `{repeat}`. Naučí se i dva nové příkazy: `{and}` a `{or}`.
             Díky tomu budou mít více možností, jak psát rozmanité programy.
 
             Novinky v této úrovni:
-            * Vnoření {if} a {repeat}
-            * Použití {and} a {or} za {if}
+            * Vnoření `{if}` a `{repeat}`
+            * Použití `{and}` a `{or}` za `{if}`
     -   level: '11'
         sections:
         -   title: Žáci nepoužívají příkaz `{for}` správně
@@ -572,10 +572,10 @@ teacher-guide:
                 solution_text: Za příkazem for použijte odsazení.
                 solution_code: "zvířata {is} pes, kočka, sliznatá ryba\n{for} zvíře {in} zvířata\n  {print} 'Miluju tohle zvíře. Je to ' zvíře"
         concepts_and_changes: |-
-            V této úrovni se žáci seznámí s cykly s příkazem {for}.
+            V této úrovni se žáci seznámí s cykly s příkazem `{for}`.
 
             Novinky v této úrovni:
-            * Cykly s příkazem {for}
+            * Cykly s příkazem `{for}`
     -   level: '12'
         sections:
         -   title: Žáci vytvoří funkci, ale zapomenou ji zavolat.
@@ -587,14 +587,14 @@ teacher-guide:
         -   title: Žáci mají potíže s odsazením.
             example:
                 error_text: "Odsazení je pro mnoho žáků stále náročné"
-                error_code: "{define} funkce\n{print} 'Uvnitř funkce použij odsazení.'\n{if} použij_if {is} 'ano'\n{print} 'Nezapomeň na odsazení ani u cyklů'"
+                error_code: "{define} funkce\n{print} 'Uvnitř funkce použij odsazení.'\n{if} použij_if {is} ano\n{print} 'Nezapomeň na odsazení ani u cyklů'"
                 solution_text: 'Uvnitř funkce použijte správné odsazení'
-                solution_code: "{define} funkce\n    {print} 'Uvnitř funkce použij odsazení.'\n    {if} použij_také_if {is} 'ano'\n        {print} 'Nezapomeň na odsazení ani u cyklů'"
+                solution_code: "{define} funkce\n    {print} 'Uvnitř funkce použij odsazení.'\n    {if} použij_také_if {is} ano\n        {print} 'Nezapomeň na odsazení ani u cyklů'"
         concepts_and_changes: |-
             V této poslední úrovni Hedy Advanced se žáci naučí používat základní funkce.
 
             Novinky v této úrovni:
-            * Použití základních funkcí pomocí {define} a {call}
+            * Použití základních funkcí pomocí `{define}` a `{call}`
     -   level: '13'
         sections:
         -   title: Žáci zapomínají používat novou syntaxi
@@ -663,10 +663,10 @@ teacher-guide:
 
 
             Novinky v této úrovni:
-            * Vypsání textu se syntaxí Pythonu: `{print}('Ahoj světe!')
-            * Vypsání textových řetězců a proměnných společně, například: `{print}('Ahoj, ', jméno, '!')
+            * Vypsání textu se syntaxí Pythonu: `{print}('Ahoj světe!')`
+            * Vypsání textových řetězců a proměnných společně, například: `{print}('Ahoj, ', jméno, '!')`
             * Pokládání otázek pomocí `{input}`
-            * Dvojtečky za příkazy {if}
+            * Dvojtečky za příkazy `{if}`
             * Použití operátorů: < > == != <= >=
     -   level: '14'
         sections:
@@ -703,8 +703,8 @@ teacher-guide:
 
             Novinky v této úrovni:
             * Práce se seznamy
-            * Kombinování seznamů s {for}, {if} a {random}
-            * Opakování pomocí {for} i {range}(1,10)
+            * Kombinování seznamů s `{for}`, `{if}` a `{random}`
+            * Opakování pomocí `{for} i {in} {range}(1,10)`
     -   level: '15'
         sections:
         -   title: Žáci mají potíže se správnou syntaxí a odsazením funkce
@@ -733,12 +733,12 @@ teacher-guide:
                     číslo_pokoje = přiděl_pokoj(oblíbené_číslo)
                     print('Číslo tvého pokoje je ', číslo_pokoje)
         concepts_and_changes: |-
-            Tato úroveň se zaměřuje na funkce. V Hedy Advanced se žáci naučili používat základní funkci. Teď se naučí nejen syntaxi funkcí v Pythonu, ale také jejich argumenty a {return} {value}.
+            Tato úroveň se zaměřuje na funkce. V Hedy Advanced se žáci naučili používat základní funkci. Teď se naučí nejen syntaxi funkcí v Pythonu, ale také jejich argumenty a `{return} {value}`.
 
             Novinky v této úrovni:
             * Použití funkce způsobem Pythonu
             * Použití argumentů ve funkci
-            * Použití {return} {value}
+            * Použití `{return} {value}`
     -   level: '16'
         sections:
         -   title: Žáci zapomínají na odsazení v cyklu while
@@ -754,11 +754,11 @@ teacher-guide:
                 solution_text: 'Toto je správný kód:'
                 solution_code: "# Program ukončíš červeným tlačítkem Zastavit program"
         concepts_and_changes: |-
-            V této poslední úrovni Hedy se žáci naučí používat cyklus {while} a dál si procvičí novou syntaxi.
+            V této poslední úrovni Hedy se žáci naučí používat cyklus `{while}` a dál si procvičí novou syntaxi.
             Po této úrovni jsou připraveni pokračovat v programování ve „skutečných“ překladačích Pythonu.
 
             Novinky v této úrovni:
-            * Cyklus {while}
+            * Cyklus `{while}`
 -   title: Jak na to...
     key: manual
     subsections:
@@ -824,6 +824,13 @@ teacher-guide:
         text: |-
             Na stránce „Pro učitele“ klikněte na „Dobrodružství“ a potom na „Procházet veřejná dobrodružství“. Najdete tu všechna veřejná dobrodružství. Chcete některé z nich použít pro své žáky?
             Klikněte na „Vytvořit kopii“ a kopie dobrodružství se přidá mezi vaše vlastní dobrodružství. Můžete ji používat stejně jako dobrodružství, které vytvoříte sami.
+    -   title: Co jsou Hedy Specials?
+        text: |-
+            Hedy Specials jsou tematická veřejná dobrodružství vytvořená týmem Hedy. Najdete mezi nimi dobrodružství na různá témata, například Halloween, svátky nebo narozeniny Hedy.
+            Protože byste třeba v létě nechtěli používat halloweenské dobrodružství, nejsou tato dobrodružství součástí výchozího seznamu pro vaše žáky. Kdykoli je ale můžete přidat mezi dostupná dobrodružství.
+            Dobrodružství Hedy Specials najdete v části Pro učitele > Dobrodružství > Veřejná dobrodružství. Vyhledejte „Hedy Specials“ a klikněte na „Vytvořit kopii“. Kopie dobrodružství se přidá mezi vaše vlastní dobrodružství. Můžete ji používat stejně jako dobrodružství, které jste vytvořili sami.
+            Hedy Specials jsou dostupné v nizozemštině a angličtině. Můžete je ale přeložit do svého jazyka.
+            O aktuálních dobrodružstvích Hedy Specials vás budeme informovat prostřednictvím našeho <a href="https://hedy.org/subscribe" target="_blank"> zpravodaje</a>.
     -   title: Jak finančně přispět na Hedy
         text: Uvítáme vaši pomoc s dalším provozem Hedy. Peníze používáme na provoz serveru, údržbu a vylepšování webu Hedy. Vážíme si každého příspěvku! <a href="https://donate.stripe.com/28EcMZ1xJ5O747V8gR1Jm00" target="_blank">Klikněte sem a přispějte v eurech </a> nebo <a href="https://donate.stripe.com/00w7sF2BNgsLawjfJj1Jm02" target="_blank">klikněte sem a přispějte v amerických dolarech</a>. Děkujeme!
     -   title: Jak týmu Hedy nahlásit chybu nebo předat návrh
