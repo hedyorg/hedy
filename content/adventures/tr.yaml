@@ -36,19 +36,40 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Bu 2. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Ana karakterinizin adı artık cümle içinde herhangi bir yerde olabilir.
+                    2. seviyede hikayeni daha eğlenceli hale getirebilirsin. Ana karakterinin adı artık cümlenin herhangi bir yerinde olabilir.
 
-                    Bunun için birazcık daha fazla programlamanız gerekiyor. İlk önce ana karakterinize isim vermelisiniz.
+                    Bunun için biraz daha fazla programlaman gerekiyor. Önce ana karakterine bir ad vermelisin.
 
-                    Daha sonra bu ismi cümle içinde herhangi bir yere koyabilirsiniz.
+                    Sonra bu adı cümlenin herhangi bir yerine koyabilirsin.
                 example_code: |-
                     ```
                     isim {is} {ask} Ana karakterin adı nedir?
                     {print} isim şimdi ormanda koşacak
                     {print} isim biraz korkuyor
-                    {print} Aniden çılgın bir ses duydu....
+                    {print} Aniden garip bir ses duyuyor...
                     {sleep}
                     {print} isim buranın perili bir orman olmasından korkuyor
+                    ```
+                story_text_2: |
+                    ### Alıştırma
+                    Şimdi önceki seviyede yazdığın kendi hikayene değişkenler ekleme zamanı.
+                    Seviye 1'deki hikaye macerana git ve kodu kopyala. Kodu bu seviyedeki girdi ekranına yapıştır.
+
+                    Kod bu seviyede çalışmayacak, çünkü henüz değişken kullanmadın.
+                    Bu seviyede öğrendiğin gibi değişkenleri ve `{ask}` komutuyla birlikte `{is}` kullanarak kodu düzelt.
+
+                    **Ek Görev** Hikayende gerilimi artırmak için koduna bir `{sleep}` komutu ekle.
+                answer_code: |
+                    ```
+                    {print} Bir gün hayvanat bahçesine gittim
+                    ilk_hayvan {is} {ask} İlk önce hangi hayvanı gördüm?
+                    {print} İlk önce bir ilk_hayvan gördüm
+                    {print} Sonra bir penguen gördüm
+                    {print} Öğle yemeği yiyordu
+                    yemek {is} {ask} Penguen ne yiyordu?
+                    {print} Penguen şunu yiyordu...
+                    {sleep} 3
+                    {print} yemek
                     ```
             3:
                 story_text: |
@@ -474,6 +495,35 @@ adventures:
                     {print} Hobilerin neler?
                     {print} Hobilerin:
                     ```
+            2:
+                story_text: |-
+                    Hata ayıklama macerasına hoş geldin. Bir kodda hata ayıklamak, koddaki hatalardan kurtulmak demektir.
+                    Yani bu hata ayıklama maceralarında sana henüz çalışmayan bir kod vereceğiz.
+                    Neyin yanlış olduğunu bulup hataları düzeltmen gerekecek.
+
+                    ### Alıştırma
+                    Bu kodda hata ayıkla. Bol şans!
+                example_code: |
+                    **Dikkat! Bu kodda hata ayıklamak gerekiyor!**
+                    ```
+                    tatil_yeri {ask} Tatile nereye gidiyorsunuz?
+                    {print} tatl_yeri uçağı saat 15.00'te kalkıyor.
+                    {ask} Bagajınızı teslim ettiniz mi?
+                    {answer}
+                    {print} Biniş kartınızı yazdırayım.
+                    {sleep}
+                    Buyurun! İyi yolculuklar!
+                    ```
+                answer_code: |-
+                    ```
+                    tatil_yeri {is} {ask} Tatile nereye gidiyorsunuz?
+                    {print} tatil_yeri uçağı saat 15.00'te kalkıyor.
+                    bagaj {is} {ask} Bagajınızı teslim ettiniz mi?
+                    {print} bagaj
+                    {print} Biniş kartınızı yazdırayım.
+                    {sleep}
+                    {print} Buyurun! İyi yolculuklar!
+                    ```
     dice:
         name: Zar
         default_save_name: Zar
@@ -885,34 +935,46 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Bu perili evde canavarlarınızı emojilerle seçebilirsiniz. Tabii ki yine kelimeleri de kullanabilirsiniz.
+                    Bu perili evde canavarlarını emojilerle seçebilirsin. Tabii ki kelimeleri de kullanabilirsin.
                 example_code: |
                     ```
                     canavar_1 {is} 👻
                     canavar_2 {is} 🤡
                     canavar_3 {is} 👶
-                    {print} Perili eve giriyorsunuz.
-                    {print} Aniden bir canavar_1 görüyorsunuz
-                    {print} Diğer odaya koşuyorsunuz...
-                    {print} Ama canavar_2 sizi orada bekliyor!
-                    {print} Olamaz! Çabuk mutfağa gidin.
-                    {print} Ama siz içeri girerken canavar_3 size saldırıyor!
+                    {print} Perili eve giriyorsun.
+                    {print} Aniden bir canavar_1 görüyorsun
+                    {print} Diğer odaya koşuyorsun...
+                    {print} Ama canavar_2 seni orada bekliyor!
+                    {print} Olamaz! Çabuk mutfağa git.
+                    {print} Ama içeri girerken canavar_3 sana saldırıyor!
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Yukarıdaki örnekte canavarlar önceden belirlenmiştir. Yani kodunuzu her çalıştırdığınızda çıktı aynı olacaktır.
-                    Perili evi etkileşimli hale getirmek ve oyuncuların karşılaştıkları canavarları seçmelerini sağlamak için `{ask}` komutları ekleyebilir misiniz?
+                    Yukarıdaki örnekte canavarlar önceden belirlenmiş. Yani kodunu her çalıştırdığında çıktı aynı oluyor.
+                    Perili evi etkileşimli hale getirmek ve oyuncuların karşılaştıkları canavarları seçmelerini sağlamak için `{ask}` komutları ekleyebilir misin?
                 example_code_2: |
                     ```
                     canavar_1 {is} _
                     canavar_2 {is} _
                     canavar_3 {is} _
-                    {print} Perili eve giriyorsunuz.
-                    {print} Aniden bir canavar_1 görüyorsunuz
-                    {print} Diğer odaya koşuyorsunuz...
-                    {print} Ama canavar_2 sizi orada bekliyor!
-                    {print} Olamaz! Çabuk mutfağa gidin.
-                    {print} Ama siz içeri girerken canavar_3 size saldırıyor!
+                    {print} Perili eve giriyorsun.
+                    {print} Aniden bir canavar_1 görüyorsun
+                    {print} Diğer odaya koşuyorsun...
+                    {print} Ama canavar_2 seni orada bekliyor!
+                    {print} Olamaz! Çabuk mutfağa git.
+                    {print} Ama içeri girerken canavar_3 sana saldırıyor!
+                    ```
+                answer_code: |
+                    ```
+                    canavar_1 {is} {ask} Hangi canavar seni biraz korkutur?
+                    canavar_2 {is} {ask} Başka hangi canavardan korkarsın?
+                    canavar_3 {is} {ask} Aklına gelen en korkunç canavar hangisi?
+                    {print} Perili eve giriyorsun.
+                    {print} Aniden bir canavar_1 görüyorsun
+                    {print} Diğer odaya koşuyorsun...
+                    {print} Ama canavar_2 seni orada bekliyor!
+                    {print} Olamaz! Çabuk mutfağa git.
+                    {print} Ama içeri girerken canavar_3 sana saldırıyor!
                     ```
             3:
                 story_text: |
@@ -1129,7 +1191,25 @@ adventures:
                     ```
                     isim {is} Hedy
                     yaş {is} 15
-                    {print} isim yaş yaşındadır
+                    {print} isim yaş yaşında
+                    ```
+                story_text: |
+                    ## Değişkenlere değer atamak
+                    `{ask}` ile oyuncudan girdi alarak değişkenlere değer atamayı öğrendin. Peki değişkenlere kendin de değer atayabileceğini biliyor muydun?
+                story_text_2: |
+                    ### Alıştırma
+                    6 değişkene değer atayarak programı bitir.
+                example_code_2: |
+                    ```
+                    isim {is} _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} Benim adım isim ve yaş yaşındayım.
+                    {print} Yaşadığım yer şehir, okulum okul_adı.
+                    {print} En sevdiğim ders favori_ders, ama sevmediğim_ders dersini sevmiyorum.
                     ```
             7:
                 story_text: |
@@ -1227,8 +1307,8 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Bir önceki seviyede, sizden sonra tekrar eden bir papağan yapmıştınız. Bu seviyede papağanı bir değişken ve `{ask}` komutu kullanarak etkileşimli hale getireceğiz.
-                    Ayrıca bir şey söylendikten sonra `{sleep}` komutları ekleyerek papağanı daha gerçekçi hale getireceğiz.
+                    Önceki seviyede söylediklerini tekrar eden bir papağan yaptın. Bu seviyede papağanı bir değişken ve `{ask}` komutuyla etkileşimli hale getireceğiz.
+                    Ayrıca bir şey söylendikten sonra `{sleep}` komutları ekleyerek papağanı daha gerçekçi yapacağız.
                 example_code: |
                     ```
                     {print} Ben papağan Hedy.
@@ -1241,10 +1321,20 @@ adventures:
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    İlk olarak, 2. satırı bir `{is}` ve bir `{ask}` komutuyla bitirin.
-                    Ardından papağanın bir süre sessiz kalmasını sağlamak için 4. ve 6. satırlara `{sleep}` komutunu girin.
+                    Önce 2. satırı bir `{is}` ve bir `{ask}` komutuyla bitir.
+                    Sonra papağanın biraz sessiz kalması için 4. ve 6. satırlara `{sleep}` komutunu yaz.
 
-                    **Ek Görev** Daha fazla kod satırı ekleyerek papağanın sadece adınızdan daha fazlasını sormasını sağlayabilir misiniz?
+                    **Ek Görev** Daha fazla kod satırı ekleyerek papağanın yalnız adını değil, başka şeyler de sormasını sağlayabilir misin?
+                answer_code: |
+                    ```
+                    {print} Ben papağan Hedy.
+                    isim {is} {ask} Adın ne senin?
+                    {print} isim
+                    {sleep} 2
+                    {print} gaak
+                    {sleep} 2
+                    {print} isim
+                    ```
             3:
                 story_text: |
                     Papağanınıza `{add}` ile yeni bir kelime öğretin.
@@ -1402,7 +1492,7 @@ adventures:
                     {print} 'Çocuklarla oyun'dan daha eğlenceli ne olabilir ki?'
                     ```
     random_command:
-        default_save_name: restgele_komutu
+        default_save_name: rastgele_komutu
         description: şurada rastgele komutuna giriş
         levels:
             3:
@@ -1533,16 +1623,43 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Seviye 2'de, değişkenler kullanarak restoranınızı genişletebilirsiniz. Seviye 1'de Hedy sipariş edilen şeyi hatırlayabiliyordu.
-                    Artık değişkenleri kullanabilirsiniz ve Hedy'nin hem yemeği hem de sosları hatırlamasını sağlayayabilirsiniz!
+                    2. seviyede değişkenler kullanarak restoranını geliştirebilirsin. 1. seviyede Hedy yalnız sipariş edilen son şeyi hatırlayabiliyordu.
+                    Artık değişkenler kullanabilirsin ve Hedy hem yemeği hem de üstüne konacak malzemeyi hatırlayabilir!
                 example_code: |
                     ```
                     {print} Hedy'nin restoranına hoş geldiniz!
-                    {print} Bugün pizza ya da lazanya servis edeceğiz.
+                    {print} Bugün pizza ya da lazanya var.
                     yemek {is} {ask} Ne yemek istersiniz?
-                    {print} Harika bir seçim! yemek benim de favorim!
-                    sos {is} {ask} Et mi yoksa sebze mi istersiniz?
-                    {print} sos içeren yemek hemen geliyor!
+                    {print} Harika seçim! yemek benim favorim!
+                    malzeme {is} {ask} Üstüne et mi sebze mi istersiniz?
+                    {print} Üstünde malzeme olan yemek hemen geliyor!
+                    ```
+                story_text_2: |
+                    ### Alıştırma
+                    Önceki seviyede yazdığın restoran kodunu aşağıdaki girdi ekranına kopyala.
+                    Bu seviyede öğrendiğin gibi değişkenleri ve `{ask}` komutuyla birlikte `{is}` kullanarak kodu düzelt.
+
+                    Kodun yeniden çalıştığına göre şimdi yeni bir şey ekleme zamanı.
+                    Örnek kodun son satırına bak: `{print} Üstünde malzeme olan yemek hemen geliyor!`
+                    Bu tek satırda siparişi özetlemek için 2 değişken kullanıldı.
+                    Şimdi sen de müşterinin sipariş ettiği yemeğin ve içeceklerin özetini ekle.
+
+                    **Ek Görev** Değişken kullanmayı öğrendiğine göre bir satırda istediğin kadar değişken kullanabilirsin. Koduna burada mı yiyecek yoksa paket mi alacak, nakit mi kartla mı ödeyecek, pipet istiyor mu gibi başka değişkenler ekleyebilir misin?
+                answer_code: |
+                    ```
+                    {print} Hedy'nin restoranına hoş geldiniz 🍟
+                    yemek {is} {ask} Ne sipariş etmek istersiniz?
+                    {print} Demek yemek sipariş etmek istiyorsunuz
+                    içecek {is} {ask} Ne içmek istersiniz?
+                    {print} Demek içecek istiyorsunuz
+                    pipet {is} {ask} Yanında pipet ister misiniz?
+                    {print} Tamam!
+                    ödeme {is} {ask} Nakit mi, kartla mı ödemek istersiniz?
+                    {print} Sorun değil
+                    yer {is} {ask} Burada mı yiyeceksiniz, paket mi olsun?
+                    {print} Siparişiniz için teşekkür ederiz!
+                    {print} Hemen geliyor!
+                    {print} Teşekkürler! Güle güle!
                     ```
             3:
                 story_text: |
@@ -1894,20 +2011,21 @@ adventures:
                      ```
     sleep_command:
         default_save_name: uyu_komutu
-        description: uyku komutuna giriş
+        description: '{sleep} komutuna giriş'
         levels:
             2:
                 story_text: |
-                    Bu seviyede kullanabileceğiniz bir diğer yeni komut, programınızı bir saniyeliğine duraklatan `{sleep}` komutudur. Eğer {sleep} komutunun arkasına bir sayı yazarsanız, program o kadar saniye duraklar.
+                    Bu seviyedeki bir başka yeni komut da `{sleep}`: programını bir saniye duraklatır. `{sleep}` komutunun arkasına bir sayı yazarsan program o kadar saniye duraklar.
 
                     ### Alıştırma
-                    Bu yeni komutu, {sleep} komutunu en az 3 kez kullandığınız kendi kodunuzu oluşturarak uygulayın. Her {sleep} komutunda duraklama süresi farklı olsun.
+                    Bu yeni komutla pratik yapmak için `{sleep}` komutunu en az 3 kez kullandığın kendi kodunu yaz. Her `{sleep}` komutunda duraklama süresi farklı olsun.
                 example_code: |
                     ```
                     {print} En sevdiğim renk...
                     {sleep} 2
                     {print} yeşil!
                     ```
+        name: '{sleep}'
     songs:
         name: Bir şarkı söyle!
         default_save_name: Şarkı
@@ -2082,21 +2200,44 @@ adventures:
                     {forward} 100
                     ```
                 story_text_2: |
-                    Ayrıca, 1. seviyede kaplumbağa sadece sola veya sağa dönebiliyordu. Bu biraz sıkıcı!
-                    2. seviyede burnunu her yöne çevirebilir.
-
-                    Bir çeyrek tur döndürmek için 90 kullanın. Buna derece diyoruz. Tam dönüş 360 derecedir.
+                    Kaplumbağayı döndürürken değişken kullanabilirsin.
 
                     ### Alıştırma
-                    Bu kodla bir şekil oluşturabilir misiniz? Belki bir üçgen ya da daire?
+                    Kodu bir üçgen çizecek şekilde değiştir. İpucu: Kodu yalnız bir yerde değiştirmen yeterli.
                 example_code_2: |
                     ```
-                    {print} Şekiller çizdirmek
+                    {print} Şekiller çiziyoruz
                     açı {is} 90
                     {turn} açı
                     {forward} 25
                     {turn} açı
                     {forward} 25
+                    {turn} açı
+                    {forward} 25
+                    ```
+                answer_code: |
+                    ```
+                    {forward} 100
+                    {turn} 90
+                    {forward} 50
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 40
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 48
+                    {turn} 180
+                    {forward} 48
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 38
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 50
                     ```
             3:
                 story_text: |
@@ -2315,6 +2456,57 @@ adventures:
                     {forward} 60
                     {turn} {right}
                     {forward} 20
+                    ```
+            2:
+                story_text: |
+                    ### Alıştırma
+                    Çizimleri kaplumbağayla yeniden çiz!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Üçgen <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
+                    Ok <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
+                    Tekne <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
+                    </div>
+                answer_code: |
+                    Üçgen
+                    ```
+                    {forward} 50
+                    {turn} 135
+                    {forward} 70
+                    {turn} 135
+                    {forward} 50
+                    ```
+                    Ok
+                    ```
+                    {turn} 90
+                    {forward} 100
+                    {turn} 130
+                    {forward} 40
+                    {turn} 140
+                    {forward} 60
+                    {turn} 140
+                    {forward} 40
+                    ```
+                    Tekne
+                    ```
+                    {turn} -90
+                    {forward} 55
+                    {turn}  45
+                    {forward} 60
+                    {turn} 135
+                    {forward} 70
+                    {turn} -90
+                    {forward} 60
+                    {turn} 135
+                    {forward} 25
+                    {turn} 90
+                    {forward} 25
+                    {turn} -45
+                    {forward} 24
+                    {turn} -90
+                    {forward} 70
+                    {turn} 135
+                    {forward} 60
                     ```
         name: bunu çiz!
         default_save_name: Bunu çiz
