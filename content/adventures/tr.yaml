@@ -38,7 +38,7 @@ adventures:
                 story_text: |
                     2. seviyede hikayeni daha eğlenceli hale getirebilirsin. Ana karakterinin adı artık cümlenin herhangi bir yerinde olabilir.
 
-                    Bunun için biraz daha fazla programlaman gerekiyor. Önce ana karakterine bir ad vermelisin.
+                    Bunun için biraz daha programlaman gerekiyor. Önce ana karakterine bir ad vermelisin.
 
                     Sonra bu adı cümlenin herhangi bir yerine koyabilirsin.
                 example_code: |-
@@ -46,14 +46,14 @@ adventures:
                     isim {is} {ask} Ana karakterin adı nedir?
                     {print} isim şimdi ormanda koşacak
                     {print} isim biraz korkuyor
-                    {print} Aniden garip bir ses duyuyor...
+                    {print} Aniden tuhaf bir ses duyuyor...
                     {sleep}
                     {print} isim buranın perili bir orman olmasından korkuyor
                     ```
                 story_text_2: |
                     ### Alıştırma
                     Şimdi önceki seviyede yazdığın kendi hikayene değişkenler ekleme zamanı.
-                    Seviye 1'deki hikaye macerana git ve kodu kopyala. Kodu bu seviyedeki girdi ekranına yapıştır.
+                    1\. seviyedeki hikaye macerana git ve kodu kopyala. Kodu bu seviyedeki girdi ekranına yapıştır.
 
                     Kod bu seviyede çalışmayacak, çünkü henüz değişken kullanmadın.
                     Bu seviyede öğrendiğin gibi değişkenleri ve `{ask}` komutuyla birlikte `{is}` kullanarak kodu düzelt.
@@ -62,8 +62,8 @@ adventures:
                 answer_code: |
                     ```
                     {print} Bir gün hayvanat bahçesine gittim
-                    ilk_hayvan {is} {ask} İlk önce hangi hayvanı gördüm?
-                    {print} İlk önce bir ilk_hayvan gördüm
+                    ilk_hayvan {is} {ask} İlk hangi hayvanı gördüm?
+                    {print} Önce bir ilk_hayvan gördüm
                     {print} Sonra bir penguen gördüm
                     {print} Öğle yemeği yiyordu
                     yemek {is} {ask} Penguen ne yiyordu?
@@ -243,7 +243,7 @@ adventures:
             3:
                 story_text: |
                     ## {add} {to_list}
-                    Listeye `{add} {to_list}` komutuyla öğe ekleyebilirsin. Bir listeye öğe eklemek için şunu yazman yeterli: `{add} penguen {to_list} hayvanlar`. Ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsin.
+                    Listeye `{add} {to_list}` komutuyla eleman ekleyebilirsin. Bir listeye eleman eklemek için şunu yazman yeterli: `{add} penguen {to_list} hayvanlar`. Ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsin.
                 example_code: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
@@ -490,7 +490,7 @@ adventures:
                     **Dikkat! Bu kodda hata ayıklamak gerekiyor!**
                     ```
                     {print} Programlamayı seviyorum
-                    Sen de programlamayı seviyor musun?
+                    Programlamayı sen de seviyor musun?
                     {answer}
                     {print} Hobilerin neler?
                     {print} Hobilerin:
@@ -525,18 +525,18 @@ adventures:
                     {print} Buyurun! İyi yolculuklar!
                     ```
     dice:
-        name: Zar
+        name: zar
         default_save_name: Zar
         description: Kendi zarınızı yapın
         levels:
             3:
                 story_text: |
-                    Bu seviyede bir listeden seçim yapabiliriz. Bununla bilgisayarın zarın bir tarafını seçmesini sağlayabiliriz.
-                    Evinizde dolabınızda bulunan oyunlara bir göz atın.
-                    (Özel) bir zarı olan oyunlar var mı? Onları da bu kodla da kopyalayabilirsiniz.
-                    Örneğin, üzerinde 1'den 5'e kadar sayılar ve bir solucan bulunan Solucan oyunu zarı.
+                    Bu seviyede bir listeden seçim yapabiliriz. Böylece zarın bir yüzünü bilgisayara seçtirebiliriz.
+                    Evdeki dolabında duran oyunlara bir göz at.
+                    (Özel) bir zarı olan oyunlar var mı? Onu da bu kodla kopyalayabilirsin.
+                    Örneğin, üzerinde 1'den 5'e kadar sayılar ve bir solucan bulunan Solucanlar oyununun zarı.
 
-                    ![üzerinde 1'den 5'e kadar sayılar ve solucan olan bir solucan zarı](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+                    ![üzerinde 1'den 5'e kadar sayılar ve bir solucan olan bir solucan zarı](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
                     ```
                     seçimler {is} 1, 2, 3, 4, 5, solucan
@@ -544,8 +544,8 @@ adventures:
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Yukarıdaki örnekteki zarlar belirli bir oyun için zarlardır. Normal bir zar yapabilir misiniz?
-                    Ya da farklı bir oyundaki diğer özel zarları?
+                    Yukarıdaki örnekteki zar belirli bir oyunun zarı. Normal bir zar yapabilir misin?
+                    Ya da başka bir oyunun özel zarını?
                 example_code_2: |
                     ```
                     seçimler {is} _
@@ -612,7 +612,7 @@ adventures:
                         {sleep}
                     ```
     dishes:
-        name: Bulaşıklar mı?
+        name: bulaşıklar mı?
         default_save_name: Bulaşıklar
         description: Bulaşıkları kimin yıkayacağını seçmek için bilgisayarı kullanın
         levels:
@@ -730,7 +730,7 @@ adventures:
                 story_text_2: |
                     ### Alıştırma
                     Örnek kodu girdi ekranına kopyala ve kodun çalışması için boşlukları doldur.
-                    **Ek Görev** Kodu değiştir ve falcının yalnızca adını değil, yaşını, tuttuğun spor takımını ya da kendinle ilgili başka bir şeyi de tahmin etmesini sağla.
+                    **Ek Görev** Kodu değiştir ve falcının yalnız senin adını değil, yaşını, tuttuğun spor takımını ya da kendinle ilgili başka bir şeyi de tahmin etmesini sağla.
             3:
                 story_text: |
                     Önceki seviyelerde ilk fal makinenizi yapmıştınız, ancak Hedy gerçekten hiçbir şey tahmin edemedi.
@@ -902,7 +902,7 @@ adventures:
                     {print} Ama nasıl oldu da kendimi yerde buldum?
                     {print} Başım beyzbol sopasıyla vurulmuş gibi ağrıyor!
                     {print} Bu ses de ne?
-                    {print} Oh hayır! Bu evde yalnız değilmişim gibi hissediyorum!
+                    {print} Eyvah! Bu evde yalnız değilmişim gibi hissediyorum!
                     {print} Buradan çıkmam lazım!
                     {print} Önümde 3 kapı var...
                     {ask} Hangi kapıyı seçmeliyim?
@@ -922,14 +922,14 @@ adventures:
                     {print} Ama nasıl oldu da kendimi yerde buldum?
                     {print} Başım beyzbol sopasıyla vurulmuş gibi ağrıyor!
                     {print} Bu ses de ne?
-                    {print} Oh hayır! Bu evde yalnız değilmişim gibi hissediyorum!
+                    {print} Eyvah! Bu evde yalnız değilmişim gibi hissediyorum!
                     {print} Buradan çıkmam lazım!
                     {print} Önümde 3 kapı var...
                     {ask} Hangi kapıyı seçmeliyim?
                     {print} Seçtiğim kapı {answer}
                     {print} Kapıyı dikkatlice açıyorum
                     {print} Köşeden bakıyorum
-                    {print} Oh hayır!
+                    {print} Eyvah!
                     {print} Aç bir kurt sürüsü bana bakıyor
                     {print} Kapıyı hızla kapatıyorum.
                     ```
@@ -945,7 +945,7 @@ adventures:
                     {print} Aniden bir canavar_1 görüyorsun
                     {print} Diğer odaya koşuyorsun...
                     {print} Ama canavar_2 seni orada bekliyor!
-                    {print} Olamaz! Çabuk mutfağa git.
+                    {print} Eyvah! Çabuk mutfağa git.
                     {print} Ama içeri girerken canavar_3 sana saldırıyor!
                     ```
                 story_text_2: |
@@ -961,7 +961,7 @@ adventures:
                     {print} Aniden bir canavar_1 görüyorsun
                     {print} Diğer odaya koşuyorsun...
                     {print} Ama canavar_2 seni orada bekliyor!
-                    {print} Olamaz! Çabuk mutfağa git.
+                    {print} Eyvah! Çabuk mutfağa git.
                     {print} Ama içeri girerken canavar_3 sana saldırıyor!
                     ```
                 answer_code: |
@@ -973,7 +973,7 @@ adventures:
                     {print} Aniden bir canavar_1 görüyorsun
                     {print} Diğer odaya koşuyorsun...
                     {print} Ama canavar_2 seni orada bekliyor!
-                    {print} Olamaz! Çabuk mutfağa git.
+                    {print} Eyvah! Çabuk mutfağa git.
                     {print} Ama içeri girerken canavar_3 sana saldırıyor!
                     ```
             3:
@@ -1211,6 +1211,18 @@ adventures:
                     {print} Yaşadığım yer şehir, okulum okul_adı.
                     {print} En sevdiğim ders favori_ders, ama sevmediğim_ders dersini sevmiyorum.
                     ```
+                answer_code: |
+                    ```
+                    isim {is} Hedy
+                    yaş {is} 10
+                    şehir {is} Ankara
+                    okul_adı {is} Atatürk İlkokulu
+                    favori_ders {is} resim
+                    sevmediğim_ders {is} matematik
+                    {print} Benim adım isim ve yaş yaşındayım.
+                    {print} Yaşadığım yer şehir, okulum okul_adı.
+                    {print} En sevdiğim ders favori_ders, ama sevmediğim_ders dersini sevmiyorum.
+                    ```
             7:
                 story_text: |
                     Bir kelimeyi bir değişkende saklama konusunda da bir değişiklik yapıyoruz! Artık bir değişkende bir isim veya sayı sakladığımızda `{is}` yerine `=` kullanabilirsiniz, bunun gibi:
@@ -1324,7 +1336,7 @@ adventures:
                     Önce 2. satırı bir `{is}` ve bir `{ask}` komutuyla bitir.
                     Sonra papağanın biraz sessiz kalması için 4. ve 6. satırlara `{sleep}` komutunu yaz.
 
-                    **Ek Görev** Daha fazla kod satırı ekleyerek papağanın yalnız adını değil, başka şeyler de sormasını sağlayabilir misin?
+                    **Ek Görev** Daha fazla kod satırı ekleyerek papağanın sana yalnız adını değil, başka şeyler de sormasını sağlayabilir misin?
                 answer_code: |
                     ```
                     {print} Ben papağan Hedy.
@@ -1497,32 +1509,33 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## şurada rastgele
-                    Bu seviyede `{is}` komutunu kullanarak bir liste oluşturabileceksiniz. Bilgisayarın bu listeden rastgele bir öğe seçmesini sağlayabilirsiniz. Bunu `{at} {random}` ile yaparsınız.
+                    ## Rastgele
+                    Bu seviyede `{is}` komutuyla bir liste oluşturabilirsin. Bilgisayarın bu listeden rastgele bir eleman seçmesini sağlayabilirsin. Bunu `{at} {random}` ile yaparsın.
                 example_code: |
                     ```
                     hayvanlar {is} köpekler, kediler, kangurular
                     {print} hayvanlar {at} {random}
                     ```
                 story_text_2: |
-                    `{at} {random}` komutunu cümle içinde de kullanabilirsiniz.
+                    `{at} {random}` komutunu cümle içinde de kullanabilirsin.
                 example_code_2: |
                     ```
-                    yemek {is} sandviç, bir dilim pizza, salata, dürüm
+                    yemek {is} sandviç, dilim pizza, salata, dürüm
                     {print} Öğle yemeğinde bir yemek {at} {random} yiyeceğim.
                     ```
                 story_text_3: |
                     ### Alıştırma
-                    Bir kapı veya bir bavul seçtiğiniz ve içinde büyük bir ödül bulunan kendi oyun programınızı (televizyondakiler gibi) yapmak için `{at} {random}` komutunu deneyin!
-                    Bunu yapabilir misiniz? İlk satırları sizin için örnek koda zaten koyduk.
+                    Bir kapı ya da bavul seçtiğin ve içinde büyük bir ödül olan kendi yarışma programını (televizyondakiler gibi) yaparak `{at} {random}` komutunu dene!
+                    Bunu yapabilir misin? İlk satırları örnek koda zaten yazdık.
                 example_code_3: |
                     ```
-                    {print} Büyük oyun gösterisi!
-                    {print} Önünüzde 3 bavul var...
-                    seçim {is} {ask} Hangi bavulu seçiyorsunuz?
+                    {print} Büyük yarışma programı!
+                    {print} Önünde 3 bavul var...
+                    seçim {is} {ask} Hangi bavulu seçiyorsun?
                     ödüller {is} _
                     _
                     ```
+        name: '{random}'
     repeat_command:
         default_save_name: tekrarla_komutu
         description: tekrarla komutu
@@ -1609,7 +1622,7 @@ adventures:
                 story_text_2: |
                     ### Alıştırma
                     Sarı düğmeye basarak örnek kodu girdi ekranına kopyala.
-                    Öncelikle, kodun düzgün çalışması için boşluklara doğru komutu gir.
+                    Önce kodun düzgün çalışması için boşluklara doğru komutu gir.
                     Ardından restoran programına en az 4 satır kod daha ekle.
                     Müşteriye ne içmek istediğini ve ödemeyi nakit mi yoksa kartla mı yapmak istediğini sor.
                     Son olarak, müşterine veda etmek için güzel bir yol düşün.
@@ -1875,14 +1888,14 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Bilgisayarın taş, kağıt veya makas seçmesini sağlamak için `{at} {random}` komutunu kullanabilirsiniz!
+                    Bilgisayarın taş, kağıt ya da makas seçmesini sağlamak için `{at} {random}` komutunu kullanabilirsin!
 
                     ### Alıştırma
-                    `{at} {random}` komutunu kullanarak kodu tamamlayın.
+                    `{at} {random}` komutuyla kodu tamamla.
                 example_code: |
                     ```
                     seçimler {is} taş, kağıt, makas
-                    {print} seçimler _ _
+                    {print} seçimler _
                     ```
                 story_text_2: |
                     **Ek Görev** İki oyunculu bir oyun hazırlayın. İlk olarak iki oyuncudan isimlerini yazmalarını isteyin. Ardından bilgisayarın rastgele seçim yapmasını sağlayın.
@@ -2025,6 +2038,19 @@ adventures:
                     {sleep} 2
                     {print} yeşil!
                     ```
+                answer_code: |
+                    ```
+                    {print} Ve kazanan...
+                    {sleep} 2
+                    {print} Meryem!
+                    {print} Kazandığı ödül...
+                    {sleep} 1
+                    {print} yepyeni bir Ferrari!
+                    {print} Ve hepsi bu değil!
+                    {print} Bir de...
+                    {sleep} 5
+                    {print} Fransa'ya bir gezi kazandı!
+                    ```
         name: '{sleep}'
     songs:
         name: Bir şarkı söyle!
@@ -2137,7 +2163,7 @@ adventures:
                 story_text: |
                     Hedy'yi çizim yapmak için de kullanabilirsin. Dönüşleri ve çizgileri birleştirerek bir kare veya merdiven yapabilirsin!
 
-                    `{forward}` kullanarak ileriye doğru bir çizgi çizersin. Ardındaki sayı kaplumbağanın ne kadar yürüyeceğini belirler. `{turn} {right}` ile kaplumbağa saat yönünde çeyrek tur döner, `{turn} {left}` ile saat yönünün tersine döner.
+                    `{forward}` ile ileriye doğru bir çizgi çizersin. Ardındaki sayı kaplumbağanın ne kadar yürüyeceğini belirler. `{turn} {right}` ile kaplumbağa saat yönünde çeyrek tur döner, `{turn} {left}` ile saat yönünün tersine döner.
 
                     Geriye doğru gitmek istiyorsan, `{forward}` komutunu eksi bir sayıyla kullanırsın. Yani örneğin `{forward} -100`
                 story_text_2: |
@@ -2535,3 +2561,4 @@ adventures:
         levels: {}
     free_play:
         name: serbest oyun
+        default_save_name: serbest oyun
