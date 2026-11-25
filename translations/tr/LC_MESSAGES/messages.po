@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-11-21 21:35+0000\n"
+"PO-Revision-Date: 2026-11-25 16:52+0000\n"
 "Last-Translator: Nezih Arhan Tözenbilek <83074080+natozenbilek@users.noreply.github.com>\n"
 "Language-Team: tr <LL@li.org>\n"
 "Language: tr\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
-msgstr "`{access_line_number}` numaralı satırdaki \"`{name}`\" değişkeninin, değeri ayarlanmadan kullanıldığını tespit ettik. Değişkeni kullanmadan önce değerini ayarlayabilir misiniz?"
+msgstr "`{name}` değişkeni {access_line_number}. satırda, değer atanmadan önce kullanılmış. Bu değişkene kullanmadan önce değer atar mısın?"
 
 msgid "Cyclic Var Definition"
 msgstr "\"`{variable}`\" değişkeninin değeri ayarlanmadan önce \"`{is}`\" komutunun sağ tarafında kullanıldığını tespit ettik. Değişkeni kullanmadan önce değerini ayarlayabilir misiniz?"
@@ -32,19 +32,19 @@ msgid "Function Undefined"
 msgstr "\"`{name}`\" isimli fonksiyonun tanımlanmadan kullanıldığını tespit ettik. Fonksiyonu kullanmadan önce tanımlayabilir misiniz?"
 
 msgid "Has Blanks"
-msgstr "Bu kodun tamamlanmamış olduğunu tespit ettik. Boşlukları doldurabilir misiniz?"
+msgstr "Kod tamamlanmamış görünüyor. Boşlukları kodla doldurur musun?"
 
 msgid "Incomplete"
-msgstr "`{line_number}` numaralı satırdaki \"`{incomplete_command}`\" komutunda kodun bir kısmının eksik olduğunu tespit ettik. Eksik olan kısmı eklemeyi deneyebilir misiniz?"
+msgstr "{line_number}. satırdaki `{incomplete_command}` komutunun bir kısmı eksik görünüyor. Eksik kısmı eklemeyi dener misin?"
 
 msgid "Incomplete Repeat"
 msgstr "`{line_number}` numaralı satırdaki \"`{repeat}`\" ifadesinin yanında bir \"`{command}`\" komutunun eksik olduğunu tespit ettik. Eksik komutu eklemeyi deneyebilir misiniz?"
 
 msgid "Invalid"
-msgstr "\"`{invalid_command}`\" ifadesinin Hedy seviye {level} komutu olmadığını tespit ettik. \"`{guessed_command}`\" kullanmayı deneyebilir misiniz?"
+msgstr "`{invalid_command}` {level}. seviyede bir Hedy komutu değil. `{guessed_command}` kullanmayı dener misin?"
 
 msgid "Invalid Argument"
-msgstr "\"`{command}`\" komutununun \"`{invalid_argument}`\" ile kullanılamayacağını tespit ettik. \"`{invalid_argument}`\" argümanını bir \"`{allowed_types}`\" olarak değiştirmeyi deneyebilir misiniz?"
+msgstr "`{command}` komutu `{invalid_argument}` ile kullanılamıyor. `{invalid_argument}` yerine {allowed_types} yazmayı dener misin?"
 
 msgid "Invalid Argument Type"
 msgstr "\"`{command}`\" komutunun \"`{invalid_argument}`\" ile çalışmadığını tespit ettik, çünkü bu argüman bir \"`{invalid_type}`\". \"`{invalid_argument}`\" değerini \"`{allowed_types}`\" türüne değiştirmeyi deneyebilir misiniz?"
@@ -53,7 +53,7 @@ msgid "Invalid At Command"
 msgstr "\"`{command}`\" komutunun seviye 16'dan itibaren kullanılamayabileceğini tespit ettik. Listeler için köşeli parantezler, \"`[ ]`\", kullanmayı deneyebilir misiniz?"
 
 msgid "Invalid Space"
-msgstr "\"`{line_number}`\" numaralı satırın başında boşlukla başladığını tespit ettik. Boşluğu kaldırmayı deneyebilir misiniz?"
+msgstr "{line_number}. satır boşlukla başlıyor. Boşluğu silmeyi dener misin?"
 
 msgid "Invalid Type Combination"
 msgstr "\"`{invalid_argument}`\" ve \"`{invalid_argument_2}`\" argümanlarının \"`{command}`\" ile kullanılamayacağını tespit ettik, çünkü biri bir \"`{invalid_type}`\" ve diğeri bir \"` {invalid_type_2}`\". \"`{invalid_argument}`\" için \"`{invalid_type_2}`\" veya \"`{invalid_argument_2}`\" için \"`{invalid_type}`\" tür değişimi yapmayı deneyebilir misiniz?"
@@ -62,7 +62,7 @@ msgid "Lonely Echo"
 msgstr "Bir \"`{echo}`\" ifadesinin bir \"`{ask}`\" kullanılmadan önce ya da hiç olmadan kullanıldığını tespit ettik. \"`{echo}`\" komutundan önce bir \"`{ask}`\" yazmayı deneyebilir misiniz?"
 
 msgid "Lonely Text"
-msgstr "Kodun, `{line_number}` numaralı satırda kullanılan metinle ilgili bir komutunun eksik olduğunu tespit ettik. Gerekli komutu metinle birlikte yazmayı deneyebilir misiniz?"
+msgstr "{line_number}. satırdaki metin için bir komut eksik görünüyor. Gerekli komutu metinle birlikte yazmayı dener misin?"
 
 msgid "Missing Additional Command"
 msgstr "`{line_number}` numaralı satırdaki \"`{command}`\" komutunda bir şeyin eksik olduğunu tespit ettik. Kodunuzda bir \"`{missing_command}`\" kullanmayı deneyebilir misiniz?"
@@ -71,7 +71,7 @@ msgid "Missing Colon Error"
 msgstr "\"`{command}`\" ifadesi için `{line_number}` numaralı satırın sonunda bir \"`:`\" işaretine ihtiyaç olduğunu tespit ettik. Seviye 17'den itibaren komutların sonuna `:` eklemeye başlayabilir misiniz?"
 
 msgid "Missing Command"
-msgstr "Kodun, `{line_number}` numaralı satırda bir komutunun eksik göründüğünü tespit ettik. Hangi komutu kullanmanız gerektiğini bulmak için alıştırma bölümüne göz atmayı deneyebilir misiniz?"
+msgstr "{line_number}. satırda bir komut eksik görünüyor. Hangi komutu kullanacağını bulmak için alıştırma bölümüne bakmayı dener misin?"
 
 msgid "Missing Inner Command"
 msgstr "`{line_number}` numaralı satırdaki kodun,\"`{command}`\" için bir komutunun eksik olduğunu tespit ettik. Hangi komutun kullanılacağını bulmak için alıştırma bölümüne bakmayı deneyebilir misiniz?"
@@ -80,10 +80,10 @@ msgid "Missing Square Brackets"
 msgstr "`{line_number}` numaralı satırda oluşturduğunuz listede köşeli parantezlerin, \"`[ ]`\", eksik olduğunu tespit ettik. Listesinin etrafına köşeli parantezleri, `[ ]`, eklemeyi deneyebilir misiniz?"
 
 msgid "Missing Variable"
-msgstr "\"`{command}`\" için satırın başında bir değişkenin eksik olduğunu tespit ettik. Değişkeni \"`{command}`\" komutundan önce yazmayı deneyebilir misiniz?``"
+msgstr "`{command}` satırının başında bir değişken eksik. Değişkeni `{command}` komutundan önce yazmayı dener misin?"
 
 msgid "Misspelled At Command"
-msgstr "\"`{invalid_argument}`\" argümanının, `{line_number}` numaralı satırda bir yazım hatası olduğunu tespit ettik. Bunun yerine \"`{command}`\" yazmayı deneyebilir misiniz?."
+msgstr "{line_number}. satırdaki `{invalid_argument}` yanlış yazılmış görünüyor. Onun yerine `{command}` yazmayı dener misin?"
 
 msgid "No Indentation"
 msgstr "`{line_number}` numaralı satırda, girinti için çok az sayıda (`{leading_spaces}`) boşluk kullanılmış gibi göründüğünü tespit ettik. Her yeni blok için girintiyi `{indent_size}` kadar arttırmayı deneyebilir misiniz?."
@@ -92,7 +92,7 @@ msgid "Non Decimal Variable"
 msgstr "`{line_number}` numaralı satırda, Hedy'nin desteklemediği bir sayı kullandığınızı tespit ettik! Bir ondalıklı sayı kullanmayı deneyebilir misiniz?"
 
 msgid "Parse"
-msgstr "`{location[0]}` numaralı satırda bir \"`{character_found}`\" karakterinin kullanıldığını tespit ettik, ama buna izin verilmez. Kodunuzda eksik veya fazlalık bir karakter aramayı deneyebilir misiniz?"
+msgstr "{location[0]}. satırda `{character_found}` kullanılmış, ama buna izin verilmiyor. Kodunda eksik ya da fazla bir karakter aramayı dener misin?"
 
 msgid "Pressit Missing Else"
 msgstr "Kodunuzda, diğer tuşlara basıldığında ne olacağını belirleyecek eksik bir \"`{else}`\" olduğunu tespit ettik. Kodunuza bir `{else}` eklemeyi deneyebilir misiniz?"
@@ -110,7 +110,7 @@ msgid "Save Microbit code "
 msgstr "Microbit kodunu kaydet"
 
 msgid "Too Big"
-msgstr "Bu programın `{lines_of_code}` satırdan oluştuğunu tespit ettik, ancak sadece `{max_lines}` kadar satır işleyebiliyoruz. Programınızı kısaltmayı deneyebilir misiniz?"
+msgstr "Programında {lines_of_code} satır var, ama en fazla {max_lines} satır işleyebiliyoruz. Programını kısaltmayı dener misin?"
 
 msgid "Too Few Indents"
 msgstr "`{line_number}` numaralı satırda çok az sayıda (`{leading_spaces}`) boşluk olduğunu tespit ettik. Fazladan bir boşluk eklemeyi deneyebilir misiniz?"
@@ -128,22 +128,22 @@ msgid "Unquoted Equality Check"
 msgstr "Kodun, bir değişkenin birden fazla kelimeye eşit olup olmadığını kontrol etmeye çalıştığını tespit ettik. Kontrol etmek istediğiniz kelimeler için tırnak işareti kullanmayı deneyebilir misiniz?"
 
 msgid "Unquoted Text"
-msgstr "\"'{ask}`\" veya \"`{print}`\" için tırnak işaretlerinin eksik olduğunu tespit ettik. \"`{unquotedtext}`\" için tırnak işareti eklemeyi deneyebilir misiniz?"
+msgstr "`{ask}` ya da `{print}` ile yazdığın metinde tırnak işaretleri eksik görünüyor. `{unquotedtext}` için tırnak işareti eklemeyi dener misin?"
 
 msgid "Unsupported Float"
 msgstr "Bu kodun, tamsayılar dışında henüz desteklenmeyen sayıları kullandığını tespit ettik. \"`{value}`\" değerini bir tamsayı olarak değiştirmeyi deneyebilir misiniz?"
 
 msgid "Unsupported String Value"
-msgstr "Metnin, içinde bulunmaması gerek değerler, \"`{invalid_value}`\", kullandığını tespit ettik. Yazılan değeri kaldırmayı veya türünü değiştirmeyi deneyebilir misiniz?"
+msgstr "Metinde kullanılamayan bir değer var: `{invalid_value}`. Yazdığın değeri silmeyi ya da türünü değiştirmeyi dener misin?"
 
 msgid "Unused Variable"
-msgstr "\"` {variable_name}`\" isimli değişkeninin `{line_number}` numaralı satırda tanımlandığını ancak hiç kullanılmadığını tespit ettik. Bu tanımlı değişkeni kullanmayı veya kaldırmayı deneyebilir misiniz?"
+msgstr "{line_number}. satırda tanımladığın `{variable_name}` değişkeni hiç kullanılmamış. Bu değişkeni kullanmayı ya da silmeyi dener misin?"
 
 msgid "Var Undefined"
-msgstr "\"`{name}`\" isimli değişkeninin henüz ayarlanmadan önce kullanıldığını tespit ettik. Bu değişkeni, kullanılmadan önce ayarlayabilir misiniz veya bu bir değişken değilse `{name}` kelimesini tırnak işaretleri içinde kullanabilir misiniz?"
+msgstr "`{name}` değişkeni değer atanmadan önce kullanılmış. Bu değişkene kullanmadan önce değer atar mısın ya da `{name}` için tırnak işareti kullanır mısın?"
 
 msgid "Wrong Level"
-msgstr "Yazılan kodun doğru Hedy kodu olduğunu, ancak seviye `{working_level}` için kullanılmaması gereken \"`{offending_keyword}`\" kelimesinin kullanıldığını tespit ettik. {tip}"
+msgstr "Yazdığın kod doğru bir Hedy kodu, ama `{offending_keyword}` kelimesini {working_level}. seviyedeki gibi kullanmışsın. {tip}"
 
 msgid "Wrong Number of Arguments"
 msgstr "\"`{name}`\" fonksiyonunun yanlış sayıda argümana, `{used_number}`, sahip olduğunu tespit ettik. Bunun yerine `{defined_number}` tane kullanmayı deneyebilir misiniz?"
@@ -164,7 +164,7 @@ msgid "add_students"
 msgstr "Öğrenci ekleyin"
 
 msgid "add_your_language"
-msgstr "Dilinizi ekleyin!"
+msgstr "Dilini ekle!"
 
 msgid "admin"
 msgstr "Yönetici"
@@ -248,13 +248,13 @@ msgid "already_account"
 msgstr "Zaten bir hesabınız var mı?"
 
 msgid "already_program_running"
-msgstr "Şu anda çalışan bir program var, önce onu bitirin."
+msgstr "Şu anda çalışan bir program var, önce onu bitir."
 
 msgid "are_you_sure"
 msgstr "Emin misiniz? Bu işlemi geri alamazsınız."
 
 msgid "ask_needs_var"
-msgstr "Seviye 2'den itibaren, \"`{ask}`\" komutu bir değişkenle birlikte kullanılmalıdır. Örnek: isim `{is}` `{ask}` Senin adın ne?"
+msgstr "2. seviyeden itibaren `{ask}` komutu bir değişkenle kullanılmalı. Örnek: isim `{is}` `{ask}` Senin adın ne?"
 
 msgid "available_in"
 msgstr "Şurada mevcut:"
@@ -349,6 +349,9 @@ msgstr "Komut artık geçerli değil"
 msgid "commands"
 msgstr "Komutlar"
 
+msgid "confirm"
+msgstr "Onay"
+
 msgid "content_invalid"
 msgstr "Bu macera geçersiz."
 
@@ -440,10 +443,10 @@ msgid "delete_adventure_prompt"
 msgstr "Bu macerayı kaldırmak istediğinizden emin misiniz?"
 
 msgid "delete_class_prompt"
-msgstr "Sınıfı silmek istediğinizden emin misiniz?"
+msgstr "Sınıfı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
 
 msgid "delete_confirm"
-msgstr "Programı silmek istediğinizden emin misiniz?"
+msgstr "Programı silmek istediğinden emin misin?"
 
 msgid "delete_invite"
 msgstr "Davetiyeyi sil"
@@ -491,7 +494,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "yankıla ve sor uyuşmazlığı"
 
 msgid "echo_out"
-msgstr "2. seviyeden itibaren, `{echo}` artık gerekli değildir. Şimdi bir cevabı `{ask}` ve `{print}` kullanarak tekrarlayabilirsiniz. Örnek: `isim {is} {ask} Senin adın ne? {print} merhaba isim`"
+msgstr "2. seviyeden itibaren `{echo}` komutuna gerek kalmadı. Bir cevabı artık `{ask}` ve `{print}` ile tekrarlayabilirsin. Örnek: `isim {is} {ask} Senin adın ne? {print} merhaba isim`"
 
 msgid "edit_code_button"
 msgstr "Kodu düzenle"
@@ -512,7 +515,7 @@ msgid "enter_password"
 msgstr "Şunun için yeni bir şifre girin"
 
 msgid "enter_text"
-msgstr "Cevabınızı buraya girin..."
+msgstr "Cevabını buraya yaz..."
 
 msgid "error_logo_alt"
 msgstr "Hata logosu"
@@ -581,7 +584,7 @@ msgid "general_settings"
 msgstr "Genel ayarlar"
 
 msgid "give_link_to_teacher"
-msgstr "Aşağıdaki bağlantıyı öğretmeninize verin:"
+msgstr "Aşağıdaki bağlantıyı öğretmenine ver:"
 
 msgid "go_back_to_main"
 msgstr "Ana sayfaya geri dön"
@@ -686,9 +689,8 @@ msgstr "Sınıfa katılın"
 msgid "join_prompt"
 msgstr "Bir sınıfa katılmak için bir hesabınızın olması gerekir. Şimdi giriş yapmak ister misiniz?"
 
-#, fuzzy
 msgid "keybinding_waiting_for_keypress"
-msgstr "Bir düğmeye basılmasını bekliyorum..."
+msgstr "Bir tuşa basılması bekleniyor..."
 
 msgid "keyword_language_invalid"
 msgstr "Lütfen geçerli bir anahtar kelime dili seçin (İngilizce, Türkçe veya kendi dilinizi seçin)."
@@ -743,7 +745,7 @@ msgid "list"
 msgstr "bir liste"
 
 msgid "logged_in_to_share"
-msgstr "Bir programı kaydetmek ve paylaşmak için oturum açmış olmanız gerekir."
+msgstr "Program kaydetmek ve paylaşmak için giriş yapmalısın."
 
 msgid "login"
 msgstr "Giriş yap"
@@ -752,7 +754,7 @@ msgid "login_long"
 msgstr "Hesabınıza giriş yapın"
 
 msgid "login_to_save_your_work"
-msgstr "Çalışmanızı kaydetmek için giriş yapın"
+msgstr "Çalışmanı kaydetmek için giriş yap"
 
 msgid "logout"
 msgstr "Oturumu kapatın"
@@ -831,13 +833,19 @@ msgid "main_subtitle"
 msgstr "Sınıf için metinsel programlama"
 
 msgid "make_sure_you_are_done"
-msgstr "İşinizin tamamen bittiğinden emin olun! \"Teslim Et\" düğmesine tıkladıktan sonra artık programınızı değiştiremeyeceksiniz."
+msgstr "İşinin bittiğinden emin ol! \"Teslim et\" düğmesine bastıktan sonra artık programını değiştiremeyeceksin."
 
 msgid "male"
 msgstr "Erkek"
 
+msgid "more_adventures"
+msgstr "Daha fazla macera"
+
 msgid "more_options"
 msgstr "Diğer seçenekler"
+
+msgid "multiple_keywords_warning"
+msgstr "{orig_keyword} anahtar kelimesini kullanmaya çalışıyorsunuz, ama bu anahtar kelimenin birden fazla anlamı olabilir. Lütfen kullanmak istediğinizi bu listeden seçin ve küme parantezleriyle birlikte kopyalayıp kodunuza yapıştırın: {keyword_list}"
 
 msgid "mute"
 msgstr "Sessiz"
@@ -888,7 +896,7 @@ msgid "no_accounts"
 msgstr "Oluşturulacak hesap bulunamadı."
 
 msgid "no_more_flat_if"
-msgstr "8. seviyeden itibaren, `{if}`'den sonraki kodun bir sonraki satıra yerleştirilmesi ve satırın 4 boşlukla başlaması gerekir."
+msgstr "8. seviyeden itibaren `{if}` komutundan sonraki kod bir sonraki satıra yazılmalı ve 4 boşlukla başlamalı."
 
 msgid "no_programs"
 msgstr "Hiç program yok."
@@ -912,13 +920,13 @@ msgid "not_enrolled"
 msgstr "Görünüşe göre bu sınıfta değilsiniz!"
 
 msgid "not_in_class_no_handin"
-msgstr "Bir sınıfta değilsiniz, bu yüzden herhangi bir şey teslim etmenize gerek yok."
+msgstr "Bir sınıfta değilsin, bu yüzden bir şey teslim etmene gerek yok."
 
 msgid "not_logged_in_cantsave"
-msgstr "Programınız kaydedilmeyecektir."
+msgstr "Programın kaydedilmeyecek"
 
 msgid "not_logged_in_handin"
-msgstr "Bir ödevi teslim etmek için oturum açmış olmanız gerekir."
+msgstr "Ödev teslim etmek için giriş yapmalısın."
 
 msgid "not_teacher"
 msgstr "Görünüşe göre bir öğretmen değilsiniz!"
@@ -933,7 +941,7 @@ msgid "ok"
 msgstr "Tamam"
 
 msgid "only_you_can_see"
-msgstr "Bu programı sadece siz görebilirsiniz."
+msgstr "Bu programı yalnız sen görebilirsin."
 
 msgid "open"
 msgstr "Aç"
@@ -964,6 +972,9 @@ msgstr "Diğer"
 
 msgid "other_text"
 msgstr "Başka bir metin dili"
+
+msgid "outdated_class_warning"
+msgstr "Bu sınıfta güncel olmayan içerik var."
 
 msgid "overwrite_warning"
 msgstr "Bu isimde bir programınız zaten var, bu programı kaydederseniz eskisinin yerini alacaktır, ve eskisi silinecektir. Emin misiniz?"
@@ -1004,9 +1015,8 @@ msgstr "Tüm parolaların altı karakter veya daha uzun olması gerekir."
 msgid "pending_invites"
 msgstr "Bekleyen davetler"
 
-#, fuzzy
 msgid "people_with_a_link"
-msgstr "Bağlantıya sahip olan diğer kişiler bu programı doğrudan görebilir. Ayrıca \"Keşfet\" sayfasında da aranıp bulunabilir."
+msgstr "Bu programın bağlantısı olan başka kişiler de görebilir. Herkese açık bir profil sayfan varsa, program orada da görünür."
 
 msgid "period"
 msgstr "bir nokta"
@@ -1113,6 +1123,9 @@ msgstr "Öğrenciyi bu sınıftan çıkarmak istediğinize emin misiniz?"
 msgid "repair_program_logo_alt"
 msgstr "Program onarım simgesi"
 
+msgid "repeat_dep"
+msgstr "8. seviyeden itibaren `{repeat}` komutu girintiyle kullanılmalı. Örnekleri 8. seviyedeki `{repeat}` sekmesinde görebilirsin."
+
 msgid "repeat_match_password"
 msgstr "Yinelenen şifre eşleşmiyor."
 
@@ -1204,10 +1217,10 @@ msgid "settings"
 msgstr "Kişisel ayarlarım"
 
 msgid "share_by_giving_link"
-msgstr "Aşağıdaki bağlantıyı vererek programınızı diğer insanlara gösterin:"
+msgstr "Aşağıdaki bağlantıyı vererek programını başkalarına göster:"
 
 msgid "share_your_program"
-msgstr "Programınızı paylaşın"
+msgstr "Programını paylaş"
 
 msgid "signup_student_or_teacher"
 msgstr "Öğrenci misiniz yoksa öğretmen mi?"
@@ -1273,9 +1286,8 @@ msgstr "Bu programı teslim etmek istediğinizden emin misiniz?"
 msgid "submitted"
 msgstr "Teslim edildi"
 
-#, fuzzy
 msgid "submitted_header"
-msgstr "Bu teslim edilmiş bir programdır ve üzerinde değişiklik yapılamaz."
+msgstr "Bu program başarıyla teslim edildi ve artık değiştirilemez."
 
 msgid "subscribe"
 msgstr "Abone Olun"
@@ -1285,6 +1297,12 @@ msgstr "Haber bültenine abone olun"
 
 msgid "surname"
 msgstr "İlk Adınız"
+
+msgid "survey_skip"
+msgstr "Bir daha gösterme"
+
+msgid "survey_submit"
+msgstr "Gönder"
 
 msgid "teacher"
 msgstr "Öğretmen"
@@ -1318,7 +1336,7 @@ msgstr ""
 "</pre>"
 
 msgid "this_turns_in_assignment"
-msgstr "Bu, ödevinizi öğretmeninize teslim etmenizi sağlar."
+msgstr "Buradan ödevini öğretmenine teslim edebilirsin."
 
 msgid "title"
 msgstr "Başlık"
@@ -1370,6 +1388,9 @@ msgstr "Hedy - Macerayı görüntüle"
 
 msgid "token_invalid"
 msgstr "Bağlanma jeton dizesi geçersiz."
+
+msgid "tooltip_level_locked"
+msgstr "Öğretmenin bu seviyeyi kapattı"
 
 msgid "translate_error"
 msgstr "Kodu çevirirken bir şeyler yanlış gitti. Hata olup olmadığını görmek için kodu çalıştırmayı deneyin. Hata içeren kod çevrilemez."
@@ -1424,6 +1445,9 @@ msgstr "Programı görüntüle"
 
 msgid "what_is_your_role"
 msgstr "Göreviniz nedir?"
+
+msgid "work_in_progress"
+msgstr "Yapım aşamasında"
 
 msgid "year_invalid"
 msgstr "Lütfen 1900 ile {current_year} arasında bir yıl girin."
