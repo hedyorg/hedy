@@ -10,10 +10,15 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
     let parseResult = parser.parse(code);
     let formattedCode = ''
     let previous_node: SyntaxNode | undefined = undefined
+    const commentsByLineStart = new Map<number, number>();
 
     parseResult.iterate({
         enter: (node) => {
             const nodeName = node.node.name;
+            if (nodeName === 'Comment') {
+                const lineStart = code.lastIndexOf('\n', node.from - 1) + 1;
+                commentsByLineStart.set(lineStart, node.from - lineStart);
+            }
             let number_spaces = 0
             let previous_name = ''
             if (keywords.includes(nodeName)) {
@@ -46,14 +51,23 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
     let lines = code.split('\n');
     let resultingLines = []
 
+    let lineStart = 0;
     for (let i = 0, j = 0; i < lines.length; i++) {
-        if (lines[i].trim() === '') {
-            resultingLines.push(lines[i]);
+        const line = lines[i];
+        const commentColumn = commentsByLineStart.get(lineStart);
+        lineStart += line.length + 1;
+        if (line.trim() === '' || (commentColumn !== undefined && line.slice(0, commentColumn).trim() === '')) {
+            resultingLines.push(line);
             continue;
         }
-        const indent_number = lines[i].search(/\S/)
+        const indent_number = line.search(/\S/)
         if (indent_number > -1) {
-            resultingLines.push(' '.repeat(indent_number) + formattedLines[j])
+            let formattedLine = ' '.repeat(indent_number) + formattedLines[j];
+            if (commentColumn !== undefined) {
+                const whitespace = line.slice(0, commentColumn).match(/\s*$/)?.[0] || '';
+                formattedLine += whitespace + line.slice(commentColumn);
+            }
+            resultingLines.push(formattedLine);
         }
         j += 1;
     }
