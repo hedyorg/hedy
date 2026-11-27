@@ -1,29 +1,39 @@
 adventures:
     story:
-        name: Hikaye
+        name: hikaye
         default_save_name: Hikaye
         description: Kısa bir hikaye oluşturun
         levels:
             1:
                 story_text: |
-                    Seviye 1'de, kendi oluşturduğunuz farklı bir ana karakterle bir hikaye oluşturabilirsiniz.
+                    1. seviyede ana karakterini her seferinde kendi belirlediğin bir hikaye yazabilirsin.
 
-                    İlk satırda `{ask}` kullanın ve hikayenin ana karakterinin kim olacağını sorun.
+                    İlk satırda `{ask}` ile hikayenin ana karakterinin kim olacağını sor. Karakterin adını kullanmak istediğinde `{answer}` yaz.
                 example_code: |
                     ```
                     {ask} Bu hikayenin ana karakteri kim?
-                    {print} Ana karakter şimdi ormanda yürüyecek
-                    {print} Biraz korkmuşlar, {answer}
-                    {print} Her yerde çılgın sesler duyuyorlar.
-                    {print} Buranın perili bir orman olmasından korkuyorlar.
+                    {print} {answer} şimdi ormanda yürüyecek
+                    {print} {answer} biraz korkuyor ama yürümeye devam ediyor
+                    {print} {answer} her yerden tuhaf sesler duyuyor
+                    {print} Buranın perili bir orman olmasından korkuyor
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Şimdi en az 6 satır koddan oluşan kendi hikayenizi oluşturun.
+                    Şimdi en az 6 satır koddan oluşan kendi hikayeni yaz.
                     Bu hikaye örnek kod ile aynı olamaz.
-                    En az bir tane `{ask}` ve bir tane `{answer}` komutu kullanın.
-                    İstediğiniz herhangi bir konu hakkında yapabilirsiniz.
-                    Aklınıza bir konu gelmiyorsa, seçeneklerimizden birini kullanın: sinemaya gitmek, bir spor karşılaşması veya hayvanat bahçesinde bir gün.
+                    En az bir tane `{ask}` ve bir tane `{answer}` kullan.
+                    İstediğin herhangi bir konu hakkında yazabilirsin.
+                    Aklına bir konu gelmiyorsa, seçeneklerimizden birini kullan: sinemaya gitmek, bir spor karşılaşması veya hayvanat bahçesinde bir gün.
+                answer_code: |
+                    ```
+                    {print} Bir gün hayvanat bahçesine gittim
+                    {ask} İlk hangi hayvanı gördüm?
+                    {print} Önce bir {answer} gördüm
+                    {print} Sonra bir penguen gördüm
+                    {print} Öğle yemeği yiyordu
+                    {ask} Penguen ne yiyordu?
+                    {print} Penguen öğle yemeğinde {answer} yiyordu
+                    ```
             2:
                 story_text: |
                     Bu 2. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Ana karakterinizin adı artık cümle içinde herhangi bir yerde olabilir.
@@ -185,11 +195,11 @@ adventures:
                     ```
             11:
                 story_text: |
-                    Bu seviyede {for} komutunu hikayenizde kullanabilirsiniz. Bu şekilde 'Brown bear, Brown bear, what do you see' adlı çocuk kitabını kolayca programlayabilirsiniz.
+                    Bu seviyede hikayende `{for}` komutunu kullanabilirsin. Böylece 'Brown bear, Brown bear, what do you see' adlı çocuk kitabını kolayca programlayabilirsin.
 
                     ### Alıştırma
 
-                    Eğer bilmiyorsanız <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> hikayeye bir göz atın</a> , ve kitapta yazıldığı gibi yazdığınızdan emin olun. (Bunun gibi bir Türkçe kitap biliyorsanız onu da yazabilirsiniz)
+                    Bilmiyorsan <a href="https://fliphtml5.com/jmlya/nquy">hikayeye</a> bir göz at ve kitaptaki gibi yazdırıldığından emin ol.
                 example_code: "```\nhayvanlar = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
             13:
                 example_code: |
@@ -212,7 +222,7 @@ adventures:
             3:
                 story_text: |
                     ## {add} {to_list}
-                    Listeye `{add} {to_list}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to_list} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
+                    Listeye `{add} {to_list}` komutuyla öğe ekleyebilirsin. Bir listeye öğe eklemek için şunu yazman yeterli: `{add} penguen {to_list} hayvanlar`. Ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsin.
                 example_code: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
@@ -246,18 +256,45 @@ adventures:
     and_or_command:
         levels: {}
     ask_command:
-        name: sor
+        name: '{ask}'
         default_save_name: sor_komutu
-        description: sor komutuna giriş
+        description: '{ask} komutuna giriş'
         levels:
             1:
                 story_text: |
-                    ## sor komutu
-                    Artık `{print}` komutunu kullanabildiğinize göre, bir sonraki komutu öğrenmeye hazırsınız: `{ask}`. `{ask}` komutunu kullanarak bir soru sorabilirsiniz. Şuna bir bakın:
+                    ## `{ask}` komutu
+                    Artık `{print}` komutunu kullanabildiğine göre bir sonraki komutu öğrenmeye hazırsın: `{ask}`. `{ask}` komutuyla bir soru sorabilirsin. Şuna bir bak:
                 example_code: |
                     ```
                     {print} Merhaba!
                     {ask} Senin adın ne?
+                    ```
+                story_text_2: |
+                    ## `{answer}`
+                    Cevabı yazdırmak istersen şöyle yapabilirsin:
+                example_code_2: |
+                    ```
+                    {print} Merhaba!
+                    {ask} Senin adın ne?
+                    {print} Selam, {answer}!
+                    ```
+                story_text_3: |
+                    ### Alıştırma
+                    `{ask}` ve `{answer}` kullanmayı dene. Önce programın çalışması için boşlukları doldur.
+                    Sonra `{ask}` ile 2 soru daha sor; her `{ask}` satırından sonra cevabı ekrana yazdırmak için `{answer}` kullan.
+                example_code_3: |
+                    ```
+                    _ Nasıl hissediyorsun?
+                    _ Kendini _ hissediyorsun
+                    ```
+                answer_code: |
+                    ```
+                    {ask} Nasıl hissediyorsun?
+                    {print} Kendini {answer} hissediyorsun
+                    {ask} En sevdiğin spor ne?
+                    {print} En sevdiğin spor {answer}
+                    {ask} En sevmediğin spor ne?
+                    {print} En sevmediğin spor {answer}
                     ```
             2:
                 example_code: |
@@ -265,7 +302,36 @@ adventures:
                     isim {is} {ask} Senin adın ne?
                     {print} Merhaba isim
                     yaş {is} {ask} Kaç yaşındasın?
-                    {print} isim yaş yaşındadır.
+                    {print} isim yaş yaşında.
+                    ```
+                story_text: |
+                    ## Değişken kullanmak
+                    Önceki seviyede bir sorunun cevabını yazdırmak için `{answer}` kullanmayı öğrendin. Peki ya birden fazla cevap kullanmak istersen?
+                    Bu seviyede birden fazla **değişken** kullanmayı öğreneceksin. Değişken, kullanıcının verdiği bir cevabın (ya da *girdinin*) saklandığı yerdir. `{answer}` değişkenini zaten kullanıyordun, ama şimdi daha fazla değişken kullanmayı öğreneceksin!
+                    Bu örnek, 'isim' ve 'yaş' değişkenlerini nasıl kullanabileceğini gösteriyor.
+
+                    ## {ask}
+                    `{ask}` komutunun da değiştiğini fark ettin mi? Cevabı hangi değişkende saklamak istediğini bilgisayara söylemek için satıra değişkenin adıyla başlarsın, ardından `{is}` ve `{ask}` yazarsın.
+                story_text_2: |
+                    ### Alıştırma
+                    Kendi değişkenlerini oluşturma zamanı! Oyuncuya en sevdiği içeceği ve en sevdiği kitabı sor, cevapları ekrana yazdır.
+                    Programı bitirmek için oyuncunun sevdiği her şeyi tek satırda sırala.
+                example_code_2: |
+                    ```
+                    favori_hayvan {is} {ask} En sevdiğin hayvan ne?
+                    {print} Ben favori_hayvan severim
+
+                    {print} Demek _ , _ ve _ seviyorsun.
+                    ```
+                answer_code: |
+                    ```
+                    favori_hayvan {is} {ask} En sevdiğin hayvan ne?
+                    {print} Ben favori_hayvan severim
+                    favori_içecek {is} {ask} En sevdiğin içecek ne?
+                    {print} Ben favori_içecek içmeyi severim
+                    favori_kitap {is} {ask} En sevdiğin kitap ne?
+                    {print} Ben favori_kitap okumayı severim
+                    {print} Demek favori_hayvan, favori_içecek ve favori_kitap seviyorsun.
                     ```
             13:
                 story_text: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
@@ -390,7 +456,24 @@ adventures:
     debugging:
         name: hata ayıklama
         default_save_name: hata ayıklama
-        levels: {}
+        levels:
+            1:
+                story_text: |-
+                    Hata ayıklama macerasına hoş geldin. Bir kodda hata ayıklamak, koddaki hatalardan kurtulmak demektir.
+                    Yani bu hata ayıklama maceralarında sana henüz çalışmayan kodlar göstereceğiz.
+                    Neyin yanlış olduğunu bulup hataları düzeltmen gerekecek.
+
+                    ### Alıştırma
+                    Bu kodda hata ayıkla. Bol şans!
+                example_code: |
+                    **Dikkat! Bu kodda hata ayıklamak gerekiyor!**
+                    ```
+                    {print} Programlamayı seviyorum
+                    Sen de programlamayı seviyor musun?
+                    {answer}
+                    {print} Hobilerin neler?
+                    {print} Hobilerin:
+                    ```
     dice:
         name: Zar
         default_save_name: Zar
@@ -574,7 +657,7 @@ adventures:
                         {print} 'Benim sevdiğim ' hayvan
                     ```
     fortune:
-        name: Falcı
+        name: falcı
         default_save_name: Falcı
         description: Hedy'nin geleceği tahmin etmesini sağlayın
         levels:
@@ -596,8 +679,8 @@ adventures:
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Örnek kodu girdi ekranınıza kopyalayın ve kodun çalışması için boşlukları doldurun.
-                    **Ek Görev** Kodu değiştirin ve falcının yalnızca adınızı değil, yaşınızı, tuttuğunuz spor takımını veya kendinizle ilgili başka bir şeyi de tahmin etmesini sağlayın.
+                    Örnek kodu girdi ekranına kopyala ve kodun çalışması için boşlukları doldur.
+                    **Ek Görev** Kodu değiştir ve falcının yalnızca adını değil, yaşını, tuttuğun spor takımını ya da kendinle ilgili başka bir şeyi de tahmin etmesini sağla.
             3:
                 story_text: |
                     Önceki seviyelerde ilk fal makinenizi yapmıştınız, ancak Hedy gerçekten hiçbir şey tahmin edemedi.
@@ -751,20 +834,20 @@ adventures:
                     _ {print} isim ' en çok şundan korkuyor: ' korkular {at} {random}
                     ```
     haunted:
-        name: Perili Ev
+        name: perili ev
         default_save_name: Perili Ev
         description: Perili evden kaçış
         levels:
             1:
                 story_text: |
-                    Bu macerada, doğru kapıyı seçerek perili bir evden kaçmanız gereken bir oyun yapmak için çalışıyorsunuz.
-                    Eğer doğru kapıyı seçerseniz hayatta kalırsınız, ama seçmezseniz korkunç bir canavar sizi...
+                    Bu macerada adım adım bir kaçış oyunu yapacaksın. Oyunda perili bir evden çıkmak için doğru kapıyı bulman gerekiyor.
+                    Doğru kapıyı seçersen kurtulursun, yoksa korkunç bir canavar seni...
 
-                    1. seviyede, perili ev oyunumuza korkutucu bir hikaye uydurarak başlıyoruz ve oyuncuya perili evde hangi canavarı göreceklerini soruyoruz.
+                    1. seviyede oyuna ürkütücü bir hikaye uydurarak başlıyoruz ve oyuncuya hangi kapıyı seçeceğini soruyoruz.
                 example_code: |
                     ```
                     {print} Buraya nasıl geldim?
-                    {print} Arkadaşımın bana eski malikaneye gitmemi söylediğini hatırlıyorum...
+                    {print} Arkadaşımın bana eski malikaneye girmemi söylediğini hatırlıyorum...
                     {print} sonra her şey aniden karardı.
                     {print} Ama nasıl oldu da kendimi yerde buldum?
                     {print} Başım beyzbol sopasıyla vurulmuş gibi ağrıyor!
@@ -778,9 +861,28 @@ adventures:
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Sarı düğmeye tıklayarak örnek kodu girdi ekranınıza kopyalayın.
-                    Şimdi en az 5 satır kod ekleyerek hikayeyi bitirin.
-                    Her kod satırına `{print}` komutuyla başlamayı unutmayın.
+                    Sarı düğmeye basarak örnek kodu girdi ekranına kopyala.
+                    Sonra en az 5 satır daha yazarak hikayeyi tamamla.
+                    Unutma, her satır `{print}` ya da `{ask}` ile başlamalı.
+                answer_code: |
+                    ```
+                    {print} Buraya nasıl geldim?
+                    {print} Arkadaşımın bana eski malikaneye girmemi söylediğini hatırlıyorum...
+                    {print} sonra her şey aniden karardı.
+                    {print} Ama nasıl oldu da kendimi yerde buldum?
+                    {print} Başım beyzbol sopasıyla vurulmuş gibi ağrıyor!
+                    {print} Bu ses de ne?
+                    {print} Oh hayır! Bu evde yalnız değilmişim gibi hissediyorum!
+                    {print} Buradan çıkmam lazım!
+                    {print} Önümde 3 kapı var...
+                    {ask} Hangi kapıyı seçmeliyim?
+                    {print} Seçtiğim kapı {answer}
+                    {print} Kapıyı dikkatlice açıyorum
+                    {print} Köşeden bakıyorum
+                    {print} Oh hayır!
+                    {print} Aç bir kurt sürüsü bana bakıyor
+                    {print} Kapıyı hızla kapatıyorum.
+                    ```
             2:
                 story_text: |
                     Bu perili evde canavarlarınızı emojilerle seçebilirsiniz. Tabii ki yine kelimeleri de kullanabilirsiniz.
@@ -907,7 +1009,23 @@ adventures:
                         {print} 'Harika! Hayatta kaldınız!'
                     ```
     hospital:
-        levels: {}
+        levels:
+            1:
+                story_text: |
+                    Hastane macerasına hoş geldin. Bu macerada bir hastanenin müdürüne, hastanede çıkan bazı sorunları çözmesi için yardım edeceksin. İlk görevin şu:
+
+                    Danışma masamızın önünde upuzun bir kuyruk var ve görevli çok yoğun. Kendi kendine kayıt kiosku programlayarak bu görevliye yardım edebilir misin?
+                    ### Alıştırma
+                    Kendi kendine kayıt kiosku şunları yapmalı:
+                    * Hastayı selamlamak
+                    * Hastanın adını sormak ve cevabı yazdırmak
+                    * Doğum tarihini sormak ve cevabı yazdırmak
+                    * Randevusunun hangi bölümde olduğunu sormak
+                    * Randevusunun hangi doktorla olduğunu sormak
+                    * Kaydını başarıyla yaptığı için hastaya teşekkür etmek
+                    * Hastaya bekleme salonunda oturmasını söylemek
+        name: hastane
+        default_save_name: hastane
     hotel:
         levels: {}
     if_command:
@@ -1003,8 +1121,8 @@ adventures:
                     _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
                     ```
     is_command:
-        default_save_name: eşit_komutu
-        description: eşit komutuna giriş
+        default_save_name: eşittir_komutu
+        description: '{is} komutuna giriş'
         levels:
             2:
                 example_code: |
@@ -1021,6 +1139,7 @@ adventures:
                     isim = Hedy
                     cevap = 20 + 4
                     ```
+        name: '{is}'
     language:
         name: Dil
         default_save_name: Dil
@@ -1068,8 +1187,10 @@ adventures:
         levels:
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+        name: müzik
+        default_save_name: müzik
     parrot:
-        name: Papağan
+        name: papağan
         default_save_name: Papağan
         description: Sizi taklit edecek kendi çevrimiçi evcil papağanınızı yaratın!
         levels:
@@ -1085,15 +1206,25 @@ adventures:
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Sarı düğmeye tıklayarak örnek kodu girdi ekranınıza kopyalayın.
-                    Papağanın farklı bir soru sormasını sağlayın. Örnekteki boşlukları doldurun!
-                    **Ek Görev** Papağanın birden fazla soru sormasını da sağlayabilirsiniz. Kendi kodunuzun altına birkaç satır daha kod yazın.
+                    Sarı düğmeye basarak örnek kodu girdi ekranına kopyala.
+                    Papağanın farklı bir soru sormasını sağla. Örnekteki boşlukları doldur!
+                    **Ek Görev** Papağanın birden fazla soru sormasını da sağlayabilirsin. Kendi kodunun altına birkaç satır daha kod yaz.
                 example_code_2: |
                     ```
                     {print} Ben papağan Hedy.
                     {ask} _
                     {print} {answer}
                     {print} {answer}
+                answer_code: |
+                    ```
+                    {print} Ben papağan Hedy.
+                    {ask} En sevdiğin kelime ne?
+                    {print} {answer}
+                    {print} {answer}
+                    {ask} Bu papağan daha fazla soruyu cevaplayabilir mi?
+                    {print} {answer}
+                    {print} {answer}
+                    ```
             2:
                 story_text: |
                     Bir önceki seviyede, sizden sonra tekrar eden bir papağan yapmıştınız. Bu seviyede papağanı bir değişken ve `{ask}` komutu kullanarak etkileşimli hale getireceğiz.
@@ -1189,8 +1320,8 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## yazdır komutu
-                    `{print}` komutunu kullanarak ekrana metin yazdırabilirsiniz.
+                    ## {print} komutu
+                    `{print}` komutuyla ekrana yazı yazdırabilirsin.
                 example_code: |
                     ```
                     {print} Merhaba, programcı!
@@ -1198,14 +1329,23 @@ adventures:
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Hedy'de, her macerada alıştırmalar bulacaksınız. Bir alıştırma, yeni komutları ve kavramları uygulamanıza ve örnek kodlara kendi yorumunuzu katmanıza olanak tanır.
-                    Bu alıştırmada pembe bir boşluk göreceksiniz. Kodun çalıştırılabilmesi için boş alanın yerine bir şey yazıp doldurmanız gerekiyor.
+                    Hedy'de her macerada alıştırmalar bulacaksın. Alıştırmalar yeni komutlarla ve kavramlarla pratik yapmanı, örnek kodlara kendi dokunuşunu katmanı sağlar.
+                    Bu alıştırmada pembe bir boşluk göreceksin. Kodu çalıştırabilmek için önce bu boşluğa bir şey yazman gerekiyor.
 
-                    Boş alana `{print}` komutunu girin ve ardından beş tane daha kod satırı ekleyin. Her satır bir `{print}` komutu ile başlamalıdır.
+                    Boşluğa `{print}` komutunu yaz, sonra beş satır kod daha ekle. Her satır `{print}` komutuyla başlamalı.
                     İyi eğlenceler!
                 example_code_2: |
                     ```
                     _ Merhaba!
+                    ```
+                answer_code: |
+                    ```
+                    {print} Merhaba!
+                    {print} Kod yazıyorum
+                    {print} Bu çok kolay
+                    {print} Hem de çok havalı!
+                    {print} Bu daha 1. seviye
+                    {print} Umarım çok daha fazlasını öğrenirim!
                     ```
             13:
                 story_text: |-
@@ -1227,6 +1367,7 @@ adventures:
                     isim = 'Hedy'
                     {print}('Benim adım ', isim)
                     ```
+        name: '{print}'
     quizmaster:
         name: Kısa sınav ustası
         default_save_name: Kısa sınav ustası
@@ -1368,20 +1509,20 @@ adventures:
                     _ {print} 'kim tanır çörek adamı, nerede yaşıyor?'
                     ```
     restaurant:
-        name: Restoran
+        name: restoran
         default_save_name: Restoran
         description: Kendi sanal restoranınızı oluşturun
         levels:
             1:
                 story_text: |
-                    Seviye 1'de, kendi sanal restoranınızı oluşturabilir ve konuklarınızın siparişlerini alabilirsiniz.
+                    1. seviyede kendi sanal restoranını kurabilir ve konuklarının siparişlerini alabilirsin.
                 story_text_2: |
                     ### Alıştırma
-                    Sarı düğmeye tıklayarak örnek kodu giriş ekranınıza kopyalayın.
-                    Öncelikle, kodun düzgün çalışması için boşluklara doğru komutu girin.
-                    Ardından restoran programına en az 4 satır kod daha ekleyin.
-                    Müşteriye ne içmek istediklerini sorun ve nakit mi yoksa kartla mı ödeme yapmak istediklerini sorun.
-                    Son olarak, müşterinize veda etmek için güzel bir yol düşünün.
+                    Sarı düğmeye basarak örnek kodu girdi ekranına kopyala.
+                    Öncelikle, kodun düzgün çalışması için boşluklara doğru komutu gir.
+                    Ardından restoran programına en az 4 satır kod daha ekle.
+                    Müşteriye ne içmek istediğini ve ödemeyi nakit mi yoksa kartla mı yapmak istediğini sor.
+                    Son olarak, müşterine veda etmek için güzel bir yol düşün.
                 example_code_2: |
                     ```
                     {print} Hedy'nin restoranına hoş geldiniz 🍟
@@ -1583,14 +1724,16 @@ adventures:
                     {print}('Teşekkür ederiz!')
                     ```
     rock:
-        name: Taş, kağıt, makas
+        name: taş, kağıt, makas
         description: Kendi taş, kağıt, makas oyununuzu yapın
         levels:
             1:
                 story_text: |
-                    Seviye 1'de, taş, kağıt, makas oyunu yazmaya başlayabilirsiniz.
+                    1. seviyede taş, kağıt, makas oyunu yapmaya başlayabilirsin.
 
-                    `{ask}` ile bir seçim yapabilir ve `{answer}` ile bu seçimi tekrarlayabilirsiniz.
+                    `{ask}` ile bir seçim yapabilir, `{answer}` ile de bu seçimi ekrana yazdırabilirsin.
+
+                    Not: Bu oyun henüz tam olarak çalışmıyor ama sonraki seviyelerde onu gerçek bir oyuna dönüştürmeyi öğreneceksin!
                 example_code: |
                     ```
                     {print} Neyi seçiyorsun?
@@ -1599,12 +1742,18 @@ adventures:
                     ```
                 story_text_2: |
                     ### Alıştırma
-                    Kelimeleri kullanmak yerine emojileri de kullanabilirsiniz: ✊✋✌
-                    Emojileri kullanarak bir kod oluşturabilir misiniz? (kopyala-yapıştır deneyin)
+                    Kelimeler yerine emoji de kullanabilirsin: ✊✋✌
+                    Emojilerle bir kod yazabilir misin?
                 example_code_2: |
                     ```
                     {print} Neyi seçiyorsun?
-                    {ask} Bunlardan birini seçin _
+                    {ask} Bunlardan birini seç _
+                    {print} Demek senin seçimin: {answer}
+                    ```
+                answer_code: |
+                    ```
+                    {print} Neyi seçiyorsun?
+                    {ask} Bunlardan birini seç ✊✋✌️
                     {print} Demek senin seçimin: {answer}
                     ```
             3:
@@ -1705,15 +1854,21 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Artık `{ask}` komutunu nasıl kullanacağınızı öğrendiğinize göre, taş, kağıt, makas kodunuzu da etkileşimli hale getirebilirsiniz!
+                    Artık `{ask}` komutunu kullanmayı öğrendiğine göre taş, kağıt, makas kodunu da etkileşimli hale getirebilirsin!
 
                     ### Alıştırma
-                    Taş, kağıt, makas kodunuza `{ask}` komutu ile bir soru ekleyerek kodu etkileşimli hale getirin.
+                    Taş, kağıt, makas koduna `{ask}` komutuyla bir soru ekleyerek kodu etkileşimli hale getir.
                 example_code: |
                     ```
                     seçim {is} _
                     {print} Benim seçimim seçim
                     ```
+                answer_code: |
+                    ```
+                    seçim {is} {ask} Taş mı, kağıt mı, makas mı?
+                    {print} Benim seçimim seçim
+                    ```
+        default_save_name: taş
     secret:
         name: SüperCasus
         default_save_name: SüperCasus
@@ -1856,27 +2011,75 @@ adventures:
                     {call} _
                     ```
     turtle:
-        name: Kaplumbağa
+        name: kaplumbağa
         default_save_name: Kaplumbağa
         description: Kendi çiziminizi yapın
         levels:
             1:
                 story_text: |
-                    Hedy'yi çizim yapmak için de kullanabilirsiniz. Dönüşleri ve çizgileri birleştirerek bir kare veya merdiven yapabilirsiniz!
+                    Hedy'yi çizim yapmak için de kullanabilirsin. Dönüşleri ve çizgileri birleştirerek bir kare veya merdiven yapabilirsin!
 
-                    `{forward}` kullanarak ileriye doğru bir çizgi çizersiniz. Ardındaki sayı kaplumbağanın ne kadar yürüyeceğini belirler. `{turn} {right}` saat yönünde çeyrek tur döner, `{turn} {left}` saat yönünün tersine döner.
+                    `{forward}` kullanarak ileriye doğru bir çizgi çizersin. Ardındaki sayı kaplumbağanın ne kadar yürüyeceğini belirler. `{turn} {right}` ile kaplumbağa saat yönünde çeyrek tur döner, `{turn} {left}` ile saat yönünün tersine döner.
 
-                    Geriye doğru gitmek istiyorsanız, `{forward}` komutunu eksili bir sayı ile kullanırsınız. Yani örneğin `{forward} -100`
+                    Geriye doğru gitmek istiyorsan, `{forward}` komutunu eksi bir sayıyla kullanırsın. Yani örneğin `{forward} -100`
                 story_text_2: |
                     ### Alıştırma
                     Bu küçük bir merdivenin başlangıcı. Bunu beş basamaklı yapabilir misin?
-            2:
-                story_text: |
-                    Bu seviyede, kaplumbağayı etkileşimli hale getirmek için değişkenler kullanabilirsiniz. Örneğin oyuncuya kaplumbağanın kaç adım atması gerektiğini sorabilirsiniz.
                 example_code: |
                     ```
-                    cevap {is} {ask} Kaplumbağa kaç adım atsın?
-                    {forward} cevap
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                example_code_2: |
+                    ```
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    ```
+                answer_code: |
+                    ```
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    ```
+            2:
+                story_text: |
+                    1. seviyede kaplumbağa yalnız sola ya da sağa dönebiliyordu. Bu biraz sıkıcı!
+                    2. seviyede burnunu her yöne çevirebilir.
+
+                    Çeyrek tur dönmek için 90 derece, yarım tur için 180 derece kullan; tam tur 360 derecedir.
+
+                    ### Alıştırma
+                    Bu kod şimdi T harfini çiziyor. Kodu B harfini çizecek şekilde değiştirebilir misin?
+
+                    **Ek Görev** Harfi başka bir harfle değiştir, örneğin adının ilk harfiyle.
+                    Harflerin arasına `{color}` `{white}` yazarak birden fazla harf de çizebilirsin.
+                example_code: |
+                    ```
+                    {forward} 80
+                    {turn} 90
+                    {forward} 50
+                    {turn} 180
+                    {forward} 100
                     ```
                 story_text_2: |
                     Ayrıca, 1. seviyede kaplumbağa sadece sola veya sağa dönebiliyordu. Bu biraz sıkıcı!
@@ -2059,6 +2262,62 @@ adventures:
                         {color} _
                         {repeat} _
                     ```
+            1:
+                story_text: |
+                    ### Alıştırma
+                    Çizimleri kaplumbağayla yeniden çiz!
+
+                    <div class="w-full flex flex-row gap-2">
+                        Dikdörtgen <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
+                        Kare <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                        Merdiven <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                    </div>
+                answer_code: |
+                    Dikdörtgen
+                    ```
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 50
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Kare
+                    ```
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    {turn} {right}
+                    {forward} 100
+                    ```
+
+                    Merdiven
+                    ```
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {left}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 20
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 60
+                    {turn} {right}
+                    {forward} 20
+                    ```
+        name: bunu çiz!
+        default_save_name: Bunu çiz
     while_command:
         default_save_name: iken_komutu
         description: iken
@@ -2082,3 +2341,5 @@ adventures:
         default_save_name: Yeni Yıl Geri Sayımı
         description: Yeni Yıl için Geri Sayım!
         levels: {}
+    free_play:
+        name: serbest oyun

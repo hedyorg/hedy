@@ -2,17 +2,17 @@
     1:
         name: '{print}'
         explanation: Imprima algo com `{print}`.
-        demo_code: '{print} Olá bem-vindo(a) à Hedy!'
+        demo_code: '{print} Olá, bem-vindo(a) à Hedy!'
     2:
         name: '{ask}'
         explanation: Pergunte algo com `{ask}`.
-        demo_code: '{ask} Qual a sua cor favorita?'
+        demo_code: '{ask} Qual é o seu esporte favorito?'
     3:
         name: '{answer}'
-        explanation: Repita algo usando `{answer}`.
+        explanation: Imprima a resposta usando `{answer}`.
         demo_code: |-
-            {ask} Qual a sua cor favorita?
-            {print} então a sua cor favorita é {answer}
+            {ask} Qual é o seu esporte favorito?
+            {print} então o seu esporte favorito é {answer}
     5:
         name: '{forward}'
         explanation: Desenhe uma linha com `{forward}`.
@@ -59,36 +59,36 @@
 4:
     1:
         name: '{print}'
-        explanation: Imprima exatamente usando aspas simples.
-        demo_code: '{print} ''Olá bem-vindo(a) à Hedy.'''
+        explanation: Imprima usando aspas.
+        demo_code: '{print} ''Olá, bem-vindo(a) à Hedy.'''
     2:
         name: '{is}'
-        explanation: Dê um nome para um texto qualquer e use `{print}` sem aspas.
+        explanation: Use uma variável. Deixe a variável fora das aspas.
         demo_code: |-
             nome {is} Hedy
             {print} 'meu nome é ' nome
 9:
     1:
         name: '{if} com múltiplas linhas'
-        explanation: Peça pela resposta de uma soma com `{ask}` e verifique se está correta. Agora imprima duas linhas.
+        explanation: Agora você pode incluir múltiplas linhas de código em um `{if}` ou `{else}`.
         demo_code: |-
             resposta = {ask} 'Quanto é 10 mais 10?'
             {if} resposta {is} 20
                 {print} 'Muito bem!!'
-                {print} 'A resposta é realmente' resposta
+                {print} 'A resposta é realmente ' resposta
             {else}
                 {print} 'Errado'
                 {print} 'A resposta é 20'
     2:
         name: '{repeat} com múltiplas linhas'
-        explanation: Repita múltiplas linhas.
+        explanation: Use indentações com {repeat}.
         demo_code: |-
             {repeat} 4 {times}
-                {print} 'Hello!'
+                {print} 'Olá!'
 13:
     1:
         name: '{print}'
-        explanation: Depois de `{print}` você precisa usar parênteses.
+        explanation: Imprima texto desse jeito em Python.
         demo_code: '{print}(''olá!'')'
     2:
         name: '{print} com variável'
@@ -98,7 +98,7 @@
             {print}('meu nome é ', nome)
     3:
         name: pergunte alguma coisa com {input}
-        explanation: Use `{input}` ao invés de `{ask}` para perguntar alguma coisa.
+        explanation: Use `{input}` em vez de `{ask}` para perguntar alguma coisa.
         demo_code: |-
             nome = {input}('Qual é o seu nome?')
             {print}('Então o seu nome é ', nome)
@@ -117,7 +117,7 @@
         demo_code: |-
             idade = {input}('Quantos anos você tem?')
             {if} idade > 13:
-                {print}('Você é mais velho do que eu!')
+                {print}('Sou mais nova que você!')
     7:
         name: Igual
         explanation: Nós usamos o `==` para verificar se duas coisas são idênticas.
@@ -145,11 +145,11 @@
         demo_code: |-
             idade = {input}('Quantos anos você tem?')
             {if} idade >= 14:
-                {print}('Você é mais velho do que eu!')
+                {print}('Sou mais nova que você!')
 14:
     1:
-        name: 'creating a list'
-        explanation: Listas com colchetes.
+        name: 'criando uma lista'
+        explanation: Use colchetes para criar uma lista, com aspas ao redor de cada item.
         demo_code: |-
             fruta = ['maçã', 'banana', 'cereja']
     6:

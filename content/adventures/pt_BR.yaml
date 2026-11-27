@@ -308,9 +308,9 @@ adventures:
                     ```
             11:
                 story_text: |
-                    Neste nível você pode usar o comando {for} em sua história. Desta forma, você poderia facilmente programar o livro infantil 'urso pardo, urso pardo, o que você vê'.
+                    Neste nível, você pode usar o comando `{for}` em sua história. Desta forma, você poderia facilmente programar o livro infantil 'urso pardo, urso pardo, o que você vê'.
 
-                    ###Exercício
+                    ### Exercício
 
                     Veja <a href="https://fliphtml5.com/jmlya/nquy"> a história</a> se você não a conhece. Verifique se ela está impressa como no livro.
                 example_code: "```\nanimais = _ , _ , _ \n{print} 'Urso marrom, Urso marrom'\n{print} 'O que você vê?'\n```\n"
@@ -563,17 +563,18 @@ adventures:
                 example_code: |
                     ```
                     pontuação = 0
-                    #Fazendo 10 perguntas de matemática:
+                    # Fazendo 10 perguntas de matemática:
                     {repeat} 10 {times}
-                        #Escolhendo uma pergunta aleatória:
+                        # Escolhendo uma pergunta aleatória:
                         números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         número_1 = números {at} {random}
                         número_2 = números {at} {random}
                         resposta_correta = número_1 * número_2
-                        #Fazendo a pergunta:
+                        # Fazendo a pergunta:
                         {print} 'Quanto é ' número_1 ' vezes ' número_2 '?'
                         resposta = {ask} 'Digite aqui a sua resposta...'
                         {print} 'Você respondeu ' resposta
+                        # Contando os pontos
                         {if} _ {is} _
                             pontuação = pontuação + 1
                     {print} 'Ótimo trabalho! Sua pontuação foi... ' pontuação ' de 10!'
@@ -780,9 +781,9 @@ adventures:
                 answer_code: |
                     ```
                     {print} Eu amo programar
-                    {print} Você também ama programar?
+                    {ask} Você também ama programar?
                     {print} {answer}
-                    {print} Quais são os seus hobbies?
+                    {ask} Quais são os seus hobbies?
                     {print} Seus hobbies são {answer}
                     ```
             2:
@@ -2111,7 +2112,7 @@ adventures:
                 answer_code: |
                     ```
                     {print} o que você escolhe?
-                    {ask} escolha entre ✊✋✌
+                    {ask} escolha entre ✊✋✌️
                     {print} então sua escolha foi: {answer}
                     ```
             3:
