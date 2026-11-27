@@ -5131,7 +5131,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Create your own online pet parrot that will copy you!
+                    Recreate your own online pet parrot that will copy you!
                 example_code: |
                     ```
                     {print} I'm Hedy the parrot
@@ -5139,27 +5139,7 @@ adventures:
                     {print} {answer}
                     {print} {answer}
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Copy the example code to your input screen by clicking on the yellow button.
-                    Make the parrot ask a different question. Fill in the blanks in the example!
-                    **Extra** You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code.
-                example_code_2: |
-                    ```
-                    {print} I'm Hedy the parrot
-                    {ask} _
-                    {print} {answer}
-                    {print} {answer}
-                answer_code: |
-                    ```
-                    {print} I'm Hedy the parrot
-                    {ask} What is your favorite word?
-                    {print} {answer}
-                    {print} {answer}
-                    {ask} Can this parrot answer even more questions?
-                    {print} {answer}
-                    {print} {answer}
-                    ```
+                show_output: 'True'
             2:
                 story_text: |
                     In the previous level you've made a parrot that will repeat after you. In this level we'll make the parrot interactive using a variable and `{ask}` command.
