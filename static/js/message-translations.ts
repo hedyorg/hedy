@@ -3113,7 +3113,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "invitations_sent": "All the invitations were sent successfully!",
     "invite": "Invite",
     "level_title": "Seviye",
-    "multiple_keywords_warning": "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}",
+    "multiple_keywords_warning": "{orig_keyword} anahtar kelimesini kullanmaya çalışıyorsunuz, ama bu anahtar kelimenin birden fazla anlamı olabilir. Lütfen kullanmak istediğinizi bu listeden seçin ve küme parantezleriyle birlikte kopyalayıp kodunuza yapıştırın: {keyword_list}",
     "number_of_errors": "Number of errors: {number_of_errors}",
     "one_level_error": "You need to select at least one level.",
     "program_size_too_long": "Programın {amount_lines} satırdan uzun olamaz!",

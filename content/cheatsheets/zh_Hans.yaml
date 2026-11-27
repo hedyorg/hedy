@@ -25,6 +25,10 @@
             {turn} {left}
             {forward} 25
             {turn} {right}
+    4:
+        name: '{play}'
+        explanation: 通过`{play}`弹奏音符
+        demo_code: '{play}C5'
 2:
     1:
         name: '{is}'
@@ -37,6 +41,14 @@
         explanation: 通过`{sleep}` 你可以让海蒂暂停几秒钟。
         demo_code: |-
             {sleep} 3
+    2:
+        name: '{ask}'
+        explanation: 通过`{ask}`询问一些东西.注意！你需要用到变量`{is}`.
+        demo_code: |-
+            运动是{is}{ask}你最喜欢什么运动？
+            {print}运动是你的最爱！
+    4:
+        name: '{turn}90'
 3:
     2:
         name: 选择随机
