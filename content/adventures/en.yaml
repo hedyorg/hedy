@@ -4188,6 +4188,510 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
+    mall:
+        name: mall
+        default_save_name: mall
+        description: mall
+        levels:
+            1:
+                story_text: |-
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome message
+                    {print} Welcome to our flower shop
+                    {print} Create your own bouquet with the new Bouquet maker 3000
+                    {print} Fill in how many of each flower you'd like and I will create a beautiful bouquet for you.
+
+                    # Devider
+                    {print} -----------------
+
+                    # How many of each flower
+                    {ask} How many lilies would you like?
+                    {print} answer lillies
+                    {ask} How many roses would you like?
+                    {print} answer roses
+                    {ask} How many tulips would you like?
+                    {print} answer tulips
+                    {ask} How many peonies would you like?
+                    {print} answer peonies
+
+                    # Devider
+                    {print} -----------------
+
+                    # Payment and goodbye
+                    {print} Here you go! A beautiful bouquet!
+                    {print} That will be 30 dollars please.
+                    {print} Thank you! Bye!
+                    ```
+                show_output: 'True'
+            2:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome message
+                    {print} Welcome to the ice cream shop
+                    {print} Please select what kind of ice cream you'd like!
+
+                    # Selecting container, flavor, sauce flavor, whipped cream and kind of sprinkles
+                    container {is} {ask} Would you like a cone or a cup?
+                    flavor {is} {ask} What flavor ice cream would you like?
+                    sauce_flavor {is} {ask} What flavour sauce would you like?
+                    whipped_cream {is} {ask} Would you like whipped cream or not?
+                    kind_of_sprinkles {is} {ask} What kind of sprinkles would you like?
+
+                    # Making the ice cream
+                    {print} making your ice cream
+                    {print} please wait
+                    {sleep} 3
+                    {print} Here you go!
+                    {print} One scoop of flavor ice cream in a container with sauce_flavor sauce, whipped_cream and kind_of_sprinkles sprinkles.
+
+                    # Payment and goodbye
+                    {print} That will be 4 euros please.
+                    {print} Enjoy!
+                    ```
+                show_output: 'True'
+            3:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome and explanation
+                    {print} Welcome to the big bookshop give away!
+                    name {is} {ask} Please enter your name to enter the competition:
+
+                    # Making a list of the prices, genres and duration
+                    prices {is} one free book, two free books, 20% off, one free book for you and one for a friend
+                    genres {is} romance, child, fantasy, horror, mystery, non-fiction
+                    duration {is} today only, in the next 10 minutes, each day this week, each day this month, each day this year
+
+                    # Adding the genre they are hoping for to the list once more
+                    hoping_for_genre {is} {ask} What genre are you hoping for?
+                    {add} hoping_for_genre {to_list} genres
+
+                    # Selecting a price
+                    {print} Congratulations, name!
+                    {print} You win prices at random from our genres at random section.
+                    {print} This offer stands duration
+                    ```
+                show_output: 'True'
+            4:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome and old settings
+                    {print} 'Goodmorning Kiosk owner'
+                    {print} 'Yesterdays specials offers were: pencils buy one get one free, 40% off gum, 10% off postcards'
+                    {print} 'Yesterdays headlines were: World peace almost there, Ajax wins the champions league, Hedy wins award'
+                    {print} 'Please update the sign'
+
+                    # Making the lists
+                    special_offers {is} pencils buy one get one free, 40% off gum, 10% off postcards
+                    headlines {is} World peace almost there, Ajax wins the champions league, Hedy wins award
+
+                    # Updating the lists
+                    old_headline {is} {ask} "What old headline would you like to remove?"
+                    old_special_offer {is} {ask} "What old special offer would you like to remove?"
+                    new_headline {is} {ask} "What is today's headline that you'd like to add?"
+                    new_special_offer {is} {ask} "What is today's special offer that you'd like to add?"
+
+                    {add} new_headline {to_list} headlines
+                    {add} new_special_offer {to_list} special_offers
+                    {remove} old_headline {from} headlines
+                    {remove} old_special_offer {from} special_offers
+
+                    # Thanking the shopkeeper and clearing the screen
+                    {print} 'Thank you for updating the sign.'
+                    {print} 'The sign will be up and running now'
+                    {sleep} 2
+                    {clear}
+
+                    # 4 times a new headline and special offer is selected to be on display
+                    {print} special_offers {at} {random}
+                    {print} headlines {at} {random}
+                    {sleep} 2
+                    {clear}
+
+                    {print} special_offers {at} {random}
+                    {print} headlines {at} {random}
+                    {sleep} 2
+                    {clear}
+
+                    {print} special_offers {at} {random}
+                    {print} headlines {at} {random}
+                    {sleep} 2
+                    {clear}
+
+                    {print} special_offers {at} {random}
+                    {print} headlines {at} {random}
+                    {sleep} 2
+                    {clear}
+                    ```
+                show_output: 'True'
+            5:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Explanation
+                    {print} 'This is the emergency system'
+                    {print} 'Fill in your location number and the emergency code'
+
+                    # Locating the emergency
+                    {print} 'juweler is 1'
+                    {print} 'pet shop is 2'
+                    {print} 'book shop is 3'
+                    location_code {is} {ask} 'What is your location number?'
+                    {clear}
+
+                    # Setting the variable location to the right location
+                    {if} location_code {is} 1
+                    location {is} juweler
+                    {if} location_code {is} 2
+                    location {is} pet shop
+                    {if} location_code {is} 3
+                    location {is} book store
+
+                    # Emergency code
+                    {print} '1 is police'
+                    {print} '2 is ambulance'
+                    {print} '3 is fire department'
+                    {print} '4 is security'
+                    {print} '000 is false alarm'
+                    code_input {is} {ask} 'What is your emergency code?'
+                    {clear}
+
+                    # Sending the right emergency service to the right location
+                    {if} code_input {is} 1
+                    {print} 'We will send the police to ' location
+                    {if} code_input {is} 2
+                    {print} 'We will send an ambulance to ' location
+                    {if} code_input {is} 3
+                    {print} 'We will send the fire department to ' location
+                    {if} code_input {is} 4
+                    {print} 'We will send a security officer to ' location
+                    {if} code_input {is} 000
+                    {print} 'FALSE AlARM'
+                    ```
+                show_output: 'True'
+            6:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome and explanation
+                    {print} 'Hello costumer'
+                    {print} 'This map will tell you which floor a shop is at'
+                    target {is} {ask} 'What store are you looking for?'
+
+                    # Lists of shops on each floor
+                    first_floor {is} pet shop, kiosk, toy store, bookstore
+                    second_floor {is} bakery, florist, clothing store, coffee shop
+                    third_floor {is} bathrooms, juweler, sports shop, caferetia
+                    fourth_floor {is} security office, cafeteria, candy store, game shop
+
+                    # Giving directions
+                    {if} target {in} first_floor
+                    {print} 'The ' target ' is on the first floor'
+                    {elif} target {in} second_floor
+                    {print} 'The ' target ' is on the second floor'
+                    {elif} target {in} third_floor
+                    {print} 'The ' target ' is on the third floor'
+                    {elif} target {in} fourth_floor
+                    {print} 'The ' target ' is on the fourth floor'
+                    {else}
+                    {print} 'There is no such store in this mall'
+                    ```
+                show_output: 'True'
+            7:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome and sign up points
+                    {print} 'Welcome to your rewards program'
+                    {print} 'Thank you for signing up, this earns you 200 points!'
+                    total_points = 200
+
+                    # Adding points for today
+                    items = {ask} 'How many items did you buy on this trip?'
+                    item_points = items * 10
+                    {print} 'That means you have earned ' item_points ' points today'
+                    total_points = total_points + item_points
+                    {print} 'You have ' total_points ' points in total'
+
+                    # Redeeming points
+                    {print} 'You can choose to redeem points. 100 points are worth 1 euro'
+                    points_redeemed = {ask} 'How many points would you like to redeem?'
+                    discount = points_redeemed / 100
+
+                    # Calculating points left
+                    total_points = total_points - points_redeemed
+                    {print} 'You have ' total_points ' left'
+
+                    # Creating a voucher
+                    {print} 'Here is a voucher for your next shopping trip.'
+                    {print} 'The voucher is worth ' discount ' euros'
+                    voucher_codes = 129386, 097321, 927384, 276544, 207465, 330886, 377482
+                    voucher_code = voucher_codes {at} {random}
+                    {print} 'Your voucher code is ' voucher_code
+
+                    # Sending the vouhcer to you e-mailadress
+                    send_email = {ask} 'would you like to send the voucher to your e-mailadress?'
+                    {if} send_email {is} 'yes'
+                    email_adress = {ask} 'what is your e-mailadress?'
+                    {else}
+                    {print} "We won't send you an e-mail"
+
+                    # Goodbye
+                    {print} 'Thank you for shopping at Hedy shopping centre!'
+                    ```
+                show_output: 'True'
+            8:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome
+                    {print} 'Welcome to the surprise candy machine!'
+                    start = {ask} 'Please pay 2 euros to start!'
+                    {print} "Let's fill up that bag with surpise candy!"
+                    {print} '--------------'
+
+                    # List of candy
+                    gumball = red gumball, blue gumball, yellow gumball, green gumball
+                    gummy_bears = red gummy bear, yellow gummy bear, white gummy bear
+                    chocolates = white chocolate, milk chocolate, pure chocolate
+
+                    # Adding a random number of randomly colored gumballs
+                    numbers = 0, 1, 2, 3
+                    random_number = numbers {at} {random}
+                    {repeat} random_number {times} {print} 'One ' gumball {at} {random}
+                    {sleep} 2
+
+                    # Adding a random number of randomly colored chocolates
+                    random_number = numbers {at} {random}
+                    {repeat} random_number {times} {print} 'One piece of ' chocolates {at} {random}
+                    {sleep} 2
+
+                    # Adding a random number of randomly colored gummy bears
+                    random_number = numbers {at} {random}
+                    {repeat} random_number {times} {print} 'One ' gummy_bears {at} {random}
+                    {sleep} 2
+
+                    # Goodbye
+                    {print} '--------------'
+                    {print} "That's it! Enjoy!"
+                    ```
+                show_output: 'True'
+            9:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome and chosing a product
+                    {print} 'Hi baker!'
+                    {print} 'We have muffins, bananabread and croissants'
+                    product = {ask} 'What whould you like to bake today?'
+
+                    # Printing the correct recipe for each product
+                    {if} product {is} muffins
+                        {print} 'Preheat the oven to 180'
+                        {print} 'Get the muffin mix'
+                        {print} 'Add 2 eggs, 1 cup of milk and 2 sticks of butter'
+                        {print} 'Mix well'
+                        {print} 'Add the chocolate chips'
+                        {print} 'Line the muffin tin with paper'
+                        {print} 'Pour the batter into the muffin tin'
+                        {print} 'Bake for 30 minutes'
+                        {print} 'Let the muffins cool for 5 minutes'
+                    {elif} product {is} bananabread
+                        {print} 'Preheat the oven to 180'
+                        {print} 'Mush 3 large bananas'
+                        {print} 'Add 2 eggs, 2 cups of oatmeal and some cinnamon'
+                        {print} 'Mix well'
+                        {print} 'Line the baking tin with paper'
+                        {print} 'Pour the batter into the baking tin'
+                        {print} 'Bake for 20 minutes'
+                        {print} 'Let the banana bread cool for 5 minutes'
+                        {print} 'Cut the banana bread into slices'
+                    {elif} product {is} croissants
+                        {print} 'Preheat the oven to 180'
+                        {print} 'Get the premade croissant dough from the fridge'
+                        {print} 'Roll the dough into croissants'
+                        {print} 'Bake for 10 minutes'
+                        {print} 'Let the croissants cool for 5 minutes'
+                    {else}
+                        {print} "I don't have the recipe for that"
+
+                    # Clear the screen when you're done
+                    done = {ask} 'Please type ready when the ' product ' are ready'
+                    {if} done {is} ready
+                        {clear}
+
+                    # Sign outside the shop
+                    {repeat} 5 times
+                        {print} 'Fresh ' product ' just out of the oven!'
+                        {sleep} 2
+                        {clear}
+                        {print} 'Buy one get one free!'
+                        {sleep} 2
+                        {clear}
+                        {print} 'Hedy bakery'
+                        {sleep} 2
+                        {clear}
+                    ```
+                show_output: 'True'
+            10:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Welcome
+                    {print} 'Not sure what pet to get?'
+                    start = {ask} 'Type start to find out which pet suits you best!'
+
+                    # Choose a pet
+                    companion_or_roommate = {ask} 'Are you looking for a companion or a roommate you have to feed?'
+                    {if} companion_or_roomate {is} companion
+                        {print} 'You should get a dog!'
+                    {else}
+                        fur = {ask} 'Do you mind fur?'
+                        {if} fur {is} 'no'
+                            {print} 'You should get a cat!'
+                        {else}
+                            legs = {ask} 'How many legs can you handle? 0, 2, 4, 8?'
+                            {if} legs {is} 0
+                                dead_mice = {ask} 'Are you okay with feeding it dead mice?'
+                                {if} dead_mice {is} yes
+                                    {print} 'You should get a snake!'
+                                {else}
+                                    {print} 'You should get a fish'
+                            {elif} legs {is} 2
+                                {print} 'you should get a bird'
+                            {elif} legs {is} 4
+                                cold_blooded is {ask} 'Hot or coldblooded?'
+                                {if} cold_blooded {is} hot
+                                    print 'You should get a rabbit'
+                                {else}
+                                    print 'You should get a turtle'
+                            {else}
+                                print 'You should get a tarantula'
+                    ```
+                show_output: 'True'
+            11:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    obstacles = grass, river, mud
+
+                    {for} obstacle {in} obstacles
+                        {if} obstacle {is} grass
+                            adjectives = long wavy
+                            sound = swish swoosh
+                        {elif} obstacle {is} river
+                            adjectives = deep cold
+                            sound = splish splosh
+                        {elif} obstacle {is} mud
+                            adjectives = thick oozy
+                            sound = squelch squirch
+                        {print} "We're going on a bear hunt"
+                        {print} "We're going to catch a big one!"
+                        {print} 'What a beautiful day!'
+                        {print} "We're not scared"
+                        {print} 'Oh no! ' obstacle
+                        {print} adjectives ' ' obstacle
+                        {print} "We can't go under it"
+                        {print} "We can't go over it"
+                        {print} "Oh no, we'll have to go through it!"
+                        {print} sound ' ' sound ' ' sound
+                        {print} " "
+                        {sleep} 10
+                    ```
+                show_output: 'True'
+            12:
+                story_text: |
+                    ### Exercise
+                    Recreate this program!
+                example_code: |
+                    ```
+                    # Move to the bottom of the screen
+                    {color} white
+                    {forward} -100
+                    {color} black
+
+                    # Drawing the shirt
+                    {forward} 100
+                    {turn} -90
+                    {forward} 50
+                    {turn} 90
+                    {forward} 50
+                    {turn} 90
+                    {forward} 200
+                    {turn} 90
+                    {forward} 50
+                    {turn} 90
+                    {forward} 50
+                    {turn} -90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+
+                    # Go to the centre of the shirt
+                    {color} white
+                    {turn} 135
+                    {forward} 40
+                    {turn} -45
+                    {forward} 40
+
+                    # Functions for square, circle and triangle
+                    {define} draw_square
+                        {repeat} 4 {times}
+                            {forward} 50
+                            {turn} 90
+
+                    {define} draw_circle
+                        {repeat} 60 {times}
+                            {forward} 2
+                            {turn} 6
+
+                    {define} draw_triangle
+                        {repeat} 3 {times}
+                            {forward} 60
+                            {turn} 120
+
+                    # Choose a shape and color
+                    chosen_color = {ask} 'What color would you like?'
+                    chosen_shape = {ask} 'What shape would you like?'
+
+                    # Draw the figure in the chosen color
+                    {color} chosen_color
+
+                    {if} chosen_shape {is} square
+                        {call} draw_square
+                    {elif} chosen_shape {is} circle
+                        {call} draw_circle
+                    {elif} chosen_shape {is} triangle
+                        {call} draw_triangle
+                    {else}
+                        {print} "sorry i don't know that shape"
+                    ```
+                show_output: 'True'
     market:
         name: market
         default_save_name: market
