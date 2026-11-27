@@ -256,6 +256,15 @@ def load_adventures_for_level(level, subset=None):
         if not default_save_name or default_save_name == 'intro':
             default_save_name = adventure['name']
 
+        example_code = adventure_level.get('example_code', "")
+        output_only = adventure_shows_output(short_name, level)
+        if output_only:
+            user = current_user()
+            if is_teacher(user) or is_second_teacher(user):
+                hidden_program = example_code or hidden_program_markdown(short_name, level, keyword_lang)
+                solutions.insert(0, Solution(code=hidden_program))
+            example_code = ""
+
         # only add adventures that have been added to the adventure list of this level
         if short_name in adventures_order_per_level().get(level, []):
             current_adventure = Adventure(
@@ -263,7 +272,8 @@ def load_adventures_for_level(level, subset=None):
                 name=adventure['name'],
                 image=adventure.get('image', None),
                 text=adventure['levels'][level].get('story_text', ""),
-                example_code=adventure['levels'][level].get('example_code', ""),
+                example_code=example_code,
+                output_only=output_only,
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
                 is_command_adventure=short_name in KEYWORDS_ADVENTURES,
@@ -281,6 +291,36 @@ def load_adventures_for_level(level, subset=None):
         len(adventures_order)))
 
     return all_adventures
+
+
+def adventure_shows_output(short_name, level):
+    """Whether this adventure level hides its example program, so students can only run it (`show_output`).
+
+    The flag is read from the English file only: language files can be partial or translate the value,
+    and neither should make the hidden program show up in plain sight.
+    """
+    adventure = ADVENTURES['en'].file.get('adventures', {}).get(short_name) or {}
+    level_content = (adventure.get('levels') or {}).get(level) or {}
+    return str(level_content.get('show_output', '')).strip().lower() == 'true'
+
+
+def hidden_program_markdown(short_name, level, keyword_lang):
+    """The `example_code` markdown of a `show_output` adventure, in the user's language if translated."""
+    for lang in [g.lang, 'en']:
+        adventures = ADVENTURES[lang]
+        if not isinstance(adventures, hedy_content.Adventures) or not adventures.has_adventures():
+            continue
+        adventure = adventures.get_adventures_subset([short_name], keyword_lang).get(short_name) or {}
+        markdown = ((adventure.get('levels') or {}).get(level) or {}).get('example_code')
+        if markdown:
+            return markdown
+    return ''
+
+
+def first_code_block(markdown):
+    """The contents of the first fenced code block in the markdown, or the whole text if it has none."""
+    match = re.search(r'```[^\n]*\n(.*?)```', markdown, re.DOTALL)
+    return (match.group(1) if match else markdown).strip('\n')
 
 
 def load_saved_programs(level, into_adventures, preferential_program: Optional[Program]):
@@ -1499,12 +1539,14 @@ def view_program_redesing(user, id):
         solutions = (
             adventure_content.get("levels", {}).get(level, {}).get("solutions", [])
         )
+        output_only = adventure_shows_output(result["adventure_name"], level)
         adventure = Adventure(
             short_name=result["adventure_name"],
             name=adventure_content["name"],
             image=adventure_content.get("image", None),
             text=adventure_content["levels"][level].get("story_text", ""),
-            example_code=adventure_content["levels"][level].get("example_code", ""),
+            example_code="" if output_only else adventure_content["levels"][level].get("example_code", ""),
+            output_only=output_only,
             extra_stories=extra_stories,
             is_teacher_adventure=False,
             save_name=adventure_content["name"],
@@ -1911,6 +1953,25 @@ def get_specific_adventure(name, level, mode):
             current_user_name=current_user()['username'],
         )
     )
+
+
+@app.route('/adventure-output/<name>/<int:level>', methods=['GET'])
+def get_adventure_output(name, level):
+    """Run the hidden example program of a `show_output` adventure, showing only its output."""
+    if not adventure_shows_output(name, level):
+        return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
+
+    code = first_code_block(hidden_program_markdown(name, level, g.keyword_lang))
+    return render_template("embedded-editor.html", run=True, outputOnly=True, fullWidth=False, readOnly=True,
+                           language=g.lang, keyword_language=g.keyword_lang, level=level,
+                           javascript_page_options=dict(
+                               page='view-program',
+                               lang=g.lang,
+                               level=level,
+                               code=code,
+                               # Debug lines in local storage belong to the student's editor, not this program
+                               ignore_debug_line=True,
+                           ))
 
 
 @app.route('/embedded/<int:level>', methods=['GET'])

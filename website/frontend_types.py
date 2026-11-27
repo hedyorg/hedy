@@ -155,6 +155,7 @@ class Adventure:
     author: Optional[str] = ""
     is_checked: Optional[bool] = False
     solutions: Optional[List[Solution]] = field(default_factory=list)
+    output_only: Optional[bool] = False
 
     def __getitem__(self, key):
         return getattr(self, key)

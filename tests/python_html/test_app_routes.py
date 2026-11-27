@@ -743,6 +743,122 @@ class TestEmbedded:
         assert context['javascript_page_options']['page'] == 'view-program'
 
 
+class TestAdventureOutput:
+    # The demo adventure in content/adventures/en.yaml
+    ADVENTURE = 'recreate_program'
+    LEVEL = 6
+    HIDDEN_LINE = "Do you like ice cream? yes or no"
+
+    def adventure_from(self, template_variables):
+        adventures = last_template_context(template_variables)['adventures']
+        return next(a for a in adventures if a.short_name == self.ADVENTURE)
+
+    def test_flag_is_read_from_english_content(self):
+        assert hedy_app.adventure_shows_output(self.ADVENTURE, self.LEVEL)
+        assert not hedy_app.adventure_shows_output(self.ADVENTURE, self.LEVEL + 1)
+        assert not hedy_app.adventure_shows_output('restaurant', self.LEVEL)
+        assert not hedy_app.adventure_shows_output('no_such_adventure', self.LEVEL)
+
+    def test_first_code_block(self):
+        assert hedy_app.first_code_block("Text\n```\nprint hi\nprint bye\n```\nMore") == 'print hi\nprint bye'
+        assert hedy_app.first_code_block("print hi") == 'print hi'
+
+    def test_code_page_does_not_contain_hidden_program(self, client, template_variables):
+        response = client.get(f'/hedy/{self.LEVEL}')
+        html = response.get_data(as_text=True)
+
+        adventure = self.adventure_from(template_variables)
+        assert adventure.output_only is True
+        assert adventure.example_code == ''
+        assert adventure.solutions == []
+        assert f'/adventure-output/{self.ADVENTURE}/{self.LEVEL}' in html
+        assert self.HIDDEN_LINE not in html
+
+    def test_teacher_gets_hidden_program_as_solution(self, client, given, template_variables):
+        given.logged_in_as_new_teacher()
+        client.get(f'/hedy/{self.LEVEL}')
+
+        adventure = self.adventure_from(template_variables)
+        assert adventure.output_only is True
+        assert adventure.example_code == ''
+        assert self.HIDDEN_LINE in adventure.solutions[0].code
+
+    def test_output_page_runs_hidden_program(self, client, template_variables):
+        response = client.get(f'/adventure-output/{self.ADVENTURE}/{self.LEVEL}')
+        assert_html_response(response)
+
+        context = last_template_context(template_variables)
+        assert context['outputOnly'] is True
+        assert context['run'] is True
+        options = context['javascript_page_options']
+        assert options['page'] == 'view-program'
+        assert options['level'] == self.LEVEL
+        assert options['ignore_debug_line'] is True
+        # Without the markdown fences, and with the keywords filled in
+        assert options['code'].startswith("name is ask 'What is your name?'\n")
+        assert self.HIDDEN_LINE in options['code']
+        assert not options['code'].endswith('```')
+
+    def test_output_page_keeps_user_logged_in(self, client, given):
+        user = given.logged_in_as_new_student()
+        client.get(f'/adventure-output/{self.ADVENTURE}/{self.LEVEL}')
+
+        with client.client.session_transaction() as sess:
+            assert sess['user']['username'] == user['username']
+
+    def given_dutch_translation(self, monkeypatch, **level_fields):
+        """Replace the Dutch adventures with a translation of the demo adventure."""
+        level = {
+            'story_text': 'Maak dit programma na!',
+            'example_code': "```\nnaam {is} {ask} 'Hoe heet jij?'\n{print} naam\n```",
+            **level_fields,
+        }
+        dutch = {'adventures': {self.ADVENTURE: {
+            'name': 'maak het na!', 'default_save_name': 'Namaken', 'description': '',
+            'levels': {self.LEVEL: level},
+        }}}
+        monkeypatch.setattr(hedy_app.ADVENTURES['nl'], '_file', dutch)
+
+    def test_output_page_runs_translated_program(self, client, monkeypatch, template_variables):
+        self.given_dutch_translation(monkeypatch)
+        client.get(f'/adventure-output/{self.ADVENTURE}/{self.LEVEL}?language=nl&keyword_language=nl')
+
+        code = last_template_context(template_variables)['javascript_page_options']['code']
+        assert code == "naam is vraag 'Hoe heet jij?'\nprint naam"
+
+    def test_translated_program_is_hidden_on_code_page(self, client, monkeypatch, template_variables):
+        self.given_dutch_translation(monkeypatch)
+        response = client.get(f'/hedy/{self.LEVEL}?language=nl')
+
+        adventure = self.adventure_from(template_variables)
+        assert adventure.name == 'maak het na!'
+        assert adventure.output_only is True
+        assert adventure.example_code == ''
+        assert 'Hoe heet jij?' not in response.get_data(as_text=True)
+
+    @pytest.mark.parametrize('dutch_flag', [{}, {'show_output': 'Waar'}])
+    def test_translation_cannot_reveal_the_program(self, client, monkeypatch, template_variables, dutch_flag):
+        """A translation that leaves out the flag, or translates its value, still hides the program."""
+        self.given_dutch_translation(monkeypatch, **dutch_flag)
+        response = client.get(f'/hedy/{self.LEVEL}?language=nl')
+
+        assert self.adventure_from(template_variables).output_only is True
+        assert 'Hoe heet jij?' not in response.get_data(as_text=True)
+
+    def test_untranslated_level_falls_back_to_english_program(self, client, monkeypatch, template_variables):
+        self.given_dutch_translation(monkeypatch, example_code='')
+        client.get(f'/adventure-output/{self.ADVENTURE}/{self.LEVEL}?language=nl&keyword_language=en')
+
+        code = last_template_context(template_variables)['javascript_page_options']['code']
+        assert self.HIDDEN_LINE in code
+
+    def test_output_page_is_only_for_hidden_programs(self, client):
+        response = client.get(f'/adventure-output/restaurant/{self.LEVEL}', check=False)
+        assert response.status_code == 404
+        response = client.get(f'/adventure-output/{self.ADVENTURE}/{self.LEVEL + 1}', check=False)
+        assert response.status_code == 404
+
+
 class TestCheatsheet:
     """Test cheatsheet routes."""
 

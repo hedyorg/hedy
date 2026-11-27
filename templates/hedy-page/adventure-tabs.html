@@ -74,12 +74,17 @@
                           turn-pre-into-ace show-copy-button text-adventure-copy">
                 <div class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
                     <div
-                        class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                        class="w-full {% if adventure.example_code or adventure.output_only or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {% if adventure.is_teacher_adventure %}{{ adventure.text|safe }}{% else %}{{
                         adventure.text|commonmark }}{% endif %}
                         {{ weblate_link(show_weblate and adventure.text, adventure, 'story_text') }}
                     </div>
-                    {% if adventure.example_code %}
+                    {% if adventure.output_only %}
+                    <div class="border"></div>
+                    <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {% include "incl/adventure-output-runner.html" %}
+                    </div>
+                    {% elif adventure.example_code %}
                     <div class="border"></div>
                     <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
                         {% if adventure.is_teacher_adventure %}{{ adventure.example_code|safe }}{% else %}{{

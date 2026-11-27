@@ -1,0 +1,7 @@
+{##
+ # Runs the hidden example program of a `show_output` adventure (see /adventure-output), in place of the
+ # example code. Students can run it and see what it does, but not its code.
+ #}
+<iframe src="/adventure-output/{{ adventure.short_name }}/{{ level }}" loading="lazy"
+        class="w-full h-96 rounded border-0" title="{{ adventure.name }}"
+        data-cy="adventure_output_frame_{{ adventure.short_name }}"></iframe>

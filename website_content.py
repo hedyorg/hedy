@@ -75,6 +75,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     2: [
@@ -91,6 +92,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     3: [
@@ -109,6 +111,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     4: [
@@ -127,6 +130,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'monster',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     5: [
@@ -143,6 +147,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     6: [
@@ -151,9 +156,11 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'music',
         'in_command',
         'restaurant',
+        'recreate_program',
         'fortune',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     7: [
@@ -171,6 +178,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     8: [
@@ -187,6 +195,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'mall',
         'free_play',
         'congratulations'
     ],
@@ -203,6 +212,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     10: [
@@ -221,6 +231,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     11: [
@@ -239,6 +250,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     12: [
@@ -250,6 +262,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it_2',
         'debugging',
         'hospital',
+        'mall',
         'free_play',
         'congratulations'
     ],
@@ -268,6 +281,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'for_command',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     14: ['lists',
@@ -281,6 +295,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
          'language',
          'debugging',
          'hospital',
+         'mall',
          'free_play'
          ],
     15: [
@@ -299,6 +314,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'debugging',
         'hospital',
+        'mall',
         'free_play'
     ],
     16: [
@@ -313,6 +329,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'guess_my_number',
         'debugging',
         'hospital',
+        'mall',
         'free_play',
         'congratulations'
     ],
