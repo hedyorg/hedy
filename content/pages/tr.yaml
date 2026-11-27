@@ -147,12 +147,15 @@ teacher-guide:
             Öğrencilerinizin çalışmalarını ve ilerlemelerini sınıf sayfasından takip edebilirsiniz.
     -   title: Cihazlar
         text: |-
-            Hedy web tabanlıdır, yani tarayıcısı olan herhangi bir cihazda (Google Chrome, Firefox, Edge vb.) çalışır, bu sayede dizüstü bilgisayarlar, Chromebook'lar, tabletler ve hatta akıllı telefonlar Hedy'yi kullanmak için uygundur.
-            Hedy ile çalışmadan önce herhangi bir şey indirmenize gerek yok, sadece web sitesine gidin ve her şey çalışmaya hazır sizi bekler!
+            Hedy web tabanlıdır, yani tarayıcısı (Google Chrome, Firefox, Edge vb.) olan her cihazda çalışır. Bu yüzden dizüstü bilgisayar, Chromebook, tablet, hatta akıllı telefon Hedy için uygundur.
+            Hedy'yle çalışmadan önce hiçbir şey indirmenize gerek yok, web sitesine girin ve hazırsınız!
+            Hedy'nin bir de <a href="https://github.com/hedyorg/hedy/wiki/Offline-Hedy " target="_blank">çevrim dışı sürümü</a> var.
     -   title: Hedy Topluluğu
         text: |-
-            Bütün Hedy öğretmenleri, programcıları ve diğer hayranları <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord sunucumuza</a> katılmaya davetlidir. Burası Hedy hakkında sohbet etmek için ideal bir yer: harika projelerinizi ve derslerinizi gösterebileceğiniz kanallarımız, hataları bildirebileceğiniz kanallarımız ve diğer öğretmenlerle ve Hedy ekibiyle sohbet edebileceğiniz kanallarımız var.
-            <a href="https://www.youtube.com/watch?v=Lyz_Lnd-_aI" target="_blank">Burada</a> Discord Topluluğuna nasıl katılacağınıza dair bir video bulabilirsiniz.
+            Bütün Hedy öğretmenlerini, programcılarını ve öteki hayranlarını <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord sunucumuza</a> bekliyoruz. Burası Hedy üzerine sohbet etmek için en uygun yer: harika projelerinizi ve derslerinizi gösterebileceğiniz, hata bildirebileceğiniz, öteki öğretmenlerle ve Hedy ekibiyle sohbet edebileceğiniz kanallarımız var.
+            Discord topluluğuna nasıl katılacağınızı anlatan videoyu <a href="https://www.youtube.com/watch?v=Lyz_Lnd-_aI" target="_blank">burada</a> bulabilirsiniz.
+
+            Hedy'den haberdar olmak için <a href="https://hedy.org/subscribe" target="_blank">bültenimize abone olabilirsiniz</a>. Ya da bizi <a href="https://nl.linkedin.com/company/hedyorg" target="_blank">LinkedIn</a>'de takip edin.
     -   title: Hedy ve GDPR
         text: |-
             Organizations in the EU have to comply with the GDPR (General Data Protection Regulation) when processing personal data.
@@ -198,12 +201,14 @@ teacher-guide:
                 solution_code: |-
                     {forward} 100
                     {turn} 90
-        -   title: "Kaplumbağa: Öğrenciler geriye gibi bir komutu kullanmayı deniyor, ancak böyle bir komut yok"
+        -   title: "Kaplumbağa: Öğrenciler kaplumbağayı ekranın dışına çıkarıyor"
             example:
-                error_text: geriye diye bir komutumuz yok.
-                error_code: geriye 100
-                solution_text: "Kaplumbağanın geriye doğru gitmesini sağlamak için ileri komutu ile negatif bir sayı kullanırsınız. Örneğin:"
-                solution_code: "{forward} -100"
+                error_text: Öğrenciler kaplumbağayla çalışırken çoğu zaman büyük sayı denemeye bayılır, bu da okun ekranın dışına çıkmasına yol açar.
+                error_code: |-
+                    {forward} 300
+                    {turn} 90
+                solution_text: "Bu örnekte öğrenciler genellikle `{turn}` komutunun çalışmadığını düşünür, oysa komut yapması gerekeni yapmıştır. Aslında kaplumbağa ekranın sınırlarını aşmıştır. Bunun olmaması için daha küçük sayı kullanın."
+                solution_code: "{forward} 100\n{turn} 90"
     -   level: "2"
         sections:
         -   title: Öğrenciler komutlarında yazım hataları yapmış olabilirler
@@ -434,10 +439,10 @@ teacher-guide:
                 solution_code: |-
                     {if} isim {is} Hedy {print} 'eğlenceli'
                     {else} {print} 'eh işte!
-        -   title: Öğrenciler iki sözcük içeren uzun değişken adları kullanmaya çalışabilirler
+        -   title: Öğrenciler iki ya da daha fazla kelimeden oluşan uzun değişken adı kullanıyor
             example:
-                error_text: Bir değişken tek bir kelime ile adlandırılmalıdır. İki kelimeyi bağlamak için aralarına alt çizgi koyabilirsiniz. Bu şekilde bir kelime olarak sayılır.
-                error_code: seçilen kapı eşit sor  Hangi kapıyı seçiyorsun?
+                error_text: Hedy'de değişken adında boşluk olamaz, bu yüzden öğrencilerin birden fazla kelimeyi alt çizgiyle (_) birleştirmesi gerekir
+                error_code: seçilen kapı {is} {ask} 'Hangi kapıyı seçiyorsun?'
                 solution_text: Bir alt çizgi ekleyin.
                 solution_code: seçilen_kapı {is} {ask} 'Hangi kapıyı seçiyorsun?'
         -   title: Öğrenciler birden fazla cevabın doğru olmasını isteyebilir
