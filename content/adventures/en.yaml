@@ -6176,14 +6176,10 @@ adventures:
                     Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
                 example_code: |
                     ```
-                    choice {is} _
-                    {print} I choose choice
-                    ```
-                answer_code: |
-                    ```
                     choice {is} {ask} Rock, paper, or scissors?
                     {print} I choose choice
                     ```
+                show_output: 'True'
             3:
                 story_text: |
                     You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
