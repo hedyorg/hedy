@@ -25,7 +25,7 @@ describe("General tests for my programs page (with both custom teacher and built
     const getProgramId = (name = programName) => cy.getDataCy(name).first().invoke('attr', 'data-id');
 
     const ensureProgramShareState = (shouldBePublic) => {
-        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.visit(`${Cypress.expose('programs_page')}`);
         getProgramId().then((programId) => {
             cy.getDataCy(`share_option_dropdown_${programId}`).then(($dropdown) => {
                 const isCurrentlyPublic = $dropdown.text().includes('Public');
@@ -62,29 +62,29 @@ describe("General tests for my programs page (with both custom teacher and built
     });
 
     it("should not be added to my programs when running a program with copied code", () => {
-        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
-                cy.intercept('POST', '/programs').as('saveProgram');
+        cy.visit(`${Cypress.expose('hedy_page')}#${adventure}`);
+        cy.intercept('POST', '/programs').as('saveProgram');
         // Paste example code
         cy.get(`.adventure_content_${adventure}`).within(() => {
-          cy.getDataCy(`paste_example_code_${adventure}`).click();
+            cy.getDataCy(`paste_example_code_${adventure}`).click();
         });
         cy.getDataCy('runit').click();
         cy.wait(500);
-        cy.visit(`${Cypress.env('programs_page')}`);
-                cy.get('@saveProgram.all').should('have.length', 0);
+        cy.visit(`${Cypress.expose('programs_page')}`);
+        cy.get('@saveProgram.all').should('have.length', 0);
     });
 
     it("should be added to my programs when running a program with modified code", () => {
-        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
+        cy.visit(`${Cypress.expose('hedy_page')}#${adventure}`);
         // Paste example code and modify code
         cy.get(`.adventure_content_${adventure}`).within(() => {
-          cy.getDataCy(`paste_example_code_${adventure}`).click();
+            cy.getDataCy(`paste_example_code_${adventure}`).click();
         });
         cy.get('#editor .cm-content').click();
         cy.focused().type('print Hello world\nask Hello world?');
         cy.getDataCy('runit').click();
         cy.wait(500);
-        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.visit(`${Cypress.expose('programs_page')}`);
         cy.getDataCy('programs').should("contain.text", adventure);
     });
 
@@ -94,9 +94,9 @@ describe("General tests for my programs page (with both custom teacher and built
 
     describe('Test filters', () => {
         beforeEach(() => {
-            cy.visit(`${Cypress.env('programs_page')}`);
+            cy.visit(`${Cypress.expose('programs_page')}`);
         })
-        it("The level filter should show the appropiate programs", ()=>{
+        it("The level filter should show the appropiate programs", () => {
             // After selecting level 2 only the programs from level 2 should ve visible
             cy.getDataCy('levels_dropdown').select('2')
 

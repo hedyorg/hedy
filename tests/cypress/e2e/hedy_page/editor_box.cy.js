@@ -2,13 +2,13 @@ const YAML = require('js-yaml')
 import { codeMirrorContent } from '../tools/programs/program';
 
 describe('Is able to type in the editor box', () => {
-  const LANGUAGES_TO_TEST = ['en', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de','el', 'eo', 'es', 'et', 'fa', 'fi', 'fr', 'fy', 'he', 'hi', 'hu', 'id', 'it', 'ja', 'kmr', 'ko', 'nb_NO', 'nl', 'pa_PK', 'pl', 'pt_BR', 'pt_PT', 'ro', 'ru', 'sq', 'sr', 'sv', 'sw', 'te', 'th']
+  const LANGUAGES_TO_TEST = ['en', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'eo', 'es', 'et', 'fa', 'fi', 'fr', 'fy', 'he', 'hi', 'hu', 'id', 'it', 'ja', 'kmr', 'ko', 'nb_NO', 'nl', 'pa_PK', 'pl', 'pt_BR', 'pt_PT', 'ro', 'ru', 'sq', 'sr', 'sv', 'sw', 'te', 'th']
 
   // Do something for every language
   for (const language of LANGUAGES_TO_TEST) {
 
     it(`Language ${language} should run`, () => {
-      cy.visit(`${Cypress.env('hedy_page')}?language=${language}#default`);
+      cy.visit(`${Cypress.expose('hedy_page')}?language=${language}#default`);
 
       // click on text areas to get focus, then clear it
       codeMirrorContent().click();
@@ -24,7 +24,7 @@ describe('Is able to type in the editor box', () => {
 
 describe('Test editor box functionality', () => {
   beforeEach(() => {
-    cy.visit(`${Cypress.env('hedy_page')}#default`);
+    cy.visit(`${Cypress.expose('hedy_page')}#default`);
 
     codeMirrorContent().click();
     clearViaBackspace();
@@ -62,7 +62,7 @@ describe('Test editor box functionality', () => {
     cy.get('#ask_modal').should('be.visible');
   });
 
-  it ('When making an error the error modal should be shown', () => {
+  it('When making an error the error modal should be shown', () => {
     cy.focused().type('echo');
     codeMirrorContent().should('have.text', 'echo');
     cy.get('#runit').click();
@@ -72,7 +72,7 @@ describe('Test editor box functionality', () => {
     cy.getDataCy('error_details').should('contain.text', 'echo');
   });
 
-  it ('When making an error the keywords must be highligted', () => {
+  it('When making an error the keywords must be highligted', () => {
     cy.focused().type('prin Hello world');
     codeMirrorContent().should('have.text', 'prin Hello world');
     cy.get('#runit').click();
