@@ -84,6 +84,42 @@ describe('Customize adventure redesign autosave', () => {
     });
   });
 
+  it('keeps comments in the saved adventure and solution code', () => {
+    const adventureName = uniqueName('comment-lines');
+    loginForTeacher('teacher1');
+    cy.visit(`/for-teachers/customize-adventure?name=${adventureName}&level=1`);
+    cy.location('pathname').then((pathname) => {
+      const adventureId = pathname.split('/').pop();
+      cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadComments');
+      cy.window().should((win) => {
+        expect(win.ckEditor).to.exist;
+        expect(win.ckSolutionEditor).to.exist;
+      });
+      cy.window().then((win) => {
+        win.ckEditor.setData('<p>Example</p><pre><code class="language-python"># Body comment\nask What is your name?\nprint hello</code></pre>');
+        win.ckSolutionEditor.setData('<p>Solution</p><pre><code class="language-python"># Solution comment\nprint hello</code></pre>');
+      });
+
+      function waitForSavedComments(remainingAttempts = 6) {
+        cy.wait('@uploadComments', { timeout: 20000 }).then(({ request, response }) => {
+          expect(response?.statusCode).to.eq(200);
+          if (!request.body.content.includes('# Body comment')) {
+            if (remainingAttempts <= 1) throw new Error('Expected the comment sample to be saved');
+            return waitForSavedComments(remainingAttempts - 1);
+          }
+          expect(request.body.formatted_content).to.include('# Body comment');
+          expect(request.body.formatted_solution_code).to.include('# Solution comment');
+        });
+      }
+
+      waitForSavedComments();
+      cy.visit(`/adventure/${adventureName}/1?keyword_language=en`);
+      cy.get(`[data-tabtarget="${adventureId}"] .cm-content`, { timeout: 20000 })
+        .should('contain.text', '# Body comment')
+        .and('contain.text', 'ask What is your name?');
+    });
+  });
+
   it('uploads successfully when editor content is emptied', () => {
     loginForTeacher('teacher1');
     cy.visit('/for-teachers/adventures/manage');

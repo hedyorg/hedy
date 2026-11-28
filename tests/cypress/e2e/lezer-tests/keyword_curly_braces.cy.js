@@ -105,6 +105,30 @@ describe('Adds curly braces around keywords, mainting the original code as much 
         })
     })
 
+    describe('Comments in teacher adventure code', () => {
+        it('preserves whole-line and indented comments and their positions', () => {
+            const code = "# Before\nif name is Hedy\n    # Explain the next command\n    print 'Hello'\n# After";
+            const expected = "# Before\n{if} name {is} Hedy\n    # Explain the next command\n    {print} 'Hello'\n# After";
+
+            expect(addCurlyBracesToCode(code, 9, 'en')).to.equal(expected);
+        });
+
+        it('preserves inline comments without treating hashes in strings as comments', () => {
+            const code = "print 'a # sign'  # explanation\nprint 'done'";
+            const expected = "{print} 'a # sign'  # explanation\n{print} 'done'";
+
+            expect(addCurlyBracesToCode(code, 12, 'en')).to.equal(expected);
+        });
+
+        it('preserves comments while formatting translated and multi-word keywords', () => {
+            const translated = '# Saludo\nimprimir hola';
+            const multiWord = 'if 1 not in list # explanation';
+
+            expect(addCurlyBracesToCode(translated, 1, 'es')).to.equal('# Saludo\n{print} hola');
+            expect(addCurlyBracesToCode(multiWord, 9, 'en')).to.equal('{if} 1 {not_in} list # explanation');
+        });
+    });
+
     describe('Inline keyword tests', () => {
         it('wraps multi-word keyword not in', () => {
             const generatedKeyword = addCurlyBracesToKeyword('not in', 'en');
